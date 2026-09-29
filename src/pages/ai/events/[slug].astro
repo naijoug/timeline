@@ -1,0 +1,9 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import EventDetail from '../../../components/EventDetail.astro';
+import { events } from '../../../data/events';
+export function getStaticPaths() { return events.map(event => ({ params: { slug: event.id }, props: { event } })); }
+const { event } = Astro.props;
+const active = event.tracks.includes('models') ? 'models' : event.tracks.includes('products') ? 'products' : event.tracks.includes('history') ? 'history' : 'methods';
+---
+<Layout title={event.title} description={event.summary} active={active}><EventDetail event={event} /></Layout>

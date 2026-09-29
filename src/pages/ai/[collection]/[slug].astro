@@ -1,0 +1,23 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Timeline from '../../../components/Timeline';
+import { entities, entityMap, entityHref, relations } from '../../../data/entities';
+import { events } from '../../../data/events';
+import { sourceMap } from '../../../data/sources';
+import { ArrowLeft, ExternalLink, Network } from 'lucide-react';
+export function getStaticPaths() { return entities.map(entity => ({ params: { collection: entity.type === 'concept' ? 'concepts' : entity.type === 'family' ? 'models' : 'products', slug: entity.id }, props: { entity } })); }
+const { entity } = Astro.props;
+const track = entity.type === 'concept' ? 'methods' : entity.type === 'family' ? 'models' : 'products';
+const relevant = events.filter(e => e.entityIds.includes(entity.id)).sort((a,b) => a.date.localeCompare(b.date));
+const edges = relations.filter(r => r.from === entity.id || r.to === entity.id);
+const labels = { concept: '技术与方法', family: '模型家族', product: 'Agent 产品' };
+---
+<Layout title={entity.name} description={entity.description} active={track}>
+  <a class="back-link" href={track === 'methods' ? '/ai/methods/' : track === 'models' ? '/ai/models/' : '/ai/agents/'}><ArrowLeft size={16} />{labels[entity.type]}</a>
+  <header class="entity-hero"><div class="eyebrow">{entity.company || 'IDEAS & METHODS'}</div><h1>{entity.name}</h1><p>{entity.description}</p><div class="entity-facts"><span>{relevant.length} 个已收录事件</span>{relevant.length > 0 && <span>{relevant[0].date.slice(0,4)} — {relevant[relevant.length - 1].date.slice(0,4)}</span>}{entity.tags.map(t => <span class="tag-pill">{t}</span>)}</div></header>
+  <div class="entity-source-links">{entity.sourceIds.map(id => <a href={sourceMap[id].url} target="_blank" rel="noopener noreferrer">{sourceMap[id].publisher} · {sourceMap[id].type}<ExternalLink size={12} /></a>)}</div>
+  {edges.length > 0 && <section class="relation-panel"><div class="detail-caption"><Network size={15} />关联线索</div>{edges.map(r => <div class="relation-row"><a href={entityHref(r.from)}>{entityMap[r.from].name}</a><span>{r.label}</span><a href={entityHref(r.to)}>{entityMap[r.to].name}</a><a class="relation-source" href={sourceMap[r.sourceIds[0]].url} target="_blank" rel="noopener noreferrer" aria-label={`查看关系依据：${r.label}`}><ExternalLink size={12} /></a></div>)}</section>}
+  {entity.type === 'family' && <div class="coverage-note">当前展示该家族的精选公开版本与技术报告，尚未穷尽所有档位和快照。点击事件可查看比较基线、变化与依据。</div>}
+  {entity.type === 'concept' && <div class="coverage-note">以下日期对应具体论文或公开实践，不代表这一概念在当天诞生；不同方法可以并行使用。</div>}
+  <Timeline client:load track={track} entityId={entity.id} />
+</Layout>

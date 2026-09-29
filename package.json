@@ -1,0 +1,30 @@
+{
+  "name": "ai-timeline",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "npm run validate && astro build",
+    "preview": "astro preview --host 127.0.0.1",
+    "check": "astro check",
+    "validate": "node --import tsx scripts/validate.ts",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "check:links": "node scripts/check-links.mjs"
+  },
+  "dependencies": {
+    "@astrojs/react": "7.0.0",
+    "astro": "7.3.5",
+    "lucide-react": "^0.468.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@types/node": "^22.20.4",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  }
+}

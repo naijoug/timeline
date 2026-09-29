@@ -1,0 +1,9 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import EventDetail from '../../../../components/EventDetail.astro';
+import { events } from '../../../../data/events';
+import { entityMap } from '../../../../data/entities';
+export function getStaticPaths() { return events.filter(e => e.tracks.includes('models')).flatMap(event => event.entityIds.filter(id => entityMap[id].type === 'family').map(id => ({ params: { family: id, version: event.id }, props: { event } }))); }
+const { event } = Astro.props;
+---
+<Layout title={event.title} description={event.summary} active="models"><EventDetail event={event} /></Layout>

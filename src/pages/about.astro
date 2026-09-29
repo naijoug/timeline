@@ -1,0 +1,8 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { events } from '../data/events';
+import { sources } from '../data/sources';
+import { ArrowLeft, ExternalLink } from 'lucide-react';
+---
+<Layout title="关于这份时间线"><a class="back-link" href="/ai/"><ArrowLeft size={16} />返回时间线</a><article class="about-page"><div class="eyebrow">A HISTORY WITH SOURCES</div><h1>重要的不只是发生过，<br />还有为什么值得记住。</h1><p class="detail-lead">Chronicle 是一份持续整理的全球 AI 发展史。我们从论文、产品公告与历史档案出发，把技术、产品和模型的变化放回时间之中。</p><div class="about-numbers"><div><strong>{events.length}</strong><span>已收录事件</span></div><div><strong>{sources.length}</strong><span>来源资料</span></div><div><strong>1943–2026</strong><span>当前历史跨度</span></div></div>
+<h2>怎样收录</h2><p>优先选择能解释方法突破、能力变化、产品形态和重要转折的事件。全史展示精选里程碑，专题收录更细的发布与变化。“全部事件”指全部已收录事件，并不代表完整行业数据库。</p><h2>怎样看待日期</h2><p>区分论文首次提交、公告发表、研究预览与正式可用。资料只有年份或月份时，保留原有精度。持续过程不填入虚构的精确日期。列表间距不代表真实时间长度。</p><h2>怎样看待“提升”</h2><p>版本变化需要明确比较基线。厂商报告、原始论文与编辑解读分开标记。测试预算、工具框架或数据集不同的分数不能直接比较。产品升级也不一定意味着底层模型升级。</p><h2>这版内容的边界</h2><p>内容核查截止于 2026 年 9 月 29 日。当前为人工编辑的精选资料集：模型家族、产品更新及早期历史仍有待补充，尤其不代表覆盖了每个版本或所有地区。官方产品描述不等同于本站实测，部分历史材料采用机构回顾。</p><h2>资料目录</h2><div class="source-list">{sources.map(s => <a class="source-item" href={s.url} target="_blank" rel="noopener noreferrer"><div><strong>{s.title}</strong><span>{s.publisher} · {s.type}</span></div><ExternalLink size={15} /></a>)}</div></article></Layout>

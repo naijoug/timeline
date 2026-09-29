@@ -1,0 +1,9 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Timeline from '../../components/Timeline';
+import type { Track } from '../../data/types';
+import { trackLabels } from '../../lib/timeline';
+export function getStaticPaths() { return ['methods', 'agents', 'models'].map(path => ({ params: { track: path }, props: { track: path === 'agents' ? 'products' : path } })); }
+const { track } = Astro.props as { track: Track };
+---
+<Layout title={trackLabels[track]} active={track}><Timeline client:load track={track} /></Layout>
