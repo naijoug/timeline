@@ -1,6 +1,8 @@
 import type { Source } from './types';
+import { globalSources } from './global';
 const source = (id: string, title: string, publisher: string, url: string, type: Source['type'] = '原始论文'): Source => ({ id, title, publisher, url, type, language: 'English', checkedAt: '2026-09-29' });
 export const sources: Source[] = [
+  ...globalSources,
   source('mcp', 'Introducing the Model Context Protocol', 'Anthropic', 'https://www.anthropic.com/news/model-context-protocol', '官方公告'),
   source('context-engineering', 'Effective context engineering for AI agents', 'Anthropic', 'https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents', '工程文章'),
   source('tool-engineering', 'Writing effective tools for AI agents', 'Anthropic', 'https://www.anthropic.com/engineering/writing-tools-for-agents', '工程文章'),

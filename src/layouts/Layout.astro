@@ -1,23 +1,17 @@
 ---
+import { sitePath } from '../lib/paths';
 import '../styles/global.css';
-import { trackPaths, trackLabels } from '../lib/timeline';
+import '../styles/atlas.css';
+import Header from '../components/Header';
 import type { Track } from '../data/types';
-import { BookOpen, Network, Bot, Layers3, Telescope } from 'lucide-react';
-interface Props { title?: string; description?: string; active?: Track; }
-const { title = 'AI 的来时路', description = '探索全球人工智能发展史：技术方法、Agent 产品与模型版本，每个重要事件都有来源。', active = 'history' } = Astro.props;
-const icons = { history: BookOpen, methods: Network, products: Bot, models: Layers3 };
+interface Props { title?: string; description?: string; active?: Track; explorer?:boolean }
+const { title = '全球 AI 时间线', description = '探索全球人工智能发展史：技术方法、Agent 产品与模型版本，每个重要事件都有来源。', active = 'history', explorer=false } = Astro.props;
 ---
 <!doctype html>
 <html lang="zh-CN">
-  <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="description" content={description} /><meta name="theme-color" content="#6845d9" /><title>{title} · Chronicle</title><link rel="icon" href="/favicon.svg" type="image/svg+xml" /><meta property="og:title" content={`${title} · Chronicle`} /><meta property="og:description" content={description} /></head>
+  <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="description" content={description} /><meta name="theme-color" content="#ffffff" /><title>{title} · timeline</title><link rel="icon" href={sitePath('/favicon.svg')} type="image/svg+xml" /><meta property="og:title" content={`${title} · timeline`} /><meta property="og:description" content={description} /></head>
   <body>
     <a href="#main" class="skip-link">跳到主要内容</a>
-    <aside class="sidebar"><a class="brand" href="/ai/" aria-label="Chronicle 首页"><img src="/favicon.svg" width="34" height="34" alt="" /><span>chronicle<span class="brand-sub">THE AI TIMELINE</span></span></a>
-      <div class="sidebar-section-label">探索 / EXPLORE</div><nav class="main-nav" aria-label="主要导航">{(Object.keys(trackPaths) as Track[]).map(track => { const Icon = icons[track]; return <a href={trackPaths[track]} data-track-link data-path={trackPaths[track]} class={active === track ? 'active' : ''} aria-current={active === track ? 'page' : undefined}><Icon size={19} strokeWidth={1.6} /><span>{trackLabels[track]}</span><span class="nav-index">0{Object.keys(trackPaths).indexOf(track) + 1}</span></a>; })}</nav>
-      <div class="sidebar-divider"></div><div class="sidebar-section-label">一条线索，一个时代</div><div class="sidebar-quote">“Can machines<br />think?”<span>ALAN TURING · 1950</span></div>
-      <div class="sidebar-bottom"><a href="/about/"><Telescope size={17} />关于这份时间线</a><div class="edition"><span>VOL. 01</span><span>1943 — 2026</span></div></div>
-    </aside>
-    <div class="app-content"><header class="topbar"><div class="breadcrumb">探索<span>/</span><strong>{trackLabels[active]}</strong></div><a href="/about/" class="edition-label">一部有出处的 AI 简史<BookOpen size={14} /></a></header>
-    <main id="main" class="main-content"><slot /></main><footer class="site-footer"><span>chronicle<span class="footer-dot">·</span>记录突破，也记录来路。</span><a href="/about/">收录原则与资料来源</a></footer></div>
+    {explorer ? <slot /> : <><Header active={Astro.url.pathname.endsWith('/about/')?'about':active==='history'?'timeline':'themes'}/><main id="main" class="record-content"><slot /></main><footer class="atlas-footer"><span><strong>timeline</strong><i/>理解过去 · 看见可能的未来</span><a href={sitePath('/about/')}>收录原则与资料来源</a></footer></>}
   </body>
 </html>

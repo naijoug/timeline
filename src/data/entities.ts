@@ -1,5 +1,8 @@
+import { sitePath } from '../lib/paths';
 import type { Entity, Relation, TimelineEvent } from './types';
+import { globalEntities } from './global';
 export const entities: Entity[] = [
+  ...globalEntities,
   { id: 'mcp', name: 'MCP', type: 'concept', description: '连接 AI 应用与外部数据、工具的开放协议。与 Skills 的任务知识和 Agent 的运行循环各有分工。', tags: ['协议', '工具连接'], sourceIds: ['mcp'] },
   { id: 'neural-networks', name: '神经网络', type: 'concept', description: '通过连接和参数学习，把输入转化为预测。从早期形式神经元，到现代深度学习。', tags: ['深度学习', '学习方法'], sourceIds: ['mcculloch', 'backprop'] },
   { id: 'symbolic-ai', name: '符号主义与专家系统', type: 'concept', description: '用符号、知识和规则完成推理。它与学习方法长期并行发展。', tags: ['知识表示', '推理'], sourceIds: ['chm'] },
@@ -25,8 +28,8 @@ export const entities: Entity[] = [
   { id: 'grok', name: 'Grok', type: 'family', company: 'xAI', description: '追踪 Grok 模型发布、API 开放及输入能力的变化，与 Grok Bot 产品分开记录。', tags: ['推理', '工具使用'], sourceIds: ['grok-releases'] },
 ];
 export const entityMap = Object.fromEntries(entities.map(e => [e.id, e]));
-export const entityHref = (id: string) => { const e = entityMap[id]; return e ? `/ai/${e.type === 'concept' ? 'concepts' : e.type === 'family' ? 'models' : 'products'}/${id}/` : '/ai/'; };
-export const eventHref = (event: TimelineEvent) => { const family = event.entityIds.find(id => entityMap[id]?.type === 'family'); return event.tracks.includes('models') && family ? `/ai/models/${family}/${event.id}/` : `/ai/events/${event.id}/`; };
+export const entityHref = (id: string) => { const e = entityMap[id]; return e ? sitePath(`/ai/${e.type === 'concept' ? 'concepts' : e.type === 'family' ? 'models' : 'products'}/${id}/`) : sitePath('/ai/'); };
+export const eventHref = (event: TimelineEvent) => { const family = event.entityIds.find(id => entityMap[id]?.type === 'family'); return event.tracks.includes('models') && family ? sitePath(`/ai/models/${family}/${event.id}/`) : sitePath(`/ai/events/${event.id}/`); };
 export const relations: Relation[] = [
   { from: 'manus-studio', to: 'manus', label: '桌面工作空间', sourceIds: ['manus2'], since: '2026-09' },
   { from: 'cue', to: 'manus', label: '共享基础设施的独立应用', sourceIds: ['manus2'], since: '2026-09' },

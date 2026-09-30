@@ -1,3 +1,4 @@
+import { sitePath } from '../lib/paths';
 import { useEffect, useState, useMemo, useRef } from 'react';
 import { Search, SlidersHorizontal, X, ArrowDownUp, ExternalLink, ChevronDown, Bookmark, Sparkles, CalendarDays } from 'lucide-react';
 import type { TimelineEvent, Track } from '../data/types';
@@ -70,7 +71,7 @@ export default function Timeline({ track = 'history', entityId }: { track?: Trac
   const availableEras = eras.filter(era => results.some(e => +e.date.slice(0, 4) >= era.from && +e.date.slice(0, 4) <= era.to));
   const sourceCount = new Set(events.flatMap(e => e.sourceIds)).size;
   const [eyebrow, title, intro] = headings[track];
-  const returnUrl = typeof window === 'undefined' ? '/ai/' : `${window.location.pathname}${filterQuery(filters, track)}`;
+  const returnUrl = typeof window === 'undefined' ? sitePath('/ai/') : `${window.location.pathname}${filterQuery(filters, track)}`;
   const hasFilters = !!(filters.q || filters.from || filters.to || filters.company || (!entityId && filters.entity));
   return <>
     {!entityId && <header className="page-intro"><div className="eyebrow"><span></span>{eyebrow}</div><h1>{title}</h1><p>{intro}</p><div className="intro-meta"><span><CalendarDays size={14} />1943 — 2026</span><span>{events.length} 个已收录事件</span><span>{sourceCount} 份来源</span></div></header>}

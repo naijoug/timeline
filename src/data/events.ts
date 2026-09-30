@@ -1,9 +1,11 @@
 import type { TimelineEvent, Track } from './types';
+import { globalEvents } from './global';
 
 export function entry(id: string, date: string, title: string, summary: string, significance: string, sourceIds: string[], entityIds: string[], tracks: Track[], extra: Partial<TimelineEvent> = {}): TimelineEvent {
   return { id, date, title, summary, significance, sourceIds, entityIds, tracks, tags: [], milestone: false, kind: '研究进展', limitation: '此条目记录特定历史事件，不代表该方向的唯一源头。', ...extra };
 }
 export const events: TimelineEvent[] = [
+  ...globalEvents,
   entry('formal-neuron', '1943-12', '神经元，被写成数学逻辑', 'McCulloch 与 Pitts 用数学逻辑描述简化的神经活动，为人工神经网络提供早期形式模型。', '把关于大脑的想象变成可以分析的计算问题。', ['mcculloch'], ['neural-networks'], ['history', 'methods'], { milestone: true, subtitle: 'A logical calculus of nervous activity', tags: ['理论基础'], limitation: '这是高度简化的形式模型，不能等同于真实大脑。' }),
   entry('turing-test', '1950-10', '机器能思考吗？', '图灵在《Computing Machinery and Intelligence》中讨论模仿游戏，以可观察的交互重新组织机器智能的问题。', '让关于智能的讨论进入可以设计实验的领域。', ['turing'], [], ['history'], { milestone: true, subtitle: 'Computing Machinery and Intelligence', tags: ['思想起点'], kind: '论文发表', limitation: '通过对话表现判断智能存在边界，也不等于证明机器拥有意识。' }),
   entry('logic-theorist', '1955', 'Logic Theorist：用程序证明定理', 'Newell、Simon 和 Shaw 开始研制 Logic Theorist，探索通过搜索与启发式方法完成符号推理。', '早期 AI 开始处理超出数值计算的推理任务。', ['chm'], ['symbolic-ai'], ['history', 'methods'], { tags: ['符号推理'] }),

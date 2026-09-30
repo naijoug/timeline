@@ -1,6 +1,7 @@
+import { sitePath } from './paths';
 import type { TimelineEvent, Track } from '../data/types';
 export const trackLabels: Record<Track, string> = { history: 'AI 全史', methods: '技术与方法', products: 'Agent 产品', models: '模型演进' };
-export const trackPaths: Record<Track, string> = { history: '/ai/', methods: '/ai/methods/', products: '/ai/agents/', models: '/ai/models/' };
+export const trackPaths: Record<Track, string> = { history: sitePath('/ai/'), methods: sitePath('/ai/methods/'), products: sitePath('/ai/agents/'), models: sitePath('/ai/models/') };
 export const eras = [
   { from: 1943, to: 1956, label: '思想的起点', short: '1943—1956' },
   { from: 1957, to: 1979, label: '探索与早期系统', short: '1957—1979' },

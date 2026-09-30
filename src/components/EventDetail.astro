@@ -1,4 +1,5 @@
 ---
+import { sitePath } from '../lib/paths';
 import type { TimelineEvent } from '../data/types';
 import { events } from '../data/events';
 import { sourceMap } from '../data/sources';
@@ -9,20 +10,21 @@ const { event } = Astro.props as { event: TimelineEvent };
 const siblings = event.announcementGroup ? events.filter(e => e.id !== event.id && e.announcementGroup === event.announcementGroup) : [];
 const related = events.filter(e => e.id !== event.id && !siblings.includes(e) && e.entityIds.some(id => event.entityIds.includes(id))).sort((a,b) => Math.abs(Number(a.date.slice(0,4)) - Number(event.date.slice(0,4))) - Math.abs(Number(b.date.slice(0,4)) - Number(event.date.slice(0,4)))).slice(0,3);
 ---
-<a class="back-link" id="back-to-timeline" href="/ai/"><ArrowLeft size={16} />返回时间线</a>
+<a class="back-link" id="back-to-timeline" href={sitePath('/ai/')}><ArrowLeft size={16} />返回时间线</a>
 <article class="full-event">
   <header class="event-hero"><div class="eyebrow">A MOMENT IN AI HISTORY</div><div class="full-event-meta"><span>{event.kind}</span><time datetime={event.date}>{displayDate(event)}</time>{event.milestone && <span><Sparkles size={14} />里程碑</span>}</div><h1>{event.title}</h1>{event.subtitle && <p class="detail-subtitle">{event.subtitle}</p>}<p class="detail-lead">{event.summary}</p></header>
   <div class="article-layout"><div class="article-body">
     <section><h2>为什么重要</h2><p>{event.significance}</p></section>
-    {event.change && <section class="change-panel"><div class="eyebrow">WHAT CHANGED</div><h2>这一次，改变了什么？</h2><div class="comparison-baseline">比较基线：{event.change.baselineEventId ? <a href={`/ai/events/${event.change.baselineEventId}/`}>{event.change.baseline}</a> : event.change.baseline}</div><ul class="improvements">{event.change.improvements.map(i => <li>{i}</li>)}</ul><h3>代价与使用条件</h3><p>{event.change.tradeoffs}</p><div class="evidence-label">证据类型：{event.change.evidence}{event.change.sourceIds.map(id => <a href={sourceMap[id].url} target="_blank" rel="noopener noreferrer">{sourceMap[id].publisher}<ExternalLink size={12} /></a>)}</div></section>}
+    {event.change && <section class="change-panel"><div class="eyebrow">WHAT CHANGED</div><h2>这一次，改变了什么？</h2><div class="comparison-baseline">比较基线：{event.change.baselineEventId ? <a href={sitePath(`/ai/events/${event.change.baselineEventId}/`)}>{event.change.baseline}</a> : event.change.baseline}</div><ul class="improvements">{event.change.improvements.map(i => <li>{i}</li>)}</ul><h3>代价与使用条件</h3><p>{event.change.tradeoffs}</p><div class="evidence-label">证据类型：{event.change.evidence}{event.change.sourceIds.map(id => <a href={sourceMap[id].url} target="_blank" rel="noopener noreferrer">{sourceMap[id].publisher}<ExternalLink size={12} /></a>)}</div></section>}
     <section><h2>阅读这段历史时</h2><p>{event.limitation}</p></section>
     <section id="sources"><div class="section-heading"><h2>回到原始资料</h2><span>{event.sourceIds.length} 份来源</span></div><div class="source-list">{event.sourceIds.map((id, index) => { const s = sourceMap[id]; return <a href={s.url} target="_blank" rel="noopener noreferrer" class="source-item"><span class="source-number">0{index + 1}</span><div><strong>{s.title}</strong><span>{s.publisher} · {s.type} · {s.language}</span></div><ExternalLink size={16} /></a>; })}</div><p class="source-note">资料核查于 2026-09-29。论文、公告与机构回顾分别标记；“为什么重要”为编辑解读。</p></section>
-    {siblings.length > 0 && <section><h2>同一次发布</h2><p class="section-description">一份公告里的不同变化，在这里彼此关联。</p><div class="related-list">{siblings.map(e => <a href={`/ai/events/${e.id}/`}><span>{e.kind}</span><strong>{e.title}</strong><Link2 size={15} /></a>)}</div></section>}
-    {related.length > 0 && <section><h2>沿着这条线索继续</h2><div class="related-list">{related.map(e => <a href={`/ai/events/${e.id}/`}><span>{e.date.slice(0,4)}</span><strong>{e.title}</strong><span>阅读</span></a>)}</div></section>}
+    {siblings.length > 0 && <section><h2>同一次发布</h2><p class="section-description">一份公告里的不同变化，在这里彼此关联。</p><div class="related-list">{siblings.map(e => <a href={sitePath(`/ai/events/${e.id}/`)}><span>{e.kind}</span><strong>{e.title}</strong><Link2 size={15} /></a>)}</div></section>}
+    {related.length > 0 && <section><h2>沿着这条线索继续</h2><div class="related-list">{related.map(e => <a href={sitePath(`/ai/events/${e.id}/`)}><span>{e.date.slice(0,4)}</span><strong>{e.title}</strong><span>阅读</span></a>)}</div></section>}
   </div><aside class="article-aside"><div class="rail-heading">相关对象</div>{event.entityIds.map(id => <a class="entity-reference" href={entityHref(id)}><span>{entityMap[id].type === 'family' ? '模型家族' : entityMap[id].type === 'concept' ? '技术与方法' : 'Agent 产品'}</span><strong>{entityMap[id].name}</strong></a>)}<div class="rail-heading aside-second">事件档案</div><dl><dt>时间精度</dt><dd>{event.dateLabel || (event.date.length === 4 ? '年份' : event.date.length === 7 ? '月份' : '日期')}</dd><dt>机构</dt><dd>{event.company || '见原始资料'}</dd><dt>类别</dt><dd>{event.tags.join(' / ') || '研究进展'}</dd></dl><button class="copy-link" id="copy-link"><Link2 size={14} /><span>复制事件链接</span></button><p id="copy-status" aria-live="polite"></p></aside></div>
 </article>
 <script>
+import { sitePath } from '../lib/paths';
   const back = document.querySelector<HTMLAnchorElement>('#back-to-timeline');
-  try { const stored = sessionStorage.getItem('timeline-return'); if (stored && back) { const url = new URL(stored, window.location.origin); if (url.origin === window.location.origin && url.pathname.startsWith('/ai/')) back.href = url.pathname + url.search + url.hash; } } catch {}
+  try { const stored = sessionStorage.getItem('timeline-return'); if (stored && back) { const url = new URL(stored, window.location.origin); if (url.origin === window.location.origin && url.pathname.startsWith(sitePath('/ai/'))) back.href = url.pathname + url.search + url.hash; } } catch {}
   document.querySelector('#copy-link')?.addEventListener('click', async () => { const status = document.querySelector('#copy-status'); try { await navigator.clipboard.writeText(window.location.href); if (status) status.textContent = '链接已复制'; } catch { if (status) status.textContent = '可直接复制浏览器地址栏中的链接'; } });
 </script>

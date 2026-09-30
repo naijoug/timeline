@@ -1,0 +1,38 @@
+name: Deploy to GitHub Pages
+
+# Publication is explicit: pushing source does not publish the site.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      TIMELINE_BASE_PATH: /timeline
+    steps:
+      - uses: actions/checkout@v7
+      - name: Validate, build, and upload static site
+        uses: withastro/action@v6
+        with:
+          node-version: 22
+          build-cmd: npm run check && npm test && npm run build && npm run check:links
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5

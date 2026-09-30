@@ -1,4 +1,5 @@
 ---
+import { sitePath } from '../lib/paths';
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="这一页还没被写下"><div class="empty-state"><div class="eyebrow">404 · AN UNWRITTEN CHAPTER</div><h1>这条线索暂时没有记录。</h1><p>链接可能有误，也可能指向尚未收录的事件。</p><a class="primary-button" href="/ai/">回到 AI 时间线</a></div></Layout>
+<Layout title="这一页还没被写下"><div class="empty-state"><div class="eyebrow">404 · AN UNWRITTEN CHAPTER</div><h1>这条线索暂时没有记录。</h1><p>链接可能有误，也可能指向尚未收录的事件。</p><a class="primary-button" href={sitePath('/ai/')}>回到 AI 时间线</a></div></Layout>
