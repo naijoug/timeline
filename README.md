@@ -1,6 +1,6 @@
 # timeline
 
-一个可本地运行、可静态部署的多维 AI 发展史网站。使用 Astro、React、TypeScript；无数据库、账号或运行时模型 API。当前已按选定的方案一改为共用时间刻度的横向三轨视图。
+一个可本地运行、可静态部署的通用时间线网站。使用 Astro、React、TypeScript；无数据库、账号或运行时模型 API。当前包含 AI 发展史与中国历史两个主题，共用时间计算、筛选、区间布局和节点聚合能力。
 
 ## 启动
 
@@ -11,11 +11,22 @@ npm ci
 npm run dev
 ```
 
-打开终端显示的本地 URL，默认 http://127.0.0.1:4321/ai/。
+打开终端显示的本地 URL，默认 http://127.0.0.1:4321/；AI 入口为 `/ai/`，中国历史入口为 `/china-history/`。
 
 当前 Astro 版本会在后台管理开发服务器，可用 `npx astro dev status` 查看，`npx astro dev stop` 停止。
 
-## 已实现
+## 通用底座与中国历史
+
+- 首页提供主题入口，主题数据独立加载。
+- 34 个朝代与时期的阅读骨架，20 个精选事件、14 份来源；唐代 12 个事件（默认 11 个关键节点），宋辽夏金提供跨政权示例。
+- 朝代条带、展开分期、并存政权、独立时期页；时期树表示阅读组织，不推断历史隶属。
+- 朝代＋类别筛选、战役专题、搜索、拖动平移、缩放、年份范围、详情面板与独立事件页。
+- 视图参数与选中事件可分享，详情返回恢复原视图；原根路径中的 AI 查询链接自动转到 `/ai/`。
+- 公元前年份、无公元0年的连续坐标、年／月／日精度、近似日期、不确定范围和持续事件重叠查询。
+
+中国历史首版为**时期骨架＋精选样例**，并非完整通史。各时期单独注明收录深度与纪年口径；更多历史事件可继续按来源扩充。
+
+## AI 已实现
 
 - AI 技术突破、模型演进、Agent 应用三条共用时间轴的主线。
 - 109 个事件、46 个实体（13 个概念、15 个产品、18 个模型家族），86 份来源。
@@ -61,22 +72,24 @@ TIMELINE_BASE_PATH=/timeline TIMELINE_OUT_DIR=dist-pages npm run check:links
 ## 目录
 
 ```text
-src/data/types.ts       数据类型
-src/data/events.ts      事件与模型版本变化
-src/data/global.ts      全球补充资料、模型与 Agent 产品
-src/data/entities.ts    概念、产品、家族与关系
-src/data/sources.ts     共享来源目录
-src/lib/timeline.ts     筛选、日期和 URL 逻辑
-src/lib/atlas.ts        横向时间轴、区域分类、聚合与窗口状态
-src/lib/validate.ts     数据图校验
-src/components/        时间线与事件详情
-src/pages/             静态路由
-src/styles/            响应式样式
-tests/                 逻辑测试
-docs/                  调研与方案
+src/core/                      通用类型、日期、筛选、URL、布局、校验
+src/topics/ai/                 AI 数据、类型、规则、校验与通用模型适配器
+src/topics/china-history/      历史数据、时期骨架、类别与来源
+src/data/                     原 AI 数据导入的兼容出口
+src/lib/atlas.ts               AI 视图状态适配，复用 core 的时间、筛选与聚合
+src/lib/timeline.ts            原 AI 列表 API 兼容出口
+src/lib/paths.ts               项目站点子路径
+src/components/Atlas.tsx       AI 三轨展示与模型专用详情
+src/components/timeline/      接收 Catalog 配置的时期／事件浏览器
+src/pages/                    静态路由
+src/styles/                   响应式样式
+tests/                        通用逻辑与 AI 兼容测试
+docs/                         研究、设计与重构说明
 ```
 
-## 添加内容
+## 添加 AI 内容
+
+AI 内容文件已移动到 `src/topics/ai/`；`src/data/` 只保留兼容导出。
 
 1. 在 `sources.ts` 添加具体论文、公告或档案，不用机构主页代替事件依据。
 2. 如需新产品、概念或家族，在 `entities.ts` 添加稳定英文 ID、说明与来源。
@@ -96,3 +109,19 @@ docs/                  调研与方案
 厂商声明不等于独立实测，模型分数不混合不同测试配置。概念页上的事件日期不代表概念发明日。部分早期历史使用机构回顾，来源类型在事件页标明。
 
 外链会随时间变化；结构校验不等于实时外站可用性保证。新内容发布前仍需核对原资料和日期。首版记录见 `docs/verification.md`；改版设计对照见 `design-qa.md`，运行验证见 `docs/verification-v2.md`。
+
+
+## 添加历史内容或新主题
+
+中国历史在 `src/topics/china-history/catalog.ts` 维护。新增事件必须有稳定 ID、`TimeSpan`、分类、明确的 `periodIds`／`entityIds` 和来源；不要按年份自动推断朝代归属。同一事件可引用多个时期，只存储一次。
+
+通用 `HistoricalDate.year` 使用非零的历史年份（-1 表示前1年），`yearCoordinate()` 转为内部连续坐标（0 表示前1年）。URL 使用历史年份，界面不会显示0年。`duration` 是持续过程，`uncertain` 是不确定日期范围，两者均保留端点；月日计算采用前推公历，古代原始历法须先核对换算，不能直接填写为公历月日。
+
+新主题实现步骤：
+
+1. 在 `src/topics/<topic>/` 添加符合 `Catalog` 的数据，配置分类、范围说明、快捷入口和时期路由段。
+2. 生成主题、时期、事件路由；时期浏览可直接传数据给 `Explorer`，专业详情可单独实现。
+3. 在主题首页添加入口，在 `scripts/validate.ts` 注册内容校验。
+4. 添加该主题特有的约束与关键测试，运行检查、构建和子路径链接验证。
+
+通用校验只管日期、ID、引用、时期层级和基础内容；AI 模型比较基线等规则留在主题校验器中。当前浏览器按主题载入整个小型精选数据集；海量数据的分片和全文检索后置。

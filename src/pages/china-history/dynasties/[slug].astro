@@ -1,0 +1,8 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Explorer from '../../../components/timeline/Explorer';
+import { chinaHistory } from '../../../topics/china-history/catalog';
+export function getStaticPaths() { return chinaHistory.periods.map(period=>({params:{slug:period.id},props:{period}})); }
+const { period } = Astro.props;
+---
+<Layout explorer title={`${period.title} · 中国历史时间线`} description={period.summary}><Explorer catalog={chinaHistory} initialPeriod={period.id} client:load /></Layout>

@@ -2,23 +2,22 @@ import { sitePath } from '../lib/paths';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Cpu, Layers3, Network, Globe2, Building2, CircleDot, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, X, ExternalLink, SlidersHorizontal } from 'lucide-react';
 import Header from './Header';
-import { events } from '../data/events';
-import { entities, entityMap, entityHref, eventHref } from '../data/entities';
-import { sourceMap } from '../data/sources';
+import { aiAtlasData } from '../topics/ai/adapter';
 import { displayDate } from '../lib/timeline';
-import { MAX_YEAR, MIN_YEAR, atlasQuery, clampWindow, clusterEvents, datePosition, defaultAtlas, eventLane, eventTitle, filterAtlas, laneInfo, readAtlas, yearTicks, type AtlasState, type Cluster, type Lane } from '../lib/atlas';
+import { MAX_YEAR, MIN_YEAR, atlasQuery, clampWindow, clusterEvents, datePosition, defaultAtlas, eventLane, eventTitle, filterAtlas, laneInfo, readAtlas, yearTicks, type AtlasState, type Cluster, type Lane, YEAR_COUNT, aiPresentation } from '../lib/atlas';
 
-const lanes:Lane[]=['methods','models','products'];
+const lanes = aiPresentation.lanes;
 const icons={methods:Cpu,models:Layers3,products:Network};
-const names=Object.fromEntries(entities.map(e=>[e.id,e.name]));
 const motionBehavior=():ScrollBehavior=>window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
-const overviewTicks=[1943,1950,1960,1970,1980,1990,2000,2010,2020,2026];
+const overviewTicks=[MIN_YEAR,...yearTicks(MIN_YEAR+1,MAX_YEAR-1,650),MAX_YEAR];
 function dateSpan(cluster:Cluster) {
   const first=cluster.events[0].date.slice(0,7),last=cluster.events.at(-1)!.date.slice(0,7);
   return first===last?first.replace('-','.'):`${first.replace('-','.')} – ${last.replace('-','.')}`;
 }
 
-export default function Atlas({ initialLane='all' }: { initialLane?:AtlasState['lane'] }) {
+export default function Atlas({ initialLane='all', data=aiAtlasData }: { initialLane?:AtlasState['lane']; data?:typeof aiAtlasData }) {
+  const { events, entities, entityMap, entityHref, eventHref, sourceMap } = data;
+  const names=useMemo(()=>Object.fromEntries(entities.map(e=>[e.id,e.name])),[entities]);
   const [state,setState]=useState(()=>defaultAtlas(initialLane));
   const [ready,setReady]=useState(false);
   const [rangeOpen,setRangeOpen]=useState(false);
@@ -49,7 +48,7 @@ export default function Atlas({ initialLane='all' }: { initialLane?:AtlasState['
     const [from,to]=clampWindow(state.from+direction*Math.max(1,Math.floor(span/2)),span);update({from,to});
   };
   const zoom=(direction:number)=>{
-    const newSpan=direction<0?Math.max(1,Math.ceil(span/2)):Math.min(84,span*2);
+    const newSpan=direction<0?Math.max(1,Math.ceil(span/2)):Math.min(YEAR_COUNT,span*2);
     const [from,to]=clampWindow(Math.floor((state.from+state.to-newSpan+1)/2),newSpan);update({from,to});
   };
   const choose=(id:string)=>{
@@ -66,14 +65,14 @@ export default function Atlas({ initialLane='all' }: { initialLane?:AtlasState['
     <Header query={state.q} onQuery={q=>update({q})} active={initialLane==='all'?'timeline':'themes'}/>
     <main id="main" className="atlas-main">
       <section className="history-overview" aria-label="历史总览">
-        <div className="overview-heading"><h1>1943 — 2026</h1><p>从图灵到生成式 AI</p></div>
+        <div className="overview-heading"><h1>{MIN_YEAR} — {MAX_YEAR}</h1><p>{aiPresentation.subtitle}</p></div>
         <div className="overview-axis" role="group" aria-label="选择历史时间窗口">
           <div className="overview-rule"/>
-          <div className="overview-selection" style={{left:`${overviewPosition(state.from)}%`,width:`${span/84*100}%`}}><span className="window-label">{state.from} — {state.to}</span></div>
+          <div className="overview-selection" style={{left:`${overviewPosition(state.from)}%`,width:`${span/YEAR_COUNT*100}%`}}><span className="window-label">{state.from} — {state.to}</span></div>
           <input className="overview-range" type="range" min={MIN_YEAR} max={MAX_YEAR+1} step="1" value={state.from} aria-label="时间窗口起点" aria-valuetext={`${state.from} 年`} onChange={e=>update({from:Math.min(state.to,Number(e.target.value))})}/>
           <input className="overview-range" type="range" min={MIN_YEAR} max={MAX_YEAR+1} step="1" value={state.to+1} aria-label="时间窗口终点" aria-valuetext={`${state.to} 年结束`} onChange={e=>update({to:Math.max(state.from,Number(e.target.value)-1)})}/>
           {overviewTicks.map(year=><button className="overview-tick" key={year} style={{left:`${overviewPosition(year+.5)}%`}} onClick={()=>{const[from,to]=clampWindow(year,span);update({from,to});}} aria-label={`从 ${year} 年开始浏览`}><span/>{year}</button>)}
-          <button className="overview-landmark" style={{left:`${overviewPosition(datePosition('2017-06-12'))}%`}} onClick={()=>update({from:2016,to:2018,selected:'transformer',scope:'world',q:'',lane:'all'})}><strong>2017</strong><span>Transformer</span><i/></button>
+          <button className="overview-landmark" style={{left:`${overviewPosition(datePosition(aiPresentation.landmark.date))}%`}} onClick={()=>update({from:aiPresentation.landmark.year-1,to:aiPresentation.landmark.year+1,selected:aiPresentation.landmark.event,scope:'world',q:'',lane:'all'})}><strong>{aiPresentation.landmark.year}</strong><span>{aiPresentation.landmark.title}</span><i/></button>
         </div>
       </section>
       <div className={`atlas-workspace ${selected?'with-detail':''}`}>
@@ -83,11 +82,11 @@ export default function Atlas({ initialLane='all' }: { initialLane?:AtlasState['
             <div className="scope-controls" aria-label="地区筛选"><button aria-pressed={state.scope==='world'} onClick={()=>update({scope:'world'})}><Globe2 size={17}/>全球</button><button aria-pressed={state.scope==='china'} onClick={()=>update({scope:'china'})}><Building2 size={17}/>中国团队</button></div>
             <span className="toolbar-divider"/>
             <div className="density-controls"><span><CircleDot size={16}/>{state.all?'全部已收录':'仅关键节点'}</span><label className="all-switch"><input type="checkbox" checked={state.all} onChange={e=>update({all:e.target.checked})}/><span className="switch-track"/><span>显示全部</span></label></div>
-            <div className="zoom-controls"><button className="square-button" aria-label="缩小时间轴" onClick={()=>zoom(1)} disabled={span>=84}><ZoomOut size={17}/></button><button className="square-button" aria-label="放大时间轴" onClick={()=>zoom(-1)} disabled={span<=1}><ZoomIn size={17}/></button><button className="latest-button" onClick={()=>update({from:2025,to:2026,selected:'manus-2',q:'',scope:'world'})}>最近</button></div>
+            <div className="zoom-controls"><button className="square-button" aria-label="缩小时间轴" onClick={()=>zoom(1)} disabled={span>=YEAR_COUNT}><ZoomOut size={17}/></button><button className="square-button" aria-label="放大时间轴" onClick={()=>zoom(-1)} disabled={span<=1}><ZoomIn size={17}/></button><button className="latest-button" onClick={()=>update({from:MAX_YEAR-1,to:MAX_YEAR,selected:aiPresentation.latestEvent,q:'',scope:'world'})}>最近</button></div>
           </div>
           <div id="range-picker" className="range-picker" hidden={!rangeOpen}>
-            <label>起始年份<select value={state.from} onChange={e=>{const from=Number(e.target.value);update({from,to:Math.max(from,state.to)});}}>{Array.from({length:84},(_,i)=>MIN_YEAR+i).map(y=><option key={y}>{y}</option>)}</select></label>
-            <label>结束年份<select value={state.to} onChange={e=>{const to=Number(e.target.value);update({to,from:Math.min(to,state.from)});}}>{Array.from({length:84},(_,i)=>MIN_YEAR+i).map(y=><option key={y}>{y}</option>)}</select></label>
+            <label>起始年份<select value={state.from} onChange={e=>{const from=Number(e.target.value);update({from,to:Math.max(from,state.to)});}}>{Array.from({length:YEAR_COUNT},(_,i)=>MIN_YEAR+i).map(y=><option key={y}>{y}</option>)}</select></label>
+            <label>结束年份<select value={state.to} onChange={e=>{const to=Number(e.target.value);update({to,from:Math.min(to,state.from)});}}>{Array.from({length:YEAR_COUNT},(_,i)=>MIN_YEAR+i).map(y=><option key={y}>{y}</option>)}</select></label>
             <label>关注主线<select aria-label="关注主线" value={state.lane} onChange={e=>update({lane:e.target.value as AtlasState['lane']})}><option value="all">三条主线</option>{lanes.map(l=><option key={l} value={l}>{laneInfo[l].title}</option>)}</select></label><button onClick={()=>setRangeOpen(false)}>完成</button>
           </div>
           {(state.q || state.scope==='china' || state.lane!=='all') && <div className="atlas-filter-status"><span>{state.q?`搜索「${state.q}」 · `:''}{state.scope==='china'?'中国团队 · ':''}{state.lane!=='all'?`${laneInfo[state.lane].title} · `:''}{results.length} 个事件</span><button onClick={()=>setState(defaultAtlas())}>清除筛选<X size={12}/></button></div>}
@@ -101,7 +100,7 @@ export default function Atlas({ initialLane='all' }: { initialLane?:AtlasState['
                   {ticks.map(y=><div key={y} className="grid-line" style={{left:`${(y-state.from)/span*100}%`}}/>)}
                   <div className="lane-baseline"/>
                   {clusters.map(c=>{
-                    const preferred=['claude-code-preview','skills-introduction'];
+                    const preferred=aiPresentation.preferredEvents;
                     const e=c.events.find(item=>item.id===state.selected)||c.events.find(item=>preferred.includes(item.id))||c.events[0];
                     const x=c.position*width,labelWidth=Math.min(116,width),left=Math.max(0,Math.min(width-labelWidth,x-labelWidth/2));
                     return <button key={c.id} data-event-id={e.id} className={`event-node ${c.events.some(e=>e.id===state.selected)?'selected':''}`} style={{left:`${left}px`,width:`${labelWidth}px`}} onClick={()=>choose(e.id)} aria-pressed={c.events.some(e=>e.id===state.selected)} aria-label={`${dateSpan(c)} ${eventTitle(e)}${c.events.length>1?`，共 ${c.events.length} 个事件`:''}`} title={c.events.map(e=>`${e.date} ${e.title}`).join('\n')}>

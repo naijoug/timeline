@@ -1,0 +1,6 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Explorer from '../../../components/timeline/Explorer';
+import { chinaHistory } from '../../../topics/china-history/catalog';
+---
+<Layout explorer title="重大战役 · 中国历史" description="按朝代和时间范围探索已收录的重大战役。"><Explorer catalog={chinaHistory} initialCategory="battle" viewPath="/china-history/themes/battles/" client:load /></Layout>

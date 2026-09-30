@@ -1,0 +1,6 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Explorer from '../../components/timeline/Explorer';
+import { chinaHistory } from '../../topics/china-history/catalog';
+---
+<Layout explorer title="中国历史" description={chinaHistory.topic.description}><Explorer catalog={chinaHistory} client:load /></Layout>
