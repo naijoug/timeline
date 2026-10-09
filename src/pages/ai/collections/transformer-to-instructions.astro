@@ -1,0 +1,7 @@
+---
+import CollectionPage from '../../../components/timeline/CollectionPage.astro';
+import { aiCatalog } from '../../../topics/ai/adapter';
+import { instructionCollection } from '../../../topics/ai/instruction-following';
+import { entityHref } from '../../../topics/ai/entities';
+---
+<CollectionPage catalog={aiCatalog} collection={instructionCollection} entityHref={entityHref} />

@@ -1,0 +1,7 @@
+---
+import type { Source } from '../../core/types';
+interface Props { sources: Source[]; ids?: string[]; locator?: string }
+const { sources, ids = sources.map(s => s.id), locator } = Astro.props;
+---
+<span class="reader-evidence-links">{ids.map(id => { const index = sources.findIndex(s => s.id === id); const source = sources[index]; return source && <a href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`来源${index + 1}：${source.title}${locator ? `；${locator}` : ''}`} title={`${source.title} · ${locator || source.locator || source.publisher}`}>{index + 1}</a>; })}</span>
+{locator && <small class="evidence-locator">原文定位：{locator}</small>}

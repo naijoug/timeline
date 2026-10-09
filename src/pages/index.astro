@@ -5,13 +5,13 @@ import { sitePath } from '../lib/paths';
 import { ArrowUpRight } from 'lucide-react';
 import { events as aiEvents } from '../topics/ai/events';
 import { chinaHistory } from '../topics/china-history/catalog';
-import '../styles/explorer.css';
+import '../styles/library.css';
 ---
 <Layout explorer title="探索时间线" description="从 AI 发展到中国历史，沿着时间发现事件、时代与主题之间的关联。">
-  <Header topicTitle="探索时间线" topicPath="/" />
+  <Header client:load topicTitle="探索时间线" topicPath="/" />
   <main id="main" class="library"><p class="library-kicker">TIMELINE / A WAY TO EXPLORE</p><h1>沿着时间，<br/>看见事物的来路。</h1><p class="library-lead">一个主题，一条主线。走进一个时代，展开一段历史，发现事件之间的关联。</p><div class="library-rule"/><div class="library-label"><span>选择一条线，开始探索</span><span>02 个主题</span></div><div class="topic-cards">
-    <a class="topic-card" href={sitePath('/ai/')}><div class="topic-card-visual" aria-hidden="true"><span>1943 — 2026</span><div class="mini-timeline">{['思想','学习','生成','行动'].map(t=><i><b>{t}</b></i>)}</div></div><div class="topic-card-body"><span>SCIENCE & TECHNOLOGY</span><h2>AI 发展史<ArrowUpRight size={22}/></h2><p>从技术突破到模型演进、Agent 应用。三条轨道，共同讲述人工智能的发展。</p><small>{aiEvents.length} 个事件 · 技术 / 模型 / Agent</small></div></a>
-    <a class="topic-card history" href={sitePath('/china-history/')}><div class="topic-card-visual" aria-hidden="true"><span>中国历史</span><div class="mini-timeline">{['先秦','汉唐','宋元','明清'].map(t=><i><b>{t}</b></i>)}</div></div><div class="topic-card-body"><span>HISTORY & CIVILIZATION</span><h2>中国历史<ArrowUpRight size={22}/></h2><p>从朝代主线走进具体时期，展开并存政权，沿着战役、制度与文化继续阅读。</p><small>{chinaHistory.periods.length} 个朝代与时期 · {chinaHistory.events.length} 个精选事件</small></div></a>
+    <a class="topic-card" href={sitePath('/ai/')}><div class="topic-card-visual" aria-hidden="true"><span>1943 — 2026</span><div class="mini-timeline">{['思想','学习','生成','行动'].map(t=><i><b>{t}</b></i>)}</div></div><div class="topic-card-body"><span>SCIENCE & TECHNOLOGY</span><h2>AI 发展史<ArrowUpRight size={22}/></h2><p>从技术突破到模型演进、Agent 应用。沿着关键节点，阅读人工智能的发展。</p><small>{aiEvents.length} 个事件 · 技术 / 模型 / Agent</small></div></a>
+    <a class="topic-card" href={sitePath('/china-history/')}><div class="topic-card-visual" aria-hidden="true"><span>中国历史</span><div class="mini-timeline">{['先秦','汉唐','宋元','明清'].map(t=><i><b>{t}</b></i>)}</div></div><div class="topic-card-body"><span>HISTORY & CIVILIZATION</span><h2>中国历史<ArrowUpRight size={22}/></h2><p>从朝代主线走进具体时期，展开并存政权，沿着战役、制度与文化继续阅读。</p><small>{chinaHistory.periods.length} 个朝代与时期 · {chinaHistory.events.length} 个精选事件</small></div></a>
   </div><p class="library-note">每条时间线都有自己的收录范围。事件与资料持续补充，来源随节点一起保留。</p></main>
   <footer class="atlas-footer"><span><strong>timeline</strong><i/>在时间中，发现关联</span><a href={sitePath('/about/')}>收录范围与资料说明</a></footer>
 </Layout>

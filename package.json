@@ -9,6 +9,7 @@
     "preview": "astro preview --host 127.0.0.1",
     "check": "astro check",
     "validate": "node --import tsx scripts/validate.ts",
+    "report:ai": "node --import tsx scripts/ai-coverage.ts",
     "test": "node --import tsx --test tests/*.test.ts",
     "check:links": "node scripts/check-links.mjs"
   },

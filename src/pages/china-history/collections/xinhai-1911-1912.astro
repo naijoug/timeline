@@ -1,0 +1,8 @@
+---
+import CollectionPage from '../../../components/timeline/CollectionPage.astro';
+import { chinaHistory } from '../../../topics/china-history/catalog';
+import { xinhaiCollection } from '../../../topics/china-history/xinhai';
+import { sitePath } from '../../../lib/paths';
+const entityHref = (id:string) => sitePath(`/china-history/objects/${id}/`);
+---
+<CollectionPage catalog={chinaHistory} collection={xinhaiCollection} entityHref={entityHref} />

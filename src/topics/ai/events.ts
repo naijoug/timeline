@@ -1,11 +1,14 @@
 import type { TimelineEvent, Track } from './types';
 import { globalEvents } from './global';
+import { releaseEvents } from './releases';
+import { instructionEvents, enrichInstructionEvent } from './instruction-following';
 
 export function entry(id: string, date: string, title: string, summary: string, significance: string, sourceIds: string[], entityIds: string[], tracks: Track[], extra: Partial<TimelineEvent> = {}): TimelineEvent {
   return { id, date, title, summary, significance, sourceIds, entityIds, tracks, tags: [], milestone: false, kind: '研究进展', limitation: '此条目记录特定历史事件，不代表该方向的唯一源头。', ...extra };
 }
-export const events: TimelineEvent[] = [
+const baseEvents: TimelineEvent[] = [
   ...globalEvents,
+  ...releaseEvents,
   entry('formal-neuron', '1943-12', '神经元，被写成数学逻辑', 'McCulloch 与 Pitts 用数学逻辑描述简化的神经活动，为人工神经网络提供早期形式模型。', '把关于大脑的想象变成可以分析的计算问题。', ['mcculloch'], ['neural-networks'], ['history', 'methods'], { milestone: true, subtitle: 'A logical calculus of nervous activity', tags: ['理论基础'], limitation: '这是高度简化的形式模型，不能等同于真实大脑。' }),
   entry('turing-test', '1950-10', '机器能思考吗？', '图灵在《Computing Machinery and Intelligence》中讨论模仿游戏，以可观察的交互重新组织机器智能的问题。', '让关于智能的讨论进入可以设计实验的领域。', ['turing'], [], ['history'], { milestone: true, subtitle: 'Computing Machinery and Intelligence', tags: ['思想起点'], kind: '论文发表', limitation: '通过对话表现判断智能存在边界，也不等于证明机器拥有意识。' }),
   entry('logic-theorist', '1955', 'Logic Theorist：用程序证明定理', 'Newell、Simon 和 Shaw 开始研制 Logic Theorist，探索通过搜索与启发式方法完成符号推理。', '早期 AI 开始处理超出数值计算的推理任务。', ['chm'], ['symbolic-ai'], ['history', 'methods'], { tags: ['符号推理'] }),
@@ -44,7 +47,7 @@ export const events: TimelineEvent[] = [
   entry('cue-release', '2026-09', 'Cue：拥有独立身份的个人 Agent', 'Manus 发布独立应用 Cue，介绍电话、邮箱、钱包与电脑等 Agent 身份能力。', 'Agent 被组织为能够长期承担角色的独立协作者。', ['manus2', 'cue'], ['cue'], ['products'], { company: 'Manus', kind: '抢先体验', announcementGroup: 'manus-2', tags: ['个人助理', '多 Agent'], limitation: '发布公告说明 Cue 处于抢先体验，不同平台的可用状态可能不同。' }),
 ];
 
-events.push(
+baseEvents.push(
   entry('mcp-standard', '2024-11-25', 'MCP：为模型连接外部世界', 'Anthropic 开放 Model Context Protocol，用统一协议连接 AI 应用、工具与数据。', '减少每种数据源都单独实现连接的重复工作。', ['mcp'], ['mcp', 'agent'], ['methods'], { company: 'Anthropic', kind: '协议发布', tags: ['开放协议', '工具连接'], limitation: 'MCP 解决连接问题，本身不是模型，也不决定 Agent 的执行策略。' }),
   entry('context-engineering', '2025-09-29', '上下文工程：管理模型看到的信息', 'Anthropic 总结如何管理指令、工具结果和历史信息，以支持多轮 Agent 工作。', '上下文的取舍成为运行系统的一部分。', ['context-engineering'], ['context', 'prompt', 'agent'], ['methods'], { company: 'Anthropic', kind: '工程文章', tags: ['上下文', '信息管理'] }),
   entry('tool-engineering', '2025-09-11', '工具设计也需要面向 Agent', 'Anthropic 分享工具接口、返回信息与评估的设计实践。', '工具描述和反馈质量影响 Agent 能否正确使用工具。', ['tool-engineering'], ['agent', 'harness'], ['methods'], { company: 'Anthropic', kind: '工程文章', tags: ['工具使用'] }),
@@ -54,8 +57,8 @@ events.push(
   entry('vae', '2013-12-20', 'VAE：学习生成数据的隐空间', '变分自编码器研究如何有效学习带连续隐变量的概率生成模型。', '成为神经网络生成模型的一条重要路线。', ['vae'], ['generative', 'neural-networks'], ['methods', 'history'], { tags: ['生成模型'], kind: '论文首发' }),
   entry('gan', '2014-06-10', 'GAN：在对抗中学会生成', '生成器和判别器共同训练，一个生成样本，另一个尝试区分真实与生成数据。', '为高质量内容生成带来一种新的训练方式。', ['gan'], ['generative'], ['methods', 'history'], { milestone: true, tags: ['生成模型'], kind: '论文首发', limitation: '对抗训练存在稳定性与模式覆盖等问题。' }),
   entry('resnet', '2015-12-10', 'ResNet 让更深的网络更容易训练', '残差学习通过跳跃连接缓解深层网络的优化困难。', '网络深度可以更有效地转化为实际能力。', ['resnet'], ['neural-networks'], ['methods', 'history'], { tags: ['计算机视觉', '架构'], kind: '论文首发' }),
-  entry('bert', '2018-10', 'BERT 推动语言预训练', 'BERT 用双向 Transformer 预训练获得语言表示，再适配不同任务。', '共享预训练模型成为语言任务的重要基础。', ['bert'], ['transformer'], ['methods', 'history'], { milestone: true, company: 'Google', tags: ['语言理解'], kind: '论文首发' }),
-  entry('gpt3-paper', '2020-05', 'GPT-3：通过示例告诉模型任务', 'GPT-3 论文展示大规模语言模型在少样本提示下处理多种任务的能力。', '提示中的示例成为使用模型的重要方式。', ['gpt3'], ['prompt', 'transformer'], ['methods', 'history'], { milestone: true, company: 'OpenAI', tags: ['少样本学习'], kind: '论文首发', limitation: '论文日期不是 API 对所有用户开放的日期。' }),
+  entry('bert', '2018-10', 'BERT 推动语言预训练', 'BERT 用双向 Transformer 预训练获得语言表示，再适配不同任务。', '共享预训练模型成为语言任务的重要基础。', ['bert'], ['bert-family', 'transformer'], ['models', 'methods', 'history'], { milestone: true, company: 'Google', tags: ['语言理解'], kind: '论文首发', change: { baseline: '单向语言预训练及任务专用表示', improvements: ['通过掩码语言建模学习双向上下文表示', '预训练后适配多种语言理解任务'], tradeoffs: 'BERT 主要用于语言理解，不能直接当作自回归对话生成模型。', evidence: '论文报告', sourceIds: ['bert'] } }),
+  entry('gpt3-paper', '2020-05', 'GPT-3：通过示例告诉模型任务', 'GPT-3 论文展示大规模语言模型在少样本提示下处理多种任务的能力。', '提示中的示例成为使用模型的重要方式。', ['gpt3'], ['gpt', 'prompt', 'transformer'], ['models', 'methods', 'history'], { milestone: true, company: 'OpenAI', tags: ['少样本学习'], kind: '论文首发', limitation: '论文日期不是 API 对所有用户开放的日期。', change: { baseline: 'GPT-2', baselineEventId: 'gpt-2', improvements: ['扩大模型规模', '通过上下文中的少量示例适应任务而不更新参数'], tradeoffs: '少样本效果依任务与提示而变，生成内容仍可能不准确。', evidence: '论文报告', sourceIds: ['gpt3'] } }),
   entry('rag-paper', '2020-05', 'RAG：先查资料，再生成回答', '研究者将检索模块与生成模型结合，处理依赖外部知识的任务。', '提供更新知识和追溯依据的一条工程路线。', ['rag'], ['rag', 'context'], ['methods'], { tags: ['检索增强'], kind: '论文首发', limitation: '检索到资料并不保证回答正确，仍需核查引用与结论。' }),
   entry('ddpm', '2020-06', '扩散模型：从噪声中恢复图像', 'DDPM 研究通过逐步去噪生成图像的方法。', '成为后来图像生成系统的重要技术路线。', ['ddpm'], ['generative'], ['methods', 'history'], { milestone: true, tags: ['扩散模型'], kind: '论文首发' }),
   entry('lora', '2021-06', 'LoRA：用更少参数适配大模型', 'LoRA 冻结预训练权重，并训练低秩矩阵来适配任务。', '降低微调过程中需要训练和保存的参数数量。', ['lora'], ['neural-networks'], ['methods'], { tags: ['参数高效微调'], kind: '论文首发', limitation: '节省可训练参数并不意味着所有部署成本都按同一比例降低。' }),
@@ -77,7 +80,7 @@ function model(id: string, date: string, title: string, family: string, company:
     change: { baseline, baselineEventId, improvements, tradeoffs, evidence: source === 'v2' || source === 'v3' ? '论文报告' : '厂商报告', sourceIds: [source] },
   });
 }
-events.push(
+baseEvents.push(
   model('claude-2', '2023-07-11', 'Claude 2 发布', 'claude', 'Anthropic', 'claude2', '此前 Claude 版本', ['官方报告编程、数学和推理改善', '支持处理更长的输入材料'], '发布时间的能力与可用地区以原公告为准，不能代表今天的服务状态。'),
   model('claude-2-1', '2023-11-21', 'Claude 2.1：更长的上下文', 'claude', 'Anthropic', 'claude21', 'Claude 2', ['上下文窗口扩大到 200K token', '官方报告错误回答减少'], '长上下文容量不等于对每一处信息都同样可靠。', 'claude-2'),
   model('claude-3-sonnet', '2024-03-04', 'Claude 3 Sonnet 发布', 'claude', 'Anthropic', 'claude3', 'Claude 2.1', ['加入图像理解能力', '在模型家族中提供速度与能力的平衡'], 'Sonnet、Opus 和 Haiku 是不同档位，不能当作同一天连续升级的三个版本。', 'claude-2-1'),
@@ -99,3 +102,4 @@ events.push(
   entry('manus-automations', '2026-09', 'Manus 自动化扩展到事件触发', 'Manus 2.0 公告介绍，连接服务中的事件可以触发后续任务。', '后台工作可以由外部变化发起。', ['manus2'], ['manus', 'loop'], ['products'], { company: 'Manus', kind: '功能发布', announcementGroup: 'manus-2', tags: ['事件触发', '自动化'] }),
   entry('manus-cascade', '2026-09', 'Cascade：按任务引入专业能力', 'Manus 2.0 介绍新一代 Agent 框架，强调按工作需要引入专业能力。', '框架设计会影响 token 使用和任务执行效率。', ['manus2'], ['manus', 'harness', 'context'], ['methods'], { company: 'Manus', kind: '框架更新', announcementGroup: 'manus-2', tags: ['运行框架'], limitation: '公告中的成本和完成时间改善来自特定配置，不是基础模型能力排名。' }),
 );
+export const events: TimelineEvent[] = [...baseEvents.map(enrichInstructionEvent), ...instructionEvents];

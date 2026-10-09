@@ -5,6 +5,7 @@ import type {
   TimeSpan,
   TimelineEvent,
 } from "../../core/types";
+import { xinhaiCollection, xinhaiEntities, xinhaiEvents, xinhaiRelations, xinhaiSources } from './xinhai';
 
 const source = (
   id: string,
@@ -107,6 +108,7 @@ export const sources: Source[] = [
     "https://m.gjzc.cn/content/61b477c49e766",
     "历史回顾",
   ),
+  ...xinhaiSources,
 ];
 const duration = (
   start: number,
@@ -307,6 +309,17 @@ export const periods: Period[] = [
     sourceIds: ["columbia"],
     note: "1644年是入关口径；1636年改国号等更早阶段待补充。",
   }),
+  period('late-qing-republic', '清末民初：辛亥革命与共和建政', 1911, 1912,
+    '跨政权的专题阅读分期，包含清廷存续、地方起义、南京建政与总统交接。', {
+      entityIds: [], coverage: 'selected', sourceIds: ['xinhai-chronology', 'xinhai-frus-overview'],
+      note: '阅读分组，不是一个政权；不把共和事件归为清廷内部事件。1912 年两个临时政府的协调与交接分阶段进行。',
+    }),
+  period('early-republic', '民国初年：1912 建政与交接', 1912, 1912,
+    '本版仅展开 1912 年共和建政、总统交接和约法，不代表民国整体存续范围。', {
+      time: { kind: 'duration', start: { year: 1912, month: 1, day: 1 }, end: { year: 1912, month: 12, day: 31 } },
+      entityIds: [], coverage: 'selected', sourceIds: ['xinhai-exhibition', 'xinhai-frus-overview'],
+      note: '与清的末期在 1912 年并行；全年阅读范围不表示南京政府一直存续到年底。',
+    }),
 ];
 
 const event = (
@@ -580,6 +593,7 @@ export const events: TimelineEvent[] = [
     ["columbia", "song-rivals"],
     { significance: "王朝建立与完成征服不是同一个日期。" },
   ),
+  ...xinhaiEvents,
 ];
 export const chinaHistory: Catalog = {
   topic: {
@@ -590,13 +604,14 @@ export const chinaHistory: Catalog = {
       { title: "从唐朝开始", path: "/china-history/dynasties/tang/" },
       { title: "看宋辽夏金并存", path: "/china-history/dynasties/song-era/" },
       { title: "跨朝代战役", path: "/china-history/themes/battles/" },
+      { title: "辛亥革命 1911—1912", path: xinhaiCollection.path },
     ],
     id: "china-history",
     title: "中国历史",
     path: "/china-history/",
     description: "沿着朝代读历史，也沿着一场战役走进一个时代。",
     coverage:
-      "夏至清末的时期骨架；唐代与宋辽夏金精选事件。其余时期以骨架为主，事件仍在补充。",
+      "夏至民初的时期骨架；唐代、宋辽夏金与辛亥革命 1911—1912 精选事件。其余时期以骨架为主，事件仍在补充。",
     categories: [
       { id: "politics", title: "政治与更替" },
       { id: "battle", title: "重大战役" },
@@ -609,12 +624,14 @@ export const chinaHistory: Catalog = {
   periods,
   events,
   sources,
-  entities: periods
+  collections: [xinhaiCollection],
+  relations: xinhaiRelations,
+  entities: [...periods
     .filter((p) => p.entityIds.length)
     .map((p) => ({
       id: p.id,
       name: p.title,
       type: "历史对象",
       sourceIds: p.sourceIds,
-    })),
+    })), ...xinhaiEntities],
 };

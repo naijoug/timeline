@@ -13,6 +13,7 @@ export function validateCatalog(events: TimelineEvent[], entities: Entity[], sou
     if (!e.sourceIds.length) errors.push(`${e.id}: missing source`);
     if (!e.tracks.length || e.tracks.some(t => !['history','methods','products','models'].includes(t))) errors.push(`${e.id}: invalid track`);
     refs(e.sourceIds, sourceIds, e.id); refs(e.entityIds, entityIds, e.id);
+    for (const section of e.details || []) refs(section.sourceIds || [], sourceIds, e.id);
     if (e.tracks.includes('models') && !e.change) errors.push(`${e.id}: missing model change`);
     if (e.change) {
       if (!e.change.baseline || !e.change.improvements.length || !e.change.tradeoffs || !e.change.sourceIds.length) errors.push(`${e.id}: incomplete change evidence`);

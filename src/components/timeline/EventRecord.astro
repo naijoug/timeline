@@ -1,0 +1,34 @@
+---
+import { ArrowLeft, ExternalLink, Link2, Sparkles } from 'lucide-react';
+import { sitePath } from '../../lib/paths';
+import '../../styles/record.css';
+import type { Source, ReadingSection } from '../../core/types';
+import EvidenceLinks from './EvidenceLinks.astro';
+import '../../styles/collections.css';
+interface Props {
+  topicPath: string; topicTitle: string; title: string; category: string; date: string;
+  summary: string; significance: string; subtitle?: string; milestone?: boolean; note?: string;
+  details?: ReadingSection[];
+  sources: (Source & {language?:string})[];
+  related?: {title:string;label:string;href:string}[];
+  facts?: {label:string;value:string;sourceIds?:string[]}[];
+}
+const { topicPath, topicTitle, title, category, date, summary, significance, subtitle, milestone, note, details=[], sources, related=[], facts=[] } = Astro.props;
+---
+<a class="back-link" id="back-to-timeline" href={sitePath(topicPath)} data-topic-prefix={sitePath(topicPath)}><ArrowLeft size={16}/>返回时间线</a>
+<article class="full-event event-record">
+  <header class="event-hero"><div class="eyebrow">{topicTitle}</div><div class="full-event-meta"><span>{category}</span><time>{date}</time>{milestone&&<span><Sparkles size={14}/>关键节点</span>}</div><h1>{title}</h1>{subtitle&&<p class="detail-subtitle">{subtitle}</p>}<p class="detail-lead">{summary}</p></header>
+  <div class="article-layout"><div class="article-body">
+    <section><h2>为什么重要</h2><p>{significance}</p><small class="evidence-locator">编辑概述；具体事实见下文及其来源。</small></section>
+    {details.map(section=><section><h2>{section.label}{section.editorial && ' · 编辑解读'}</h2><p>{section.text}{!section.editorial && <EvidenceLinks sources={sources} ids={section.sourceIds} locator={section.locator}/>}</p></section>)}
+    <slot name="change" />
+    {note&&<section><h2>阅读这段历史时</h2><p>{note}</p></section>}
+    <section id="sources"><div class="section-heading"><h2>回到原始资料</h2><span>{sources.length} 份来源</span></div><div class="source-list">{sources.map((source,index)=><a class="source-item" href={source.url} target="_blank" rel="noopener noreferrer"><span class="source-number">{String(index+1).padStart(2,'0')}</span><div><strong>{source.title}</strong><span>{source.publisher} · {source.format || source.type}{source.language?` · ${source.language}`:''} · 核查于 {source.checkedAt}</span>{source.version&&<span>版本：{source.version}</span>}{source.locator&&<span>定位：{source.locator}</span>}</div><ExternalLink size={16}/></a>)}</div><p class="source-note">事实与日期依据上述资料，各份资料的核查日期分别标记；“为什么重要”为编辑概述。</p></section>
+    <slot name="related" />
+  </div><aside class="article-aside"><div class="rail-heading">相关对象与时期</div>{related.map(item=><a class="entity-reference" href={item.href}><span>{item.label}</span><strong>{item.title}</strong></a>)}{!!facts.length&&<><div class="rail-heading aside-second">事件档案</div><dl>{facts.map(fact=><><dt>{fact.label}</dt><dd>{fact.value}{fact.sourceIds && <EvidenceLinks sources={sources} ids={fact.sourceIds}/>}</dd></>)}</dl></>}<button class="copy-link" id="copy-link"><Link2 size={14}/><span>复制事件链接</span></button><p id="copy-status" aria-live="polite"></p></aside></div>
+</article>
+<script>
+  const back=document.querySelector<HTMLAnchorElement>('#back-to-timeline');
+  try { const value=new URLSearchParams(location.search).get('return') || sessionStorage.getItem('timeline-return'); if(value&&back){const url=new URL(value,location.origin);if(url.origin===location.origin&&url.pathname.startsWith(back.dataset.topicPrefix!))back.href=url.pathname+url.search+url.hash;} } catch {}
+  document.querySelector('#copy-link')?.addEventListener('click',async()=>{const status=document.querySelector('#copy-status');try{await navigator.clipboard.writeText(location.href);if(status)status.textContent='链接已复制';}catch{if(status)status.textContent='可直接复制浏览器地址栏中的链接';}});
+</script>

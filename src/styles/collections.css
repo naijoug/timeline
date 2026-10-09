@@ -1,0 +1,16 @@
+/* Content collections reuse the site's paper palette and existing record shell. */
+.collection-nodes { padding:0; list-style:none; }
+.collection-nodes li { display:grid; grid-template-columns:150px minmax(0,1fr); gap:24px; padding:24px 0; border-bottom:1px solid var(--paper-line); }
+.collection-nodes a { font-size:20px; font-weight:600; color:var(--paper-ink); text-decoration:underline; text-underline-offset:4px; }
+.collection-nodes p { line-height:1.8; color:var(--paper-text); margin:10px 0; }
+.collection-nodes time,.collection-nodes small { color:var(--paper-muted); }
+.evidenced-relations { margin:40px 0; }
+.evidenced-relations ul { list-style:none; padding:0; }
+.evidenced-relations li { padding:18px 0; border-bottom:1px solid var(--paper-line); line-height:1.8; }
+.evidenced-relations a { color:var(--paper-ink); text-decoration:underline; text-underline-offset:3px; }
+.evidenced-relations small,.evidence-locator { display:block; color:var(--paper-muted); font-size:12px; line-height:1.8; }
+.evidenced-relations p { margin:8px 0; }
+.collection-context { border:1px solid var(--paper-line); padding:20px; margin:25px 0; }
+.chronicle-collections { display:flex; gap:12px; flex-wrap:wrap; margin:8px 0; font-size:13px; }
+.chronicle-collections a { color:var(--paper-ink); text-decoration:underline; }
+@media(max-width:760px) { .collection-nodes li { grid-template-columns:1fr; gap:8px; } }

@@ -18,6 +18,36 @@ export interface Source {
   url: string;
   type: string;
   checkedAt: string;
+  format?: string;
+  version?: string;
+  locator?: string;
+  publishedAt?: string;
+}
+export interface ReadingSection {
+  label: string;
+  text: string;
+  sourceIds?: string[];
+  locator?: string;
+  editorial?: boolean;
+}
+/** A sourced statement, never an edge inferred merely from chronological order. */
+export interface EventRelation {
+  id: string;
+  fromEventId: string;
+  toEventId?: string;
+  entityId?: string;
+  label: string;
+  sourceIds: string[];
+  locator: string;
+  note?: string;
+}
+export interface Collection {
+  id: string;
+  title: string;
+  description: string;
+  path: string;
+  eventIds: string[];
+  note: string;
 }
 export interface Entity {
   id: string;
@@ -49,7 +79,16 @@ export interface TimelineEvent {
   sourceIds: string[];
   tags: string[];
   milestone: boolean;
-  details?: { label: string; text: string }[];
+  facts?: { label: string; text: string; sourceIds?: string[] }[];
+  details?: ReadingSection[];
+  change?: {
+    baseline: string;
+    baselineEventId?: string;
+    improvements: string[];
+    tradeoffs: string;
+    evidence: string;
+    sourceIds: string[];
+  };
 }
 export interface Topic {
   id: string;
@@ -68,6 +107,8 @@ export interface Catalog {
   events: TimelineEvent[];
   entities: Entity[];
   sources: Source[];
+  relations?: EventRelation[];
+  collections?: Collection[];
 }
 /** from/to use the internal continuous year coordinate, including coordinate 0 (1 BCE). */
 export interface TimelineView {

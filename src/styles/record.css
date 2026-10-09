@@ -1,0 +1,24 @@
+/* Shared standalone event presentation:no topic-specific palettes. */
+.record-content .event-record { color:var(--paper-ink); }
+.record-content .event-record .event-hero h1 { font-family:inherit; font-size:44px; font-weight:650; letter-spacing:-1px; color:var(--paper-ink); }
+.record-content .event-record .eyebrow,.record-content .event-record .rail-heading { color:var(--paper-muted); }
+.record-content .event-record .full-event-meta { color:var(--paper-muted); }
+.record-content .event-record .full-event-meta>span:first-child { background:var(--paper-surface); color:var(--paper-text); }
+.record-content .event-record .detail-lead { font-size:21px; line-height:1.8; color:var(--paper-ink); }
+.record-content .event-record .detail-subtitle { color:var(--paper-muted); }
+.record-content .event-record .article-body p { color:var(--paper-text); }
+.record-content .event-record .article-body h2,.record-content .event-record .article-body h3 { color:var(--paper-ink); }
+.record-content .event-record .article-aside dt,.record-content .event-record .entity-reference>span { color:var(--paper-muted); }
+.record-content .event-record .article-aside dd { color:var(--paper-text); }
+.record-content .event-record .copy-link { border-color:var(--paper-line); color:var(--paper-text); }
+.record-content .event-record .copy-link:hover { background:var(--paper-surface); }
+.record-content .event-record .source-item strong,.record-content .event-record .entity-reference strong,.record-content .event-record .related-list strong { color:var(--paper-text); }
+.record-content .event-record .source-item div>span,.record-content .event-record .source-note,.record-content .event-record .source-number,.record-content .event-record .related-list>a>span,.record-content .event-record .section-heading>span { color:var(--paper-muted); }
+.record-content .event-record .comparison-baseline,.record-content .event-record .improvements,.record-content .event-record .evidence-label { color:var(--paper-text); }
+.record-content .event-record .evidence-label a { color:var(--paper-text); }
+.reader-evidence-links { display:inline-flex; align-items:center; gap:4px; margin-left:7px; vertical-align:super; }
+.reader-evidence-links>a { display:inline-flex; align-items:center; gap:2px; min-width:18px; height:18px; justify-content:center; padding:0 3px; border:1px solid var(--paper-line); border-radius:999px; background:var(--paper-surface); color:var(--paper-text); font-size:10px; line-height:1; text-decoration:none; }
+.reader-evidence-links>a:hover { border-color:var(--paper-ink); background:var(--paper-ink); color:var(--paper-inverse); }
+@media(max-width:760px) { .record-content .event-record .event-hero h1 { font-size:32px; } .record-content .event-record .detail-lead { font-size:18px; } }
+.record-content .event-record .source-note { color:var(--paper-muted)!important; }
+.record-content .event-record .source-item>svg,.record-content .event-record .improvements li::before,.record-content .event-record #copy-status { color:var(--paper-text); }

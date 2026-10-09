@@ -1,0 +1,22 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Relations from '../../../components/timeline/Relations.astro';
+import { chinaHistory } from '../../../topics/china-history/catalog';
+import { xinhaiEntities } from '../../../topics/china-history/xinhai';
+import { sitePath } from '../../../lib/paths';
+import { formatTime } from '../../../core/time';
+import '../../../styles/collections.css';
+export function getStaticPaths() { return xinhaiEntities.map(entity=>({params:{slug:entity.id},props:{entity}})); }
+const { entity } = Astro.props;
+const events = chinaHistory.events.filter(e=>e.entityIds.includes(entity.id));
+const sources = chinaHistory.sources.filter(s=>entity.sourceIds.includes(s.id));
+const subset = { ...chinaHistory, relations:chinaHistory.relations?.filter(r=>r.entityId===entity.id) };
+const entityHref = (id:string) => sitePath(`/china-history/objects/${id}/`);
+---
+<Layout title={`${entity.name} · 中国历史`} description={`${entity.name}在辛亥革命专题中的相关记录与来源。`} topicTitle="中国历史" topicPath="/china-history/">
+  <a class="back-link" href={sitePath('/china-history/collections/xinhai-1911-1912/')}>返回辛亥革命专题</a>
+  <header class="entity-hero"><div class="eyebrow">{entity.type} · 专题对象</div><h1>{entity.name}</h1><p>下列条目展示此对象在已收录事件中的参与记录。人物生平与机构沿革尚未完整展开。</p></header>
+  <section><h2>相关事件</h2><ol class="collection-nodes">{events.map(e=><li><time>{formatTime(e.time)}</time><div><a href={sitePath(`/china-history/events/${e.id}/`)}>{e.title}</a><p>{e.summary}</p></div></li>)}</ol></section>
+  <Relations catalog={subset} entityHref={entityHref}/>
+  <section id="sources"><h2>对象依据</h2>{sources.map(s=><p><a href={s.url} target="_blank" rel="noopener noreferrer">{s.title}</a><small class="evidence-locator">{s.format} · 核查于 {s.checkedAt} · {s.locator}</small></p>)}</section>
+</Layout>

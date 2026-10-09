@@ -1,0 +1,11 @@
+---
+import type { Catalog } from '../../core/types';
+import { relationEndpoints, relationsFor } from '../../core/evidence';
+import { sitePath } from '../../lib/paths';
+interface Props { catalog: Catalog; eventId?: string; entityHref?: (id:string)=>string }
+const { catalog, eventId, entityHref } = Astro.props;
+const relations = eventId ? relationsFor(catalog, eventId) : catalog.relations || [];
+const eventLink = (id: string) => sitePath(`${catalog.topic.path}events/${id}/`);
+const sources = new Map(catalog.sources.map(s => [s.id,s]));
+---
+{relations.length > 0 && <section class="evidenced-relations" aria-label="有据关系"><h2>有据关系</h2><p>每条关系单独核对原文；时间相邻不等于继承或因果。</p><ul>{relations.map(r => { const { subject, object } = relationEndpoints(catalog,r); return <li><div><a href={eventLink(subject.id)}>{subject.title}</a><span> · {r.label} · </span>{object.kind === 'event' ? <a href={eventLink(object.id)}>{object.title}</a> : entityHref ? <a href={entityHref(object.id)}>{object.title}</a> : <strong>{object.title}</strong>}</div>{r.note && <p>{r.note}</p>}<small>依据：{r.sourceIds.map(id => <a href={sources.get(id)!.url} target="_blank" rel="noopener noreferrer">{sources.get(id)!.title} </a>)} · {r.locator}</small></li>; })}</ul></section>}

@@ -2,6 +2,8 @@
 import { sitePath } from '../lib/paths';
 import '../styles/global.css';
 import '../styles/atlas.css';
+import '../styles/paper.css';
+import { APPEARANCE_KEY } from '../lib/appearance';
 import Header from '../components/Header';
 import type { Track } from '../data/types';
 interface Props { title?: string; description?: string; active?: Track; explorer?:boolean; topicTitle?:string; topicPath?:string }
@@ -9,9 +11,23 @@ const { title = '全球 AI 时间线', description = '探索全球人工智能�
 ---
 <!doctype html>
 <html lang="zh-CN">
-  <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="description" content={description} /><meta name="theme-color" content="#ffffff" /><title>{title} · timeline</title><link rel="icon" href={sitePath('/favicon.svg')} type="image/svg+xml" /><meta property="og:title" content={`${title} · timeline`} /><meta property="og:description" content={description} /></head>
+  <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="description" content={description} /><meta name="theme-color" content="#f3f3f3" /><title>{title} · timeline</title><link rel="icon" href={sitePath('/favicon.svg')} type="image/svg+xml" /><meta property="og:title" content={`${title} · timeline`} /><meta property="og:description" content={description} /><meta name="color-scheme" content="light dark" />
+    <script is:inline data-appearance-key={APPEARANCE_KEY}>
+      const appearanceKey = document.currentScript?.getAttribute('data-appearance-key') || '';
+      // Runs before body paint so saved dark mode never flashes the light palette.
+      let appearance = 'system';
+      try { const saved = localStorage.getItem(appearanceKey); if (saved === 'light' || saved === 'dark') appearance = saved; } catch {}
+      const theme = appearance === 'system' ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : appearance;
+      document.documentElement.dataset.appearance = appearance;
+      document.documentElement.dataset.theme = theme;
+      document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#202020' : '#f3f3f3';
+    </script>
+  </head>
   <body>
+    <script is:inline>
+      try { document.documentElement.dataset.sidebar = localStorage.getItem('timeline-sidebar-collapsed') === 'true' ? 'collapsed' : 'expanded'; } catch {}
+    </script>
     <a href="#main" class="skip-link">跳到主要内容</a>
-    {explorer ? <slot /> : <><Header topicTitle={topicTitle} topicPath={topicPath} active={Astro.url.pathname.endsWith('/about/')?'about':active==='history'?'timeline':'themes'}/><main id="main" class="record-content"><slot /></main><footer class="atlas-footer"><span><strong>timeline</strong><i/>理解过去 · 看见可能的未来</span><a href={sitePath('/about/')}>收录原则与资料来源</a></footer></>}
+    {explorer ? <slot /> : <><Header client:load topicTitle={topicTitle} topicPath={topicPath} active={Astro.url.pathname.endsWith('/about/')?'about':active==='history'?'timeline':'themes'}/><main id="main" class="record-content"><slot /></main><footer class="atlas-footer"><span><strong>timeline</strong><i/>理解过去 · 看见可能的未来</span><a href={sitePath('/about/')}>收录原则与资料来源</a></footer></>}
   </body>
 </html>

@@ -44,6 +44,16 @@ const agents = new Set([
   "replit-agent",
   "devin",
   "cursor",
+  "generative-agents",
+  "swe-agent",
+  "openhands",
+  "autoglm",
+  "gemini-cli",
+  "qwen-code",
+  "trae",
+  "mistral-vibe",
+  "chatgpt-agent",
+  "cowork",
 ]);
 const technicalOverrides = new Set(["skills-introduction", "manus-cascade"]);
 export function eventLane(e: TimelineEvent): Lane {

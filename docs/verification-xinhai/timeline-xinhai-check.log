@@ -1,0 +1,9 @@
+> timeline@0.1.0 check
+> astro check
+
+15:05:10 [types] Generated 29ms
+15:05:10 [check] Getting diagnostics for Astro files in /Users/guojian/Workspace/naijoug/timeline...
+Result (74 files):
+- 0 errors
+- 0 warnings
+- 0 hints

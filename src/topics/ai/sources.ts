@@ -1,8 +1,11 @@
 import type { Source } from './types';
 import { globalSources } from './global';
+import { releaseSources, releaseResearchDate } from './releases';
+import { instructionSources, instructionSourceReviews } from './instruction-following';
 const source = (id: string, title: string, publisher: string, url: string, type: Source['type'] = '原始论文'): Source => ({ id, title, publisher, url, type, language: 'English', checkedAt: '2026-09-29' });
-export const sources: Source[] = [
+const baseSources: Source[] = [
   ...globalSources,
+  ...releaseSources,
   source('mcp', 'Introducing the Model Context Protocol', 'Anthropic', 'https://www.anthropic.com/news/model-context-protocol', '官方公告'),
   source('context-engineering', 'Effective context engineering for AI agents', 'Anthropic', 'https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents', '工程文章'),
   source('tool-engineering', 'Writing effective tools for AI agents', 'Anthropic', 'https://www.anthropic.com/engineering/writing-tools-for-agents', '工程文章'),
@@ -34,7 +37,7 @@ export const sources: Source[] = [
   source('sonnet46', 'Introducing Sonnet 4.6', 'Anthropic', 'https://www.anthropic.com/news/claude-sonnet-4-6', '官方公告'),
   source('sonnet5', 'Introducing Claude Sonnet 5', 'Anthropic', 'https://www.anthropic.com/news/claude-sonnet-5', '官方公告'),
   source('r1-0528', 'DeepSeek-R1-0528 Release', 'DeepSeek', 'https://api-docs.deepseek.com/news/news250528/', '官方公告'),
-  source('api-changelog', 'OpenAI API changelog', 'OpenAI', 'https://developers.openai.com/api/docs/changelog', '官方公告'),
+  { ...source('api-changelog', 'OpenAI API changelog', 'OpenAI', 'https://developers.openai.com/api/docs/changelog', '官方公告'), checkedAt: releaseResearchDate },
   source('codex-changelog', 'ChatGPT & Codex changelog', 'OpenAI', 'https://learn.chatgpt.com/docs/changelog', '官方公告'),
   source('mcculloch', 'A logical calculus of the ideas immanent in nervous activity', 'Springer', 'https://doi.org/10.1007/BF02478259'),
   source('turing', 'Computing Machinery and Intelligence', 'Mind / Oxford', 'https://academic.oup.com/mind/article/LIX/236/433/986238'),
@@ -63,4 +66,5 @@ export const sources: Source[] = [
   source('muse', 'How We Designed Muse', 'Muse / Meta', 'https://introducing.muse.ai/', '工程文章'),
   source('cue', 'Your personal agents, on Cue', 'Cue / Manus', 'https://cue.im/', '官方文档'),
 ];
+export const sources: Source[] = [...baseSources.map(s => ({ ...s, ...instructionSourceReviews[s.id] })), ...instructionSources];
 export const sourceMap = Object.fromEntries(sources.map(s => [s.id, s]));

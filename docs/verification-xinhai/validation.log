@@ -1,0 +1,5 @@
+> timeline@0.1.0 validate
+> node --import tsx scripts/validate.ts
+
+AI validated: 245 events, 78 entities, 201 sources, 6 object relations, 12 event evidence relations, 1 collections.
+Chinese history validated: 36 periods, 34 events, 41 entities, 29 sources, 0 object relations, 10 event evidence relations, 1 collections.

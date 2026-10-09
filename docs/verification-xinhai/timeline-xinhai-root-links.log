@@ -1,0 +1,4 @@
+> timeline@0.1.0 check:links
+> node scripts/check-links.mjs
+
+Static links verified: 10228 internal links across 559 pages.

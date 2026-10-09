@@ -3,21 +3,23 @@ import Layout from '../../../layouts/Layout.astro';
 import { chinaHistory } from '../../../topics/china-history/catalog';
 import { formatTime } from '../../../core/time';
 import { sitePath } from '../../../lib/paths';
-import '../../../styles/explorer.css';
+import EventRecord from '../../../components/timeline/EventRecord.astro';
+import Relations from '../../../components/timeline/Relations.astro';
+import { eventSourceIds, relationsFor } from '../../../core/evidence';
 export function getStaticPaths() { return chinaHistory.events.map(event=>({params:{slug:event.id},props:{event}})); }
 const { event } = Astro.props;
 const category = chinaHistory.topic.categories.find(c=>c.id===event.category)!;
-const sources = chinaHistory.sources.filter(s=>event.sourceIds.includes(s.id));
+const sourceIds = new Set([...eventSourceIds(event), ...relationsFor(chinaHistory,event.id).flatMap(r=>r.sourceIds)]);
+const sources = chinaHistory.sources.filter(s=>sourceIds.has(s.id));
 const periods = chinaHistory.periods.filter(p=>event.periodIds.includes(p.id));
+const objects = chinaHistory.entities.filter(e=>event.entityIds.includes(e.id) && !chinaHistory.periods.some(p=>p.entityIds.includes(e.id)));
+const entityHref = (id:string) => sitePath(`/china-history/objects/${id}/`);
 ---
 <Layout title={`${event.title} · 中国历史`} description={event.summary} topicTitle="中国历史" topicPath="/china-history/">
-  <a class="back-link" id="history-return" href={sitePath('/china-history/')} data-prefix={sitePath('/china-history/')}>← 返回时间线</a>
-  <article class="full-event"><header class="event-hero"><div class="eyebrow">{category.title} · 中国历史</div><h1>{event.title}</h1><p class="detail-subtitle">{formatTime(event.time)}</p><p class="detail-lead">{event.summary}</p></header>
-    <div class="article-layout"><div class="article-body"><section><h2>为什么重要</h2><p>{event.significance}</p></section>{event.details?.map(d=><section><h2>{d.label}</h2><p>{d.text}</p></section>)}<section><h2>日期与阅读说明</h2><p>{event.note || '首版按年份精度展示。年份节点不表示事件发生于该年的某个确定月日。'}</p>{event.time.kind==='duration'&&<p>这是一段持续过程，时间窗口与它相交时仍会显示。</p>}</section><section><h2>资料来源</h2><div class="source-list">{sources.map(s=><a class="source-item" href={s.url} target="_blank" rel="noopener noreferrer"><div><strong>{s.title}</strong><span>{s.publisher} · {s.type} · 核查于 {s.checkedAt}</span></div><span>↗</span></a>)}</div><p class="source-note">事实与日期依据上述资料；“为什么重要”为本站编辑概述。参考资料的纪年口径可能存在差异。</p></section></div><aside class="article-aside"><div class="rail-heading">相关朝代与时期</div>{periods.map(p=><a class="entity-reference" href={sitePath(`/china-history/dynasties/${p.id}/`)}><span>{formatTime(p.time)}</span><strong>{p.title} →</strong></a>)}<a class="copy-link" href={sitePath('/china-history/themes/battles/')}>探索重大战役</a></aside></div>
-  </article>
+  <EventRecord topicPath="/china-history/" topicTitle="中国历史" title={event.title} category={category.title} date={formatTime(event.time)} summary={event.summary} significance={event.significance} milestone={event.milestone} details={event.details}
+    note={event.note || (event.time.start.day ? '按资料所列公历日期展示。' : event.time.start.month ? '按月份精度展示，不补造具体日期。' : '按年份精度展示；年份节点不表示事件发生于某个确定月日。')} sources={sources}
+    related={[...periods.map(period=>({title:period.title,label:formatTime(period.time),href:sitePath(`/china-history/dynasties/${period.id}/`)})), ...objects.map(o=>({title:o.name,label:o.type,href:entityHref(o.id)}))]}
+    facts={[{label:'时间精度',value:event.time.start.day?'日期':event.time.start.month?'月份':'年份'},{label:'类别',value:category.title},{label:'时间类型',value:event.time.kind==='duration'?'持续过程':event.time.kind==='uncertain'?'日期范围待考':'时间节点'}]}>
+    <div slot="related"><Relations catalog={chinaHistory} eventId={event.id} entityHref={entityHref} /></div>
+  </EventRecord>
 </Layout>
-<script>
-  const back = document.querySelector<HTMLAnchorElement>('#history-return');
-  const value = new URLSearchParams(location.search).get('return');
-  if (back && value) { try { const url=new URL(value,location.origin); if(url.origin===location.origin&&url.pathname.startsWith(back.dataset.prefix!)) back.href=url.pathname+url.search; } catch {} }
-</script>
