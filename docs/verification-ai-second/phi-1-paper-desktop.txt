@@ -1,0 +1,173 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- complementary "主题导航":
+  - link "timeline 首页":
+    - /url: /
+    - text: timeline
+  - button "收拢侧栏" [expanded]:
+  - generic: 主题库
+  - textbox "查找主题":
+    - /placeholder: 查找主题…
+  - navigation "所有主题":
+    - link "所有主题":
+      - /url: /
+      - generic: 所有主题
+    - link "AI 发展史":
+      - /url: /ai/
+      - generic: AI 发展史
+    - link "中国历史":
+      - /url: /china-history/
+      - generic: 中国历史
+  - paragraph: 更多主题持续收录
+  - link "浏览主题":
+    - /url: /
+    - text: 浏览主题
+  - button "当前外观：跟随系统；点击切换为浅色":
+  - link "关于 timeline":
+    - /url: /about/
+    - generic: 关于 timeline
+  - generic "简体中文":
+    - generic: 简体中文
+- banner:
+  - link "AI 发展史":
+    - /url: /ai/
+  - generic: 从图灵到生成式 AI
+  - search:
+    - textbox "搜索事件、对象或关键词":
+      - /placeholder: 搜索当前主题…
+    - generic: ⌘ K
+- main:
+  - link "返回时间线":
+    - /url: /ai/
+    - text: 返回时间线
+  - article:
+    - generic: AI 发展史
+    - generic: 论文首发
+    - time: 2023 年 6 月 20 日
+    - text: 关键节点
+    - heading "Phi-1：用教材式数据训练小型代码模型" [level=1]
+    - paragraph: Textbooks Are All You Need 研究筛选代码数据和合成教材、练习对小型代码模型的作用。
+    - heading "为什么重要" [level=2]
+    - paragraph: 编辑解读：模型规模之外，训练数据的组织与质量也值得单独比较。
+    - generic: 编辑概述；具体事实见下文及其来源。
+    - heading "数据与训练阶段" [level=2]
+    - paragraph:
+      - text: 1.3B 参数模型先以筛选的代码和合成教材预训练，再用合成 Python 练习微调为 phi-1。论文中的语料规模与多轮训练实际处理的 token 数是不同口径。
+      - link "来源1：Textbooks Are All You Need；Abstract、§2–2.3":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+      - generic: 原文定位：Abstract、§2–2.3
+    - heading "范围与局限" [level=2]
+    - paragraph:
+      - text: 论文以 HumanEval、MBPP 等代码任务比较，讨论训练数据污染，并列出复杂应用、提示长度等限制。日期采用 arXiv v1，不推定模型权重在同日开放。
+      - link "来源1：Textbooks Are All You Need；Table 1、§5、Appendix B；Submission history":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+      - generic: 原文定位：Table 1、§5、Appendix B；Submission history
+    - generic: WHAT CHANGED
+    - heading "这一次，改变了什么？" [level=2]
+    - generic: 比较基线：在标准代码语料上扩大模型或增加训练轮次
+    - list:
+      - listitem: +比较筛选与合成教材数据的训练效果
+      - listitem: +通过代码练习微调提升特定 Python 任务表现
+    - heading "代价与使用条件" [level=3]
+    - paragraph: 数据筛选成本、污染评估和复杂代码任务的泛化仍有边界。
+    - text: 证据类型：论文报告
+    - link "论文作者 · arXiv":
+      - /url: https://arxiv.org/abs/2306.11644v1
+      - text: 论文作者 · arXiv
+    - heading "阅读这段历史时" [level=2]
+    - paragraph: 主要研究 Python 代码任务；论文自报成绩不等于通用能力排名或独立复测。
+    - heading "回到原始资料" [level=2]
+    - generic: 4 份来源
+    - link "01 Textbooks Are All You Need 论文作者 · arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：Abstract、§2–2.3、§5、Appendix B；Submission history":
+      - /url: https://arxiv.org/abs/2306.11644v1
+      - generic: "01"
+      - strong: Textbooks Are All You Need
+      - generic: 论文作者 · arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：Abstract、§2–2.3、§5、Appendix B；Submission history
+    - 'link "02 LoRA: Low-Rank Adaptation of Large Language Models arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：§3.1、§5.2–5.3；Submission history"':
+      - /url: https://arxiv.org/abs/2106.09685v1
+      - generic: "02"
+      - strong: "LoRA: Low-Rank Adaptation of Large Language Models"
+      - generic: arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：§3.1、§5.2–5.3；Submission history
+    - link "03 Scaling Laws for Neural Language Models 论文作者 · arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：§1.1–1.2、§2.3、§6、Appendix C":
+      - /url: https://arxiv.org/abs/2001.08361v1
+      - generic: "03"
+      - strong: Scaling Laws for Neural Language Models
+      - generic: 论文作者 · arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：§1.1–1.2、§2.3、§6、Appendix C
+    - link "04 Training Compute-Optimal Large Language Models 论文作者 · arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：§3、§4.1、Table 1、§5":
+      - /url: https://arxiv.org/abs/2203.15556v1
+      - generic: "04"
+      - strong: Training Compute-Optimal Large Language Models
+      - generic: 论文作者 · arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：§3、§4.1、Table 1、§5
+    - paragraph: 事实与日期依据上述资料，各份资料的核查日期分别标记；“为什么重要”为编辑概述。
+    - region "有据关系":
+      - heading "有据关系" [level=2]
+      - paragraph: 每条关系单独核对原文；时间相邻不等于继承或因果。
+      - list:
+        - link "Phi-1：用教材式数据训练小型代码模型":
+          - /url: /ai/events/phi-1-paper/
+        - text: · 署名研究机构 ·
+        - link "Microsoft 研究团队":
+          - /url: /ai/organizations/microsoft-research/
+        - text: 依据：
+        - link "Textbooks Are All You Need":
+          - /url: https://arxiv.org/abs/2306.11644v1
+        - text: · 作者署名与机构
+    - heading "沿着这条线索继续" [level=2]
+    - link "2022 Chinchilla：重新平衡模型规模与训练数据 阅读":
+      - /url: /ai/events/chinchilla/
+      - generic: "2022"
+      - strong: Chinchilla：重新平衡模型规模与训练数据
+      - generic: 阅读
+    - link "2021 LoRA：用更少参数适配大模型 阅读":
+      - /url: /ai/events/lora/
+      - generic: "2021"
+      - strong: LoRA：用更少参数适配大模型
+      - generic: 阅读
+    - link "2020 Scaling Laws：分配语言模型的训练预算 阅读":
+      - /url: /ai/events/scaling-laws/
+      - generic: "2020"
+      - strong: Scaling Laws：分配语言模型的训练预算
+      - generic: 阅读
+    - complementary:
+      - generic: 相关对象与时期
+      - link "模型家族 Phi":
+        - /url: /ai/models/phi/
+        - generic: 模型家族
+        - strong: Phi
+      - link "研究机构 Microsoft 研究团队":
+        - /url: /ai/organizations/microsoft-research/
+        - generic: 研究机构
+        - strong: Microsoft 研究团队
+      - link "技术与方法 训练规模与算力分配":
+        - /url: /ai/concepts/training-scale/
+        - generic: 技术与方法
+        - strong: 训练规模与算力分配
+      - link "精选专题 从视觉学习到协作系统":
+        - /url: /ai/collections/learning-to-systems/
+        - generic: 精选专题
+        - strong: 从视觉学习到协作系统
+      - generic: 事件档案
+      - term: 时间精度
+      - definition: 日期
+      - term: 机构
+      - definition: Microsoft Research
+      - term: 类别
+      - definition: 代码模型 / 数据质量 / 合成数据
+      - button "复制事件链接":
+        - generic: 复制事件链接
+      - paragraph
+- contentinfo:
+  - strong: timeline
+  - text: 理解过去 · 看见可能的未来
+  - link "收录原则与资料来源":
+    - /url: /about/

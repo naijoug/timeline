@@ -1,0 +1,121 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- banner:
+  - button "打开主题导航":
+  - link "AI 发展史":
+    - /url: /ai/
+  - search:
+    - textbox "搜索事件、对象或关键词":
+      - /placeholder: 搜索当前主题…
+- main:
+  - link "返回时间线":
+    - /url: /ai/
+    - text: 返回时间线
+  - article:
+    - generic: AI 发展史
+    - generic: 论文首发
+    - time: 2013 年 12 月 20 日
+    - heading "VAE：学习生成数据的隐空间" [level=1]
+    - paragraph: 变分自编码器研究如何有效学习带连续隐变量的概率生成模型。
+    - heading "为什么重要" [level=2]
+    - paragraph: 成为神经网络生成模型的一条重要路线。
+    - generic: 编辑概述；具体事实见下文及其来源。
+    - heading "学习概率隐变量" [level=2]
+    - paragraph:
+      - text: 推断网络为观测数据给出隐变量的近似后验分布，生成网络给出隐变量条件下的数据分布。两部分共同优化变分下界，而不是只学习确定性的压缩与重建。
+      - link "来源1：Auto-Encoding Variational Bayes；§2.1–2.2":
+        - /url: https://arxiv.org/abs/1312.6114v1
+        - text: "1"
+      - generic: 原文定位：§2.1–2.2
+    - heading "重参数化与范围" [level=2]
+    - paragraph:
+      - text: 将采样写成噪声与可微变换的组合，使下界的随机梯度能够用于训练。论文讨论连续隐变量，并以特定分布和数据实验验证；不保证每种生成模型都能使用相同估计器。
+      - link "来源1：Auto-Encoding Variational Bayes；§2.3–2.4、§3、§5":
+        - /url: https://arxiv.org/abs/1312.6114v1
+        - text: "1"
+      - generic: 原文定位：§2.3–2.4、§3、§5
+    - heading "阅读这段历史时" [level=2]
+    - paragraph: 此条目记录特定历史事件，不代表该方向的唯一源头。
+    - heading "回到原始资料" [level=2]
+    - generic: 5 份来源
+    - link "Auto-Encoding Variational Bayes arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：作者署名、§2.1–2.4、§3、§5；Submission history":
+      - /url: https://arxiv.org/abs/1312.6114v1
+      - strong: Auto-Encoding Variational Bayes
+      - generic: arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：作者署名、§2.1–2.4、§3、§5；Submission history
+    - link "Generative Adversarial Networks arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：作者署名、§3–4、§6；Submission history":
+      - /url: https://arxiv.org/abs/1406.2661v1
+      - strong: Generative Adversarial Networks
+      - generic: arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：作者署名、§3–4、§6；Submission history
+    - link "Denoising Diffusion Probabilistic Models arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：§1–2、§3.2、§3.4、§4.1–4.3；Submission history":
+      - /url: https://arxiv.org/abs/2006.11239v1
+      - strong: Denoising Diffusion Probabilistic Models
+      - generic: arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：§1–2、§3.2、§3.4、§4.1–4.3；Submission history
+    - link "A logical calculus of the ideas immanent in nervous activity Springer · 原始论文 · English · 核查于 2026-09-29":
+      - /url: https://doi.org/10.1007/BF02478259
+      - strong: A logical calculus of the ideas immanent in nervous activity
+      - generic: Springer · 原始论文 · English · 核查于 2026-09-29
+    - link "Learning representations by back-propagating errors Nature · 原始论文 · English · 核查于 2026-09-29":
+      - /url: https://www.nature.com/articles/323533a0
+      - strong: Learning representations by back-propagating errors
+      - generic: Nature · 原始论文 · English · 核查于 2026-09-29
+    - paragraph: 事实与日期依据上述资料，各份资料的核查日期分别标记；“为什么重要”为编辑概述。
+    - region "有据关系":
+      - heading "有据关系" [level=2]
+      - paragraph: 每条关系单独核对原文；时间相邻不等于继承或因果。
+      - list:
+        - link "VAE：学习生成数据的隐空间":
+          - /url: /ai/events/vae/
+        - text: · 署名作者之一 ·
+        - link "Diederik P. Kingma":
+          - /url: /ai/people/diederik-kingma/
+        - text: 依据：
+        - link "Auto-Encoding Variational Bayes":
+          - /url: https://arxiv.org/abs/1312.6114v1
+        - text: · 论文作者署名
+    - heading "沿着这条线索继续" [level=2]
+    - link "2013 把词语放进向量空间 阅读":
+      - /url: /ai/events/word2vec/
+      - generic: "2013"
+      - strong: 把词语放进向量空间
+      - generic: 阅读
+    - link "2012 深度学习的视觉转折点 阅读":
+      - /url: /ai/events/alexnet/
+      - generic: "2012"
+      - strong: 深度学习的视觉转折点
+      - generic: 阅读
+    - link "2014 GAN：在对抗中学会生成 阅读":
+      - /url: /ai/events/gan/
+      - generic: "2014"
+      - strong: GAN：在对抗中学会生成
+      - generic: 阅读
+    - complementary:
+      - link "技术与方法 生成模型":
+        - /url: /ai/concepts/generative/
+        - generic: 技术与方法
+        - strong: 生成模型
+      - link "技术与方法 神经网络":
+        - /url: /ai/concepts/neural-networks/
+        - generic: 技术与方法
+        - strong: 神经网络
+      - link "论文作者 Diederik P. Kingma":
+        - /url: /ai/people/diederik-kingma/
+        - generic: 论文作者
+        - strong: Diederik P. Kingma
+      - link "精选专题 从视觉学习到协作系统":
+        - /url: /ai/collections/learning-to-systems/
+        - generic: 精选专题
+        - strong: 从视觉学习到协作系统
+      - button "复制事件链接":
+        - generic: 复制事件链接
+      - paragraph
+- contentinfo:
+  - strong: timeline
+  - text: 理解过去 · 看见可能的未来
+  - link "收录原则与资料来源":
+    - /url: /about/

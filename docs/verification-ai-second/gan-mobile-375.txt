@@ -1,0 +1,105 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- banner:
+  - button "打开主题导航":
+  - link "AI 发展史":
+    - /url: /ai/
+  - search:
+    - textbox "搜索事件、对象或关键词":
+      - /placeholder: 搜索当前主题…
+- main:
+  - link "返回时间线":
+    - /url: /ai/
+    - text: 返回时间线
+  - article:
+    - generic: AI 发展史
+    - generic: 论文首发
+    - time: 2014 年 6 月 10 日
+    - text: 关键节点
+    - heading "GAN：在对抗中学会生成" [level=1]
+    - paragraph: 生成器和判别器共同训练，一个生成样本，另一个尝试区分真实与生成数据。
+    - heading "为什么重要" [level=2]
+    - paragraph: 为高质量内容生成带来一种新的训练方式。
+    - generic: 编辑概述；具体事实见下文及其来源。
+    - heading "两个网络的目标" [level=2]
+    - paragraph:
+      - text: 生成器把噪声映射为样本，判别器学习区分真实数据与生成样本；二者通过对抗目标交替训练。
+      - link "来源1：Generative Adversarial Networks；§3 Adversarial nets":
+        - /url: https://arxiv.org/abs/1406.2661v1
+        - text: "1"
+      - generic: 原文定位：§3 Adversarial nets
+    - heading "理论与实践" [level=2]
+    - paragraph:
+      - text: 原文的分布收敛分析有理想化假设，不能当作有限网络训练的保证。作者明确讨论判别器与生成器的同步困难，以及生成器将不同输入映射为相同样本的失败情形。
+      - link "来源1：Generative Adversarial Networks；§4 Theoretical Results、§6 Advantages and disadvantages":
+        - /url: https://arxiv.org/abs/1406.2661v1
+        - text: "1"
+      - generic: 原文定位：§4 Theoretical Results、§6 Advantages and disadvantages
+    - heading "阅读这段历史时" [level=2]
+    - paragraph: 对抗训练存在稳定性与模式覆盖等问题。
+    - heading "回到原始资料" [level=2]
+    - generic: 3 份来源
+    - link "Generative Adversarial Networks arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：作者署名、§3–4、§6；Submission history":
+      - /url: https://arxiv.org/abs/1406.2661v1
+      - strong: Generative Adversarial Networks
+      - generic: arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：作者署名、§3–4、§6；Submission history
+    - link "Auto-Encoding Variational Bayes arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：作者署名、§2.1–2.4、§3、§5；Submission history":
+      - /url: https://arxiv.org/abs/1312.6114v1
+      - strong: Auto-Encoding Variational Bayes
+      - generic: arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：作者署名、§2.1–2.4、§3、§5；Submission history
+    - link "Denoising Diffusion Probabilistic Models arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：§1–2、§3.2、§3.4、§4.1–4.3；Submission history":
+      - /url: https://arxiv.org/abs/2006.11239v1
+      - strong: Denoising Diffusion Probabilistic Models
+      - generic: arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：§1–2、§3.2、§3.4、§4.1–4.3；Submission history
+    - paragraph: 事实与日期依据上述资料，各份资料的核查日期分别标记；“为什么重要”为编辑概述。
+    - region "有据关系":
+      - heading "有据关系" [level=2]
+      - paragraph: 每条关系单独核对原文；时间相邻不等于继承或因果。
+      - list:
+        - link "GAN：在对抗中学会生成":
+          - /url: /ai/events/gan/
+        - text: · 署名作者之一 ·
+        - link "Ian Goodfellow":
+          - /url: /ai/people/ian-goodfellow/
+        - text: 依据：
+        - link "Generative Adversarial Networks":
+          - /url: https://arxiv.org/abs/1406.2661v1
+        - text: · 论文作者署名
+    - heading "沿着这条线索继续" [level=2]
+    - link "2013 VAE：学习生成数据的隐空间 阅读":
+      - /url: /ai/events/vae/
+      - generic: "2013"
+      - strong: VAE：学习生成数据的隐空间
+      - generic: 阅读
+    - link "2020 扩散模型：从噪声中恢复图像 阅读":
+      - /url: /ai/events/ddpm/
+      - generic: "2020"
+      - strong: 扩散模型：从噪声中恢复图像
+      - generic: 阅读
+    - complementary:
+      - link "技术与方法 生成模型":
+        - /url: /ai/concepts/generative/
+        - generic: 技术与方法
+        - strong: 生成模型
+      - link "论文作者 Ian Goodfellow":
+        - /url: /ai/people/ian-goodfellow/
+        - generic: 论文作者
+        - strong: Ian Goodfellow
+      - link "精选专题 从视觉学习到协作系统":
+        - /url: /ai/collections/learning-to-systems/
+        - generic: 精选专题
+        - strong: 从视觉学习到协作系统
+      - button "复制事件链接":
+        - generic: 复制事件链接
+      - paragraph
+- contentinfo:
+  - strong: timeline
+  - text: 理解过去 · 看见可能的未来
+  - link "收录原则与资料来源":
+    - /url: /about/

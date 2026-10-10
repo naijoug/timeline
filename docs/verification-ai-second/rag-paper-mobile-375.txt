@@ -1,0 +1,112 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- banner:
+  - button "打开主题导航":
+  - link "AI 发展史":
+    - /url: /ai/
+  - search:
+    - textbox "搜索事件、对象或关键词":
+      - /placeholder: 搜索当前主题…
+- main:
+  - link "返回时间线":
+    - /url: /ai/
+    - text: 返回时间线
+  - article:
+    - generic: AI 发展史
+    - generic: 论文首发
+    - time: 2020 年 5 月 22 日
+    - heading "RAG：先查资料，再生成回答" [level=1]
+    - paragraph: 研究者将检索模块与生成模型结合，处理依赖外部知识的任务。
+    - heading "为什么重要" [level=2]
+    - paragraph: 提供更新知识和追溯依据的一条工程路线。
+    - generic: 编辑概述；具体事实见下文及其来源。
+    - heading "检索器和生成器" [level=2]
+    - paragraph:
+      - text: 原论文把 Wikipedia 向量索引作为外部记忆，使用基于 BERT 的 DPR 检索器和 BART 生成器。微调查询编码器与生成器时，文档编码器和索引保持固定。
+      - link "来源1：Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks；§2.2–2.4":
+        - /url: https://arxiv.org/abs/2005.11401v1
+        - text: "1"
+      - generic: 原文定位：§2.2–2.4
+    - heading "两种组合" [level=2]
+    - paragraph:
+      - text: RAG-Sequence 对整段输出使用同一检索文档，RAG-Token 允许输出的不同 token 使用不同文档，并对候选文档进行边缘化。研究评估知识密集型任务，不等于只在提示中拼接搜索结果。
+      - link "来源1：Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks；§2.1、§3":
+        - /url: https://arxiv.org/abs/2005.11401v1
+        - text: "1"
+      - generic: 原文定位：§2.1、§3
+    - heading "阅读这段历史时" [level=2]
+    - paragraph: 检索到资料并不保证回答正确，仍需核查引用与结论。
+    - heading "回到原始资料" [level=2]
+    - generic: 3 份来源
+    - link "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：§2.1–2.4、§3、§6；Submission history":
+      - /url: https://arxiv.org/abs/2005.11401v1
+      - strong: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
+      - generic: arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：§2.1–2.4、§3、§6；Submission history
+    - link "Effective harnesses for long-running agents Anthropic · 工程文章 · English · 核查于 2026-09-29":
+      - /url: https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents
+      - strong: Effective harnesses for long-running agents
+      - generic: Anthropic · 工程文章 · English · 核查于 2026-09-29
+    - 'link "BERT: Pre-training of Deep Bidirectional Transformers arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：§3.1、§3.3、§3.5；Submission history"':
+      - /url: https://arxiv.org/abs/1810.04805v1
+      - strong: "BERT: Pre-training of Deep Bidirectional Transformers"
+      - generic: arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：§3.1、§3.3、§3.5；Submission history
+    - paragraph: 事实与日期依据上述资料，各份资料的核查日期分别标记；“为什么重要”为编辑概述。
+    - region "有据关系":
+      - heading "有据关系" [level=2]
+      - paragraph: 每条关系单独核对原文；时间相邻不等于继承或因果。
+      - list:
+        - link "RAG：先查资料，再生成回答":
+          - /url: /ai/events/rag-paper/
+        - text: · 在 DPR 检索器中使用 BERT 编码器 ·
+        - link "BERT 推动语言预训练":
+          - /url: /ai/events/bert/
+        - paragraph: 检索组件关系；原论文生成器是 BART。
+        - text: 依据：
+        - link "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks":
+          - /url: https://arxiv.org/abs/2005.11401v1
+        - text: "· §2.2 Retriever: DPR"
+    - heading "沿着这条线索继续" [level=2]
+    - link "2018 BERT 推动语言预训练 阅读":
+      - /url: /ai/events/bert/
+      - generic: "2018"
+      - strong: BERT 推动语言预训练
+      - generic: 阅读
+    - link "2025 让 Agent 跨越多次会话继续工作 阅读":
+      - /url: /ai/events/long-running-harness/
+      - generic: "2025"
+      - strong: 让 Agent 跨越多次会话继续工作
+      - generic: 阅读
+    - link "2025 上下文工程：管理模型看到的信息 阅读":
+      - /url: /ai/events/context-engineering/
+      - generic: "2025"
+      - strong: 上下文工程：管理模型看到的信息
+      - generic: 阅读
+    - complementary:
+      - link "技术与方法 RAG":
+        - /url: /ai/concepts/rag/
+        - generic: 技术与方法
+        - strong: RAG
+      - link "技术与方法 Context engineering":
+        - /url: /ai/concepts/context/
+        - generic: 技术与方法
+        - strong: Context engineering
+      - link "模型家族 BERT":
+        - /url: /ai/models/bert-family/
+        - generic: 模型家族
+        - strong: BERT
+      - link "精选专题 从视觉学习到协作系统":
+        - /url: /ai/collections/learning-to-systems/
+        - generic: 精选专题
+        - strong: 从视觉学习到协作系统
+      - button "复制事件链接":
+        - generic: 复制事件链接
+      - paragraph
+- contentinfo:
+  - strong: timeline
+  - text: 理解过去 · 看见可能的未来
+  - link "收录原则与资料来源":
+    - /url: /about/

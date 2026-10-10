@@ -1,0 +1,118 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- banner:
+  - button "打开主题导航":
+  - link "AI 发展史":
+    - /url: /ai/
+  - search:
+    - textbox "搜索事件、对象或关键词":
+      - /placeholder: 搜索当前主题…
+- main:
+  - link "返回时间线":
+    - /url: /ai/
+    - text: 返回时间线
+  - article:
+    - generic: AI 发展史
+    - generic: 论文首发
+    - time: 2023 年 8 月 16 日
+    - text: 关键节点
+    - heading "AutoGen：用多 Agent 对话组织应用" [level=1]
+    - paragraph: 论文提出可定制、可对话的 Agent，以消息交互组合语言模型、工具和人类参与。
+    - heading "为什么重要" [level=2]
+    - paragraph: 编辑解读：角色、消息和执行能力构成应用流程，而不只是让模型扮演多个身份。
+    - generic: 编辑概述；具体事实见下文及其来源。
+    - heading "可对话 Agent" [level=2]
+    - paragraph:
+      - text: Agent 可以由语言模型、人或工具驱动，通过统一消息接口组合。论文介绍 AssistantAgent 与 UserProxyAgent 等预设，并支持自动回复和可定制的交互模式。
+      - 'link "来源1：AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation Framework；§2.1–2.2"':
+        - /url: https://arxiv.org/abs/2308.08155v1
+        - text: "1"
+      - generic: 原文定位：§2.1–2.2
+    - heading "应用与阶段" [level=2]
+    - paragraph:
+      - text: 论文给出数学、代码与网页交互等应用案例。此节点记录 8 月 16 日 arXiv v1，不将后续推广或库版本更新当作同一发布阶段。
+      - 'link "来源1：AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation Framework；§4；Submission history"':
+        - /url: https://arxiv.org/abs/2308.08155v1
+        - text: "1"
+      - generic: 原文定位：§4；Submission history
+    - heading "工作流边界" [level=2]
+    - paragraph:
+      - text: 作者说明 Agent 数量、角色与交互模式依应用而定，并讨论日志调试、连锁错误和适当的人类参与。研究案例不能证明多 Agent 在所有任务上都更优。
+      - 'link "来源1：AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation Framework；§5.2 Future Work"':
+        - /url: https://arxiv.org/abs/2308.08155v1
+        - text: "1"
+      - generic: 原文定位：§5.2 Future Work
+    - heading "阅读这段历史时" [level=2]
+    - paragraph: 工作流依任务配置；更多 Agent 不保证更好结果，自动执行需要可追踪的行为与人类介入机制。
+    - heading "回到原始资料" [level=2]
+    - generic: 3 份来源
+    - 'link "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation Framework 论文作者 · arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：作者署名与机构、§2.1–2.2、§4、§5.2；Submission history"':
+      - /url: https://arxiv.org/abs/2308.08155v1
+      - strong: "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation Framework"
+      - generic: 论文作者 · arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：作者署名与机构、§2.1–2.2、§4、§5.2；Submission history
+    - link "Building effective agents Anthropic · 工程文章 · English · 核查于 2026-09-29":
+      - /url: https://www.anthropic.com/engineering/building-effective-agents
+      - strong: Building effective agents
+      - generic: Anthropic · 工程文章 · English · 核查于 2026-09-29
+    - 'link "ReAct: Synergizing Reasoning and Acting in Language Models arXiv · 原始论文 · English · 核查于 2026-09-29"':
+      - /url: https://arxiv.org/abs/2210.03629
+      - strong: "ReAct: Synergizing Reasoning and Acting in Language Models"
+      - generic: arXiv · 原始论文 · English · 核查于 2026-09-29
+    - paragraph: 事实与日期依据上述资料，各份资料的核查日期分别标记；“为什么重要”为编辑概述。
+    - region "有据关系":
+      - heading "有据关系" [level=2]
+      - paragraph: 每条关系单独核对原文；时间相邻不等于继承或因果。
+      - list:
+        - link "AutoGen：用多 Agent 对话组织应用":
+          - /url: /ai/events/autogen-paper/
+        - text: · 以可对话 Agent 组合模型、工具和人 ·
+        - link "Agent":
+          - /url: /ai/concepts/agent/
+        - text: 依据：
+        - 'link "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation Framework"':
+          - /url: https://arxiv.org/abs/2308.08155v1
+        - text: · §2.1–2.2
+    - heading "沿着这条线索继续" [level=2]
+    - link "2023 Toolformer：学习何时调用工具 阅读":
+      - /url: /ai/events/toolformer/
+      - generic: "2023"
+      - strong: Toolformer：学习何时调用工具
+      - generic: 阅读
+    - link "2022 ReAct：把推理与行动放进同一循环 阅读":
+      - /url: /ai/events/react/
+      - generic: "2022"
+      - strong: ReAct：把推理与行动放进同一循环
+      - generic: 阅读
+    - link "2024 工作流与 Agent，有了清晰的区分 阅读":
+      - /url: /ai/events/effective-agents/
+      - generic: "2024"
+      - strong: 工作流与 Agent，有了清晰的区分
+      - generic: 阅读
+    - complementary:
+      - link "技术与方法 AutoGen":
+        - /url: /ai/concepts/autogen/
+        - generic: 技术与方法
+        - strong: AutoGen
+      - link "技术与方法 Agent":
+        - /url: /ai/concepts/agent/
+        - generic: 技术与方法
+        - strong: Agent
+      - link "技术与方法 Agent loop":
+        - /url: /ai/concepts/loop/
+        - generic: 技术与方法
+        - strong: Agent loop
+      - link "精选专题 从视觉学习到协作系统":
+        - /url: /ai/collections/learning-to-systems/
+        - generic: 精选专题
+        - strong: 从视觉学习到协作系统
+      - button "复制事件链接":
+        - generic: 复制事件链接
+      - paragraph
+- contentinfo:
+  - strong: timeline
+  - text: 理解过去 · 看见可能的未来
+  - link "收录原则与资料来源":
+    - /url: /about/
+- generic "flow-ai-assistant"

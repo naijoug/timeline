@@ -1,0 +1,173 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- complementary "主题导航":
+  - link "timeline 首页":
+    - /url: /
+    - text: timeline
+  - button "收拢侧栏" [expanded]:
+  - generic: 主题库
+  - textbox "查找主题":
+    - /placeholder: 查找主题…
+  - navigation "所有主题":
+    - link "所有主题":
+      - /url: /
+      - generic: 所有主题
+    - link "AI 发展史":
+      - /url: /ai/
+      - generic: AI 发展史
+    - link "中国历史":
+      - /url: /china-history/
+      - generic: 中国历史
+  - paragraph: 更多主题持续收录
+  - link "浏览主题":
+    - /url: /
+    - text: 浏览主题
+  - button "当前外观：跟随系统；点击切换为浅色":
+  - link "关于 timeline":
+    - /url: /about/
+    - generic: 关于 timeline
+  - generic "简体中文":
+    - generic: 简体中文
+- banner:
+  - link "AI 发展史":
+    - /url: /ai/
+  - generic: 从图灵到生成式 AI
+  - search:
+    - textbox "搜索事件、对象或关键词":
+      - /placeholder: 搜索当前主题…
+    - generic: ⌘ K
+- main:
+  - link "返回时间线":
+    - /url: /ai/
+    - text: 返回时间线
+  - article:
+    - generic: AI 发展史
+    - generic: 研究发布
+    - time: 2021 年 1 月 5 日
+    - text: 关键节点
+    - heading "CLIP：连接文本与图像" [level=1]
+    - paragraph: 从图文配对中学习可迁移的视觉表示；通过文本类别描述进行零样本分类。
+    - heading "为什么重要" [level=2]
+    - paragraph: 自然语言成为视觉模型的任务接口。
+    - generic: 编辑概述；具体事实见下文及其来源。
+    - heading "图文对齐" [level=2]
+    - paragraph:
+      - text: 联合训练图像编码器与文本编码器，在同一批次中区分正确图文配对。图像编码器实验包括改造的 ResNet 和 Vision Transformer；类别文字可用于零样本分类。
+      - link "来源2：Learning Transferable Visual Models From Natural Language Supervision；§2.3–2.4、§3.1":
+        - /url: https://arxiv.org/abs/2103.00020v1
+        - text: "2"
+      - generic: 原文定位：§2.3–2.4、§3.1
+    - heading "发布与论文" [level=2]
+    - paragraph:
+      - text: 节点日期采用官方研究公告的 2021 年 1 月 5 日。所引 arXiv v1 提交于 2 月 26 日，是后续论文材料；CLIP 学习视觉表示，不生成图像，细粒度分类和计数等任务仍有局限。
+      - link "来源1：CLIP：连接文本与图像；公告页首日期；论文 Submission history、§6 Limitations":
+        - /url: https://openai.com/index/clip/
+        - text: "1"
+      - link "来源2：Learning Transferable Visual Models From Natural Language Supervision；公告页首日期；论文 Submission history、§6 Limitations":
+        - /url: https://arxiv.org/abs/2103.00020v1
+        - text: "2"
+      - generic: 原文定位：公告页首日期；论文 Submission history、§6 Limitations
+    - heading "公告口径" [level=2]
+    - paragraph:
+      - text: 官方发布页介绍通过自然语言监督学习视觉概念，并给出使用文本类别描述进行分类的示例。
+      - link "来源1：CLIP：连接文本与图像；页首日期、Approach":
+        - /url: https://openai.com/index/clip/
+        - text: "1"
+      - generic: 原文定位：页首日期、Approach
+    - generic: WHAT CHANGED
+    - heading "这一次，改变了什么？" [level=2]
+    - generic: 比较基线：依赖固定类别标注的视觉模型
+    - list:
+      - listitem: +从图文配对中学习可迁移的视觉表示
+      - listitem: +通过文本类别描述进行零样本分类
+    - heading "代价与使用条件" [level=3]
+    - paragraph: 并非图像生成模型；细粒度识别和分布外场景仍有明显限制。
+    - text: 证据类型：厂商报告
+    - link "OpenAI":
+      - /url: https://openai.com/index/clip/
+      - text: OpenAI
+    - heading "阅读这段历史时" [level=2]
+    - paragraph: 并非图像生成模型；细粒度识别和分布外场景仍有明显限制。
+    - heading "回到原始资料" [level=2]
+    - generic: 3 份来源
+    - link "01 CLIP：连接文本与图像 OpenAI · 官方网页原文 · 核查于 2026-10-09 版本：2021-01-05 研究发布页 定位：页首日期、Approach、Limitations":
+      - /url: https://openai.com/index/clip/
+      - generic: "01"
+      - strong: CLIP：连接文本与图像
+      - generic: OpenAI · 官方网页原文 · 核查于 2026-10-09
+      - generic: 版本：2021-01-05 研究发布页
+      - generic: 定位：页首日期、Approach、Limitations
+    - link "02 Learning Transferable Visual Models From Natural Language Supervision 论文作者 · arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：§2.3–2.4、§3.1、§6；Submission history":
+      - /url: https://arxiv.org/abs/2103.00020v1
+      - generic: "02"
+      - strong: Learning Transferable Visual Models From Natural Language Supervision
+      - generic: 论文作者 · arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：§2.3–2.4、§3.1、§6；Submission history
+    - link "03 Improving Language Understanding by Generative Pre-Training Alec Radford 等 · OpenAI · 原始论文 PDF · English · 核查于 2026-10-09 版本：2018 官方发布 PDF 定位：§3 Framework、§4.1 Model specifications":
+      - /url: https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf
+      - generic: "03"
+      - strong: Improving Language Understanding by Generative Pre-Training
+      - generic: Alec Radford 等 · OpenAI · 原始论文 PDF · English · 核查于 2026-10-09
+      - generic: 版本：2018 官方发布 PDF
+      - generic: 定位：§3 Framework、§4.1 Model specifications
+    - paragraph: 事实与日期依据上述资料，各份资料的核查日期分别标记；“为什么重要”为编辑概述。
+    - region "有据关系":
+      - heading "有据关系" [level=2]
+      - paragraph: 每条关系单独核对原文；时间相邻不等于继承或因果。
+      - list:
+        - link "CLIP：连接文本与图像":
+          - /url: /ai/events/clip-release/
+        - text: · 使用改造的 ResNet 作为图像编码器之一 ·
+        - link "ResNet 让更深的网络更容易训练":
+          - /url: /ai/events/resnet/
+        - paragraph: 也研究 Vision Transformer；不表示沿用原 ResNet 权重。
+        - text: 依据：
+        - link "Learning Transferable Visual Models From Natural Language Supervision":
+          - /url: https://arxiv.org/abs/2103.00020v1
+        - text: · §2.4 Choosing and Scaling a Model
+    - heading "沿着这条线索继续" [level=2]
+    - link "2022 ChatGPT 向公众开放 阅读":
+      - /url: /ai/events/chatgpt/
+      - generic: "2022"
+      - strong: ChatGPT 向公众开放
+      - generic: 阅读
+    - link "2020 GPT-3：通过示例告诉模型任务 阅读":
+      - /url: /ai/events/gpt3-paper/
+      - generic: "2020"
+      - strong: GPT-3：通过示例告诉模型任务
+      - generic: 阅读
+    - link "2022 用人类反馈训练指令模型 阅读":
+      - /url: /ai/events/instructgpt/
+      - generic: "2022"
+      - strong: 用人类反馈训练指令模型
+      - generic: 阅读
+    - complementary:
+      - generic: 相关对象与时期
+      - link "模型家族 CLIP":
+        - /url: /ai/models/clip/
+        - generic: 模型家族
+        - strong: CLIP
+      - link "研究机构 OpenAI":
+        - /url: /ai/organizations/openai-research/
+        - generic: 研究机构
+        - strong: OpenAI
+      - link "精选专题 从视觉学习到协作系统":
+        - /url: /ai/collections/learning-to-systems/
+        - generic: 精选专题
+        - strong: 从视觉学习到协作系统
+      - generic: 事件档案
+      - term: 时间精度
+      - definition: 日期
+      - term: 机构
+      - definition: OpenAI
+      - term: 类别
+      - definition: 视觉 / 多模态
+      - button "复制事件链接":
+        - generic: 复制事件链接
+      - paragraph
+- contentinfo:
+  - strong: timeline
+  - text: 理解过去 · 看见可能的未来
+  - link "收录原则与资料来源":
+    - /url: /about/

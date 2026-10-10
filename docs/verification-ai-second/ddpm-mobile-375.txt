@@ -1,0 +1,101 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- banner:
+  - button "打开主题导航":
+  - link "AI 发展史":
+    - /url: /ai/
+  - search:
+    - textbox "搜索事件、对象或关键词":
+      - /placeholder: 搜索当前主题…
+- main:
+  - link "返回时间线":
+    - /url: /ai/
+    - text: 返回时间线
+  - article:
+    - generic: AI 发展史
+    - generic: 论文首发
+    - time: 2020 年 6 月 19 日
+    - text: 关键节点
+    - heading "扩散模型：从噪声中恢复图像" [level=1]
+    - paragraph: DDPM 研究通过逐步去噪生成图像的方法。
+    - heading "为什么重要" [level=2]
+    - paragraph: 成为后来图像生成系统的重要技术路线。
+    - generic: 编辑概述；具体事实见下文及其来源。
+    - heading "加噪与反向过程" [level=2]
+    - paragraph:
+      - text: 前向过程逐步向数据加入高斯噪声，模型学习反向链的去噪转移。论文将特定参数化与多噪声水平的去噪得分匹配联系起来。
+      - link "来源1：Denoising Diffusion Probabilistic Models；§1–2、§3.2":
+        - /url: https://arxiv.org/abs/2006.11239v1
+        - text: "1"
+      - generic: 原文定位：§1–2、§3.2
+    - heading "训练目标与边界" [level=2]
+    - paragraph:
+      - text: 简化目标训练网络预测加入的噪声，并在 CIFAR-10、LSUN 等图像数据上评估。论文讨论样本质量与似然指标的差别；此节点不是文本生图产品发布，也不是扩散方法的最早起点。
+      - link "来源1：Denoising Diffusion Probabilistic Models；§3.4、§4.1–4.3、§1":
+        - /url: https://arxiv.org/abs/2006.11239v1
+        - text: "1"
+      - generic: 原文定位：§3.4、§4.1–4.3、§1
+    - heading "阅读这段历史时" [level=2]
+    - paragraph: 此条目记录特定历史事件，不代表该方向的唯一源头。
+    - heading "回到原始资料" [level=2]
+    - generic: 3 份来源
+    - link "Denoising Diffusion Probabilistic Models arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：§1–2、§3.2、§3.4、§4.1–4.3；Submission history":
+      - /url: https://arxiv.org/abs/2006.11239v1
+      - strong: Denoising Diffusion Probabilistic Models
+      - generic: arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：§1–2、§3.2、§3.4、§4.1–4.3；Submission history
+    - link "Auto-Encoding Variational Bayes arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：作者署名、§2.1–2.4、§3、§5；Submission history":
+      - /url: https://arxiv.org/abs/1312.6114v1
+      - strong: Auto-Encoding Variational Bayes
+      - generic: arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：作者署名、§2.1–2.4、§3、§5；Submission history
+    - link "Generative Adversarial Networks arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：作者署名、§3–4、§6；Submission history":
+      - /url: https://arxiv.org/abs/1406.2661v1
+      - strong: Generative Adversarial Networks
+      - generic: arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：作者署名、§3–4、§6；Submission history
+    - paragraph: 事实与日期依据上述资料，各份资料的核查日期分别标记；“为什么重要”为编辑概述。
+    - region "有据关系":
+      - heading "有据关系" [level=2]
+      - paragraph: 每条关系单独核对原文；时间相邻不等于继承或因果。
+      - list:
+        - link "扩散模型：从噪声中恢复图像":
+          - /url: /ai/events/ddpm/
+        - text: · 研究逐步去噪的生成方法 ·
+        - link "生成模型":
+          - /url: /ai/concepts/generative/
+        - text: 依据：
+        - link "Denoising Diffusion Probabilistic Models":
+          - /url: https://arxiv.org/abs/2006.11239v1
+        - text: · §1–2
+    - heading "沿着这条线索继续" [level=2]
+    - link "2014 GAN：在对抗中学会生成 阅读":
+      - /url: /ai/events/gan/
+      - generic: "2014"
+      - strong: GAN：在对抗中学会生成
+      - generic: 阅读
+    - link "2013 VAE：学习生成数据的隐空间 阅读":
+      - /url: /ai/events/vae/
+      - generic: "2013"
+      - strong: VAE：学习生成数据的隐空间
+      - generic: 阅读
+    - complementary:
+      - link "技术与方法 生成模型":
+        - /url: /ai/concepts/generative/
+        - generic: 技术与方法
+        - strong: 生成模型
+      - link "精选专题 从视觉学习到协作系统":
+        - /url: /ai/collections/learning-to-systems/
+        - generic: 精选专题
+        - strong: 从视觉学习到协作系统
+      - button "复制事件链接":
+        - generic: 复制事件链接
+      - paragraph
+- contentinfo:
+  - strong: timeline
+  - text: 理解过去 · 看见可能的未来
+  - link "收录原则与资料来源":
+    - /url: /about/

@@ -1,0 +1,596 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- complementary "主题导航":
+  - link "timeline 首页":
+    - /url: /
+    - text: timeline
+  - button "收拢侧栏" [expanded]:
+  - generic: 主题库
+  - textbox "查找主题":
+    - /placeholder: 查找主题…
+  - navigation "所有主题":
+    - link "所有主题":
+      - /url: /
+      - generic: 所有主题
+    - link "AI 发展史":
+      - /url: /ai/
+      - generic: AI 发展史
+    - link "中国历史":
+      - /url: /china-history/
+      - generic: 中国历史
+  - paragraph: 更多主题持续收录
+  - link "浏览主题":
+    - /url: /
+    - text: 浏览主题
+  - button "当前外观：跟随系统；点击切换为浅色":
+  - link "关于 timeline":
+    - /url: /about/
+    - generic: 关于 timeline
+  - generic "简体中文":
+    - generic: 简体中文
+- banner:
+  - link "AI 发展史":
+    - /url: /ai/
+  - generic: 从图灵到生成式 AI
+  - search:
+    - textbox "搜索事件、对象或关键词":
+      - /placeholder: 搜索当前主题…
+    - generic: ⌘ K
+- main:
+  - region "历史总览":
+    - heading "1943 — 2026" [level=1]
+    - paragraph: 从图灵到生成式 AI
+    - navigation "精选专题":
+      - text: 专题：
+      - link "Transformer 到指令遵循":
+        - /url: /ai/collections/transformer-to-instructions/
+      - link "从视觉学习到协作系统":
+        - /url: /ai/collections/learning-to-systems/
+    - group "选择历史时间窗口":
+      - generic: 2023 — 2025
+      - slider "时间窗口起点": "2023"
+      - slider "时间窗口终点": "2026"
+      - button "从 1943 年开始浏览": "1943"
+      - button "从 1960 年开始浏览": "1960"
+      - button "从 1980 年开始浏览": "1980"
+      - button "从 2000 年开始浏览": "2000"
+      - button "从 2026 年开始浏览": "2026"
+      - button "2017 Transformer":
+        - strong: "2017"
+        - generic: Transformer
+  - region "关键事件时间线":
+    - button "2023 — 2025"
+    - button "时间与范围筛选":
+    - combobox "事件类别":
+      - generic: 全部类别
+    - checkbox "关键节点" [checked]
+    - generic: 关键节点
+    - region "2023 年事件":
+      - heading "2023 年" [level=2]
+      - list:
+        - button "2023 年 2 月 24 日 LLaMA 首次公布":
+          - time: "02.24"
+          - strong: LLaMA 首次公布
+          - generic: Meta
+        - button "2023 年 3 月 14 日 Claude / Claude Instant":
+          - time: "03.14"
+          - strong: Claude / Claude Instant
+          - generic: Anthropic
+        - button "2023 年 3 月 15 日 GPT-4 技术报告":
+          - time: "03.15"
+          - strong: GPT-4 技术报告
+          - generic: OpenAI
+        - button "2023 年 4 月 7 日 Generative Agents：记忆、反思与规划":
+          - time: "04.07"
+          - strong: Generative Agents：记忆、反思与规划
+          - generic: Stanford / Google Research
+        - button "2023 年 5 月 29 日 DPO":
+          - time: "05.29"
+          - strong: DPO
+          - generic: Stanford University
+        - button "2023 年 6 月 20 日 Phi-1：用教材式数据训练小型代码模型" [active] [pressed]:
+          - time: "06.20"
+          - strong: Phi-1：用教材式数据训练小型代码模型
+          - generic: Microsoft Research
+        - button "2023 年 7 月 18 日 Llama 2":
+          - time: "07.18"
+          - strong: Llama 2
+          - generic: Meta
+        - button "2023 年 8 月 16 日 AutoGen：用多 Agent 对话组织应用":
+          - time: "08.16"
+          - strong: AutoGen：用多 Agent 对话组织应用
+          - generic: Microsoft / Penn State / University of Washington
+        - button "2023 年 9 月 6 日 Falcon 180B":
+          - time: "09.06"
+          - strong: Falcon 180B
+          - generic: TII
+        - button "2023 年 9 月 27 日 Mistral 7B":
+          - time: "09.27"
+          - strong: Mistral 7B
+          - generic: Mistral AI
+        - button "2023 年 11 月 6 日 GPT-4 Turbo 预览":
+          - time: "11.06"
+          - strong: GPT-4 Turbo 预览
+          - generic: OpenAI
+        - button "2023 年 12 月 6 日 Gemini 1.0":
+          - time: "12.06"
+          - strong: Gemini 1.0
+          - generic: Google
+        - button "2023 年 12 月 11 日 Mixtral 8×7B":
+          - time: "12.11"
+          - strong: Mixtral 8×7B
+          - generic: Mistral AI
+    - region "2024 年事件":
+      - heading "2024 年" [level=2]
+      - list:
+        - button "2024 年 2 月 15 日 Gemini 1.5":
+          - time: "02.15"
+          - strong: Gemini 1.5
+          - generic: Google
+        - button "2024 年 2 月 21 日 Gemma 开放模型":
+          - time: "02.21"
+          - strong: Gemma 开放模型
+          - generic: Google
+        - button "2024 年 3 月 Command R":
+          - time: 3月
+          - strong: Command R
+          - generic: Cohere
+        - button "2024 年 3 月 Devin":
+          - time: 3月
+          - strong: Devin
+          - generic: Cognition
+        - button "2024 年 3 月 21 日 EvoLLM-JP / EvoVLM-JP":
+          - time: "03.21"
+          - strong: EvoLLM-JP / EvoVLM-JP
+          - generic: Sakana AI
+        - button "2024 年 4 月 18 日 Llama 3":
+          - time: "04.18"
+          - strong: Llama 3
+          - generic: Meta
+        - button "2024 年 5 月 6 日 SWE-agent：为 Agent 设计电脑接口":
+          - time: "05.06"
+          - strong: SWE-agent：为 Agent 设计电脑接口
+          - generic: Princeton / Stanford
+        - button "2024 年 5 月 13 日 GPT-4o":
+          - time: "05.13"
+          - strong: GPT-4o
+          - generic: OpenAI
+        - button "2024 年 6 月 7 日 Qwen2":
+          - time: "06.07"
+          - strong: Qwen2
+          - generic: 阿里巴巴
+        - button "2024 年 7 月 23 日 Llama 3.1":
+          - time: "07.23"
+          - strong: Llama 3.1
+          - generic: Meta
+        - button "2024 年 7 月 23 日 OpenDevin / OpenHands 平台论文":
+          - time: "07.23"
+          - strong: OpenDevin / OpenHands 平台论文
+          - generic: OpenHands 社区
+        - button "2024 年 8 月 1 日 FLUX.1":
+          - time: "08.01"
+          - strong: FLUX.1
+          - generic: Black Forest Labs
+        - button "2024 年 8 月 7 日 EXAONE 3.0 研究权重开放":
+          - time: "08.07"
+          - strong: EXAONE 3.0 研究权重开放
+          - generic: LG AI Research
+        - button "2024 年 8 月 29 日 Qwen2-VL":
+          - time: "08.29"
+          - strong: Qwen2-VL
+          - generic: 阿里巴巴
+        - button "2024 年 9 月 Qwen2.5":
+          - time: 9月
+          - strong: Qwen2.5
+          - generic: 阿里巴巴
+        - button "2024 年 9 月 Replit Agent 首次推出":
+          - time: 9月
+          - strong: Replit Agent 首次推出
+          - generic: Replit
+        - button "2024 年 9 月 12 日 o1-preview / o1-mini":
+          - time: "09.12"
+          - strong: o1-preview / o1-mini
+          - generic: OpenAI
+        - button "2024 年 9 月 25 日 Llama 3.2：视觉与端侧":
+          - time: "09.25"
+          - strong: Llama 3.2：视觉与端侧
+          - generic: Meta
+        - button "2024 年 10 月 28 日 AutoGLM：浏览器与手机 GUI Agent":
+          - time: "10.28"
+          - strong: AutoGLM：浏览器与手机 GUI Agent
+          - generic: 智谱
+        - button "2024 年 11 月 24 日 Cursor Agent":
+          - time: "11.24"
+          - strong: Cursor Agent
+          - generic: Cursor
+        - button "2024 年 11 月 25 日 MCP":
+          - time: "11.25"
+          - strong: MCP
+          - generic: Anthropic
+        - button "2024 年 12 月 11 日 Gemini 2.0 Flash 实验版":
+          - time: "12.11"
+          - strong: Gemini 2.0 Flash 实验版
+          - generic: Google
+    - region "2025 年事件":
+      - heading "2025 年" [level=2]
+      - list:
+        - button "2025 年 1 月 UI-TARS":
+          - time: 1月
+          - strong: UI-TARS
+          - generic: 字节跳动
+        - button "2025 年 1 月 20 日 DeepSeek-R1":
+          - time: "01.20"
+          - strong: DeepSeek-R1
+          - generic: DeepSeek
+        - button "2025 年 1 月 22 日 Kimi k1.5 技术论文":
+          - time: "01.22"
+          - strong: Kimi k1.5 技术论文
+          - generic: 月之暗面
+        - button "2025 年 1 月 23 日 Operator 研究预览":
+          - time: "01.23"
+          - strong: Operator 研究预览
+          - generic: OpenAI
+        - button "2025 年 1 月 31 日 o3-mini":
+          - time: "01.31"
+          - strong: o3-mini
+          - generic: OpenAI
+        - button "2025 年 2 月 2 日 ChatGPT deep research":
+          - time: "02.02"
+          - strong: ChatGPT deep research
+          - generic: OpenAI
+        - button "2025 年 2 月 19 日 Grok 3 推理路线公告":
+          - time: "02.19"
+          - strong: Grok 3 推理路线公告
+          - generic: xAI
+        - button "2025 年 2 月 24 日 Claude Code":
+          - time: "02.24"
+          - strong: Claude Code
+          - generic: Anthropic
+        - button "2025 年 2 月 24 日 Claude 3.7 Sonnet":
+          - time: "02.24"
+          - strong: Claude 3.7 Sonnet
+          - generic: Anthropic
+        - button "2025 年 2 月 25 日 Replit Agent v2":
+          - time: "02.25"
+          - strong: Replit Agent v2
+          - generic: Replit
+        - button "2025 年 2 月 25 日 Wan2.1 开放视频模型":
+          - time: "02.25"
+          - strong: Wan2.1 开放视频模型
+          - generic: 阿里巴巴
+        - button "2025 年 3 月 6 日 QwQ-32B":
+          - time: "03.06"
+          - strong: QwQ-32B
+          - generic: 阿里巴巴
+        - button "2025 年 3 月 12 日 Gemma 3":
+          - time: "03.12"
+          - strong: Gemma 3
+          - generic: Google
+        - button "2025 年 3 月 13 日 Command A":
+          - time: "03.13"
+          - strong: Command A
+          - generic: Cohere
+        - button "2025 年 3 月 21 日 混元 Hunyuan-T1":
+          - time: "03.21"
+          - strong: 混元 Hunyuan-T1
+          - generic: 腾讯
+        - button "2025 年 3 月 25 日 Gemini 2.5 Pro 实验版":
+          - time: "03.25"
+          - strong: Gemini 2.5 Pro 实验版
+          - generic: Google
+        - button "2025 年 4 月 5 日 Llama 4 Scout / Maverick":
+          - time: "04.05"
+          - strong: Llama 4 Scout / Maverick
+          - generic: Meta
+        - button "2025 年 4 月 10 日 日日新 SenseNova V6":
+          - time: "04.10"
+          - strong: 日日新 SenseNova V6
+          - generic: 商汤
+        - button "2025 年 4 月 14 日 GPT-4.1 系列":
+          - time: "04.14"
+          - strong: GPT-4.1 系列
+          - generic: OpenAI
+        - button "2025 年 4 月 16 日 Codex CLI":
+          - time: "04.16"
+          - strong: Codex CLI
+          - generic: OpenAI
+        - button "2025 年 4 月 16 日 o3 / o4-mini":
+          - time: "04.16"
+          - strong: o3 / o4-mini
+          - generic: OpenAI
+        - button "2025 年 4 月 29 日 Qwen3":
+          - time: "04.29"
+          - strong: Qwen3
+          - generic: 阿里巴巴
+        - button "2025 年 5 月 13 日 Seed1.5-VL 技术公告":
+          - time: "05.13"
+          - strong: Seed1.5-VL 技术公告
+          - generic: 字节跳动
+        - button "2025 年 5 月 15 日 Cursor Background Agents 预览":
+          - time: "05.15"
+          - strong: Cursor Background Agents 预览
+          - generic: Cursor
+        - button "2025 年 5 月 16 日 Codex 云端研究预览":
+          - time: "05.16"
+          - strong: Codex 云端研究预览
+          - generic: OpenAI
+        - button "2025 年 5 月 19 日 Copilot Agent":
+          - time: "05.19"
+          - strong: Copilot Agent
+          - generic: GitHub
+        - button "2025 年 5 月 20 日 Jules":
+          - time: "05.20"
+          - strong: Jules
+          - generic: Google
+        - button "2025 年 5 月 21 日 Devstral：软件工程模型":
+          - time: "05.21"
+          - strong: Devstral：软件工程模型
+          - generic: Mistral AI
+        - button "2025 年 5 月 22 日 Claude Sonnet 4":
+          - time: "05.22"
+          - strong: Claude Sonnet 4
+          - generic: Anthropic
+        - button "2025 年 6 月 16 日 MiniMax-M1":
+          - time: "06.16"
+          - strong: MiniMax-M1
+          - generic: MiniMax
+        - button "2025 年 6 月 19 日 MiniMax Agent":
+          - time: "06.19"
+          - strong: MiniMax Agent
+          - generic: MiniMax
+        - button "2025 年 6 月 25 日 Gemini CLI 开源":
+          - time: "06.25"
+          - strong: Gemini CLI 开源
+          - generic: Google
+        - button "2025 年 6 月 30 日 文心 ERNIE 4.5 开放权重":
+          - time: "06.30"
+          - strong: 文心 ERNIE 4.5 开放权重
+          - generic: 百度
+        - button "2025 年 6 月 30 日 盘古 7B / Pro MoE 开放":
+          - time: "06.30"
+          - strong: 盘古 7B / Pro MoE 开放
+          - generic: 华为
+        - button "2025 年 7 月 Qwen3-Coder":
+          - time: 7月
+          - strong: Qwen3-Coder
+          - generic: 阿里巴巴
+        - button "2025 年 7 月 Qwen Code 发布":
+          - time: 7月
+          - strong: Qwen Code 发布
+          - generic: 阿里巴巴
+        - button "2025 年 7 月 9 日 Grok 4 / Heavy":
+          - time: "07.09"
+          - strong: Grok 4 / Heavy
+          - generic: xAI
+        - button "2025 年 7 月 11 日 Kimi K2":
+          - time: "07.11"
+          - strong: Kimi K2
+          - generic: 月之暗面
+        - button "2025 年 7 月 17 日 ChatGPT agent":
+          - time: "07.17"
+          - strong: ChatGPT agent
+          - generic: OpenAI
+        - button "2025 年 7 月 17 日 TRAE SOLO 模式":
+          - time: "07.17"
+          - strong: TRAE SOLO 模式
+          - generic: 字节跳动
+        - button "2025 年 7 月 28 日 GLM-4.5":
+          - time: "07.28"
+          - strong: GLM-4.5
+          - generic: 智谱
+        - button "2025 年 7 月 31 日 Manus Wide Research":
+          - time: "07.31"
+          - strong: Manus Wide Research
+          - generic: Manus
+        - button "2025 年 7 月 31 日 Step3":
+          - time: "07.31"
+          - strong: Step3
+          - generic: 阶跃星辰
+        - button "2025 年 8 月 6 日 Jules 正式开放":
+          - time: "08.06"
+          - strong: Jules 正式开放
+          - generic: Google
+        - button "2025 年 8 月 7 日 GPT-5 系列 API":
+          - time: "08.07"
+          - strong: GPT-5 系列 API
+          - generic: OpenAI
+        - button "2025 年 8 月 21 日 DeepSeek-V3.1":
+          - time: "08.21"
+          - strong: DeepSeek-V3.1
+          - generic: DeepSeek
+        - button "2025 年 9 月 10 日 Replit Agent 3":
+          - time: "09.10"
+          - strong: Replit Agent 3
+          - generic: Replit
+        - button "2025 年 9 月 26 日 Kimi OK Computer":
+          - time: "09.26"
+          - strong: Kimi OK Computer
+          - generic: 月之暗面
+        - button "2025 年 9 月 29 日 上下文工程":
+          - time: "09.29"
+          - strong: 上下文工程
+          - generic: Anthropic
+        - button "2025 年 10 月 16 日 Agent Skills":
+          - time: "10.16"
+          - strong: Agent Skills
+          - generic: Anthropic
+        - button "2025 年 10 月 20 日 Claude Code 网页研究预览":
+          - time: "10.20"
+          - strong: Claude Code 网页研究预览
+          - generic: Anthropic
+        - button "2025 年 10 月 27 日 MiniMax-M2":
+          - time: "10.27"
+          - strong: MiniMax-M2
+          - generic: MiniMax
+        - button "2025 年 10 月 29 日 Cursor 2.0：并行 Agent":
+          - time: "10.29"
+          - strong: Cursor 2.0：并行 Agent
+          - generic: Cursor
+        - button "2025 年 11 月 6 日 Kimi K2 Thinking":
+          - time: "11.06"
+          - strong: Kimi K2 Thinking
+          - generic: 月之暗面
+        - button "2025 年 11 月 18 日 Gemini 3 预览":
+          - time: "11.18"
+          - strong: Gemini 3 预览
+          - generic: Google
+        - button "2025 年 11 月 24 日 Claude Opus 4.5":
+          - time: "11.24"
+          - strong: Claude Opus 4.5
+          - generic: Anthropic
+        - button "2025 年 11 月 26 日 长任务 Harness":
+          - time: "11.26"
+          - strong: 长任务 Harness
+          - generic: Anthropic
+        - button "2025 年 12 月 1 日 DeepSeek-V3.2":
+          - time: "12.01"
+          - strong: DeepSeek-V3.2
+          - generic: DeepSeek
+        - button "2025 年 12 月 9 日 Mistral Vibe CLI":
+          - time: "12.09"
+          - strong: Mistral Vibe CLI
+          - generic: Mistral AI
+        - button "2025 年 12 月 16 日 Seedance 1.5 pro":
+          - time: "12.16"
+          - strong: Seedance 1.5 pro
+          - generic: 字节跳动
+    - text: 当前 95 / 全库 248 个事件
+    - generic: ·
+    - text: 92 份来源
+  - complementary "事件详情":
+    - button "展开阅读":
+    - button "关闭事件详情":
+    - generic: 模型演进
+    - heading "Phi-1：用教材式数据训练小型代码模型" [level=2]
+    - text: 2023 年 6 月 20 日
+    - generic: ·
+    - text: Microsoft Research
+    - paragraph:
+      - text: Textbooks Are All You Need 研究筛选代码数据和合成教材、练习对小型代码模型的作用。
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+    - generic: 代码模型
+    - generic: 数据质量
+    - generic: 合成数据
+    - generic: 论文首发
+    - region "事件档案":
+      - heading "关键信息" [level=3]
+      - generic: 发布 / 发表方
+      - strong: Microsoft Research
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+      - generic: 事件类型
+      - strong: 论文首发
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+      - generic: 时间口径
+      - strong: 日期精度
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+      - generic: 涉及对象
+      - strong: Phi · Microsoft 研究团队 · 训练规模与算力分配
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+      - link "2":
+        - /url: https://arxiv.org/abs/2106.09685v1
+        - text: "2"
+      - link "3":
+        - /url: https://arxiv.org/abs/2001.08361v1
+        - text: "3"
+      - link "4":
+        - /url: https://arxiv.org/abs/2203.15556v1
+        - text: "4"
+      - generic: 关键标签
+      - strong: 代码模型 / 数据质量 / 合成数据
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+    - heading "为什么重要 · 编辑概述" [level=3]
+    - paragraph: 编辑解读：模型规模之外，训练数据的组织与质量也值得单独比较。
+    - heading "数据与训练阶段" [level=3]
+    - paragraph:
+      - text: 1.3B 参数模型先以筛选的代码和合成教材预训练，再用合成 Python 练习微调为 phi-1。论文中的语料规模与多轮训练实际处理的 token 数是不同口径。
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+    - generic: 原文定位：Abstract、§2–2.3
+    - heading "范围与局限" [level=3]
+    - paragraph:
+      - text: 论文以 HumanEval、MBPP 等代码任务比较，讨论训练数据污染，并列出复杂应用、提示长度等限制。日期采用 arXiv v1，不推定模型权重在同日开放。
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+    - generic: 原文定位：Table 1、§5、Appendix B；Submission history
+    - generic "变化、证据与边界":
+      - text: 变化、证据与边界
+    - paragraph: 比较基线：在标准代码语料上扩大模型或增加训练轮次
+    - list:
+      - listitem: 比较筛选与合成教材数据的训练效果
+      - listitem: 通过代码练习微调提升特定 Python 任务表现
+    - paragraph:
+      - text: 论文报告 · 数据筛选成本、污染评估和复杂代码任务的泛化仍有边界。
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+    - heading "阅读边界" [level=3]
+    - paragraph:
+      - text: 主要研究 Python 代码任务；论文自报成绩不等于通用能力排名或独立复测。
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+    - heading "来源与背景资料" [level=3]
+    - link "Textbooks Are All You Need 论文作者 · arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · Abstract、§2–2.3、§5、Appendix B；Submission history":
+      - /url: https://arxiv.org/abs/2306.11644v1
+      - text: Textbooks Are All You Need
+      - generic: 论文作者 · arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · Abstract、§2–2.3、§5、Appendix B；Submission history
+    - 'link "LoRA: Low-Rank Adaptation of Large Language Models arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · §3.1、§5.2–5.3；Submission history"':
+      - /url: https://arxiv.org/abs/2106.09685v1
+      - text: "LoRA: Low-Rank Adaptation of Large Language Models"
+      - generic: arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · §3.1、§5.2–5.3；Submission history
+    - link "Scaling Laws for Neural Language Models 论文作者 · arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · §1.1–1.2、§2.3、§6、Appendix C":
+      - /url: https://arxiv.org/abs/2001.08361v1
+      - text: Scaling Laws for Neural Language Models
+      - generic: 论文作者 · arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · §1.1–1.2、§2.3、§6、Appendix C
+    - link "Training Compute-Optimal Large Language Models 论文作者 · arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · §3、§4.1、Table 1、§5":
+      - /url: https://arxiv.org/abs/2203.15556v1
+      - text: Training Compute-Optimal Large Language Models
+      - generic: 论文作者 · arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · §3、§4.1、Table 1、§5
+    - heading "有据关系" [level=3]
+    - paragraph:
+      - link "Phi-1：用教材式数据训练小型代码模型":
+        - /url: /ai/events/phi-1-paper/
+      - text: · 署名研究机构 ·
+      - strong: Microsoft 研究团队
+      - text: 依据：作者署名与机构
+      - link "Textbooks Are All You Need":
+        - /url: https://arxiv.org/abs/2306.11644v1
+    - generic: 继续探索
+    - link "Phi":
+      - /url: /ai/models/phi/
+      - text: Phi
+    - link "Microsoft 研究团队":
+      - /url: /ai/organizations/microsoft-research/
+      - text: Microsoft 研究团队
+    - link "训练规模与算力分配":
+      - /url: /ai/concepts/training-scale/
+      - text: 训练规模与算力分配
+    - link "阅读完整事件":
+      - /url: /ai/models/phi/phi-1-paper/
+      - text: 阅读完整事件
+    - navigation "相邻事件":
+      - button "上一节点：DPO":
+        - generic: 上一节点
+        - strong: DPO
+      - button "下一节点：Llama 2":
+        - generic: 下一节点
+        - strong: Llama 2
+- contentinfo:
+  - generic: 理解过去 · 看见可能的未来
+  - link "本轮核查 2026-09-30 · 持续整理":
+    - /url: /about/
+- generic "flow-ai-assistant"

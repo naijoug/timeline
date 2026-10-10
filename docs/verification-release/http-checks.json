@@ -1,0 +1,106 @@
+[
+  {
+    "url": "https://naijoug.github.io/timeline/",
+    "ok": true,
+    "bytes": 17034,
+    "missing": [],
+    "sha256": "d5932c9dc3830c2fe47bb7ef20aed0b9044e5c933268d5e755c71d7a655cc9fa"
+  },
+  {
+    "url": "https://naijoug.github.io/timeline/ai/",
+    "ok": true,
+    "bytes": 69263,
+    "missing": [],
+    "sha256": "e337ded75e13930375be996129b982f6d6156bce8819ee37f7a56b4bbd9b3735"
+  },
+  {
+    "url": "https://naijoug.github.io/timeline/ai/collections/transformer-to-instructions/",
+    "ok": true,
+    "bytes": 24205,
+    "missing": [],
+    "sha256": "005e7aabd907b95363a2e90260742ce08df873cd65d87691dcc6779ecd54b171"
+  },
+  {
+    "url": "https://naijoug.github.io/timeline/ai/events/bert/",
+    "ok": true,
+    "bytes": 25893,
+    "missing": [],
+    "sha256": "e5a6419f2b3d9747531883833044719fa30823030e6cd53ae614f30472df71a7"
+  },
+  {
+    "url": "https://naijoug.github.io/timeline/ai/models/gpt/gpt-1/",
+    "ok": true,
+    "bytes": 29576,
+    "missing": [],
+    "sha256": "b09f696611b39e4c8c85ff74782f0b996549591bcd7759c96923a89e29ed4911",
+    "verified_text": [
+      "预训练与任务适配",
+      "language_understanding_paper.pdf"
+    ]
+  },
+  {
+    "url": "https://naijoug.github.io/timeline/china-history/",
+    "ok": true,
+    "bytes": 140257,
+    "missing": [],
+    "sha256": "4fb78151abf19667644a0bbfe62abfa8fa9c5136561914a9ed80c0634325ba46"
+  },
+  {
+    "url": "https://naijoug.github.io/timeline/china-history/collections/xinhai-1911-1912/",
+    "ok": true,
+    "bytes": 23887,
+    "missing": [],
+    "sha256": "7948e315cbea2a5b60f2d6825e68fdd2aae39333d2f15c65ba10fec87bcd617a"
+  },
+  {
+    "url": "https://naijoug.github.io/timeline/china-history/events/sun-inauguration/",
+    "ok": true,
+    "bytes": 28144,
+    "missing": [],
+    "sha256": "a1dfbf63a49ed41d0a894d64b8a78139e8309da884f3a9380ca5889889142c9a"
+  },
+  {
+    "url": "https://naijoug.github.io/timeline/china-history/events/provisional-constitution/",
+    "ok": true,
+    "bytes": 26368,
+    "missing": [],
+    "sha256": "6280fbcebbe4707722e36dab37ac05b62146e0d844f7c10afd124b7f614556f2"
+  },
+  {
+    "url": "https://naijoug.github.io/timeline/china-history/objects/provisional-senate/",
+    "ok": true,
+    "bytes": 16306,
+    "missing": [],
+    "sha256": "3072be003067fb139b4ff9521e506e33feda21535b5e9fb45db9ff62b6e8573d"
+  },
+  {
+    "url": "https://arxiv.org/abs/1810.04805v1",
+    "ok": true,
+    "bytes": 42148,
+    "missing": [],
+    "sha256": "3bcf2e9a3a8d612183a1b03b9a8e73eff68a91fabe066e80bc21d78c46b5da92"
+  },
+  {
+    "url": "https://www.1911museum.cn/view_59.html",
+    "ok": true,
+    "bytes": 33568,
+    "missing": [],
+    "sha256": "e0b2698c6ae528ba8c83c0741aa668afcd2d254dcb4415854a028351048f9b67"
+  },
+  {
+    "url": "https://history.state.gov/historicaldocuments/frus1912/ch11",
+    "ok": true,
+    "bytes": 97411,
+    "missing": [],
+    "sha256": "859ef25bfe6532102dd218a2c7bfd176960202e0db411c1e2b56f1cfb7ccefaa"
+  },
+  {
+    "url": "https://sunology.yatsen.gov.tw/detail/74f4fd127b7dd1fac4fb3d2dfa0808aa/",
+    "ok": false,
+    "bytes": 0,
+    "missing": [],
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "http_status": 403,
+    "note": "第三方站点拒绝此 HTTP 客户端；此前 Mac Chrome 已读核原文"
+  }
+]

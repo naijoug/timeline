@@ -1,0 +1,186 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- complementary "主题导航":
+  - link "timeline 首页":
+    - /url: /
+    - text: timeline
+  - button "收拢侧栏" [expanded]:
+  - generic: 主题库
+  - textbox "查找主题":
+    - /placeholder: 查找主题…
+  - navigation "所有主题":
+    - link "所有主题":
+      - /url: /
+      - generic: 所有主题
+    - link "AI 发展史":
+      - /url: /ai/
+      - generic: AI 发展史
+    - link "中国历史":
+      - /url: /china-history/
+      - generic: 中国历史
+  - paragraph: 更多主题持续收录
+  - link "浏览主题":
+    - /url: /
+    - text: 浏览主题
+  - button "当前外观：跟随系统；点击切换为浅色":
+  - link "关于 timeline":
+    - /url: /about/
+    - generic: 关于 timeline
+  - generic "简体中文":
+    - generic: 简体中文
+- banner:
+  - link "AI 发展史":
+    - /url: /ai/
+  - generic: 从图灵到生成式 AI
+  - search:
+    - textbox "搜索事件、对象或关键词":
+      - /placeholder: 搜索当前主题…
+    - generic: ⌘ K
+- main:
+  - link "返回时间线":
+    - /url: /ai/
+    - text: 返回时间线
+  - article:
+    - generic: AI 发展史
+    - generic: 研究发布
+    - time: 2022 年 9 月 21 日
+    - text: 关键节点
+    - heading "Whisper：开放多语言语音识别研究" [level=1]
+    - paragraph: OpenAI 发布基于大规模弱监督数据训练的语音识别模型，并开放模型与推理代码。
+    - heading "为什么重要" [level=2]
+    - paragraph: 编辑解读：跨数据分布的稳健性与多任务接口成为语音模型的重要考察维度。
+    - generic: 编辑概述；具体事实见下文及其来源。
+    - heading "研究开放阶段" [level=2]
+    - paragraph:
+      - text: 2022 年 9 月 21 日官方公告介绍约 68 万小时多语言、多任务监督数据，并开放模型与推理代码。这里记录研究发布；论文首版提交于 12 月 6 日。
+      - link "来源1：Introducing Whisper；公告页首日期、训练数据、开源说明；论文 Submission history":
+        - /url: https://openai.com/index/whisper/
+        - text: "1"
+      - link "来源2：Robust Speech Recognition via Large-Scale Weak Supervision；公告页首日期、训练数据、开源说明；论文 Submission history":
+        - /url: https://arxiv.org/abs/2212.04356v1
+        - text: "2"
+      - generic: 原文定位：公告页首日期、训练数据、开源说明；论文 Submission history
+    - heading "统一任务接口" [level=2]
+    - paragraph:
+      - text: 编码器—解码器 Transformer 处理音频特征，并用特殊 token 表达任务。任务包括多语言转录和翻译到英语；训练使用 30 秒音频片段，长音频需要分段解码。
+      - link "来源2：Robust Speech Recognition via Large-Scale Weak Supervision；§2.1–2.3、§3.8":
+        - /url: https://arxiv.org/abs/2212.04356v1
+        - text: "2"
+      - generic: 原文定位：§2.1–2.3、§3.8
+    - heading "评估边界" [level=2]
+    - paragraph:
+      - text: 作者讨论长音频的重复、漏词和幻觉转录，以及低资源语言的数据不足。零样本跨数据集评估不能证明所有语言或所有语音系统都被超越。
+      - link "来源2：Robust Speech Recognition via Large-Scale Weak Supervision；§6 Limitations and Future Work":
+        - /url: https://arxiv.org/abs/2212.04356v1
+        - text: "2"
+      - generic: 原文定位：§6 Limitations and Future Work
+    - generic: WHAT CHANGED
+    - heading "这一次，改变了什么？" [level=2]
+    - generic: 比较基线：面向单一语音数据集或专门任务训练的系统
+    - list:
+      - listitem: +探索大规模多语言监督下的零样本迁移
+      - listitem: +以序列接口组合语音识别与英语翻译等任务
+    - heading "代价与使用条件" [level=3]
+    - paragraph: 训练成本、低资源语言差异与长音频解码错误仍需评估。
+    - text: 证据类型：论文报告
+    - link "OpenAI":
+      - /url: https://openai.com/index/whisper/
+      - text: OpenAI
+    - link "论文作者 · arXiv":
+      - /url: https://arxiv.org/abs/2212.04356v1
+      - text: 论文作者 · arXiv
+    - heading "阅读这段历史时" [level=2]
+    - paragraph: 不同语言与场景表现不同；长音频可能重复、漏词或输出与音频无关的转录。
+    - heading "回到原始资料" [level=2]
+    - generic: 4 份来源
+    - link "01 Introducing Whisper OpenAI · 官方网页原文 · English · 核查于 2026-10-09 版本：2022-09-21 研究发布页（现页面含后加提示） 定位：页首日期、训练数据、架构、评估和开源说明":
+      - /url: https://openai.com/index/whisper/
+      - generic: "01"
+      - strong: Introducing Whisper
+      - generic: OpenAI · 官方网页原文 · English · 核查于 2026-10-09
+      - generic: 版本：2022-09-21 研究发布页（现页面含后加提示）
+      - generic: 定位：页首日期、训练数据、架构、评估和开源说明
+    - link "02 Robust Speech Recognition via Large-Scale Weak Supervision 论文作者 · arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：§2.1–2.3、§3.8、§6；Submission history":
+      - /url: https://arxiv.org/abs/2212.04356v1
+      - generic: "02"
+      - strong: Robust Speech Recognition via Large-Scale Weak Supervision
+      - generic: 论文作者 · arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：§2.1–2.3、§3.8、§6；Submission history
+    - link "03 Attention Is All You Need arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：§3 Model Architecture、§5–6；Submission history":
+      - /url: https://arxiv.org/abs/1706.03762v1
+      - generic: "03"
+      - strong: Attention Is All You Need
+      - generic: arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：§3 Model Architecture、§5–6；Submission history
+    - link "04 Improving Language Understanding by Generative Pre-Training Alec Radford 等 · OpenAI · 原始论文 PDF · English · 核查于 2026-10-09 版本：2018 官方发布 PDF 定位：§3 Framework、§4.1 Model specifications":
+      - /url: https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf
+      - generic: "04"
+      - strong: Improving Language Understanding by Generative Pre-Training
+      - generic: Alec Radford 等 · OpenAI · 原始论文 PDF · English · 核查于 2026-10-09
+      - generic: 版本：2018 官方发布 PDF
+      - generic: 定位：§3 Framework、§4.1 Model specifications
+    - paragraph: 事实与日期依据上述资料，各份资料的核查日期分别标记；“为什么重要”为编辑概述。
+    - region "有据关系":
+      - heading "有据关系" [level=2]
+      - paragraph: 每条关系单独核对原文；时间相邻不等于继承或因果。
+      - list:
+        - link "Whisper：开放多语言语音识别研究":
+          - /url: /ai/events/whisper-release/
+        - text: · 采用编码器—解码器 Transformer ·
+        - link "Attention Is All You Need":
+          - /url: /ai/events/transformer/
+        - text: 依据：
+        - link "Robust Speech Recognition via Large-Scale Weak Supervision":
+          - /url: https://arxiv.org/abs/2212.04356v1
+        - text: · §2.2 Model
+    - heading "沿着这条线索继续" [level=2]
+    - link "2022 ChatGPT 向公众开放 阅读":
+      - /url: /ai/events/chatgpt/
+      - generic: "2022"
+      - strong: ChatGPT 向公众开放
+      - generic: 阅读
+    - link "2022 用人类反馈训练指令模型 阅读":
+      - /url: /ai/events/instructgpt/
+      - generic: "2022"
+      - strong: 用人类反馈训练指令模型
+      - generic: 阅读
+    - link "2021 CLIP：连接文本与图像 阅读":
+      - /url: /ai/events/clip-release/
+      - generic: "2021"
+      - strong: CLIP：连接文本与图像
+      - generic: 阅读
+    - complementary:
+      - generic: 相关对象与时期
+      - link "模型家族 Whisper":
+        - /url: /ai/models/whisper/
+        - generic: 模型家族
+        - strong: Whisper
+      - link "技术与方法 Transformer":
+        - /url: /ai/concepts/transformer/
+        - generic: 技术与方法
+        - strong: Transformer
+      - link "研究机构 OpenAI":
+        - /url: /ai/organizations/openai-research/
+        - generic: 研究机构
+        - strong: OpenAI
+      - link "精选专题 从视觉学习到协作系统":
+        - /url: /ai/collections/learning-to-systems/
+        - generic: 精选专题
+        - strong: 从视觉学习到协作系统
+      - generic: 事件档案
+      - term: 时间精度
+      - definition: 日期
+      - term: 机构
+      - definition: OpenAI
+      - term: 类别
+      - definition: 语音识别 / 多语言 / 开放模型
+      - button "复制事件链接":
+        - generic: 复制事件链接
+      - paragraph
+- contentinfo:
+  - strong: timeline
+  - text: 理解过去 · 看见可能的未来
+  - link "收录原则与资料来源":
+    - /url: /about/

@@ -7,6 +7,7 @@ import { entities, entityMap, entityHref, eventHref } from "./entities";
 import { sources, sourceMap } from "./sources";
 import { aiEventDetails } from "./narrative";
 import { instructionCollection, instructionRelations } from './instruction-following';
+import { historicalCollection, historicalRelations } from './historical-milestones';
 
 export function toCoreEvent(e: AIEvent): TimelineEvent {
   const entityList = e.entityIds.map(id => entities.find(entity => entity.id === id)).filter(entity => !!entity);
@@ -53,8 +54,8 @@ export const aiCatalog: Catalog = {
   entities,
   sources,
   periods: [],
-  collections: [instructionCollection],
-  relations: instructionRelations,
+  collections: [instructionCollection, historicalCollection],
+  relations: [...instructionRelations, ...historicalRelations],
 };
 /** The AI reading presentation retains its model comparison and entity links. */
 export const aiAtlasData = {

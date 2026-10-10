@@ -1,0 +1,270 @@
+- link "Skip to main content":
+  - /url: "#content"
+- banner:
+  - link:
+    - /url: https://arxiv.org/IgnoreMe
+  - link "archive home":
+    - /url: https://arxiv.org/
+    - img "archive"
+  - navigation "Main navigation":
+    - link "Search":
+      - /url: https://arxiv.org/search
+      - text: Search
+    - link "Submit":
+      - /url: https://arxiv.org/user/create
+    - link "Donate":
+      - /url: https://info.arxiv.org/about/donate.html
+    - link "Log in":
+      - /url: https://arxiv.org/login
+- main:
+  - heading "Computer Science > Computer Vision and Pattern Recognition" [level=1]
+  - generic: "[Submitted on 26 Feb 2021]"
+  - heading "Learning Transferable Visual Models From Natural Language Supervision" [level=1]
+  - link "Alec Radford":
+    - /url: https://arxiv.org/search/cs?searchtype=author&query=Radford,+A
+  - text: ","
+  - link "Jong Wook Kim":
+    - /url: https://arxiv.org/search/cs?searchtype=author&query=Kim,+J+W
+  - text: ","
+  - link "Chris Hallacy":
+    - /url: https://arxiv.org/search/cs?searchtype=author&query=Hallacy,+C
+  - text: ","
+  - link "Aditya Ramesh":
+    - /url: https://arxiv.org/search/cs?searchtype=author&query=Ramesh,+A
+  - text: ","
+  - link "Gabriel Goh":
+    - /url: https://arxiv.org/search/cs?searchtype=author&query=Goh,+G
+  - text: ","
+  - link "Sandhini Agarwal":
+    - /url: https://arxiv.org/search/cs?searchtype=author&query=Agarwal,+S
+  - text: ","
+  - link "Girish Sastry":
+    - /url: https://arxiv.org/search/cs?searchtype=author&query=Sastry,+G
+  - text: ","
+  - link "Amanda Askell":
+    - /url: https://arxiv.org/search/cs?searchtype=author&query=Askell,+A
+  - text: ","
+  - link "Pamela Mishkin":
+    - /url: https://arxiv.org/search/cs?searchtype=author&query=Mishkin,+P
+  - text: ","
+  - link "Jack Clark":
+    - /url: https://arxiv.org/search/cs?searchtype=author&query=Clark,+J
+  - text: ","
+  - link "Gretchen Krueger":
+    - /url: https://arxiv.org/search/cs?searchtype=author&query=Krueger,+G
+  - text: ","
+  - link "Ilya Sutskever":
+    - /url: https://arxiv.org/search/cs?searchtype=author&query=Sutskever,+I
+  - blockquote:
+    - text: State-of-the-art computer vision systems are trained to predict a fixed set of predetermined object categories. This restricted form of supervision limits their generality and usability since additional labeled data is needed to specify any other visual concept. Learning directly from raw text about images is a promising alternative which leverages a much broader source of supervision. We demonstrate that the simple pre-training task of predicting which caption goes with which image is an efficient and scalable way to learn SOTA image representations from scratch on a dataset of 400 million (image, text) pairs collected from the internet. After pre-training, natural language is used to reference learned visual concepts (or describe new ones) enabling zero-shot transfer of the model to downstream tasks. We study the performance of this approach by benchmarking on over 30 different existing computer vision datasets, spanning tasks such as OCR, action recognition in videos, geo-localization, and many types of fine-grained object classification. The model transfers non-trivially to most tasks and is often competitive with a fully supervised baseline without the need for any dataset specific training. For instance, we match the accuracy of the original ResNet-50 on ImageNet zero-shot without needing to use any of the 1.28 million training examples it was trained on. We release our code and pre-trained model weights at
+    - link "this https URL":
+      - /url: https://github.com/OpenAI/CLIP
+    - text: .
+  - table "Additional metadata":
+    - rowgroup:
+      - 'row "Subjects: Computer Vision and Pattern Recognition (cs.CV); Machine Learning (cs.LG)"':
+        - cell "Subjects:"
+        - cell "Computer Vision and Pattern Recognition (cs.CV); Machine Learning (cs.LG)"
+      - 'row "Cite as: arXiv:2103.00020 [cs.CV]"':
+        - cell "Cite as:"
+        - cell "arXiv:2103.00020 [cs.CV]":
+          - link "arXiv:2103.00020":
+            - /url: https://arxiv.org/abs/2103.00020
+          - text: "[cs.CV]"
+      - row "(or arXiv:2103.00020v1 [cs.CV] for this version)":
+        - cell
+        - cell "(or arXiv:2103.00020v1 [cs.CV] for this version)":
+          - text: (or
+          - link "arXiv:2103.00020v1":
+            - /url: https://arxiv.org/abs/2103.00020v1
+          - text: "[cs.CV]"
+          - text: for this version)
+      - row "https://doi.org/10.48550/arXiv.2103.00020 Focus to learn more":
+        - cell
+        - cell "https://doi.org/10.48550/arXiv.2103.00020 Focus to learn more":
+          - link "https://doi.org/10.48550/arXiv.2103.00020":
+            - /url: https://doi.org/10.48550/arXiv.2103.00020
+          - button "Focus to learn more":
+            - generic: Focus to learn more
+  - heading "Submission history" [level=2]
+  - text: "From: Jong Wook Kim ["
+  - link "view email":
+    - /url: /show-email/6c157f7d/2103.00020
+  - text: "]"
+  - strong: "[v1]"
+  - text: Fri, 26 Feb 2021 19:04:58 UTC (6,174 KB)
+  - heading "Access Paper:" [level=2]
+  - list:
+    - link "View PDF":
+      - /url: /pdf/2103.00020v1
+    - button "AI 阅读":
+      - generic: AI 阅读
+    - link "HTML (experimental)":
+      - /url: https://arxiv.org/html/2103.00020v1
+    - link "TeX Source":
+      - /url: /src/2103.00020v1
+  - link "view license":
+    - /url: http://arxiv.org/licenses/nonexclusive-distrib/1.0/
+  - heading "Current browse context:" [level=3]
+  - generic: cs.CV
+  - link "< prev":
+    - /url: /prevnext?id=2103.00020&function=prev&context=cs.CV
+  - text: "|"
+  - link "next >":
+    - /url: /prevnext?id=2103.00020&function=next&context=cs.CV
+  - link "new":
+    - /url: /list/cs.CV/new
+  - text: "|"
+  - link "recent":
+    - /url: /list/cs.CV/recent
+  - text: "|"
+  - link "2021-03":
+    - /url: /list/cs.CV/2021-03
+  - text: "Change to browse by:"
+  - link "cs":
+    - /url: /abs/2103.00020?context=cs
+  - link "cs.LG":
+    - /url: /abs/2103.00020?context=cs.LG
+  - heading "References & Citations" [level=3]
+  - list:
+    - link "NASA ADS":
+      - /url: https://ui.adsabs.harvard.edu/abs/arXiv:2103.00020
+    - link "Google Scholar":
+      - /url: https://scholar.google.com/scholar_lookup?arxiv_id=2103.00020
+    - link "Semantic Scholar":
+      - /url: https://api.semanticscholar.org/arXiv:2103.00020
+  - heading "16 blog links" [level=3]:
+    - link "16 blog links":
+      - /url: /tb/2103.00020
+  - text: (
+  - link "what is this?":
+    - /url: https://info.arxiv.org/help/trackback.html
+  - text: )
+  - heading "DBLP - CS Bibliography" [level=3]:
+    - link "DBLP":
+      - /url: https://dblp.uni-trier.de
+    - text: "- CS Bibliography"
+  - link "listing":
+    - /url: https://dblp.uni-trier.de/db/journals/corr/corr2103.html#abs-2103-00020
+  - text: "|"
+  - link "bibtex":
+    - /url: https://dblp.uni-trier.de/rec/bibtex/journals/corr/abs-2103-00020
+  - link "Alec Radford":
+    - /url: https://dblp.uni-trier.de/search/author?author=Alec%20Radford
+  - link "Jong Wook Kim":
+    - /url: https://dblp.uni-trier.de/search/author?author=Jong%20Wook%20Kim
+  - link "Aditya Ramesh":
+    - /url: https://dblp.uni-trier.de/search/author?author=Aditya%20Ramesh
+  - link "Gabriel Goh":
+    - /url: https://dblp.uni-trier.de/search/author?author=Gabriel%20Goh
+  - link "Girish Sastry":
+    - /url: https://dblp.uni-trier.de/search/author?author=Girish%20Sastry
+  - generic: …
+  - button "export BibTeX citation"
+  - heading "Bookmark" [level=3]
+  - link "BibSonomy":
+    - /url: http://www.bibsonomy.org/BibtexHandler?requTask=upload&url=https://arxiv.org/abs/2103.00020&description=Learning Transferable Visual Models From Natural Language Supervision
+    - img "BibSonomy"
+  - link "Reddit":
+    - /url: https://reddit.com/submit?url=https://arxiv.org/abs/2103.00020&title=Learning Transferable Visual Models From Natural Language Supervision
+    - img "Reddit"
+  - tablist "arXivLabs tools":
+    - radio "Bibliographic Tools" [checked]
+    - tab "Bibliographic Tools" [selected]
+    - tabpanel "Bibliographic Tools":
+      - heading "Bibliographic and Citation Tools" [level=1]
+      - checkbox "Bibliographic Explorer Toggle"
+      - generic: Bibliographic Explorer Toggle
+      - text: Bibliographic Explorer
+      - emphasis:
+        - text: (
+        - link "What is the Explorer?":
+          - /url: https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer
+        - text: )
+      - checkbox "Connected Papers"
+      - generic: Connected Papers Toggle
+      - text: Connected Papers
+      - emphasis:
+        - text: (
+        - link "What is Connected Papers?":
+          - /url: https://www.connectedpapers.com/about
+        - text: )
+      - checkbox "Litmaps"
+      - generic: Litmaps Toggle
+      - text: Litmaps
+      - emphasis:
+        - text: (
+        - link "What is Litmaps?":
+          - /url: https://www.litmaps.co/
+        - text: )
+      - checkbox "scite Smart Citations"
+      - generic: scite.ai Toggle
+      - text: scite Smart Citations
+      - emphasis:
+        - text: (
+        - link "What are Smart Citations?":
+          - /url: https://www.scite.ai/
+        - text: )
+    - radio "Code, Data, Media"
+    - tab "Code, Data, Media"
+    - radio "Demos"
+    - tab "Demos"
+    - radio "Related Papers"
+    - tab "Related Papers"
+    - radio "About arXivLabs"
+    - tab "About arXivLabs"
+  - link "Which authors of this paper are endorsers?":
+    - /url: /auth/show-endorsers/2103.00020
+  - text: "|"
+  - link "Disable MathJax":
+    - /url: javascript:setMathjaxCookie()
+  - text: (
+  - link "What is MathJax?":
+    - /url: https://info.arxiv.org/help/mathjax.html
+  - text: )
+- contentinfo:
+  - text: We gratefully acknowledge support from our
+  - strong: major funders
+  - text: ","
+  - link "member institutions":
+    - /url: https://info.arxiv.org/about/ourmembers.html
+    - strong: member institutions
+  - text: ", and all contributors."
+  - navigation "Site navigation":
+    - link "About":
+      - /url: https://info.arxiv.org/about
+    - generic: ·
+    - link "Help":
+      - /url: https://info.arxiv.org/help
+    - generic: ·
+    - link "Contact":
+      - /url: https://info.arxiv.org/help/contact.html
+    - generic: ·
+    - link "Subscribe":
+      - /url: https://info.arxiv.org/help/subscribe
+    - generic: ·
+    - link "Copyright":
+      - /url: https://info.arxiv.org/help/license/index.html
+    - generic: ·
+    - link "Privacy":
+      - /url: https://info.arxiv.org/help/policies/privacy_policy.html
+    - generic: ·
+    - link "Accessibility":
+      - /url: https://info.arxiv.org/help/web_accessibility.html
+    - generic: ·
+    - link "Operational Status (opens in new tab)":
+      - /url: https://status.arxiv.org
+      - text: Operational Status
+      - generic: (opens in new tab)
+  - generic "Major funders":
+    - generic: Major funding support from
+    - link "Simons Foundation":
+      - /url: https://www.simonsfoundation.org/
+      - img "Simons Foundation"
+    - link "Simons Foundation International":
+      - /url: https://www.sfi.org.bm/
+      - img "Simons Foundation International"
+    - link "Schmidt Sciences":
+      - /url: https://www.schmidtsciences.org/
+      - img "Schmidt Sciences"
+- generic "flow-ai-assistant"

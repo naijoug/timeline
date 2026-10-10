@@ -4,10 +4,13 @@ import { entities } from '../src/topics/ai/entities';
 import { sources } from '../src/topics/ai/sources';
 import { eventLane, isKeyEvent, chinaCompanies } from '../src/topics/ai/config';
 import { releaseEvents, releaseResearchDate } from '../src/topics/ai/releases';
+import { instructionEvents } from '../src/topics/ai/instruction-following';
+import { historicalEvents } from '../src/topics/ai/historical-milestones';
+const latestCheckedAt = sources.map(s=>s.checkedAt).sort().at(-1);
 
-const rows = ['# AI 时间线覆盖报告', '', `本轮研究核查日期：${releaseResearchDate}。运行 \`npm run report:ai\` 从实际数据重新生成本报告。`, '',
+const rows = ['# AI 时间线覆盖报告', '', `来源最近核查日期：${latestCheckedAt}；版本发布批次核查日期：${releaseResearchDate}。各来源保留各自核查日期。运行 \`npm run report:ai\` 从实际数据重新生成本报告。`, '',
   '## 收录范围', '',
-  `当前共 ${events.length} 个事件、${entities.length} 个对象、${sources.length} 份来源；本轮新增 ${releaseEvents.length} 条，并把已存在的 BERT、GPT-3 论文归入模型主轨道，保留原事件 ID。`, '',
+  `当前工作区共 ${events.length} 个事件、${entities.length} 个对象、${sources.length} 份来源；版本发布批次新增 ${releaseEvents.length} 条，指令专题新增 ${instructionEvents.length} 条，视觉学习到协作系统专题新增 ${historicalEvents.length} 条。两个专题分别复用并完善 11、7 个既有节点，保留原事件 ID。第二个专题目前仅供本机预览。`, '',
   '| 主线 | 全部已收录 | 关键节点 | 中国团队筛选 |', '| --- | ---: | ---: | ---: |'];
 for (const [lane, title] of [['methods', 'AI 技术突破'], ['models', '模型演进'], ['products', 'Agent 应用']]) {
   const list = events.filter(e => eventLane(e) === lane);
@@ -26,9 +29,9 @@ rows.push('', '“当前显示”受时间窗口、关键词、地区、主线�
   '- 同页发布模型与产品时保留两条事件、关联同次公告，共用一个来源；多个模型尺寸通常作为系列事件，不靠拆尺寸凑数量。', '',
   '## 尚未穷尽的范围', '',
   '本轮重点补齐语言、推理、编码模型及 Agent 的公开演进，增加视觉、图像和视频生成代表路线。全球覆盖包括中国、美国、欧洲、加拿大、阿联酋、日本和韩国团队；这不等于覆盖每家公司、每个地区或每个快照。', '',
-  '- 文心、混元、盘古、Step、日日新、Falcon 等仍以代表节点为主；微软 Phi、IBM Granite、更多地区语言模型及垂直模型值得下一批系统研究。',
+  '- 文心、混元、盘古、Step、日日新、Falcon 等仍以代表节点为主；Phi 当前仅补充 phi-1，后续 Phi、IBM Granite、更多地区语言模型及垂直模型仍待系统研究。',
   '- 视觉、音频、视频、具身与世界模型当前只收录部分代表事件，尚未形成各系列的完整版本链。',
-  '- Agent 框架如 AutoGen、LangGraph、CrewAI 应按方法/开发框架单独整理，不直接当作面向用户的应用来增加数量。',
+  '- AutoGen 已按开发框架归入技术与方法；LangGraph、CrewAI 等仍待补充，不直接当作面向用户的应用来增加数量。',
   '- Manus 最初邀请测试的精确一手发布时间、本轮未核实的产品小版本暂不补猜。已有多个后续重要升级可追踪。',
   '- 资料截至本次核查；外链可能跳转或改写。OpenAI 部分公告拒绝普通 HTTP 抓取，采用可读取的官方网页索引交叉核对；结构测试不等于实时外链全部可访问。', '',
   '## 按对象的覆盖', '', '| 对象 | 团队 | 主轨事件数 | 最早已收录 | 最近已收录 |', '| --- | --- | ---: | --- | --- |');

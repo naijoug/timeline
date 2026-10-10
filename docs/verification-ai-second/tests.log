@@ -1,0 +1,302 @@
+
+> timeline@0.1.0 test
+> node --import tsx --test tests/*.test.ts
+
+TAP version 13
+# Subtest: version baselines point backwards within a shared model family
+ok 1 - version baselines point backwards within a shared model family
+  ---
+  duration_ms: 0.498375
+  type: 'test'
+  ...
+# Subtest: release dates retain the distinction between snapshot, paper, announcement and availability
+ok 2 - release dates retain the distinction between snapshot, paper, announcement and availability
+  ---
+  duration_ms: 0.103958
+  type: 'test'
+  ...
+# Subtest: full history and dense clusters expose every newly researched model and agent
+ok 3 - full history and dense clusters expose every newly researched model and agent
+  ---
+  duration_ms: 12.941542
+  type: 'test'
+  ...
+# Subtest: model and application releases share evidence without duplicating source pages
+ok 4 - model and application releases share evidence without duplicating source pages
+  ---
+  duration_ms: 0.644083
+  type: 'test'
+  ...
+# Subtest: appearance preferences resolve explicit modes independently of the system
+ok 5 - appearance preferences resolve explicit modes independently of the system
+  ---
+  duration_ms: 0.327167
+  type: 'test'
+  ...
+# Subtest: the actual pre-paint script restores saved dark mode and tolerates blocked storage
+ok 6 - the actual pre-paint script restores saved dark mode and tolerates blocked storage
+  ---
+  duration_ms: 2.224334
+  type: 'test'
+  ...
+# Subtest: automatic changes, manual overrides, cross-tab changes and cleanup work together
+ok 7 - automatic changes, manual overrides, cross-tab changes and cleanup work together
+  ---
+  duration_ms: 1.673
+  type: 'test'
+  ...
+# Subtest: paper palettes stay achromatic and body text meets contrast in both modes
+ok 8 - paper palettes stay achromatic and body text meets contrast in both modes
+  ---
+  duration_ms: 1.674708
+  type: 'test'
+  ...
+# Subtest: atlas share URL restores range, region, topic, density, and selection
+ok 9 - atlas share URL restores range, region, topic, density, and selection
+  ---
+  duration_ms: 0.791292
+  type: 'test'
+  ...
+# Subtest: untrusted ranges are bounded and reversed years normalized
+ok 10 - untrusted ranges are bounded and reversed years normalized
+  ---
+  duration_ms: 0.086667
+  type: 'test'
+  ...
+# Subtest: model releases, methods, and early AI systems are not misclassified as agents
+ok 11 - model releases, methods, and early AI systems are not misclassified as agents
+  ---
+  duration_ms: 0.129667
+  type: 'test'
+  ...
+# Subtest: China filter includes model and application milestones without inferring unknown affiliations
+ok 12 - China filter includes model and application milestones without inferring unknown affiliations
+  ---
+  duration_ms: 7.608291
+  type: 'test'
+  ...
+# Subtest: clustering preserves every event and avoids overlapping labels at all target widths
+ok 13 - clustering preserves every event and avoids overlapping labels at all target widths
+  ---
+  duration_ms: 3.235208
+  type: 'test'
+  ...
+# Subtest: partial dates use interval midpoints; precise dates stay chronological
+ok 14 - partial dates use interval midpoints; precise dates stay chronological
+  ---
+  duration_ms: 0.056417
+  type: 'test'
+  ...
+# Subtest: year ticks stay legible when zooming out on a narrow screen
+ok 15 - year ticks stay legible when zooming out on a narrow screen
+  ---
+  duration_ms: 0.169083
+  type: 'test'
+  ...
+# Subtest: instruction collection reuses unique records and preserves publication stages
+ok 16 - instruction collection reuses unique records and preserves publication stages
+  ---
+  duration_ms: 0.736334
+  type: 'test'
+  ...
+# Subtest: relations encode evidence and distinguish experiments from adoption
+ok 17 - relations encode evidence and distinguish experiments from adoption
+  ---
+  duration_ms: 0.126459
+  type: 'test'
+  ...
+# Subtest: nested citations, source review dates and relationship endpoints are guarded
+ok 18 - nested citations, source review dates and relationship endpoints are guarded
+  ---
+  duration_ms: 7.42525
+  type: 'test'
+  ...
+# Subtest: historical pack keeps publication phases and cited details discoverable
+ok 19 - historical pack keeps publication phases and cited details discoverable
+  ---
+  duration_ms: 0.359833
+  type: 'test'
+  ...
+# Subtest: component relations retain direction and make paper evidence available
+ok 20 - component relations retain direction and make paper evidence available
+  ---
+  duration_ms: 0.201
+  type: 'test'
+  ...
+# Subtest: BCE and CE form a continuous axis without a civil year zero
+ok 21 - BCE and CE form a continuous axis without a civil year zero
+  ---
+  duration_ms: 0.658
+  type: 'test'
+  ...
+# Subtest: partial dates preserve precision and early CE leap years avoid JS Date 1900 offset
+ok 22 - partial dates preserve precision and early CE leap years avoid JS Date 1900 offset
+  ---
+  duration_ms: 1.067291
+  type: 'test'
+  ...
+# Subtest: duration is visible when only its middle overlaps the viewport
+ok 23 - duration is visible when only its middle overlaps the viewport
+  ---
+  duration_ms: 0.674208
+  type: 'test'
+  ...
+# Subtest: period membership differs from coincidence and shared events are not duplicated
+ok 24 - period membership differs from coincidence and shared events are not duplicated
+  ---
+  duration_ms: 0.236792
+  type: 'test'
+  ...
+# Subtest: views round-trip BCE years, expansion, filters and selected events
+ok 25 - views round-trip BCE years, expansion, filters and selected events
+  ---
+  duration_ms: 3.319
+  type: 'test'
+  ...
+# Subtest: millennia-scale ticks and small screens remain finite and clustering keeps every event
+ok 26 - millennia-scale ticks and small screens remain finite and clustering keeps every event
+  ---
+  duration_ms: 0.928416
+  type: 'test'
+  ...
+# Subtest: concurrent regimes occupy separate rows while same-year succession can share the main line
+ok 27 - concurrent regimes occupy separate rows while same-year succession can share the main line
+  ---
+  duration_ms: 0.175375
+  type: 'test'
+  ...
+# Subtest: both catalogs validate; broken references, cycles and reversed dates fail
+ok 28 - both catalogs validate; broken references, cycles and reversed dates fail
+  ---
+  duration_ms: 2.729167
+  type: 'test'
+  ...
+# Subtest: shared history view selects a real node, but preserves an explicitly closed reader
+ok 29 - shared history view selects a real node, but preserves an explicitly closed reader
+  ---
+  duration_ms: 1.530875
+  type: 'test'
+  ...
+# Subtest: history BCE windows and selected periods survive shared view URLs without year zero
+ok 30 - history BCE windows and selected periods survive shared view URLs without year zero
+  ---
+  duration_ms: 0.858542
+  type: 'test'
+  ...
+# Subtest: shared explorer retains duration events when a window overlaps only their middle
+ok 31 - shared explorer retains duration events when a window overlaps only their middle
+  ---
+  duration_ms: 0.213
+  type: 'test'
+  ...
+# Subtest: AI legacy links and regional filters retain their behavior in the shared explorer
+ok 32 - AI legacy links and regional filters retain their behavior in the shared explorer
+  ---
+  duration_ms: 1.427375
+  type: 'test'
+  ...
+# Subtest: AI events expose structured facts and source-backed change evidence in the shared reader
+ok 33 - AI events expose structured facts and source-backed change evidence in the shared reader
+  ---
+  duration_ms: 1.510875
+  type: 'test'
+  ...
+# Subtest: AI reading uses curated sections when supplied and retains fallback verification guidance
+ok 34 - AI reading uses curated sections when supplied and retains fallback verification guidance
+  ---
+  duration_ms: 1.324083
+  type: 'test'
+  ...
+# Subtest: root hosting preserves local paths
+ok 35 - root hosting preserves local paths
+  ---
+  duration_ms: 0.59975
+  type: 'test'
+  ...
+# Subtest: project hosting prefixes assets, pages and query links exactly once
+ok 36 - project hosting prefixes assets, pages and query links exactly once
+  ---
+  duration_ms: 0.103
+  type: 'test'
+  ...
+# Subtest: external sources and hash anchors are not prefixed
+ok 37 - external sources and hash anchors are not prefixed
+  ---
+  duration_ms: 0.053875
+  type: 'test'
+  ...
+# Subtest: entire content graph has valid dates, evidence, and references
+ok 38 - entire content graph has valid dates, evidence, and references
+  ---
+  duration_ms: 1.613791
+  type: 'test'
+  ...
+# Subtest: validator rejects nonexistent evidence and impossible dates
+ok 39 - validator rejects nonexistent evidence and impossible dates
+  ---
+  duration_ms: 0.287958
+  type: 'test'
+  ...
+# Subtest: date precision is preserved without fabricated days
+ok 40 - date precision is preserved without fabricated days
+  ---
+  duration_ms: 0.076875
+  type: 'test'
+  ...
+# Subtest: shareable query restores combined state and strips invalid years
+ok 41 - shareable query restores combined state and strips invalid years
+  ---
+  duration_ms: 0.297667
+  type: 'test'
+  ...
+# Subtest: filters combine track, date range, company, and entity
+ok 42 - filters combine track, date range, company, and entity
+  ---
+  duration_ms: 6.344125
+  type: 'test'
+  ...
+# Subtest: search handles English case, entity names, and empty results
+ok 43 - search handles English case, entity names, and empty results
+  ---
+  duration_ms: 0.499125
+  type: 'test'
+  ...
+# Subtest: reversed date range is empty and sort reverses consistently
+ok 44 - reversed date range is empty and sort reverses consistently
+  ---
+  duration_ms: 0.292583
+  type: 'test'
+  ...
+# Subtest: same announcement retains separate product and model events
+ok 45 - same announcement retains separate product and model events
+  ---
+  duration_ms: 0.068917
+  type: 'test'
+  ...
+# Subtest: Xinhai records are unique, cited and discoverable across the transition
+ok 46 - Xinhai records are unique, cited and discoverable across the transition
+  ---
+  duration_ms: 2.609125
+  type: 'test'
+  ...
+# Subtest: election, inauguration, negotiations and constitutional stages keep distinct dates
+ok 47 - election, inauguration, negotiations and constitutional stages keep distinct dates
+  ---
+  duration_ms: 0.284083
+  type: 'test'
+  ...
+# Subtest: incoming event relationships retain the complete directed statement in both topics
+ok 48 - incoming event relationships retain the complete directed statement in both topics
+  ---
+  duration_ms: 0.20075
+  type: 'test'
+  ...
+1..48
+# tests 48
+# suites 0
+# pass 48
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 197.218459

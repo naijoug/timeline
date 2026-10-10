@@ -1,0 +1,143 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- complementary "主题导航":
+  - link "timeline 首页":
+    - /url: /
+    - text: timeline
+  - button "收拢侧栏" [expanded]:
+  - generic: 主题库
+  - textbox "查找主题":
+    - /placeholder: 查找主题…
+  - navigation "所有主题":
+    - link "所有主题":
+      - /url: /
+      - generic: 所有主题
+    - link "AI 发展史":
+      - /url: /ai/
+      - generic: AI 发展史
+    - link "中国历史":
+      - /url: /china-history/
+      - generic: 中国历史
+  - paragraph: 更多主题持续收录
+  - link "浏览主题":
+    - /url: /
+    - text: 浏览主题
+  - button "当前外观：跟随系统；点击切换为浅色":
+  - link "关于 timeline":
+    - /url: /about/
+    - generic: 关于 timeline
+  - generic "简体中文":
+    - generic: 简体中文
+- banner:
+  - link "AI 发展史":
+    - /url: /ai/
+  - generic: 从图灵到生成式 AI
+  - search:
+    - textbox "搜索事件、对象或关键词":
+      - /placeholder: 搜索当前主题…
+    - generic: ⌘ K
+- main:
+  - link "返回时间线":
+    - /url: /ai/
+    - text: 返回时间线
+  - article:
+    - generic: AI 发展史
+    - generic: 会议论文
+    - time: NIPS 2012 会议论文，年份精度
+    - text: 关键节点
+    - heading "深度学习的视觉转折点" [level=1]
+    - paragraph: ImageNet · AlexNet
+    - paragraph: AlexNet 相关论文展示深层卷积网络在图像分类中的表现。
+    - heading "为什么重要" [level=2]
+    - paragraph: 数据、GPU 和神经网络的组合成为新的研究动力。
+    - generic: 编辑概述；具体事实见下文及其来源。
+    - heading "网络与训练" [level=2]
+    - paragraph:
+      - text: 论文采用五层卷积层和三层全连接层，使用 ReLU，并将网络分布在两块 GPU 上训练。数据增广和 dropout 用于减轻过拟合。
+      - link "来源1：ImageNet Classification with Deep Convolutional Neural Networks；§3.1–3.2、§3.5、§4.1–4.2":
+        - /url: https://papers.nips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf
+        - text: "1"
+      - generic: 原文定位：§3.1–3.2、§3.5、§4.1–4.2
+    - heading "结果的口径" [level=2]
+    - paragraph:
+      - text: 论文分别报告 ILSVRC-2010 与 ILSVRC-2012 的实验，2012 竞赛成绩涉及多个网络的组合。这里保留会议年份；分类基准不能直接代表任意视觉任务。
+      - link "来源1：ImageNet Classification with Deep Convolutional Neural Networks；§6 Results、Table 1–2":
+        - /url: https://papers.nips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf
+        - text: "1"
+      - generic: 原文定位：§6 Results、Table 1–2
+    - heading "阅读这段历史时" [level=2]
+    - paragraph: 这里记录论文年份；图像分类表现不等同于通用视觉理解。
+    - heading "回到原始资料" [level=2]
+    - generic: 3 份来源
+    - link "01 ImageNet Classification with Deep Convolutional Neural Networks NeurIPS · 原始会议论文 PDF · English · 核查于 2026-10-09 版本：NIPS 2012 会议论文 定位：§3.1–3.2、§3.5、§4.1–4.2、§6；会议年份":
+      - /url: https://papers.nips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf
+      - generic: "01"
+      - strong: ImageNet Classification with Deep Convolutional Neural Networks
+      - generic: NeurIPS · 原始会议论文 PDF · English · 核查于 2026-10-09
+      - generic: 版本：NIPS 2012 会议论文
+      - generic: 定位：§3.1–3.2、§3.5、§4.1–4.2、§6；会议年份
+    - link "02 A logical calculus of the ideas immanent in nervous activity Springer · 原始论文 · English · 核查于 2026-09-29":
+      - /url: https://doi.org/10.1007/BF02478259
+      - generic: "02"
+      - strong: A logical calculus of the ideas immanent in nervous activity
+      - generic: Springer · 原始论文 · English · 核查于 2026-09-29
+    - link "03 Learning representations by back-propagating errors Nature · 原始论文 · English · 核查于 2026-09-29":
+      - /url: https://www.nature.com/articles/323533a0
+      - generic: "03"
+      - strong: Learning representations by back-propagating errors
+      - generic: Nature · 原始论文 · English · 核查于 2026-09-29
+    - paragraph: 事实与日期依据上述资料，各份资料的核查日期分别标记；“为什么重要”为编辑概述。
+    - region "有据关系":
+      - heading "有据关系" [level=2]
+      - paragraph: 每条关系单独核对原文；时间相邻不等于继承或因果。
+      - list:
+        - link "深度学习的视觉转折点":
+          - /url: /ai/events/alexnet/
+        - text: · 采用深层卷积神经网络 ·
+        - link "神经网络":
+          - /url: /ai/concepts/neural-networks/
+        - text: 依据：
+        - link "ImageNet Classification with Deep Convolutional Neural Networks":
+          - /url: https://papers.nips.cc/paper_files/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf
+        - text: · §3.5
+    - heading "沿着这条线索继续" [level=2]
+    - link "2013 把词语放进向量空间 阅读":
+      - /url: /ai/events/word2vec/
+      - generic: "2013"
+      - strong: 把词语放进向量空间
+      - generic: 阅读
+    - link "2013 VAE：学习生成数据的隐空间 阅读":
+      - /url: /ai/events/vae/
+      - generic: "2013"
+      - strong: VAE：学习生成数据的隐空间
+      - generic: 阅读
+    - link "2015 ResNet 让更深的网络更容易训练 阅读":
+      - /url: /ai/events/resnet/
+      - generic: "2015"
+      - strong: ResNet 让更深的网络更容易训练
+      - generic: 阅读
+    - complementary:
+      - generic: 相关对象与时期
+      - link "技术与方法 神经网络":
+        - /url: /ai/concepts/neural-networks/
+        - generic: 技术与方法
+        - strong: 神经网络
+      - link "精选专题 从视觉学习到协作系统":
+        - /url: /ai/collections/learning-to-systems/
+        - generic: 精选专题
+        - strong: 从视觉学习到协作系统
+      - generic: 事件档案
+      - term: 时间精度
+      - definition: NIPS 2012 会议论文，年份精度
+      - term: 机构
+      - definition: Alex Krizhevsky、Ilya Sutskever、Geoffrey Hinton
+      - term: 类别
+      - definition: 计算机视觉
+      - button "复制事件链接":
+        - generic: 复制事件链接
+      - paragraph
+- contentinfo:
+  - strong: timeline
+  - text: 理解过去 · 看见可能的未来
+  - link "收录原则与资料来源":
+    - /url: /about/

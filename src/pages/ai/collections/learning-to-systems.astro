@@ -1,0 +1,7 @@
+---
+import CollectionPage from '../../../components/timeline/CollectionPage.astro';
+import { aiCatalog } from '../../../topics/ai/adapter';
+import { historicalCollection } from '../../../topics/ai/historical-milestones';
+import { entityHref } from '../../../topics/ai/entities';
+---
+<CollectionPage catalog={aiCatalog} collection={historicalCollection} entityHref={entityHref} />

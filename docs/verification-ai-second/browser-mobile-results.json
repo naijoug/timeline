@@ -1,0 +1,123 @@
+[
+  {
+    "clientWidth": 360,
+    "height": 812,
+    "page": "/ai/collections/learning-to-systems/",
+    "scrollWidth": 360,
+    "width": 375
+  },
+  {
+    "clientWidth": 360,
+    "height": 812,
+    "page": "/ai/events/alexnet/",
+    "scrollWidth": 360,
+    "width": 375,
+    "heading": true,
+    "source": true
+  },
+  {
+    "clientWidth": 360,
+    "height": 812,
+    "page": "/ai/events/vae/",
+    "scrollWidth": 360,
+    "width": 375,
+    "heading": true,
+    "source": true
+  },
+  {
+    "clientWidth": 360,
+    "height": 812,
+    "page": "/ai/events/gan/",
+    "scrollWidth": 360,
+    "width": 375,
+    "heading": true,
+    "source": true
+  },
+  {
+    "clientWidth": 360,
+    "height": 812,
+    "page": "/ai/events/resnet/",
+    "scrollWidth": 360,
+    "width": 375,
+    "heading": true,
+    "source": true
+  },
+  {
+    "clientWidth": 360,
+    "height": 812,
+    "page": "/ai/events/rag-paper/",
+    "scrollWidth": 360,
+    "width": 375,
+    "heading": true,
+    "source": true
+  },
+  {
+    "clientWidth": 360,
+    "height": 812,
+    "page": "/ai/events/ddpm/",
+    "scrollWidth": 360,
+    "width": 375,
+    "heading": true,
+    "source": true
+  },
+  {
+    "clientWidth": 360,
+    "height": 812,
+    "page": "/ai/events/clip-release/",
+    "scrollWidth": 360,
+    "width": 375,
+    "heading": true,
+    "source": true
+  },
+  {
+    "clientWidth": 360,
+    "height": 812,
+    "page": "/ai/events/whisper-release/",
+    "scrollWidth": 360,
+    "width": 375,
+    "heading": true,
+    "source": true
+  },
+  {
+    "node": "phi-1-paper",
+    "url": "http://127.0.0.1:4328/ai/events/phi-1-paper/",
+    "sources": true,
+    "client": 360,
+    "height": 812,
+    "scroll": 360,
+    "width": 375
+  },
+  {
+    "node": "autogen-paper",
+    "url": "http://127.0.0.1:4328/ai/events/autogen-paper/",
+    "sources": true,
+    "client": 360,
+    "height": 812,
+    "scroll": 360,
+    "width": 375
+  },
+  {
+    "node": "autogen-paper-320",
+    "url": "http://127.0.0.1:4328/ai/events/autogen-paper/",
+    "client": 305,
+    "height": 812,
+    "scroll": 305,
+    "width": 320
+  },
+  {
+    "node": "resnet-relations-320",
+    "url": "http://127.0.0.1:4328/ai/events/resnet/",
+    "client": 305,
+    "height": 812,
+    "scroll": 305,
+    "width": 320
+  },
+  {
+    "node": "collection-320",
+    "url": "http://127.0.0.1:4328/ai/collections/learning-to-systems/",
+    "width": 320,
+    "height": 812,
+    "client": 305,
+    "scroll": 305
+  }
+]

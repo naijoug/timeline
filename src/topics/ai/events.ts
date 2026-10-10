@@ -2,6 +2,7 @@ import type { TimelineEvent, Track } from './types';
 import { globalEvents } from './global';
 import { releaseEvents } from './releases';
 import { instructionEvents, enrichInstructionEvent } from './instruction-following';
+import { historicalEvents, enrichHistoricalEvent } from './historical-milestones';
 
 export function entry(id: string, date: string, title: string, summary: string, significance: string, sourceIds: string[], entityIds: string[], tracks: Track[], extra: Partial<TimelineEvent> = {}): TimelineEvent {
   return { id, date, title, summary, significance, sourceIds, entityIds, tracks, tags: [], milestone: false, kind: '研究进展', limitation: '此条目记录特定历史事件，不代表该方向的唯一源头。', ...extra };
@@ -102,4 +103,4 @@ baseEvents.push(
   entry('manus-automations', '2026-09', 'Manus 自动化扩展到事件触发', 'Manus 2.0 公告介绍，连接服务中的事件可以触发后续任务。', '后台工作可以由外部变化发起。', ['manus2'], ['manus', 'loop'], ['products'], { company: 'Manus', kind: '功能发布', announcementGroup: 'manus-2', tags: ['事件触发', '自动化'] }),
   entry('manus-cascade', '2026-09', 'Cascade：按任务引入专业能力', 'Manus 2.0 介绍新一代 Agent 框架，强调按工作需要引入专业能力。', '框架设计会影响 token 使用和任务执行效率。', ['manus2'], ['manus', 'harness', 'context'], ['methods'], { company: 'Manus', kind: '框架更新', announcementGroup: 'manus-2', tags: ['运行框架'], limitation: '公告中的成本和完成时间改善来自特定配置，不是基础模型能力排名。' }),
 );
-export const events: TimelineEvent[] = [...baseEvents.map(enrichInstructionEvent), ...instructionEvents];
+export const events: TimelineEvent[] = [...baseEvents.map(enrichInstructionEvent).map(enrichHistoricalEvent), ...instructionEvents, ...historicalEvents];

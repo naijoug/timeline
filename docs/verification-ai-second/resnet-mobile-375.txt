@@ -1,0 +1,131 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- banner:
+  - button "打开主题导航":
+  - link "AI 发展史":
+    - /url: /ai/
+  - search:
+    - textbox "搜索事件、对象或关键词":
+      - /placeholder: 搜索当前主题…
+- main:
+  - link "返回时间线":
+    - /url: /ai/
+    - text: 返回时间线
+  - article:
+    - generic: AI 发展史
+    - generic: 论文首发
+    - time: 2015 年 12 月 10 日
+    - heading "ResNet 让更深的网络更容易训练" [level=1]
+    - paragraph: 残差学习通过跳跃连接缓解深层网络的优化困难。
+    - heading "为什么重要" [level=2]
+    - paragraph: 网络深度可以更有效地转化为实际能力。
+    - generic: 编辑概述；具体事实见下文及其来源。
+    - heading "残差连接" [level=2]
+    - paragraph:
+      - text: 将目标映射写成输入加上待学习的残差 F(x)，用捷径连接传递输入。论文针对加深网络后训练误差反而增加的退化问题，而不仅是讨论过拟合。
+      - link "来源1：Deep Residual Learning for Image Recognition；§1、§3.1–3.2":
+        - /url: https://arxiv.org/abs/1512.03385v1
+        - text: "1"
+      - generic: 原文定位：§1、§3.1–3.2
+    - heading "实验范围" [level=2]
+    - paragraph:
+      - text: 研究在 ImageNet 和 CIFAR-10 比较不同深度的网络，并报告视觉识别实验。残差结构有助于优化，但更深的网络并非在任意数据与配置下都更好。
+      - link "来源1：Deep Residual Learning for Image Recognition；§3.3、§4.1–4.2":
+        - /url: https://arxiv.org/abs/1512.03385v1
+        - text: "1"
+      - generic: 原文定位：§3.3、§4.1–4.2
+    - heading "阅读这段历史时" [level=2]
+    - paragraph: 此条目记录特定历史事件，不代表该方向的唯一源头。
+    - heading "回到原始资料" [level=2]
+    - generic: 5 份来源
+    - link "Deep Residual Learning for Image Recognition arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：作者署名、§1、§3.1–3.3、§4.1–4.2；Submission history":
+      - /url: https://arxiv.org/abs/1512.03385v1
+      - strong: Deep Residual Learning for Image Recognition
+      - generic: arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：作者署名、§1、§3.1–3.3、§4.1–4.2；Submission history
+    - link "A logical calculus of the ideas immanent in nervous activity Springer · 原始论文 · English · 核查于 2026-09-29":
+      - /url: https://doi.org/10.1007/BF02478259
+      - strong: A logical calculus of the ideas immanent in nervous activity
+      - generic: Springer · 原始论文 · English · 核查于 2026-09-29
+    - link "Learning representations by back-propagating errors Nature · 原始论文 · English · 核查于 2026-09-29":
+      - /url: https://www.nature.com/articles/323533a0
+      - strong: Learning representations by back-propagating errors
+      - generic: Nature · 原始论文 · English · 核查于 2026-09-29
+    - 'link "LoRA: Low-Rank Adaptation of Large Language Models arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：§3.1、§5.2–5.3；Submission history"':
+      - /url: https://arxiv.org/abs/2106.09685v1
+      - strong: "LoRA: Low-Rank Adaptation of Large Language Models"
+      - generic: arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：§3.1、§5.2–5.3；Submission history
+    - link "Learning Transferable Visual Models From Natural Language Supervision 论文作者 · arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09 版本：arXiv v1 定位：§2.3–2.4、§3.1、§6；Submission history":
+      - /url: https://arxiv.org/abs/2103.00020v1
+      - strong: Learning Transferable Visual Models From Natural Language Supervision
+      - generic: 论文作者 · arXiv · 原始论文（作者提交版） · English · 核查于 2026-10-09
+      - generic: 版本：arXiv v1
+      - generic: 定位：§2.3–2.4、§3.1、§6；Submission history
+    - paragraph: 事实与日期依据上述资料，各份资料的核查日期分别标记；“为什么重要”为编辑概述。
+    - region "有据关系":
+      - heading "有据关系" [level=2]
+      - paragraph: 每条关系单独核对原文；时间相邻不等于继承或因果。
+      - list:
+        - link "ResNet 让更深的网络更容易训练":
+          - /url: /ai/events/resnet/
+        - text: · 署名作者之一 ·
+        - link "Kaiming He / 何恺明":
+          - /url: /ai/people/kaiming-he/
+        - text: 依据：
+        - link "Deep Residual Learning for Image Recognition":
+          - /url: https://arxiv.org/abs/1512.03385v1
+        - text: · 论文作者署名
+        - link "CLIP：连接文本与图像":
+          - /url: /ai/events/clip-release/
+        - text: · 使用改造的 ResNet 作为图像编码器之一 ·
+        - link "ResNet 让更深的网络更容易训练":
+          - /url: /ai/events/resnet/
+        - paragraph: 也研究 Vision Transformer；不表示沿用原 ResNet 权重。
+        - text: 依据：
+        - link "Learning Transferable Visual Models From Natural Language Supervision":
+          - /url: https://arxiv.org/abs/2103.00020v1
+        - text: · §2.4 Choosing and Scaling a Model
+    - heading "沿着这条线索继续" [level=2]
+    - link "2016 AlphaGo 以 4:1 战胜李世石 阅读":
+      - /url: /ai/events/alphago/
+      - generic: "2016"
+      - strong: AlphaGo 以 4:1 战胜李世石
+      - generic: 阅读
+    - link "2013 把词语放进向量空间 阅读":
+      - /url: /ai/events/word2vec/
+      - generic: "2013"
+      - strong: 把词语放进向量空间
+      - generic: 阅读
+    - link "2013 VAE：学习生成数据的隐空间 阅读":
+      - /url: /ai/events/vae/
+      - generic: "2013"
+      - strong: VAE：学习生成数据的隐空间
+      - generic: 阅读
+    - complementary:
+      - link "技术与方法 神经网络":
+        - /url: /ai/concepts/neural-networks/
+        - generic: 技术与方法
+        - strong: 神经网络
+      - link "研究机构 Microsoft 研究团队":
+        - /url: /ai/organizations/microsoft-research/
+        - generic: 研究机构
+        - strong: Microsoft 研究团队
+      - link "论文作者 Kaiming He / 何恺明":
+        - /url: /ai/people/kaiming-he/
+        - generic: 论文作者
+        - strong: Kaiming He / 何恺明
+      - link "精选专题 从视觉学习到协作系统":
+        - /url: /ai/collections/learning-to-systems/
+        - generic: 精选专题
+        - strong: 从视觉学习到协作系统
+      - button "复制事件链接":
+        - generic: 复制事件链接
+      - paragraph
+- contentinfo:
+  - strong: timeline
+  - text: 理解过去 · 看见可能的未来
+  - link "收录原则与资料来源":
+    - /url: /about/

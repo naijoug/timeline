@@ -7,6 +7,9 @@ import { aiCatalog } from '../src/topics/ai/adapter';
 import { aiEventDetails } from '../src/topics/ai/narrative';
 import { eventSourceIds } from '../src/core/evidence';
 import { validateCatalog } from '../src/core/validate';
+import { historicalCollection, historicalRelations, historicalSourceReviews } from '../src/topics/ai/historical-milestones';
+import { eventLane } from '../src/topics/ai/config';
+import { relationEndpoints } from '../src/core/evidence';
 
 test('instruction collection reuses unique records and preserves publication stages', () => {
   assert.equal(instructionCollection.eventIds.length, 14);
@@ -43,4 +46,34 @@ test('nested citations, source review dates and relationship endpoints are guard
   broken.collections![0].eventIds.push(broken.collections![0].eventIds[0]);
   const errors=validateCatalog(broken);
   for(const fragment of ['unknown reference missing','checkedAt','missing-event','invalid collection']) assert.ok(errors.some(e=>e.includes(fragment)),fragment);
+});
+
+test('historical pack keeps publication phases and cited details discoverable', () => {
+  assert.equal(historicalCollection.eventIds.length, 10);
+  assert.ok(aiCatalog.collections?.some(c=>c.id===historicalCollection.id));
+  for(const id of historicalCollection.eventIds) {
+    const matches=events.filter(e=>e.id===id);
+    assert.equal(matches.length,1,id);
+    assert.ok(matches[0].details?.every(s=>s.sourceIds?.length && s.locator),id);
+  }
+  const dates={alexnet:'2012','rag-paper':'2020-05-22',ddpm:'2020-06-19','clip-release':'2021-01-05','whisper-release':'2022-09-21','phi-1-paper':'2023-06-20','autogen-paper':'2023-08-16'};
+  for(const [id,date] of Object.entries(dates)) assert.equal(events.find(e=>e.id===id)!.date,date,id);
+  assert.equal(sources.find(s=>s.id==='clip-paper')!.publishedAt,'2021-02-26');
+  assert.equal(sources.find(s=>s.id==='whisper-paper')!.publishedAt,'2022-12-06');
+  assert.equal(eventLane(events.find(e=>e.id==='autogen-paper')!),'methods');
+  assert.equal(eventLane(events.find(e=>e.id==='phi-1-paper')!),'models');
+  for(const id of Object.keys(historicalSourceReviews)) assert.equal(sources.find(s=>s.id===id)!.checkedAt,'2026-10-09');
+  assert.equal(sources.find(s=>s.id==='manus2')!.checkedAt,'2026-09-29');
+});
+test('component relations retain direction and make paper evidence available', () => {
+  const rag=historicalRelations.find(r=>r.id==='rag-retriever-bert')!;
+  assert.equal(rag.toEventId,'bert');
+  assert.match(rag.note!,/BART/);
+  const clip=historicalRelations.find(r=>r.id==='clip-image-resnet')!;
+  assert.deepEqual(clip.sourceIds,['clip-paper']);
+  const endpoints=relationEndpoints(aiCatalog,clip);
+  assert.ok(endpoints);
+  assert.equal(endpoints.subject.title,events.find(e=>e.id==='clip-release')!.title);
+  assert.equal(endpoints.object.title,events.find(e=>e.id==='resnet')!.title);
+  assert.ok(eventSourceIds(aiCatalog.events.find(e=>e.id==='clip-release')!).includes('clip-paper'));
 });

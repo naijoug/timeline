@@ -1,0 +1,163 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- banner:
+  - button "打开主题导航":
+  - link "AI 发展史":
+    - /url: /ai/
+  - search:
+    - textbox "搜索事件、对象或关键词":
+      - /placeholder: 搜索当前主题…
+- main:
+  - region "历史总览":
+    - heading "1943 — 2026" [level=1]
+    - paragraph: 从图灵到生成式 AI
+    - navigation "精选专题":
+      - text: 专题：
+      - link "Transformer 到指令遵循":
+        - /url: /ai/collections/transformer-to-instructions/
+      - link "从视觉学习到协作系统":
+        - /url: /ai/collections/learning-to-systems/
+    - group "选择历史时间窗口":
+      - generic: 2023 — 2025
+      - slider "时间窗口起点": "2023"
+      - slider "时间窗口终点": "2026"
+      - button "从 1943 年开始浏览": "1943"
+      - button "从 2026 年开始浏览": "2026"
+      - button "2017 Transformer":
+        - strong: "2017"
+        - generic: Transformer
+  - complementary "事件详情" [active]:
+    - button "关闭事件详情":
+    - generic: 模型演进
+    - heading "Phi-1：用教材式数据训练小型代码模型" [level=2]
+    - text: 2023 年 6 月 20 日
+    - generic: ·
+    - text: Microsoft Research
+    - paragraph:
+      - text: Textbooks Are All You Need 研究筛选代码数据和合成教材、练习对小型代码模型的作用。
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+    - generic: 代码模型
+    - generic: 数据质量
+    - generic: 合成数据
+    - generic: 论文首发
+    - region "事件档案":
+      - heading "关键信息" [level=3]
+      - generic: 发布 / 发表方
+      - strong: Microsoft Research
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+      - generic: 事件类型
+      - strong: 论文首发
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+      - generic: 时间口径
+      - strong: 日期精度
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+      - generic: 涉及对象
+      - strong: Phi · Microsoft 研究团队 · 训练规模与算力分配
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+      - link "2":
+        - /url: https://arxiv.org/abs/2106.09685v1
+        - text: "2"
+      - link "3":
+        - /url: https://arxiv.org/abs/2001.08361v1
+        - text: "3"
+      - link "4":
+        - /url: https://arxiv.org/abs/2203.15556v1
+        - text: "4"
+      - generic: 关键标签
+      - strong: 代码模型 / 数据质量 / 合成数据
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+    - heading "为什么重要 · 编辑概述" [level=3]
+    - paragraph: 编辑解读：模型规模之外，训练数据的组织与质量也值得单独比较。
+    - heading "数据与训练阶段" [level=3]
+    - paragraph:
+      - text: 1.3B 参数模型先以筛选的代码和合成教材预训练，再用合成 Python 练习微调为 phi-1。论文中的语料规模与多轮训练实际处理的 token 数是不同口径。
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+    - generic: 原文定位：Abstract、§2–2.3
+    - heading "范围与局限" [level=3]
+    - paragraph:
+      - text: 论文以 HumanEval、MBPP 等代码任务比较，讨论训练数据污染，并列出复杂应用、提示长度等限制。日期采用 arXiv v1，不推定模型权重在同日开放。
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+    - generic: 原文定位：Table 1、§5、Appendix B；Submission history
+    - generic "变化、证据与边界":
+      - text: 变化、证据与边界
+    - paragraph: 比较基线：在标准代码语料上扩大模型或增加训练轮次
+    - list:
+      - listitem: 比较筛选与合成教材数据的训练效果
+      - listitem: 通过代码练习微调提升特定 Python 任务表现
+    - paragraph:
+      - text: 论文报告 · 数据筛选成本、污染评估和复杂代码任务的泛化仍有边界。
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+    - heading "阅读边界" [level=3]
+    - paragraph:
+      - text: 主要研究 Python 代码任务；论文自报成绩不等于通用能力排名或独立复测。
+      - link "1":
+        - /url: https://arxiv.org/abs/2306.11644v1
+        - text: "1"
+    - heading "来源与背景资料" [level=3]
+    - link "Textbooks Are All You Need 论文作者 · arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · Abstract、§2–2.3、§5、Appendix B；Submission history":
+      - /url: https://arxiv.org/abs/2306.11644v1
+      - text: Textbooks Are All You Need
+      - generic: 论文作者 · arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · Abstract、§2–2.3、§5、Appendix B；Submission history
+    - 'link "LoRA: Low-Rank Adaptation of Large Language Models arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · §3.1、§5.2–5.3；Submission history"':
+      - /url: https://arxiv.org/abs/2106.09685v1
+      - text: "LoRA: Low-Rank Adaptation of Large Language Models"
+      - generic: arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · §3.1、§5.2–5.3；Submission history
+    - link "Scaling Laws for Neural Language Models 论文作者 · arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · §1.1–1.2、§2.3、§6、Appendix C":
+      - /url: https://arxiv.org/abs/2001.08361v1
+      - text: Scaling Laws for Neural Language Models
+      - generic: 论文作者 · arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · §1.1–1.2、§2.3、§6、Appendix C
+    - link "Training Compute-Optimal Large Language Models 论文作者 · arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · §3、§4.1、Table 1、§5":
+      - /url: https://arxiv.org/abs/2203.15556v1
+      - text: Training Compute-Optimal Large Language Models
+      - generic: 论文作者 · arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · §3、§4.1、Table 1、§5
+    - heading "有据关系" [level=3]
+    - paragraph:
+      - link "Phi-1：用教材式数据训练小型代码模型":
+        - /url: /ai/events/phi-1-paper/
+      - text: · 署名研究机构 ·
+      - strong: Microsoft 研究团队
+      - text: 依据：作者署名与机构
+      - link "Textbooks Are All You Need":
+        - /url: https://arxiv.org/abs/2306.11644v1
+    - generic: 继续探索
+    - link "Phi":
+      - /url: /ai/models/phi/
+      - text: Phi
+    - link "Microsoft 研究团队":
+      - /url: /ai/organizations/microsoft-research/
+      - text: Microsoft 研究团队
+    - link "训练规模与算力分配":
+      - /url: /ai/concepts/training-scale/
+      - text: 训练规模与算力分配
+    - link "阅读完整事件":
+      - /url: /ai/models/phi/phi-1-paper/
+      - text: 阅读完整事件
+    - navigation "相邻事件":
+      - button "上一节点：DPO":
+        - generic: 上一节点
+        - strong: DPO
+      - button "下一节点：Llama 2":
+        - generic: 下一节点
+        - strong: Llama 2
+- contentinfo:
+  - link "本轮核查 2026-09-30 · 持续整理":
+    - /url: /about/
+- generic "flow-ai-assistant"

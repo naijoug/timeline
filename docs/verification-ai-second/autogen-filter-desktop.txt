@@ -1,0 +1,229 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- complementary "主题导航":
+  - link "timeline 首页":
+    - /url: /
+    - text: timeline
+  - button "收拢侧栏" [expanded]:
+  - generic: 主题库
+  - textbox "查找主题":
+    - /placeholder: 查找主题…
+  - navigation "所有主题":
+    - link "所有主题":
+      - /url: /
+      - generic: 所有主题
+    - link "AI 发展史":
+      - /url: /ai/
+      - generic: AI 发展史
+    - link "中国历史":
+      - /url: /china-history/
+      - generic: 中国历史
+  - paragraph: 更多主题持续收录
+  - link "浏览主题":
+    - /url: /
+    - text: 浏览主题
+  - button "当前外观：跟随系统；点击切换为浅色":
+  - link "关于 timeline":
+    - /url: /about/
+    - generic: 关于 timeline
+  - generic "简体中文":
+    - generic: 简体中文
+- banner:
+  - link "AI 发展史":
+    - /url: /ai/
+  - generic: 从图灵到生成式 AI
+  - search:
+    - textbox "搜索事件、对象或关键词":
+      - /placeholder: 搜索当前主题…
+    - generic: ⌘ K
+- main:
+  - region "历史总览":
+    - heading "1943 — 2026" [level=1]
+    - paragraph: 从图灵到生成式 AI
+    - navigation "精选专题":
+      - text: 专题：
+      - link "Transformer 到指令遵循":
+        - /url: /ai/collections/transformer-to-instructions/
+      - link "从视觉学习到协作系统":
+        - /url: /ai/collections/learning-to-systems/
+    - group "选择历史时间窗口":
+      - generic: 2023 — 2025
+      - slider "时间窗口起点": "2023"
+      - slider "时间窗口终点": "2026"
+      - button "从 1943 年开始浏览": "1943"
+      - button "从 1960 年开始浏览": "1960"
+      - button "从 1980 年开始浏览": "1980"
+      - button "从 2000 年开始浏览": "2000"
+      - button "从 2026 年开始浏览": "2026"
+      - button "2017 Transformer":
+        - strong: "2017"
+        - generic: Transformer
+  - region "关键事件时间线":
+    - button "2023 — 2025"
+    - button "时间与范围筛选":
+    - combobox "事件类别" [active]:
+      - generic: AI 技术突破
+    - checkbox "关键节点" [checked]
+    - generic: 关键节点
+    - region "2023 年事件":
+      - heading "2023 年" [level=2]
+      - list:
+        - button "2023 年 5 月 29 日 DPO":
+          - time: "05.29"
+          - strong: DPO
+          - generic: Stanford University
+        - button "2023 年 8 月 16 日 AutoGen：用多 Agent 对话组织应用" [pressed]:
+          - time: "08.16"
+          - strong: AutoGen：用多 Agent 对话组织应用
+          - generic: Microsoft / Penn State / University of Washington
+    - region "2024 年事件":
+      - heading "2024 年" [level=2]
+      - list:
+        - button "2024 年 11 月 25 日 MCP":
+          - time: "11.25"
+          - strong: MCP
+          - generic: Anthropic
+    - region "2025 年事件":
+      - heading "2025 年" [level=2]
+      - list:
+        - button "2025 年 9 月 29 日 上下文工程":
+          - time: "09.29"
+          - strong: 上下文工程
+          - generic: Anthropic
+        - button "2025 年 10 月 16 日 Agent Skills":
+          - time: "10.16"
+          - strong: Agent Skills
+          - generic: Anthropic
+        - button "2025 年 11 月 26 日 长任务 Harness":
+          - time: "11.26"
+          - strong: 长任务 Harness
+          - generic: Anthropic
+    - text: 当前 6 / 全库 248 个事件
+    - generic: ·
+    - text: 6 份来源
+  - complementary "事件详情":
+    - button "展开阅读":
+    - button "关闭事件详情":
+    - generic: AI 技术突破
+    - heading "AutoGen：用多 Agent 对话组织应用" [level=2]
+    - text: 2023 年 8 月 16 日
+    - generic: ·
+    - text: Microsoft / Penn State / University of Washington
+    - paragraph:
+      - text: 论文提出可定制、可对话的 Agent，以消息交互组合语言模型、工具和人类参与。
+      - link "1":
+        - /url: https://arxiv.org/abs/2308.08155v1
+        - text: "1"
+    - generic: 开发框架
+    - generic: 多 Agent
+    - generic: 人类参与
+    - generic: 论文首发
+    - region "事件档案":
+      - heading "关键信息" [level=3]
+      - generic: 发布 / 发表方
+      - strong: Microsoft / Penn State / University of Washington
+      - link "1":
+        - /url: https://arxiv.org/abs/2308.08155v1
+        - text: "1"
+      - generic: 事件类型
+      - strong: 论文首发
+      - link "1":
+        - /url: https://arxiv.org/abs/2308.08155v1
+        - text: "1"
+      - generic: 时间口径
+      - strong: 日期精度
+      - link "1":
+        - /url: https://arxiv.org/abs/2308.08155v1
+        - text: "1"
+      - generic: 涉及对象
+      - strong: AutoGen · Agent · Agent loop
+      - link "1":
+        - /url: https://arxiv.org/abs/2308.08155v1
+        - text: "1"
+      - link "2":
+        - /url: https://www.anthropic.com/engineering/building-effective-agents
+        - text: "2"
+      - link "3":
+        - /url: https://arxiv.org/abs/2210.03629
+        - text: "3"
+      - generic: 关键标签
+      - strong: 开发框架 / 多 Agent / 人类参与
+      - link "1":
+        - /url: https://arxiv.org/abs/2308.08155v1
+        - text: "1"
+    - heading "为什么重要 · 编辑概述" [level=3]
+    - paragraph: 编辑解读：角色、消息和执行能力构成应用流程，而不只是让模型扮演多个身份。
+    - heading "可对话 Agent" [level=3]
+    - paragraph:
+      - text: Agent 可以由语言模型、人或工具驱动，通过统一消息接口组合。论文介绍 AssistantAgent 与 UserProxyAgent 等预设，并支持自动回复和可定制的交互模式。
+      - link "1":
+        - /url: https://arxiv.org/abs/2308.08155v1
+        - text: "1"
+    - generic: 原文定位：§2.1–2.2
+    - heading "应用与阶段" [level=3]
+    - paragraph:
+      - text: 论文给出数学、代码与网页交互等应用案例。此节点记录 8 月 16 日 arXiv v1，不将后续推广或库版本更新当作同一发布阶段。
+      - link "1":
+        - /url: https://arxiv.org/abs/2308.08155v1
+        - text: "1"
+    - generic: 原文定位：§4；Submission history
+    - heading "工作流边界" [level=3]
+    - paragraph:
+      - text: 作者说明 Agent 数量、角色与交互模式依应用而定，并讨论日志调试、连锁错误和适当的人类参与。研究案例不能证明多 Agent 在所有任务上都更优。
+      - link "1":
+        - /url: https://arxiv.org/abs/2308.08155v1
+        - text: "1"
+    - generic: 原文定位：§5.2 Future Work
+    - heading "阅读边界" [level=3]
+    - paragraph:
+      - text: 工作流依任务配置；更多 Agent 不保证更好结果，自动执行需要可追踪的行为与人类介入机制。
+      - link "1":
+        - /url: https://arxiv.org/abs/2308.08155v1
+        - text: "1"
+    - heading "来源与背景资料" [level=3]
+    - 'link "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation Framework 论文作者 · arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · 作者署名与机构、§2.1–2.2、§4、§5.2；Submission history"':
+      - /url: https://arxiv.org/abs/2308.08155v1
+      - text: "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation Framework"
+      - generic: 论文作者 · arXiv · 原始论文（作者提交版） · 核查于 2026-10-09 · arXiv v1 · 作者署名与机构、§2.1–2.2、§4、§5.2；Submission history
+    - link "Building effective agents Anthropic · 工程文章 · 核查于 2026-09-29":
+      - /url: https://www.anthropic.com/engineering/building-effective-agents
+      - text: Building effective agents
+      - generic: Anthropic · 工程文章 · 核查于 2026-09-29
+    - 'link "ReAct: Synergizing Reasoning and Acting in Language Models arXiv · 原始论文 · 核查于 2026-09-29"':
+      - /url: https://arxiv.org/abs/2210.03629
+      - text: "ReAct: Synergizing Reasoning and Acting in Language Models"
+      - generic: arXiv · 原始论文 · 核查于 2026-09-29
+    - heading "有据关系" [level=3]
+    - paragraph:
+      - link "AutoGen：用多 Agent 对话组织应用":
+        - /url: /ai/events/autogen-paper/
+      - text: · 以可对话 Agent 组合模型、工具和人 ·
+      - strong: Agent
+      - text: 依据：§2.1–2.2
+      - 'link "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation Framework"':
+        - /url: https://arxiv.org/abs/2308.08155v1
+    - generic: 继续探索
+    - link "AutoGen":
+      - /url: /ai/concepts/autogen/
+      - text: AutoGen
+    - link "Agent":
+      - /url: /ai/concepts/agent/
+      - text: Agent
+    - link "Agent loop":
+      - /url: /ai/concepts/loop/
+      - text: Agent loop
+    - link "阅读完整事件":
+      - /url: /ai/events/autogen-paper/
+      - text: 阅读完整事件
+    - navigation "相邻事件":
+      - button "上一节点：DPO":
+        - generic: 上一节点
+        - strong: DPO
+      - button "下一节点：MCP":
+        - generic: 下一节点
+        - strong: MCP
+- contentinfo:
+  - generic: 理解过去 · 看见可能的未来
+  - link "本轮核查 2026-09-30 · 持续整理":
+    - /url: /about/
+- generic "flow-ai-assistant"

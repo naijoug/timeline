@@ -1,0 +1,291 @@
+- link "跳到主要内容":
+  - /url: "#main"
+- banner:
+  - button "打开主题导航":
+  - link "AI 发展史":
+    - /url: /ai/
+  - search:
+    - textbox "搜索事件、对象或关键词":
+      - /placeholder: 搜索当前主题…
+- main:
+  - region "历史总览":
+    - heading "1943 — 2026" [level=1]
+    - paragraph: 从图灵到生成式 AI
+    - navigation "精选专题":
+      - text: 专题：
+      - link "Transformer 到指令遵循":
+        - /url: /ai/collections/transformer-to-instructions/
+      - link "从视觉学习到协作系统":
+        - /url: /ai/collections/learning-to-systems/
+    - group "选择历史时间窗口":
+      - generic: 2023 — 2025
+      - slider "时间窗口起点": "2023"
+      - slider "时间窗口终点": "2026"
+      - button "从 1943 年开始浏览": "1943"
+      - button "从 2026 年开始浏览": "2026"
+      - button "2017 Transformer":
+        - strong: "2017"
+        - generic: Transformer
+  - region "关键事件时间线":
+    - button "2023 — 2025"
+    - button "时间与范围筛选":
+    - combobox "事件类别" [active]:
+      - generic: 模型演进
+    - checkbox "关键节点" [checked]
+    - generic: 关键节点
+    - region "2023 年事件":
+      - heading "2023 年" [level=2]
+      - list:
+        - button "2023 年 2 月 24 日 LLaMA 首次公布":
+          - time: "02.24"
+          - strong: LLaMA 首次公布
+          - generic: Meta
+        - button "2023 年 3 月 14 日 Claude / Claude Instant":
+          - time: "03.14"
+          - strong: Claude / Claude Instant
+          - generic: Anthropic
+        - button "2023 年 3 月 15 日 GPT-4 技术报告":
+          - time: "03.15"
+          - strong: GPT-4 技术报告
+          - generic: OpenAI
+        - button "2023 年 6 月 20 日 Phi-1：用教材式数据训练小型代码模型":
+          - time: "06.20"
+          - strong: Phi-1：用教材式数据训练小型代码模型
+          - generic: Microsoft Research
+        - button "2023 年 7 月 18 日 Llama 2":
+          - time: "07.18"
+          - strong: Llama 2
+          - generic: Meta
+        - button "2023 年 9 月 6 日 Falcon 180B":
+          - time: "09.06"
+          - strong: Falcon 180B
+          - generic: TII
+        - button "2023 年 9 月 27 日 Mistral 7B":
+          - time: "09.27"
+          - strong: Mistral 7B
+          - generic: Mistral AI
+        - button "2023 年 11 月 6 日 GPT-4 Turbo 预览":
+          - time: "11.06"
+          - strong: GPT-4 Turbo 预览
+          - generic: OpenAI
+        - button "2023 年 12 月 6 日 Gemini 1.0":
+          - time: "12.06"
+          - strong: Gemini 1.0
+          - generic: Google
+        - button "2023 年 12 月 11 日 Mixtral 8×7B":
+          - time: "12.11"
+          - strong: Mixtral 8×7B
+          - generic: Mistral AI
+    - region "2024 年事件":
+      - heading "2024 年" [level=2]
+      - list:
+        - button "2024 年 2 月 15 日 Gemini 1.5":
+          - time: "02.15"
+          - strong: Gemini 1.5
+          - generic: Google
+        - button "2024 年 2 月 21 日 Gemma 开放模型":
+          - time: "02.21"
+          - strong: Gemma 开放模型
+          - generic: Google
+        - button "2024 年 3 月 Command R":
+          - time: 3月
+          - strong: Command R
+          - generic: Cohere
+        - button "2024 年 3 月 21 日 EvoLLM-JP / EvoVLM-JP":
+          - time: "03.21"
+          - strong: EvoLLM-JP / EvoVLM-JP
+          - generic: Sakana AI
+        - button "2024 年 4 月 18 日 Llama 3":
+          - time: "04.18"
+          - strong: Llama 3
+          - generic: Meta
+        - button "2024 年 5 月 13 日 GPT-4o":
+          - time: "05.13"
+          - strong: GPT-4o
+          - generic: OpenAI
+        - button "2024 年 6 月 7 日 Qwen2":
+          - time: "06.07"
+          - strong: Qwen2
+          - generic: 阿里巴巴
+        - button "2024 年 7 月 23 日 Llama 3.1":
+          - time: "07.23"
+          - strong: Llama 3.1
+          - generic: Meta
+        - button "2024 年 8 月 1 日 FLUX.1":
+          - time: "08.01"
+          - strong: FLUX.1
+          - generic: Black Forest Labs
+        - button "2024 年 8 月 7 日 EXAONE 3.0 研究权重开放":
+          - time: "08.07"
+          - strong: EXAONE 3.0 研究权重开放
+          - generic: LG AI Research
+        - button "2024 年 8 月 29 日 Qwen2-VL":
+          - time: "08.29"
+          - strong: Qwen2-VL
+          - generic: 阿里巴巴
+        - button "2024 年 9 月 Qwen2.5":
+          - time: 9月
+          - strong: Qwen2.5
+          - generic: 阿里巴巴
+        - button "2024 年 9 月 12 日 o1-preview / o1-mini":
+          - time: "09.12"
+          - strong: o1-preview / o1-mini
+          - generic: OpenAI
+        - button "2024 年 9 月 25 日 Llama 3.2：视觉与端侧":
+          - time: "09.25"
+          - strong: Llama 3.2：视觉与端侧
+          - generic: Meta
+        - button "2024 年 12 月 11 日 Gemini 2.0 Flash 实验版":
+          - time: "12.11"
+          - strong: Gemini 2.0 Flash 实验版
+          - generic: Google
+    - region "2025 年事件":
+      - heading "2025 年" [level=2]
+      - list:
+        - button "2025 年 1 月 20 日 DeepSeek-R1":
+          - time: "01.20"
+          - strong: DeepSeek-R1
+          - generic: DeepSeek
+        - button "2025 年 1 月 22 日 Kimi k1.5 技术论文":
+          - time: "01.22"
+          - strong: Kimi k1.5 技术论文
+          - generic: 月之暗面
+        - button "2025 年 1 月 31 日 o3-mini":
+          - time: "01.31"
+          - strong: o3-mini
+          - generic: OpenAI
+        - button "2025 年 2 月 19 日 Grok 3 推理路线公告":
+          - time: "02.19"
+          - strong: Grok 3 推理路线公告
+          - generic: xAI
+        - button "2025 年 2 月 24 日 Claude 3.7 Sonnet":
+          - time: "02.24"
+          - strong: Claude 3.7 Sonnet
+          - generic: Anthropic
+        - button "2025 年 2 月 25 日 Wan2.1 开放视频模型":
+          - time: "02.25"
+          - strong: Wan2.1 开放视频模型
+          - generic: 阿里巴巴
+        - button "2025 年 3 月 6 日 QwQ-32B":
+          - time: "03.06"
+          - strong: QwQ-32B
+          - generic: 阿里巴巴
+        - button "2025 年 3 月 12 日 Gemma 3":
+          - time: "03.12"
+          - strong: Gemma 3
+          - generic: Google
+        - button "2025 年 3 月 13 日 Command A":
+          - time: "03.13"
+          - strong: Command A
+          - generic: Cohere
+        - button "2025 年 3 月 21 日 混元 Hunyuan-T1":
+          - time: "03.21"
+          - strong: 混元 Hunyuan-T1
+          - generic: 腾讯
+        - button "2025 年 3 月 25 日 Gemini 2.5 Pro 实验版":
+          - time: "03.25"
+          - strong: Gemini 2.5 Pro 实验版
+          - generic: Google
+        - button "2025 年 4 月 5 日 Llama 4 Scout / Maverick":
+          - time: "04.05"
+          - strong: Llama 4 Scout / Maverick
+          - generic: Meta
+        - button "2025 年 4 月 10 日 日日新 SenseNova V6":
+          - time: "04.10"
+          - strong: 日日新 SenseNova V6
+          - generic: 商汤
+        - button "2025 年 4 月 14 日 GPT-4.1 系列":
+          - time: "04.14"
+          - strong: GPT-4.1 系列
+          - generic: OpenAI
+        - button "2025 年 4 月 16 日 o3 / o4-mini":
+          - time: "04.16"
+          - strong: o3 / o4-mini
+          - generic: OpenAI
+        - button "2025 年 4 月 29 日 Qwen3":
+          - time: "04.29"
+          - strong: Qwen3
+          - generic: 阿里巴巴
+        - button "2025 年 5 月 13 日 Seed1.5-VL 技术公告":
+          - time: "05.13"
+          - strong: Seed1.5-VL 技术公告
+          - generic: 字节跳动
+        - button "2025 年 5 月 21 日 Devstral：软件工程模型":
+          - time: "05.21"
+          - strong: Devstral：软件工程模型
+          - generic: Mistral AI
+        - button "2025 年 5 月 22 日 Claude Sonnet 4":
+          - time: "05.22"
+          - strong: Claude Sonnet 4
+          - generic: Anthropic
+        - button "2025 年 6 月 16 日 MiniMax-M1":
+          - time: "06.16"
+          - strong: MiniMax-M1
+          - generic: MiniMax
+        - button "2025 年 6 月 30 日 文心 ERNIE 4.5 开放权重":
+          - time: "06.30"
+          - strong: 文心 ERNIE 4.5 开放权重
+          - generic: 百度
+        - button "2025 年 6 月 30 日 盘古 7B / Pro MoE 开放":
+          - time: "06.30"
+          - strong: 盘古 7B / Pro MoE 开放
+          - generic: 华为
+        - button "2025 年 7 月 Qwen3-Coder":
+          - time: 7月
+          - strong: Qwen3-Coder
+          - generic: 阿里巴巴
+        - button "2025 年 7 月 9 日 Grok 4 / Heavy":
+          - time: "07.09"
+          - strong: Grok 4 / Heavy
+          - generic: xAI
+        - button "2025 年 7 月 11 日 Kimi K2":
+          - time: "07.11"
+          - strong: Kimi K2
+          - generic: 月之暗面
+        - button "2025 年 7 月 28 日 GLM-4.5":
+          - time: "07.28"
+          - strong: GLM-4.5
+          - generic: 智谱
+        - button "2025 年 7 月 31 日 Step3":
+          - time: "07.31"
+          - strong: Step3
+          - generic: 阶跃星辰
+        - button "2025 年 8 月 7 日 GPT-5 系列 API":
+          - time: "08.07"
+          - strong: GPT-5 系列 API
+          - generic: OpenAI
+        - button "2025 年 8 月 21 日 DeepSeek-V3.1":
+          - time: "08.21"
+          - strong: DeepSeek-V3.1
+          - generic: DeepSeek
+        - button "2025 年 10 月 27 日 MiniMax-M2":
+          - time: "10.27"
+          - strong: MiniMax-M2
+          - generic: MiniMax
+        - button "2025 年 11 月 6 日 Kimi K2 Thinking":
+          - time: "11.06"
+          - strong: Kimi K2 Thinking
+          - generic: 月之暗面
+        - button "2025 年 11 月 18 日 Gemini 3 预览":
+          - time: "11.18"
+          - strong: Gemini 3 预览
+          - generic: Google
+        - button "2025 年 11 月 24 日 Claude Opus 4.5":
+          - time: "11.24"
+          - strong: Claude Opus 4.5
+          - generic: Anthropic
+        - button "2025 年 12 月 1 日 DeepSeek-V3.2":
+          - time: "12.01"
+          - strong: DeepSeek-V3.2
+          - generic: DeepSeek
+        - button "2025 年 12 月 16 日 Seedance 1.5 pro":
+          - time: "12.16"
+          - strong: Seedance 1.5 pro
+          - generic: 字节跳动
+    - text: 当前 60 / 全库 248 个事件
+    - generic: ·
+    - text: 60 份来源
+- contentinfo:
+  - link "本轮核查 2026-09-30 · 持续整理":
+    - /url: /about/
+- generic "flow-ai-assistant"

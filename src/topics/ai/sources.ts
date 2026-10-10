@@ -2,6 +2,7 @@ import type { Source } from './types';
 import { globalSources } from './global';
 import { releaseSources, releaseResearchDate } from './releases';
 import { instructionSources, instructionSourceReviews } from './instruction-following';
+import { historicalSources, historicalSourceReviews } from './historical-milestones';
 const source = (id: string, title: string, publisher: string, url: string, type: Source['type'] = '原始论文'): Source => ({ id, title, publisher, url, type, language: 'English', checkedAt: '2026-09-29' });
 const baseSources: Source[] = [
   ...globalSources,
@@ -66,5 +67,5 @@ const baseSources: Source[] = [
   source('muse', 'How We Designed Muse', 'Muse / Meta', 'https://introducing.muse.ai/', '工程文章'),
   source('cue', 'Your personal agents, on Cue', 'Cue / Manus', 'https://cue.im/', '官方文档'),
 ];
-export const sources: Source[] = [...baseSources.map(s => ({ ...s, ...instructionSourceReviews[s.id] })), ...instructionSources];
+export const sources: Source[] = [...baseSources.map(s => ({ ...s, ...instructionSourceReviews[s.id], ...historicalSourceReviews[s.id] })), ...instructionSources, ...historicalSources];
 export const sourceMap = Object.fromEntries(sources.map(s => [s.id, s]));
