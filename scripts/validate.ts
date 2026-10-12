@@ -6,11 +6,14 @@ import { validateCatalog as validateCore } from "../src/core/validate";
 import { chinaHistory } from "../src/topics/china-history/catalog";
 import { aiCatalog } from "../src/topics/ai/adapter";
 import { programmingLanguages } from "../src/topics/programming-languages/catalog";
+import { writersCatalog } from "../src/topics/writers/catalog";
+
 const errors = [
   ...validateCatalog(events, entities, sources, relations),
   ...validateCore(aiCatalog),
   ...validateCore(chinaHistory),
   ...validateCore(programmingLanguages),
+  ...validateCore(writersCatalog),
 ];
 if (errors.length) {
   console.error(errors.join("\n"));
@@ -24,4 +27,7 @@ console.log(
 );
 console.log(
   `Chinese history validated: ${chinaHistory.periods.length} periods, ${chinaHistory.events.length} events, ${chinaHistory.entities.length} entities, ${chinaHistory.sources.length} sources, 0 object relations, ${chinaHistory.relations?.length || 0} event evidence relations, ${chinaHistory.collections?.length || 0} collections.`,
+);
+console.log(
+  `Writers validated: ${writersCatalog.periods.length} eras, ${writersCatalog.events.length} events, ${writersCatalog.entities.length} entities, ${writersCatalog.sources.length} sources.`,
 );

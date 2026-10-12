@@ -1,0 +1,13 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Explorer from '../../../components/timeline/Explorer';
+import { writersCatalog } from '../../../topics/writers/catalog';
+import { writersPresentation } from '../../../topics/writers/presentation';
+
+export function getStaticPaths() {
+  return writersCatalog.periods.map(period => ({ params: { slug: period.id }, props: { period } }));
+}
+
+const { period } = Astro.props;
+---
+<Layout explorer title={`${period.title} · 作家作品时间线`} description={period.summary}><Explorer catalog={writersCatalog} initialPeriod={period.id} presentation={writersPresentation} client:load /></Layout>

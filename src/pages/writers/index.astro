@@ -1,0 +1,7 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Explorer from '../../components/timeline/Explorer';
+import { writersCatalog } from '../../topics/writers/catalog';
+import { writersPresentation } from '../../topics/writers/presentation';
+---
+<Layout explorer title="作家作品" description={writersCatalog.topic.description}><Explorer catalog={writersCatalog} presentation={writersPresentation} client:load /></Layout>
