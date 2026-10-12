@@ -25,6 +25,7 @@ import {
 } from "../src/core/layout";
 import { chinaHistory } from "../src/topics/china-history/catalog";
 import { aiCatalog } from "../src/topics/ai/adapter";
+import { programmingLanguages } from "../src/topics/programming-languages/catalog";
 
 test("BCE and CE form a continuous axis without a civil year zero", () => {
   assert.equal(yearCoordinate(-1), 0);
@@ -166,9 +167,10 @@ test("concurrent regimes occupy separate rows while same-year succession can sha
     1,
   );
 });
-test("both catalogs validate; broken references, cycles and reversed dates fail", () => {
+test("all catalogs validate; broken references, cycles and reversed dates fail", () => {
   assert.deepEqual(validateCatalog(chinaHistory), []);
   assert.deepEqual(validateCatalog(aiCatalog), []);
+  assert.deepEqual(validateCatalog(programmingLanguages), []);
   const broken = structuredClone(chinaHistory);
   broken.periods[0].parentId = broken.periods[0].id;
   broken.events[0].sourceIds = ["missing"];

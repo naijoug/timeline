@@ -1,0 +1,13 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Explorer from '../../../components/timeline/Explorer';
+import { programmingLanguages } from '../../../topics/programming-languages/catalog';
+import { languagePresentation } from '../../../topics/programming-languages/presentation';
+
+export function getStaticPaths() {
+  return programmingLanguages.periods.map(period => ({ params: { slug: period.id }, props: { period } }));
+}
+
+const { period } = Astro.props;
+---
+<Layout explorer title={`${period.title} · 编程语言时间线`} description={period.summary}><Explorer catalog={programmingLanguages} initialPeriod={period.id} presentation={languagePresentation} client:load /></Layout>
