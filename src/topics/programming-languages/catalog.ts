@@ -55,6 +55,16 @@ export const sources: Source[] = [
   source("carbon-release", "Carbon Language", "GitHub", "https://github.com/carbon-language/carbon-lang", "实验项目", "2022 年 7 月公开实验代码"),
   source("modular-mojo", "Mojo 编程语言", "Modular", "https://www.modular.com/mojo", "官方文档", "面向 AI 工作负载的语言"),
   source("python-313", "Python 3.13 Release Notes", "Python 官方社区", "https://docs.python.org/3.13/whatsnew/3.13.html", "发布说明", "实验性 free-threaded 构建与 2024 年发布"),
+  source("cpp-standard", "C++ Standards", "Standard C++ Foundation", "https://isocpp.org/std/the-standard", "标准档案", "C++ 11/20/23 等标准版本入口"),
+  source("java-versions", "Java SE Versions", "Oracle", "https://www.oracle.com/java/technologies/java-se-support-roadmap.html", "官方路线图", "Java SE 5/8/11/17/21 版本窗口"),
+  source("javascript-2015", "ECMAScript 2015 Language Specification", "Ecma International", "https://262.ecma-international.org/6.0/", "标准", "let/const、类、模块与 Promise"),
+  source("typescript-release-notes", "TypeScript Release Notes", "Microsoft TypeScript", "https://www.typescriptlang.org/docs/handbook/release-notes/", "发布说明", "TypeScript 1.0/2.0/5.0 变化"),
+  source("go-release-notes", "Go Release History", "Go 官方社区", "https://go.dev/doc/devel/release", "发布说明", "Go 1/1.11/1.18 版本记录"),
+  source("rust-editions", "Rust Edition Guide", "Rust 官方社区", "https://doc.rust-lang.org/edition-guide/", "官方指南", "Rust 2015/2018/2021/2024 版本差异"),
+  source("csharp-release-notes", "C# What's New", "Microsoft Learn", "https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/", "官方文档", "C# 2/3/6/8 变化"),
+  source("swift-release-notes", "Swift Release Notes", "Apple Developer", "https://developer.apple.com/documentation/swift-release-notes", "发布说明", "Swift 3/5/6 兼容性与并发演进"),
+  source("kotlin-release-notes", "Kotlin Releases", "JetBrains", "https://kotlinlang.org/docs/releases.html", "发布说明", "Kotlin 1.x 与 2.0 变化"),
+  source("python-versions", "Python Release Versions", "Python 官方社区", "https://www.python.org/downloads/release-list/", "版本列表", "Python 2.0/3.0/3.11 发布时间"),
 ];
 
 const duration = (start: number, end: number): TimeSpan => ({
@@ -143,6 +153,19 @@ export const entities: Entity[] = [
   entity("carbon", "Carbon", "carbon-release"),
   entity("mojo", "Mojo", "modular-mojo"),
 ];
+
+const change = (
+  baseline: string,
+  improvements: string[],
+  tradeoffs: string,
+  sourceIds: string[],
+): TimelineEvent["change"] => ({
+  baseline,
+  improvements,
+  tradeoffs,
+  evidence: "依据官方发布说明或标准文档",
+  sourceIds,
+});
 
 const event = (
   id: string,
@@ -332,6 +355,126 @@ export const events: TimelineEvent[] = [
     significance: "长期以单解释器为主的 Python 开始把并行执行作为正式工程方向，说明成熟语言仍会改变核心约束。",
     tags: ["free-threading", "解释器", "并行"],
     milestone: true,
+  }),
+  event("cpp-11", "C++11 标准发布", 2011, "release", ["modern-safety"], ["cpp"], "C++11 以 auto、lambda、右值引用和智能指针等特性更新现代 C++ 的表达方式。", ["cpp-standard"], {
+    significance: "C++11 是从经典 C++ 转向现代资源管理与泛型编程的分界线。",
+    tags: ["C++11", "lambda", "移动语义"],
+    change: change("C++03 语法与手工资源管理模式", ["auto 类型推断", "lambda 表达式", "右值引用与移动语义", "标准智能指针"], "新特性增加语言复杂度，旧代码迁移需要明确编译器支持范围", ["cpp-standard"]),
+  }),
+  event("cpp-20", "C++20 标准发布", 2020, "release", ["modern-safety"], ["cpp"], "C++20 引入模块、协程、概念和 ranges 等大型语言与库特性。", ["cpp-standard"], {
+    significance: "C++20 继续压缩依赖宏和手写模板约束的空间，让接口约束与组合式算法更直接。",
+    tags: ["C++20", "模块", "协程", "ranges"],
+    change: change("C++11/17 中的头文件、模板约束和手写迭代模式", ["模块化组织代码", "concepts 约束模板参数", "协程语法", "ranges 组合算法"], "模块与协程的工具链支持长期不均衡，迁移通常分阶段进行", ["cpp-standard"]),
+  }),
+  event("java-5", "Java SE 5 发布", 2004, "release", ["web-platform"], ["java"], "Java SE 5 引入泛型、枚举、注解和增强 for 循环。", ["java-versions"], {
+    significance: "这些特性长期构成 Java 企业开发的基本语法面，也推动注解成为框架配置的重要方式。",
+    tags: ["Java 5", "泛型", "注解"],
+    change: change("Java 1.4 的原始集合与显式迭代", ["泛型集合", "枚举类型", "注解", "增强 for 循环"], "泛型采用擦除实现，运行期不能直接获得泛型实参", ["java-versions"]),
+  }),
+  event("java-8", "Java SE 8 发布", 2014, "release", ["modern-safety"], ["java"], "Java SE 8 引入 lambda 表达式、Stream API 和新的日期时间 API。", ["java-versions"], {
+    significance: "Java 从以类为中心的命令式写法转向函数式集合处理，生态迁移范围极大。",
+    tags: ["Java 8", "lambda", "Stream"],
+    change: change("Java 7 的匿名内部类与手写循环", ["lambda 表达式", "Stream API", "java.time 日期时间库"], "并行 Stream 的调度与语义使性能调优更依赖上下文", ["java-versions"]),
+  }),
+  event("java-21", "Java SE 21 LTS 发布", 2023, "release", ["modern-safety"], ["java"], "Java SE 21 作为 LTS 版本，进一步推广虚拟线程与模式匹配等能力。", ["java-versions"], {
+    significance: "虚拟线程把高并发服务的线程模型从每请求一平台线程中解放出来，模式匹配继续简化数据解构。",
+    tags: ["Java 21", "LTS", "虚拟线程"],
+    change: change("Java 17 LTS 的平台线程与 switch 模式匹配预览", ["虚拟线程正式化", "记录模式匹配", "switch 模式匹配", "序列化集合"], "虚拟线程适合阻塞式 I/O 场景，并不能替代所有并发设计", ["java-versions"]),
+  }),
+  event("javascript-2015", "ECMAScript 2015 发布", 2015, "standard", ["modern-safety"], ["ecmascript", "javascript"], "ECMAScript 2015 引入 let/const、类、模块、生成器和 Promise。", ["javascript-2015"], {
+    significance: "这次修订奠定了现代 JavaScript 模块化、异步和类语法的基础，也让标准进入年度节奏。",
+    tags: ["ES2015", "模块", "Promise"],
+    change: change("ES5 的 var、函数模块模式和回调式异步", ["块级 let/const", "class 语法", "ES Modules", "Promise", "生成器"], "模块加载和 class 底层仍需兼容既有动态语义", ["javascript-2015"]),
+  }),
+  event("typescript-10", "TypeScript 1.0 发布", 2014, "release", ["modern-safety"], ["typescript"], "TypeScript 1.0 提供稳定的类型系统、泛型与 Visual Studio 工具支持。", ["typescript-release-notes"], {
+    significance: "0.x 预览进入可用于生产评估的稳定版本。",
+    tags: ["TypeScript 1.0", "泛型"],
+    change: change("TypeScript 0.8 的基础类型注解", ["正式类型系统", "泛型", "工具链集成"], "严格性选项与现代项目默认值仍随后续版本演进", ["typescript-release-notes"]),
+  }),
+  event("typescript-20", "TypeScript 2.0 发布", 2016, "release", ["modern-safety"], ["typescript"], "TypeScript 2.0 引入 strictNullChecks 与控制流分析相关的空安全能力。", ["typescript-release-notes"], {
+    significance: "空值检查把 TypeScript 从“可选注解”推进到可系统性消除 null/undefined 错误的工具。",
+    tags: ["TypeScript 2.0", "strictNullChecks"],
+    change: change("TypeScript 1.x 默认允许 null 赋给多数类型", ["strictNullChecks", "never 类型", "只读属性", "标记联合改进"], "启用严格空安全后需要显式收窄和标注边界", ["typescript-release-notes"]),
+  }),
+  event("typescript-50", "TypeScript 5.0 发布", 2023, "release", ["modern-safety"], ["typescript"], "TypeScript 5.0 重构运行时与数据结构，引入 const 类型参数和装饰器新方案。", ["typescript-release-notes"], {
+    significance: "在语言表达力继续增加的同时，工具链性能和代码规模被明确纳入版本目标。",
+    tags: ["TypeScript 5.0", "性能", "装饰器"],
+    change: change("TypeScript 4.x 的代码库结构与实验性装饰器", ["更快的编译与安装体验", "const 类型参数", "标准化装饰器", "命名空间兼容改进"], "部分 API 被移除，复杂项目需要检查迁移清单", ["typescript-release-notes"]),
+  }),
+  event("go-10", "Go 1 发布", 2012, "release", ["modern-safety"], ["go"], "Go 1 明确语言与标准库兼容性承诺，让 Go 程序可以随编译器升级持续构建。", ["go-release-notes"], {
+    significance: "兼容性承诺成为 Go 生态扩散的关键前提。",
+    tags: ["Go 1", "兼容性"],
+    change: change("Go 发布前的预发布语言与标准库", ["Go 1 兼容性承诺", "统一工具链与发布节奏"], "兼容性以受控方式演进，重大能力通常经由构建标签或新 API 引入", ["go-release-notes"]),
+  }),
+  event("go-111", "Go 1.11 发布", 2018, "release", ["modern-safety"], ["go"], "Go 1.11 引入 WebAssembly 支持和模块实验。", ["go-release-notes"], {
+    significance: "Go 开始同时进入浏览器执行环境和去 GOPATH 的依赖管理路径。",
+    tags: ["Go modules", "WebAssembly"],
+    change: change("GOPATH 依赖布局与仅原生平台目标", ["Go modules 实验", "GO111MODULE 开关", "WebAssembly 目标"], "模块模式最初仍需迁移开关，旧工作流保留一段时间", ["go-release-notes"]),
+  }),
+  event("go-118", "Go 1.18 发布", 2022, "release", ["modern-safety"], ["go"], "Go 1.18 引入泛型、模糊测试和工作区模式。", ["go-release-notes"], {
+    significance: "Go 在保持简洁语法和兼容承诺的同时，补上参数化类型这一长期缺口。",
+    tags: ["Go 泛型", "模糊测试"],
+    change: change("Go 1.17 的 interface{} 与代码生成式泛型替代品", ["类型参数", "泛型约束", "原生模糊测试", "go work 工作区"], "泛型不等于所有场景的继承或运行时多态，标准库采用仍保持克制", ["go-release-notes"]),
+  }),
+  event("rust-2018", "Rust 2018 edition 发布", 2018, "release", ["modern-safety"], ["rust"], "Rust 2018 edition 引入模块路径与异步生态的基础语法改进。", ["rust-editions"], {
+    significance: "edition 机制让 Rust 能清理语法债务，同时保持跨版本库互操作。",
+    tags: ["Rust 2018", "edition"],
+    change: change("Rust 2015 的模块声明与 await 生态碎片化", ["更直接的模块路径", "async/await 生态准备", "dyn Trait 语法", "edition 迁移工具"], "edition 改变源代码兼容性而非库 ABI，迁移仍需工具检查", ["rust-editions"]),
+  }),
+  event("rust-2024", "Rust 2024 edition 发布", 2024, "release", ["modern-safety"], ["rust"], "Rust 2024 edition 继续清理 unsafe 边界、宏与 async 语法细节。", ["rust-editions"], {
+    significance: "edition 成为 Rust 稳定演进制度的一部分，而不是破坏性重写。",
+    tags: ["Rust 2024", "edition"],
+    change: change("Rust 2021 edition 的既有宏、unsafe 与 async 行为", ["std::io::Error 简化", "gen 关键字预留", "async 闭包方向", "unsafe 属性边界澄清"], "edition 迁移可自动处理多数语法变化，但 unsafe 相关语义需人工审查", ["rust-editions"]),
+  }),
+  event("csharp-2", "C# 2.0 发布", 2005, "release", ["web-platform"], ["csharp"], "C# 2.0 引入泛型、可空类型与迭代器。", ["csharp-release-notes"], {
+    significance: "类型安全集合和惰性枚举成为 C# 常用表达方式。",
+    tags: ["C# 2.0", "泛型"],
+    change: change("C# 1.x 的非泛型集合与显式枚举模式", ["泛型", "可空值类型", "yield return 迭代器", "匿名方法"], "泛型运行时实现与 Java 擦除不同，但旧集合仍需迁移", ["csharp-release-notes"]),
+  }),
+  event("csharp-3", "C# 3.0 发布", 2007, "release", ["web-platform"], ["csharp"], "C# 3.0 引入 LINQ、lambda、扩展方法和匿名类型。", ["csharp-release-notes"], {
+    significance: "LINQ 把查询语法纳入语言，推动函数式风格进入主流 .NET 开发。",
+    tags: ["C# 3.0", "LINQ"],
+    change: change("C# 2.0 的显式循环与匿名方法", ["LINQ 查询表达式", "lambda", "扩展方法", "类型推断"], "查询语法对提供程序实现敏感，复杂表达式可读性需权衡", ["csharp-release-notes"]),
+  }),
+  event("csharp-8", "C# 8.0 发布", 2019, "release", ["modern-safety"], ["csharp"], "C# 8.0 引入可空引用类型、异步流与默认接口实现。", ["csharp-release-notes"], {
+    significance: "可空引用类型把空安全从值类型扩展到对象引用，是大型存量代码的长期治理工具。",
+    tags: ["C# 8.0", "可空引用类型"],
+    change: change("C# 7.3 默认所有引用类型可为空", ["可空引用类型注解", "IAsyncEnumerable", "索引与范围", "默认接口实现"], "注解式空安全需要项目、库与调用方逐步协调", ["csharp-release-notes"]),
+  }),
+  event("swift-3", "Swift 3 发布", 2016, "release", ["modern-safety"], ["swift"], "Swift 3 完成 API 命名指南的系统性清理，语言进入相对稳定阶段。", ["swift-release-notes"], {
+    significance: "Swift 2 到 Swift 3 的源代码破坏性变化明显，这也是语言确立公共 API 风格的重要阶段。",
+    tags: ["Swift 3", "API 命名"],
+    change: change("Swift 2 的旧 API 命名与跨平台核心库差异", ["Swift 3 API 命名指南", "核心库 API 清理", "移除 ++/-- 等遗留运算符"], "这是源代码不兼容版本，大量项目需要迁移", ["swift-release-notes"]),
+  }),
+  event("swift-5", "Swift 5 发布", 2019, "release", ["modern-safety"], ["swift"], "Swift 5 稳定 ABI，并继续推进编码指南与字符串处理。", ["swift-release-notes"], {
+    significance: "稳定 ABI 使系统组件与用户程序可共享 Swift 运行时，是 Apple 平台集成的重要基础。",
+    tags: ["Swift 5", "ABI 稳定"],
+    change: change("Swift 4 每个应用附带运行时与源码兼容模式", ["ABI 稳定", "标准库二进制兼容", "字符串重写与 SIMD 雏形"], "源代码兼容性与二进制兼容是不同层面的承诺", ["swift-release-notes"]),
+  }),
+  event("swift-6", "Swift 6 发布", 2024, "release", ["modern-safety"], ["swift"], "Swift 6 默认开启严格数据隔离检查，把并发安全提升为可检查的语言约束。", ["swift-release-notes"], {
+    significance: "并发模型从库和开发者约定进一步转向编译期隔离检查。",
+    tags: ["Swift 6", "并发", "数据竞争安全"],
+    change: change("Swift 5 语言模式下的 Sendable 与并发检查警告", ["严格并发检查默认化", "数据竞争安全阶段", "typed throws", "非可复制类型继续演进"], "并发迁移可按语言模式分阶段开启，存量代码需要 actor 与 Sendable 边界整理", ["swift-release-notes"]),
+  }),
+  event("kotlin-2", "Kotlin 2.0 发布", 2024, "release", ["modern-safety"], ["kotlin"], "Kotlin 2.0 引入 K2 编译器并保持语言源码兼容。", ["kotlin-release-notes"], {
+    significance: "编译器基础设施重写为后续语言与工具性能演进提供基础。",
+    tags: ["Kotlin 2.0", "K2"],
+    change: change("Kotlin 1.x 旧编译器前端", ["K2 编译器", "编译速度与诊断改进", "智能类型转换增强"], "第三方编译器插件生态需要适配新前端", ["kotlin-release-notes"]),
+  }),
+  event("python-2", "Python 2.0 发布", 2000, "release", ["web-platform"], ["python"], "Python 2.0 引入列表推导和垃圾回收等基础能力。", ["python-versions"], {
+    significance: "Python 2 系长期主导 2000 年代脚本与 Web 开发，也为后来的迁移难题埋下伏笔。",
+    tags: ["Python 2", "列表推导"],
+    change: change("Python 1.x 的类型与内存模型", ["列表推导", "引用计数加垃圾回收", "增强赋值"], "Unicode 支持尚不完整，Python 2 与 3 的长期并存需要项目明确兼容策略", ["python-versions"]),
+  }),
+  event("python-3", "Python 3.0 发布", 2008, "release", ["web-platform"], ["python"], "Python 3.0 以不兼容方式修正 Unicode、除法和 print 等基础语义。", ["python-versions"], {
+    significance: "这是 Python 历史上最重要的兼容性转折，生态花费十余年完成迁移。",
+    tags: ["Python 3", "Unicode", "不兼容迁移"],
+    change: change("Python 2 的 ASCII 字符串与旧 print 语句", ["str/bytes 分离", "默认 Unicode 字符串", "整数除法语义修正", "print 函数化"], "初期部分库不兼容，Python 2.6/2.7 提供过渡工具但无法消除全部差异", ["python-versions"]),
+  }),
+  event("python-311", "Python 3.11 发布", 2022, "release", ["modern-safety"], ["python"], "Python 3.11 带来异常组、改进追溯信息和大比例解释器性能提升。", ["python-versions"], {
+    significance: "CPython 把性能工程作为 3.11 后的重要主线。",
+    tags: ["Python 3.11", "性能"],
+    change: change("Python 3.10 的异常处理与解释器开销", ["异常组与 except*", "精确错误定位", "Faster CPython 优化"], "具体加速幅度取决于工作负载，官方基准不能直接代表所有程序", ["python-versions"]),
   }),
 ];
 

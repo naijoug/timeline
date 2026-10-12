@@ -13,4 +13,6 @@
 .collection-context { border:1px solid var(--paper-line); padding:20px; margin:25px 0; }
 .chronicle-collections { display:flex; gap:12px; flex-wrap:wrap; margin:8px 0; font-size:13px; }
 .chronicle-collections a { color:var(--paper-ink); text-decoration:underline; }
+.collection-cta { display:inline-flex; align-items:center; border:1px solid var(--paper-line); border-radius:3px; padding:9px 13px; color:var(--paper-ink); font-size:13px; text-decoration:none; }
+.collection-cta:hover { background:var(--paper-surface); }
 @media(max-width:760px) { .collection-nodes li { grid-template-columns:1fr; gap:8px; } }

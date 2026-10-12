@@ -18,6 +18,8 @@ export interface ExplorerPresentation {
   latestEvent?: string;
   landmark?: { year: number; title: string; event: string; position: number };
   scopes?: { id: string; title: string; eventIds: string[] }[];
+  scopeLabel?: string;
+  scopeAllLabel?: string;
   events?: Record<string, EventPresentation>;
   footer?: string;
   readState?: (search: string, category: string) => ExplorerState;
