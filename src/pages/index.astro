@@ -9,16 +9,20 @@ import { chinaHistory } from '../topics/china-history/catalog';
 import { writersCatalog } from '../topics/writers/catalog';
 import '../styles/library.css';
 
+const aiYears = aiEvents.map(event => Number(event.date.slice(0, 4)));
+const languageYears = programmingLanguages.events.map(event => event.time.start.year);
+const writerYears = writersCatalog.events.map(event => event.time.start.year);
+const yearRange = (years: number[]) => `${Math.min(...years)} — ${Math.max(...years)}`;
 const topics = [
   {
-    path: '/ai/', title: 'AI 发展史', range: '1943 — 2026', category: 'SCIENCE & TECHNOLOGY',
+    path: '/ai/', title: 'AI 发展史', range: yearRange(aiYears), category: 'SCIENCE & TECHNOLOGY',
     milestones: ['思想', '学习', '生成', '行动'],
     description: '从技术突破到模型演进、Agent 应用。沿着关键节点，阅读人工智能的发展。',
     mobileDescription: '技术突破、模型演进与 Agent 应用。',
     count: `${aiEvents.length} 个事件`, scope: '技术 / 模型 / Agent',
   },
   {
-    path: '/programming-languages/', title: '编程语言', range: '1957 — 2026', category: 'SCIENCE & TECHNOLOGY',
+    path: '/programming-languages/', title: '编程语言', range: yearRange(languageYears), category: 'SCIENCE & TECHNOLOGY',
     milestones: ['编译', '范式', '平台', '安全'],
     description: '从 FORTRAN、Lisp、C 到现代语言，观察抽象、平台与工程目标如何塑造工具。',
     mobileDescription: '从早期语言到现代工具的演进。',
@@ -32,7 +36,7 @@ const topics = [
     count: `${chinaHistory.periods.length} 个朝代与时期`, scope: `${chinaHistory.events.length} 个精选事件`,
   },
   {
-    path: '/writers/', title: '作家作品', range: '1999 — 2026', category: 'LITERATURE & AUTHORS',
+    path: '/writers/', title: '作家作品', range: yearRange(writerYears), category: 'LITERATURE & AUTHORS',
     milestones: ['科幻', '推理', '历史', '非虚构'],
     description: '从刘慈欣的科幻史诗、紫金陈的社会派推理到马伯庸的历史小说与微尘叙事，阅读当代作家的出版轨迹与内容简介。',
     mobileDescription: '刘慈欣、紫金陈与马伯庸的出版轨迹。',
@@ -41,7 +45,7 @@ const topics = [
 ];
 ---
 <Layout explorer title="探索时间线" description="从 AI 发展、编程语言、中国历史到当代作家作品，沿着时间发现事件、时代与主题之间的关联。">
-  <Header client:load topicTitle="探索时间线" topicPath="/" />
+  <Header client:load screen="home" topicTitle="探索时间线" topicPath="/" />
   <main id="main" class="library">
     <p class="library-kicker">TIME, IN CONTEXT</p>
     <h1>沿着时间，<br/><span>看见事物的来路。</span></h1>

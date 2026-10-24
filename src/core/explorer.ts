@@ -1,7 +1,7 @@
 import type { Catalog, TimelineEvent, TimelineView } from './types';
 import { defaultView, readView, selectEvents, viewQuery } from './catalog';
 
-export interface ExplorerState extends TimelineView { scope: string }
+export interface ExplorerState extends TimelineView { scope: string; order?: 'asc' | 'desc' }
 export interface EventPresentation {
   title?: string;
   metadata?: string;

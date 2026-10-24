@@ -1,6 +1,5 @@
-/* A single document scroll, a fine left spine, and readable leaf-shaped links. */
+/* One document timeline at every width: mobile leaves right, desktop leaves alternate. */
 .mobile-topic-back,.mobile-timeline-guide,.mobile-event-meta,.mobile-event-summary,.mobile-event-footer,.mobile-year-count,.mobile-filter-label { display:none; }
-@media(max-width:1050px) {
   html { scroll-behavior:auto; }
   html .chronicle-app { height:auto; min-height:100dvh; overflow:visible; }
   .chronicle-app .atlas-main { flex:none; overflow:visible; }
@@ -68,7 +67,6 @@
   .mobile-event-footer>span:last-child { display:flex; align-items:center; gap:6px; color:var(--paper-text); white-space:nowrap; }
   .chronicle-count { padding:16px 24px; flex-wrap:wrap; font-size:11px; }
   .chronicle-footer { padding:18px 24px max(20px,env(safe-area-inset-bottom)); font-size:10px; }
-}
 @media(min-width:761px) and (max-width:1050px) {
   .chronicle-app .atlas-main { width:100%; max-width:760px; margin-inline:auto; }
 }
@@ -82,4 +80,71 @@
   html .chronicle-event-button { padding:17px; }
   html .chronicle-event-copy strong { font-size:17px; }
   html .chronicle-range-row .range-title { flex-direction:column; justify-content:center; }
+}
+
+/* On a wide screen the trunk runs down the middle and branches alternate sides.
+   Cards overlap vertically only across opposite columns, never over each other. */
+@media(min-width:1051px) {
+  .chronicle-app .atlas-main { width:100%; max-width:1160px; margin-inline:auto; }
+  .mobile-topic-back { padding:22px 40px 0; }
+  .chronicle-app .history-overview { padding:16px 40px 28px; }
+  html .chronicle-app .overview-heading h1 { font-size:36px; }
+  .chronicle-app .overview-heading p { max-width:760px; font-size:14px; }
+  .chronicle-app .chronicle-collections { margin-top:16px; }
+  .chronicle-toolbar { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:22px 40px 12px; }
+  html .chronicle-range-row .range-title { font-size:12px; }
+  .range-title .mobile-range-label { font-size:18px; }
+  .chronicle-range-row .range-numbers { font-size:12px; }
+  .chronicle-filter-row { margin:0; gap:20px; }
+  .chronicle-period-select { padding:0 40px 14px; }
+  .chronicle-period-select label { flex:none; max-width:600px; }
+  .chronicle-filters { padding:24px 40px; }
+  .chronicle-filter-status { padding-inline:40px; }
+  .mobile-timeline-guide { margin:0 40px; padding-bottom:18px; font-size:12px; }
+  .mobile-timeline-guide select { font-size:14px; }
+  html .chronicle-event-scroll { padding:0 40px 40px; }
+  .chronicle-year { padding-bottom:40px; }
+  .chronicle-year::before { left:50%; top:36px; bottom:0; }
+  .chronicle-year:last-child::before { bottom:36px; }
+  html .chronicle-year h2 { justify-content:center; gap:10px; width:fit-content; max-width:100%; margin:0 auto 24px; padding:10px 18px; font-size:24px; background:var(--paper-bg); }
+  .chronicle-year h2 .mobile-year-count { font-size:11px; }
+  .chronicle-year ol { display:flex; flex-direction:column; }
+  .chronicle-event { width:calc(50% - 32px); margin:0 0 24px; }
+  .chronicle-event + .chronicle-event { margin-top:-64px; }
+  .chronicle-event.branch-right { margin-left:calc(50% + 32px); }
+  html .chronicle-event::before { width:32px; left:auto; right:-32px; top:32px; }
+  html .chronicle-event.branch-right::before { left:-32px; right:auto; }
+  html .chronicle-event-button { min-height:184px; padding:22px 24px 20px; border-radius:26px 7px 26px 7px; }
+  html .chronicle-event.branch-right .chronicle-event-button { border-radius:7px 26px 7px 26px; }
+  html .chronicle-node { left:auto; right:-36px; top:28px; width:8px; height:8px; }
+  html .chronicle-event.branch-right .chronicle-node { left:-36px; right:auto; }
+  html .chronicle-event-copy strong { font-size:19px; line-height:1.6; font-weight:650; }
+  .chronicle-event-copy .mobile-event-meta { margin-bottom:5px; }
+  .mobile-event-meta time { font-size:11px; }
+  .chronicle-event-copy .mobile-event-summary { font-size:14px; line-height:1.9; }
+  .chronicle-event-copy .mobile-event-footer { font-size:11px; margin-top:12px; }
+  .chronicle-count { padding:20px 40px; }
+}
+/* A sticky header must never conceal a requested year or an event anchor. */
+html .chronicle-year,html .chronicle-event { scroll-margin-top:8px; }
+
+.timeline-freshness { margin:0 24px 6px; padding:18px 0; border-bottom:1px solid var(--paper-line); }
+.timeline-freshness>span { display:block; color:var(--paper-muted); font-size:11px; margin-bottom:7px; }
+.timeline-freshness>a { display:flex; align-items:center; justify-content:space-between; gap:14px; font-size:15px; line-height:1.7; font-weight:600; }
+.timeline-freshness>small { display:block; margin-top:7px; color:var(--paper-muted); font-size:10px; }
+.chronicle-filter-status { gap:16px; background:transparent; font-size:11px; }
+.chronicle-filter-status button { flex-shrink:0; font-size:11px; text-decoration:underline; text-underline-offset:4px; }
+.mobile-timeline-guide>.timeline-order { margin-left:auto; }
+.mobile-timeline-guide>.timeline-year-jump { margin-left:0; }
+@media(min-width:1051px) { .timeline-freshness { margin-inline:40px; } }
+@media(max-width:760px) {
+  .mobile-topic-back { display:none; }
+  .chronicle-app .history-overview { padding-top:24px; }
+  .mobile-timeline-guide { display:grid; grid-template-columns:1fr 1fr; gap:0 12px; }
+  .mobile-timeline-guide>.timeline-order { margin:0; justify-self:end; }
+  .mobile-timeline-guide>.timeline-year-jump { justify-self:start; }
+  .mobile-timeline-guide>button { justify-self:end; }
+  .mobile-timeline-guide select { font-size:14px; }
+  .timeline-freshness { padding-block:16px; }
+  .timeline-freshness>a { font-size:14px; }
 }

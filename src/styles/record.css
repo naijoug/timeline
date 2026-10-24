@@ -273,3 +273,9 @@ html .record-content .event-record .copy-link { border-radius:10px; background:v
   html .record-content .event-record .article-body p { font-size:15px; }
   html .record-content .event-record .evidence-locator { font-size:11px; }
 }
+
+@media(max-width:760px) {
+  body:has(.navigation-root[data-screen='record']) .record-content > #back-to-timeline { display:none; }
+  body:has(.navigation-root[data-screen='record']) .record-content:has(.event-record) { padding-top:26px; }
+  html .record-content .event-record .article-body section { scroll-margin-top:8px; }
+}

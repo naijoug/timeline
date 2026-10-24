@@ -8,6 +8,7 @@ import { APPEARANCE_KEY } from '../lib/appearance';
 import Header from '../components/Header';
 import type { Track } from '../data/types';
 interface Props { title?: string; description?: string; active?: Track; explorer?:boolean; topicTitle?:string; topicPath?:string }
+const isEventRecord = /\/events\/[^/]+\/?$/.test(Astro.url.pathname) || /\/ai\/models\/[^/]+\/[^/]+\/?$/.test(Astro.url.pathname);
 const { title = '全球 AI 时间线', description = '探索全球人工智能发展史：技术方法、Agent 产品与模型版本，每个重要事件都有来源。', active = 'history', explorer=false, topicTitle, topicPath } = Astro.props;
 ---
 <!doctype html>
@@ -29,6 +30,6 @@ const { title = '全球 AI 时间线', description = '探索全球人工智能�
       try { document.documentElement.dataset.sidebar = localStorage.getItem('timeline-sidebar-collapsed') === 'true' ? 'collapsed' : 'expanded'; } catch {}
     </script>
     <a href="#main" class="skip-link">跳到主要内容</a>
-    {explorer ? <slot /> : <><Header client:load topicTitle={topicTitle} topicPath={topicPath} active={Astro.url.pathname.endsWith('/about/')?'about':active==='history'?'timeline':'themes'}/><main id="main" class="record-content"><slot /></main><footer class="atlas-footer"><span><strong>timeline</strong><i/>理解过去 · 看见可能的未来</span><a href={sitePath('/about/')}>收录原则与资料来源</a></footer></>}
+    {explorer ? <slot /> : <><Header client:load screen={isEventRecord ? 'record' : 'timeline'} topicTitle={topicTitle} topicPath={topicPath} active={Astro.url.pathname.endsWith('/about/')?'about':active==='history'?'timeline':'themes'}/><main id="main" class="record-content"><slot /></main><footer class="atlas-footer"><span><strong>timeline</strong><i/>理解过去 · 看见可能的未来</span><a href={sitePath('/about/')}>收录原则与资料来源</a></footer></>}
   </body>
 </html>

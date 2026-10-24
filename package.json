@@ -11,7 +11,8 @@
     "validate": "node --import tsx scripts/validate.ts",
     "report:ai": "node --import tsx scripts/ai-coverage.ts",
     "test": "node --import tsx --test tests/*.test.ts",
-    "check:links": "node scripts/check-links.mjs"
+    "check:links": "node scripts/check-links.mjs",
+    "check:reading": "node --import tsx scripts/check-reading-ui.ts"
   },
   "dependencies": {
     "@astrojs/react": "7.0.0",
