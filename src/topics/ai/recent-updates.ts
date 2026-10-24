@@ -1,44 +1,62 @@
 import type { Entity, Source, TimelineEvent } from './types';
 
-// A small, source-reviewed batch. Announcement dates are not snapshot dates,
-// and benchmark launches are not claims about when the underlying work began.
-export const recentResearchDate = '2026-10-23';
+// Source-reviewed updates. Each source keeps its own verification date; advancing
+// the latest research date does not imply older sources were checked again.
+export const recentResearchDate = '2026-10-24';
 
 export const recentSources: Source[] = [
   {
+    id: 'kimi-k3-1-pro-announcement', title: 'Introducing Kimi K3.1 Pro',
+    publisher: '月之暗面', url: 'https://www.kimi.com/en/blog/kimi-k3-1-pro',
+    type: '官方公告', checkedAt: '2026-10-24', publishedAt: '2026-10-24',
+    locator: 'Opening announcement; Advancing the Frontier of Open Intelligence; Availability; date cross-checked in the official research index',
+  },
+  {
+    id: 'kimi-k3-1-pro-release-date', title: 'Kimi Research: Kimi K3.1 Pro dated entry',
+    publisher: '月之暗面', url: 'https://www.kimi.com/en/blog/',
+    type: '官方文档', checkedAt: '2026-10-24',
+    version: 'Kimi K3.1 Pro entry, 2026-10-24', locator: 'Research → Kimi K3.1 Pro → 2026-10-24',
+  },
+  {
+    id: 'kimi-code-k3-1-pro-rollout', title: 'Kimi Code: K3.1 Pro Series is live',
+    publisher: '月之暗面', url: 'https://www.kimi.com/code/docs/en/kimi-code/whats-new.html',
+    type: '官方公告', checkedAt: '2026-10-24', publishedAt: '2026-10-23',
+    version: 'K3.1 Pro rollout entry', locator: 'K3.1 Pro Series is live → October 23, 2026; Membership access',
+  },
+  {
     id: 'decisions-api-ga', title: 'Build more responsive apps with the Decisions API',
     publisher: 'OpenAI', url: 'https://openai.com/index/decisions-api/',
-    type: '官方公告', checkedAt: recentResearchDate, publishedAt: '2026-10-22',
+    type: '官方公告', checkedAt: '2026-10-23', publishedAt: '2026-10-22',
     locator: 'Opening announcement; Select the type of decision your application needs',
   },
   {
     id: 'skills-aaif', title: 'Donating Agent Skills to the Agentic AI Foundation',
     publisher: 'Anthropic', url: 'https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation',
-    type: '官方公告', checkedAt: recentResearchDate, publishedAt: '2026-10-22',
+    type: '官方公告', checkedAt: '2026-10-23', publishedAt: '2026-10-22',
     locator: 'Donating Agent Skills to AAIF; What comes next',
   },
   {
     id: 'deepseek-flash-1017-changelog', title: 'DeepSeek API Change Log: 2026-10-17',
     publisher: 'DeepSeek', url: 'https://api-docs.deepseek.com/updates/',
-    type: '官方公告', checkedAt: recentResearchDate, publishedAt: '2026-10-17',
+    type: '官方公告', checkedAt: '2026-10-23', publishedAt: '2026-10-17',
     version: '2026-10-17 update', locator: 'Date: 2026-10-17 → DeepSeek-V4.1-Flash-1017 Update',
   },
   {
     id: 'deepseek-flash-1017-card', title: 'DeepSeek-V4.1-Flash-1017 model card',
     publisher: 'DeepSeek', url: 'https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017',
-    type: '官方文档', checkedAt: recentResearchDate,
+    type: '官方文档', checkedAt: '2026-10-23',
     version: 'DeepSeek-V4.1-Flash-1017', locator: 'Introduction; benchmark table and harness footnote',
   },
   {
     id: 'aa-robotics-v01', title: 'Welcome to the era of embodied AI: Introducing AA-Robotics v0.1',
     publisher: 'Artificial Analysis', url: 'https://artificialanalysis.ai/articles/aa-robotics',
-    type: '官方公告', checkedAt: recentResearchDate, publishedAt: '2026-10-14',
+    type: '官方公告', checkedAt: '2026-10-23', publishedAt: '2026-10-14',
     version: 'v0.1 research preview', locator: 'Introducing AA-Robotics v0.1; The eight tasks; Results',
   },
   {
     id: 'aa-frontiercode-launch', title: 'Announcing FrontierCode on Artificial Analysis: can AI models write code maintainers would merge?',
     publisher: 'Artificial Analysis', url: 'https://artificialanalysis.ai/articles/frontiercode',
-    type: '官方公告', checkedAt: recentResearchDate, publishedAt: '2026-10-12',
+    type: '官方公告', checkedAt: '2026-10-23', publishedAt: '2026-10-12',
     version: 'FrontierCode 1.1 launch results, 2026-10-12', locator: 'Overview; How FrontierCode works → Methodology',
   },
 ];
@@ -57,6 +75,26 @@ export const recentEntities: Entity[] = [
 ];
 
 export const recentEvents: TimelineEvent[] = [
+  {
+    id: 'kimi-k3-1-pro', date: '2026-10-24', title: 'Kimi K3.1 Pro 发布：强化长程编程与 Agent',
+    company: '月之暗面', kind: '模型发布', tracks: ['models'],
+    summary: '月之暗面发布 K3.1 系列首款模型 Kimi K3.1 Pro，支持 100 万 token 上下文，面向编程、3D 创作与长程 Agent 任务。',
+    significance: '基础模型的升级继续围绕完整任务的执行质量展开，长上下文与后训练共同服务于更长的工作流程。',
+    limitation: '本条按官方研究索引的 10 月 24 日记录；Kimi Code 更新日志标为 10 月 23 日，两者保留各自日期，不推断具体发布时刻。完整模型权重仍为后续计划。',
+    entityIds: ['kimi'], sourceIds: ['kimi-k3-1-pro-announcement', 'kimi-k3-1-pro-release-date', 'kimi-code-k3-1-pro-rollout'],
+    tags: ['编程', '长上下文', '3D 创作', 'Agent', '模型发布'], milestone: true,
+    change: {
+      baseline: 'Kimi K3（2026-07-16 公告）', baselineEventId: 'kimi-k3',
+      improvements: ['在 K3 基础上扩大后训练，官方报告编程、3D 创作与 Agent 能力改善', '同步推出 Highspeed 版本，官方称速度约为 Pro 的 2–3 倍'],
+      tradeoffs: '能力与速度提升均为厂商报告，不是本项目独立实测；百万 token 上下文并非相对 K3 新增，实际可用范围取决于渠道和套餐。',
+      evidence: '厂商报告', sourceIds: ['kimi-k3-1-pro-announcement', 'kimi-code-k3-1-pro-rollout'],
+    },
+    details: [
+      { label: '发布日期口径', text: '官方研究索引把 K3.1 Pro 列在 2026 年 10 月 24 日；Kimi Code 的上线条目标为 10 月 23 日。本条采用研究发布日，同时保留产品渠道日期。', sourceIds: ['kimi-k3-1-pro-release-date', 'kimi-code-k3-1-pro-rollout'], locator: 'Research → Kimi K3.1 Pro; K3.1 Pro Series is live → October 23, 2026' },
+      { label: '已上线与待发布', text: 'Kimi、Kimi Work、Kimi Code 与 API 已上线。完整模型权重计划于 2026 年 11 月 4 日前发布，本条不记录为权重开放。', sourceIds: ['kimi-k3-1-pro-announcement'], locator: 'Availability' },
+      { label: '上下文与使用范围', text: 'Kimi Code 更新日志说明：Pro 模型从 Plus / Moderato 档可用，100 万 token 上下文和 Highspeed 从 Pro / Allegretto 档开放；这不是所有套餐统一提供的额度。', sourceIds: ['kimi-code-k3-1-pro-rollout'], locator: 'Membership access' },
+    ],
+  },
   {
     id: 'decisions-api-ga', date: '2026-10-22', title: 'Decisions API 正式开放：把小决策接入应用',
     company: 'OpenAI', kind: '正式开放', tracks: ['methods'],
