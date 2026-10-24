@@ -2,10 +2,11 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, ExternalLink, SlidersHorizontal, SearchX, Copy, Info } from 'lucide-react';
 import Header from '../Header';
 import CategorySelect from './CategorySelect';
-import type { Catalog, TimelineEvent } from '../../core/types';
+import type { ExplorerCatalog, ExplorerEvent } from '../../core/types';
 import { catalogBounds, descendants } from '../../core/catalog';
 import { civilYear, yearCoordinate, formatYear, formatTime, clampRange } from '../../core/time';
 import { explorerEvents, explorerQuery, type ExplorerState, type ExplorerPresentation } from '../../core/explorer';
+import { aiViewQuery } from '../../core/ai-view-state';
 import { sitePath } from '../../lib/paths';
 import '../../styles/chronicle.css';
 import '../../styles/collections.css';
@@ -17,7 +18,7 @@ const shortYear = (coordinate: number) => { const year = civilYear(coordinate); 
 
 /** One layout, palette and interaction model for every timeline topic. */
 export default function Explorer({ catalog, initialPeriod = '', initialCategory = '', viewPath, presentation = emptyPresentation }: {
-  catalog: Catalog; initialPeriod?: string; initialCategory?: string; viewPath?: string; presentation?: ExplorerPresentation;
+  catalog: ExplorerCatalog; initialPeriod?: string; initialCategory?: string; viewPath?: string; presentation?: ExplorerPresentation;
 }) {
   const { topic, periods, events } = catalog;
   const [state, setState] = useState(() => restoreReadingExplorer('', catalog, initialPeriod, initialCategory, presentation));
@@ -27,19 +28,19 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   const [rangeError, setRangeError] = useState('');
   const [message, setMessage] = useState('');
   const update = (patch: Partial<ExplorerState>) => setState(s => ({ ...s, ...patch }));
-  const query = useMemo(() => (view: ExplorerState) => readingExplorerQuery(view, presentation.serializeState || explorerQuery), [presentation]);
+  const query = useMemo(() => (view: ExplorerState) => readingExplorerQuery(view, presentation.urlFormat === 'ai' ? aiViewQuery : presentation.serializeState || explorerQuery), [presentation]);
   const [min, max] = useMemo(() => catalogBounds(catalog), [catalog]);
   const sourceMap = useMemo(() => new Map(catalog.sources.map(s => [s.id, s])), [catalog.sources]);
   const categoryTitle = (id: string) => topic.categories.find(c => c.id === id)?.title || id;
-  const info = (event: TimelineEvent) => presentation.events?.[event.id] || {};
-  const title = (event: TimelineEvent) => info(event).title || event.title;
-  const metadata = (event: TimelineEvent) => info(event).metadata || periods.filter(p => event.periodIds.includes(p.id)).map(p => p.title).join(' · ') || categoryTitle(event.category);
-  const date = (event: TimelineEvent) => info(event).dateLabel || formatTime(event.time);
+  const info = (event: ExplorerEvent) => presentation.events?.[event.id] || {};
+  const title = (event: ExplorerEvent) => info(event).title || event.title;
+  const metadata = (event: ExplorerEvent) => info(event).metadata || periods.filter(p => event.periodIds.includes(p.id)).map(p => p.title).join(' · ') || categoryTitle(event.category);
+  const date = (event: ExplorerEvent) => info(event).dateLabel || formatTime(event.time);
   const currentPeriod = periods.find(p => p.id === state.period);
   const periodHref = (id: string) => sitePath(`${topic.path}${topic.periodSegment || 'periods'}/${id}/`) + `?category=${state.category || 'all'}${state.all ? '&all=1' : ''}`;
   const timelinePath = sitePath(viewPath || (initialPeriod ? `${topic.path}${topic.periodSegment || 'periods'}/${initialPeriod}/` : topic.path));
-  const returnPath = (event?: TimelineEvent, view = state) => timelinePath + query(event ? { ...view, selected: '' } : view) + (event ? `#event-${event.id}` : '');
-  const eventHref = (event: TimelineEvent, view = state) => eventRecordHref(info(event).href || sitePath(`${topic.path}events/${event.id}/`), returnPath(event, view));
+  const returnPath = (event?: ExplorerEvent, view = state) => timelinePath + query(event ? { ...view, selected: '' } : view) + (event ? `#event-${event.id}` : '');
+  const eventHref = (event: ExplorerEvent, view = state) => eventRecordHref(info(event).href || sitePath(`${topic.path}events/${event.id}/`), returnPath(event, view));
   useEffect(() => {
     const restore = () => {
       const next = restoreReadingExplorer(location.search, catalog, initialPeriod, initialCategory, presentation);
@@ -70,7 +71,15 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   const branchSides = useMemo(() => new Map(results.map((event, index) => [event.id, index % 2 ? 'right' : 'left'])), [results]);
   const newestEvent = useMemo(() => explorerEvents(catalog, { ...restoreReadingExplorer('', catalog, '', '', presentation), from: min, to: max, all: true, period: '', category: '', q: '', scope: '' }, presentation).at(-1), [catalog, min, max, presentation]);
   const activeFilters = [state.q && `搜索：${state.q}`, state.scope && (presentation.scopes?.find(scope => scope.id === state.scope)?.title || state.scope), state.category && categoryTitle(state.category), state.period && currentPeriod?.title, (state.from !== min || state.to !== max) && '限定年份', !state.all && '仅关键节点'].filter(Boolean);
-  const years = useMemo(() => [...new Set(results.map(e => e.time.start.year))].map(year => ({ year, events: results.filter(e => e.time.start.year === year) })), [results]);
+  const years = useMemo(() => {
+    const groups = new Map<number, ExplorerEvent[]>();
+    for (const event of results) {
+      const year = event.time.start.year;
+      const group = groups.get(year);
+      if (group) group.push(event); else groups.set(year, [event]);
+    }
+    return [...groups].map(([year, events]) => ({ year, events }));
+  }, [results]);
   useEffect(() => {
     const escape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && !document.querySelector('.topic-sidebar.mobile-open')) setRangeOpen(false);
@@ -83,7 +92,7 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   const sourceCount = new Set(results.flatMap(e => e.sourceIds)).size;
   const filteredOutside = state.q ? explorerEvents(catalog, { ...state, from: min, to: max, all: true, period: '' }, presentation).length : 0;
   const rangeLabel = state.from === state.to ? shortYear(state.from) : `${shortYear(state.from)} — ${shortYear(state.to)}`;
-  const rememberReturn = (event?: TimelineEvent) => {
+  const rememberReturn = (event?: ExplorerEvent) => {
     const url = returnPath(event);
     if (event) history.replaceState(history.state, '', url);
     try {
@@ -100,7 +109,7 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   };
   const togglePeriod = (id: string) => { const subtree = descendants(catalog, id); update({ expanded: state.expanded.includes(id) ? state.expanded.filter(p => !subtree.has(p)) : [...state.expanded, id] }); };
   const visiblePeriodOptions = periods.filter(p => !p.parentId || state.expanded.includes(p.parentId) || p.id === state.period || p.parentId === state.period);
-  return <div className="atlas-app chronicle-app">
+  return <div className="atlas-app chronicle-app" data-timeline-ready={ready || undefined}>
     <Header screen="timeline" topicTitle={topic.title} topicPath={topic.path} query={state.q} onQuery={q => update({ q })} />
     <main id="main" className="atlas-main">
       <nav className="mobile-topic-back" aria-label="返回主题"><a href={sitePath('/')}><ArrowLeft size={16} />所有主题</a><span>沿时间向下探索</span></nav>

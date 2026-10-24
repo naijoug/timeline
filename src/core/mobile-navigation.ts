@@ -1,9 +1,9 @@
 import { catalogBounds } from './catalog';
 import { restoreExplorer, explorerQuery, explorerEvents, type ExplorerPresentation, type ExplorerState } from './explorer';
-import type { Catalog } from './types';
+import type { ExplorerCatalog, ExplorerEvent } from './types';
 
 /** The document timeline opens the whole chronology at every viewport width. */
-export function restoreReadingExplorer(search: string, catalog: Catalog, period = '', category = '', presentation: ExplorerPresentation = {}): ExplorerState {
+export function restoreReadingExplorer(search: string, catalog: ExplorerCatalog, period = '', category = '', presentation: ExplorerPresentation = {}): ExplorerState {
   const state = restoreExplorer(search, catalog, period, category, presentation);
   const params = new URLSearchParams(search);
   if (!params.has('from') && !params.has('to') && !state.period) {
@@ -77,7 +77,7 @@ export function readingExplorerQuery(state: ExplorerState, serialize: (state: Ex
   params.set('order', state.order || 'asc');
   return `?${params}`;
 }
-export function readingExplorerEvents(catalog: Catalog, state: ExplorerState, presentation: ExplorerPresentation = {}) {
+export function readingExplorerEvents<Event extends ExplorerEvent>(catalog: ExplorerCatalog<Event>, state: ExplorerState, presentation: ExplorerPresentation = {}) {
   const chronological = explorerEvents(catalog, state, presentation);
   return state.order === 'desc' ? chronological.reverse() : chronological;
 }

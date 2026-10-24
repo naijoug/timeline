@@ -1,4 +1,5 @@
-import type { Catalog, TimelineEvent, TimelineView } from './types';
+import type { ExplorerCatalog, ExplorerEvent, TimelineView } from './types';
+import { readAiView } from './ai-view-state';
 import { defaultView, readView, selectEvents, viewQuery } from './catalog';
 
 export interface ExplorerState extends TimelineView { scope: string; order?: 'asc' | 'desc' }
@@ -12,6 +13,7 @@ export interface EventPresentation {
   change?: { baseline: string; improvements: string[]; evidence: string; tradeoffs: string; sourceIds?: string[] };
 }
 export interface ExplorerPresentation {
+  urlFormat?: 'ai';
   subtitle?: string;
   defaultRange?: readonly [number, number];
   defaultEvent?: string;
@@ -25,19 +27,20 @@ export interface ExplorerPresentation {
   readState?: (search: string, category: string) => ExplorerState;
   serializeState?: (state: ExplorerState) => string;
 }
-export function explorerEvents(catalog: Catalog, state: ExplorerState, presentation: ExplorerPresentation = {}): TimelineEvent[] {
+export function explorerEvents<Event extends ExplorerEvent>(catalog: ExplorerCatalog<Event>, state: ExplorerState, presentation: ExplorerPresentation = {}): Event[] {
   const scope = presentation.scopes?.find(scope => scope.id === state.scope);
   const allowed = scope ? new Set(scope.eventIds) : undefined;
   return selectEvents(catalog, state).filter(event => !allowed || allowed.has(event.id));
 }
-export function defaultExplorer(catalog: Catalog, period = '', category = '', presentation: ExplorerPresentation = {}): ExplorerState {
+export function defaultExplorer(catalog: ExplorerCatalog, period = '', category = '', presentation: ExplorerPresentation = {}): ExplorerState {
   const base = defaultView(catalog, period, category);
   const state: ExplorerState = { ...base, scope: '', ...(presentation.defaultRange && !period ? { from: presentation.defaultRange[0], to: presentation.defaultRange[1] } : {}) };
   const events = explorerEvents(catalog, state, presentation);
   state.selected = events.find(e => e.id === presentation.defaultEvent)?.id || events[0]?.id || '';
   return state;
 }
-export function restoreExplorer(search: string, catalog: Catalog, period = '', category = '', presentation: ExplorerPresentation = {}): ExplorerState {
+export function restoreExplorer(search: string, catalog: ExplorerCatalog, period = '', category = '', presentation: ExplorerPresentation = {}): ExplorerState {
+  if (presentation.urlFormat === 'ai') return readAiView(search, category, catalog, presentation);
   if (presentation.readState) return presentation.readState(search, category);
   const params = new URLSearchParams(search);
   const state: ExplorerState = { ...readView(search, catalog, period, category), scope: params.get('scope') || '' };

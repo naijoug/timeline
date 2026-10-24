@@ -121,3 +121,14 @@ export interface TimelineView {
   selected: string;
   expanded: string[];
 }
+
+/** The complete, searchable timeline index, without detail-only reading records. */
+export type ExplorerEvent = Pick<TimelineEvent, 'id' | 'title' | 'time' | 'summary' | 'category' | 'entityIds' | 'periodIds' | 'sourceIds' | 'tags' | 'milestone'>;
+export interface ExplorerCatalog<Event extends ExplorerEvent = ExplorerEvent> {
+  topic: Topic;
+  periods: Period[];
+  events: Event[];
+  entities: Pick<Entity, 'id' | 'name'>[];
+  sources: Pick<Source, 'id' | 'title' | 'url'>[];
+  collections?: Pick<Collection, 'id' | 'title' | 'path'>[];
+}

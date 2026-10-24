@@ -1,4 +1,4 @@
-import type { Catalog, TimelineEvent, TimelineView } from "./types";
+import type { ExplorerCatalog, ExplorerEvent, TimelineView } from "./types";
 import {
   civilYear,
   dateBounds,
@@ -7,7 +7,7 @@ import {
   yearCoordinate,
 } from "./time";
 
-export function catalogBounds(catalog: Catalog): [number, number] {
+export function catalogBounds(catalog: ExplorerCatalog): [number, number] {
   const ranges = [...catalog.periods, ...catalog.events].map((item) =>
     timeBounds(item.time),
   );
@@ -18,7 +18,7 @@ export function catalogBounds(catalog: Catalog): [number, number] {
       ]
     : [1, 1];
 }
-export function descendants(catalog: Catalog, id: string): Set<string> {
+export function descendants(catalog: ExplorerCatalog, id: string): Set<string> {
   const ids = new Set([id]);
   for (let changed = true; changed;) {
     changed = false;
@@ -31,7 +31,7 @@ export function descendants(catalog: Catalog, id: string): Set<string> {
   return ids;
 }
 export function defaultView(
-  catalog: Catalog,
+  catalog: ExplorerCatalog,
   period = "",
   category = "",
 ): TimelineView {
@@ -50,10 +50,10 @@ export function defaultView(
     expanded: [],
   };
 }
-export function selectEvents(
-  catalog: Catalog,
+export function selectEvents<Event extends ExplorerEvent>(
+  catalog: ExplorerCatalog<Event>,
   view: TimelineView,
-): TimelineEvent[] {
+): Event[] {
   const periods = view.period ? descendants(catalog, view.period) : undefined;
   const q = view.q.trim().normalize("NFKC").toLocaleLowerCase();
   const names = new Map(catalog.entities.map((e) => [e.id, e.name]));
@@ -97,7 +97,7 @@ export function viewQuery(view: TimelineView): string {
 }
 export function readView(
   search: string,
-  catalog: Catalog,
+  catalog: ExplorerCatalog,
   initialPeriod = "",
   initialCategory = "",
 ): TimelineView {

@@ -120,7 +120,7 @@ export default function Header({ query, onQuery, active = 'timeline', topicTitle
       </div>
       <nav id="topic-navigation" className="topic-navigation" aria-label="所有主题">
         <a href={sitePath('/')} aria-current={topicPath === '/' && active !== 'about' ? 'page' : undefined} title="所有主题"><Grid2X2 size={19} /><span>所有主题</span></a>
-        {visibleTopics.map(topic => <a key={topic.id} href={sitePath(topic.path)} title={topic.title} aria-current={topicPath === topic.path && active !== 'about' ? 'page' : undefined}>{topic.icon === 'book' ? <BookOpen size={20} /> : <ChartNoAxesColumn size={20} />}<span>{topic.title}</span></a>)}
+        {visibleTopics.map(topic => <a key={topic.id} data-astro-prefetch="hover" href={sitePath(topic.path)} title={topic.title} aria-current={topicPath === topic.path && active !== 'about' ? 'page' : undefined}>{topic.icon === 'book' ? <BookOpen size={20} /> : <ChartNoAxesColumn size={20} />}<span>{topic.title}</span></a>)}
         {!visibleTopics.length && <p className="topic-no-results">没有匹配的主题</p>}
       </nav>
       <div className="sidebar-discovery"><p>更多主题持续收录</p><a href={sitePath('/')}>浏览主题<ArrowRight size={15} /></a></div>

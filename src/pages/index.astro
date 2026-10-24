@@ -54,7 +54,7 @@ const topics = [
     <div class="library-rule"/>
     <div class="library-label"><span>选择一条线，开始探索</span><span>04 个主题</span></div>
     <div class="topic-cards">
-      {topics.map((topic, index) => <a class="topic-card" href={sitePath(topic.path)}>
+      {topics.map((topic, index) => <a class="topic-card" href={sitePath(topic.path)} data-astro-prefetch>
         <span class="topic-card-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
         <div class="topic-card-body">
           <h2>{topic.title}</h2>

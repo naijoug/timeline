@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Explorer from '../../components/timeline/Explorer';
+import Explorer from '../../components/timeline/ExplorerIsland.astro';
 import { programmingLanguages } from '../../topics/programming-languages/catalog';
-import { languagePresentation } from '../../topics/programming-languages/presentation';
 ---
-<Layout explorer title="编程语言" description={programmingLanguages.topic.description}><Explorer catalog={programmingLanguages} presentation={languagePresentation} client:load /></Layout>
+<Layout explorer title="编程语言" description={programmingLanguages.topic.description}><Explorer topicId="programming-languages" /></Layout>

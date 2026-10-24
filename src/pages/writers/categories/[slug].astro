@@ -1,8 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import Explorer from '../../../components/timeline/Explorer';
+import Explorer from '../../../components/timeline/ExplorerIsland.astro';
 import { writersCatalog } from '../../../topics/writers/catalog';
-import { writersPresentation } from '../../../topics/writers/presentation';
 
 export function getStaticPaths() {
   return writersCatalog.topic.categories.map(category => ({ params: { slug: category.id }, props: { category } }));
@@ -10,4 +9,4 @@ export function getStaticPaths() {
 
 const { category } = Astro.props;
 ---
-<Layout explorer title={`${category.title} · 作家作品时间线`} description={`按“${category.title}”筛选作家作品发布时间线。`}><Explorer catalog={writersCatalog} initialCategory={category.id} presentation={writersPresentation} client:load /></Layout>
+<Layout explorer title={`${category.title} · 作家作品时间线`} description={`按“${category.title}”筛选作家作品发布时间线。`}><Explorer topicId="writers" initialCategory={category.id} /></Layout>

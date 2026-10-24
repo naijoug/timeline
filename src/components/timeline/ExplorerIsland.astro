@@ -1,0 +1,8 @@
+---
+import TopicExplorer from './TopicExplorer';
+import type { ExplorerTopic } from '../../core/topic-payloads.server';
+interface Props {
+  topicId: ExplorerTopic; initialPeriod?: string; initialCategory?: string; viewPath?: string;
+}
+---
+<TopicExplorer {...Astro.props} client:load />
