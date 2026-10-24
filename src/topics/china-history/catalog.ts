@@ -6,6 +6,11 @@ import type {
   TimelineEvent,
 } from "../../core/types";
 import { transitionCollection, transitionEvents, transitionRelations, transitionSources, transitionSourceReviews } from './state-transitions';
+import { ancientEvents, ancientSources, ancientEventPatches, ancientRelations } from './ancient-backbone';
+import { modernEvents, modernSources, modernEventPatches, modernRelations } from './modern-backbone';
+import { historyBackboneCollections, modernReadingPeriods, reviewedPeriodCoverage, earlyQingReadingPeriod } from './backbone-structure';
+import { historyReviewedSources, historyReviewedEventPatches } from './reviewed-records';
+import { historyRecommendedResources } from './recommended-resources';
 import { xinhaiCollection, xinhaiEntities, xinhaiEvents, xinhaiRelations, xinhaiSources } from './xinhai';
 
 const source = (
@@ -111,6 +116,9 @@ export const sources: Source[] = [
   ),
   ...xinhaiSources,
   ...transitionSources,
+  ...ancientSources,
+  ...modernSources,
+  ...historyReviewedSources,
 ].map(s => transitionSourceReviews[s.id] ? { ...s, ...transitionSourceReviews[s.id] } : s);
 const duration = (
   start: number,
@@ -138,7 +146,7 @@ const period = (
   coverage: "outline",
   ...extra,
 });
-export const periods: Period[] = [
+const legacyPeriods: Period[] = [
   period("xia", "夏", -2070, -1600, "早期王朝的传统纪年。", {
     time: {
       kind: "duration",
@@ -310,7 +318,7 @@ export const periods: Period[] = [
   }),
   period("qing", "清", 1644, 1912, "按入关至退位分期，追踪通商条约、选官改革与共和转折。", {
     coverage: "selected", sourceIds: ["columbia", "nmc-ming-qing"],
-    note: "1644年是入关口径；1636年改国号等更早阶段待补充。",
+    note: "1644年是入关口径；1616年后金建立与1636年改国号，另见“后金与入关前的清”分组。",
   }),
   period('late-qing-republic', '清末民初：辛亥革命与共和建政', 1911, 1912,
     '跨政权的专题阅读分期，包含清廷存续、地方起义、南京建政与总统交接。', {
@@ -320,10 +328,12 @@ export const periods: Period[] = [
   period('early-republic', '民国初年：1912 建政与交接', 1912, 1912,
     '本版仅展开 1912 年共和建政、总统交接和约法，不代表民国整体存续范围。', {
       time: { kind: 'duration', start: { year: 1912, month: 1, day: 1 }, end: { year: 1912, month: 12, day: 31 } },
-      entityIds: [], coverage: 'selected', sourceIds: ['xinhai-exhibition', 'xinhai-frus-overview'],
+      entityIds: [], parentId: 'republican-early', coverage: 'selected', sourceIds: ['xinhai-exhibition', 'xinhai-frus-overview'],
       note: '与清的末期在 1912 年并行；全年阅读范围不表示南京政府一直存续到年底。',
     }),
 ];
+
+export const periods: Period[] = reviewedPeriodCoverage([...legacyPeriods.flatMap(period => period.id === 'qing' ? [earlyQingReadingPeriod(ancientEvents), period] : [period]), ...modernReadingPeriods(modernEvents)], [...ancientEvents, ...modernEvents]);
 
 const event = (
   id: string,
@@ -606,13 +616,24 @@ export const events: TimelineEvent[] = [
   ),
   ...xinhaiEvents,
   ...transitionEvents,
-];
+  ...ancientEvents,
+  ...modernEvents,
+].map(event => ({
+  ...event,
+  ...(ancientEventPatches[event.id] || {}),
+  ...(modernEventPatches[event.id] || {}),
+  ...(historyReviewedEventPatches[event.id] || {}),
+  ...(historyRecommendedResources[event.id] ? { recommendedResources: historyRecommendedResources[event.id] } : {}),
+}));
+const backboneCollections = historyBackboneCollections(events);
 export const chinaHistory: Catalog = {
   topic: {
     periodLabel: "朝代与时期",
     periodSegment: "dynasties",
     shortcuts: [
-      { title: "朝代总览", path: "/china-history/" },
+      { title: "通史总览", path: "/china-history/" },
+      { title: "从夏商周到当代", path: "/china-history/collections/china-through-the-ages/" },
+      { title: "战役与战争转折", path: "/china-history/collections/wars-and-turning-points/" },
       { title: "统一、分裂与制度转型", path: transitionCollection.path },
       { title: "从唐朝开始", path: "/china-history/dynasties/tang/" },
       { title: "看宋辽夏金并存", path: "/china-history/dynasties/song-era/" },
@@ -622,9 +643,9 @@ export const chinaHistory: Catalog = {
     id: "china-history",
     title: "中国历史",
     path: "/china-history/",
-    description: "沿朝代与并存政权读历史，也追踪统一、分裂和制度变化的脉络。",
+    description: "从夏商周到当代，沿重要战役、政权更替、制度和社会转型读中国历史。",
     coverage:
-      "夏至民初的时期骨架；补入秦汉至清末的统一、分裂与制度转型节点，唐代、宋辽夏金及辛亥革命有较详细的精选事件，仍非完整通史。",
+      "贯穿夏商周至当代的通史主干，收录重要战役、长期战争、制度与社会转折；史实、编辑解读和相关节目分开呈现。各时期深度不一，仍非无遗漏的历史数据库。",
     categories: [
       { id: "politics", title: "政治与更替" },
       { id: "battle", title: "重大战役" },
@@ -637,8 +658,8 @@ export const chinaHistory: Catalog = {
   periods,
   events,
   sources,
-  collections: [transitionCollection, xinhaiCollection],
-  relations: [...transitionRelations, ...xinhaiRelations],
+  collections: [...backboneCollections, transitionCollection, xinhaiCollection],
+  relations: [...transitionRelations, ...xinhaiRelations, ...ancientRelations, ...modernRelations],
   entities: [...periods
     .filter((p) => p.entityIds.length)
     .map((p) => ({

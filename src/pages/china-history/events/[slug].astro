@@ -5,6 +5,7 @@ import { formatTime } from '../../../core/time';
 import { sitePath } from '../../../lib/paths';
 import EventRecord from '../../../components/timeline/EventRecord.astro';
 import Relations from '../../../components/timeline/Relations.astro';
+import RecommendedReading from '../../../components/timeline/RecommendedReading.astro';
 import { eventSourceIds, relationsFor } from '../../../core/evidence';
 export function getStaticPaths() { return chinaHistory.events.map(event=>({params:{slug:event.id},props:{event}})); }
 const { event } = Astro.props;
@@ -21,5 +22,6 @@ const entityHref = (id:string) => sitePath(`/china-history/objects/${id}/`);
     related={[...periods.map(period=>({title:period.title,label:formatTime(period.time),href:sitePath(`/china-history/dynasties/${period.id}/`)})), ...objects.map(o=>({title:o.name,label:o.type,href:entityHref(o.id)}))]}
     facts={[{label:'时间精度',value:event.time.start.day?'日期':event.time.start.month?'月份':'年份'},{label:'类别',value:category.title},{label:'时间类型',value:event.time.kind==='duration'?'持续过程':event.time.kind==='uncertain'?'日期范围待考':'时间节点'}]}>
     <div slot="related"><Relations catalog={chinaHistory} eventId={event.id} entityHref={entityHref} /></div>
+    <RecommendedReading slot="further-reading" resources={event.recommendedResources} />
   </EventRecord>
 </Layout>

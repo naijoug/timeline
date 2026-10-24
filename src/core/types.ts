@@ -30,6 +30,21 @@ export interface ReadingSection {
   locator?: string;
   editorial?: boolean;
 }
+/** Optional interpretation or teaching material, separate from evidence for facts.
+ * These records are rendered only on static detail pages, never in the client index. */
+export interface RecommendedResource {
+  id: string;
+  title: string;
+  creator: string;
+  series?: string;
+  url: string;
+  kind: "video" | "audio" | "lecture" | "article";
+  match: string;
+  scopeNote: string;
+  checkedAt: string;
+  publishedAt?: string;
+  locator?: string;
+}
 /** A sourced statement, never an edge inferred merely from chronological order. */
 export interface EventRelation {
   id: string;
@@ -81,6 +96,7 @@ export interface TimelineEvent {
   milestone: boolean;
   facts?: { label: string; text: string; sourceIds?: string[] }[];
   details?: ReadingSection[];
+  recommendedResources?: RecommendedResource[];
   change?: {
     baseline: string;
     baselineEventId?: string;

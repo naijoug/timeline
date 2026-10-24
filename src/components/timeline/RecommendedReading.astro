@@ -1,0 +1,29 @@
+---
+import { ExternalLink } from 'lucide-react';
+import type { RecommendedResource } from '../../core/types';
+interface Props { resources?: RecommendedResource[] }
+const { resources = [] } = Astro.props;
+const labels: Record<RecommendedResource['kind'], string> = {
+  video: '视频节目', audio: '音频节目', lecture: '讲座与课程', article: '延伸文章',
+};
+---
+{resources.length > 0 && <section class="recommended-reading" id="further-reading">
+  <div class="section-heading"><h2>相关节目与延伸阅读</h2><span>{resources.length} 条推荐</span></div>
+  <p class="source-note">以下是帮助理解事件的讲解或观点，不替代上面的史料依据。节目中的解释与评价属于作者；推荐只说明内容与本事件相关。</p>
+  <ul class="recommended-resources">{resources.map(resource => <li>
+    <a href={resource.url} target="_blank" rel="noopener noreferrer"><strong>{resource.title}</strong><ExternalLink size={15}/></a>
+    <small>{resource.creator}{resource.series ? ` · ${resource.series}` : ''} · {labels[resource.kind]} · 链接核查于 {resource.checkedAt}</small>
+    <p><b>与本事件的联系：</b>{resource.match}</p>
+    {resource.locator && <small>内容定位：{resource.locator}</small>}
+    <p class="resource-scope">{resource.scopeNote}</p>
+  </li>)}</ul>
+</section>}
+<style>
+  .recommended-resources { list-style: none; padding: 0; }
+  .recommended-resources li { padding: 20px 0; border-bottom: 1px solid var(--paper-line); }
+  .recommended-resources a { display: flex; align-items: flex-start; gap: 10px; color: var(--paper-ink); text-decoration: underline; text-underline-offset: 4px; }
+  .recommended-resources a svg { flex: none; margin-top: 6px; }
+  .recommended-resources small { display: block; margin-top: 8px; color: var(--paper-muted); font-size: 12px; line-height: 1.8; }
+  .recommended-resources p { margin: 10px 0; }
+  .recommended-resources .resource-scope { color: var(--paper-muted); font-size: 14px; }
+</style>

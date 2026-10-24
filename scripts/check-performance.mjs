@@ -45,7 +45,7 @@ for (const topic of topics) {
   assert.ok(html.indexOf('class="chronicle-event-button"') < dataMatch.index, `${topic}: visible SSR cards must precede data`);
   assert.ok(html.indexOf('<!--astro:end-->', dataMatch.index) > dataMatch.index, `${topic}: data must be inside the island hydration boundary`);
   for (const event of payload.catalog.events) {
-    for (const field of ['significance', 'details', 'facts', 'change', 'note']) assert.equal(field in event, false, `${topic}/${event.id}: ${field} leaked into index`);
+    for (const field of ['significance', 'details', 'facts', 'change', 'note', 'recommendedResources']) assert.equal(field in event, false, `${topic}/${event.id}: ${field} leaked into index`);
   }
   assert.ok(Buffer.byteLength(dataMatch[1]) < payload.catalog.events.length * 750 + 30_000, `${topic}: index grows faster than the summary/search data budget`);
   // Complete static cards and real destinations remain usable before hydration.

@@ -51,6 +51,21 @@ export function validateCatalog(catalog: Catalog): string[] {
       if (!section.label.trim() || !section.text.trim()) errors.push(`${e.id}: empty reading section`);
     }
     if (e.change) refs(e.change.sourceIds, sources, e.id);
+    ids(e.recommendedResources || [], `${e.id}: recommended resource`);
+    for (const resource of e.recommendedResources || []) {
+      if (![resource.title, resource.creator, resource.match, resource.scopeNote].every(value => value?.trim()))
+        errors.push(`${e.id}/${resource.id}: incomplete recommended resource`);
+      if (!['video', 'audio', 'lecture', 'article'].includes(resource.kind))
+        errors.push(`${e.id}/${resource.id}: invalid recommended resource kind`);
+      try {
+        if (new URL(resource.url).protocol !== 'https:') throw new Error();
+      } catch { errors.push(`${e.id}/${resource.id}: invalid recommended resource URL`); }
+      try {
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(resource.checkedAt)) throw new Error();
+        parseDate(resource.checkedAt);
+        if (resource.checkedAt > new Date().toISOString().slice(0,10)) throw new Error();
+      } catch { errors.push(`${e.id}/${resource.id}: invalid recommended resource checkedAt`); }
+    }
   }
   for (const p of catalog.periods) {
     const visited = new Set([p.id]);

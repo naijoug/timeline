@@ -24,7 +24,7 @@ test('compact JSON indexes keep every searchable event, summary, time, source co
     for (const [i, event] of catalog.events.entries()) {
       const compact = payload.catalog.events[i];
       for (const key of ['id', 'title', 'summary', 'time', 'tags', 'entityIds', 'periodIds', 'sourceIds', 'category', 'milestone'] as const) assert.deepEqual(compact[key], event[key]);
-      for (const key of ['details', 'significance', 'facts', 'change', 'note']) assert.equal(key in compact, false);
+      for (const key of ['details', 'significance', 'facts', 'change', 'note', 'recommendedResources']) assert.equal(key in compact, false);
       const fullPresentation = presentation.events?.[event.id];
       for (const key of ['title', 'metadata', 'dateLabel', 'href'] as const) assert.equal(payload.presentation.events?.[event.id]?.[key], fullPresentation?.[key]);
     }
