@@ -7,7 +7,7 @@ export function applyAppearance(mode: Appearance, systemDark = window.matchMedia
   const theme = resolveAppearance(mode, systemDark);
   document.documentElement.dataset.appearance = mode;
   document.documentElement.dataset.theme = theme;
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#202020' : '#f3f3f3');
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#181818' : '#f7f7f7');
 }
 
 /** System changes apply only in automatic mode; storage changes sync open tabs. */

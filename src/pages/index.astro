@@ -25,7 +25,7 @@ const topics = [
     count: `${programmingLanguages.events.length} 个关键节点`, scope: '范式 / 标准 / 实现',
   },
   {
-    path: '/china-history/', title: '中国历史', range: '中国历史', category: 'HISTORY & CIVILIZATION',
+    path: '/china-history/', title: '中国历史', range: '先秦 — 近代', category: 'HISTORY & CIVILIZATION',
     milestones: ['先秦', '汉唐', '宋元', '明清'],
     description: '从朝代主线走进具体时期，展开并存政权，沿着战役、制度与文化继续阅读。',
     mobileDescription: '沿朝代与时期，读战役、制度与文化。',
@@ -43,25 +43,23 @@ const topics = [
 <Layout explorer title="探索时间线" description="从 AI 发展、编程语言、中国历史到当代作家作品，沿着时间发现事件、时代与主题之间的关联。">
   <Header client:load topicTitle="探索时间线" topicPath="/" />
   <main id="main" class="library">
-    <p class="library-kicker">TIMELINE / A WAY TO EXPLORE</p>
-    <h1>沿着时间，<br/>看见事物的来路。</h1>
+    <p class="library-kicker">TIME, IN CONTEXT</p>
+    <h1>沿着时间，<br/><span>看见事物的来路。</span></h1>
     <p class="library-lead">一个主题，一条主线。走进一个时代，展开一段历史，发现事件之间的关联。</p>
-    <p class="library-mobile-guide">选一个主题，上下滑动时间线，<br/>点开事件，继续阅读。</p>
+    <p class="library-mobile-guide">从一个主题出发，<br/>读懂每一步如何走到今天。</p>
     <div class="library-rule"/>
     <div class="library-label"><span>选择一条线，开始探索</span><span>04 个主题</span></div>
     <div class="topic-cards">
-      {topics.map(topic => <a class="topic-card" href={sitePath(topic.path)}>
-        <div class="topic-card-visual" aria-hidden="true">
-          <span>{topic.range}</span>
-          <div class="mini-timeline">{topic.milestones.map(label => <i><b>{label}</b></i>)}</div>
-        </div>
+      {topics.map((topic, index) => <a class="topic-card" href={sitePath(topic.path)}>
+        <span class="topic-card-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
         <div class="topic-card-body">
-          <span>{topic.category}</span>
-          <h2>{topic.title}<ArrowUpRight size={22} aria-hidden="true"/></h2>
+          <h2>{topic.title}</h2>
           <p class="topic-card-description">{topic.description}</p>
           <p class="topic-card-mobile-description">{topic.mobileDescription}</p>
-          <small>{topic.count}<span class="topic-card-scope"> · {topic.scope}</span></small>
+          <div class="topic-card-meta"><span>{topic.range}</span><span>{topic.count}</span></div>
         </div>
+        <span class="topic-card-arrow" aria-hidden="true"><ArrowUpRight size={19} /></span>
+        <span class="topic-card-line" aria-hidden="true"><i/><i/><i/></span>
       </a>)}
     </div>
     <p class="library-note">每条时间线都有自己的收录范围。事件与资料持续补充，来源随节点一起保留。</p>

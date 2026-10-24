@@ -1,5 +1,6 @@
 ---
 import { sitePath } from '../lib/paths';
+import firaCodeUrl from '../assets/fonts/fira-code-latin-wght-normal.woff2?url';
 import '../styles/global.css';
 import '../styles/atlas.css';
 import '../styles/paper.css';
@@ -11,7 +12,7 @@ const { title = '全球 AI 时间线', description = '探索全球人工智能�
 ---
 <!doctype html>
 <html lang="zh-CN">
-  <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="description" content={description} /><meta name="theme-color" content="#f3f3f3" /><title>{title} · timeline</title><link rel="icon" href={sitePath('/favicon.svg')} type="image/svg+xml" /><meta property="og:title" content={`${title} · timeline`} /><meta property="og:description" content={description} /><meta name="color-scheme" content="light dark" />
+  <head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="description" content={description} /><meta name="theme-color" content="#f7f7f7" /><title>{title} · timeline</title><link rel="icon" href={sitePath('/favicon.svg')} type="image/svg+xml" /><meta property="og:title" content={`${title} · timeline`} /><meta property="og:description" content={description} /><meta name="color-scheme" content="light dark" /><link rel="preload" href={firaCodeUrl} as="font" type="font/woff2" crossorigin="anonymous" />
     <script is:inline data-appearance-key={APPEARANCE_KEY}>
       const appearanceKey = document.currentScript?.getAttribute('data-appearance-key') || '';
       // Runs before body paint so saved dark mode never flashes the light palette.
@@ -20,7 +21,7 @@ const { title = '全球 AI 时间线', description = '探索全球人工智能�
       const theme = appearance === 'system' ? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : appearance;
       document.documentElement.dataset.appearance = appearance;
       document.documentElement.dataset.theme = theme;
-      document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#202020' : '#f3f3f3';
+      document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#181818' : '#f7f7f7';
     </script>
   </head>
   <body>

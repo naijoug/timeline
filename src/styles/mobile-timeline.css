@@ -1,5 +1,4 @@
-/* On touch-sized screens the document is the only scrolling surface.
-   Each leaf is a real link to a complete, shareable event page. */
+/* A single document scroll, a fine left spine, and readable leaf-shaped links. */
 .mobile-topic-back,.mobile-timeline-guide,.mobile-event-meta,.mobile-event-summary,.mobile-event-footer,.mobile-year-count,.mobile-filter-label { display:none; }
 @media(max-width:1050px) {
   html { scroll-behavior:auto; }
@@ -8,68 +7,79 @@
   .chronicle-workspace,.chronicle-workspace.reader-expanded { display:block; flex:none; }
   .chronicle-workspace .chronicle-board,.chronicle-workspace.has-selection .chronicle-board,.reader-expanded .chronicle-board { display:flex; visibility:visible; border:0; }
   .chronicle-workspace .chronicle-reader,.chronicle-reader-placeholder { display:none; }
-  .mobile-topic-back { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:17px 24px 0; font-size:12px; color:var(--paper-muted); }
-  .mobile-topic-back a { display:inline-flex; align-items:center; gap:7px; min-height:36px; color:var(--paper-text); }
-  .chronicle-app .history-overview { display:block; flex:none; height:auto; padding:12px 24px 20px; border-bottom:1px solid var(--paper-line); }
+  .mobile-topic-back { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 24px 0; font-size:11px; color:var(--paper-muted); }
+  .mobile-topic-back a { display:inline-flex; align-items:center; gap:6px; min-height:44px; color:var(--paper-text); font-size:12px; }
+  .chronicle-app .history-overview { display:block; flex:none; height:auto; padding:12px 24px 24px; border-bottom:1px solid var(--paper-line); }
   .chronicle-app .overview-heading { display:block; margin:0; }
-  .chronicle-app .overview-heading h1 { font-size:32px; line-height:1.25; margin:0 0 9px; letter-spacing:-.8px; }
-  .chronicle-app .overview-heading p { display:block; max-width:none; font-size:13px; line-height:1.8; white-space:normal; overflow:visible; }
+  html .chronicle-app .overview-heading h1 { font-size:30px; line-height:1.35; font-weight:650; margin:0 0 10px; letter-spacing:-.4px; }
+  .chronicle-app .overview-heading p { display:block; max-width:640px; font-size:13px; line-height:1.9; white-space:normal; overflow:visible; }
   .chronicle-app .overview-axis { display:none; }
-  .chronicle-collections { margin:16px 0 0; gap:9px; font-size:0; }
-  .chronicle-collections a { display:inline-flex; align-items:center; min-height:36px; font-size:11px; padding:6px 11px; border:1px solid var(--paper-line); border-radius:20px; text-decoration:none; }
-  .chronicle-toolbar { display:block; padding:18px 24px 12px; }
-  .chronicle-range-row .range-title { font-size:20px; min-height:44px; }
-  .chronicle-range-actions button { display:flex; align-items:center; gap:7px; width:auto; min-height:44px; height:auto; padding:9px 13px; border:1px solid var(--paper-line); border-radius:24px; }
+  .chronicle-app .chronicle-collections { margin:16px 0 0; gap:7px 16px; font-size:0; }
+  .chronicle-app .chronicle-collections a { display:inline-flex; align-items:center; min-height:36px; font-size:11px; padding:0; border:0; border-radius:0; color:var(--paper-text); text-decoration:none; }
+  .chronicle-app .chronicle-collections a::after { content:'↗'; margin-left:5px; color:var(--paper-muted); }
+  .chronicle-toolbar { display:block; padding:20px 24px 12px; }
+  html .chronicle-range-row .range-title { display:flex; align-items:baseline; flex-wrap:wrap; column-gap:12px; min-height:44px; font-size:12px; font-weight:400; line-height:1.5; color:var(--paper-muted); }
+  .range-title .mobile-range-label { display:inline; font-size:16px; font-weight:650; color:var(--paper-ink); }
+  .chronicle-range-row .range-numbers { display:inline; padding-top:2px; font-size:11px; }
+  .chronicle-range-actions button { display:flex; align-items:center; gap:6px; width:auto; min-height:44px; height:auto; padding:8px 12px; border:1px solid var(--paper-line); border-radius:10px; background:var(--paper-control); }
   .mobile-filter-label { display:inline; font-size:12px; }
-  .chronicle-filter-row { margin-top:9px; gap:12px; }
-  .key-toggle { min-height:44px; font-size:12px; }
-  .chronicle-period-select { padding:0 24px 16px; }
-  .chronicle-period-select select { min-height:44px; font-size:16px; }
+  .chronicle-filter-row { margin-top:5px; gap:12px; }
+  html .category-select-trigger { font-size:13px; }
+  html .key-toggle { min-height:44px; font-size:12px; gap:8px; }
+  html .key-toggle input { width:16px; height:16px; }
+  .chronicle-period-select { padding:0 24px 16px; border:0; }
+  html .chronicle-period-select select { min-height:44px; font-size:16px; border-radius:10px; background:var(--paper-control); }
   .chronicle-period-select>button { min-width:44px; min-height:44px; justify-content:center; }
-  .chronicle-filters { max-height:none; overflow:visible; padding:18px 24px; }
-  .filter-years { gap:10px; }
-  .filter-years input,.chronicle-filters select { min-height:44px; font-size:16px; }
-  .filter-years>button { min-height:44px; }
+  .chronicle-filters { max-height:none; overflow:visible; padding:20px 24px; background:var(--paper-surface); }
+  .filter-years { gap:10px; flex-wrap:wrap; }
+  html .filter-years input,html .chronicle-filters select { min-height:44px; font-size:16px; border-radius:8px; background:var(--paper-control); }
+  .filter-years>button { min-height:44px; border:1px solid var(--paper-line); border-radius:8px; }
   .filter-zoom { flex-wrap:wrap; gap:8px; }
-  .filter-zoom button { min-width:44px; min-height:44px; }
+  .filter-zoom button { min-width:44px; min-height:44px; border-radius:8px; }
   .filter-zoom button:last-child { margin-left:0; }
-  .chronicle-filter-status { padding:10px 24px; }
+  .chronicle-filter-status { padding:8px 24px; }
   .chronicle-filter-status button { min-width:44px; min-height:44px; justify-content:center; align-items:center; }
-  .mobile-timeline-guide { display:flex; align-items:center; gap:12px; padding:10px 24px 19px; font-size:11px; color:var(--paper-muted); }
+  .mobile-timeline-guide { display:flex; align-items:center; gap:12px; margin:0 24px; padding:6px 0 16px; font-size:11px; color:var(--paper-muted); }
   .mobile-timeline-guide>label { margin-left:auto; min-width:0; }
-  .mobile-timeline-guide select { width:100%; max-width:140px; min-height:44px; padding:8px 10px; border:1px solid var(--paper-line); background:var(--paper-bg); color:var(--paper-text); border-radius:8px; font-size:16px; }
+  .mobile-timeline-guide select { width:100%; max-width:128px; min-height:44px; padding:8px 9px; border:0; background:transparent; color:var(--paper-text); border-radius:8px; font-size:16px; }
   .mobile-timeline-guide>button { display:flex; gap:5px; align-items:center; min-height:44px; padding:6px 0 6px 6px; color:var(--paper-text); white-space:nowrap; }
   html .chronicle-event-scroll { overflow:visible; overscroll-behavior:auto; flex:none; padding:0 24px 20px; }
-  .chronicle-year { position:relative; padding-bottom:24px; scroll-margin-top:20px; }
-  .chronicle-year::before { content:''; position:absolute; left:8px; width:1px; top:35px; bottom:-20px; background:var(--paper-line); }
-  .chronicle-year:last-child::before { bottom:37px; }
-  .chronicle-year h2 { display:flex; align-items:center; gap:14px; position:relative; top:auto; background:var(--paper-bg); margin:0; padding:10px 0 17px; font-size:25px; line-height:1.4; }
-  .chronicle-year h2 .mobile-year-count { display:inline; margin-left:0; color:var(--paper-muted); font-family:inherit; font-size:11px; font-weight:400; }
-  .chronicle-event { margin:0 0 17px 32px; scroll-margin-top:24px; }
-  html .chronicle-event::before { left:-24px; top:30px; bottom:auto; width:24px; height:1px; background:var(--paper-line); }
-  html .chronicle-event-button,html .chronicle-event-button.selected { display:block; min-height:0; padding:19px 19px 16px; border:1px solid var(--paper-line); border-radius:3px 28px 3px 28px; background:var(--paper-control); box-shadow:none; }
-  html .chronicle-event-button:hover { background:var(--paper-surface); border-color:var(--paper-dim); }
+  .chronicle-year { position:relative; padding-bottom:22px; scroll-margin-top:20px; }
+  .chronicle-year::before { content:''; position:absolute; left:6px; width:1px; top:40px; bottom:-14px; background:var(--paper-line); }
+  .chronicle-year:last-child::before { bottom:46px; }
+  html .chronicle-year h2 { display:flex; align-items:center; gap:12px; position:relative; top:auto; background:var(--paper-bg); margin:0; padding:8px 0 18px; font-size:23px; font-weight:650; line-height:1.4; letter-spacing:-.3px; }
+  .chronicle-year h2 .mobile-year-count { display:inline; color:var(--paper-muted); font-size:10px; font-weight:400; letter-spacing:0; }
+  .chronicle-event { margin:0 0 16px 28px; scroll-margin-top:24px; }
+  html .chronicle-event::before { left:-22px; top:30px; bottom:auto; width:22px; height:1px; background:var(--paper-line); }
+  html .chronicle-event-button,html .chronicle-event-button.selected { display:block; min-height:0; padding:18px 19px 16px; border:1px solid transparent; border-radius:7px 24px 7px 24px; background:var(--paper-control); box-shadow:0 2px 8px #00000003; }
+  html[data-theme='dark'] .chronicle-event-button { border-color:var(--paper-line); box-shadow:none; }
+  html .chronicle-event-button:hover { background:var(--paper-control); border-color:var(--paper-dim); }
   .chronicle-short-date { display:none; }
-  html .chronicle-node,html .chronicle-event-button.selected .chronicle-node { position:absolute; left:-28px; top:26px; width:9px; height:9px; margin:0; border:1px solid var(--paper-dim); outline:0; background:var(--paper-bg); }
+  html .chronicle-node,html .chronicle-event-button.selected .chronicle-node { position:absolute; left:-25px; top:27px; width:7px; height:7px; margin:0; border:1px solid var(--paper-dim); outline:0; background:var(--paper-bg); }
   html .is-milestone .chronicle-node { background:var(--paper-ink); border-color:var(--paper-ink); box-shadow:0 0 0 4px var(--paper-bg); }
-  .chronicle-event-copy { padding:0; gap:8px; }
-  html .chronicle-event-copy strong { font-size:21px; line-height:1.5; font-weight:600; letter-spacing:-.2px; }
-  .chronicle-event-copy>span { font-size:12px; }
-  .chronicle-event-copy .mobile-event-meta { display:flex; align-items:center; flex-wrap:wrap; gap:7px 12px; color:var(--paper-muted); }
-  .mobile-event-meta time { font-size:11px; text-align:left; padding:0; }
-  .mobile-milestone { font-size:9px; letter-spacing:.3px; border:1px solid var(--paper-line); padding:1px 6px; border-radius:12px; }
-  .chronicle-event-copy .mobile-event-summary { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; overflow:hidden; color:var(--paper-text); font-size:13px; line-height:1.85; margin-top:1px; }
-  .chronicle-event-copy .mobile-event-footer { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:7px; padding-top:12px; border-top:1px solid var(--paper-line); font-size:10px; }
+  .chronicle-event-copy { padding:0; gap:7px; }
+  html .chronicle-event-copy strong { font-family:var(--paper-sans); font-size:18px; line-height:1.6; font-weight:650; letter-spacing:0; overflow-wrap:anywhere; }
+  .chronicle-event-copy>span { font-size:11px; }
+  .chronicle-event-copy .mobile-event-meta { display:flex; align-items:center; flex-wrap:wrap; gap:6px 10px; color:var(--paper-muted); margin-bottom:3px; }
+  .mobile-event-meta time { font-size:10px; font-variant-numeric:tabular-nums; text-align:left; padding:0; }
+  .mobile-milestone { font-size:9px; font-weight:500; letter-spacing:.2px; padding:2px 6px; border:0; border-radius:5px; background:var(--paper-surface); color:var(--paper-muted); }
+  .chronicle-event-copy .mobile-event-summary { display:block; color:var(--paper-text); font-size:14px; line-height:1.85; margin-top:3px; overflow-wrap:anywhere; }
+  .chronicle-event-copy .mobile-event-footer { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:9px; padding-top:4px; border:0; font-size:10px; color:var(--paper-muted); }
   .mobile-event-footer>span:last-child { display:flex; align-items:center; gap:6px; color:var(--paper-text); white-space:nowrap; }
   .chronicle-count { padding:16px 24px; flex-wrap:wrap; font-size:11px; }
   .chronicle-footer { padding:18px 24px max(20px,env(safe-area-inset-bottom)); font-size:10px; }
 }
+@media(min-width:761px) and (max-width:1050px) {
+  .chronicle-app .atlas-main { width:100%; max-width:760px; margin-inline:auto; }
+}
 @media(max-width:380px) {
-  .mobile-topic-back,.chronicle-toolbar,.chronicle-filters,.chronicle-period-select,.mobile-timeline-guide { padding-left:16px; padding-right:16px; }
-  .chronicle-app .history-overview,html .chronicle-event-scroll { padding-left:16px; padding-right:16px; }
-  .chronicle-event { margin-left:26px; }
+  .mobile-topic-back,.chronicle-toolbar,.chronicle-filters,.chronicle-period-select { padding-left:18px; padding-right:18px; }
+  .mobile-timeline-guide { margin-left:18px; margin-right:18px; gap:8px; }
+  .chronicle-app .history-overview,html .chronicle-event-scroll { padding-left:18px; padding-right:18px; }
+  .chronicle-event { margin-left:24px; }
   html .chronicle-event::before { left:-18px; width:18px; }
-  html .chronicle-node,html .chronicle-event-button.selected .chronicle-node { left:-22px; }
-  html .chronicle-event-button { padding:16px; }
-  html .chronicle-event-copy strong { font-size:20px; }
+  html .chronicle-node,html .chronicle-event-button.selected .chronicle-node { left:-21px; }
+  html .chronicle-event-button { padding:17px; }
+  html .chronicle-event-copy strong { font-size:17px; }
+  html .chronicle-range-row .range-title { flex-direction:column; justify-content:center; }
 }

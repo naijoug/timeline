@@ -152,6 +152,15 @@ AI 内容文件已移动到 `src/topics/ai/`；`src/data/` 只保留兼容导出
 
 ## 外观
 
-全站采用电子墨水屏风格的黑白灰配色。侧栏底部可选择浅色、深色或跟随系统；刷新、切换页面和同源标签页会保持同步，收拢侧栏和手机抽屉内也可操作。默认跟随系统。
+全站采用统一的黑白灰阅读界面，英文、数字与时间标签优先使用自托管 Fira Code，中文回退至系统中文无衬线字体，不依赖外部字体请求。首页使用编号主题索引；移动端叶片事件卡保留细时间轴，摘要完整显示，独立详情页按正文阅读比例排版。侧栏底部可选择浅色、深色或跟随系统；刷新、切换页面和同源标签页会保持同步，收拢侧栏和手机抽屉内也可操作。默认跟随系统。
 
 样式统一使用 `src/styles/paper.css` 的灰阶变量，页面绘制前恢复偏好以避免深色刷新闪白。外观逻辑、存储不可用时的降级以及文字对比度包含在 `npm test` 中。
+
+### 字体
+
+Fira Code Latin variable WOFF2 来自 `@fontsource-variable/fira-code@5.3.0` 的官方分发，内部字体版本为 5.002，支持 300–700 字重。文件仅 36,276 字节，随静态站点部署并使用 `font-display: swap`；中文使用苹方、微软雅黑或 Noto Sans CJK 等本机字体回退。
+
+- 来源：https://github.com/fontsource/font-files/blob/main/fonts/variable/fira-code/files/fira-code-latin-wght-normal.woff2
+- 作者：https://github.com/tonsky/FiraCode
+- 许可：SIL Open Font License 1.1，完整文本保留在 `public/fonts/FiraCode-OFL.txt`。
+- SHA-256：`771bf4b79a97fc005d12866168bd39d868a9dd3d5903008fe8b796723c8a56f4`。

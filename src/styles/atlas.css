@@ -8,13 +8,13 @@
   --purple:var(--blue);
   color:var(--ink);
   background:var(--paper-bg);
-  font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;
+  font-family:var(--paper-sans);
 }
 body{background:var(--paper-bg)}
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--paper-focus);outline-offset:4px}
 .atlas-app{min-height:100vh;display:flex;flex-direction:column;background:var(--paper-bg)}
 .atlas-header{height:72px;padding:0 40px;display:flex;align-items:center;gap:20px;border-bottom:1px solid var(--rule);background:var(--paper-bg)}
-.atlas-brand{font-family:Georgia,'Times New Roman',serif;font-size:29px;font-weight:700;color:var(--paper-ink);letter-spacing:-1.1px;white-space:nowrap;line-height:1}
+.atlas-brand{font-family:var(--paper-sans);font-size:29px;font-weight:700;color:var(--paper-ink);letter-spacing:-1.1px;white-space:nowrap;line-height:1}
 .brand-divider{width:1px;height:22px;background:var(--paper-surface)}
 .atlas-name{font-weight:600;font-size:16px;white-space:nowrap;color:var(--paper-ink)}
 .atlas-search{display:flex;align-items:center;gap:10px;border:1px solid var(--paper-line);border-radius:5px;flex:1;max-width:530px;margin:auto;padding:8px 12px;color:var(--paper-muted);background:var(--paper-bg);min-width:80px}
@@ -138,7 +138,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .drawer-related a{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:14px;color:var(--paper-text);margin:9px 0}.drawer-related a:hover{color:var(--blue)}.drawer-related a span{font-size:11px;color:var(--paper-muted);white-space:nowrap}
 .full-record{font-size:13px;color:var(--blue);display:flex;align-items:center;gap:7px;margin-top:28px}
 .atlas-footer{border-top:1px solid var(--rule);min-height:65px;padding:19px 40px;display:flex;align-items:center;justify-content:space-between;gap:20px;color:var(--paper-muted);font-size:12px;background:var(--paper-bg)}
-.atlas-footer>span{display:flex;align-items:center;gap:14px}.atlas-footer strong{font-family:Georgia,serif;font-size:16px;letter-spacing:-.5px;color:var(--paper-ink)}.atlas-footer i{height:13px;width:1px;background:var(--paper-surface)}
+.atlas-footer>span{display:flex;align-items:center;gap:14px}.atlas-footer strong{font-family:var(--paper-sans);font-size:16px;letter-spacing:-.5px;color:var(--paper-ink)}.atlas-footer i{height:13px;width:1px;background:var(--paper-surface)}
 .record-content{max-width:1120px;padding:40px 48px;margin:0 auto;min-height:calc(100vh - 137px)}
 .record-content .event-hero h1,.record-content .entity-hero h1,.record-content .about-page h1{color:var(--ink)}
 .record-content .eyebrow,.record-content .back-link{color:var(--paper-muted)}
