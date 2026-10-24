@@ -136,7 +136,7 @@ export default function Header({ query, onQuery, active = 'timeline', topicTitle
         if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         event.preventDefault();
         if (screen !== 'record' || active === 'about') {
-          if (canUseParentHistoryBack(destination, location.origin, document.referrer, history.length)) history.back();
+          if (!location.hash && canUseParentHistoryBack(destination, location.origin, document.referrer, history.length)) history.back();
           else location.replace(destination);
           return;
         }

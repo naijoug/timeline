@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { restoreReadingExplorer, readingExplorerQuery, readingExplorerEvents, timelineReadingReturn, canUseParentHistoryBack, canUseTimelineHistoryBack } from '../src/core/mobile-navigation';
+import { restoreReadingExplorer, readingExplorerQuery, readingExplorerEvents, timelineReadingReturn, canUseParentHistoryBack, canUseTimelineHistoryBack, recordContinuationHref } from '../src/core/mobile-navigation';
 import { catalogBounds } from '../src/core/catalog';
 import { aiCatalog } from '../src/topics/ai/adapter';
 import { aiExplorerPresentation } from '../src/topics/ai/explorer';
@@ -90,5 +90,29 @@ test('topic app Back reuses a real Home entry, while direct links safely replace
 
 test('app Back does not mistake an in-page hash entry for the originating timeline', () => {
   for (const file of ['src/components/Header.tsx','src/components/timeline/EventRecord.astro']) assert.match(source(file), /!location\.hash && canUseTimelineHistoryBack/);
+  assert.match(source('src/components/Header.tsx'), /!location\.hash && canUseParentHistoryBack/);
   assert.match(source('src/components/timeline/Explorer.tsx'), /new Map\(results\.map\(\(event, index\) => \[event\.id, index % 2/);
+});
+
+test('related event chains keep the exact original filters, order and reading anchor', () => {
+  const origin='https://naijoug.github.io', prefix='/timeline/ai/';
+  const destination=prefix+'?q=Kimi&all=1&order=desc#event-kimi-k3';
+  for (const path of [prefix+'events/kimi-k3-1-pro/',prefix+'models/kimi/kimi-k2-6/']) {
+    const next=recordContinuationHref(path,destination,origin,prefix)!;
+    assert.equal(new URL(next,origin).searchParams.get('return'),destination);
+    const again=recordContinuationHref(next,destination,origin,prefix)!;
+    assert.equal(again,next);
+  }
+  assert.match(source('src/components/timeline/EventRecord.astro'), /querySelectorAll<HTMLAnchorElement>\('\.event-record a\[href\]'\)/);
+  assert.match(source('src/components/timeline/EventRecord.astro'), /if \(href\) link\.href = href/);
+});
+
+test('record continuation leaves sources, entity pages and cross-topic links untouched', () => {
+  const origin='https://naijoug.github.io', prefix='/timeline/ai/', destination=prefix+'?q=Kimi';
+  for (const href of ['https://example.com/events/source/', '/timeline/writers/events/example/',prefix+'models/kimi/',prefix+'collections/transformers/', 'mailto:editor@example.com']) {
+    assert.equal(recordContinuationHref(href,destination,origin,prefix),null);
+  }
+  assert.equal(recordContinuationHref(prefix+'events/example/','https://example.com/',origin,prefix),null);
+  const fallback=recordContinuationHref(prefix+'events/example/',prefix,origin,prefix)!;
+  assert.equal(new URL(fallback,origin).searchParams.get('return'),prefix);
 });

@@ -21,6 +21,18 @@ export function eventRecordHref(href: string, returnPath: string): string {
   return `${path}?${params}${hash ? `#${hash}` : ''}`;
 }
 
+/** Carry the originating reading context through related records, not entity or external links. */
+export function recordContinuationHref(href: string, returnPath: string, origin: string, topicPrefix: string): string | null {
+  const destination = safeTimelineReturn(returnPath, origin, topicPrefix);
+  if (!destination) return null;
+  try {
+    const url = new URL(href, origin);
+    const isRecord = /\/events\/[^/]+\/?$/.test(url.pathname) || /\/models\/[^/]+\/[^/]+\/?$/.test(url.pathname);
+    if (url.origin !== origin || !url.pathname.startsWith(topicPrefix) || !isRecord) return null;
+    return eventRecordHref(url.pathname + url.search + url.hash, timelineReadingReturn(destination));
+  } catch { return null; }
+}
+
 /** Only return to an explorer within this topic; never to another detail or origin. */
 export function safeTimelineReturn(value: string | null, origin: string, topicPrefix: string): string | null {
   if (!value) return null;
