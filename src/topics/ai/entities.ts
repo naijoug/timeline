@@ -1,3 +1,4 @@
+import { verified2026Entities } from './verified-2026';
 import { sitePath } from '../../lib/paths';
 import type { Entity, Relation, TimelineEvent } from './types';
 import { globalEntities } from './global';
@@ -11,6 +12,7 @@ export const entities: Entity[] = [
   ...instructionEntities,
   ...historicalEntities,
   ...recentEntities,
+  ...verified2026Entities,
   { id: 'mcp', name: 'MCP', type: 'concept', description: '连接 AI 应用与外部数据、工具的开放协议。与 Skills 的任务知识和 Agent 的运行循环各有分工。', tags: ['协议', '工具连接'], sourceIds: ['mcp'] },
   { id: 'neural-networks', name: '神经网络', type: 'concept', description: '通过连接和参数学习，把输入转化为预测。从早期形式神经元，到现代深度学习。', tags: ['深度学习', '学习方法'], sourceIds: ['mcculloch', 'backprop'] },
   { id: 'symbolic-ai', name: '符号主义与专家系统', type: 'concept', description: '用符号、知识和规则完成推理。它与学习方法长期并行发展。', tags: ['知识表示', '推理'], sourceIds: ['chm'] },
