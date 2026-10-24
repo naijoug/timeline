@@ -8,15 +8,64 @@ import { programmingLanguages } from '../topics/programming-languages/catalog';
 import { chinaHistory } from '../topics/china-history/catalog';
 import { writersCatalog } from '../topics/writers/catalog';
 import '../styles/library.css';
+
+const topics = [
+  {
+    path: '/ai/', title: 'AI 发展史', range: '1943 — 2026', category: 'SCIENCE & TECHNOLOGY',
+    milestones: ['思想', '学习', '生成', '行动'],
+    description: '从技术突破到模型演进、Agent 应用。沿着关键节点，阅读人工智能的发展。',
+    mobileDescription: '技术突破、模型演进与 Agent 应用。',
+    count: `${aiEvents.length} 个事件`, scope: '技术 / 模型 / Agent',
+  },
+  {
+    path: '/programming-languages/', title: '编程语言', range: '1957 — 2026', category: 'SCIENCE & TECHNOLOGY',
+    milestones: ['编译', '范式', '平台', '安全'],
+    description: '从 FORTRAN、Lisp、C 到现代语言，观察抽象、平台与工程目标如何塑造工具。',
+    mobileDescription: '从早期语言到现代工具的演进。',
+    count: `${programmingLanguages.events.length} 个关键节点`, scope: '范式 / 标准 / 实现',
+  },
+  {
+    path: '/china-history/', title: '中国历史', range: '中国历史', category: 'HISTORY & CIVILIZATION',
+    milestones: ['先秦', '汉唐', '宋元', '明清'],
+    description: '从朝代主线走进具体时期，展开并存政权，沿着战役、制度与文化继续阅读。',
+    mobileDescription: '沿朝代与时期，读战役、制度与文化。',
+    count: `${chinaHistory.periods.length} 个朝代与时期`, scope: `${chinaHistory.events.length} 个精选事件`,
+  },
+  {
+    path: '/writers/', title: '作家作品', range: '1999 — 2026', category: 'LITERATURE & AUTHORS',
+    milestones: ['科幻', '推理', '历史', '非虚构'],
+    description: '从刘慈欣的科幻史诗、紫金陈的社会派推理到马伯庸的历史小说与微尘叙事，阅读当代作家的出版轨迹与内容简介。',
+    mobileDescription: '刘慈欣、紫金陈与马伯庸的出版轨迹。',
+    count: `${writersCatalog.events.length} 部代表作`, scope: '刘慈欣 / 紫金陈 / 马伯庸',
+  },
+];
 ---
 <Layout explorer title="探索时间线" description="从 AI 发展、编程语言、中国历史到当代作家作品，沿着时间发现事件、时代与主题之间的关联。">
   <Header client:load topicTitle="探索时间线" topicPath="/" />
-  <main id="main" class="library"><p class="library-kicker">TIMELINE / A WAY TO EXPLORE</p><h1>沿着时间，<br/>看见事物的来路。</h1><p class="library-lead">一个主题，一条主线。走进一个时代，展开一段历史，发现事件之间的关联。</p><div class="library-rule"/><div class="library-label"><span>选择一条线，开始探索</span><span>04 个主题</span></div><div class="topic-cards">
-    <a class="topic-card" href={sitePath('/ai/')}><div class="topic-card-visual" aria-hidden="true"><span>1943 — 2026</span><div class="mini-timeline">{['思想','学习','生成','行动'].map(t=><i><b>{t}</b></i>)}</div></div><div class="topic-card-body"><span>SCIENCE & TECHNOLOGY</span><h2>AI 发展史<ArrowUpRight size={22}/></h2><p>从技术突破到模型演进、Agent 应用。沿着关键节点，阅读人工智能的发展。</p><small>{aiEvents.length} 个事件 · 技术 / 模型 / Agent</small></div></a>
-    <a class="topic-card" href={sitePath('/programming-languages/')}><div class="topic-card-visual" aria-hidden="true"><span>1957 — 2026</span><div class="mini-timeline">{['编译','范式','平台','安全'].map(t=><i><b>{t}</b></i>)}</div></div><div class="topic-card-body"><span>SCIENCE & TECHNOLOGY</span><h2>编程语言<ArrowUpRight size={22}/></h2><p>从 FORTRAN、Lisp、C 到现代语言，观察抽象、平台与工程目标如何塑造工具。</p><small>{programmingLanguages.events.length} 个关键节点 · 范式 / 标准 / 实现</small></div></a>
-    <a class="topic-card" href={sitePath('/china-history/')}><div class="topic-card-visual" aria-hidden="true"><span>中国历史</span><div class="mini-timeline">{['先秦','汉唐','宋元','明清'].map(t=><i><b>{t}</b></i>)}</div></div><div class="topic-card-body"><span>HISTORY & CIVILIZATION</span><h2>中国历史<ArrowUpRight size={22}/></h2><p>从朝代主线走进具体时期，展开并存政权，沿着战役、制度与文化继续阅读。</p><small>{chinaHistory.periods.length} 个朝代与时期 · {chinaHistory.events.length} 个精选事件</small></div></a>
-    <a class="topic-card" href={sitePath('/writers/')}><div class="topic-card-visual" aria-hidden="true"><span>1999 — 2026</span><div class="mini-timeline">{['科幻','推理','历史','非虚构'].map(t=><i><b>{t}</b></i>)}</div></div><div class="topic-card-body"><span>LITERATURE & AUTHORS</span><h2>作家作品<ArrowUpRight size={22}/></h2><p>从刘慈欣的科幻史诗、紫金陈的社会派推理到马伯庸的历史小说与微尘叙事，阅读当代作家的出版轨迹与内容简介。</p><small>{writersCatalog.events.length} 部代表作 · 刘慈欣 / 紫金陈 / 马伯庸</small></div></a>
-  </div><p class="library-note">每条时间线都有自己的收录范围。事件与资料持续补充，来源随节点一起保留。</p></main>
+  <main id="main" class="library">
+    <p class="library-kicker">TIMELINE / A WAY TO EXPLORE</p>
+    <h1>沿着时间，<br/>看见事物的来路。</h1>
+    <p class="library-lead">一个主题，一条主线。走进一个时代，展开一段历史，发现事件之间的关联。</p>
+    <p class="library-mobile-guide">选一个主题，上下滑动时间线，<br/>点开事件，继续阅读。</p>
+    <div class="library-rule"/>
+    <div class="library-label"><span>选择一条线，开始探索</span><span>04 个主题</span></div>
+    <div class="topic-cards">
+      {topics.map(topic => <a class="topic-card" href={sitePath(topic.path)}>
+        <div class="topic-card-visual" aria-hidden="true">
+          <span>{topic.range}</span>
+          <div class="mini-timeline">{topic.milestones.map(label => <i><b>{label}</b></i>)}</div>
+        </div>
+        <div class="topic-card-body">
+          <span>{topic.category}</span>
+          <h2>{topic.title}<ArrowUpRight size={22} aria-hidden="true"/></h2>
+          <p class="topic-card-description">{topic.description}</p>
+          <p class="topic-card-mobile-description">{topic.mobileDescription}</p>
+          <small>{topic.count}<span class="topic-card-scope"> · {topic.scope}</span></small>
+        </div>
+      </a>)}
+    </div>
+    <p class="library-note">每条时间线都有自己的收录范围。事件与资料持续补充，来源随节点一起保留。</p>
+  </main>
   <footer class="atlas-footer"><span><strong>timeline</strong><i/>在时间中，发现关联</span><a href={sitePath('/about/')}>收录范围与资料说明</a></footer>
 </Layout>
 <script>

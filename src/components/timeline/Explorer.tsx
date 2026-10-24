@@ -9,6 +9,8 @@ import { defaultExplorer, restoreExplorer, explorerEvents, explorerQuery, type E
 import { sitePath } from '../../lib/paths';
 import '../../styles/chronicle.css';
 import '../../styles/collections.css';
+import '../../styles/mobile-timeline.css';
+import { restoreMobileExplorer, eventRecordHref } from '../../core/mobile-navigation';
 import { eventSourceIds, relationEndpoints, relationsFor } from '../../core/evidence';
 
 const emptyPresentation: ExplorerPresentation = {};
@@ -26,13 +28,15 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   const { topic, periods, events } = catalog;
   const [state, setState] = useState(() => defaultExplorer(catalog, initialPeriod, initialCategory, presentation));
   const [ready, setReady] = useState(false);
+  const [mobile, setMobile] = useState(false);
+  const restoredPosition = useRef(false);
   const [rangeOpen, setRangeOpen] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [rangeError, setRangeError] = useState('');
   const [message, setMessage] = useState('');
   const [overviewWidth, setOverviewWidth] = useState(900);
   const details = useRef<HTMLElement>(null), reader = useRef<HTMLDivElement>(null), list = useRef<HTMLDivElement>(null), axis = useRef<HTMLDivElement>(null);
-  const opener = useRef<HTMLButtonElement | null>(null);
+  const opener = useRef<HTMLElement | null>(null);
   const update = (patch: Partial<ExplorerState>) => setState(s => ({ ...s, ...patch }));
   const query = presentation.serializeState || explorerQuery;
   const [min, max] = useMemo(() => catalogBounds(catalog), [catalog]);
@@ -46,14 +50,42 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   const sourceChips = (ids?: string[]) => !!ids?.length && <span className="reader-evidence-links">{ids.map(id => { const source = sourceMap.get(id); const number = eventSources(selected).findIndex(item => item.id === id) + 1; if (!source || !number) return null; return <a key={id} href={source.url} target="_blank" rel="noopener noreferrer" title={`${source.title} · ${source.publisher}`}>{number}<ExternalLink size={11} /></a>; })}</span>;
   const currentPeriod = periods.find(p => p.id === state.period);
   const periodHref = (id: string) => sitePath(`${topic.path}${topic.periodSegment || 'periods'}/${id}/`) + `?category=${state.category || 'all'}${state.all ? '&all=1' : ''}`;
-  const eventHref = (event: TimelineEvent) => info(event).href || sitePath(`${topic.path}events/${event.id}/`) + `?return=${encodeURIComponent(sitePath(viewPath || (initialPeriod ? `${topic.path}${topic.periodSegment || 'periods'}/${initialPeriod}/` : topic.path)) + query(state))}`;
+  const timelinePath = sitePath(viewPath || (initialPeriod ? `${topic.path}${topic.periodSegment || 'periods'}/${initialPeriod}/` : topic.path));
+  const returnPath = (event?: TimelineEvent, view = state) => timelinePath + query(event ? { ...view, selected: '' } : view) + (event ? `#event-${event.id}` : '');
+  const eventHref = (event: TimelineEvent, standalone = false, view = state) => eventRecordHref(info(event).href || sitePath(`${topic.path}events/${event.id}/`), returnPath(standalone ? event : undefined, view));
   const related = (event: TimelineEvent) => info(event).related || periods.filter(p => event.periodIds.includes(p.id)).map(p => ({ title: p.title, href: periodHref(p.id) }));
   useEffect(() => {
-    const restore = () => { setState(restoreExplorer(location.search, catalog, initialPeriod, initialCategory, presentation)); setReady(true); };
-    restore(); window.addEventListener('popstate', restore);
-    return () => window.removeEventListener('popstate', restore);
+    const media = window.matchMedia('(max-width: 1050px)');
+    const restore = (followDeepLink = true) => {
+      const narrow = media.matches;
+      const next = narrow ? restoreMobileExplorer(location.search, catalog, initialPeriod, initialCategory, presentation) : restoreExplorer(location.search, catalog, initialPeriod, initialCategory, presentation);
+      const explicitEvent = new URLSearchParams(location.search).get('event');
+      const linkedEvent = explicitEvent && events.find(event => event.id === explicitEvent);
+      if (narrow && followDeepLink && linkedEvent) {
+        location.replace(eventHref(linkedEvent, true, next));
+        return;
+      }
+      setMobile(narrow); setState(next); setReady(true);
+    };
+    const pop = () => { restoredPosition.current = false; restore(); };
+    const resize = () => restore(false);
+    restore(); window.addEventListener('popstate', pop); media.addEventListener('change', resize);
+    return () => { window.removeEventListener('popstate', pop); media.removeEventListener('change', resize); };
   }, [catalog, initialPeriod, initialCategory, presentation]);
-  useEffect(() => { if (ready) history.replaceState(null, '', location.pathname + query(state)); }, [state, ready, query]);
+  useEffect(() => { if (ready) history.replaceState(history.state, '', location.pathname + query(state) + location.hash); }, [state, ready, query]);
+  useEffect(() => {
+    if (!ready || !mobile || restoredPosition.current) return;
+    restoredPosition.current = true;
+    let position: { url: string; top: number; filters?: boolean } | undefined;
+    try { position = JSON.parse(sessionStorage.getItem('timeline-mobile-position') || 'null') || undefined; } catch { /* Browser Back also restores naturally. */ }
+    const current = location.pathname + query(state) + location.hash;
+    if (position?.url === current && position.filters) setRangeOpen(true);
+    const frame = requestAnimationFrame(() => requestAnimationFrame(() => {
+      if (position?.url === current && Number.isFinite(position.top)) window.scrollTo({ top: position.top, behavior: 'instant' });
+      else if (location.hash.startsWith('#event-')) document.getElementById(decodeURIComponent(location.hash.slice(1)))?.scrollIntoView({ block: 'center', behavior: 'instant' });
+    }));
+    return () => cancelAnimationFrame(frame);
+  }, [ready, mobile]);
   useEffect(() => {
     if (!axis.current) return;
     const observer = new ResizeObserver(([entry]) => setOverviewWidth(entry.contentRect.width));
@@ -66,7 +98,7 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   useEffect(() => {
     reader.current?.scrollTo({ top: 0 });
     if (!selected) setExpanded(false);
-    if (!ready || !selected || !list.current) return;
+    if (!ready || mobile || !selected || !list.current) return;
     const container = list.current;
     const revealSelection = () => {
       const node = [...container.querySelectorAll<HTMLElement>('[data-event-id]')].find(node => node.dataset.eventId === selected.id);
@@ -75,15 +107,15 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
       if (item.top > bounds.top + bounds.height * .65 || item.top < bounds.top + 48) container.scrollTop += item.top - bounds.top - Math.max(60, bounds.height / 3);
     };
     revealSelection(); const observer = new ResizeObserver(revealSelection); observer.observe(container); return () => observer.disconnect();
-  }, [selected?.id, ready, expanded]);
-  const choose = (id: string, button?: HTMLButtonElement) => {
+  }, [selected?.id, ready, expanded, mobile]);
+  const choose = (id: string, button?: HTMLElement) => {
     if (button) opener.current = button;
     update({ selected: id });
     if (window.matchMedia('(max-width: 1050px)').matches) requestAnimationFrame(() => details.current?.focus({ preventScroll: true }));
   };
   const closeDetails = () => {
     const id = state.selected; update({ selected: '' }); setExpanded(false);
-    requestAnimationFrame(() => ([...(list.current?.querySelectorAll<HTMLButtonElement>('[data-event-id]') || [])].find(node => node.dataset.eventId === id) || opener.current)?.focus());
+    requestAnimationFrame(() => ([...(list.current?.querySelectorAll<HTMLElement>('[data-event-id]') || [])].find(node => node.dataset.eventId === id) || opener.current)?.focus());
   };
   useEffect(() => {
     const escape = (e: KeyboardEvent) => {
@@ -100,7 +132,16 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   const overviewPosition = (year: number) => (year - min) / totalYears * 100;
   const overviewTicks = useMemo(() => [...new Set([min, ...yearTicks(min + 1, max - 1, overviewWidth).filter(year => (year - min) / totalYears * overviewWidth > 58 && (max - year) / totalYears * overviewWidth > 58), max])], [min, max, overviewWidth]);
   const rangeLabel = state.from === state.to ? shortYear(state.from) : `${shortYear(state.from)} — ${shortYear(state.to)}`;
-  const rememberReturn = () => { try { sessionStorage.setItem('timeline-return', location.pathname + query(state)); } catch { /* Optional context. */ } };
+  const rememberReturn = (event?: TimelineEvent) => {
+    const url = returnPath(event);
+    if (event) history.replaceState(history.state, '', url);
+    try {
+      sessionStorage.setItem('timeline-return', url);
+      if (event) sessionStorage.setItem('timeline-mobile-position', JSON.stringify({ url, top: window.scrollY, filters: rangeOpen }));
+    } catch { /* The return URL and anchor work without storage. */ }
+  };
+  const resetFilters = () => setState(mobile ? restoreMobileExplorer('', catalog, initialPeriod, initialCategory, presentation) : defaultExplorer(catalog, initialPeriod, initialCategory, presentation));
+  const jumpToYear = (year: string) => document.getElementById(`year-${year}`)?.scrollIntoView({ behavior: 'instant', block: 'start' });
   const searchAll = () => {
     const nextState = { ...state, from: min, to: max, all: true, scope: '', category: '', period: '', selected: '' };
     if (initialPeriod || viewPath) location.href = sitePath(topic.path) + query(nextState);
@@ -111,6 +152,7 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   return <div className="atlas-app chronicle-app">
     <Header topicTitle={topic.title} topicPath={topic.path} query={state.q} onQuery={q => update({ q })} />
     <main id="main" className="atlas-main">
+      <nav className="mobile-topic-back" aria-label="返回主题"><a href={sitePath('/')}><ArrowLeft size={16} />所有主题</a><span>沿时间向下探索</span></nav>
       <section className="history-overview" aria-label="历史总览">
         <div className="overview-heading"><h1 title={`${formatYear(civilYear(min))} — ${formatYear(civilYear(max))}`}>{shortYear(min)} — {shortYear(max)}</h1><p>{presentation.subtitle || topic.description}</p></div>
         {!!catalog.collections?.length && <nav className="chronicle-collections" aria-label="精选专题">专题：{catalog.collections.map(c => <a key={c.id} href={sitePath(c.path)}>{c.title}</a>)}</nav>}
@@ -125,7 +167,7 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
       <div className={`chronicle-workspace ${selected ? 'has-selection' : ''} ${expanded ? 'reader-expanded' : ''}`}>
         <section className="chronicle-board" aria-label="关键事件时间线">
           <div className="chronicle-toolbar">
-            <div className="chronicle-range-row"><button className="range-title" onClick={() => setRangeOpen(!rangeOpen)} aria-expanded={rangeOpen} aria-controls="chronicle-filters">{rangeLabel}</button><div className="chronicle-range-actions"><button aria-label="时间与范围筛选" aria-expanded={rangeOpen} aria-controls="chronicle-filters" className={rangeOpen || state.scope ? 'active' : ''} onClick={() => setRangeOpen(!rangeOpen)}><SlidersHorizontal size={17} /></button></div></div>
+            <div className="chronicle-range-row"><button className="range-title" onClick={() => setRangeOpen(!rangeOpen)} aria-expanded={rangeOpen} aria-controls="chronicle-filters">{rangeLabel}</button><div className="chronicle-range-actions"><button aria-label="时间与范围筛选" aria-expanded={rangeOpen} aria-controls="chronicle-filters" className={rangeOpen || state.scope ? 'active' : ''} onClick={() => setRangeOpen(!rangeOpen)}><SlidersHorizontal size={17} /><span className="mobile-filter-label">筛选</span></button></div></div>
             <div className="chronicle-filter-row"><CategorySelect value={state.category} options={[{ id: '', title: '全部类别' }, ...topic.categories]} onChange={category => update({ category })} /><label className="key-toggle"><input type="checkbox" checked={!state.all} onChange={e => update({ all: !e.target.checked })} /><span>关键节点</span></label></div>
           </div>
           {!!periods.length && <div className="chronicle-period-select"><label>{topic.periodLabel || '时期'}<select aria-label="选择朝代或时期" value={state.period} onChange={e => { location.href = e.target.value ? periodHref(e.target.value) : sitePath(topic.path) + `?category=${state.category || 'all'}`; }}><option value="">全部时期</option>{periods.map(p => <option key={p.id} value={p.id}>{p.parentId ? '　' : ''}{p.title} · {formatTime(p.time)}</option>)}</select></label><button onClick={() => setRangeOpen(!rangeOpen)} title="收录说明与时期目录" aria-label="收录说明与时期目录"><Info size={17} /></button></div>}
@@ -135,7 +177,7 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
             </form>
             {min <= 0 && <p className="filter-help">公元前用负数表示，无公元 0 年。</p>}{rangeError && <p className="filter-error" role="alert">{rangeError}</p>}
             {!!presentation.scopes?.length && <label className="region-filter">{presentation.scopeLabel || '地区'}<select value={state.scope} onChange={e => update({ scope: e.target.value })}><option value="">{presentation.scopeAllLabel || '全球'}</option>{presentation.scopes.map(scope => <option key={scope.id} value={scope.id}>{scope.title}</option>)}</select></label>}
-            <div className="filter-zoom"><button aria-label="更早的时间" onClick={() => move(-1)} disabled={state.from === min}><ChevronLeft size={17} /></button><button aria-label="更晚的时间" onClick={() => move(1)} disabled={state.to === max}><ChevronRight size={17} /></button><button aria-label="缩小时间轴" onClick={() => zoom(1)} disabled={span >= totalYears}><ZoomOut size={17} /></button><button aria-label="放大时间轴" onClick={() => zoom(-1)} disabled={span <= 1}><ZoomIn size={17} /></button><button onClick={() => setState(defaultExplorer(catalog, initialPeriod, initialCategory, presentation))}>重置</button>{presentation.latestEvent && <button onClick={() => update({ from: max - 1, to: max, selected: presentation.latestEvent!, scope: '', q: '', category: '', period: '' })}>最近</button>}<button onClick={() => setRangeOpen(false)}>完成</button></div>
+            <div className="filter-zoom"><button aria-label="更早的时间" onClick={() => move(-1)} disabled={state.from === min}><ChevronLeft size={17} /></button><button aria-label="更晚的时间" onClick={() => move(1)} disabled={state.to === max}><ChevronRight size={17} /></button><button aria-label="缩小时间轴" onClick={() => zoom(1)} disabled={span >= totalYears}><ZoomOut size={17} /></button><button aria-label="放大时间轴" onClick={() => zoom(-1)} disabled={span <= 1}><ZoomIn size={17} /></button><button onClick={resetFilters}>重置</button>{presentation.latestEvent && <button onClick={() => update({ from: max - 1, to: max, selected: mobile ? '' : presentation.latestEvent!, scope: '', q: '', category: '', period: '' })}>最近</button>}<button onClick={() => setRangeOpen(false)}>完成</button></div>
             <p className="filter-help">{currentPeriod?.summary || topic.coverage}</p>{currentPeriod?.note && <p className="filter-help">{currentPeriod.note}</p>}
             {!!periods.length && <details className="period-directory-control"><summary>{topic.periodLabel || '时期'}目录</summary><div>{visiblePeriodOptions.map(p => <div key={p.id} className={p.parentId ? 'period-child-row' : ''}><a href={periodHref(p.id)}>{p.title}<small>{formatTime(p.time)}</small></a>{periods.some(child => child.parentId === p.id) && <button onClick={() => togglePeriod(p.id)} aria-expanded={state.expanded.includes(p.id)} aria-label={`展开${p.title}分期`}>{state.expanded.includes(p.id) ? '收起' : '分期'}</button>}</div>)}</div></details>}
             {!!currentPeriod?.sourceIds.length && <div className="period-evidence">{currentPeriod.sourceIds.map(id => { const source = sourceMap.get(id)!; return <a key={id} href={source.url} target="_blank" rel="noopener noreferrer">{source.title}<ExternalLink size={12} /></a>; })}</div>}
@@ -143,9 +185,19 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
             <button className="copy-timeline" onClick={async () => { try { await navigator.clipboard.writeText(location.href); setMessage('时间线链接已复制'); } catch { setMessage('可复制浏览器地址栏中的链接'); } }}><Copy size={14} />复制当前时间线链接</button><span className="filter-help" role="status">{message}</span>
           </div>
           {(state.q || state.scope) && <div className="chronicle-filter-status"><span>{state.q ? `“${state.q}”` : ''}{state.scope ? ` · ${presentation.scopes?.find(s => s.id === state.scope)?.title || ''}` : ''}</span><button onClick={() => update({ q: '', scope: '' })} aria-label={`清除搜索与${presentation.scopeLabel || '地区'}筛选`}><X size={14} /></button></div>}
+          <div className="mobile-timeline-guide"><span aria-live="polite">{results.length} 个{state.all ? '事件' : '关键节点'}</span><label><span className="sr-only">跳转年份</span><select aria-label="跳转年份" value="" onChange={e => jumpToYear(e.target.value)}><option value="">跳转年份</option>{years.map(group => <option key={group.year} value={group.year}>{formatYear(group.year)}</option>)}</select></label><button onClick={() => results.length && document.getElementById(`event-${results.at(-1)!.id}`)?.scrollIntoView({ behavior: 'instant', block: 'start' })}>到最新<ArrowRight size={14} /></button></div>
           <div className="chronicle-event-scroll" ref={list}>
-            {years.map(group => <section className="chronicle-year" key={group.year} aria-label={`${formatYear(group.year)}事件`}><h2>{formatYear(group.year)}</h2><ol>{group.events.map(event => <li key={event.id} className="chronicle-event"><button data-event-id={event.id} className={`chronicle-event-button ${event.id === selected?.id ? 'selected' : ''}`} aria-pressed={event.id === selected?.id} aria-label={`${date(event)} ${title(event)}`} onClick={e => choose(event.id, e.currentTarget)}><time title={date(event)}>{shortDate(event)}</time><span className="chronicle-node" aria-hidden="true" /><span className="chronicle-event-copy"><strong>{title(event)}</strong><span>{metadata(event)}</span></span></button></li>)}</ol></section>)}
-            {!results.length && <div className="chronicle-empty"><SearchX size={28} /><h2>{currentPeriod?.coverage === 'outline' ? '这个时期的事件正在补充' : '没有匹配的事件'}</h2><p>{filteredOutside ? `其他年份还有 ${filteredOutside} 条匹配记录。` : '可调整类别、关键词或时间范围；未收录不代表没有重要事件。'}</p><button onClick={searchAll}>搜索完整历史</button><button onClick={() => setState(defaultExplorer(catalog, initialPeriod, initialCategory, presentation))}>重置筛选</button></div>}
+            {years.map(group => <section className="chronicle-year" id={`year-${group.year}`} key={group.year} aria-label={`${formatYear(group.year)}事件`}><h2>{formatYear(group.year)}<span className="mobile-year-count">{group.events.length} 个节点</span></h2><ol>{group.events.map(event => <li id={`event-${event.id}`} key={event.id} className={`chronicle-event ${event.milestone ? 'is-milestone' : ''}`}>
+              <a href={eventHref(event, true)} data-event-id={event.id} className={`chronicle-event-button ${event.id === selected?.id ? 'selected' : ''}`} aria-label={`${date(event)} ${title(event)}，阅读事件详情`} aria-current={event.id === selected?.id ? 'true' : undefined} onKeyDown={e => { if (e.key === ' ' && !window.matchMedia('(max-width: 1050px)').matches) { e.preventDefault(); choose(event.id, e.currentTarget); } }} onClick={e => {
+                if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+                if (window.matchMedia('(max-width: 1050px)').matches) rememberReturn(event);
+                else { e.preventDefault(); choose(event.id, e.currentTarget); }
+              }}>
+                <time className="chronicle-short-date" title={date(event)}>{shortDate(event)}</time><span className="chronicle-node" aria-hidden="true" />
+                <span className="chronicle-event-copy"><span className="mobile-event-meta"><time>{date(event)}</time>{event.milestone && <span className="mobile-milestone">关键节点</span>}</span><strong>{title(event)}</strong><span>{metadata(event)}</span><span className="mobile-event-summary">{event.summary}</span><span className="mobile-event-footer"><span>{categoryTitle(event.category)}</span><span>阅读事件<ArrowRight size={14} /></span></span></span>
+              </a>
+            </li>)}</ol></section>)}
+            {!results.length && <div className="chronicle-empty"><SearchX size={28} /><h2>{currentPeriod?.coverage === 'outline' ? '这个时期的事件正在补充' : '没有匹配的事件'}</h2><p>{filteredOutside ? `其他年份还有 ${filteredOutside} 条匹配记录。` : '可调整类别、关键词或时间范围；未收录不代表没有重要事件。'}</p><button onClick={searchAll}>搜索完整历史</button><button onClick={resetFilters}>重置筛选</button></div>}
           </div>
           <div className="chronicle-count" aria-live="polite">当前 {results.length} / 全库 {events.length} 个事件<span>·</span>{sourceCount} 份来源</div>
         </section>
@@ -162,7 +214,7 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
             <section className="reader-section reader-sources"><h3>来源与背景资料</h3>{eventSources(selected).map(source => <a key={source.id} href={source.url} target="_blank" rel="noopener noreferrer"><ExternalLink size={17} /><span><span className="reader-source-title">{source.title}</span><small>{source.publisher} · {source.format || source.type} · 核查于 {source.checkedAt}{source.version && ` · ${source.version}`}{source.locator && ` · ${source.locator}`}</small></span></a>)}</section>
             {!!relationsFor(catalog,selected.id).length && <section className="reader-section"><h3>有据关系</h3>{relationsFor(catalog,selected.id).map(r => { const { subject, object } = relationEndpoints(catalog,r); return <p key={r.id}><a href={sitePath(`${topic.path}events/${subject.id}/`)}>{subject.title}</a> · {r.label} · {object.kind === 'event' ? <a href={sitePath(`${topic.path}events/${object.id}/`)}>{object.title}</a> : <strong>{object.title}</strong>}<small className="evidence-locator">依据：{r.locator} {r.sourceIds.map(id=><a key={id} href={sourceMap.get(id)!.url} target="_blank" rel="noopener noreferrer">{sourceMap.get(id)!.title}</a>)}</small>{r.note}</p>; })}</section>}
             {!!related(selected).length && <div className="reader-related"><span>继续探索</span>{related(selected).map(item => <a key={item.href} href={item.href}>{item.title}<ArrowRight size={13} /></a>)}</div>}
-            <a className="reader-full-record" href={eventHref(selected)} onClick={rememberReturn}>阅读完整事件<ExternalLink size={14} /></a>
+            <a className="reader-full-record" href={eventHref(selected)} onClick={() => rememberReturn()}>阅读完整事件<ExternalLink size={14} /></a>
           </div>
           <nav className="reader-pagination" aria-label="相邻事件"><button disabled={!previous} onClick={() => previous && choose(previous.id)} aria-label={previous ? `上一节点：${title(previous)}` : '已经是第一个节点'}><ArrowLeft size={20} /><span><small>上一节点</small><strong>{previous ? title(previous) : '已到起点'}</strong></span></button><button disabled={!next} onClick={() => next && choose(next.id)} aria-label={next ? `下一节点：${title(next)}` : '已经是最后一个节点'}><span><small>下一节点</small><strong>{next ? title(next) : '已到终点'}</strong></span><ArrowRight size={20} /></button></nav>
         </aside> : <aside className="chronicle-reader-placeholder" aria-label="阅读提示"><MousePointer2 size={30} strokeWidth={1.4} /><h2>{currentPeriod?.title || '选择一个节点，走进它的故事'}</h2><p>{currentPeriod?.summary || '沿着左侧时间线浏览，在这里阅读事件的背景、意义与来源。'}</p>{currentPeriod && <button onClick={() => setRangeOpen(true)}>查看时期依据与分期<ArrowRight size={14} /></button>}</aside>}

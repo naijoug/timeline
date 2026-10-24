@@ -42,6 +42,7 @@
 }
 .topic-card {
   display:block;
+  min-width:0;
   border:1px solid var(--paper-line);
   border-radius:12px;
   overflow:hidden;
@@ -103,6 +104,7 @@
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:8px;
 }
 .topic-card-body p {
   font-size:13px;
@@ -118,7 +120,14 @@
   color:var(--paper-muted);
 }
 .topic-card:hover {
-  border-color:var(--paper-line);
+  border-color:var(--paper-ink);
+}
+.topic-card:focus-visible {
+  outline:2px solid var(--paper-focus);
+  outline-offset:4px;
+}
+.library-mobile-guide,.topic-card-mobile-description {
+  display:none;
 }
 .library-note {
   font-size:12px;
@@ -126,4 +135,130 @@
   margin-top:28px;
 }
 
-@media(max-width:600px){.library{padding:40px 20px 55px}.library h1{font-size:40px}.library-lead{font-size:14px}.topic-cards{grid-template-columns:1fr;gap:20px}.topic-card-visual{height:175px}.topic-card-body{padding:22px}.library-rule{margin:30px 0 23px}}
+/* A phone starts with a choice, not four full-height cover stories. */
+@media(max-width:760px) {
+  .library {
+    padding:24px 18px 36px;
+  }
+  .library-kicker {
+    font-size:10px;
+    letter-spacing:1.3px;
+  }
+  .library h1 {
+    font-size:34px;
+    line-height:1.25;
+    letter-spacing:-.8px;
+    margin:12px 0;
+  }
+  .library-lead {
+    display:none;
+  }
+  .library-mobile-guide {
+    display:block;
+    color:var(--paper-muted);
+    font-size:14px;
+    line-height:1.7;
+  }
+  .library-rule {
+    margin:22px 0 16px;
+  }
+  .library-label {
+    gap:12px;
+    font-size:12px;
+    margin-bottom:14px;
+  }
+  .library-label > span:last-child {
+    white-space:nowrap;
+  }
+  .topic-cards {
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:12px;
+  }
+  .topic-card {
+    display:flex;
+    flex-direction:column;
+  }
+  .topic-card-visual {
+    height:68px;
+    padding:12px 14px;
+    flex-shrink:0;
+  }
+  .topic-card-visual > span {
+    font-size:20px;
+    line-height:1.4;
+    white-space:nowrap;
+  }
+  .mini-timeline {
+    left:16px;
+    right:16px;
+    bottom:14px;
+    height:1px;
+  }
+  .mini-timeline i {
+    width:5px;
+    height:5px;
+    margin-top:-2px;
+  }
+  .mini-timeline b,.topic-card-body > span,.topic-card-description,.topic-card-scope {
+    display:none;
+  }
+  .topic-card-body {
+    display:flex;
+    flex-direction:column;
+    flex:1;
+    padding:14px;
+  }
+  .topic-card-body h2 {
+    font-family:var(--paper-serif);
+    font-size:20px;
+    line-height:1.35;
+    margin:0 0 8px;
+  }
+  .topic-card-body h2 svg {
+    width:17px;
+    height:17px;
+  }
+  .topic-card-mobile-description {
+    display:block;
+  }
+  .topic-card-body p {
+    font-size:13px;
+    line-height:1.7;
+    margin-bottom:14px;
+    overflow-wrap:anywhere;
+  }
+  .topic-card-body > small {
+    font-size:11px;
+    line-height:1.5;
+    margin-top:auto;
+    padding-top:10px;
+  }
+  .library-note {
+    font-size:12px;
+    line-height:1.8;
+    margin-top:20px;
+  }
+}
+
+@media(max-width:360px) {
+  .library {
+    padding-left:14px;
+    padding-right:14px;
+  }
+  .library h1 {
+    font-size:30px;
+  }
+  .topic-cards {
+    gap:10px;
+  }
+  .topic-card-body,.topic-card-visual {
+    padding-left:11px;
+    padding-right:11px;
+  }
+  .topic-card-visual > span {
+    font-size:18px;
+  }
+  .topic-card-body h2 {
+    font-size:18px;
+  }
+}

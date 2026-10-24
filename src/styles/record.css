@@ -19,6 +19,229 @@
 .reader-evidence-links { display:inline-flex; align-items:center; gap:4px; margin-left:7px; vertical-align:super; }
 .reader-evidence-links>a { display:inline-flex; align-items:center; gap:2px; min-width:18px; height:18px; justify-content:center; padding:0 3px; border:1px solid var(--paper-line); border-radius:999px; background:var(--paper-surface); color:var(--paper-text); font-size:10px; line-height:1; text-decoration:none; }
 .reader-evidence-links>a:hover { border-color:var(--paper-ink); background:var(--paper-ink); color:var(--paper-inverse); }
-@media(max-width:760px) { .record-content .event-record .event-hero h1 { font-size:32px; } .record-content .event-record .detail-lead { font-size:18px; } }
 .record-content .event-record .source-note { color:var(--paper-muted)!important; }
 .record-content .event-record .source-item>svg,.record-content .event-record .improvements li::before,.record-content .event-record #copy-status { color:var(--paper-text); }
+
+/* Standalone records are documents: all sections remain in normal page flow. */
+.record-content .event-record :is(.event-hero,.article-layout,.article-body,.article-aside) {
+  min-width:0;
+}
+.record-content .event-record :is(h1,h2,h3,p,dd,.entity-reference,.source-item,.related-list a) {
+  overflow-wrap:anywhere;
+}
+.record-content .event-record .event-hero h1 {
+  line-height:1.25;
+}
+.record-content .event-record .source-item {
+  align-items:flex-start;
+}
+.record-content .event-record .source-item > svg {
+  margin-top:4px;
+}
+.record-content .event-record .source-item div > span {
+  line-height:1.8;
+}
+.record-content .event-record .source-item:focus-visible {
+  outline-offset:3px;
+}
+.record-content .event-record :is(.copy-link,.entity-reference,.related-list > a) {
+  min-height:44px;
+}
+.record-content .event-record .copy-link {
+  border-radius:3px;
+}
+
+/* The shared legacy rail hides facts below 1100px; a full record must not. */
+@media(max-width:1100px) {
+  .record-content .event-record .article-aside {
+    display:block;
+    padding-top:24px;
+  }
+  .record-content .event-record .article-aside > .rail-heading {
+    display:block;
+    margin-bottom:10px;
+  }
+  .record-content .event-record .article-aside dl {
+    display:block;
+    font-size:14px;
+  }
+  .record-content .event-record .article-aside dd {
+    margin:4px 0 16px;
+    line-height:1.8;
+  }
+  .record-content .event-record .entity-reference {
+    padding:12px 0;
+    border-bottom:1px solid var(--paper-line);
+  }
+  .record-content .event-record .copy-link {
+    margin-top:24px;
+  }
+}
+
+@media(max-width:760px) {
+  .record-content:has(.event-record) {
+    padding:16px 20px calc(36px + env(safe-area-inset-bottom, 0px));
+  }
+  .record-content > .back-link {
+    min-height:44px;
+    padding:9px 0;
+    margin-bottom:20px;
+    font-size:14px;
+    color:var(--paper-text);
+  }
+  .record-content .event-record .event-hero {
+    padding-bottom:26px;
+    margin-bottom:0;
+  }
+  .record-content .event-record .eyebrow {
+    font-size:12px;
+    letter-spacing:1px;
+  }
+  .record-content .event-record .full-event-meta {
+    gap:8px 12px;
+    font-size:12px;
+    line-height:1.8;
+    margin-top:14px;
+  }
+  .record-content .event-record .full-event-meta time {
+    font-variant-numeric:tabular-nums;
+  }
+  .record-content .event-record .event-hero h1 {
+    font-size:32px;
+    line-height:1.3;
+    letter-spacing:-.5px;
+    margin:18px 0 14px;
+  }
+  .record-content .event-record .detail-subtitle {
+    font-size:14px;
+    line-height:1.8;
+    margin-bottom:14px;
+  }
+  .record-content .event-record .detail-lead {
+    font-size:18px;
+    line-height:1.85;
+  }
+  .record-content .event-record .article-layout {
+    display:block;
+  }
+  .record-content .event-record .article-body section {
+    margin:30px 0;
+    scroll-margin-top:24px;
+  }
+  .record-content .event-record .article-body h2 {
+    font-family:var(--paper-serif);
+    font-size:22px;
+    line-height:1.45;
+    margin-bottom:12px;
+  }
+  .record-content .event-record .article-body h3 {
+    font-size:17px;
+    line-height:1.6;
+  }
+  .record-content .event-record .article-body p {
+    font-size:16px;
+    line-height:1.95;
+  }
+  .record-content .event-record .change-panel {
+    padding:18px;
+    border-radius:3px;
+  }
+  .record-content .event-record .improvements {
+    gap:12px;
+    line-height:1.85;
+  }
+  .record-content .event-record .evidence-label {
+    gap:8px 14px;
+    line-height:1.8;
+  }
+  .record-content .event-record .evidence-label a {
+    min-height:32px;
+  }
+  .record-content .event-record .reader-evidence-links {
+    flex-wrap:wrap;
+    max-width:100%;
+    gap:6px;
+    margin-left:5px;
+    vertical-align:baseline;
+  }
+  .record-content .event-record .reader-evidence-links > a {
+    min-width:28px;
+    height:28px;
+    font-size:11px;
+  }
+  .record-content .event-record .evidence-locator {
+    font-size:12px;
+    line-height:1.8;
+    margin-top:8px;
+  }
+  .record-content .event-record .section-heading {
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:4px 12px;
+    margin-bottom:12px;
+  }
+  .record-content .event-record .section-heading h2 {
+    margin-bottom:0;
+  }
+  .record-content .event-record .source-item {
+    gap:10px;
+    padding:18px 0;
+  }
+  .record-content .event-record .source-number {
+    display:block;
+    flex-shrink:0;
+    min-width:18px;
+    padding-top:2px;
+    font-size:11px;
+    font-variant-numeric:tabular-nums;
+  }
+  .record-content .event-record .source-item strong {
+    font-size:15px;
+    line-height:1.7;
+  }
+  .record-content .event-record .source-note {
+    line-height:1.9;
+  }
+  .record-content .event-record .related-list > a {
+    display:grid;
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:6px 12px;
+    padding:16px 0;
+  }
+  .record-content .event-record .related-list > a > span {
+    grid-column:1 / -1;
+  }
+  .record-content .event-record .related-list strong {
+    min-width:0;
+    font-size:16px;
+    line-height:1.7;
+  }
+  .record-content .event-record .article-aside .rail-heading {
+    font-size:12px;
+    letter-spacing:1px;
+  }
+  .record-content .event-record .entity-reference > span {
+    font-size:12px;
+  }
+  .record-content .event-record .entity-reference strong {
+    display:block;
+    font-size:16px;
+    line-height:1.7;
+  }
+  .record-content .event-record .copy-link {
+    justify-content:center;
+    width:100%;
+    min-height:46px;
+    font-size:14px;
+  }
+}
+
+@media(max-width:360px) {
+  .record-content:has(.event-record) {
+    padding-left:16px;
+    padding-right:16px;
+  }
+  .record-content .event-record .event-hero h1 {
+    font-size:29px;
+  }
+}

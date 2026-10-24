@@ -28,7 +28,17 @@ const { topicPath, topicTitle, title, category, date, summary, significance, sub
   </div><aside class="article-aside"><div class="rail-heading">相关对象与时期</div>{related.map(item=><a class="entity-reference" href={item.href}><span>{item.label}</span><strong>{item.title}</strong></a>)}{!!facts.length&&<><div class="rail-heading aside-second">事件档案</div><dl>{facts.map(fact=><><dt>{fact.label}</dt><dd>{fact.value}{fact.sourceIds && <EvidenceLinks sources={sources} ids={fact.sourceIds}/>}</dd></>)}</dl></>}<button class="copy-link" id="copy-link"><Link2 size={14}/><span>复制事件链接</span></button><p id="copy-status" aria-live="polite"></p></aside></div>
 </article>
 <script>
+  import { safeTimelineReturn, mobileTimelineReturn } from '../../core/mobile-navigation';
   const back=document.querySelector<HTMLAnchorElement>('#back-to-timeline');
-  try { const value=new URLSearchParams(location.search).get('return') || sessionStorage.getItem('timeline-return'); if(value&&back){const url=new URL(value,location.origin);if(url.origin===location.origin&&url.pathname.startsWith(back.dataset.topicPrefix!))back.href=url.pathname+url.search+url.hash;} } catch {}
+  if (back) {
+    let value = new URLSearchParams(location.search).get('return');
+    if (!value) { try { value = sessionStorage.getItem('timeline-return'); } catch { /* The topic link still works. */ } }
+    const destination = safeTimelineReturn(value, location.origin, back.dataset.topicPrefix!);
+    if (destination) {
+      const media = window.matchMedia('(max-width: 1050px)');
+      const updateBack = () => { back.href = media.matches ? mobileTimelineReturn(destination) : destination; };
+      updateBack(); media.addEventListener('change', updateBack);
+    }
+  }
   document.querySelector('#copy-link')?.addEventListener('click',async()=>{const status=document.querySelector('#copy-status');try{await navigator.clipboard.writeText(location.href);if(status)status.textContent='链接已复制';}catch{if(status)status.textContent='可直接复制浏览器地址栏中的链接';}});
 </script>
