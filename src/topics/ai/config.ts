@@ -126,7 +126,7 @@ export const MAX_YEAR = Math.max(
   ...events.map((e) => Number(e.date.slice(0, 4))),
 );
 export const YEAR_COUNT = MAX_YEAR - MIN_YEAR + 1;
-const newestRecordedEvent = [...events].sort((a, b) => a.date.localeCompare(b.date)).at(-1)!;
+const newestRecordedEvent = [...events].sort((a, b) => a.date.localeCompare(b.date) || a.id.localeCompare(b.id)).at(-1)!;
 export const aiPresentation = {
   title: "全球 AI 时间线",
   subtitle: "从图灵到生成式 AI",

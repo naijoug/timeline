@@ -1,6 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import EventRecord from '../../../components/timeline/EventRecord.astro';
+import RecommendedReading from '../../../components/timeline/RecommendedReading.astro';
 import Relations from '../../../components/timeline/Relations.astro';
 import { eventSourceIds, relationsFor } from '../../../core/evidence';
 import { writersCatalog } from '../../../topics/writers/catalog';
@@ -27,5 +28,5 @@ const facts = [
 <Layout title={`${event.title} · 作家作品`} description={event.summary} topicTitle="作家作品" topicPath="/writers/">
   <EventRecord topicPath="/writers/" topicTitle="作家作品" title={event.title} category={category.title} date={formatTime(event.time)} summary={event.summary} significance={event.significance} milestone={event.milestone} details={event.details} note={event.note || (event.time.start.day ? '按资料所列日期展示节点时间。' : event.time.start.month ? '按月份精度展示节点时间。' : '按年份精度展示；年份节点不表示确切月日。')} sources={sources}
     related={[...periods.map(p => ({ title: p.title, label: formatTime(p.time), href: sitePath(`/writers/eras/${p.id}/`) })), ...authors.map(a => ({ title: a.name, label: a.type, href: sitePath(`/writers/authors/${a.id}/`) }))]}
-    facts={facts}><Relations slot="related" catalog={writersCatalog} eventId={event.id} /></EventRecord>
+    facts={facts}><RecommendedReading slot="further-reading" resources={event.recommendedResources} /><Relations slot="related" catalog={writersCatalog} eventId={event.id} /></EventRecord>
 </Layout>

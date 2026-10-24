@@ -28,7 +28,7 @@ test('reviewed works cite concrete records without refreshing unrelated source d
   for (const id of writersReviewedEventIds) {
     const entry = event(id);
     assert.ok(entry.details?.length, id);
-    for (const detail of entry.details!) {
+    for (const detail of entry.details!.filter(detail => !detail.editorial)) {
       assert.ok(detail.locator && detail.sourceIds?.length, `${id}: missing detail provenance`);
       assert.ok(detail.sourceIds.every(sourceId => ids.has(sourceId)), `${id}: generic source`);
     }

@@ -88,8 +88,8 @@ export const writersReviewedSources: Source[] = [
     title: "《太白金星有点烦》",
     publisher: "中国作家网·书汇",
     url: "https://image.chinawriter.com.cn/n1/2023/0602/c405081-40005145.html",
-    type: "图书书讯与作者后记",
-    locator: "出版时间、ISBN、内容简介；后记说明其短篇幅写作缘起",
+    type: "图书书讯与作者前言",
+    locator: "出版时间、ISBN、内容简介；前言说明其短篇幅写作缘起",
     checkedAt: "2026-10-24",
     publishedAt: "2023-06-02",
     version: "ISBN 9787572610912"

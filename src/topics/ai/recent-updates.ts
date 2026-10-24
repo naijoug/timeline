@@ -1,3 +1,4 @@
+import { safetyEntities, safetyEvents, safetySources } from "./safety-updates";
 import type { Entity, Source, TimelineEvent } from './types';
 
 // Source-reviewed updates. Each source keeps its own verification date; advancing
@@ -5,6 +6,7 @@ import type { Entity, Source, TimelineEvent } from './types';
 export const recentResearchDate = '2026-10-24';
 
 export const recentSources: Source[] = [
+  ...safetySources,
   {
     id: 'aa-kimi-k31-launch-evaluation', title: 'Kimi K3.1 Pro 发布评测（标题节译）',
     publisher: 'Artificial Analysis', url: 'https://artificialanalysis.ai/articles/kimi-k3-1-pro-launch-benchmarks',
@@ -74,6 +76,7 @@ export const recentSources: Source[] = [
 ];
 
 export const recentEntities: Entity[] = [
+  ...safetyEntities,
   {
     id: 'decisions-api', name: 'Decisions API', type: 'concept', company: 'OpenAI',
     description: '面向有限答案问题的结构化决策 API，支持概率、选项与评分；不是独立 Agent 产品。',
@@ -87,6 +90,7 @@ export const recentEntities: Entity[] = [
 ];
 
 export const recentEvents: TimelineEvent[] = [
+  ...safetyEvents,
   {
     id: 'kimi-k3-1-pro', date: '2026-10-24', title: 'Kimi K3.1 Pro 发布：强化长程编程与 Agent',
     company: '月之暗面', kind: '模型发布', tracks: ['models'],
