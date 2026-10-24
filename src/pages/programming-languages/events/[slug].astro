@@ -1,6 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import EventRecord from '../../../components/timeline/EventRecord.astro';
+import RecommendedReading from '../../../components/timeline/RecommendedReading.astro';
 import Relations from '../../../components/timeline/Relations.astro';
 import { eventSourceIds, relationsFor } from '../../../core/evidence';
 import { programmingLanguages } from '../../../topics/programming-languages/catalog';
@@ -31,5 +32,6 @@ const facts = [
     facts={facts}>
     {event.change && <div slot="change"><section><h2>版本变化</h2><p><strong>比较基线：</strong>{event.change.baseline}</p>{baseline && <p><a href={sitePath(`/programming-languages/events/${baseline.id}/`)}>回看已收录基线：{baseline.title}</a></p>}<ul>{event.change.improvements.map(item => <li>{item}</li>)}</ul><p><strong>边界：</strong>{event.change.tradeoffs}</p><small class="evidence-locator">{event.change.evidence}</small></section></div>}
     <div slot="related"><Relations catalog={programmingLanguages} eventId={event.id} entityHref={entityHref} /></div>
+    <RecommendedReading slot="further-reading" resources={event.recommendedResources} />
   </EventRecord>
 </Layout>

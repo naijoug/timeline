@@ -6,6 +6,18 @@ export const recentResearchDate = '2026-10-24';
 
 export const recentSources: Source[] = [
   {
+    id: 'aa-kimi-k31-launch-evaluation', title: 'Kimi K3.1 Pro 发布评测（标题节译）',
+    publisher: 'Artificial Analysis', url: 'https://artificialanalysis.ai/articles/kimi-k3-1-pro-launch-benchmarks',
+    type: '机构回顾', checkedAt: '2026-10-24', publishedAt: '2026-10-23',
+    version: '2026-10-23 评测文章快照', locator: '标题中的 Intelligence Index 55；Additional model details → Weights and license',
+  },
+  {
+    id: 'aa-intelligence-methodology-432', title: 'Artificial Analysis Intelligence Benchmarking Methodology',
+    publisher: 'Artificial Analysis', url: 'https://artificialanalysis.ai/methodology/intelligence-benchmarking',
+    type: '官方文档', checkedAt: '2026-10-24',
+    version: 'Intelligence Index v4.3.2；2026-10-24 核查快照', locator: 'Artificial Analysis Intelligence Index；10 evaluations；primarily text-based, English-language evaluation suite',
+  },
+  {
     id: 'kimi-k3-1-pro-announcement', title: 'Introducing Kimi K3.1 Pro',
     publisher: '月之暗面', url: 'https://www.kimi.com/en/blog/kimi-k3-1-pro',
     type: '官方公告', checkedAt: '2026-10-24', publishedAt: '2026-10-24',
@@ -81,7 +93,7 @@ export const recentEvents: TimelineEvent[] = [
     summary: '月之暗面发布 K3.1 系列首款模型 Kimi K3.1 Pro，支持 100 万 token 上下文，面向编程、3D 创作与长程 Agent 任务。',
     significance: '基础模型的升级继续围绕完整任务的执行质量展开，长上下文与后训练共同服务于更长的工作流程。',
     limitation: '本条按官方研究索引的 10 月 24 日记录；Kimi Code 更新日志标为 10 月 23 日，两者保留各自日期，不推断具体发布时刻。完整模型权重仍为后续计划。',
-    entityIds: ['kimi'], sourceIds: ['kimi-k3-1-pro-announcement', 'kimi-k3-1-pro-release-date', 'kimi-code-k3-1-pro-rollout'],
+    entityIds: ['kimi'], sourceIds: ['kimi-k3-1-pro-announcement', 'kimi-k3-1-pro-release-date', 'kimi-code-k3-1-pro-rollout', 'aa-kimi-k31-launch-evaluation', 'aa-intelligence-methodology-432'],
     tags: ['编程', '长上下文', '3D 创作', 'Agent', '模型发布'], milestone: true,
     change: {
       baseline: 'Kimi K3（2026-07-16 公告）', baselineEventId: 'kimi-k3',
@@ -93,7 +105,18 @@ export const recentEvents: TimelineEvent[] = [
       { label: '发布日期口径', text: '官方研究索引把 K3.1 Pro 列在 2026 年 10 月 24 日；Kimi Code 的上线条目标为 10 月 23 日。本条采用研究发布日，同时保留产品渠道日期。', sourceIds: ['kimi-k3-1-pro-release-date', 'kimi-code-k3-1-pro-rollout'], locator: 'Research → Kimi K3.1 Pro; K3.1 Pro Series is live → October 23, 2026' },
       { label: '已上线与待发布', text: 'Kimi、Kimi Work、Kimi Code 与 API 已上线。完整模型权重计划于 2026 年 11 月 4 日前发布，本条不记录为权重开放。', sourceIds: ['kimi-k3-1-pro-announcement'], locator: 'Availability' },
       { label: '上下文与使用范围', text: 'Kimi Code 更新日志说明：Pro 模型从 Plus / Moderato 档可用，100 万 token 上下文和 Highspeed 从 Pro / Allegretto 档开放；这不是所有套餐统一提供的额度。', sourceIds: ['kimi-code-k3-1-pro-rollout'], locator: 'Membership access' },
+      { label: '第三方评测快照', text: 'Artificial Analysis 的 2026-10-23 评测文章报告 K3.1 Pro 的 Intelligence Index 得分为 55，并明确当时权重尚未公开。这是评测方在其测试设置下的报告，不是本项目复测，也不把文章时间替代模型官方研究日期。', sourceIds: ['aa-kimi-k31-launch-evaluation'], locator: '标题；Additional model details → Weights and license' },
+      { label: '测量范围与版本', text: '本次核查时方法页标为 Intelligence Index v4.3.2，由 10 项评测组合，主要面向文本和英语任务；图像、语音与多语言能力另行评测。综合分数不能直接代替中文任务、特定代码库或实际产品效果的验证。', sourceIds: ['aa-intelligence-methodology-432'], locator: 'Artificial Analysis Intelligence Index：版本、评测组成与语言范围' },
+      { label: '怎样阅读这个增量', text: '我们的判断是：独立评测为厂商能力声明提供了另一组观察，但不等于所有使用场景都同步改善。保留带日期的分数与方法说明比固定“第几名”更有用；持续变化的榜单排名不写成模型的永久属性。', editorial: true, sourceIds: ['aa-kimi-k31-launch-evaluation', 'aa-intelligence-methodology-432'], locator: '编辑基于评测快照与方法范围的归纳，不是评测方原话' },
     ],
+    recommendedResources: [{
+      id: 'kimi-k31-aa-benchmark-reading', title: 'Kimi K3.1 Pro 发布评测（标题节译）', creator: 'Artificial Analysis',
+      series: 'Artificial Analysis · 模型发布评测', kind: 'article',
+      url: 'https://artificialanalysis.ai/articles/kimi-k3-1-pro-launch-benchmarks', publishedAt: '2026-10-23', checkedAt: '2026-10-24',
+      match: '逐项查看该模型的 Agent、代码与其他测评结果，理解综合指数之外的能力差异。',
+      scopeNote: '已核验文章正文；数字与标题排名是文章发布时的快照，不代表当前固定名次，也不是本项目独立实测。权重可用状态仍需以厂商后续实际发布为准。',
+      locator: 'Key results；Individual eval results；Additional model details',
+    }],
   },
   {
     id: 'decisions-api-ga', date: '2026-10-22', title: 'Decisions API 正式开放：把小决策接入应用',

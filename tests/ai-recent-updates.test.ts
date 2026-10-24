@@ -98,7 +98,7 @@ test('Kimi K3.1 Pro is a key China model event with a K3 baseline, not a complet
 test('new research dates do not rewrite older sources as freshly checked', () => {
   assert.equal(recentResearchDate, '2026-10-24');
   for (const source of recentSources) {
-    assert.equal(source.checkedAt, source.publisher === '月之暗面' ? '2026-10-24' : '2026-10-23', source.id);
+    assert.equal(source.checkedAt, (source.publisher === '月之暗面' || ['aa-kimi-k31-launch-evaluation', 'aa-intelligence-methodology-432'].includes(source.id)) ? '2026-10-24' : '2026-10-23', source.id);
   }
   assert.equal(recentSources.find(source => source.id === 'kimi-k3-1-pro-announcement')!.publishedAt, '2026-10-24');
   assert.equal(recentSources.find(source => source.id === 'kimi-code-k3-1-pro-rollout')!.publishedAt, '2026-10-23');

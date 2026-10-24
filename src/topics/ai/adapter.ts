@@ -27,6 +27,7 @@ export function toCoreEvent(e: AIEvent): TimelineEvent {
     tags: [...e.tags, e.company || "", e.subtitle || ""],
     milestone: isKeyEvent(e),
     details: aiEventDetails(e),
+    recommendedResources: e.recommendedResources,
     facts: [
       { label: '发布 / 发表方', text: e.company || entityList[0]?.name || '见原始资料', sourceIds: e.sourceIds },
       { label: '事件类型', text: e.kind, sourceIds: e.sourceIds },

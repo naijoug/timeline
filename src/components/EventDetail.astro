@@ -10,6 +10,7 @@ import Relations from './timeline/Relations.astro';
 import { displayDate } from '../lib/timeline';
 import { aiEventDetails } from '../topics/ai/narrative';
 import { ExternalLink, Link2 } from 'lucide-react';
+import RecommendedReading from './timeline/RecommendedReading.astro';
 import EventRecord from './timeline/EventRecord.astro';
 const { event } = Astro.props as { event: TimelineEvent };
 const siblings = event.announcementGroup ? events.filter(e => e.id !== event.id && e.announcementGroup === event.announcementGroup) : [];
@@ -30,4 +31,5 @@ const evidenceIds = [...new Set([...eventSourceIds(coreEvent), ...relationsFor(a
     {siblings.length > 0 && <section><h2>同一次发布</h2><p class="section-description">一份公告里的不同变化，在这里彼此关联。</p><div class="related-list">{siblings.map(e => <a href={sitePath(`/ai/events/${e.id}/`)}><span>{e.kind}</span><strong>{e.title}</strong><Link2 size={15} /></a>)}</div></section>}
     {related.length > 0 && <section><h2>沿着这条线索继续</h2><div class="related-list">{related.map(e => <a href={sitePath(`/ai/events/${e.id}/`)}><span>{e.date.slice(0,4)}</span><strong>{e.title}</strong><span>阅读</span></a>)}</div></section>}
   </Fragment>
+  <RecommendedReading slot="further-reading" resources={event.recommendedResources} />
 </EventRecord>

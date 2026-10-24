@@ -1,5 +1,5 @@
 export type Track = 'history' | 'methods' | 'products' | 'models';
-import type { Source as CoreSource, ReadingSection } from '../../core/types';
+import type { Source as CoreSource, ReadingSection, RecommendedResource } from '../../core/types';
 export type EntityType = 'concept' | 'product' | 'family' | 'person' | 'organization';
 export type Evidence = '原始论文' | '官方公告' | '机构回顾' | '工程文章' | '官方文档';
 export interface Source extends CoreSource { type: Evidence; language?: string }
@@ -12,5 +12,6 @@ export interface TimelineEvent {
   milestone: boolean; kind: string; company?: string; announcementGroup?: string;
   change?: Change;
   details?: ReadingSection[];
+  recommendedResources?: RecommendedResource[];
 }
 export interface Relation { from: string; to: string; label: string; sourceIds: string[]; since?: string }

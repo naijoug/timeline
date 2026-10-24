@@ -8,6 +8,8 @@ import type {
 } from "../../core/types";
 import { evolutionCheckedAt, evolutionEvents, evolutionRelations, evolutionSources } from "./evolution-milestones";
 
+import { goReviewedEvents, goReviewedSources, goReviewedRelations } from "./go-reviewed-records";
+
 const checkedAt = "2026-10-12";
 
 const source = (
@@ -20,6 +22,7 @@ const source = (
 ): Source => ({ id, title, publisher, url, type, locator, checkedAt });
 
 export const sources: Source[] = [
+  ...goReviewedSources,
   source("ibm-fortran", "IBM 100: FORTRAN", "IBM", "https://www.ibm.com/ibm/history/ibm100/us/en/items/fortran/", "机构史料", "项目背景、1957 年交付与首个编译器"),
   source("acm-lisp", "Recursive Functions of Symbolic Expressions and Their Computation by Machine, Part I", "ACM", "https://dl.acm.org/doi/10.1145/367199.367179", "原始论文", "Communications of the ACM, 1960 年 4 月"),
   source("codasyl-cobol", "COBOL: Initial Specifications for a Common Business Oriented Language", "CODASYL · Bitsavers 扫描档案", "https://bitsavers.trailing-edge.com/pdf/codasyl/COBOL_Report_Apr60.pdf", "历史规格", "1960 年 4 月报告；1959 年为发起年份"),
@@ -407,21 +410,7 @@ export const events: TimelineEvent[] = [
     tags: ["TypeScript 5.0", "性能", "装饰器"],
     change: change("TypeScript 4.x 的代码库结构与实验性装饰器", ["更快的编译与安装体验", "const 类型参数", "标准化装饰器", "命名空间兼容改进"], "部分 API 被移除，复杂项目需要检查迁移清单", ["typescript-release-notes"]),
   }),
-  event("go-10", "Go 1 发布", 2012, "release", ["modern-safety"], ["go"], "Go 1 明确语言与标准库兼容性承诺，让 Go 程序可以随编译器升级持续构建。", ["go-release-notes"], {
-    significance: "兼容性承诺成为 Go 生态扩散的关键前提。",
-    tags: ["Go 1", "兼容性"],
-    change: change("Go 发布前的预发布语言与标准库", ["Go 1 兼容性承诺", "统一工具链与发布节奏"], "兼容性以受控方式演进，重大能力通常经由构建标签或新 API 引入", ["go-release-notes"]),
-  }),
-  event("go-111", "Go 1.11 发布", 2018, "release", ["modern-safety"], ["go"], "Go 1.11 引入 WebAssembly 支持和模块实验。", ["go-release-notes"], {
-    significance: "Go 开始同时进入浏览器执行环境和去 GOPATH 的依赖管理路径。",
-    tags: ["Go modules", "WebAssembly"],
-    change: change("GOPATH 依赖布局与仅原生平台目标", ["Go modules 实验", "GO111MODULE 开关", "WebAssembly 目标"], "模块模式最初仍需迁移开关，旧工作流保留一段时间", ["go-release-notes"]),
-  }),
-  event("go-118", "Go 1.18 发布", 2022, "release", ["modern-safety"], ["go"], "Go 1.18 引入泛型、模糊测试和工作区模式。", ["go-release-notes"], {
-    significance: "Go 在保持简洁语法和兼容承诺的同时，补上参数化类型这一长期缺口。",
-    tags: ["Go 泛型", "模糊测试"],
-    change: change("Go 1.17 的 interface{} 与代码生成式泛型替代品", ["类型参数", "泛型约束", "原生模糊测试", "go work 工作区"], "泛型不等于所有场景的继承或运行时多态，标准库采用仍保持克制", ["go-release-notes"]),
-  }),
+  ...goReviewedEvents,
   event("rust-2018", "Rust 2018 edition 发布", 2018, "release", ["modern-safety"], ["rust"], "Rust 2018 随 Rust 1.31 发布，改善模块路径、非词法生命周期与迁移工具。", ["rust-editions", "rust131-release"], {
     time: { kind: "point", start: { year: 2018, month: 12, day: 6 } },
     significance: "edition 机制让 Rust 能清理语法债务，同时保持跨版本库互操作。",
@@ -520,5 +509,5 @@ export const programmingLanguages: Catalog = {
   events,
   entities,
   sources,
-  relations: evolutionRelations,
+  relations: [...evolutionRelations, ...goReviewedRelations],
 };
