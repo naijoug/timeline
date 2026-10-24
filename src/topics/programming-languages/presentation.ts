@@ -21,7 +21,7 @@ export const languagePresentation: ExplorerPresentation = {
   subtitle: "从 FORTRAN 的编译器到现代语言的安全性与平台能力",
   defaultRange: [1957, 2026],
   defaultEvent: "fortran-i",
-  latestEvent: "python-313",
+  latestEvent: "rust-2024",
   scopes: languageScopes,
   scopeLabel: "语言",
   scopeAllLabel: "全部语言",

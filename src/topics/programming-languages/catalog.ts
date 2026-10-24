@@ -6,6 +6,7 @@ import type {
   TimeSpan,
   TimelineEvent,
 } from "../../core/types";
+import { evolutionCheckedAt, evolutionEvents, evolutionRelations, evolutionSources } from "./evolution-milestones";
 
 const checkedAt = "2026-10-12";
 
@@ -48,7 +49,7 @@ export const sources: Source[] = [
   source("go-open-source", "Hey, Ho, Let's Go!", "Go 官方网站", "https://go.dev/blog/lets-go", "官方公告", "2009 年 11 月 10 日开源"),
   source("rust-history", "Rust 官方博客", "Rust 官方社区", "https://blog.rust-lang.org/", "官方公告", "2010 年预览与 2015 年 1.0"),
   source("typescript-release", "TypeScript: JavaScript at Scale", "Microsoft TypeScript 官网", "https://www.typescriptlang.org/", "官方网站", "2012 年 TypeScript 0.8"),
-  source("julia-paper", "Julia: A Fresh Approach to Numerical Computing", "SIAM Review", "https://epubs.siam.org/doi/10.1137/141000671", "原始论文", "2012 年论文与语言目标"),
+  { ...source("julia-paper", "Julia: A Fresh Approach to Numerical Computing", "SIAM Review", "https://epubs.siam.org/doi/10.1137/141000671", "原始论文", "Information & Authors → History：2017-02-07 在线发表；Abstract：设计目标"), publishedAt: "2017-02-07", checkedAt: evolutionCheckedAt },
   source("apple-swift", "The Swift Programming Language", "Apple Developer", "https://developer.apple.com/swift/", "官方文档", "2014 年发布与演进"),
   source("kotlin-release", "Kotlin 官方网站", "JetBrains", "https://kotlinlang.org/", "官方网站", "2011 年公布与 2016 年 1.0"),
   source("elixir-release", "Elixir 语言官网", "Elixir 官方社区", "https://elixir-lang.org/", "官方网站", "Elixir 与 Erlang 虚拟机"),
@@ -65,6 +66,7 @@ export const sources: Source[] = [
   source("swift-release-notes", "Swift Release Notes", "Apple Developer", "https://developer.apple.com/documentation/swift-release-notes", "发布说明", "Swift 3/5/6 兼容性与并发演进"),
   source("kotlin-release-notes", "Kotlin Releases", "JetBrains", "https://kotlinlang.org/docs/releases.html", "发布说明", "Kotlin 1.x 与 2.0 变化"),
   source("python-versions", "Python Release Versions", "Python 官方社区", "https://www.python.org/downloads/release-list/", "版本列表", "Python 2.0/3.0/3.11 发布时间"),
+  ...evolutionSources,
 ];
 
 const duration = (start: number, end: number): TimeSpan => ({
@@ -159,7 +161,7 @@ const change = (
   improvements: string[],
   tradeoffs: string,
   sourceIds: string[],
-): TimelineEvent["change"] => ({
+): NonNullable<TimelineEvent["change"]> => ({
   baseline,
   improvements,
   tradeoffs,
@@ -321,9 +323,13 @@ export const events: TimelineEvent[] = [
     significance: "可选类型层让大型 JavaScript 工程获得编辑器支持与渐进迁移路径，改变了前端工程形态。",
     tags: ["渐进类型", "JavaScript", "工具链"],
   }),
-  event("julia-paper", "Julia 语言论文发表", 2012, "paradigm", ["modern-safety"], ["julia"], "Julia 团队发表论文，说明其兼顾数值计算生产力与接近编译语言性能的目标。", ["julia-paper"], {
+  // Keep the legacy event ID so previously shared links continue to resolve.
+  event("julia-paper", "Julia 首次公开发布", 2012, "release", ["modern-safety"], ["julia"], "Julia 创始团队公开介绍语言，提出把动态语言的易用性与数值计算性能结合的目标。", ["julia-initial-release", "julia-paper"], {
+    time: { kind: "point", start: { year: 2012, month: 2, day: 14 } },
     significance: "Julia 把多重派发、科学计算生态和即时编译结合，服务数值密集型研究工作流。",
     tags: ["数值计算", "多重派发", "即时编译"],
+    note: "2012 年是首次公开发布，不是 Julia 1.0，也不是所引 SIAM Review 论文的出版年；该论文于 2017-02-07 在线发表，仅作后续设计说明。",
+    details: [{ label: "先公开语言，再形成后续论文", text: "初次发布文章明确提出尚未完成的语言需要更多使用者参与；官方脚注也澄清这不是 1.0 发布。", sourceIds: ["julia-initial-release"], locator: "末段 initial release；脚注 1" }],
   }),
   event("swift-announced", "Swift 发布", 2014, "release", ["modern-safety"], ["swift"], "Apple 在 WWDC 发布 Swift，作为 Objective-C 之外的新一代平台语言。", ["apple-swift"], {
     significance: "Swift 展示了现代类型安全、值语义和开发者体验在移动与系统平台中的组合。",
@@ -356,12 +362,12 @@ export const events: TimelineEvent[] = [
     tags: ["free-threading", "解释器", "并行"],
     milestone: true,
   }),
-  event("cpp-11", "C++11 标准发布", 2011, "release", ["modern-safety"], ["cpp"], "C++11 以 auto、lambda、右值引用和智能指针等特性更新现代 C++ 的表达方式。", ["cpp-standard"], {
+  event("cpp-11", "C++11 标准发布", 2011, "standard", ["modern-safety"], ["cpp"], "C++11 以 auto、lambda、右值引用和智能指针等特性更新现代 C++ 的表达方式。", ["cpp-standard"], {
     significance: "C++11 是从经典 C++ 转向现代资源管理与泛型编程的分界线。",
     tags: ["C++11", "lambda", "移动语义"],
     change: change("C++03 语法与手工资源管理模式", ["auto 类型推断", "lambda 表达式", "右值引用与移动语义", "标准智能指针"], "新特性增加语言复杂度，旧代码迁移需要明确编译器支持范围", ["cpp-standard"]),
   }),
-  event("cpp-20", "C++20 标准发布", 2020, "release", ["modern-safety"], ["cpp"], "C++20 引入模块、协程、概念和 ranges 等大型语言与库特性。", ["cpp-standard"], {
+  event("cpp-20", "C++20 标准发布", 2020, "standard", ["modern-safety"], ["cpp"], "C++20 引入模块、协程、概念和 ranges 等大型语言与库特性。", ["cpp-standard"], {
     significance: "C++20 继续压缩依赖宏和手写模板约束的空间，让接口约束与组合式算法更直接。",
     tags: ["C++20", "模块", "协程", "ranges"],
     change: change("C++11/17 中的头文件、模板约束和手写迭代模式", ["模块化组织代码", "concepts 约束模板参数", "协程语法", "ranges 组合算法"], "模块与协程的工具链支持长期不均衡，迁移通常分阶段进行", ["cpp-standard"]),
@@ -416,15 +422,21 @@ export const events: TimelineEvent[] = [
     tags: ["Go 泛型", "模糊测试"],
     change: change("Go 1.17 的 interface{} 与代码生成式泛型替代品", ["类型参数", "泛型约束", "原生模糊测试", "go work 工作区"], "泛型不等于所有场景的继承或运行时多态，标准库采用仍保持克制", ["go-release-notes"]),
   }),
-  event("rust-2018", "Rust 2018 edition 发布", 2018, "release", ["modern-safety"], ["rust"], "Rust 2018 edition 引入模块路径与异步生态的基础语法改进。", ["rust-editions"], {
+  event("rust-2018", "Rust 2018 edition 发布", 2018, "release", ["modern-safety"], ["rust"], "Rust 2018 随 Rust 1.31 发布，改善模块路径、非词法生命周期与迁移工具。", ["rust-editions", "rust131-release"], {
+    time: { kind: "point", start: { year: 2018, month: 12, day: 6 } },
     significance: "edition 机制让 Rust 能清理语法债务，同时保持跨版本库互操作。",
     tags: ["Rust 2018", "edition"],
-    change: change("Rust 2015 的模块声明与 await 生态碎片化", ["更直接的模块路径", "async/await 生态准备", "dyn Trait 语法", "edition 迁移工具"], "edition 改变源代码兼容性而非库 ABI，迁移仍需工具检查", ["rust-editions"]),
+    note: "async / await 要到 2019 年 Rust 1.39 才稳定，不能与 Rust 2018 edition 的发布混同。",
+    change: { ...change("Rust 2015 edition 的模块路径与词法借用限制", ["更直接的模块路径", "非词法生命周期（NLL）借用检查", "cargo fix 辅助 edition 迁移"], "edition 按包选择，2015 与 2018 的依赖可互用；不构成稳定 ABI 的承诺", ["rust131-release"]), baselineEventId: "rust-10" },
+    details: [{ label: "兼容地改变规则", text: "官方说明不同 edition 的包可以相互依赖，新规则由各包主动选择；2018 并不意味着旧生态同时失效。", sourceIds: ["rust131-release"], locator: "Rust 2018：edition package setting and dependency interoperability" }],
   }),
-  event("rust-2024", "Rust 2024 edition 发布", 2024, "release", ["modern-safety"], ["rust"], "Rust 2024 edition 继续清理 unsafe 边界、宏与 async 语法细节。", ["rust-editions"], {
+  event("rust-2024", "Rust 2024 edition 随 1.85 稳定", 2025, "release", ["modern-safety"], ["rust"], "Rust 2024 edition 于 2025 年随 Rust 1.85 稳定，调整 unsafe 边界、临时值作用域与宏规则。", ["rust-editions", "rust185-release"], {
+    time: { kind: "point", start: { year: 2025, month: 2, day: 20 } },
     significance: "edition 成为 Rust 稳定演进制度的一部分，而不是破坏性重写。",
     tags: ["Rust 2024", "edition"],
-    change: change("Rust 2021 edition 的既有宏、unsafe 与 async 行为", ["std::io::Error 简化", "gen 关键字预留", "async 闭包方向", "unsafe 属性边界澄清"], "edition 迁移可自动处理多数语法变化，但 unsafe 相关语义需人工审查", ["rust-editions"]),
+    note: "2024 是 edition 名称，不是稳定发布日期。Rust 1.85 同时稳定的 async 闭包属于该编译器版本的能力，不列作仅限 2024 edition 的变化。",
+    change: { ...change("Rust 2021 edition", ["unsafe extern 块与 unsafe 属性显式标记", "调整 impl Trait 捕获与临时值作用域", "预留 gen 关键字", "Cargo 默认采用考虑 rust-version 的解析器"], "cargo fix 优先保留旧语义；unsafe 和析构顺序变化仍需人工检查与测试", ["rust185-release"]), baselineEventId: "rust-2021" },
+    details: [{ label: "名称年份与发布日期", text: "1.85 发布公告明确宣布 2024 edition 进入 stable；该公告的时间是 2025 年 2 月 20 日。", sourceIds: ["rust185-release"], locator: "发布日期；Rust 2024；Migrating to 2024" }],
   }),
   event("csharp-2", "C# 2.0 发布", 2005, "release", ["web-platform"], ["csharp"], "C# 2.0 引入泛型、可空类型与迭代器。", ["csharp-release-notes"], {
     significance: "类型安全集合和惰性枚举成为 C# 常用表达方式。",
@@ -451,10 +463,13 @@ export const events: TimelineEvent[] = [
     tags: ["Swift 5", "ABI 稳定"],
     change: change("Swift 4 每个应用附带运行时与源码兼容模式", ["ABI 稳定", "标准库二进制兼容", "字符串重写与 SIMD 雏形"], "源代码兼容性与二进制兼容是不同层面的承诺", ["swift-release-notes"]),
   }),
-  event("swift-6", "Swift 6 发布", 2024, "release", ["modern-safety"], ["swift"], "Swift 6 默认开启严格数据隔离检查，把并发安全提升为可检查的语言约束。", ["swift-release-notes"], {
+  event("swift-6", "Swift 6 发布", 2024, "release", ["modern-safety"], ["swift"], "Swift 6 提供可选择启用的语言模式，把潜在数据竞争诊断提升为编译错误。", ["swift-release-notes", "swift6-release"], {
+    time: { kind: "point", start: { year: 2024, month: 9, day: 17 } },
     significance: "并发模型从库和开发者约定进一步转向编译期隔离检查。",
     tags: ["Swift 6", "并发", "数据竞争安全"],
-    change: change("Swift 5 语言模式下的 Sendable 与并发检查警告", ["严格并发检查默认化", "数据竞争安全阶段", "typed throws", "非可复制类型继续演进"], "并发迁移可按语言模式分阶段开启，存量代码需要 actor 与 Sendable 边界整理", ["swift-release-notes"]),
+    note: "Swift 6 工具链与 Swift 6 语言模式不是一回事；升级编译器不等于所有旧项目自动开启新模式。",
+    change: change("Swift 5.10 可通过完整严格并发选项获得的警告", ["Swift 6 语言模式将潜在数据竞争作为错误", "typed throws 指定抛出错误类型", "非可复制类型扩展到泛型系统"], "新语言模式需要主动选择；存量代码仍需整理 actor、Sendable 和跨隔离域边界", ["swift6-release"]),
+    details: [{ label: "安全检查的启用边界", text: "官方将这一能力称为 opt-in language mode：原先在 Swift 5.10 可作为警告启用的检查，在新模式中成为编译错误。", sourceIds: ["swift6-release"], locator: "Language and Standard Library → Concurrency" }],
   }),
   event("kotlin-2", "Kotlin 2.0 发布", 2024, "release", ["modern-safety"], ["kotlin"], "Kotlin 2.0 引入 K2 编译器并保持语言源码兼容。", ["kotlin-release-notes"], {
     significance: "编译器基础设施重写为后续语言与工具性能演进提供基础。",
@@ -476,6 +491,7 @@ export const events: TimelineEvent[] = [
     tags: ["Python 3.11", "性能"],
     change: change("Python 3.10 的异常处理与解释器开销", ["异常组与 except*", "精确错误定位", "Faster CPython 优化"], "具体加速幅度取决于工作负载，官方基准不能直接代表所有程序", ["python-versions"]),
   }),
+  ...evolutionEvents,
 ];
 
 export const programmingLanguages: Catalog = {
@@ -504,4 +520,5 @@ export const programmingLanguages: Catalog = {
   events,
   entities,
   sources,
+  relations: evolutionRelations,
 };

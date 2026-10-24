@@ -5,6 +5,7 @@ import type {
   TimeSpan,
   TimelineEvent,
 } from "../../core/types";
+import { transitionCollection, transitionEvents, transitionRelations, transitionSources, transitionSourceReviews } from './state-transitions';
 import { xinhaiCollection, xinhaiEntities, xinhaiEvents, xinhaiRelations, xinhaiSources } from './xinhai';
 
 const source = (
@@ -109,7 +110,8 @@ export const sources: Source[] = [
     "历史回顾",
   ),
   ...xinhaiSources,
-];
+  ...transitionSources,
+].map(s => transitionSourceReviews[s.id] ? { ...s, ...transitionSourceReviews[s.id] } : s);
 const duration = (
   start: number,
   end: number,
@@ -186,10 +188,10 @@ export const periods: Period[] = [
     -202,
     220,
     "展开西汉与东汉；其间的政权变化不等于汉连续统治。",
-    { note: "起点按前202年称帝口径，部分资料以汉王建国的前206年为起点。" },
+    { coverage: "selected", sourceIds: ["chronology", "nmc-qin-han"], note: "起点按前202年称帝口径，部分资料以汉王建国的前206年为起点。" },
   ),
   period("western-han", "西汉", -202, 8, "汉的前期。", {
-    parentId: "han",
+    parentId: "han", coverage: "selected", sourceIds: ["chronology", "nmc-qin-han"],
     note: "这里按参考简表记至公元8年；有资料按新朝建立记至9年。",
   }),
   period("eastern-han", "东汉", 25, 220, "汉的后期。", { parentId: "han" }),
@@ -199,7 +201,7 @@ export const periods: Period[] = [
     220,
     589,
     "多政权并存的阅读分组，展开后使用同一时间刻度。",
-    { entityIds: [], sourceIds: ["chronology", "columbia"] },
+    { entityIds: [], coverage: "selected", sourceIds: ["chronology", "columbia", "nmc-division"] },
   ),
   period("wei", "曹魏", 220, 265, "三国中的一个政权。", {
     parentId: "division",
@@ -211,8 +213,8 @@ export const periods: Period[] = [
     parentId: "division",
     note: "起点采用称吴王的222年口径。",
   }),
-  period("western-jin", "西晋", 265, 316, "两晋的前期。", {
-    parentId: "division",
+  period("western-jin", "西晋", 265, 316, "两晋的前期；280年出现短暂统一。", {
+    parentId: "division", coverage: "selected", sourceIds: ["chronology", "aja-western-jin"],
   }),
   period("eastern-jin", "东晋", 317, 420, "两晋的后期。", {
     parentId: "division",
@@ -229,7 +231,7 @@ export const periods: Period[] = [
     parentId: "division",
     entityIds: [],
   }),
-  period("sui", "隋", 581, 618, "隋朝与南北朝末期在时间上交叠。"),
+  period("sui", "隋", 581, 618, "581年建国、589年灭陈，随后扩建南北运输网络。", { coverage: "selected", sourceIds: ["chronology", "nmc-sui-tang", "unesco-grand-canal"] }),
   period("tang", "唐", 618, 907, "从王朝建立、对外往来到战争与制度变化。", {
     sourceIds: ["tang-met"],
     coverage: "selected",
@@ -302,11 +304,12 @@ export const periods: Period[] = [
     "按1271年定国号口径起算，保留与南宋的交叠。",
     { note: "1279年是南宋结束的节点，不等同于元朝定国号之年。" },
   ),
-  period("ming", "明", 1368, 1644, "以明王朝为线索的历史。", {
+  period("ming", "明", 1368, 1644, "从南京建政进入明清制度变迁的阅读线索。", {
+    coverage: "selected", sourceIds: ["chronology", "nmc-ming-qing"],
     note: "总览采用明朝通常分期；南明等后续政权尚未展开。",
   }),
-  period("qing", "清", 1644, 1912, "此处按入关至清帝退位的阅读分期展示。", {
-    sourceIds: ["columbia"],
+  period("qing", "清", 1644, 1912, "按入关至退位分期，追踪通商条约、选官改革与共和转折。", {
+    coverage: "selected", sourceIds: ["columbia", "nmc-ming-qing"],
     note: "1644年是入关口径；1636年改国号等更早阶段待补充。",
   }),
   period('late-qing-republic', '清末民初：辛亥革命与共和建政', 1911, 1912,
@@ -354,11 +357,15 @@ export const events: TimelineEvent[] = [
     -221,
     "politics",
     ["qin", "warring-states"],
-    "秦建立统一王朝，成为总览中先秦与帝国时期之间的节点。",
-    ["talas"],
+    "秦完成对六国的兼并，以皇帝为中心组织统一国家，推行郡县与文字、货币、度量衡标准。",
+    ["nmc-qin-han", "columbia"],
     {
-      significance:
-        "政治组织进入新的阶段；后续制度的形成仍需结合具体史料理解。",
+      significance: "从列国竞争转向统一的中央行政体系；秦虽很快灭亡，其制度框架仍是理解汉代调整与继承的起点。",
+      details: [
+        { label: "统一与制度", text: "前230至前221年间，秦先后兼并六国；其后以皇帝、中央官署与郡县组织统治，并推动多项标准化措施。", sourceIds: ["nmc-qin-han"], locator: "第一单元总述及第一组「秦统一中国」" },
+        { label: "阅读重点", text: "哥伦比亚大学年表同时强调中央行政和标准化，而不只把秦统一当作王朝名单上的起点。", sourceIds: ["columbia"], locator: "Annotated Timeline / Qin" },
+      ],
+      note: "前221年标记兼并六国完成，不代表所有制度从该年才开始或在该年全部完成；保留年份精度。",
     },
   ),
   event(
@@ -483,11 +490,15 @@ export const events: TimelineEvent[] = [
     780,
     "institution",
     ["tang"],
-    "唐德宗时期，杨炎主持制定两税法。",
+    "780年，杨炎主持推行两税法，赋税计征由以人丁为主转向土地、财产等依据。",
     ["tax"],
     {
-      significance:
-        "征税方式向土地、财产等依据调整，是唐代财政制度的变化节点。",
+      significance: "土地与户口条件变化后，原有租庸调制度难以维持财政。两税法展示国家如何调整征收办法，而不只是一次皇帝更替。",
+      details: [
+        { label: "为什么调整", text: "税务机构所引研究说明，均田制受损、农民授田不足等变化，使原有赋役义务难以承担，朝廷财政收入下降。", sourceIds: ["tax"], locator: "正文均田制变化与财政危机段" },
+        { label: "调整了什么", text: "780年由杨炎主持改革，以户为单位按土地和财产计征，区别于此前以人丁为基本依据的租庸调。", sourceIds: ["tax"], locator: "正文唐德宗建中元年及地税、户税段" },
+      ],
+      note: "税务机构网页转引研究，不是780年法令原件；只说明计征依据的变化，不据此断言税负普遍减轻或把改革归结为安史之乱的单一结果。",
     },
   ),
   event(
@@ -594,6 +605,7 @@ export const events: TimelineEvent[] = [
     { significance: "王朝建立与完成征服不是同一个日期。" },
   ),
   ...xinhaiEvents,
+  ...transitionEvents,
 ];
 export const chinaHistory: Catalog = {
   topic: {
@@ -601,6 +613,7 @@ export const chinaHistory: Catalog = {
     periodSegment: "dynasties",
     shortcuts: [
       { title: "朝代总览", path: "/china-history/" },
+      { title: "统一、分裂与制度转型", path: transitionCollection.path },
       { title: "从唐朝开始", path: "/china-history/dynasties/tang/" },
       { title: "看宋辽夏金并存", path: "/china-history/dynasties/song-era/" },
       { title: "跨朝代战役", path: "/china-history/themes/battles/" },
@@ -609,9 +622,9 @@ export const chinaHistory: Catalog = {
     id: "china-history",
     title: "中国历史",
     path: "/china-history/",
-    description: "沿着朝代读历史，也沿着一场战役走进一个时代。",
+    description: "沿朝代与并存政权读历史，也追踪统一、分裂和制度变化的脉络。",
     coverage:
-      "夏至民初的时期骨架；唐代、宋辽夏金与辛亥革命 1911—1912 精选事件。其余时期以骨架为主，事件仍在补充。",
+      "夏至民初的时期骨架；补入秦汉至清末的统一、分裂与制度转型节点，唐代、宋辽夏金及辛亥革命有较详细的精选事件，仍非完整通史。",
     categories: [
       { id: "politics", title: "政治与更替" },
       { id: "battle", title: "重大战役" },
@@ -624,8 +637,8 @@ export const chinaHistory: Catalog = {
   periods,
   events,
   sources,
-  collections: [xinhaiCollection],
-  relations: xinhaiRelations,
+  collections: [transitionCollection, xinhaiCollection],
+  relations: [...transitionRelations, ...xinhaiRelations],
   entities: [...periods
     .filter((p) => p.entityIds.length)
     .map((p) => ({

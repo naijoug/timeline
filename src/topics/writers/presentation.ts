@@ -5,7 +5,7 @@ const scopeEventIds = (entityId: string) =>
   writersCatalog.events.filter(e => e.entityIds.includes(entityId)).map(e => e.id);
 
 export const writersPresentation: ExplorerPresentation = {
-  subtitle: "刘慈欣、紫金陈、马伯庸代表作品出版时间线与内容简介",
+  subtitle: "刘慈欣、紫金陈、马伯庸精选作品、发表阶段与阅读脉络",
   defaultRange: [1999, 2026],
   defaultEvent: "liu-cixin-wandering-earth",
   latestEvent: "ma-bo-yong-food-of-the-south",
@@ -22,5 +22,5 @@ export const writersPresentation: ExplorerPresentation = {
     title: "《三体》开始连载",
     event: "liu-cixin-three-body-1",
   },
-  footer: "作品出版记录、期刊首发与图书版本随节点保留",
+  footer: "期刊首发、成书、译介与获奖分别记录，日期不混用",
 };
