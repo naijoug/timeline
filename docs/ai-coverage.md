@@ -1,15 +1,15 @@
 # AI 时间线覆盖报告
 
-来源最近核查日期：2026-10-09；版本发布批次核查日期：2026-09-30。各来源保留各自核查日期。运行 `npm run report:ai` 从实际数据重新生成本报告。
+来源最近核查日期：2026-10-23；版本发布批次核查日期：2026-09-30。各来源保留各自核查日期。运行 `npm run report:ai` 从实际数据重新生成本报告。
 
 ## 收录范围
 
-当前共 248 个事件、84 个对象、206 份来源；版本发布批次新增 133 条，指令专题新增 3 条，视觉学习到协作系统专题新增 3 条。两个专题分别复用并完善 11、7 个既有节点，保留原事件 ID。
+当前工作区共 253 个事件、86 个对象、212 份来源；版本发布批次新增 133 条，指令专题新增 3 条，视觉学习到协作系统专题新增 3 条，2026-10-23 核查批次新增 5 条。两个专题分别复用并完善 11、7 个既有节点，保留原事件 ID。
 
 | 主线 | 全部已收录 | 关键节点 | 中国团队筛选 |
 | --- | ---: | ---: | ---: |
-| AI 技术突破 | 53 | 29 | 0 |
-| 模型演进 | 144 | 76 | 58 |
+| AI 技术突破 | 57 | 32 | 0 |
+| 模型演进 | 145 | 76 | 59 |
 | Agent 应用 | 51 | 34 | 9 |
 
 “当前显示”受时间窗口、关键词、地区、主线和关键节点筛选共同影响；页面同时显示全库和每轨总数。聚合不删除事件，打开组内目录可逐条阅读。
@@ -51,7 +51,7 @@
 | Cue | Manus | 1 | 2026-09 | 2026-09 |
 | Cursor Agent | Cursor | 4 | 2024-11-24 | 2025-10-29 |
 | DALL·E | OpenAI | 1 | 2021-01-05 | 2021-01-05 |
-| DeepSeek | DeepSeek | 14 | 2024-01-25 | 2026-09-10 |
+| DeepSeek | DeepSeek | 15 | 2024-01-25 | 2026-10-17 |
 | Devin | Cognition | 2 | 2024-03 | 2025-04-03 |
 | ERNIE / 文心 | 百度 | 1 | 2025-06-30 | 2025-06-30 |
 | EXAONE | LG AI Research | 1 | 2024-08-07 | 2024-08-07 |
@@ -98,7 +98,19 @@
 | Wan / 通义万相 | 阿里巴巴 | 1 | 2025-02-25 | 2025-02-25 |
 | Whisper | OpenAI | 1 | 2022-09-21 | 2022-09-21 |
 
-## 本轮新增事件与原始依据
+## 2026-10-23 更新与原始依据
+
+本批次查阅厂商公告、官方模型卡及独立评测机构的原始发布。榜单上线、评测研究预览、模型更新、API 正式开放与标准治理变化分别记录；不把厂商成绩当独立实测，不混淆榜单得分与通过率，也不把后续计划写成已发布。
+
+| 日期 | 事件 | 事件口径 | 原始来源 |
+| --- | --- | --- | --- |
+| 2026-10-22 | Decisions API 正式开放：把小决策接入应用 | 正式开放 | [OpenAI](https://openai.com/index/decisions-api/) |
+| 2026-10-22 | Agent Skills 捐赠给 Agentic AI Foundation | 标准治理更新 | [Anthropic](https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation) |
+| 2026-10-17 | DeepSeek-V4.1-Flash-1017 更新 | 模型更新 | [DeepSeek](https://api-docs.deepseek.com/updates/)、[DeepSeek](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017) |
+| 2026-10-14 | AA-Robotics v0.1：让语言模型操作真实机械臂 | 评测研究预览 | [Artificial Analysis](https://artificialanalysis.ai/articles/aa-robotics) |
+| 2026-10-12 | Artificial Analysis 上线 FrontierCode 1.1 榜单 | 独立评测榜单上线 | [Artificial Analysis](https://artificialanalysis.ai/articles/frontiercode) |
+
+## 2026-09-30 版本发布批次与原始依据
 
 | 日期 | 事件 | 事件口径 | 原始来源 |
 | --- | --- | --- | --- |

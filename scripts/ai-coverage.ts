@@ -6,11 +6,12 @@ import { eventLane, isKeyEvent, chinaCompanies } from '../src/topics/ai/config';
 import { releaseEvents, releaseResearchDate } from '../src/topics/ai/releases';
 import { instructionEvents } from '../src/topics/ai/instruction-following';
 import { historicalEvents } from '../src/topics/ai/historical-milestones';
+import { recentEvents, recentResearchDate } from '../src/topics/ai/recent-updates';
 const latestCheckedAt = sources.map(s=>s.checkedAt).sort().at(-1);
 
 const rows = ['# AI 时间线覆盖报告', '', `来源最近核查日期：${latestCheckedAt}；版本发布批次核查日期：${releaseResearchDate}。各来源保留各自核查日期。运行 \`npm run report:ai\` 从实际数据重新生成本报告。`, '',
   '## 收录范围', '',
-  `当前工作区共 ${events.length} 个事件、${entities.length} 个对象、${sources.length} 份来源；版本发布批次新增 ${releaseEvents.length} 条，指令专题新增 ${instructionEvents.length} 条，视觉学习到协作系统专题新增 ${historicalEvents.length} 条。两个专题分别复用并完善 11、7 个既有节点，保留原事件 ID。第二个专题目前仅供本机预览。`, '',
+  `当前工作区共 ${events.length} 个事件、${entities.length} 个对象、${sources.length} 份来源；版本发布批次新增 ${releaseEvents.length} 条，指令专题新增 ${instructionEvents.length} 条，视觉学习到协作系统专题新增 ${historicalEvents.length} 条，${recentResearchDate} 核查批次新增 ${recentEvents.length} 条。两个专题分别复用并完善 11、7 个既有节点，保留原事件 ID。`, '',
   '| 主线 | 全部已收录 | 关键节点 | 中国团队筛选 |', '| --- | ---: | ---: | ---: |'];
 for (const [lane, title] of [['methods', 'AI 技术突破'], ['models', '模型演进'], ['products', 'Agent 应用']]) {
   const list = events.filter(e => eventLane(e) === lane);
@@ -40,9 +41,15 @@ for (const entity of entities.filter(e => e.type !== 'concept').sort((a, b) => a
   if (list.length) rows.push(`| ${entity.name} | ${entity.company || '研究团队'} | ${list.length} | ${list[0].date} | ${list.at(-1)!.date} |`);
 }
 const sourceMap = new Map(sources.map(s => [s.id, s]));
-rows.push('', '## 本轮新增事件与原始依据', '', '| 日期 | 事件 | 事件口径 | 原始来源 |', '| --- | --- | --- | --- |');
+rows.push('', `## ${recentResearchDate} 更新与原始依据`, '',
+  '本批次查阅厂商公告、官方模型卡及独立评测机构的原始发布。榜单上线、评测研究预览、模型更新、API 正式开放与标准治理变化分别记录；不把厂商成绩当独立实测，不混淆榜单得分与通过率，也不把后续计划写成已发布。', '',
+  '| 日期 | 事件 | 事件口径 | 原始来源 |', '| --- | --- | --- | --- |');
+for (const event of [...recentEvents].sort((a, b) => b.date.localeCompare(a.date) || a.id.localeCompare(b.id))) {
+  rows.push(`| ${event.date} | ${event.title} | ${event.kind} | ${event.sourceIds.map(id => { const s = sourceMap.get(id)!; return `[${s.publisher}](${s.url})`; }).join('、')} |`);
+}
+rows.push('', '## 2026-09-30 版本发布批次与原始依据', '', '| 日期 | 事件 | 事件口径 | 原始来源 |', '| --- | --- | --- | --- |');
 for (const event of [...releaseEvents].sort((a, b) => a.date.localeCompare(b.date) || a.id.localeCompare(b.id))) {
   rows.push(`| ${event.date} | ${event.title} | ${event.kind} | ${event.sourceIds.map(id => { const s = sourceMap.get(id)!; return `[${s.publisher}](${s.url})`; }).join('、')} |`);
 }
 writeFileSync(new URL('../docs/ai-coverage.md', import.meta.url), rows.join('\n') + '\n');
-console.log(`AI coverage report: ${events.length} events, ${releaseEvents.length} additions, ${sources.length} sources.`);
+console.log(`AI coverage report: ${events.length} events, ${recentEvents.length} recent updates, ${releaseEvents.length} release-pack events, ${sources.length} sources.`);
