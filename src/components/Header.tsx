@@ -1,7 +1,7 @@
 import { sitePath } from '../lib/paths';
 import { topics } from '../core/topics';
 import { canUseParentHistoryBack, canUseTimelineHistoryBack, safeTimelineReturn, timelineReadingReturn } from '../core/mobile-navigation';
-import { Search, Globe2, X, BookOpen, ChartNoAxesColumn, Grid2X2, Info, ArrowLeft, ArrowRight, PanelLeftClose, PanelLeftOpen, Menu } from 'lucide-react';
+import { Search, X, BookOpen, ChartNoAxesColumn, Grid2X2, Info, ArrowLeft, PanelLeftClose, PanelLeftOpen, Menu } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import '../styles/navigation.css';
 import AppearanceControl from './AppearanceControl';
@@ -19,12 +19,10 @@ export default function Header({ query, onQuery, active = 'timeline', topicTitle
   const searchToggle = useRef<HTMLButtonElement>(null);
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [topicQuery, setTopicQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
   const [backHref, setBackHref] = useState(screen === 'record' && active !== 'about' ? sitePath(topicPath) : sitePath('/'));
   const currentTopic = topics.find(t => t.path === topicPath);
   const mobileTitle = active === 'about' ? '关于 timeline' : screen === 'home' ? '探索时间线' : screen === 'record' ? '事件详情' : currentTopic?.title || topicTitle;
-  const visibleTopics = topics.filter(t => t.title.toLocaleLowerCase().includes(topicQuery.trim().toLocaleLowerCase()));
   const resolveBackHref = () => {
     if (screen !== 'record' || active === 'about') return sitePath('/');
     const prefix = sitePath(topicPath);
@@ -73,7 +71,6 @@ export default function Header({ query, onQuery, active = 'timeline', topicTitle
   const toggle = () => {
     const next = !collapsed;
     setCollapsed(next);
-    if (next) setTopicQuery('');
     try { localStorage.setItem('timeline-sidebar-collapsed', String(next)); } catch { /* Still works without storage. */ }
   };
   const closeMobile = () => { setMobileOpen(false); requestAnimationFrame(() => menu.current?.focus({ preventScroll: true })); };
@@ -111,23 +108,17 @@ export default function Header({ query, onQuery, active = 'timeline', topicTitle
     <aside id="topic-sidebar" ref={sidebar} className={`topic-sidebar ${mobileOpen ? 'mobile-open' : ''}`} aria-label="主题导航" role={mobileOpen ? 'dialog' : undefined} aria-modal={mobileOpen || undefined}>
       <div className="sidebar-brand-row">
         <a className="sidebar-wordmark" href={sitePath('/')} aria-label="timeline 首页"><span className="sidebar-long-brand">timeline</span><span className="sidebar-short-brand">t.</span></a>
-        <button type="button" className="sidebar-toggle" onClick={toggle} aria-label={collapsed ? '展开侧栏' : '收拢侧栏'} aria-expanded={!collapsed} aria-controls="topic-navigation" title={collapsed ? '展开侧栏' : '收拢侧栏'}>{collapsed ? <PanelLeftOpen size={19} /> : <PanelLeftClose size={19} />}</button>
         <button type="button" className="mobile-nav-close" aria-label="关闭主题导航" onClick={closeMobile}><X size={22} /></button>
       </div>
-      <div className="sidebar-search-section">
-        <span className="sidebar-caption">主题库</span>
-        <label className="sidebar-topic-search"><Search size={16} /><input aria-label="查找主题" placeholder="查找主题…" value={topicQuery} onChange={e => setTopicQuery(e.target.value)} />{topicQuery && <button aria-label="清除主题搜索" onClick={() => setTopicQuery('')}><X size={14} /></button>}</label>
-      </div>
+      <span className="sidebar-caption" aria-hidden="true">主题</span>
       <nav id="topic-navigation" className="topic-navigation" aria-label="所有主题">
-        <a href={sitePath('/')} aria-current={topicPath === '/' && active !== 'about' ? 'page' : undefined} title="所有主题"><Grid2X2 size={19} /><span>所有主题</span></a>
-        {visibleTopics.map(topic => <a key={topic.id} data-astro-prefetch="hover" href={sitePath(topic.path)} title={topic.title} aria-current={topicPath === topic.path && active !== 'about' ? 'page' : undefined}>{topic.icon === 'book' ? <BookOpen size={20} /> : <ChartNoAxesColumn size={20} />}<span>{topic.title}</span></a>)}
-        {!visibleTopics.length && <p className="topic-no-results">没有匹配的主题</p>}
+        <a href={sitePath('/')} aria-current={topicPath === '/' && active !== 'about' ? 'page' : undefined} title="所有主题" aria-label="所有主题"><Grid2X2 size={19} /><span>所有主题</span></a>
+        {topics.map(topic => <a key={topic.id} data-astro-prefetch="hover" href={sitePath(topic.path)} title={topic.title} aria-label={topic.title} aria-current={topicPath === topic.path && active !== 'about' ? 'page' : undefined}>{topic.icon === 'book' ? <BookOpen size={20} /> : <ChartNoAxesColumn size={20} />}<span>{topic.title}</span></a>)}
       </nav>
-      <div className="sidebar-discovery"><p>更多主题持续收录</p><a href={sitePath('/')}>浏览主题<ArrowRight size={15} /></a></div>
-      <div className="sidebar-utilities"><AppearanceControl /><a href={sitePath('/about/')} aria-current={active === 'about' ? 'page' : undefined} title="关于 timeline"><Info size={18} /><span>关于 timeline</span></a><div title="简体中文"><Globe2 size={18} /><span>简体中文</span></div></div>
+      <div className="sidebar-utilities"><AppearanceControl showLabel /><a href={sitePath('/about/')} aria-current={active === 'about' ? 'page' : undefined} title="关于 timeline" aria-label="关于 timeline"><Info size={18} /><span>关于 timeline</span></a></div>
     </aside>
     <header ref={header} className="atlas-header library-header" data-search-open={searchOpen || undefined}>
-      <button ref={desktopMenu} type="button" className="header-sidebar-toggle" onClick={toggle} aria-label={collapsed ? '展开侧栏' : '收拢侧栏'} aria-expanded={!collapsed} aria-controls="topic-navigation" title={collapsed ? '展开侧栏' : '收拢侧栏'}>{collapsed ? <PanelLeftOpen size={20} /> : <PanelLeftClose size={20} />}</button>
+      <button ref={desktopMenu} type="button" className="header-sidebar-toggle" onClick={toggle} aria-label={collapsed ? '展开侧栏' : '收拢侧栏'} aria-expanded={!collapsed} aria-controls="topic-sidebar" title={collapsed ? '展开侧栏' : '收拢侧栏'}>{collapsed ? <PanelLeftOpen size={20} /> : <PanelLeftClose size={20} />}</button>
       {screen !== 'home' && <a className="mobile-app-back" href={backHref} aria-label={screen === 'record' && active !== 'about' ? '返回时间线' : '返回首页'} onClick={event => {
         // Recheck at activation as well as hydration, without guessing browser history.
         const destination = resolveBackHref();

@@ -13,7 +13,7 @@ const waitFor = async (check, message) => {
   while (Date.now() < deadline) { if (check()) return; await new Promise(resolve => setTimeout(resolve, 10)); }
   assert.ok(check(), message);
 };
-async function hydrate(path, search = '') {
+async function hydrate(path, search = '', headerOnly = false) {
   const errors = [];
   const console = new VirtualConsole();
   console.on('error', (...args) => errors.push(args.map(String).join(' ')));
@@ -23,7 +23,23 @@ async function hydrate(path, search = '') {
     referrer: `https://timeline.example${base}/`, runScripts:'outside-only', pretendToBeVisual:true, virtualConsole:console,
   });
   const w = dom.window;
-  w.matchMedia = query => ({ matches: false, media:query, addEventListener(){}, removeEventListener(){} });
+  const mediaQueries = [];
+  let currentMobile = false;
+  w.matchMedia = query => {
+    const listeners = new Set();
+    const media = { matches:query === '(max-width: 760px)' && currentMobile, media:query, addEventListener(_type, listener){ listeners.add(listener); }, removeEventListener(_type, listener){ listeners.delete(listener); } };
+    mediaQueries.push({ media, listeners });
+    return media;
+  };
+  const setMobile = mobile => {
+    currentMobile = mobile;
+    mediaQueries.forEach(({ media, listeners }) => {
+    if (media.media !== '(max-width: 760px)') return;
+    media.matches = mobile;
+    listeners.forEach(listener => listener(media));
+    });
+  };
+  w.HTMLElement.prototype.scrollTo = () => {};
   w.scrollTo = () => {};
   w.HTMLElement.prototype.scrollIntoView = () => {};
   const context = dom.getInternalVMContext();
@@ -39,17 +55,17 @@ async function hydrate(path, search = '') {
     if (module.status !== 'evaluated') await module.evaluate();
     return module.namespace;
   };
-  const island = w.document.querySelector('astro-island[component-url*="TopicExplorer"]');
+  const island = w.document.querySelector(headerOnly ? 'astro-island[component-url*="Header"]' : 'astro-island[component-url*="TopicExplorer"]');
   assert.ok(island);
   const props = Object.fromEntries(Object.entries(JSON.parse(island.getAttribute('props'))).map(([key, [, value]]) => [key, value]));
   const firstCard = w.document.querySelector('.chronicle-event-button');
   const component = await load(island.getAttribute('component-url'));
   const renderer = await load(island.getAttribute('renderer-url'));
   renderer.default(island)(component.default, props, {}, { client:'load' });
-  await waitFor(() => w.document.querySelector('[data-timeline-ready="true"]'), `${path}: hydration did not finish`);
+  await waitFor(() => headerOnly ? w.document.documentElement.style.getPropertyValue('--navigation-header-height') : w.document.querySelector('[data-timeline-ready="true"]'), `${path}: hydration did not finish`);
   assert.equal(errors.length, 0, errors.join('\n'));
   if (!search) assert.equal(w.document.querySelector('.chronicle-event-button'), firstCard, `${path}: hydration replaced SSR instead of reusing it`);
-  return { dom, w, errors };
+  return { dom, w, errors, setMobile };
 }
 for (const topic of ['ai','programming-languages','china-history','writers']) {
   const { dom, w, errors } = await hydrate(topic);
@@ -97,3 +113,37 @@ assert.equal(filtered.w.document.querySelector('[aria-label="排列顺序"]').va
 assert.equal(filtered.errors.length,0,filtered.errors.join('\n'));
 filtered.dom.window.close();
 console.log('Production hydration smoke checks passed, including filtered AI legacy links and specialized routes. Browser layout remains a separate live QA check.');
+
+// Exercise the built shared header, including repeat toggles and phone-to-desktop cleanup.
+{
+  const { dom, w, errors, setMobile } = await hydrate('', '', true);
+  const toggle = w.document.querySelector('.header-sidebar-toggle');
+  assert.equal(w.document.querySelectorAll('[aria-label="收拢侧栏"]').length, 1);
+  assert.equal(w.document.querySelectorAll('.sidebar-toggle').length, 0);
+  assert.equal(toggle.getAttribute('aria-controls'), 'topic-sidebar');
+  for (const collapsed of [true, false, true, false]) {
+    toggle.click();
+    await waitFor(() => toggle.getAttribute('aria-expanded') === String(!collapsed), 'desktop toggle state');
+    assert.equal(w.document.documentElement.dataset.sidebar, collapsed ? 'collapsed' : 'expanded');
+    assert.equal(w.localStorage.getItem('timeline-sidebar-collapsed'), String(collapsed));
+  }
+  const menu = w.document.querySelector('.mobile-nav-open');
+  setMobile(true);
+  menu.click();
+  await waitFor(() => w.document.querySelector('[role="dialog"]'), 'phone menu open');
+  assert.equal(menu.getAttribute('aria-expanded'), 'true');
+  assert.equal(w.document.querySelector('main').inert, true);
+  w.dispatchEvent(new w.KeyboardEvent('keydown', { key:'Escape', bubbles:true }));
+  await waitFor(() => !w.document.querySelector('[role="dialog"]'), 'Escape closes phone drawer');
+  await waitFor(() => w.document.activeElement === menu, 'Escape restores opener focus');
+  assert.notEqual(w.document.querySelector('main').inert, true);
+  menu.click();
+  await waitFor(() => w.document.querySelector('[role="dialog"]'), 'phone menu reopen');
+  setMobile(false);
+  await waitFor(() => !w.document.querySelector('[role="dialog"]'), 'resize closes phone drawer');
+  await waitFor(() => w.document.activeElement === toggle, 'resize focuses sole desktop toggle');
+  assert.equal(w.document.body.style.overflow, '');
+  assert.equal(errors.length, 0, errors.join('\n'));
+  dom.window.close();
+  console.log('Home header hydration: sole toggle, repeated state, Escape and resize cleanup passed');
+}

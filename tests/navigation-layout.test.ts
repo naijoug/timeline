@@ -16,10 +16,10 @@ test('the shared navigation root is one opaque sticky layer in document flow', (
 });
 
 test('desktop and phone have visible header controls for their respective navigation modes', () => {
-  assert.match(header, /className="header-sidebar-toggle" onClick=\{toggle\}[^>]*aria-expanded=\{!collapsed\}[^>]*aria-controls="topic-navigation"/);
+  assert.match(header, /className="header-sidebar-toggle" onClick=\{toggle\}[^>]*aria-expanded=\{!collapsed\}[^>]*aria-controls="topic-sidebar"/);
   assert.match(header, /className="mobile-nav-open"[^\n]*aria-expanded=\{mobileOpen\}[^\n]*aria-controls="topic-sidebar"[^\n]*aria-haspopup="dialog"/);
   assert.match(css, /\.header-sidebar-toggle\s*\{[^}]*display:flex;[^}]*width:44px;[^}]*height:44px;/);
-  assert.match(css, /@media\(max-width:760px\)\s*\{[\s\S]*\.sidebar-toggle,\.header-sidebar-toggle\s*\{\s*display:none;/);
+  assert.match(css, /@media\(max-width:760px\)\s*\{[\s\S]*\.header-sidebar-toggle\s*\{\s*display:none;/);
   assert.match(header, /localStorage\.setItem\('timeline-sidebar-collapsed', String\(next\)\)/);
   assert.match(header, /<AppearanceControl\s*\/>/);
 });
@@ -89,4 +89,14 @@ test('drawer dismissal preserves focus, scroll position, background inertness, a
   assert.match(header, /el\.inert = previousInert\[i\]/);
   assert.match(header, /document\.body\.style\.overflow = previousOverflow/);
   assert.match(header, /role=\{mobileOpen \? 'dialog' : undefined\} aria-modal=\{mobileOpen \|\| undefined\}/);
+});
+
+
+test('one desktop trigger and an uncluttered rail keep accessible names when collapsed', () => {
+  assert.equal((header.match(/onClick=\{toggle\}/g) || []).length, 1);
+  assert.doesNotMatch(header, /className="sidebar-toggle"|sidebar-discovery|sidebar-topic-search|Globe2/);
+  assert.match(header, /title=\{topic.title\} aria-label=\{topic.title\}/);
+  assert.match(header, /title="所有主题" aria-label="所有主题"/);
+  assert.match(header, /<AppearanceControl showLabel/);
+  assert.match(css, /header-sidebar-toggle:focus-visible/);
 });
