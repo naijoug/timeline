@@ -16,7 +16,7 @@ test('state transitions add eight unique sourced records and a reachable reading
   for (const e of transitionEvents) {
     assert.equal(chinaHistory.events.filter(other => other.id === e.id).length, 1, e.id);
     assert.ok(e.milestone);
-    assert.ok(e.details!.every(s => s.sourceIds?.length && s.locator), e.id);
+    assert.ok(e.details!.filter(s => !s.editorial).every(s => s.sourceIds?.length && s.locator), e.id);
     assert.ok(e.significance.length > 20 && e.note, e.id);
   }
   assert.ok(chinaHistory.collections?.includes(transitionCollection));
@@ -85,5 +85,5 @@ test('source reviews are scoped and relationships cite claims rather than mere o
   assert.equal(transitionRelations.find(r => r.id === 'han-adapts-qin-order')!.toEventId, 'qin-unification');
   assert.equal(transitionRelations.find(r => r.id === 'exam-abolition-yuan-memorial')!.entityId, 'yuan-shikai');
   assert.equal(transitionRelations.find(r => r.id === 'qing-inherits-ming-institutions')!.toEventId, 'ming-founded');
-  for (const id of ['qin-unification', 'two-tax']) assert.ok(event(id).details!.every(s => s.sourceIds?.length && s.locator));
+  for (const id of ['qin-unification', 'two-tax']) assert.ok(event(id).details!.filter(s => !s.editorial).every(s => s.sourceIds?.length && s.locator));
 });

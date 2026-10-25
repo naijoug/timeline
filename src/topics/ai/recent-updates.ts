@@ -1,3 +1,4 @@
+import { containmentEvents, containmentSources } from "./containment-report";
 import { safetyEntities, safetyEvents, safetySources } from "./safety-updates";
 import type { Entity, Source, TimelineEvent } from './types';
 
@@ -7,6 +8,7 @@ export const recentResearchDate = '2026-10-24';
 
 export const recentSources: Source[] = [
   ...safetySources,
+  ...containmentSources,
   {
     id: 'aa-kimi-k31-launch-evaluation', title: 'Kimi K3.1 Pro 发布评测（标题节译）',
     publisher: 'Artificial Analysis', url: 'https://artificialanalysis.ai/articles/kimi-k3-1-pro-launch-benchmarks',
@@ -91,6 +93,7 @@ export const recentEntities: Entity[] = [
 
 export const recentEvents: TimelineEvent[] = [
   ...safetyEvents,
+  ...containmentEvents,
   {
     id: 'kimi-k3-1-pro', date: '2026-10-24', title: 'Kimi K3.1 Pro 发布：强化长程编程与 Agent',
     company: '月之暗面', kind: '模型发布', tracks: ['models'],

@@ -2,6 +2,12 @@ import type { Source, TimelineEvent } from '../../core/types';
 
 export const historyReviewedSources: Source[] = [
   {
+    id: 'columbia-examination-social-context', title: 'The Confucian Classics & the Civil Service Examinations', publisher: '哥伦比亚大学 Asia for Educators',
+    url: 'https://afe.easia.columbia.edu/cosmos/irc/classics.htm', type: '大学教学材料', checkedAt: '2026-10-24',
+    locator: 'The Confucian Tradition Institutionalized through the Examination System；Who Took the Civil Service Examinations?',
+    version: '只采用课程与教育机会的概述，不使用其识字率估计、考试层级简化及起源定年作为本节点证据。',
+  },
+  {
     id: 'backbone-tang-met-review', title: 'Tang Dynasty (618–907)：安史之后的唐朝', publisher: '大都会艺术博物馆 · 亚洲艺术部',
     url: 'https://www.metmuseum.org/essays/tang-dynasty-618-906', type: '博物馆研究', checkedAt: '2026-10-24', publishedAt: '2001-10-01',
     locator: '正文最后一段：An Lushan rebellion与其后一个半世纪',

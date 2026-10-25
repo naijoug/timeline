@@ -26,7 +26,7 @@ export const transitionSourceReviews: Record<string, Partial<Source>> = {
     version: '本轮复核秦汉制度承接与汉朝前206年的分期口径；其余段落未逐项复核',
   },
   tax: {
-    title: '隋、唐：租庸调与两税法', checkedAt,
+    title: '隋、唐', checkedAt,
     type: '税务机构转引研究', format: '税务机构转引研究',
     locator: '正文租庸调制、均田制变化与780年两税法段',
     version: '2019-05-08网页；署摘自陈明光《隋唐王朝赋税的来源于用途》（2013）；未核验期刊原文',
@@ -86,7 +86,9 @@ export const transitionEvents: TimelineEvent[] = [
     '清廷采纳袁世凯等人的奏请，停止科举考试，推动新式学堂取士。',
     '在1911年革命之前，维系士人教育与入仕的制度已发生重大变化。学校、仕途与国家用人的关系正在重新安排。', [
       section('诏令内容', '9月2日上谕英译规定从丙午年（1906）起停止乡、会试，并停止各省生员考试；已取得功名者仍按其资格安排任用。', ['frus-1905-examinations'], '附件2：beginning with the year ping-wu (1906)段及其后段'),
+      section('学校与仕途之外的社会背景', '哥伦比亚大学教学材料说明，经学课程不仅服务于应试，也影响基础教育；继续准备考试又依赖家庭资源或资助。制度转型因此关系到学习内容与机会，并不只是官职选拔方式的替换。', ['columbia-examination-social-context'], 'The Confucian Tradition Institutionalized through the Examination System；Who Took the Civil Service Examinations?'),
       section('改革者的理由与后续', '上谕记载袁世凯等认为保留科举会妨碍扩充学校；9月4日上谕又将学政的职责转向督察各省学校。这里呈现诏令的理由，不将它等同于改革效果的完整评价。', ['frus-1905-examinations'], '附件2开头及Now we have received段；附件3'),
+      { label: '编辑解读：停止旧制不等于新制完成', text: '可以把停考、兴学和既有功名者的安排分开观察：旧的晋身道路被关闭，新的学校与任用机制仍须建设。诏令表达改革目标，不足以证明各地教育机会已经平等，也不能单凭它解释后来的革命。', editorial: true },
     ], '节点是1905年诏令颁布日，1906是诏令规定停止乡会试的起始科年，不应混为同一日期。采用同时代英译转录，未核验中文上谕原件；不把废科举写成辛亥革命的单一原因。'),
 ];
 

@@ -2,6 +2,48 @@ import type { RecommendedResource } from '../../core/types';
 
 // Teaching and interpretation links only. Evidence for dates and historical facts remains in sources.
 export const historyRecommendedResources: Record<string, RecommendedResource[]> = {
+
+  "two-tax": [
+    {
+      "id": "cctv-tang-tax-reform",
+      "title": "《国史通鉴》（隋唐五代篇）23 唐朝的重大改革",
+      "creator": "央视网 · 百家讲坛",
+      "series": "百家讲坛 · 国史通鉴",
+      "url": "https://tv.cctv.com/2018/04/24/VIDE93LDuFCHHyEUb9txpveh180424.shtml",
+      "kind": "video",
+      "publishedAt": "2018-04-24",
+      "match": "节目简介明确讨论唐德宗推行两税法及安史之乱后的财政背景。",
+      "scopeNote": "已核官网标题、日期和简介，未验证播放或逐字讲稿；节目对改革成效的评价不替代史料与地方实施研究。",
+      "checkedAt": "2026-10-24"
+    }
+  ],
+  "diamond-sutra": [
+    {
+      "id": "idp-diamond-object-reading",
+      "title": "Buddhist texts: The Diamond Sūtra",
+      "creator": "英国国家图书馆 · 国际敦煌项目",
+      "series": "Buddhism on the Silk Roads",
+      "url": "https://idp.bl.uk/discover/learning/buddhism-on-the-silk-roads/articles/buddhism-on-the-ground/buddhist-texts-the-diamond-sutra/",
+      "kind": "article",
+      "match": "结合卷首图、题记与制作说明，观察印刷、资助者和宗教实践的联系。",
+      "scopeNote": "官网正文已读取，图注已核对；“最早”指现存完整有纪年印本，不是印刷技术起源。单独数字藏品入口本轮未成功打开，不声称完成高清逐字释读。",
+      "checkedAt": "2026-10-24"
+    }
+  ],
+  "abolish-examinations": [
+    {
+      "id": "columbia-keju-social-reading",
+      "title": "The Confucian Classics & the Civil Service Examinations",
+      "creator": "哥伦比亚大学 Asia for Educators",
+      "series": "Living in the Chinese Cosmos",
+      "url": "https://afe.easia.columbia.edu/cosmos/irc/classics.htm",
+      "kind": "article",
+      "match": "理解科举与课程、家庭教育资源和社会流动的联系，为阅读1905年废科举提供背景。",
+      "scopeNote": "已核对教学概述，不是1905年诏令原件或停考后效果评估；文中的识字率估计和考试层级简化不作为本站结论。",
+      "checkedAt": "2026-10-24"
+    }
+  ]
+,
   "muye": [
     {
       "id": "nmc-li-gui",

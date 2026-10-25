@@ -89,7 +89,7 @@ export const sources: Source[] = [
   ),
   source(
     "tax",
-    "两税法",
+    "隋、唐",
     "国家税务总局天津市税务局",
     "https://tianjin.chinatax.gov.cn/11248000000/8000/800001/80000105/20191025153613963.shtml",
   ),
@@ -119,7 +119,10 @@ export const sources: Source[] = [
   ...ancientSources,
   ...modernSources,
   ...historyReviewedSources,
-].map(s => transitionSourceReviews[s.id] ? { ...s, ...transitionSourceReviews[s.id] } : s);
+].map(s => {
+  const reviewed = transitionSourceReviews[s.id] ? { ...s, ...transitionSourceReviews[s.id] } : s;
+  return s.id === 'diamond' ? { ...reviewed, checkedAt: '2026-10-24', locator: 'Frontispiece；How and why was it made?；Colophon', version: '本轮核对题记、制作与宗教实践说明，保留年份精度，不将印本年代当作印刷术发明日期。' } : reviewed;
+});
 const duration = (
   start: number,
   end: number,
@@ -507,6 +510,7 @@ export const events: TimelineEvent[] = [
       details: [
         { label: "为什么调整", text: "税务机构所引研究说明，均田制受损、农民授田不足等变化，使原有赋役义务难以承担，朝廷财政收入下降。", sourceIds: ["tax"], locator: "正文均田制变化与财政危机段" },
         { label: "调整了什么", text: "780年由杨炎主持改革，以户为单位按土地和财产计征，区别于此前以人丁为基本依据的租庸调。", sourceIds: ["tax"], locator: "正文唐德宗建中元年及地税、户税段" },
+        { label: "编辑解读：从谁来负担看制度", text: "比起只记税制名称，更值得追问国家按什么识别纳税人、土地和财产怎样进入征收依据，以及不同家庭承受什么后果。财政收入增加与个体负担改善不是同一判断；讲座可帮助理解背景，不能代替各地实施证据。", editorial: true },
       ],
       note: "税务机构网页转引研究，不是780年法令原件；只说明计征依据的变化，不据此断言税负普遍减轻或把改革归结为安史之乱的单一结果。",
     },
@@ -520,7 +524,12 @@ export const events: TimelineEvent[] = [
     "现存这一完整雕版印刷卷子具有868年的题记。",
     ["diamond"],
     {
-      significance: "为研究印刷与佛教文本传播提供实物证据。",
+      significance: "把印刷技术、宗教实践与私人资助放在同一件实物中，理解文本如何制作和传播。",
+      details: [
+        { label: "题记证明什么", text: "国际敦煌项目据卷末题记说明，此本由王玠出资为父母印造，纪年为868年。题记支持这件印本的年代，不能据此认定印刷术就在该年发明。", sourceIds: ["diamond"], locator: "Colophon from the Diamond Sutra；末段earlier examples of printing" },
+        { label: "不只是抽象的技术发明", text: "该卷以雕版分别印制后接成横卷，卷首有说法图。机构解说将复制、传播佛经与佛教积累功德的实践相联系，展现出资者、制作技术与信仰需求的结合。", sourceIds: ["diamond"], locator: "The Diamond Sutra frontispiece；How and why was it made?；Colophon" },
+        { label: "编辑解读：沿着一件实物提问", text: "读这件印本，可以依次看图像、接纸与题记，再问谁出钱、给谁看、为什么值得复制。这样能把技术史放回人的活动中，而不是只争一个“世界第一”的标签。", editorial: true },
+      ],
       note: "这是存世有纪年印本的证据，不是印刷术发明年份。",
     },
   ),
