@@ -1,12 +1,14 @@
+import { verificationTrainingEvents, verificationTrainingSources, verificationTrainingEntities } from "./verification-training-updates";
 import { containmentEvents, containmentSources } from "./containment-report";
 import { safetyEntities, safetyEvents, safetySources } from "./safety-updates";
 import type { Entity, Source, TimelineEvent } from './types';
 
 // Source-reviewed updates. Each source keeps its own verification date; advancing
 // the latest research date does not imply older sources were checked again.
-export const recentResearchDate = '2026-10-24';
+export const recentResearchDate = '2026-10-25';
 
 export const recentSources: Source[] = [
+  ...verificationTrainingSources,
   ...safetySources,
   ...containmentSources,
   {
@@ -78,6 +80,7 @@ export const recentSources: Source[] = [
 ];
 
 export const recentEntities: Entity[] = [
+  ...verificationTrainingEntities,
   ...safetyEntities,
   {
     id: 'decisions-api', name: 'Decisions API', type: 'concept', company: 'OpenAI',
@@ -92,6 +95,7 @@ export const recentEntities: Entity[] = [
 ];
 
 export const recentEvents: TimelineEvent[] = [
+  ...verificationTrainingEvents,
   ...safetyEvents,
   ...containmentEvents,
   {

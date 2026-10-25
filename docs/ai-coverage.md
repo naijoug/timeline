@@ -1,14 +1,14 @@
 # AI 时间线覆盖报告
 
-来源最近核查日期：2026-10-24；版本发布批次核查日期：2026-09-30。各来源保留各自核查日期。运行 `npm run report:ai` 从实际数据重新生成本报告。
+来源最近核查日期：2026-10-25；版本发布批次核查日期：2026-09-30。各来源保留各自核查日期。运行 `npm run report:ai` 从实际数据重新生成本报告。
 
 ## 收录范围
 
-当前工作区共 273 个事件、88 个对象、238 份来源；版本发布批次新增 133 条，指令专题新增 3 条，视觉学习到协作系统专题新增 3 条，截至 2026-10-24 的近期核查更新共 6 条。2026-10-24 的重要缺口补齐批次另增 19 条。两个专题分别复用并完善 11、7 个既有节点，保留原事件 ID。
+当前工作区共 278 个事件、91 个对象、251 份来源；版本发布批次新增 133 条，指令专题新增 3 条，视觉学习到协作系统专题新增 3 条，截至 2026-10-25 的近期核查更新共 11 条。2026-10-24 的重要缺口补齐批次另增 19 条。两个专题分别复用并完善 11、7 个既有节点，保留原事件 ID。
 
 | 主线 | 全部已收录 | 关键节点 | 中国团队筛选 |
 | --- | ---: | ---: | ---: |
-| AI 技术突破 | 57 | 32 | 0 |
+| AI 技术突破 | 62 | 36 | 0 |
 | 模型演进 | 164 | 94 | 68 |
 | Agent 应用 | 52 | 35 | 9 |
 
@@ -103,13 +103,18 @@
 | Wan / 通义万相 | 阿里巴巴 | 1 | 2025-02-25 | 2025-02-25 |
 | Whisper | OpenAI | 1 | 2022-09-21 | 2022-09-21 |
 
-## 近期更新与原始依据（最近核查 2026-10-24）
+## 近期更新与原始依据（最近核查 2026-10-25）
 
 近期更新查阅厂商公告、官方模型卡及独立评测机构的原始发布。榜单上线、评测研究预览、模型更新、API 正式开放与标准治理变化分别记录；不把厂商成绩当独立实测，不混淆榜单得分与通过率，也不把后续计划写成已发布。
 
 | 日期 | 事件 | 事件口径 | 原始来源 |
 | --- | --- | --- | --- |
-| 2026-10-24 | Kimi K3.1 Pro 发布：强化长程编程与 Agent | 模型发布 | [月之暗面](https://www.kimi.com/en/blog/kimi-k3-1-pro)、[月之暗面](https://www.kimi.com/en/blog/)、[月之暗面](https://www.kimi.com/code/docs/en/kimi-code/whats-new.html) |
+| 2026-10-24 | Kimi K3.1 Pro 发布：强化长程编程与 Agent | 模型发布 | [月之暗面](https://www.kimi.com/en/blog/kimi-k3-1-pro)、[月之暗面](https://www.kimi.com/en/blog/)、[月之暗面](https://www.kimi.com/code/docs/en/kimi-code/whats-new.html)、[Artificial Analysis](https://artificialanalysis.ai/articles/kimi-k3-1-pro-launch-benchmarks)、[Artificial Analysis](https://artificialanalysis.ai/methodology/intelligence-benchmarking) |
+| 2026-10-24 | 英国宣布设立 AI Biosecurity Lab | 机构与治理公告 | [英国 Cabinet Office](https://www.gov.uk/government/news/introducing-the-ai-biosecurity-lab)、[英国 HM Treasury](https://www.gov.uk/government/news/chancellor-unveils-britains-ambitious-plan-for-ai) |
+| 2026-10-23 | AISI 与 Anthropic 分别发布 Agent 越界事件对齐分析 | 安全评估报告 | [Anthropic](https://www.anthropic.com/research/alignment-assessment-ukaisi)、[英国 AI Security Institute](https://www.aisi.gov.uk/blog/investigating-alignment-failures-in-aisis-incident)、[英国 AI Security Institute](https://www.aisi.gov.uk/category/organisation) |
+| 2026-10-23 | OpenAI 公布前沿训练环境隔离与红队报告 | 安全工程报告 | [OpenAI](https://openai.com/index/securing-our-frontier-model-training-environment/) |
+| 2026-10-22 | Anthropic 与 Theorem 展示大规模软件形式化验证 | 研究与证明公开 | [Anthropic](https://www.anthropic.com/research/formal-verification)、[Theorem](https://github.com/theorem-labs/oss-verify-proofs)、[Theorem](https://github.com/theorem-labs/rocq-linux-process-semantics) |
+| 2026-10-22 | SageMaker AI Training Sessions 正式可用 | 平台正式可用 | [AWS](https://aws.amazon.com/blogs/machine-learning/announcing-new-ways-to-customize-models-with-sagemaker-ai-without-managing-gpus/)、[AWS](https://docs.aws.amazon.com/sagemaker/latest/dg/customizing-models-training-sessions.html) |
 | 2026-10-22 | Decisions API 正式开放：把小决策接入应用 | 正式开放 | [OpenAI](https://openai.com/index/decisions-api/) |
 | 2026-10-22 | Agent Skills 捐赠给 Agentic AI Foundation | 标准治理更新 | [Anthropic](https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation) |
 | 2026-10-17 | DeepSeek-V4.1-Flash-1017 更新 | 模型更新 | [DeepSeek](https://api-docs.deepseek.com/updates/)、[DeepSeek](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017) |

@@ -9,6 +9,7 @@ import type {
 import { evolutionCheckedAt, evolutionEvents, evolutionRelations, evolutionSources } from "./evolution-milestones";
 
 import { goReviewedEvents, goReviewedSources, goReviewedRelations } from "./go-reviewed-records";
+import { pythonReviewedEvents, pythonReviewedSources } from "./python-reviewed-records";
 
 const checkedAt = "2026-10-12";
 
@@ -23,6 +24,7 @@ const source = (
 
 export const sources: Source[] = [
   ...goReviewedSources,
+  ...pythonReviewedSources,
   source("ibm-fortran", "IBM 100: FORTRAN", "IBM", "https://www.ibm.com/ibm/history/ibm100/us/en/items/fortran/", "机构史料", "项目背景、1957 年交付与首个编译器"),
   source("acm-lisp", "Recursive Functions of Symbolic Expressions and Their Computation by Machine, Part I", "ACM", "https://dl.acm.org/doi/10.1145/367199.367179", "原始论文", "Communications of the ACM, 1960 年 4 月"),
   source("codasyl-cobol", "COBOL: Initial Specifications for a Common Business Oriented Language", "CODASYL · Bitsavers 扫描档案", "https://bitsavers.trailing-edge.com/pdf/codasyl/COBOL_Report_Apr60.pdf", "历史规格", "1960 年 4 月报告；1959 年为发起年份"),
@@ -470,16 +472,7 @@ export const events: TimelineEvent[] = [
     tags: ["Python 2", "列表推导"],
     change: change("Python 1.x 的类型与内存模型", ["列表推导", "引用计数加垃圾回收", "增强赋值"], "Unicode 支持尚不完整，Python 2 与 3 的长期并存需要项目明确兼容策略", ["python-versions"]),
   }),
-  event("python-3", "Python 3.0 发布", 2008, "release", ["web-platform"], ["python"], "Python 3.0 以不兼容方式修正 Unicode、除法和 print 等基础语义。", ["python-versions"], {
-    significance: "这是 Python 历史上最重要的兼容性转折，生态花费十余年完成迁移。",
-    tags: ["Python 3", "Unicode", "不兼容迁移"],
-    change: change("Python 2 的 ASCII 字符串与旧 print 语句", ["str/bytes 分离", "默认 Unicode 字符串", "整数除法语义修正", "print 函数化"], "初期部分库不兼容，Python 2.6/2.7 提供过渡工具但无法消除全部差异", ["python-versions"]),
-  }),
-  event("python-311", "Python 3.11 发布", 2022, "release", ["modern-safety"], ["python"], "Python 3.11 带来异常组、改进追溯信息和大比例解释器性能提升。", ["python-versions"], {
-    significance: "CPython 把性能工程作为 3.11 后的重要主线。",
-    tags: ["Python 3.11", "性能"],
-    change: change("Python 3.10 的异常处理与解释器开销", ["异常组与 except*", "精确错误定位", "Faster CPython 优化"], "具体加速幅度取决于工作负载，官方基准不能直接代表所有程序", ["python-versions"]),
-  }),
+  ...pythonReviewedEvents,
   ...evolutionEvents,
 ];
 
