@@ -19,8 +19,8 @@ export const writersReadingPaths: Record<string, WriterReadingPath[]> = {
   'zi-jin-chen': [{
     title: '先辨认“推理之王”，再对照风格',
     eventIds: ['zi-jin-chen-burning-ice', 'zi-jin-chen-bad-kids', 'zi-jin-chen-long-night', 'zi-jin-chen-tracker', 'zi-jin-chen-low-iq-crime'],
-    note: '前三本是作者访谈列出的“推理之王”系列。后两本供对照技术侦查与喜剧推理，不作为同一剧情的第四、第五部；这是一条编辑阅读建议。',
-    sourceIds: ['writers-zijin-2020-interview', 'writers-tracker-library', 'writers-low-iq-cite'],
+    note: '前三本是作者访谈列出的“推理之王”系列，各自独立叙事，不是必须连续阅读的同一故事。后两本供对照技术侦查与喜剧推理，不作为同一剧情的第四、第五部；这是一条编辑阅读建议。',
+    sourceIds: ['writers-zijin-2020-interview', 'writers-zijin-character-interview', 'writers-tracker-library', 'writers-low-iq-cite'],
   }],
   'ma-bo-yong': [{
     title: '“见微”：从办事者视角进入',

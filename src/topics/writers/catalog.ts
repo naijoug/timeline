@@ -1,4 +1,5 @@
 import { writersReviewedSources, writersRelations } from "./reviewed-works";
+import { zijinReviewedEvents, zijinReviewedSources } from "./zijin-reviewed-works";
 import type {
   Catalog,
   Entity,
@@ -21,6 +22,7 @@ const source = (
 
 export const sources: Source[] = [
   ...writersReviewedSources,
+  ...zijinReviewedSources,
   source("sfs-archive", "《科幻世界》杂志社刊发档案", "科幻世界杂志社", "https://www.sfw.com.cn/", "期刊档案", "1999—2006 年期刊发表与中国科幻银河奖评奖档案"),
   source("cq-press", "重庆出版社当代文学与科幻出版档案", "重庆出版社", "https://www.cqph.com/", "出版档案", "《三体》三部曲单行本出版记录与印次信息"),
   source("scitech-press", "四川科学技术出版社出版书目", "四川科学技术出版社", "https://www.sckjpress.com/", "出版档案", "世界科幻大师丛书 · 《球状闪电》2004 年版出版档案"),
@@ -630,71 +632,7 @@ export const events: TimelineEvent[] = [
     },
   ),
 
-  event(
-    "zi-jin-chen-bad-kids",
-    "《坏小孩》",
-    2014,
-    8,
-    "suspense",
-    ["era-screen-and-bestseller"],
-    ["zi-jin-chen"],
-    "三个孩子在景区无意录下张东升谋杀岳父母视频，因原生家庭创伤与金钱诱惑走向无法回头的人性深渊。",
-    ["jiangsu-lit-press"],
-    {
-      significance: "‘社会派推理三部曲’第二部；改编网剧《隐秘的角落》引发全民热议，深刻剖析青少年犯罪心理与家庭教育裂痕。",
-      tags: ["悬疑", "社会派", "朱朝阳", "隐秘的角落", "坏小孩", "紫金陈"],
-      facts: [
-        { label: "出版机构", text: "江苏文艺出版社（2014年8月）", sourceIds: ["jiangsu-lit-press"] },
-        { label: "系列归属", text: "社会派推理三部曲之二", sourceIds: ["jiangsu-lit-press"] },
-        { label: "影视改编", text: "网剧《隐秘的角落》（2020）", sourceIds: ["jiangsu-lit-press"] },
-      ],
-      details: [
-        {
-          label: "内容简介",
-          text: "性格孤僻内向但数学天赋极高的学霸初中生朱朝阳，遇到了从福利院逃跑出来投奔他的同乡严良与小女孩普普。三个孩子在六峰山顶拍照游玩时，无意中录下了入赘女婿张东升将岳父母故意推下悬崖的杀人过程。为了筹措为普普弟弟治病的三十万元巨款，三个孩子与凶残的张东升展开危险周旋并进行敲诈。在家庭离异的冷漠、父爱的偏颇以及嫉妒与猜忌的发酵下，看似最孱弱的孩子逐步学会了用缜密的日记与借刀杀人布局，最终让所有知情者命丧黄泉，自己独善其身。",
-          sourceIds: ["jiangsu-lit-press"],
-        },
-        {
-          label: "创作背景与反响",
-          text: "小说对未成年人纯真外表下潜伏的残酷心机进行了毫无保留的冷酷剖析，改编剧集《隐秘的角落》掀起现象级流行文化风暴，金句‘一起爬山吗’风靡全国。",
-          sourceIds: ["jiangsu-lit-press"],
-        },
-      ],
-    },
-  ),
-
-  event(
-    "zi-jin-chen-long-night",
-    "《长夜难明》",
-    2017,
-    1,
-    "suspense",
-    ["era-screen-and-bestseller"],
-    ["zi-jin-chen"],
-    "年轻检察官江阳为替支教受害青年翻案历经十年磨难，倾家荡产、家破人亡，最终以身做局用生命撕开漫漫长夜。",
-    ["yunnan-peoples-press"],
-    {
-      significance: "‘社会派推理三部曲’巅峰收官之作；改编剧集《沉默的真相》豆瓣评分9.0，被誉为中国当代现实主义社会派推理的丰碑。",
-      tags: ["悬疑", "社会派", "江阳", "沉默的真相", "长夜难明", "紫金陈"],
-      facts: [
-        { label: "出版机构", text: "云南人民出版社（2017年1月）", sourceIds: ["yunnan-peoples-press"] },
-        { label: "系列归属", text: "社会派推理三部曲之三（终结篇）", sourceIds: ["yunnan-peoples-press"] },
-        { label: "影视改编", text: "白宇、廖凡主演网剧《沉默的真相》（2020）", sourceIds: ["yunnan-peoples-press"] },
-      ],
-      details: [
-        {
-          label: "内容简介",
-          text: "某市繁华地铁站内，知名法学教授张超企图携带一只巨大行李箱登车，被安检人员发现有液体渗出，随后声称箱内有炸弹引发恐慌。防暴特警将其制服后打开箱子，赫然发现里面蜷缩着前任优秀检察官江阳的冰冷尸体。警方严加审讯下张超当场认罪，但在公开庭审中却突然全盘翻供。专案组刑警严良抽丝剥茧，终于揭开一段令人潸然泪下的惨烈往事：为了给十年前在偏远苗高乡因调查权贵性侵幼女案而惨遭灭口的支教大学生侯贵平平反昭雪，江阳、李静、朱伟、陈明章等人耗尽十年青春与社会前途，在强权与黑恶势力的层层绞杀下身败名裂、罹患绝症，最终以江阳的自杀抛尸大案迫使最高检介入，点亮了正义微光。",
-          sourceIds: ["yunnan-peoples-press"],
-        },
-        {
-          label: "创作背景与反响",
-          text: "作品以沉痛震撼的笔力展现了正义追寻过程中的惨痛牺牲与赤子之心，感动了千百万读者与观众，成为国产社会派悬疑小说的最高口碑代表作之一。",
-          sourceIds: ["yunnan-peoples-press"],
-        },
-      ],
-    },
-  ),
+  ...zijinReviewedEvents,
 
   event(
     "zi-jin-chen-low-iq-crime",
