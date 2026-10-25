@@ -10,6 +10,7 @@ import { evolutionCheckedAt, evolutionEvents, evolutionRelations, evolutionSourc
 
 import { goReviewedEvents, goReviewedSources, goReviewedRelations } from "./go-reviewed-records";
 import { pythonReviewedEvents, pythonReviewedSources } from "./python-reviewed-records";
+import { rustReviewedEvents, rustReviewedSources } from "./rust-reviewed-records";
 
 const checkedAt = "2026-10-12";
 
@@ -25,6 +26,7 @@ const source = (
 export const sources: Source[] = [
   ...goReviewedSources,
   ...pythonReviewedSources,
+  ...rustReviewedSources,
   source("ibm-fortran", "IBM 100: FORTRAN", "IBM", "https://www.ibm.com/ibm/history/ibm100/us/en/items/fortran/", "机构史料", "项目背景、1957 年交付与首个编译器"),
   source("acm-lisp", "Recursive Functions of Symbolic Expressions and Their Computation by Machine, Part I", "ACM", "https://dl.acm.org/doi/10.1145/367199.367179", "原始论文", "Communications of the ACM, 1960 年 4 月"),
   source("codasyl-cobol", "COBOL: Initial Specifications for a Common Business Oriented Language", "CODASYL · Bitsavers 扫描档案", "https://bitsavers.trailing-edge.com/pdf/codasyl/COBOL_Report_Apr60.pdf", "历史规格", "1960 年 4 月报告；1959 年为发起年份"),
@@ -340,10 +342,6 @@ export const events: TimelineEvent[] = [
     significance: "Swift 展示了现代类型安全、值语义和开发者体验在移动与系统平台中的组合。",
     tags: ["Apple", "类型安全", "移动开发"],
   }),
-  event("rust-10", "Rust 1.0 发布", 2015, "release", ["modern-safety"], ["rust"], "Rust 1.0 承诺语言与标准库核心的稳定性，生态可以建立在明确兼容性边界上。", ["rust-history"], {
-    significance: "所有权模型从实验项目进入长期生产阶段，推动内存安全成为系统语言设计议题。",
-    tags: ["稳定性", "所有权", "生产化"],
-  }),
   event("kotlin-10", "Kotlin 1.0 发布", 2016, "release", ["modern-safety"], ["kotlin"], "JetBrains 发布 Kotlin 1.0，提供 JVM 上更现代的语法、空安全与工具体验。", ["kotlin-release"], {
     significance: "Kotlin 后来成为 Android 官方支持语言，说明宿主平台能显著改变语言扩散路径。",
     tags: ["JVM", "空安全", "Android"],
@@ -421,14 +419,6 @@ export const events: TimelineEvent[] = [
     change: { ...change("Rust 2015 edition 的模块路径与词法借用限制", ["更直接的模块路径", "非词法生命周期（NLL）借用检查", "cargo fix 辅助 edition 迁移"], "edition 按包选择，2015 与 2018 的依赖可互用；不构成稳定 ABI 的承诺", ["rust131-release"]), baselineEventId: "rust-10" },
     details: [{ label: "兼容地改变规则", text: "官方说明不同 edition 的包可以相互依赖，新规则由各包主动选择；2018 并不意味着旧生态同时失效。", sourceIds: ["rust131-release"], locator: "Rust 2018：edition package setting and dependency interoperability" }],
   }),
-  event("rust-2024", "Rust 2024 edition 随 1.85 稳定", 2025, "release", ["modern-safety"], ["rust"], "Rust 2024 edition 于 2025 年随 Rust 1.85 稳定，调整 unsafe 边界、临时值作用域与宏规则。", ["rust-editions", "rust185-release"], {
-    time: { kind: "point", start: { year: 2025, month: 2, day: 20 } },
-    significance: "edition 成为 Rust 稳定演进制度的一部分，而不是破坏性重写。",
-    tags: ["Rust 2024", "edition"],
-    note: "2024 是 edition 名称，不是稳定发布日期。Rust 1.85 同时稳定的 async 闭包属于该编译器版本的能力，不列作仅限 2024 edition 的变化。",
-    change: { ...change("Rust 2021 edition", ["unsafe extern 块与 unsafe 属性显式标记", "调整 impl Trait 捕获与临时值作用域", "预留 gen 关键字", "Cargo 默认采用考虑 rust-version 的解析器"], "cargo fix 优先保留旧语义；unsafe 和析构顺序变化仍需人工检查与测试", ["rust185-release"]), baselineEventId: "rust-2021" },
-    details: [{ label: "名称年份与发布日期", text: "1.85 发布公告明确宣布 2024 edition 进入 stable；该公告的时间是 2025 年 2 月 20 日。", sourceIds: ["rust185-release"], locator: "发布日期；Rust 2024；Migrating to 2024" }],
-  }),
   event("csharp-2", "C# 2.0 发布", 2005, "release", ["web-platform"], ["csharp"], "C# 2.0 引入泛型、可空类型与迭代器。", ["csharp-release-notes"], {
     significance: "类型安全集合和惰性枚举成为 C# 常用表达方式。",
     tags: ["C# 2.0", "泛型"],
@@ -473,6 +463,7 @@ export const events: TimelineEvent[] = [
     change: change("Python 1.x 的类型与内存模型", ["列表推导", "引用计数加垃圾回收", "增强赋值"], "Unicode 支持尚不完整，Python 2 与 3 的长期并存需要项目明确兼容策略", ["python-versions"]),
   }),
   ...pythonReviewedEvents,
+  ...rustReviewedEvents,
   ...evolutionEvents,
 ];
 
