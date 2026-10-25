@@ -10,7 +10,7 @@ import { eventSourceIds } from '../src/core/evidence';
 
 test('Kimi independent measurement remains dated, bounded and separate from launch availability', () => {
   const event = events.find(event => event.id === 'kimi-k3-1-pro')!;
-  assert.equal(events.length, 278);
+  assert.equal(events.length, 279);
   assert.equal(event.date, '2026-10-24');
   const text = JSON.stringify(event.details);
   assert.match(text, /2026-10-23/);

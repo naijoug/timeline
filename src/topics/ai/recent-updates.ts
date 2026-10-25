@@ -1,3 +1,4 @@
+import { recyclerEvents, recyclerSources } from './recycler-research';
 import { verificationTrainingEvents, verificationTrainingSources, verificationTrainingEntities } from "./verification-training-updates";
 import { containmentEvents, containmentSources } from "./containment-report";
 import { safetyEntities, safetyEvents, safetySources } from "./safety-updates";
@@ -8,6 +9,7 @@ import type { Entity, Source, TimelineEvent } from './types';
 export const recentResearchDate = '2026-10-25';
 
 export const recentSources: Source[] = [
+  ...recyclerSources,
   ...verificationTrainingSources,
   ...safetySources,
   ...containmentSources,
@@ -95,6 +97,7 @@ export const recentEntities: Entity[] = [
 ];
 
 export const recentEvents: TimelineEvent[] = [
+  ...recyclerEvents,
   ...verificationTrainingEvents,
   ...safetyEvents,
   ...containmentEvents,

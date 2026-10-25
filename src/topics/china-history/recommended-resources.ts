@@ -171,6 +171,18 @@ export const historyRecommendedResources: Record<string, RecommendedResource[]> 
   ],
   "an-shi": [
     {
+      "id": "npm-yan-memorial-reading",
+      "title": "唐顏真卿祭姪文稿　卷",
+      "creator": "颜真卿（原作）／国立故宫博物院（馆藏说明）",
+      "series": "国家文化记忆库 · 馆方供稿",
+      "url": "https://tcmb.culture.tw/zh-tw/detail?id=%E6%95%85%E6%9B%B800006000000&indexCode=NPM_Uncategorized",
+      "kind": "article",
+      "match": "从颜氏一家的战争遭遇进入安史之乱，与下面的全景纪录片形成个人文物和通史叙事的对照。",
+      "locator": "作品简介、资料来源和建档单位；可从正文理解悼祭对象，不用书法排名代替历史分析。",
+      "scopeNote": "馆方供稿正文已读取；故宫数字典藏原入口本轮返回403，未核对原卷高清图或完整释文。家庭遭遇不是全国伤亡样本，馆藏解说也不等于无立场的战况实录。",
+      "checkedAt": "2026-10-25"
+    },
+    {
       "id": "cctv-an-lushan",
       "title": "《中国通史》20130818 安史之乱",
       "creator": "电影频道节目中心／中国社会科学院历史研究所",
@@ -208,6 +220,30 @@ export const historyRecommendedResources: Record<string, RecommendedResource[]> 
     }
   ],
   "wang-anshi-reforms": [
+    {
+      "id": "columbia-crop-loans-reading",
+      "title": "Memorial on the Crop Loans Measure, by Wang Anshi",
+      "creator": "王安石／制置三司条例司（奏议）；Wm. Theodore de Bary、Irene Bloom（文献集编者）",
+      "series": "哥伦比亚大学 Asia for Educators · Primary Sources with DBQs",
+      "url": "https://afe.easia.columbia.edu/main_pop/ps/ps_china-wang-anshi-crop-loans.htm",
+      "kind": "article",
+      "match": "直接阅读青苗贷款的政策论证，再用配套问题追问借户、官府和执行者的不同利益。",
+      "locator": "Longer Selection及Questions 5、8、9；文献集第2版第1卷617–618页。",
+      "scopeNote": "HTML正文已读取，内容为历史奏议英译及教学提问，不是改革效果报告。导言将王安石任首相写成1068年，与正文1069年奏议及其他纪年不合，本站不采用该导言定年或利率脚注；PDF入口本轮未成功打开。",
+      "checkedAt": "2026-10-25"
+    },
+    {
+      "id": "ucpress-smith-new-policies-reading",
+      "title": "State Power and Economic Activism during the New Policies, 1068–1085（《Ordering the World》第2章）",
+      "creator": "Paul J. Smith",
+      "series": "University of California Press · California Digital Library公开电子本",
+      "url": "https://publishing.cdlib.org/ucpressebooks/public/book/ordering-the-world-approaches-to-state-and-society-in-sung-dynasty-china.html",
+      "kind": "article",
+      "match": "与奏议对读，了解政策设计如何转为行政安排，以及为什么借贷保护和地方执行会成为争论焦点。",
+      "locator": "目录第2章；89–93页Economic Activism and Policy Formation / Displacing Private Interests。",
+      "scopeNote": "所列页段正文已读取，非整本逐页核查；这是1993年学术研究的分析，不是无争议的最终裁决，也不将书中个案推广为全部新法的统一结果。",
+      "checkedAt": "2026-10-25"
+    },
     {
       "id": "civilization-1074",
       "title": "究竟是谁主导了王安石变法？｜罗振宇《文明之旅》之1074",

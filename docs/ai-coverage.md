@@ -4,11 +4,11 @@
 
 ## 收录范围
 
-当前工作区共 278 个事件、91 个对象、251 份来源；版本发布批次新增 133 条，指令专题新增 3 条，视觉学习到协作系统专题新增 3 条，截至 2026-10-25 的近期核查更新共 11 条。2026-10-24 的重要缺口补齐批次另增 19 条。两个专题分别复用并完善 11、7 个既有节点，保留原事件 ID。
+当前工作区共 279 个事件、91 个对象、253 份来源；版本发布批次新增 133 条，指令专题新增 3 条，视觉学习到协作系统专题新增 3 条，截至 2026-10-25 的近期核查更新共 12 条。2026-10-24 的重要缺口补齐批次另增 19 条。两个专题分别复用并完善 11、7 个既有节点，保留原事件 ID。
 
 | 主线 | 全部已收录 | 关键节点 | 中国团队筛选 |
 | --- | ---: | ---: | ---: |
-| AI 技术突破 | 62 | 36 | 0 |
+| AI 技术突破 | 63 | 36 | 1 |
 | 模型演进 | 164 | 94 | 68 |
 | Agent 应用 | 52 | 35 | 9 |
 
@@ -109,6 +109,7 @@
 
 | 日期 | 事件 | 事件口径 | 原始来源 |
 | --- | --- | --- | --- |
+| 2026-10-25 | ByteDance Seed 提出 Recycler：跨 token 回收隐藏状态 | 架构研究公开 | [ByteDance Seed](https://seed.bytedance.com/en/public_papers/recycler-cost-free-latent-reasoning-via-hidden-state-recycling)、[ByteDance Seed](https://lf3-static.bytednsdoc.com/obj/eden-cn/hyvsmeh7uhobf/recycler_arxiv%20(2).pdf) |
 | 2026-10-24 | Kimi K3.1 Pro 发布：强化长程编程与 Agent | 模型发布 | [月之暗面](https://www.kimi.com/en/blog/kimi-k3-1-pro)、[月之暗面](https://www.kimi.com/en/blog/)、[月之暗面](https://www.kimi.com/code/docs/en/kimi-code/whats-new.html)、[Artificial Analysis](https://artificialanalysis.ai/articles/kimi-k3-1-pro-launch-benchmarks)、[Artificial Analysis](https://artificialanalysis.ai/methodology/intelligence-benchmarking) |
 | 2026-10-24 | 英国宣布设立 AI Biosecurity Lab | 机构与治理公告 | [英国 Cabinet Office](https://www.gov.uk/government/news/introducing-the-ai-biosecurity-lab)、[英国 HM Treasury](https://www.gov.uk/government/news/chancellor-unveils-britains-ambitious-plan-for-ai) |
 | 2026-10-23 | AISI 与 Anthropic 分别发布 Agent 越界事件对齐分析 | 安全评估报告 | [Anthropic](https://www.anthropic.com/research/alignment-assessment-ukaisi)、[英国 AI Security Institute](https://www.aisi.gov.uk/blog/investigating-alignment-failures-in-aisis-incident)、[英国 AI Security Institute](https://www.aisi.gov.uk/category/organisation) |
