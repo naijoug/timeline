@@ -1,4 +1,4 @@
-import type { TimelineEvent } from "./types";
+import type { Entity, TimelineEvent } from "./types";
 import { events } from "./events";
 export type Lane = "methods" | "models" | "products";
 export const laneInfo: Record<Lane, { title: string; description: string }> = {
@@ -55,6 +55,11 @@ const agents = new Set([
   "chatgpt-agent",
   "cowork",
 ]);
+// A product can be developer infrastructure rather than a user-facing Agent.
+export function entityLane(entity: Pick<Entity, "id" | "type">): Lane {
+  if (entity.type === "family") return "models";
+  return entity.type === "product" && agents.has(entity.id) ? "products" : "methods";
+}
 const technicalOverrides = new Set(["skills-introduction", "manus-cascade"]);
 export function eventLane(e: TimelineEvent): Lane {
   if (e.tracks.includes("models")) return "models";

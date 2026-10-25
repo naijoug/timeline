@@ -4,11 +4,12 @@ import Layout from '../../../layouts/Layout.astro';
 import Timeline from '../../../components/Timeline';
 import { entities, entityMap, entityHref, entityCollection, entityLabel, relations } from '../../../data/entities';
 import { events } from '../../../data/events';
+import { entityLane } from '../../../topics/ai/config';
 import { sourceMap } from '../../../data/sources';
 import { ArrowLeft, ExternalLink, Network } from 'lucide-react';
 export function getStaticPaths() { return entities.map(entity => ({ params: { collection: entityCollection(entity.type), slug: entity.id }, props: { entity } })); }
 const { entity } = Astro.props;
-const track = entity.type === 'concept' ? 'methods' : entity.type === 'family' ? 'models' : 'products';
+const track = entityLane(entity);
 const relevant = events.filter(e => e.entityIds.includes(entity.id)).sort((a,b) => a.date.localeCompare(b.date));
 const edges = relations.filter(r => r.from === entity.id || r.to === entity.id);
 ---

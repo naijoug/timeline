@@ -39,7 +39,7 @@ export const entities: Entity[] = [
 ];
 export const entityMap = Object.fromEntries(entities.map(e => [e.id, e]));
 export const entityCollection = (type: Entity['type']) => ({ concept: 'concepts', family: 'models', product: 'products', person: 'people', organization: 'organizations' })[type];
-export const entityLabel = (type: Entity['type']) => ({ concept: '技术与方法', family: '模型家族', product: 'Agent 产品', person: '论文作者', organization: '研究机构' })[type];
+export const entityLabel = (type: Entity['type']) => ({ concept: '技术与方法', family: '模型家族', product: '产品与工具', person: '论文作者', organization: '研究机构' })[type];
 export const entityHref = (id: string) => { const e = entityMap[id]; return e ? sitePath(`/ai/${entityCollection(e.type)}/${id}/`) : sitePath('/ai/'); };
 export const eventHref = (event: TimelineEvent) => { const family = event.entityIds.find(id => entityMap[id]?.type === 'family'); return event.tracks.includes('models') && family ? sitePath(`/ai/models/${family}/${event.id}/`) : sitePath(`/ai/events/${event.id}/`); };
 export const relations: Relation[] = [

@@ -1,8 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { verificationTrainingEvents, verificationTrainingSources } from '../src/topics/ai/verification-training-updates';
+import { entityMap, entityLabel } from '../src/topics/ai/entities';
 import { aiCatalog } from '../src/topics/ai/adapter';
-import { eventLane } from '../src/topics/ai/config';
+import { eventLane, entityLane } from '../src/topics/ai/config';
 import { createExplorerPayload } from '../src/core/explorer-payload';
 
 test('formal verification distinguishes reported research, public proofs and assumptions', () => {
@@ -38,4 +39,12 @@ test('new researched entries have citations, separate commentary and lightweight
     for (const resource of event.recommendedResources!) assert.ok(!payload.includes(resource.id));
   }
   assert.ok(verificationTrainingSources.every(source => source.checkedAt === '2026-10-25'));
+});
+
+test('infrastructure product pages use the same lane as their events, without Agent labels', () => {
+  assert.equal(entityLane(entityMap['aws-sagemaker-training-sessions']), 'methods');
+  assert.equal(entityLabel('product'), '产品与工具');
+  assert.equal(entityLane(entityMap['claude-code']), 'products');
+  assert.equal(entityLane(entityMap['claude']), 'models');
+  assert.equal(entityLane(entityMap['formal-software-verification']), 'methods');
 });
