@@ -2,6 +2,34 @@ import type { RecommendedResource } from '../../core/types';
 
 // Teaching and interpretation links only. Evidence for dates and historical facts remains in sources.
 export const historyRecommendedResources: Record<string, RecommendedResource[]> = {
+  "shang-rise": [
+    {
+        "id": "dedao-423-jianshang",
+        "title": "得到“423破万卷节”罗振宇推荐第二本书《翦商》",
+        "creator": "范新（荐书）、罗振宇（主持）",
+        "series": "得到423破万卷节 · 哔哩哔哩「玩转751」",
+        "url": "https://www.bilibili.com/en/video/BV1xh41177En",
+        "kind": "video",
+        "publishedAt": "2023-04-29",
+        "match": "以李硕《翦商：殷周之变与华夏新生》进入商代社会与商周转型，作为整个商朝的阅读入口，并非讲商王朝建立当天的事件。",
+        "locator": "合集第二本书《翦商》，页面标注11分39秒；展开简介说明荐书人及视频来源。",
+        "scopeNote": "这是2023年4月23日得到读书活动的荐书片段，4月29日由场地方「玩转751」上传，简介注明视频来源为得到APP；未核实为《罗辑思维》某个编号单集。已核对页面、简介和开头画面，播放器出现短预览提示，未验证完整播放。荐书与书中解释不替代史实依据。",
+        "checkedAt": "2026-10-25"
+    },
+    {
+        "id": "thepaper-lishuo-jianshang-interview",
+        "title": "专访｜《翦商》作者李硕：深究历史深处的黑暗",
+        "creator": "吴海云采访 · 李硕受访",
+        "series": "澎湃新闻 · 文化课",
+        "url": "https://www.thepaper.cn/newsDetail_forward_21713167",
+        "kind": "article",
+        "publishedAt": "2023-01-29",
+        "match": "与荐书视频对读，了解作者如何结合考古材料、传世文献和叙事写作解释商代与商周更替。",
+        "locator": "导读关于全书前后部分的说明；“对话”中关于《易经》解读及史料局限的问答。",
+        "scopeNote": "访谈正文已读取。文章说明作者对人祭消亡的归因不同于其他研究观点，《易经》解读也存在争论；采访呈现作者的解释，不是独立考古论证或学界共识。涉及暴力祭祀内容，阅读时请自行留意。",
+        "checkedAt": "2026-10-25"
+    }
+],
 
   "two-tax": [
     {
