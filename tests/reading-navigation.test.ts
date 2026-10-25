@@ -53,7 +53,7 @@ test('desktop and phone now share real record links, document scrolling and no i
   assert.match(css, /\.chronicle-event\.branch-right \{ margin-left:calc\(50% \+ 32px\);/);
   assert.match(explorer, /aria-label="排列顺序"/);
   assert.match(explorer, /最新已收录/);
-  assert.match(explorer, /onClick=\{searchAll\}>查看全部/);
+  assert.match(explorer, /onClick=\{resetFilters\}>清除全部/);
 });
 
 test('safe app Back uses the original history entry only for a verified round trip', () => {

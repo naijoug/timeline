@@ -1,0 +1,32 @@
+/* Filter controls share the existing paper palette and do not alter the timeline. */
+.chronicle-filter-status { display:flex; align-items:flex-start; flex-wrap:wrap; gap:8px 16px; }
+.filter-chips { display:flex; align-items:center; flex-wrap:wrap; gap:8px; flex:1; min-width:0; }
+.chronicle-filter-status .filter-chip { display:flex; align-items:center; gap:8px; min-height:36px; max-width:100%; padding:6px 10px; border:1px solid var(--paper-line); border-radius:7px; background:var(--paper-control); text-decoration:none; text-align:left; }
+.filter-chip span { overflow-wrap:anywhere; }
+.filter-chip svg { flex-shrink:0; }
+.chronicle-filter-status .filter-clear-all { min-height:36px; margin-left:auto; }
+.filter-panel-heading,.filter-panel-footer { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.filter-panel-heading { margin-bottom:16px; }
+.filter-panel-heading strong { font-size:14px; }
+.filter-panel-heading button { display:grid; place-items:center; width:44px; height:44px; border-radius:7px; }
+.filter-panel-heading button:hover { background:var(--paper-control); }
+.filter-period-field { display:flex; flex-direction:column; gap:8px; font-size:12px; margin-bottom:18px; }
+.filter-period-field select { width:100%; min-height:44px; min-width:0; max-width:100%; border:1px solid var(--paper-line); border-radius:7px; padding:8px 12px; background:var(--paper-bg); color:var(--paper-ink); font:inherit; }
+.filter-presets { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+.filter-presets>span { width:100%; font-size:12px; }
+.filter-presets button { min-height:40px; padding:8px 12px; border:1px solid var(--paper-line); border-radius:7px; font-size:12px; background:var(--paper-bg); }
+.filter-presets button[aria-pressed='true'] { border-color:var(--paper-ink); color:var(--paper-ink); background:var(--paper-control); }
+.filter-panel-footer { position:sticky; bottom:0; margin-top:16px; padding:14px 0 2px; border-top:1px solid var(--paper-line); background:var(--paper-surface); }
+.filter-panel-footer>span { color:var(--paper-muted); font-size:11px; }
+.filter-panel-footer>button { min-height:44px; padding:8px 16px; border-radius:7px; background:var(--paper-ink); color:var(--paper-bg); white-space:nowrap; }
+.chronicle-filters .filter-years { flex-wrap:wrap; }
+.chronicle-filters .filter-years label { flex:1; min-width:100px; }
+.chronicle-filters .filter-years input { min-height:44px; min-width:0; width:100%; }
+.chronicle-filters .filter-years button { min-height:44px; }
+.chronicle-filters .region-filter select { min-height:44px; }
+.filter-chip:focus-visible,.filter-presets button:focus-visible,.filter-panel-footer button:focus-visible,.filter-panel-heading button:focus-visible { outline:2px solid var(--paper-ink); outline-offset:3px; }
+@media(max-width:760px) {
+  .chronicle-filter-status .filter-chip,.chronicle-filter-status .filter-clear-all { min-height:44px; }
+  .chronicle-range-actions button { min-width:84px; }
+  .filter-panel-footer { padding-bottom:max(8px,env(safe-area-inset-bottom)); }
+}

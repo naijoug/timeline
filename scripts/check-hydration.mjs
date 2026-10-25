@@ -147,3 +147,46 @@ console.log('Production hydration smoke checks passed, including filtered AI leg
   dom.window.close();
   console.log('Home header hydration: sole toggle, repeated state, Escape and resize cleanup passed');
 }
+
+// Filter regression checks run on the real production component and serialized URLs.
+{
+  const { dom, w, errors } = await hydrate('ai', '?q=Kimi&scope=china&lane=models&order=asc');
+  const chips = () => [...w.document.querySelectorAll('.filter-chip')];
+  assert.equal(chips().length, 4);
+  chips().find(button => button.textContent.includes('仅关键节点')).click();
+  await waitFor(() => w.location.search.includes('all=1'), 'chip removes key-only restriction');
+  assert.equal(new URLSearchParams(w.location.search).get('q'), 'Kimi');
+  w.document.querySelector('.filter-clear-all').click();
+  await waitFor(() => chips().length === 0, 'clear-all removes every facet');
+  assert.equal(new URLSearchParams(w.location.search).get('order'), 'asc');
+  assert.equal(new URLSearchParams(w.location.search).get('q'), null);
+  const trigger = w.document.querySelector('[aria-label="时间与范围筛选"]');
+  trigger.click();
+  await waitFor(() => !w.document.querySelector('#chronicle-filters').hidden, 'open filters');
+  const latestYear = Number(w.document.querySelector('.filter-years [name=to]').value);
+  [...w.document.querySelectorAll('.filter-presets button')].find(button => button.textContent === '最近 5 年').click();
+  await waitFor(() => new URLSearchParams(w.location.search).get('from') === String(latestYear - 4), 'recent five years applies');
+  const form = w.document.querySelector('.filter-years');
+  form.elements.namedItem('from').value = String(latestYear); form.elements.namedItem('to').value = String(latestYear - 4);
+  form.dispatchEvent(new w.Event('submit', { bubbles:true, cancelable:true }));
+  await waitFor(() => w.document.querySelector('#filter-range-error'), 'invalid range is explained');
+  assert.equal(new URLSearchParams(w.location.search).get('from'), String(latestYear - 4));
+  w.dispatchEvent(new w.KeyboardEvent('keydown', { key:'Escape', bubbles:true }));
+  await waitFor(() => w.document.querySelector('#chronicle-filters').hidden, 'Escape closes filter panel');
+  assert.equal(w.document.activeElement, trigger);
+  assert.equal(errors.length, 0, errors.join('\n')); dom.window.close();
+}
+{
+  const { dom, w, errors } = await hydrate('china-history', '?q=制度&all=1&order=desc');
+  const select = w.document.querySelector('[aria-label="选择朝代或时期"]');
+  select.value = 'tang'; select.dispatchEvent(new w.Event('change', { bubbles:true }));
+  await waitFor(() => new URLSearchParams(w.location.search).get('period') === 'tang', 'period filters in place');
+  assert.equal(new URLSearchParams(w.location.search).get('q'), '制度');
+  assert.equal(new URLSearchParams(w.location.search).get('all'), '1');
+  assert.equal(new URLSearchParams(w.location.search).get('order'), 'desc');
+  assert.equal(w.location.pathname, `${base}/china-history/`);
+  w.dispatchEvent(new w.PopStateEvent('popstate'));
+  await waitFor(() => select.value === 'tang', 'period survives restore');
+  assert.equal(errors.length, 0, errors.join('\n')); dom.window.close();
+}
+console.log('Filter chips, full clear, year presets, invalid input, focus restoration and period context passed.');
