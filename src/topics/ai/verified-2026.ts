@@ -5,6 +5,8 @@ import type { Entity, Source, TimelineEvent } from './types';
 export const verified2026ResearchDate = '2026-10-24';
 
 export const verified2026Sources: Source[] = [
+  { id: 'muse-spark-open-model-card', title: 'Muse-Spark-Open-816B-A42B model card and access conditions', publisher: 'Meta · Hugging Face', url: 'https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B', type: '官方文档', checkedAt: '2026-10-26', locator: 'Muse Model License; gated access conditions' },
+  { id: 'muse-spark-open-files', title: 'Muse-Spark-Open-816B-A42B files and gated access notice', publisher: 'Meta · Hugging Face', url: 'https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B/tree/main', type: '官方文档', checkedAt: '2026-10-26', locator: 'Gated model; preview of files and safetensors shard metadata' },
   {
     "id": "gap-gemma-4",
     "title": "Gemma 4: Byte for byte, the most capable open models",
@@ -261,7 +263,8 @@ export const verified2026Entities: Entity[] = [
       "图像编辑"
     ],
     "sourceIds": [
-      "gap-seedream-5-pro"
+      "gap-seedream-5-pro",
+      "release-seedance-1-5-pro"
     ]
   }
 ];
@@ -879,9 +882,10 @@ export const verified2026Events: TimelineEvent[] = [
         "label": "同一模型的开放阶段",
         "text": "9 月 30 日先向 Fairwind Program 的受信任网络防御人员推出；10 月 13 日扩展至公开渠道。这两个节点记录部署阶段，而非两代模型。",
         "sourceIds": [
-          "gap-gemini-4-argon-preview"
+          "gap-gemini-4-argon-preview",
+          "gap-gemini-4-argon-ga"
         ],
-        "locator": "Opening announcement; Rolling out soon"
+        "locator": "Preview announcement; GA announcement → Get started today"
       },
       {
         "label": "不同渠道的可用条件",
@@ -904,12 +908,14 @@ export const verified2026Events: TimelineEvent[] = [
     ],
     "summary": "Meta 发布 Muse Spark Open 权重，提供原生多模态、100 万 token 上下文与面向编程和 Agent 的自部署选择。",
     "significance": "Meta 的新模型路线重新扩展到可下载、可在本地或云端运行的权重。",
-    "limitation": "采用带有限商业条款的 Muse Model License，不是无条件开源。厂商展示的桌面运行依赖特定高内存硬件，不能推广到普通电脑。",
+    "limitation": "采用带有限商业条款的 Muse Model License，不是无条件开源；官方 Hugging Face 仓库需登录并审阅访问条件。本次只核对公开文件元数据，未下载或运行权重。桌面演示依赖特定高内存硬件，不能推广到普通电脑。",
     "entityIds": [
       "muse-models"
     ],
     "sourceIds": [
-      "gap-muse-spark-open"
+      "gap-muse-spark-open",
+      "muse-spark-open-model-card",
+      "muse-spark-open-files"
     ],
     "tags": [
       "开放权重",
@@ -920,10 +926,10 @@ export const verified2026Events: TimelineEvent[] = [
     "change": {
       "baseline": "Muse Spark 系列的托管访问",
       "improvements": [
-        "实际发布可下载权重，增加自部署选择",
+        "发布受许可与访问条件约束的权重，增加自部署选择",
         "提供原生多模态、100 万 token 上下文与编程、Agent 能力"
       ],
-      "tradeoffs": "采用带有限商业条款的 Muse Model License，不是无条件开源。厂商展示的桌面运行依赖特定高内存硬件，不能推广到普通电脑。",
+      "tradeoffs": "采用带有限商业条款的 Muse Model License，不是无条件开源；官方 Hugging Face 仓库需登录并审阅访问条件。本次只核对公开文件元数据，未下载或运行权重。桌面演示依赖特定高内存硬件，不能推广到普通电脑。",
       "evidence": "厂商报告",
       "sourceIds": [
         "gap-muse-spark-open"
@@ -932,11 +938,13 @@ export const verified2026Events: TimelineEvent[] = [
     "details": [
       {
         "label": "部署方式的变化",
-        "text": "官方同时提供下载权重与合作方托管 API，并列出多种推理框架。选择本地或云端部署时，仍需核对具体框架、硬件和许可条件。",
+        "text": "官方公告提供权重与合作方托管 API。官方 Hugging Face 文件树可见权重分片元数据，但明确标为 Gated model：未获访问权限时可列文件、不可读取文件。本次没有申请权限、下载或运行权重；自部署仍需满足访问、许可、框架和硬件条件。",
         "sourceIds": [
-          "gap-muse-spark-open"
+          "gap-muse-spark-open",
+          "muse-spark-open-model-card",
+          "muse-spark-open-files"
         ],
-        "locator": "Opening announcement; Get Started"
+        "locator": "Opening announcement; Get Started; file tree gated access notice"
       },
       {
         "label": "开放权重不等于无条件开源",
@@ -1109,3 +1117,14 @@ export const verified2026Events: TimelineEvent[] = [
     ]
   }
 ];
+
+// Later availability/access clauses need their own evidence, not only the first announcement.
+for (const [id, sourceIds] of [
+  ['gemini-4-argon-preview', ['gap-gemini-4-argon-ga']],
+  ['minimax-m3-1-flash', ['gap-minimax-m3-1-flash-weights']],
+  ['muse-spark-open', ['muse-spark-open-model-card', 'muse-spark-open-files']],
+] as const) {
+  const event = verified2026Events.find(item => item.id === id)!;
+  event.sourceIds = [...new Set([...event.sourceIds, ...sourceIds])];
+  if (event.change) event.change.sourceIds = [...new Set([...event.change.sourceIds, ...sourceIds])];
+}

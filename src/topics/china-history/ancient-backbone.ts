@@ -59,7 +59,7 @@ export const ancientSources: Source[] = [
     "type": "军事史回顾",
     "checkedAt": "2026-10-24",
     "locator": "正文开头的前632年与晋楚交战叙述；不采用兵力数字或现代战略类比",
-    "version": "在线资料；仅使用下列定位段落，未对全文所有历史判断作背书"
+    "version": "在线资料；仅使用下列定位段落，未对全文所有历史判断作背书 本轮仅能复核公开索引或摘要，未完整读取正文；不将访问异常记为404，也不据索引核定全文细节。"
   },
   {
     "id": "anc-wei-recognition",
@@ -249,7 +249,7 @@ export const ancientSources: Source[] = [
     "type": "学术论文摘要",
     "checkedAt": "2026-10-24",
     "locator": "论文摘要：311年永嘉之乱、刘渊政权与晋的关系",
-    "version": "在线资料；仅使用下列定位段落，未对全文所有历史判断作背书"
+    "version": "在线资料；仅使用下列定位段落，未对全文所有历史判断作背书 本轮仅能复核公开索引或摘要，未完整读取正文；不将访问异常记为404，也不据索引核定全文细节。"
   },
   {
     "id": "anc-met-division",
@@ -273,11 +273,11 @@ export const ancientSources: Source[] = [
   },
   {
     "id": "anc-feishui",
-    "title": "东山报捷绣画",
+    "title": "顾绣东山图",
     "publisher": "上海博物馆",
     "url": "https://www.shanghaimuseum.net/mu/frontend/pg/article/id/CI00000061",
     "type": "藏品历史说明",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-26",
     "locator": "淝水之战383年与谢安、前秦战事说明；不把后世艺术情节当战场实录",
     "version": "在线资料；仅使用下列定位段落，未对全文所有历史判断作背书"
   },
@@ -339,7 +339,7 @@ export const ancientSources: Source[] = [
     "type": "学术论文题录与摘要",
     "checkedAt": "2026-10-24",
     "locator": "论文摘要及题录：874—884年王仙芝、黄巢起义",
-    "version": "已核对题录与索引摘要；直接页面需要JavaScript验证，未声称读取全文。只用874—884阶段，摘要其他起义年代疑误不采用。"
+    "version": "本轮只复核公开索引或摘要，正文访问异常；所列定位为待全文复核的位置，不表示完成全文论证核验。"
   },
   {
     "id": "anc-liao",
@@ -437,8 +437,8 @@ export const ancientSources: Source[] = [
     "publisher": "大都会艺术博物馆",
     "url": "https://www.metmuseum.org/toah/ht/07/eac.html",
     "type": "博物馆或机构研究",
-    "checkedAt": "2026-10-24",
-    "locator": "Key Events 1206、1260条；不使用页面将宋徽宗与蒙古征服混淆的文字",
+    "checkedAt": "2026-10-26",
+    "locator": "Key Events：1206登位；1215北京、1233开封；1260条内1271采用Yuan国号；不使用页面将宋徽宗与蒙古征服混淆的文字",
     "version": "在线资料；仅使用下列定位段落，未对全文所有历史判断作背书"
   },
   {
@@ -497,8 +497,8 @@ export const ancientSources: Source[] = [
     "publisher": "故宫博物院",
     "url": "https://www.dpm.org.cn/court/lineage/226244.html?hl=%E6%B1%89%E6%AD%A6%E5%B8%9D",
     "type": "帝王年表",
-    "checkedAt": "2026-10-24",
-    "locator": "元至正二十三年（1363）鄱阳湖、陈友谅败亡；只采用年份",
+    "checkedAt": "2026-10-26",
+    "locator": "页面附载“陈友谅”释条：至正二十三年（1363）鄱阳湖交战、败亡；不采用帝王正文“龙凤八年”换算",
     "version": "在线资料；仅使用下列定位段落，未对全文所有历史判断作背书"
   },
   {
@@ -593,11 +593,11 @@ export const ancientSources: Source[] = [
   },
   {
     "id": "anc-zhengtaiwan",
-    "title": "郑成功收复台湾时用过的火药弹",
-    "publisher": "中国国家博物馆",
+    "title": "郑成功的火药弹",
+    "publisher": "王芳 · 中国国家博物馆",
     "url": "https://www.chnmuseum.cn/yj/xscg/xslw/201812/t20181224_33268.shtml",
     "type": "藏品与历史研究",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-26",
     "locator": "1661年进军台湾、1662年荷兰殖民当局投降",
     "version": "在线资料；仅使用下列定位段落，未对全文所有历史判断作背书"
   },
@@ -669,7 +669,7 @@ export const ancientSources: Source[] = [
     "type": "学术研究转载",
     "checkedAt": "2026-10-24",
     "locator": "1796—1804年川楚白莲教战争与军费、赈济压力段",
-    "version": "已通过检索索引核对1796—1804年战争、军费与慈善赈济段；直接页面提取不稳定。"
+    "version": "已通过检索索引核对1796—1804年战争、军费与慈善赈济段；直接页面提取不稳定。 本轮仅能复核公开索引或摘要，未完整读取正文；不将访问异常记为404，也不据索引核定全文细节。"
   },
   {
     "id": "anc-white-lotus-caution",
@@ -679,7 +679,7 @@ export const ancientSources: Source[] = [
     "type": "宗教社会史研究",
     "checkedAt": "2026-10-24",
     "locator": "白莲教作为官府统称与不同民间教派的辨析",
-    "version": "在线资料；仅使用下列定位段落，未对全文所有历史判断作背书"
+    "version": "本轮只复核公开索引或摘要，正文访问异常；所列定位为待全文复核的位置，不表示完成全文论证核验。"
   },
   {
     "id": "anc-jiaqing",
@@ -700,6 +700,46 @@ export const ancientSources: Source[] = [
     "checkedAt": "2026-10-24",
     "locator": "PDF第2页（印刷第10页）“西班牙遺址的重現”：1664年与1668年",
     "version": "已直接读取PDF相关段落；本条只采用荷兰重返与撤离鸡笼的时间。"
+  },
+  {
+    "id": "anc-nmc-wangmang-coins",
+    "title": "王莽钱币",
+    "publisher": "中国国家博物馆",
+    "url": "https://www.chnmuseum.cn/zp/zpml/hb/202008/t20200824_247119.shtml",
+    "type": "博物馆藏品说明",
+    "checkedAt": "2026-10-26",
+    "locator": "首段：西汉末掌权、公元7年摄政及9年新朝币改",
+    "version": "已读正文；仅用掌权与币改背景，不采其价值判断，也不由币改年份推定即位日。"
+  },
+  {
+    "id": "anc-nmh-huoquan",
+    "title": "貨泉（馆藏编号78-00926）",
+    "publisher": "国立历史博物馆藏 · 文化部典藏网供稿",
+    "url": "https://tcmb.culture.tw/zh-tw/detail?id=14000139388&indexCode=MOCCOLLECTIONS",
+    "type": "博物馆藏品说明",
+    "checkedAt": "2026-10-26",
+    "locator": "器物说明：王莽建立新莽（9—23）期间；典藏单位",
+    "version": "已读馆藏说明，仅采用新莽年代口径；不将币改写成亡国单一原因，未独立核验实物。"
+  },
+  {
+    "id": "anc-westernxia-yinchuan",
+    "title": "银川大事记·宋元明清（宋代部分）",
+    "publisher": "银川市档案馆",
+    "url": "https://dag.yinchuan.gov.cn/fzdahc/dsj/symq1/202001/P020200110536353692107.pdf",
+    "type": "地方档案馆大事记",
+    "checkedAt": "2026-10-26",
+    "locator": "PDF第1页：1001、1020、1033、1038年各条",
+    "version": "已下载并读取原PDF；采用大事记的西夏建国与兴庆府沿革，不将其当作同时代诏书。"
+  },
+  {
+    "id": "anc-wuzhou-gold-tablet",
+    "title": "武则天金简",
+    "publisher": "河南博物院",
+    "url": "https://www.chnmus.net/ch/collection/treasure/details.html?id=508161850642982087",
+    "type": "博物馆藏品说明",
+    "checkedAt": "2026-10-26",
+    "locator": "铭文释读“大周国主武曌”及武周文字说明",
+    "version": "已读正文；只核武周国号与实物身份，690—705年仍由e国宝馆藏说明支持，不将投简日期当作建国日期。"
   }
 ];
 
@@ -727,7 +767,7 @@ export const ancientEvents: TimelineEvent[] = [
     ],
     "summary": "二里头的大型建筑、墓葬与青铜器，为讨论夏代及早期国家提供重要材料。",
     "significance": "为早期国家研究区分考古证据与王朝名称的识别。",
-    "note": "本条标记所引年表的二里头阶段，非夏朝建立之日；不同考古分期有不同年代范围。夏约前2070年的传统起点不可视作已证实精确年份。",
+    "note": "本条标记所引年表的二里头阶段，非夏朝建立之日；不同考古分期有不同年代范围。传统王朝纪年不可视作已证实的精确考古年份。",
     "sourceIds": [
       "anc-met-bronze",
       "anc-nmc-early"
@@ -953,7 +993,7 @@ export const ancientEvents: TimelineEvent[] = [
     ],
     "summary": "周王室东迁，东周开始；诸侯间的政治竞争日益突出。",
     "significance": "标记王室政治重心改变及诸侯竞争的新阶段。",
-    "note": "前770年是迁都的通行纪年；春秋、战国的具体分界存在不同学术口径。",
+    "note": "本条采用国博所记前770年东迁节点，不据此给春秋、战国所有分期设定同一个边界。",
     "sourceIds": [
       "anc-nmc-zhou"
     ],
@@ -1002,9 +1042,9 @@ export const ancientEvents: TimelineEvent[] = [
     "entityIds": [
       "zhou"
     ],
-    "summary": "晋文公领导的晋军及盟军在城濮击败楚方军队，改变中原争霸形势。",
-    "significance": "显示春秋霸权竞争依赖联盟与多国军事互动。",
-    "note": "不采纳未经交叉核对的兵力、伤亡或把“退避三舍”写成可逐日复原的行动日志。",
+    "summary": "所引文章的公开索引将城濮之战记于前632年，并记晋文公一方击败楚军。",
+    "significance": "编辑总结：本条作为春秋晋楚竞争的阅读入口；参战联盟与作战过程仍需结合可读原文核对。",
+    "note": "本轮来源正文返回503，仅能复核公开索引中的年份、晋文公与晋楚胜负；不采未经交叉核对的兵力、伤亡或把“退避三舍”写成逐日行动日志。",
     "sourceIds": [
       "anc-chengpu"
     ],
@@ -1016,7 +1056,7 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "晋、楚争夺在诸侯中的政治影响，宋等国卷入竞争。",
+        "text": "当前可读索引将该战置于晋楚竞争背景；盟军构成及宋等国卷入过程未在本轮读到的正文中完成核实。",
         "sourceIds": [
           "anc-chengpu"
         ],
@@ -1024,7 +1064,7 @@ export const ancientEvents: TimelineEvent[] = [
       },
       {
         "label": "事件与变化",
-        "text": "前632年城濮交战，晋方获胜；参战主体是晋及其盟国与楚方军队。",
+        "text": "公开索引将前632年城濮之战记为晋楚交战、晋方获胜；本轮未核盟军名册与完整战斗过程。",
         "sourceIds": [
           "anc-chengpu"
         ],
@@ -1032,7 +1072,7 @@ export const ancientEvents: TimelineEvent[] = [
       },
       {
         "label": "阅读理解",
-        "text": "此战适合观察多国结盟与霸权竞争；不能用晋、楚的胜负替代整个春秋秩序的复杂变化。",
+        "text": "对盟国作用及霸权变化的解释，应等待可读战史材料，而不从标题或单句胜负推出全部过程。",
         "editorial": true
       }
     ]
@@ -1055,7 +1095,7 @@ export const ancientEvents: TimelineEvent[] = [
     ],
     "summary": "晋国卿族势力分立为列国；前403年魏获得周王的诸侯册封。",
     "significance": "体现晋国贵族权力转为列国政治地位的过程。",
-    "note": "只把前403年用于已核对的册封节点，不把三家分晋整个过程定为同一年；不采用该网页前471年的错误纪年。",
+    "note": "只把前403年用于已核对的册封节点，不把三家分晋整个过程定为同一年；未采用该网页对三家分晋整体过程的另一纪年。",
     "sourceIds": [
       "anc-wei-recognition"
     ],
@@ -1075,7 +1115,7 @@ export const ancientEvents: TimelineEvent[] = [
       },
       {
         "label": "事件与变化",
-        "text": "国博器物说明明确记前403年魏受周威烈王册封；此后魏开展政治、经济和军事改革。",
+        "text": "国博器物说明明确记前403年魏受周威烈王册封，并另述战国初魏文侯任用李悝、吴起、西门豹进行改革。",
         "sourceIds": [
           "anc-wei-recognition"
         ],
@@ -1109,7 +1149,7 @@ export const ancientEvents: TimelineEvent[] = [
     ],
     "summary": "秦在商鞅主持下推进改革，涉及行政、土地、赋税与度量衡。",
     "significance": "呈现秦统一以前长期制度与资源动员能力的积累。",
-    "note": "采用前356—前350年的主要改革阶段；前359年提出方案等记法属于不同阶段，不意味着所有措施同时颁布。",
+    "note": "采用前356—前350年的主要改革阶段；筹议与不同措施的推行不是同一时刻，不意味着所有措施同时颁布。",
     "sourceIds": [
       "anc-shangyang",
       "anc-shangyang-date"
@@ -1268,7 +1308,7 @@ export const ancientEvents: TimelineEvent[] = [
     ],
     "summary": "项羽率反秦军在巨鹿击败秦军，反秦战争的力量对比发生重要变化。",
     "significance": "反秦战争中的重要军事转折，而非秦亡的单一时刻。",
-    "note": "秦历岁首及换算会造成前208/前207年表述差别；本条采用通行前207年纪年，不写公历月日。",
+    "note": "采用所引页面的前207年纪年，不补造公历月日，也不在未核历法论证时解释其他纪年的来源。",
     "sourceIds": [
       "anc-julu"
     ],
@@ -1528,7 +1568,7 @@ export const ancientEvents: TimelineEvent[] = [
       "western-han"
     ],
     "summary": "汉廷把盐铁生产经营纳入官营体系，以加强财政资源控制。",
-    "significance": "显示军事扩张背后的财政控制和生产组织变化。",
+    "significance": "编辑总结：从盐铁官营观察财政控制与生产组织变化。",
     "note": "采用该馆前119年的制度节点；官营制度的筹议、实施和调整不是同一天完成。",
     "sourceIds": [
       "anc-monopolies"
@@ -1580,9 +1620,11 @@ export const ancientEvents: TimelineEvent[] = [
     ],
     "summary": "王莽取代汉帝，自立新朝；汉代年表中的连续标签中断。",
     "significance": "明确西汉、王莽新朝和东汉并非无缝延续。",
-    "note": "采用公元9年口径；部分中文展陈以公元8年记建国，涉及传统历法岁末与公元纪年边界。han仅为阅读归属，并非把新朝视为汉朝皇帝延续。",
+    "note": "本条采用国立历史博物馆藏品说明的新莽9—23年口径；国博秦汉展陈另记8年建国，资料纪年口径存在差异，本条不推定精确即位日，也不声称已解决历法换算问题。han仅为阅读归属。",
     "sourceIds": [
-      "anc-oup-chronology"
+      "anc-nmc-wangmang-coins",
+      "anc-nmh-huoquan",
+      "anc-nmc-han"
     ],
     "tags": [
       "秦汉",
@@ -1594,17 +1636,18 @@ export const ancientEvents: TimelineEvent[] = [
         "label": "背景与依据",
         "text": "西汉末年，王莽掌握朝政。",
         "sourceIds": [
-          "anc-oup-chronology"
+          "anc-nmc-wangmang-coins"
         ],
-        "locator": "Chronology：Xin、Eastern Han"
+        "locator": "首段：西汉末掌权与7年摄政"
       },
       {
         "label": "事件与变化",
-        "text": "牛津年表列新朝为9—23年，并将东汉的建立置于25年。",
+        "text": "国立历史博物馆《货泉》说明将新莽列为9—23年；国博秦汉陈列将东汉的建立置于25年。",
         "sourceIds": [
-          "anc-oup-chronology"
+          "anc-nmh-huoquan",
+          "anc-nmc-han"
         ],
-        "locator": "Chronology：Xin、Eastern Han"
+        "locator": "《货泉》器物说明；国博第四组“东汉贵族豪强的统治”"
       },
       {
         "label": "阅读理解",
@@ -1631,12 +1674,11 @@ export const ancientEvents: TimelineEvent[] = [
       "han",
       "eastern-han"
     ],
-    "summary": "刘秀重建汉朝统治，以洛阳为都，后续继续整合各地势力。",
+    "summary": "刘秀于25年重建汉朝统治，以洛阳为都。",
     "significance": "为汉室重建与后续政治整合提供独立节点。",
     "note": "本条只标建国节点，不把25年写成全部战争已经结束。",
     "sourceIds": [
-      "anc-nmc-han",
-      "anc-oup-chronology"
+      "anc-nmc-han"
     ],
     "tags": [
       "秦汉",
@@ -1646,21 +1688,19 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "新朝结束后，各支政治军事力量争夺天下。",
+        "text": "国博秦汉陈列记新朝于23年被推翻，刘秀于25年重建汉朝。",
         "sourceIds": [
-          "anc-nmc-han",
-          "anc-oup-chronology"
+          "anc-nmc-han"
         ],
-        "locator": "国博东汉段；Chronology Eastern Han"
+        "locator": "第三组“王莽改制”、第四组“东汉贵族豪强的统治”"
       },
       {
         "label": "事件与变化",
-        "text": "国博与牛津年表均以25年为东汉起点；国博记刘秀建都洛阳。",
+        "text": "国博秦汉陈列记刘秀于25年重建汉朝，定都洛阳。",
         "sourceIds": [
-          "anc-nmc-han",
-          "anc-oup-chronology"
+          "anc-nmc-han"
         ],
-        "locator": "国博东汉段；Chronology Eastern Han"
+        "locator": "第四组“东汉贵族豪强的统治”"
       },
       {
         "label": "阅读理解",
@@ -1707,7 +1747,7 @@ export const ancientEvents: TimelineEvent[] = [
       },
       {
         "label": "事件与变化",
-        "text": "国博陈列记184年黄巾起义；随后东汉皇权衰弱与军阀竞争构成政权转折背景。",
+        "text": "国博将黄巾起义置于184年，并在后文记220年曹丕代汉；两者不是同一年发生的事件。",
         "sourceIds": [
           "anc-nmc-han"
         ],
@@ -1853,7 +1893,7 @@ export const ancientEvents: TimelineEvent[] = [
     "significance": "区分军事割据、称王与称帝的不同政治阶段。",
     "note": "区间标记相继称帝；目录吴时期从222年改元独立阶段起算，与229年称帝并不矛盾。",
     "sourceIds": [
-      "anc-oup-chronology",
+      "anc-nmc-han",
       "anc-sunwu"
     ],
     "tags": [
@@ -1864,21 +1904,21 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "东汉末年的军事集团逐渐转为彼此竞争的帝国。",
+        "text": "国博记220年曹丕代汉；吕春盛的研究分别记述刘备与孙权后来称帝，不能把三者合为同一个建国年份。",
         "sourceIds": [
-          "anc-oup-chronology",
+          "anc-nmc-han",
           "anc-sunwu"
         ],
-        "locator": "Oxford Chronology Wei/Shu；《族群关系》前言第3页"
+        "locator": "国博第四组末句；《族群关系》第20页刘备称帝、第3页孙权称帝"
       },
       {
         "label": "事件与变化",
         "text": "220年曹丕代汉建魏，221年刘备称帝；孙权的正式称帝在229年。",
         "sourceIds": [
-          "anc-oup-chronology",
+          "anc-nmc-han",
           "anc-sunwu"
         ],
-        "locator": "Oxford Chronology Wei/Shu；《族群关系》前言第3页"
+        "locator": "国博第四组末句；《族群关系》第20页（221年）、第3页（229年）"
       },
       {
         "label": "阅读理解",
@@ -1964,7 +2004,8 @@ export const ancientEvents: TimelineEvent[] = [
     "significance": "区分西晋建国与十五年后的灭吴统一。",
     "note": "年份采用通行建国口径；不采用大都会年表把265年误作统一之年的段落。",
     "sourceIds": [
-      "anc-westernjin"
+      "anc-westernjin",
+      "aja-western-jin"
     ],
     "tags": [
       "魏晋南北朝",
@@ -1974,7 +2015,7 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "曹魏后期司马氏掌握实际权力。",
+        "text": "上海博物馆的晋代说明以265年为司马炎建立西晋的起点。",
         "sourceIds": [
           "anc-westernjin"
         ],
@@ -2068,9 +2109,9 @@ export const ancientEvents: TimelineEvent[] = [
     "entityIds": [
       "western-jin"
     ],
-    "summary": "汉赵方面的军队攻陷洛阳，西晋中央统治遭到重大打击。",
+    "summary": "所引研究摘要将311年洛阳陷落视为西晋中央统治遭受重大打击的节点。",
     "significance": "标记西晋中央与北方政治秩序遭受的重大打击。",
-    "note": "“汉赵”是为区别汉朝而用的后世称呼；西晋并非311年立即彻底灭亡，316年长安失陷是后续节点。",
+    "note": "本轮可读研究摘要而非论文全文；仅采用摘要明确的311年洛阳陷落与西晋政治危机，不补写军队命名沿革、兵力或具体战斗过程。",
     "sourceIds": [
       "anc-yongjia"
     ],
@@ -2120,7 +2161,7 @@ export const ancientEvents: TimelineEvent[] = [
     "entityIds": [
       "eastern-jin"
     ],
-    "summary": "晋室在江南延续统治，东晋以建康为中心；人口南迁影响南方社会。",
+    "summary": "晋室于317年在江南延续统治，以今南京一带为政治中心。",
     "significance": "连接政权南移、人口流动与江南社会变化。",
     "note": "南迁在317年前后长期发生，不是该年一次完成。",
     "sourceIds": [
@@ -2160,7 +2201,7 @@ export const ancientEvents: TimelineEvent[] = [
   },
   {
     "id": "feishui",
-    "title": "淝水之战：东晋抵御前秦",
+    "title": "淝水之战：东晋与前秦",
     "time": {
       "kind": "point",
       "start": {
@@ -2176,8 +2217,8 @@ export const ancientEvents: TimelineEvent[] = [
     "entityIds": [
       "eastern-jin"
     ],
-    "summary": "东晋军在淝水战胜前秦南下军队，南北统一进程受挫。",
-    "significance": "改变南北统一的军事前景，延续南北并立格局。",
+    "summary": "383年，东晋一方在淝水之战中战胜前秦；上海博物馆以此解释“东山报捷”题材。",
+    "significance": "编辑总结：由后世艺术作品进入战史阅读时，应区分图像表现与同时代作战记录。",
     "note": "藏品是后世艺术作品，不把谢安下棋等艺术叙事自动视为同期实录；兵力与伤亡数字未列入。",
     "sourceIds": [
       "anc-feishui"
@@ -2190,7 +2231,7 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "前秦向南进攻，东晋组织抵御。",
+        "text": "上海博物馆藏品说明把“东山报捷”题材与谢安子侄在淝水之战获胜相联系；图画本身不是383年的现场记录。",
         "sourceIds": [
           "anc-feishui"
         ],
@@ -2206,7 +2247,7 @@ export const ancientEvents: TimelineEvent[] = [
       },
       {
         "label": "阅读理解",
-        "text": "淝水说明强大军事联盟也可能因一次重大失利而改变走向；仍需区分战役与其后各地政治分裂。",
+        "text": "后世“报捷”图像可以展示胜利的文化记忆，却不能单凭艺术说明复原战前部署或政治后果。",
         "editorial": true
       }
     ]
@@ -2241,7 +2282,7 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "十六国时期北方政权反复竞争，北魏逐渐扩张。",
+        "text": "北大讲座回顾以304年起的十六国时期与439年北魏统一北方为前后两个节点。",
         "sourceIds": [
           "anc-northernwei"
         ],
@@ -2277,7 +2318,7 @@ export const ancientEvents: TimelineEvent[] = [
       "northern-dynasties"
     ],
     "entityIds": [],
-    "summary": "北魏迁都洛阳，并推进服饰、语言、姓氏及制度调整。",
+    "summary": "北魏孝文帝迁都洛阳，推动语言、服饰与姓氏等方面的变革。",
     "significance": "显示迁都、文化政策与统治结构调整的关联。",
     "note": "494年仅标迁都；相关改革分阶段实施，不能全部归为同年。",
     "sourceIds": [
@@ -2344,7 +2385,7 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "隋的兴起建立在北朝长期制度和军事变化之后。",
+        "text": "国博隋唐陈列记杨坚在581年代北周建立隋，589年灭陈；本条只标建国，不把两个阶段混为一时。",
         "sourceIds": [
           "anc-sui"
         ],
@@ -2432,9 +2473,9 @@ export const ancientEvents: TimelineEvent[] = [
     "entityIds": [
       "tang"
     ],
-    "summary": "唐武宗大规模压制佛教寺院与僧团，没收财产并令人员还俗。",
+    "summary": "唐武宗时期推行限制佛教政策；所引诏令记述毁寺、令僧尼还俗及将寺产转入税籍。",
     "significance": "连接宗教政策、财产控制与国家权威。",
-    "note": "以845年标禁佛高潮；限制措施并非只在这一年出现，佛教也未由此消失。",
+    "note": "本条以845年政策为节点；诏令中的执行宣称不能直接当作各地逐项落实的统计，政策也不意味着佛教此后消失。",
     "sourceIds": [
       "anc-huichang",
       "anc-huichang-date"
@@ -2491,7 +2532,7 @@ export const ancientEvents: TimelineEvent[] = [
     ],
     "summary": "王仙芝、黄巢领导的起义扩展，唐朝统治遭受重大冲击。",
     "significance": "呈现唐末起义、地方军事力量与王朝危机的联系。",
-    "note": "874年包括王仙芝起事，黄巢起兵通常记875年；故标题并列两者，不把黄巢个人起兵提前一年。",
+    "note": "874—884年采用所引论文讨论的起义阶段范围；不把这一范围的起点等同于黄巢个人起兵的精确日期。",
     "sourceIds": [
       "anc-huangchao",
       "anc-sui"
@@ -2504,7 +2545,7 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "晚唐社会矛盾与地方军事力量发展构成持续危机。",
+        "text": "国博将安史之乱后的地方藩镇势力与晚唐政治危机相联系；这里作为时代背景，不据此断言起义只有一个原因。",
         "sourceIds": [
           "anc-huangchao",
           "anc-sui"
@@ -2584,7 +2625,7 @@ export const ancientEvents: TimelineEvent[] = [
   },
   {
     "id": "western-xia-founded",
-    "title": "李元昊称帝，西夏建立",
+    "title": "李元昊建立西夏",
     "time": {
       "kind": "point",
       "start": {
@@ -2599,11 +2640,11 @@ export const ancientEvents: TimelineEvent[] = [
     "entityIds": [
       "western-xia"
     ],
-    "summary": "党项首领李元昊称帝，西夏成为宋、辽之间的重要政治力量。",
+    "summary": "银川大事记记1038年李元昊在兴庆府筑坛受册，建立大夏国，史称西夏。",
     "significance": "为西北党项政权提供独立于宋辽的历史位置。",
-    "note": "1038年标称帝节点，早期党项政权及地方统治早于此年。",
+    "note": "采用银川市档案馆大事记的1038年建国节点；此前的地方统治及兴州、兴庆府沿革并非同一年开始。",
     "sourceIds": [
-      "anc-westernxia"
+      "anc-westernxia-yinchuan"
     ],
     "tags": [
       "宋辽夏金",
@@ -2613,23 +2654,23 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "党项统治集团长期经营西北地区。",
+        "text": "银川大事记先记1001年党项李继迁占怀远、1020年李德明迁府并改兴州，再记1033年李元昊改兴州为兴庆府。",
         "sourceIds": [
-          "anc-westernxia"
+          "anc-westernxia-yinchuan"
         ],
-        "locator": "第一章历史背景"
+        "locator": "PDF第1页1001、1020、1033年条"
       },
       {
         "label": "事件与变化",
-        "text": "史金波的西夏经济史以1038—1227年概括西夏国家，介绍其以兴庆为中心的统治。",
+        "text": "银川大事记1038年条记李元昊在兴庆府筑坛受册，建大夏国，史称西夏。",
         "sourceIds": [
-          "anc-westernxia"
+          "anc-westernxia-yinchuan"
         ],
-        "locator": "第一章历史背景"
+        "locator": "PDF第1页1038年条"
       },
       {
         "label": "阅读理解",
-        "text": "西夏拥有独立的政治、经济和文化结构，不能仅作为宋代战争的背景标签。",
+        "text": "档案馆大事记还记建国前的地方中心沿革；阅读西夏时应保留这一政权自身的历史线索，而不只把它作为宋朝背景。",
         "editorial": true
       }
     ]
@@ -2710,7 +2751,8 @@ export const ancientEvents: TimelineEvent[] = [
     "note": "金建国1115、辽亡1125与北宋终结1127是不同节点。",
     "sourceIds": [
       "anc-jin-founded",
-      "anc-song-rivals"
+      "anc-song-rivals",
+      "anc-jingkang"
     ],
     "tags": [
       "宋辽夏金",
@@ -2720,7 +2762,7 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "女真力量在辽的东北边缘逐渐壮大。",
+        "text": "所引钱币研究将金的建立联系于女真首领完颜阿骨打；本条不以建国年份替代女真群体此前的全部历史。",
         "sourceIds": [
           "anc-jin-founded",
           "anc-song-rivals"
@@ -2763,7 +2805,7 @@ export const ancientEvents: TimelineEvent[] = [
     ],
     "summary": "宋金达成绍兴和议，南宋朝廷在休战环境下调整军事和财政政策。",
     "significance": "将战场之外的停战、财政和社会恢复纳入宋金关系。",
-    "note": "本条采用1141年协议口径；后续誓表、使节与执行跨入1142年。没有将所有礼仪步骤压成同日。",
+    "note": "以1141年和议为节点，不把谈判、文书与后续执行压成同一天；未核具体文书时不另补跨年日期。",
     "sourceIds": [
       "anc-shaoxing"
     ],
@@ -2775,7 +2817,7 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "持续战争使南宋承担沉重军费，朝廷寻求以议和稳定统治。",
+        "text": "杨宇勋的研究把和战选择与宋高宗的统治考虑相联系；这是研究者对政治动机的解释，不是直接可见的当事人心理。",
         "sourceIds": [
           "anc-shaoxing"
         ],
@@ -2810,7 +2852,7 @@ export const ancientEvents: TimelineEvent[] = [
       "song-era"
     ],
     "entityIds": [],
-    "summary": "蒙古诸部整合后，铁木真获推为成吉思汗，蒙古帝国扩张进入新阶段。",
+    "summary": "1206年铁木真被推举为成吉思汗，成为蒙古帝国扩张的重要起点。",
     "significance": "区分蒙古帝国起点与后来元国号的确立。",
     "note": "本条以宋辽夏金元阅读组定位，不把蒙古政权称作1206年已经建立的元朝。",
     "sourceIds": [
@@ -2824,7 +2866,7 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "铁木真此前经历蒙古草原各集团之间的竞争。",
+        "text": "大都会艺术博物馆年表以1206年成吉思汗登位为节点，随后列举蒙古对外征服；本条不据年表倒推出各部整合的详细过程。",
         "sourceIds": [
           "anc-mongols"
         ],
@@ -2864,11 +2906,12 @@ export const ancientEvents: TimelineEvent[] = [
       "jin",
       "southern-song"
     ],
-    "summary": "蒙古征服金朝，北方政治格局再次改变，宋与蒙古直接相对。",
+    "summary": "1234年金朝灭亡；蒙古此后继续征服南宋。",
     "significance": "使宋与蒙古直接相对，重塑中原政治格局。",
     "note": "本条只列可直接核对的结束年份与大势，不在缺乏具体战役文献时补写蔡州攻城逐日细节。",
     "sourceIds": [
-      "anc-song-rivals"
+      "anc-song-rivals",
+      "anc-mongols"
     ],
     "tags": [
       "宋元",
@@ -2878,11 +2921,12 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "蒙古持续攻金，金朝在北方的统治空间不断收缩。",
+        "text": "大都会艺术博物馆年表分别记蒙古于1215年攻取北京、1233年攻取开封；哥伦比亚大学概述把金的灭亡记于1234年。",
         "sourceIds": [
+          "anc-mongols",
           "anc-song-rivals"
         ],
-        "locator": "Northern Rivals / Jin 与 Mongols"
+        "locator": "Met年表1215、1233年；Northern Rivals / Mongols"
       },
       {
         "label": "事件与变化",
@@ -2925,7 +2969,8 @@ export const ancientEvents: TimelineEvent[] = [
     "note": "战役开始时尚无元国号，1271年后才称元；此处entityIds用于同一军政体系的跨阶段阅读。",
     "sourceIds": [
       "anc-xiangyang",
-      "anc-xiangyang-dates"
+      "anc-xiangyang-dates",
+      "anc-mongols"
     ],
     "tags": [
       "宋元",
@@ -2989,7 +3034,7 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "元末灾害、河工负担与统治矛盾激化。",
+        "text": "元末河工负担与统治矛盾激化。",
         "sourceIds": [
           "anc-redturban",
           "anc-redturban-groups"
@@ -3030,7 +3075,7 @@ export const ancientEvents: TimelineEvent[] = [
     ],
     "summary": "朱元璋在鄱阳湖大战中击败陈友谅，元末南方竞争格局改变。",
     "significance": "揭示明朝建立之前反元集团之间的竞争。",
-    "note": "页面月序有疑点，本条只采用相互吻合的年份和主要结果，不使用兵船与兵力总数。",
+    "note": "所引词条的年号换算表述有疑点；本条仅采用陈友谅词条明确的至正二十三年（1363）及战果，不拼接未经核实的逐日战况。",
     "sourceIds": [
       "anc-poyang"
     ],
@@ -3050,11 +3095,11 @@ export const ancientEvents: TimelineEvent[] = [
       },
       {
         "label": "事件与变化",
-        "text": "故宫洪武年表记1363年双方在鄱阳湖交战，陈友谅败亡。",
+        "text": "故宫页面附载的陈友谅释条记至正二十三年（1363）双方在鄱阳湖交战，陈友谅败亡。",
         "sourceIds": [
           "anc-poyang"
         ],
-        "locator": "元至正二十三年条"
+        "locator": "洪武皇帝页面附载“陈友谅”释条；不采用正文“龙凤八年”换算"
       },
       {
         "label": "阅读理解",
@@ -3187,8 +3232,8 @@ export const ancientEvents: TimelineEvent[] = [
     "entityIds": [
       "ming"
     ],
-    "summary": "明廷将首都迁至北京，北方军事与政治中心的地位强化。",
-    "significance": "标记明代政治中心与南北供给体系的调整。",
+    "summary": "1421年，明成祖迁都北京。",
+    "significance": "编辑总结：迁都节点可与交通、供给及南北政治联系的专题对读；本条不单凭迁都推定所有制度变化已同时完成。",
     "note": "年份指正式迁都，不表示所有宫城、运河和行政安排同年才开始。",
     "sourceIds": [
       "anc-ming-qing"
@@ -3201,7 +3246,7 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "朱棣即位后持续建设北京并调整帝国的政治重心。",
+        "text": "国博明清陈列将明成祖迁都北京记于1421年；本条不将短篇展陈说明扩展成完整的北京营建史。",
         "sourceIds": [
           "anc-ming-qing"
         ],
@@ -3238,8 +3283,8 @@ export const ancientEvents: TimelineEvent[] = [
     "entityIds": [
       "ming"
     ],
-    "summary": "明英宗亲征瓦剌失利，在土木一带被俘，明廷面临重大军事与继承危机。",
-    "significance": "呈现军事失败引发的皇权与国家防御危机。",
+    "summary": "1449年明英宗亲征失败，在土木堡被俘。",
+    "significance": "编辑总结：区分皇帝被俘这一节点与随后防御、政局变化，避免把长期后果写成同日发生。",
     "note": "采用年份与主要结果，不列无法核实的几十万兵力或伤亡比例。",
     "sourceIds": [
       "anc-tumu"
@@ -3461,7 +3506,7 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "皇太极承继努尔哈赤政权并继续调整内部统治。",
+        "text": "故宫皇太极词条记其承继父业，并在1636年改国号为清；本条不以简短词条推定内部制度调整的完整过程。",
         "sourceIds": [
           "anc-qing-name"
         ],
@@ -3514,7 +3559,7 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "郑成功在明清战争与沿海海上网络中建立军事力量。",
+        "text": "国博《郑成功的火药弹》记清兵入闽后郑成功起兵抗清，并记1661年自金门出发进军台湾。",
         "sourceIds": [
           "anc-zhengtaiwan"
         ],
@@ -3682,7 +3727,7 @@ export const ancientEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "背景与依据",
-        "text": "清与俄罗斯在东北接触并发生冲突，需要处理边界与往来问题。",
+        "text": "故宫词条将尼布楚条约的议题列为边界及通商等事项；这里不据签约本身补写此前冲突的详细经过。",
         "sourceIds": [
           "anc-nerchinsk"
         ],
@@ -3722,7 +3767,7 @@ export const ancientEvents: TimelineEvent[] = [
     "entityIds": [
       "qing"
     ],
-    "summary": "清军击败准噶尔并进入塔里木盆地，西北统治范围扩大，战争也造成严重的人口灾难。",
+    "summary": "清军击败准噶尔并进入天山南路回部，西北统治范围扩大，战争也造成严重的人口灾难。",
     "significance": "将西北统治扩张与战争的人口、社会代价共同呈现。",
     "note": "区间合并准噶尔与回部两个相连但不同的战区；不报未经交叉核对的死亡比例。后来的新疆建省并不发生在1759年。",
     "sourceIds": [
@@ -3781,7 +3826,7 @@ export const ancientEvents: TimelineEvent[] = [
     ],
     "summary": "川、楚、陕等地教民起义与清廷镇压持续多年，军费和社会负担沉重。",
     "significance": "连接教民反抗、地方治理与清朝财政压力。",
-    "note": "1804年作为主要战争阶段的结束口径；“白莲教”常是官府对不同教派和反抗者的统称。",
+    "note": "1804年作为主要战争阶段的结束口径；刘平等研究讨论“白莲教”作为官府统称的问题，不应据此将各教派视作组织统一的单一团体。本轮相关研究正文访问异常，只复核到公开索引，具体论证仍待全文核对。",
     "sourceIds": [
       "anc-jiaqing",
       "anc-white-lotus",
@@ -3938,7 +3983,7 @@ export const ancientRelations: EventRelation[] = [
       "anc-yamen"
     ],
     "locator": "宋杰访谈襄阳与临安段；崖门遗址说明",
-    "note": "通过1276年临安陷落及沿海抵抗等中间过程，不能压成直接立即结果。"
+    "note": "襄阳失守与崖门之战是不同节点；其后仍有其他战事，不是襄阳失守当日南宋即亡。"
   },
   {
     "id": "anc-redturban-ming",
@@ -4011,7 +4056,8 @@ export const ancientEventPatches: Record<string, Partial<TimelineEvent>> = {
     "note": "1127年称帝地点是当时的南京应天府（今商丘），不是今天的南京或立即定都杭州；南迁与临安定都经历后续过程。",
     "sourceIds": [
       "anc-jingkang",
-      "anc-gaozong"
+      "anc-gaozong",
+      "anc-song-rivals"
     ],
     "tags": [
       "宋辽夏金",
@@ -4024,7 +4070,8 @@ export const ancientEventPatches: Record<string, Partial<TimelineEvent>> = {
         "text": "金灭辽后继续向宋进军，开封面临军事压力。",
         "sourceIds": [
           "anc-jingkang",
-          "anc-gaozong"
+          "anc-gaozong",
+          "anc-song-rivals"
         ],
         "locator": "大观通宝历史背景；越瓷研究第三节"
       },
@@ -4063,7 +4110,7 @@ export const ancientEventPatches: Record<string, Partial<TimelineEvent>> = {
       "yuan"
     ],
     "summary": "元军在崖山海战击败南宋最后的朝廷军队，南宋政权结束。",
-    "significance": "区分临安失守与沿海抵抗政权最后结束。",
+    "significance": "编辑总结：王朝建立与完成征服不是同一个日期；以1279年宋元崖门交战的结局标记南宋终点。",
     "note": "采用年份精度；不列无法现代核实的投海人数或把文学性的“十万人”当作人口统计。",
     "sourceIds": [
       "anc-yamen",
@@ -4078,7 +4125,7 @@ export const ancientEventPatches: Record<string, Partial<TimelineEvent>> = {
     "details": [
       {
         "label": "背景与依据",
-        "text": "元军南下后，南宋残余朝廷转移至沿海继续抵抗。",
+        "text": "哥伦比亚大学概述将蒙古征服南宋的完成置于1279年；江门遗址资料将同年的崖门海战与南宋终结相联系。",
         "sourceIds": [
           "anc-yamen",
           "anc-song-rivals"
@@ -4096,9 +4143,23 @@ export const ancientEventPatches: Record<string, Partial<TimelineEvent>> = {
       },
       {
         "label": "阅读理解",
-        "text": "1276年临安陷落之后仍有抵抗政权延续；以1279年为终点，可以避免把攻占首都与全部政权终结混成一事。",
+        "text": "将战役、王朝起点与终点分别列出，有助于避免把漫长的征服过程压缩成一个建国日期。",
         "editorial": true
       }
+    ]
+  },
+  "yuan-named": {
+    "sourceIds": [
+      "chronology",
+      "anc-mongols"
+    ]
+  },
+  "song-founded": {
+    "sourceIds": [
+      "columbia",
+      "chronology",
+      "anc-westernxia-yinchuan",
+      "anc-song-rivals"
     ]
   }
 };

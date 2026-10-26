@@ -25,7 +25,7 @@ export const xinhaiSources:Source[] = [
 ];
 const s = (label:string,text:string,sourceId:string,locator:string):ReadingSection => ({label,text,sourceIds:[sourceId],locator});
 const e = (id:string,title:string,date:string,category:string,periodIds:string[],entityIds:string[],summary:string,significance:string,details:ReadingSection[],end?:string,note?:string):TimelineEvent => ({
-  id,title,time:{kind:end?'duration':'point',start:parseDate(date),...(end?{end:parseDate(end)}:{})},category,periodIds,entityIds,summary,significance,details,
+  id,title,time:{kind:end?'duration':'point',start:parseDate(date),...(end?{end:parseDate(end)}:{})},category,periodIds,entityIds,summary,significance:`编辑总结：${significance}`,details,
   sourceIds:[...new Set(details.flatMap(d=>d.sourceIds!))],tags:['辛亥革命','1911—1912'],milestone:true,
   note:note || '日期采用资料所列公历；机构回顾与史料转录分别标示，未声称核验馆藏原件。',
 });

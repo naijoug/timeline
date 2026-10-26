@@ -93,6 +93,14 @@ const modernPeriodPlan = [
   }
 ] as const;
 
+// References for facts in the period summary that are not implied by child-event membership.
+const modernPeriodSupplementalSources: Record<string, string[]> = {
+  'civil-war': ['modern-revolution-1949'],
+  'postwar-taiwan': ['modern-revolution-1949'],
+  'republican-nanjing': ['modern-war-china'],
+  'prc-early': ['modern-reform-1978'],
+};
+
 export function modernReadingPeriods(events: TimelineEvent[]): Period[] {
   return modernPeriodPlan.map(plan => {
     const relevant = events.filter(event => event.periodIds.includes(plan.id));
@@ -101,7 +109,7 @@ export function modernReadingPeriods(events: TimelineEvent[]): Period[] {
       time: { kind: 'duration', start: { year: plan.start }, end: plan.end === 2026 ? { year: 2026, month: 10, day: 24 } : { year: plan.end } },
       ...('parentId' in plan ? { parentId: plan.parentId } : {}),
       entityIds: [], coverage: 'selected',
-      sourceIds: [...new Set([...(plan.id === 'republic-1912-1949' || plan.id === 'republican-early' ? ['xinhai-exhibition', 'xinhai-frus-overview'] : []), ...relevant.flatMap(event => event.sourceIds)])],
+      sourceIds: [...new Set([...(plan.id === 'republic-1912-1949' || plan.id === 'republican-early' ? ['xinhai-exhibition', 'xinhai-frus-overview'] : []), ...(modernPeriodSupplementalSources[plan.id] ?? []), ...relevant.flatMap(event => event.sourceIds)])],
     };
   });
 }

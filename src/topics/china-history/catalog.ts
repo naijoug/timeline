@@ -159,6 +159,7 @@ const legacyPeriods: Period[] = [
       end: { year: -1600, approximate: true },
     },
     note: "年代采用参考简表的近似纪年；起源与考古对应关系仍有讨论。",
+    sourceIds: ["chronology", "anc-met-bronze"],
   }),
   period(
     "shang",
@@ -166,7 +167,7 @@ const legacyPeriods: Period[] = [
     -1600,
     -1046,
     "从早期王朝进入有文字材料可参照的历史。",
-    { time: duration(-1600, -1046, true) },
+    { time: duration(-1600, -1046, true), sourceIds: ["chronology", "anc-yinxu"] },
   ),
   period(
     "zhou",
@@ -180,6 +181,7 @@ const legacyPeriods: Period[] = [
   ),
   period("western-zhou", "西周", -1046, -771, "周的早期阶段。", {
     parentId: "zhou",
+    time: { kind: "duration", start: { year: -1046, approximate: true }, end: { year: -771 } },
   }),
   period("eastern-zhou", "东周", -770, -256, "东周王室存续时期。", {
     parentId: "zhou",
@@ -187,12 +189,13 @@ const legacyPeriods: Period[] = [
   period("spring-autumn", "春秋", -770, -476, "列国历史的一个分期。", {
     parentId: "zhou",
     note: "春秋与战国的分界存在不同口径；此处采用前476／前475年的分期。",
+    sourceIds: ["chronology", "columbia"],
   }),
   period("warring-states", "战国", -475, -221, "列国竞争延续至秦统一。", {
-    parentId: "zhou",
+    parentId: "zhou", sourceIds: ["chronology", "nmc-qin-han"],
   }),
   period("qin", "秦", -221, -206, "以秦王朝为线索的历史。", {
-    sourceIds: ["columbia"],
+    sourceIds: ["columbia", "chronology"],
     note: "终年采用前206年；不同纪年表亦有前207年的记法。",
   }),
   period(
@@ -201,10 +204,10 @@ const legacyPeriods: Period[] = [
     -202,
     220,
     "展开西汉与东汉；其间的政权变化不等于汉连续统治。",
-    { coverage: "selected", sourceIds: ["chronology", "nmc-qin-han"], note: "起点按前202年称帝口径，部分资料以汉王建国的前206年为起点。" },
+    { coverage: "selected", sourceIds: ["chronology", "nmc-qin-han", "columbia"], note: "起点按前202年称帝口径；所引哥伦比亚大学年表另将汉的起点列为前206年。" },
   ),
   period("western-han", "西汉", -202, 8, "汉的前期。", {
-    parentId: "han", coverage: "selected", sourceIds: ["chronology", "nmc-qin-han"],
+    parentId: "han", coverage: "selected", sourceIds: ["chronology", "nmc-qin-han", "columbia", "anc-nmh-huoquan"],
     note: "这里按参考简表记至公元8年；有资料按新朝建立记至9年。",
   }),
   period("eastern-han", "东汉", 25, 220, "汉的后期。", { parentId: "han" }),
@@ -217,14 +220,15 @@ const legacyPeriods: Period[] = [
     { entityIds: [], coverage: "selected", sourceIds: ["chronology", "columbia", "nmc-division"] },
   ),
   period("wei", "曹魏", 220, 265, "三国中的一个政权。", {
-    parentId: "division",
+    parentId: "division", sourceIds: ["chronology", "nmc-qin-han"],
   }),
   period("shu", "蜀汉", 221, 263, "三国中的一个政权。", {
     parentId: "division",
   }),
   period("wu", "孙吴", 222, 280, "三国中的一个政权。", {
     parentId: "division",
-    note: "起点采用称吴王的222年口径。",
+    sourceIds: ["chronology", "anc-sunwu"],
+    note: "起点采用222年改元黄武的分期；受封吴王、改元与229年称帝是不同节点。",
   }),
   period("western-jin", "西晋", 265, 316, "两晋的前期；280年出现短暂统一。", {
     parentId: "division", coverage: "selected", sourceIds: ["chronology", "aja-western-jin"],
@@ -239,6 +243,8 @@ const legacyPeriods: Period[] = [
   period("northern-dynasties", "北朝", 386, 581, "北方诸朝的时期分组。", {
     parentId: "division",
     entityIds: [],
+    note: "采用所引纪年简表386年起的分组范围，不将它与439年北魏统一北方的事件日期混为一谈。",
+    sourceIds: ["chronology", "anc-northernwei"],
   }),
   period("southern-dynasties", "南朝", 420, 589, "南方诸朝的时期分组。", {
     parentId: "division",
@@ -246,7 +252,7 @@ const legacyPeriods: Period[] = [
   }),
   period("sui", "隋", 581, 618, "581年建国、589年灭陈，随后扩建南北运输网络。", { coverage: "selected", sourceIds: ["chronology", "nmc-sui-tang", "unesco-grand-canal"] }),
   period("tang", "唐", 618, 907, "从王朝建立、对外往来到战争与制度变化。", {
-    sourceIds: ["tang-met"],
+    sourceIds: ["tang-met", "wu-zhou", "anc-wuzhou-gold-tablet"],
     coverage: "selected",
     note: "总览使用618—907年的唐代分期，内含武周；不表示李唐统治从未中断。",
   }),
@@ -256,7 +262,7 @@ const legacyPeriods: Period[] = [
     690,
     705,
     "武则天称帝时期，作为唐代阅读分期内的独立政权列出。",
-    { parentId: "tang", sourceIds: ["wu-zhou"], coverage: "selected" },
+    { parentId: "tang", sourceIds: ["wu-zhou", "anc-wuzhou-gold-tablet"], coverage: "selected" },
   ),
   period(
     "five-dynasties",
@@ -280,9 +286,9 @@ const legacyPeriods: Period[] = [
   ),
   period("song", "宋", 960, 1279, "北宋与南宋的整体阅读入口。", {
     parentId: "song-era",
-    sourceIds: ["columbia"],
+    sourceIds: ["columbia", "chronology"],
     coverage: "selected",
-    note: "终年采用1279年；1276年临安陷落是另一常见分期节点。",
+    note: "终年采用哥伦比亚大学年表的1279年；所引纪年简表另将宋的终年列为1276年。",
   }),
   period(
     "northern-song",
@@ -290,7 +296,7 @@ const legacyPeriods: Period[] = [
     960,
     1127,
     "宋的前期，与辽、金等政权处于同一时间背景。",
-    { parentId: "song", sourceIds: ["columbia"], coverage: "selected" },
+    { parentId: "song", sourceIds: ["columbia", "song-rivals"], coverage: "selected" },
   ),
   period("southern-song", "南宋", 1127, 1279, "宋的后期。", {
     parentId: "song",
@@ -300,6 +306,7 @@ const legacyPeriods: Period[] = [
   period("liao", "辽", 916, 1125, "与宋等政权并存。", {
     parentId: "song-era",
     note: "采用916年建国口径；部分教学资料将起点前推至907年。",
+    sourceIds: ["chronology", "song-rivals"],
     coverage: "selected",
   }),
   period("western-xia", "西夏", 1038, 1227, "宋辽夏金时期的一个政权。", {
@@ -315,14 +322,14 @@ const legacyPeriods: Period[] = [
     1271,
     1368,
     "按1271年定国号口径起算，保留与南宋的交叠。",
-    { note: "1279年是南宋结束的节点，不等同于元朝定国号之年。" },
+    { note: "1279年是南宋结束的节点，不等同于元朝定国号之年。", sourceIds: ["chronology", "anc-mongols", "columbia"] },
   ),
   period("ming", "明", 1368, 1644, "从南京建政进入明清制度变迁的阅读线索。", {
     coverage: "selected", sourceIds: ["chronology", "nmc-ming-qing"],
     note: "总览采用明朝通常分期；南明等后续政权尚未展开。",
   }),
   period("qing", "清", 1644, 1912, "按入关至退位分期，追踪通商条约、选官改革与共和转折。", {
-    coverage: "selected", sourceIds: ["columbia", "nmc-ming-qing"],
+    coverage: "selected", sourceIds: ["columbia", "nmc-ming-qing", "xinhai-frus-abdication", "anc-laterjin", "anc-qing-name"],
     note: "1644年是入关口径；1616年后金建立与1636年改国号，另见“后金与入关前的清”分组。",
   }),
   period('late-qing-republic', '清末民初：辛亥革命与共和建政', 1911, 1912,

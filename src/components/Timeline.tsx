@@ -27,7 +27,7 @@ export function EventCard({ event, returnUrl }: { event: TimelineEvent; returnUr
     <div className="event-bottom"><div className="event-tags">{event.tags.slice(0, 2).map(t => <span key={t}>{t}</span>)}</div><button className="expand-button" aria-expanded={open} aria-controls={`details-${event.id}`} onClick={() => setOpen(!open)}>{open ? '收起' : '了解这次变化'}<ChevronDown size={15} /></button></div>
     <div id={`details-${event.id}`} hidden={!open} className="inline-detail">
       <div className="detail-caption">为什么重要</div><p>{event.significance}</p>
-      {event.change && <><div className="detail-caption">相比 {event.change.baseline}</div><ul>{event.change.improvements.map(x => <li key={x}>{x}</li>)}</ul><p className="caveat">{event.change.evidence} · {event.change.tradeoffs}</p></>}
+      {event.change && <><div className="detail-caption">参考背景：{event.change.baseline}</div><ul>{event.change.improvements.map(x => <li key={x}>{x}</li>)}</ul><p className="caveat">{event.change.evidence} · {event.change.tradeoffs}</p></>}
       <div className="source-links">{event.sourceIds.map(id => <a key={id} href={sourceMap[id].url} target="_blank" rel="noopener noreferrer">{sourceMap[id].publisher} · {sourceMap[id].type}<ExternalLink size={12} /></a>)}</div>
       <a className="text-link" href={href} onClick={() => { if (returnUrl) rememberReturn(`${returnUrl}#event-${event.id}`); }}>查看完整事件</a>
     </div>

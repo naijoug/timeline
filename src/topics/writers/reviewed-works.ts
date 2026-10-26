@@ -131,7 +131,7 @@ export const writersReviewedSources: Source[] = [
     publisher: "奇幻基地 / 城邦读书花园",
     url: "https://www.cite.com.tw/book?id=91129",
     type: "出版社书目与编辑推荐",
-    locator: "内容简介、编辑何宁推荐和基本资料；张一昂及多线喜剧，2022 年繁体版不作简体首版日期",
+    locator: "内容简介、编辑何宁推荐和基本资料；张一昂及多线喜剧，2022 年繁体版不作简体首版日期。2026-10-26 云浏览器仅显示网站维护提示，当前正文未能直读；本轮仅复核检索返回的具体书目信息。",
     checkedAt: "2026-10-24",
     version: "繁体版 ISBN 9786267094006"
   },
@@ -141,7 +141,7 @@ export const writersReviewedSources: Source[] = [
     publisher: "对外经济贸易大学图书馆",
     url: "https://opac.uibe.edu.cn/opac/book/bfc0192b8f9c68d1da16a0833c65c287",
     type: "高校馆藏书目",
-    locator: "出版发行项、ISBN 与提要文摘：2018 年中国友谊版；林奇、张强、夏明与沈研",
+    locator: "出版发行项、ISBN 与提要文摘：2018 年中国友谊版；林奇、张强、夏明与沈研。2026-10-26 云浏览器连接超时，不判为404；本轮核对检索返回书目，未直读当前完整页面。",
     checkedAt: "2026-10-24",
     version: "ISBN 9787505742888"
   }

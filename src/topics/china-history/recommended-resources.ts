@@ -4,33 +4,32 @@ import type { RecommendedResource } from '../../core/types';
 export const historyRecommendedResources: Record<string, RecommendedResource[]> = {
   "shang-rise": [
     {
-        "id": "dedao-423-jianshang",
-        "title": "得到“423破万卷节”罗振宇推荐第二本书《翦商》",
-        "creator": "范新（荐书）、罗振宇（主持）",
-        "series": "得到423破万卷节 · 哔哩哔哩「玩转751」",
-        "url": "https://www.bilibili.com/en/video/BV1xh41177En",
-        "kind": "video",
-        "publishedAt": "2023-04-29",
-        "match": "以李硕《翦商：殷周之变与华夏新生》进入商代社会与商周转型，作为整个商朝的阅读入口，并非讲商王朝建立当天的事件。",
-        "locator": "合集第二本书《翦商》，页面标注11分39秒；展开简介说明荐书人及视频来源。",
-        "scopeNote": "这是2023年4月23日得到读书活动的荐书片段，4月29日由场地方「玩转751」上传，简介注明视频来源为得到APP；未核实为《罗辑思维》某个编号单集。已核对页面、简介和开头画面，播放器出现短预览提示，未验证完整播放。荐书与书中解释不替代史实依据。",
-        "checkedAt": "2026-10-25"
+      "id": "dedao-423-jianshang",
+      "title": "得到“423破万卷节”罗振宇推荐第二本书《翦商》",
+      "creator": "范新（荐书）、罗振宇（主持）",
+      "series": "得到423破万卷节 · 哔哩哔哩「玩转751」",
+      "url": "https://www.bilibili.com/en/video/BV1xh41177En",
+      "kind": "video",
+      "publishedAt": "2023-04-29",
+      "match": "以李硕《翦商：殷周之变与华夏新生》进入商代社会与商周转型，作为整个商朝的阅读入口，并非讲商王朝建立当天的事件。",
+      "locator": "合集第二本书《翦商》，页面标注11分39秒；展开简介说明荐书人及视频来源。",
+      "scopeNote": "这是2023年4月23日得到读书活动的荐书片段，4月29日由场地方「玩转751」上传，简介注明视频来源为得到APP；未核实为《罗辑思维》某个编号单集。已核对页面、简介和开头画面，播放器出现短预览提示，未验证完整播放。荐书与书中解释不替代史实依据。",
+      "checkedAt": "2026-10-25"
     },
     {
-        "id": "thepaper-lishuo-jianshang-interview",
-        "title": "专访｜《翦商》作者李硕：深究历史深处的黑暗",
-        "creator": "吴海云采访 · 李硕受访",
-        "series": "澎湃新闻 · 文化课",
-        "url": "https://www.thepaper.cn/newsDetail_forward_21713167",
-        "kind": "article",
-        "publishedAt": "2023-01-29",
-        "match": "与荐书视频对读，了解作者如何结合考古材料、传世文献和叙事写作解释商代与商周更替。",
-        "locator": "导读关于全书前后部分的说明；“对话”中关于《易经》解读及史料局限的问答。",
-        "scopeNote": "访谈正文已读取。文章说明作者对人祭消亡的归因不同于其他研究观点，《易经》解读也存在争论；采访呈现作者的解释，不是独立考古论证或学界共识。涉及暴力祭祀内容，阅读时请自行留意。",
-        "checkedAt": "2026-10-25"
+      "id": "thepaper-lishuo-jianshang-interview",
+      "title": "专访｜《翦商》作者李硕：深究历史深处的黑暗",
+      "creator": "吴海云采访 · 李硕受访",
+      "series": "澎湃新闻 · 文化课",
+      "url": "https://www.thepaper.cn/newsDetail_forward_21713167",
+      "kind": "article",
+      "publishedAt": "2023-01-29",
+      "match": "与荐书视频对读，了解作者如何结合考古材料、传世文献和叙事写作解释商代与商周更替。",
+      "locator": "导读关于全书前后部分的说明；“对话”中关于《易经》解读及史料局限的问答。",
+      "scopeNote": "访谈正文已读取。文章说明作者对人祭消亡的归因不同于其他研究观点，《易经》解读也存在争论；采访呈现作者的解释，不是独立考古论证或学界共识。涉及暴力祭祀内容，阅读时请自行留意。",
+      "checkedAt": "2026-10-25"
     }
-],
-
+  ],
   "two-tax": [
     {
       "id": "cctv-tang-tax-reform",
@@ -70,8 +69,7 @@ export const historyRecommendedResources: Record<string, RecommendedResource[]> 
       "scopeNote": "已核对教学概述，不是1905年诏令原件或停考后效果评估；文中的识字率估计和考试层级简化不作为本站结论。",
       "checkedAt": "2026-10-24"
     }
-  ]
-,
+  ],
   "muye": [
     {
       "id": "nmc-li-gui",
@@ -94,9 +92,9 @@ export const historyRecommendedResources: Record<string, RecommendedResource[]> 
       "url": "https://www.bilibili.com/video/BV1PY411Z7vB/",
       "kind": "video",
       "publishedAt": "2022-11-23",
-      "match": "围绕城濮之战与晋文公、楚成王、子玉展开人物及政治处境的解释。",
-      "scopeNote": "作者解读，不作为事件事实的唯一来源。这是分集上篇，并非完整三篇；检索索引核对标题与作者及“城濮之战”标签；未验证播放。",
-      "checkedAt": "2026-10-24"
+      "match": "标题和“城濮之战”标签提供城濮相关节目的主题线索；不据此确认具体人物分析或节目论证。",
+      "scopeNote": "仅检索索引核对标题、作者及“城濮之战”标签；本轮直读受到站点限制，未核完整页面、播放或逐段内容。仅为上篇，不作为史实证据。",
+      "checkedAt": "2026-10-26"
     }
   ],
   "shang-yang-reforms": [
@@ -108,9 +106,9 @@ export const historyRecommendedResources: Record<string, RecommendedResource[]> 
       "url": "https://www.bilibili.com/video/BV1Qd4y1Y7SX/",
       "kind": "video",
       "publishedAt": "2022-12-21",
-      "match": "以商鞅的命运为入口，作为理解秦国变法、政治秩序及改革者处境的补充。",
-      "scopeNote": "人物与制度解读，不替代《史记》等材料核查；仅链接商鞅系列上篇。检索索引核对标题与作者；未验证播放。直读返回412。",
-      "checkedAt": "2026-10-24"
+      "match": "标题指向商鞅，可作为变法人物主题的节目线索；具体论述尚未逐段核验。",
+      "scopeNote": "仅检索索引核对标题与作者；直读返回412，未验证完整播放或逐段内容。仅商鞅系列上篇，不作为史实依据，不把访问限制当404。",
+      "checkedAt": "2026-10-26"
     }
   ],
   "changping": [
@@ -121,10 +119,9 @@ export const historyRecommendedResources: Record<string, RecommendedResource[]> 
       "series": "老沈一说",
       "url": "https://www.qtfm.cn/channels/100798/programs/6205544/",
       "kind": "audio",
-      "publishedAt": "2016-12-22",
-      "match": "围绕长平之战及战后大规模杀俘的叙述提出问题，适合与史书记载、考古证据及人数争议对照。",
-      "scopeNote": "节目标题使用强烈措辞；作者推断不等于史学定论，尤其不能据此直接确定战俘人数或实施细节。原主播专辑与单集索引已核对，未验证播放。",
-      "checkedAt": "2026-10-24"
+      "match": "标题涉及长平及屠杀，可作为杀俘叙事的节目线索；不能由标题确定其人数、方式或因果解释。",
+      "scopeNote": "原主播专辑与单集索引已核对；未验证播放或逐段内容。强烈标题措辞及作者观点不等于历史结论，不作为人数或实施细节的史实依据。标题中的161222仅作为期号保留，未核验其首播日期。",
+      "checkedAt": "2026-10-26"
     }
   ],
   "xiaowen-luoyang": [
@@ -164,9 +161,9 @@ export const historyRecommendedResources: Record<string, RecommendedResource[]> 
       "url": "https://www.youtube.com/watch?v=yTGmH5Be-jY",
       "kind": "video",
       "publishedAt": "2016-04-22",
-      "match": "以李世民、李建成及其政治集团的竞争为线索，提供解释玄武门之变的结构性视角。",
-      "scopeNote": "“不得不发生”是节目解释框架，不应写成历史必然性定论。检索索引核对标题与作者；未验证播放。事件匹配另由当期观后笔记交叉核对，并非完整字幕核验。",
-      "checkedAt": "2026-10-24"
+      "match": "标题及当期观后笔记将该集指向玄武门之变，可作为相关解读的线索；未核验节目具体论证。",
+      "scopeNote": "检索索引核对标题与作者，事件关联另由当期观后笔记交叉核对；未验证播放或完整字幕。“不得不发生”仅为节目标题表达，不是本站的历史必然性结论。",
+      "checkedAt": "2026-10-26"
     }
   ],
   "an-shi": [
@@ -203,9 +200,9 @@ export const historyRecommendedResources: Record<string, RecommendedResource[]> 
       "series": "文明之旅",
       "url": "https://www.youtube.com/watch?v=fkY0na-HTOk",
       "kind": "video",
-      "match": "聚焦1004年宋辽军事对峙，适合作为澶渊之盟形成背景的延伸节目。",
-      "scopeNote": "解读性节目，不替代宋辽史料与学术研究；1004期讨论战事，不能与1005期和议混为一集。检索索引核对标题与作者；未验证播放。",
-      "checkedAt": "2026-10-24"
+      "match": "标题指向1004年澶渊战事，可作为宋辽对峙主题的延伸节目线索。",
+      "scopeNote": "仅检索索引核对标题与作者，未验证播放或逐段内容；1004与1005是不同单集，标题主题不替代战事和和议史料。",
+      "checkedAt": "2026-10-26"
     },
     {
       "id": "civilization-1005",
@@ -214,9 +211,9 @@ export const historyRecommendedResources: Record<string, RecommendedResource[]> 
       "series": "文明之旅",
       "url": "https://www.youtube.com/watch?v=LitID67Htw0",
       "kind": "video",
-      "match": "从“胜利还是屈辱的城下之盟”这一问题切入，讨论如何评价宋辽和议。",
-      "scopeNote": "这是对盟约的评价与解释，不是已经没有争论的结论。检索索引核对标题与作者；未验证播放。",
-      "checkedAt": "2026-10-24"
+      "match": "标题以“澶渊之盟是城下之盟吗”提出问题，可作为盟约评价主题的节目线索。",
+      "scopeNote": "仅检索索引核对标题与作者，未验证播放或逐段内容；不由标题推定节目答案或史学共识。",
+      "checkedAt": "2026-10-26"
     }
   ],
   "wang-anshi-reforms": [
@@ -252,9 +249,9 @@ export const historyRecommendedResources: Record<string, RecommendedResource[]> 
       "url": "https://www.youtube.com/watch?v=TuuHp2BW3HA",
       "kind": "video",
       "publishedAt": "2025-09-02",
-      "match": "以1074年旱灾、变法争议和王安石辞相为切入点，讨论宋神宗与王安石的关系。",
-      "scopeNote": "这是变法进程中的1074年节点，不是1069年变法开始的全景介绍。对皇帝动机的判断属于解释。检索索引核对标题与作者、简介；未验证播放。",
-      "checkedAt": "2026-10-24"
+      "match": "标题指向王安石变法由谁主导的问题，可作为政治主体讨论的节目线索；不从标题推定具体动机与结论。",
+      "scopeNote": "检索索引核对标题、作者及简介；未验证播放或逐段内容。1074是该集主题年份，不能据此把变法起点写为1074年，也不将节目解释作为史实证据。",
+      "checkedAt": "2026-10-26"
     }
   ],
   "treaty-shimonoseki": [
@@ -265,9 +262,9 @@ export const historyRecommendedResources: Record<string, RecommendedResource[]> 
       "series": "老沈一说",
       "url": "https://www.qtfm.cn/channels/100798/programs/3816648/",
       "kind": "audio",
-      "match": "以李鸿章在日本谈判期间遇刺为切入口，补充甲午战后外交谈判与人物处境的观察。",
-      "scopeNote": "作者观点需与谈判档案和条约原文对读，不将个人评价混写为事实。单集索引已核对标题与主播；未验证播放。标题含150417期，不把专辑“最近更新2019-09-09”误当本期首播日期。",
-      "checkedAt": "2026-10-24"
+      "match": "标题涉及李鸿章遇刺，可作为甲午战后谈判人物主题的节目线索；具体节目论述尚未逐段核验。",
+      "scopeNote": "单集索引已核对标题与主播；未验证播放或逐段内容，不作为史实证据。标题含150417期，不把专辑“最近更新2019-09-09”误当本期首播日期。",
+      "checkedAt": "2026-10-26"
     }
   ]
 };

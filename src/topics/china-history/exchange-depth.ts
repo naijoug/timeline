@@ -74,7 +74,7 @@ export const exchangeDepthEventPatches: Record<string, Partial<TimelineEvent>> =
       { label: '放回长期网络：丝路不是一条固定公路', text: 'Jason Neelis的路线文章说明，“丝绸之路”是近代命名，塔里木盆地交通包含多条分支，行程随目的、环境和政治经济条件而变。文章涉及不同时期，不应把其中汉唐及后世路线压成张骞一次出使的足迹。', sourceIds: ['zhangqian-uw-trade-routes'], locator: '开头的Richthofen命名；南北及中间路线；Travelers’ itineraries段' },
       { label: '我的理解', text: '可以把问题分成三层：皇帝原本想要什么，使者实际带回什么，商人和沿途社会早已在做什么。联盟未成，并不抹去新知识的作用；国家后来加强往来，也不意味着此前的人群和交换网络不存在。', editorial: true },
     ],
-    note: '保持“约前138年”的既有节点：故宫词条采用前139年，既有国务院新闻办公室条目采用前138年，未强行消除差异。后者本轮两次访问超时，保留2026-10-24旧核查日。首使与后来的出使、军事扩张分开；不补造返抵月日、现代国界对应或商品传播的唯一线路。',
+    note: '保持“约前138年”的既有节点：故宫词条采用前139年，既有国务院新闻办公室条目采用前138年，未强行消除差异。后者本轮返回503，公开索引仍可读；不将服务异常当成404，正文仍待复核。首使与后来的出使、军事扩张分开；不补造返抵月日、现代国界对应或商品传播的唯一线路。',
     recommendedResources: [
       {
         id: 'uw-zhangqian-primary-reading', title: 'The Mission to the West by Zhang Qian（汉代史书英译节选第三节）',

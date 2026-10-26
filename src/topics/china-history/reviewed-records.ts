@@ -92,14 +92,14 @@ export const historyReviewedEventPatches: Record<string, Partial<TimelineEvent>>
     significance: '此事件适合观察战争与外交如何共同塑造秩序。宋并非这一时期唯一政权，对和约的评价也不能脱离多国并存的背景。',
     sourceIds: ['backbone-song-rivals-review'],
     details: [
-      { label: '多政权并存的背景', text: '哥伦比亚大学教学材料指出，宋虽经济和人口规模突出，却不具压倒性的军事优势，必须在辽、西夏、金等政权先后并存的环境中调整策略。', sourceIds: ['backbone-song-rivals-review'], locator: 'Northern Rivals开头及诸政权概述' },
+      { label: '多政权并存的背景', text: '哥伦比亚大学教学材料指出，宋虽经济和人口规模突出，却不具压倒性的军事优势，必须在辽、金等政权先后并存的环境中调整策略。', sourceIds: ['backbone-song-rivals-review'], locator: 'Northern Rivals开头及诸政权概述' },
       { label: '和议的具体安排', text: '该页银锭图注将1005年澶渊之盟与宋向辽定期支付银、绢相联系；军事竞争因此还要结合财政和外交安排来理解。', sourceIds: ['backbone-song-rivals-review'], locator: 'Silver ingot图注：Treaty of Shanyuan in 1005' },
       { label: '我的理解', text: '只问“胜利还是屈辱”容易遮住决策的代价。更有价值的问题是：各方用什么成本换取哪些利益，这一安排又如何影响后续选择？下方节目提供的是对此问题的观点，而不是最终裁决。', editorial: true },
     ],
-    note: '本条按1005年和议记年，1004年军事对峙属于其背景；传统纪年年末与公历年初可能带来不同标注。后来的辽、金、蒙古并非在1005年同时与宋订立此约。',
+    note: '本条按1005年和议记年，1004年军事对峙属于其背景；这里按来源中的战争背景与和议图注分别列年，不推定历法差异的原因。后来的辽、金、蒙古并非在1005年同时与宋订立此约。',
   },
   xuanwu: {
-    summary: '626年，李世民在玄武门政变中杀死太子李建成与齐王李元吉，随后成为太子并即位。',
+    summary: '626年玄武门政变中，太子李建成与齐王李元吉被杀；李世民随后成为太子并即位。',
     significance: '军事功绩、储位身份与政治集团的竞争在这里交汇，唐初皇位继承由宫廷暴力重新安排。',
     sourceIds: ['backbone-xuanwu-review'],
     details: [

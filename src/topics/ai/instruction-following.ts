@@ -94,7 +94,7 @@ export const instructionEvents: TimelineEvent[] = [
   ]),
   addition('constitutional-ai', '2022-12-15', 'Constitutional AI：用原则和 AI 反馈训练助手', '论文研究用原则指导模型自我批评、改写和偏好评价，结合监督学习与强化学习。', '编辑解读：反馈来源和评价原则成为对齐流程中需要明确说明的组成部分。', '原则仍由人选择；减少特定有害性标签不等于没有人类参与，也不证明助手永远无害。', ['alignment', 'anthropic-research'], [
     section('监督阶段', '初始回答经过模型批评与改写，再用改写后的回答微调；批评由预先给定的原则引导。', 'constitutional-ai', '§3.1 Method'),
-    section('反馈阶段', '模型比较回答形成 AI 偏好数据，训练偏好模型，并作为强化学习奖励信号。此流程与 DPO 的直接分类目标不同。', 'constitutional-ai', '§4.1 Method、Abstract'),
+    { ...section('反馈阶段', '模型比较回答形成 AI 偏好数据，训练偏好模型，并作为强化学习奖励信号。编辑比较：此流程与 DPO 的直接分类目标不同。', 'constitutional-ai', 'CAI §4.1 Method、Abstract；DPO §4'), sourceIds: ['constitutional-ai', 'dpo'] },
   ]),
 ];
 export const instructionEntities: Entity[] = [

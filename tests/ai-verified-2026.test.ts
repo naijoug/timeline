@@ -43,10 +43,10 @@ test('the 2026 gap review remains a bounded 19-event batch with exact verified d
 });
 
 test('new primary sources retain individual review dates without refreshing older evidence', () => {
-  assert.equal(verified2026Sources.length, 23);
+  assert.equal(verified2026Sources.length, 25);
   assert.equal(new Set(verified2026Sources.map(source => source.url)).size, verified2026Sources.length);
   for (const source of verified2026Sources) {
-    assert.equal(source.checkedAt, verified2026ResearchDate);
+    assert.equal(source.checkedAt, ['muse-spark-open-model-card', 'muse-spark-open-files'].includes(source.id) ? '2026-10-26' : verified2026ResearchDate, source.id);
     assert.ok(source.locator, source.id);
     assert.ok(['官方公告', '官方文档'].includes(source.type), source.id);
     assert.ok(!source.publishedAt || source.publishedAt <= source.checkedAt, source.id);

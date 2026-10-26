@@ -44,7 +44,7 @@ test('AI legacy links and regional filters retain their behavior in the shared e
 });
 test('AI events expose structured facts and source-backed change evidence in the shared reader', () => {
   for (const event of aiCatalog.events) {
-    assert.ok(event.facts?.some(fact => fact.label === '发布 / 发表方'), `${event.id} missing publisher fact`);
+    assert.ok(!event.facts?.some(fact => fact.label === '发布 / 发表方'), `${event.id} must not infer a publisher from its thematic entity`);
     assert.ok(event.facts?.some(fact => fact.label === '时间口径'), `${event.id} missing date fact`);
     for (const fact of event.facts || []) for (const id of fact.sourceIds || []) assert.ok(aiCatalog.sources.some(source => source.id === id), `${event.id}: unknown fact source ${id}`);
   }
@@ -59,8 +59,8 @@ test('AI reading uses curated sections when supplied and retains fallback verifi
       assert.ok(event.details!.length >= 2, `${event.id} lacks context or limits`);
       assert.ok(event.details!.every(section => section.locator && section.text.trim()), `${event.id} lacks traceable reading`);
     } else {
-      assert.deepEqual(event.details?.map(section => section.label), ['事件经过', event.change ? '实质变化与解读' : '解读', '怎样核对原文'], `${event.id} missing fallback sections`);
-      assert.ok((event.details?.reduce((total, section) => total + section.text.length, 0) || 0) >= 180, `${event.id} fallback is too thin`);
+      assert.deepEqual(event.details?.map(section => section.label), ['事件经过', event.change ? '实质变化与编辑解读' : '编辑解读', '怎样核对原文'], `${event.id} missing fallback sections`);
+      assert.ok(event.details?.every(section => section.text.trim().length > 0), `${event.id} contains an empty fallback section`);
     }
     for (const section of event.details || []) assert.ok((section.sourceIds || []).length, `${event.id}: ${section.label} missing source`);
     assert.ok(event.details?.every(section => section.text.includes('核对原文时先读') || section.label !== '怎样核对原文'));

@@ -49,7 +49,7 @@ test('reviewed exchange sources distinguish text versions, observation and histo
   assert.equal(source('anc-zhangqian-scio').checkedAt, '2026-10-24');
   assert.equal(source('anc-hexi').checkedAt, '2026-10-24');
   assert.match(source('zhangqian-uw-han-text').version!, /1917.*不是张骞手稿/);
-  assert.match(entry('zhang-qian').note!, /前139年.*前138年.*超时/);
+  assert.match(entry('zhang-qian').note!, /前139年.*前138年.*503.*正文仍待复核/);
   assert.match(entry('zhang-qian').details!.find(section => section.label.startsWith('商人'))!.text, /不能据它复原一条全程路线/);
   assert.match(source('zhenghe-npm-yingya').version!, /万历刊本不是航行当年的手稿/);
   assert.match(entry('zheng-he-voyages').note!, /外交不等于从未动武.*不等于全部海外贸易终止/);

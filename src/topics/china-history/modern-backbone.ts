@@ -229,8 +229,8 @@ export const modernSources: Source[] = [
     "type": "机构历史回顾",
     "format": "机构历史回顾",
     "locator": "五阶段分期；11月12日上海地区会战结束与12月2日江阴战事结束",
-    "version": "只采用战役范围与日期，说明不同终点口径，不使用兵力伤亡总数",
-    "checkedAt": "2026-10-24"
+    "version": "2026-10-26 原网页返回503、网页工具未能完整读取；仅搜索索引可见五阶段及11月12日/12月2日段，当前链接可达性和完整正文仍待复核，不是已确认404",
+    "checkedAt": "2026-10-26"
   },
   {
     "id": "modern-nanjing-yale",
@@ -515,8 +515,8 @@ export const modernSources: Source[] = [
     "type": "选举机关历史记录",
     "format": "选举机关历史记录",
     "locator": "第9任：民国85年3月23日；首次由人民直接选举",
-    "version": "网页正文动态加载，已核对搜索索引中的第9任行，并用国史馆与选举结果表交叉核对",
-    "checkedAt": "2026-10-24"
+    "version": "2026-10-26 返回200动态页面壳，正文提取不完整；精确页面索引可见第九任选举日期与首次直选说明，另与NCCU结果表、国史馆文章交叉核对，不算404",
+    "checkedAt": "2026-10-26"
   },
   {
     "id": "modern-taiwan-election-result",
@@ -726,6 +726,39 @@ export const modernSources: Source[] = [
     "locator": "1949年10月1日段：政协、共同纲领、政府会议和成立典礼",
     "version": "只取可核对的日期、会议和机构安排，不沿用“完全统一”等政治评价",
     "checkedAt": "2026-10-26"
+  },
+  {
+    "id": "modern-first-plan-document",
+    "title": "“一五”计划（1953—1957年）重要文件汇编",
+    "publisher": "国家发展和改革委员会",
+    "url": "https://www.ndrc.gov.cn/fggz/fzzlgh/gjfzgh/202112/P020211214370085847910.pdf",
+    "type": "历史计划文件汇编",
+    "format": "PDF文本",
+    "locator": "PDF第5页（书页616）：计划期间1953—1957；第4页起李富春报告",
+    "version": "用于计划期限和当时政策安排，不将文件目标当实际成效",
+    "checkedAt": "2026-10-26"
+  },
+  {
+    "id": "modern-un-china-history",
+    "title": "Historical Information: China",
+    "publisher": "联合国条约集",
+    "url": "https://treaties.un.org/pages/historicalinfo.aspx",
+    "type": "联合国官方历史说明与决议引文",
+    "format": "官方资料",
+    "locator": "China节：1945年创始会员身份及1971年2758号决议全文引文",
+    "version": "仅核会员身份、代表权沿革和决议文字，不外推台湾主权争议结论",
+    "checkedAt": "2026-10-26"
+  },
+  {
+    "id": "modern-nanjing-archival-study",
+    "title": "Researching Japanese War Crimes Records — Documentary Evidence and the Studies of Japanese War Crimes: An Interim Assessment",
+    "publisher": "美国国家档案馆（NARA）·杨大庆（Daqing Yang）",
+    "url": "https://www.archives.gov/iwg/japanese-war-crimes/introductory-essays.pdf",
+    "type": "档案研究与研究史评述",
+    "format": "PDF研究论文",
+    "locator": "PDF第37—38页（书页29—30）：Revelation and Contention，南京暴行及日本军方文书证据",
+    "version": "2006年文集第二章；只引暴行与档案证据，不取单一死亡总数或将历史争议等同否认暴行",
+    "checkedAt": "2026-10-26"
   }
 ];
 
@@ -748,8 +781,8 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "英国对清朝发动战争，清军战败，随后签订《南京条约》。",
-    "significance": "把战争过程与既有的1842年条约节点连接，才能同时看到军事冲击与贸易、外交制度的后果。",
-    "note": "采用中国史常见的1840—1842年军事战争分期；部分国际研究从1839年中英冲突起算。本条不重复《南京条约》的具体条款。",
+    "significance": "编辑总结：把战争过程与既有的1842年条约节点连接，才能同时看到军事冲击与贸易、外交制度的后果。",
+    "note": "本目录以1840年英国大规模远征为起点；所引博物馆文章也讨论1839年的前期冲突。本条不重复《南京条约》的具体条款。",
     "sourceIds": [
       "modern-first-opium-nam"
     ],
@@ -800,8 +833,8 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "太平天国与清廷长期交战，战争波及大片地区并破坏社会经济。",
-    "significance": "晚清危机不能只看外战。内战、人口迁移与地方军事力量的发展也是理解国家权力变化的线索。",
-    "note": "采用1851—1864年常见分期；1850年的组织与武装冲突、1864年后的余部活动另属延伸阶段。死亡估计差异很大，本条不列单一数字。",
+    "significance": "编辑总结：晚清危机不能只看外战。内战、人口迁移与地方军事力量的发展也是理解国家权力变化的线索。",
+    "note": "采用所引哈佛研究的1851—1864年分期。本条不将这一阅读区间外推为全部组织活动的严格边界，也不列未经另行核验的死亡总数。",
     "sourceIds": [
       "modern-taiping-harvard",
       "modern-bm-qing"
@@ -853,7 +886,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "英法联军与清朝作战，战争扩展至北京，圆明园遭劫掠焚毁。",
-    "significance": "条约体系通过军事压力进一步扩展，清廷同时面临战争、外交与行政改革的压力。",
+    "significance": "编辑总结：条约体系通过军事压力进一步扩展，清廷同时面临战争、外交与行政改革的压力。",
     "note": "不是单场战役。1858年《天津条约》与1860年《北京条约》分属不同阶段；不把各国条约的全部条款混为同一文本。",
     "sourceIds": [
       "modern-second-opium"
@@ -902,7 +935,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "清廷设总理各国事务衙门，洋务改革逐步涉及外交、军工与新式教育。",
-    "significance": "从对外战争转入国家如何组织回应：学习技术与设立新机构，并不等于立即改变全部政治制度。",
+    "significance": "编辑总结：从对外战争转入国家如何组织回应：学习技术与设立新机构，并不等于立即改变全部政治制度。",
     "note": "1861年标记总理衙门这一机构节点，不把整个洋务运动视为当年一次完成，也不以甲午战败判定一切工业、教育成果归零。",
     "sourceIds": [
       "modern-tongzhi",
@@ -955,7 +988,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "清朝在对日战争中失败，1895年签订《马关条约》。",
-    "significance": "战争改变东亚力量关系，也加剧清朝改革压力。条约后果、列强干预与后续变法应分层阅读。",
+    "significance": "编辑总结：战争改变东亚力量关系，也加剧清朝改革压力。条约后果、列强干预与后续变法应分层阅读。",
     "note": "1894—1895是战争分期，不等于条约签署当天全部善后完成；辽东半岛随后归还，不应与台湾、澎湖的割让混为同一后续。",
     "sourceIds": [
       "modern-shimonoseki",
@@ -1005,7 +1038,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "光绪帝推动的变法短暂展开，随后遭政变中止。",
-    "significance": "甲午战败后的改革诉求扩大到政治与教育制度；变法受挫不意味着晚清改革从此停止。",
+    "significance": "编辑总结：甲午战败后的改革诉求扩大到政治与教育制度；变法受挫不意味着晚清改革从此停止。",
     "note": "只用年份精度。此节点概括百日维新，不将所有晚清新政都归入1898年，也不把改革者诉求当作已落实的结果。",
     "sourceIds": [
       "modern-late-qing-reform",
@@ -1058,7 +1091,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "义和团冲突与列强军事干预升级，清廷在战败后签订《辛丑条约》。",
-    "significance": "社会暴力、外国军事干预和巨额财政负担交织，成为晚清新政前的重要转折。",
+    "significance": "编辑总结：社会暴力、外国军事干预和巨额财政负担交织，成为晚清新政前的重要转折。",
     "note": "1900—1901覆盖战争高潮及议和阶段，不表示义和团最早在1900年出现。八国联军的参战国与议定书的签字国数量不同。",
     "sourceIds": [
       "modern-boxer-awm",
@@ -1111,7 +1144,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "北京学生抗议巴黎和会的山东问题安排，运动随后扩展到其他城市与社会群体。",
-    "significance": "国际外交争议转化为广泛社会动员，并与新文化、思想和政治组织的变化相交汇。",
+    "significance": "编辑总结：国际外交争议转化为广泛社会动员，并与新文化、思想和政治组织的变化相交汇。",
     "note": "日期是北京示威起点，不是全部运动结束日期；新文化运动范围更广，不能完全等同于1919年5月4日一天。",
     "sourceIds": [
       "modern-may-fourth-date",
@@ -1164,7 +1197,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "中国共产党第一次全国代表大会在上海开幕。",
-    "significance": "新的政治组织进入共和时期的竞争与合作格局，其后与国民党的关系多次变化。",
+    "significance": "编辑总结：新的政治组织进入共和时期的竞争与合作格局，其后与国民党的关系多次变化。",
     "note": "7月23日是经研究确认的一大开幕日；7月1日是后来确定的建党纪念日，二者不能混用。采用机构考证日期，不沿用其价值评价。",
     "sourceIds": [
       "modern-ccp-first"
@@ -1220,7 +1253,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "国民革命军由广东北进，经过中断与重启，南京国民政府取得名义上的全国统一。",
-    "significance": "这场战争重组军阀时代的政治格局，但军事推进、党内分裂与地方实力派延续同时存在。",
+    "significance": "编辑总结：这场战争重组军阀时代的政治格局，但军事推进、党内分裂与地方实力派延续同时存在。",
     "note": "采用1926年7月出师至1928年12月东北易帜的阶段范围。名义统一不等于中央已完全控制各地，也不等于内战结束。",
     "sourceIds": [
       "modern-northern-expedition"
@@ -1273,7 +1306,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "蒋介石一方在上海解除工人武装，逮捕并杀害共产党人与工人活动者。",
-    "significance": "北伐中的联盟破裂，国共双方随后走向长期武装冲突，政治组织与军事路线随之改变。",
+    "significance": "编辑总结：北伐中的联盟破裂，国共双方随后走向长期武装冲突，政治组织与军事路线随之改变。",
     "note": "4月12日是上海清共节点，国共合作破裂是跨地区持续过程，不在一天内完成。本条不用未独立复核的伤亡数字。",
     "sourceIds": [
       "modern-1927-purge",
@@ -1327,7 +1360,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "日本关东军制造铁路爆炸并扩大军事行动，随后占领中国东北。",
-    "significance": "中国与日本的战争不能只从1937年看起：东北危机及国际应对失效构成全面战争的重要前史。",
+    "significance": "编辑总结：中国与日本的战争不能只从1937年看起：东北危机及国际应对失效构成全面战争的重要前史。",
     "note": "本节点日期是事变起点，东北占领与1932年满洲国建立为后续过程。日军制造爆炸有日本档案机构记载，不写成未经证实的猜测。",
     "sourceIds": [
       "modern-mukden-ndl",
@@ -1383,8 +1416,8 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "共产党领导的多支红军部队撤离原根据地，向西北转移并陆续会师。",
-    "significance": "共产党军事与政治活动的重心发生重大位移；长征既是军事撤退，也成为其后组织与历史记忆的重要节点。",
-    "note": "区间覆盖多支红军的转移，不是所有部队同日出发、沿同一路线行军；不把1935年中央红军抵陕与1936年会师混为一日。",
+    "significance": "编辑总结：共产党军事与政治活动的重心发生重大位移；长征既是军事撤退，也成为其后组织与历史记忆的重要节点。",
+    "note": "区间采用藏品说明的1934年10月至1936年10月概括口径；它不是各支部队逐日行军记录，不能据此推定所有部队同日出发或路线相同。",
     "sourceIds": [
       "modern-long-march"
     ],
@@ -1396,7 +1429,7 @@ export const modernEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "撤离根据地",
-        "text": "1934年10月，中央红军等撤离原有根据地并向西转移；国博藏品说明将这一阶段置于军事压力下的撤退和转移背景。",
+        "text": "国博藏品说明把1934年10月列为红军从根据地撤退和转移的阶段起点，目的方向为陕甘地区；本条采用其概括口径，不据此确定每支部队的具体出发日。",
         "sourceIds": [
           "modern-long-march"
         ],
@@ -1440,11 +1473,13 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "卢沟桥一带冲突升级，中日进入全面战争，直到日本正式签署投降书。",
-    "significance": "把全面战争作为持续背景，再进入具体会战、占领与平民遭遇，避免以单场胜负代替整场战争。",
+    "significance": "编辑总结：把全面战争作为持续背景，再进入具体会战、占领与平民遭遇，避免以单场胜负代替整场战争。",
     "note": "1937年是全面战争阶段起点，不否定1931年起的侵略与抵抗；1945年9月2日是正式投降书签署日，中国战区受降另在9月9日。",
     "sourceIds": [
       "modern-war-china",
-      "modern-japan-surrender"
+      "modern-japan-surrender",
+      "modern-china-surrender",
+      "modern-mukden-ndl"
     ],
     "tags": [
       "中国通史",
@@ -1498,7 +1533,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "中国军队与日军在上海及周边激战，国民政府军队最终撤离上海。",
-    "significance": "上海会战显示全面战争的规模与代价；战场失利并没有使中国政府停止抵抗。",
+    "significance": "编辑总结：上海会战显示全面战争的规模与代价；战场失利并没有使中国政府停止抵抗。",
     "note": "终点采用上海市区及周边地区会战口径；若包括江阴等外围撤退战，有资料延至12月2日。不是1932年的淞沪抗战。",
     "sourceIds": [
       "modern-shanghai"
@@ -1556,10 +1591,11 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "日军占领南京后，对平民和已放下武器的人员实施大规模杀戮与其他暴行。",
-    "significance": "战争史不仅是军队进退，还必须呈现占领下的平民伤害、救助行动和目击证据。",
+    "significance": "编辑总结：战争史不仅是军队进退，还必须呈现占领下的平民伤害、救助行动和目击证据。",
     "note": "以南京沦陷日起记，结束用约略月份表示，暴行并非整齐地在某一天停止。屠杀事实与具体死亡总数的估计分开；本条不选用单一伤亡数。",
     "sourceIds": [
-      "modern-nanjing-yale"
+      "modern-nanjing-yale",
+      "modern-nanjing-archival-study"
     ],
     "tags": [
       "中国通史",
@@ -1582,6 +1618,14 @@ export const modernEvents: TimelineEvent[] = [
           "modern-nanjing-yale"
         ],
         "locator": "Introduction前两段及目击者名单"
+      },
+      {
+        "label": "暴行的交叉证据",
+        "text": "杨大庆在美国国家档案馆出版的研究文集中讨论南京暴行，指出日本指挥官日记及部队作战日志也记载了对已解除武装的中国士兵的处决。这与耶鲁所藏在宁外国人的记录形成不同来源的证据线索。",
+        "sourceIds": [
+          "modern-nanjing-archival-study"
+        ],
+        "locator": "PDF第38页（书页30）：日本指挥官日记与作战日志段"
       },
       {
         "label": "理解与延伸",
@@ -1611,7 +1655,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "李宗仁指挥的第五战区部队在台儿庄击退日军进攻。",
-    "significance": "这是全面抗战初期的重要战术胜利，但不能据此推断徐州会战整体或此后战争已获胜。",
+    "significance": "编辑总结：这是全面抗战初期的重要战术胜利，但不能据此推断徐州会战整体或此后战争已获胜。",
     "note": "起止使用月份精度；4月7日是胜利节点。台儿庄作战属于徐州会战，后续禹王山作战与徐州撤退不可删去。",
     "sourceIds": [
       "modern-taierzhuang"
@@ -1669,8 +1713,8 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "日本签署对盟国投降书，随后在南京举行中国战区受降仪式。",
-    "significance": "抗战结束不等于中国立即进入稳定和平；受降、接收与随后国共冲突需要分别追踪。",
-    "note": "这里展示两次正式签署，不把8月15日天皇广播、9月2日盟国受降与9月9日中国战区受降混为同一事件。",
+    "significance": "编辑总结：抗战结束不等于中国立即进入稳定和平；受降、接收与随后国共冲突需要分别追踪。",
+    "note": "这里展示两次正式签署，分别为9月2日对盟国投降和9月9日中国战区受降，不把不同受降程序混为同一事件。",
     "sourceIds": [
       "modern-japan-surrender",
       "modern-china-surrender"
@@ -1727,7 +1771,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "解放军东北野战军在锦州、长春、沈阳等地区击败国民党军，取得东北主要地区控制。",
-    "significance": "东北军事格局的改变，使国共力量对比和后续进军方向发生重大变化。",
+    "significance": "编辑总结：东北军事格局的改变，使国共力量对比和后续进军方向发生重大变化。",
     "note": "战役包含攻城、围困、投降与接收，不是单次交锋。本条不将军队损失总数写成阵亡人数，也不采用未经单独核对的平民死亡估计。",
     "sourceIds": [
       "modern-liaoshen"
@@ -1784,7 +1828,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "解放军华东、中原野战军在徐州及淮海地区击败国民党军主力。",
-    "significance": "长江以北的军事防线大幅改变，南京政府的核心统治区域面临更直接的军事压力。",
+    "significance": "编辑总结：长江以北的军事防线大幅改变，南京政府的核心统治区域面临更直接的军事压力。",
     "note": "是一场跨省、持续数月的战役，不是徐州城的一天战斗。不使用来源标题中的兵力对比作为无需争议说明的定论。",
     "sourceIds": [
       "modern-huaihai"
@@ -1841,11 +1885,12 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "解放军在华北展开作战；天津经攻城易手，北平通过谈判和平接收。",
-    "significance": "同一战役包含军事攻城与政治协商，不能用一种结局概括所有城市。",
+    "significance": "编辑总结：同一战役包含军事攻城与政治协商，不能用一种结局概括所有城市。",
     "note": "平津战役与淮海战役时间交叠；三大战役并非依次、互不重叠地展开。北平和平接收不代表整个战役没有战斗。",
     "sourceIds": [
       "modern-pingjin",
-      "modern-three-campaigns"
+      "modern-three-campaigns",
+      "modern-huaihai"
     ],
     "tags": [
       "中国通史",
@@ -1893,7 +1938,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "清朝与日本签订《马关条约》，接受割地、赔款及新的通商条件。",
-    "significance": "把军事战败、条约签署与列强干预拆开，才能看清台湾、辽东和东北亚外交的不同后续。",
+    "significance": "编辑总结：把军事战败、条约签署与列强干预拆开，才能看清台湾、辽东和东北亚外交的不同后续。",
     "note": "辽东半岛在三国干预后另行归还，不能据此说原约未规定割让；台湾与澎湖则在其后进入日本殖民统治时期。",
     "sourceIds": [
       "modern-shimonoseki"
@@ -1945,7 +1990,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "毛泽东在北京宣布中华人民共和国中央人民政府成立。",
-    "significance": "这是大陆政权更替和新国家机构建立的标志，但不能把它写成所有内战行动或中华民国的终结。",
+    "significance": "编辑总结：这是大陆政权更替和新国家机构建立的标志，但不能把它写成所有内战行动或中华民国的终结。",
     "note": "中华人民共和国未实际统治台湾；中华民国政府随后迁台并延续。1949年10月1日也不是所有地区完成军事接收的日期。",
     "sourceIds": [
       "modern-prc-founding-record",
@@ -1998,7 +2043,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "新政权以法律推动农村土地重新分配，将地主土地所有制改为农民土地所有制。",
-    "significance": "土地所有权与农村权力关系受到系统重构；此时的分田与后来集体化是不同阶段。",
+    "significance": "编辑总结：土地所有权与农村权力关系受到系统重构；此时的分田与后来集体化是不同阶段。",
     "note": "1950年法律不是全国土改最早起点，各地推进时间和方式不同。实施中的强制、暴力及伤亡不能仅凭法条还原，需另查地方档案与研究；本条不填入未核对的死亡总数。",
     "sourceIds": [
       "modern-land-reform"
@@ -2054,7 +2099,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "中国人民志愿军进入朝鲜作战，1953年朝鲜停战协定签署。",
-    "significance": "新成立的中华人民共和国迅速卷入冷战中的大规模国际战争，东北亚安全格局长期受其影响。",
+    "significance": "编辑总结：新成立的中华人民共和国迅速卷入冷战中的大规模国际战争，东北亚安全格局长期受其影响。",
     "note": "朝鲜战争本身始于1950年6月，此处从中国参战阶段起算。停战协定停止大规模敌对行动，不等于和平条约；不使用单一军民伤亡估计。",
     "sourceIds": [
       "modern-korea-entry",
@@ -2108,11 +2153,12 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "国家实施第一个五年计划，以重工业建设为重点，同时推进农业、手工业和私营工商业的改造。",
-    "significance": "工业投资、资源配置和所有制改革共同塑造计划经济体制，不能只以工厂数量或单一增长指标概括。",
+    "significance": "编辑总结：工业投资、资源配置和所有制改革共同塑造计划经济体制，不能只以工厂数量或单一增长指标概括。",
     "note": "计划区间为1953—1957年；1956年“基本完成改造”是当时的阶段性制度表述，不意味着一切经营形式和地区差异立即消失。",
     "sourceIds": [
       "modern-first-five-year",
-      "modern-socialist-transformation"
+      "modern-socialist-transformation",
+      "modern-first-plan-document"
     ],
     "tags": [
       "中国通史",
@@ -2122,7 +2168,7 @@ export const modernEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "工业化方向",
-        "text": "1953年《人民日报》文章将工业化任务放在第一个五年计划中，强调重工业以及其他部门的配合。",
+        "text": "1953年《人民日报》文章将工业化任务放在第一个五年计划中，强调大型工业发展以及工业化与农业合作化的关系。",
         "sourceIds": [
           "modern-first-five-year"
         ],
@@ -2160,8 +2206,8 @@ export const modernEvents: TimelineEvent[] = [
       "prc-early"
     ],
     "entityIds": [],
-    "summary": "第一届全国人大第一次会议通过中华人民共和国第一部宪法。",
-    "significance": "建国初期的组织安排进入成文宪法框架，可与1912年《临时约法》及1982年宪法比较制度设计。",
+    "summary": "第一届全国人大第一次会议通过《中华人民共和国宪法》。",
+    "significance": "编辑总结：建国初期的组织安排进入成文宪法框架，可与1912年《临时约法》及1982年宪法比较制度设计。",
     "note": "1954年宪法是历史文本，不是今天的现行文本；规定的权利和机构安排与实际运行要区分。",
     "sourceIds": [
       "modern-constitution-1954"
@@ -2210,8 +2256,8 @@ export const modernEvents: TimelineEvent[] = [
       "prc-early"
     ],
     "entityIds": [],
-    "summary": "鼓励批评的政治氛围转为反右运动，大量知识分子与干部遭到划定、处分和长期政治限制。",
-    "significance": "这次转折改变了公开批评与政策反馈的条件，也为理解随后经济运动的信息环境提供背景。",
+    "summary": "鼓励批评的政治氛围转为反右运动；1981年中共历史决议承认许多知识分子、爱国人士和干部遭错误划定并承受严重后果。",
+    "significance": "编辑总结：这次转折改变了公开批评与政策反馈的条件，也为理解随后经济运动的信息环境提供背景。",
     "note": "使用年份精度概括转折；“右派”是当时政治划定而非本目录认可的身份判断。个人经历与划定总数须另据档案核对。",
     "sourceIds": [
       "modern-hundred-flowers",
@@ -2265,8 +2311,8 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "大跃进和人民公社化激进推进，1959—1961年发生严重饥荒与大规模非正常死亡。",
-    "significance": "生产目标、征购制度、集体化和信息反馈如何相互作用，是比单一口号或单一灾因更重要的解释问题。",
-    "note": "运动与饥荒分期不完全重合；部分研究扩展灾荒至1958—1962年。死亡估计受口径、基线和资料限制影响，本条不列未经比较的单一总数，也不把灾难仅归因自然天气。",
+    "significance": "编辑总结：生产目标、征购制度、集体化和信息反馈如何相互作用，是比单一口号或单一灾因更重要的解释问题。",
+    "note": "所引决议讨论1958年政策转折，所引经济学论文研究1959—1961年饥荒；二者分期不完全重合。死亡总数需要另行比较口径与资料，本条不列单一数字，也不把灾难仅归因自然天气。",
     "sourceIds": [
       "modern-resolution-1981",
       "modern-great-famine-study"
@@ -2319,7 +2365,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "毛泽东发动文化大革命，政治清洗、群众派系冲突和迫害造成广泛社会创伤与制度破坏。",
-    "significance": "要把发动者目标、政策文件、不同地区的实际暴力与个人经历分开阅读，不能用任何一份纲领概括十年社会史。",
+    "significance": "编辑总结：要把发动者目标、政策文件、不同地区的实际暴力与个人经历分开阅读，不能用任何一份纲领概括十年社会史。",
     "note": "采用通常的1966—1976年分期；早期群众运动、随后政治清洗等阶段不同。伤亡和受迫害人数口径差异很大，本条不以单一估计替代研究。",
     "sourceIds": [
       "modern-cultural-revolution-16",
@@ -2372,10 +2418,11 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "联合国大会通过第2758号决议，由中华人民共和国政府代表中国在联合国行使代表权。",
-    "significance": "这一国际组织席位与外交地位的重大变化，应与各国建交、两岸实际治理和后来的法律争论分开。",
-    "note": "中国是联合国创始会员国，不能写作1971年“中国首次加入联合国”。决议原文处理中国代表权，未明确写入台湾主权归属；不同政治主体对其延伸含义存在争论。",
+    "significance": "编辑总结：这一国际组织席位与外交地位的重大变化，应与各国建交、两岸实际治理和后来的法律争论分开。",
+    "note": "联合国条约集说明中国是创始会员国，不能写作1971年“中国首次加入联合国”。所载决议文本处理中国代表权，未明确写入台湾主权归属；本节点不把代表权决定外推为其他法律争议的结论。",
     "sourceIds": [
-      "modern-un-2758"
+      "modern-un-2758",
+      "modern-un-china-history"
     ],
     "tags": [
       "中国通史",
@@ -2395,9 +2442,10 @@ export const modernEvents: TimelineEvent[] = [
         "label": "阅读原始文本",
         "text": "原文同时决定恢复中华人民共和国在联合国的一切权利，排除蒋介石的代表；指南提供当日会议记录和表决材料，便于区分文本与后来解释。",
         "sourceIds": [
-          "modern-un-2758"
+          "modern-un-2758",
+          "modern-un-china-history"
         ],
-        "locator": "决议与会议记录链接"
+        "locator": "联合国条约集China节决议引文；联合国图书馆指南的会议记录与表决链接"
       },
       {
         "label": "理解与延伸",
@@ -2429,7 +2477,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "中共十一届三中全会决定把工作重点转向现代化建设，成为改革开放进程的重要政治节点。",
-    "significance": "改革不是一份文件当日完成的整体方案，而是政治方向调整与随后农业、企业、价格和对外开放试验的积累。",
+    "significance": "编辑总结：改革不是一份文件当日完成的整体方案，而是政治方向调整与随后农业、企业、价格和对外开放试验的积累。",
     "note": "公报提出从1979年转移工作着重点；1978年常作为改革开放分期起点，不表示此前毫无调整，也不把此后所有政策倒写为会议既定方案。",
     "sourceIds": [
       "modern-reform-1978"
@@ -2481,8 +2529,8 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "第五届全国人大第五次会议通过并公布新宪法，形成此后多次修正的宪法文本基础。",
-    "significance": "把宪法的制定与以后修正分开，才能追踪改革时期国家机构、权利条款和经济制度表述的变化。",
-    "note": "所引官方网页是2018年合并版本，仅用其文首核对1982年通过日期及沿革，不把1993、2004、2018年修正内容提前写入1982年。",
+    "significance": "编辑总结：把宪法的制定与以后修正分开，才能追踪改革时期国家机构、权利条款和经济制度表述的变化。",
+    "note": "所引官方宪法目录列出通过日期、历次修正和现行章节；仅用其文首核对1982年通过日期及沿革，不把1993、2004、2018年修正内容提前写入1982年。",
     "sourceIds": [
       "modern-constitution-1982"
     ],
@@ -2494,7 +2542,7 @@ export const modernEvents: TimelineEvent[] = [
     "details": [
       {
         "label": "制定节点",
-        "text": "现行宪法文本的文首明确记载：1982年12月4日通过，并于同日公布施行。",
+        "text": "官方宪法目录文首明确记载：1982年12月4日通过，并于同日公布施行。",
         "sourceIds": [
           "modern-constitution-1982"
         ],
@@ -2537,7 +2585,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "学生、市民等群体的抗议扩大，北京实施戒严，军队在6月3日至4日进城并向平民开火。",
-    "significance": "这是改革时期政治与社会关系的重要断裂；记录应包括抗议诉求、决策过程、街头暴力、受害者与后续限制。",
+    "significance": "编辑总结：这是改革时期政治与社会关系的重要断裂；记录应包括抗议诉求、决策过程、街头暴力、受害者与后续限制。",
     "note": "区间标记抗议高潮及主要镇压节点，不表示抓捕、伤亡和政治后果在6月4日结束。死亡人数无法凭单一电报定论，主要伤亡地点也不应全部误写为广场内部。",
     "sourceIds": [
       "modern-tiananmen-archives"
@@ -2587,7 +2635,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "邓小平南方谈话推动改革提速，中共十四大明确建立社会主义市场经济体制的改革目标。",
-    "significance": "这是对计划与市场关系的政策再定位，不意味着国有部门或政府经济管理随即退出。",
+    "significance": "编辑总结：这是对计划与市场关系的政策再定位，不意味着国有部门或政府经济管理随即退出。",
     "note": "谈话发生于1—2月，十四大在10月，1993年又有进一步制度安排；本节点用年份精度串联方向变化，不混为一天。",
     "sourceIds": [
       "modern-southern-tour",
@@ -2648,8 +2696,8 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "台湾举行中华民国第九任总统、副总统选举，首次由选民直接投票产生这两个职位。",
-    "significance": "把台湾的制度变迁作为并行线索，可以避免将1949年后的全部历史简化成单一大陆政治进程。",
-    "note": "本条描述实际举行的选举及制度变化，不据此判定两岸主权争议。民主化是此前解严、修宪和社会运动等长期过程，不能归结为一次投票。",
+    "significance": "编辑总结：把台湾的制度变迁作为并行线索，可以避免将1949年后的全部历史简化成单一大陆政治进程。",
+    "note": "本条只描述实际举行的选举及制度变化，不据此判定两岸主权争议，也不用一次投票代替完整的制度变迁研究。",
     "sourceIds": [
       "modern-taiwan-election",
       "modern-taiwan-election-result",
@@ -2711,7 +2759,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "中国恢复对香港行使主权，香港特别行政区成立，基本法同时生效。",
-    "significance": "外交协议、政权交接与特区制度在这里相接；长期制度运行需要与交接当年的法律安排分开评价。",
+    "significance": "编辑总结：外交协议、政权交接与特区制度在这里相接；长期制度运行需要与交接当年的法律安排分开评价。",
     "note": "“一国两制”与基本法是制度安排，不是本目录对后续执行状况的预先评价；不把1997年的历史节点写成所有制度争议的终点。",
     "sourceIds": [
       "modern-hong-kong-basic-law",
@@ -2764,7 +2812,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "澳门结束葡萄牙行政管理，澳门特别行政区成立。",
-    "significance": "澳门与香港有相近的特区制度框架，但交接条约、社会背景与实施过程并不相同，应保留各自节点。",
+    "significance": "编辑总结：澳门与香港有相近的特区制度框架，但交接条约、社会背景与实施过程并不相同，应保留各自节点。",
     "note": "采用交接和特区成立日期，不将香港1997年安排的具体内容直接套用于澳门；此节点不预断后续制度运行。",
     "sourceIds": [
       "modern-macao-establishment",
@@ -2817,7 +2865,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "中华人民共和国加入世界贸易组织，承担入世议定书规定的贸易制度承诺。",
-    "significance": "加入多边贸易规则体系推动了国内制度调整与全球经济联系，但具体增长、分配与产业影响仍需分别分析。",
+    "significance": "编辑总结：加入多边贸易规则体系推动了国内制度调整与全球经济联系，但具体增长、分配与产业影响仍需分别分析。",
     "note": "部长级会议批准、签署批准书和成员资格生效不是同一天；本节点以2001年12月11日正式成为成员为准。香港与台湾的成员身份和加入时间另行处理。",
     "sourceIds": [
       "modern-wto-accession",
@@ -2870,7 +2918,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "全国人大通过宪法修正案，取消国家主席、副主席连续任职不得超过两届的限制，并增设监察委员会制度。",
-    "significance": "国家领导职务任期规则与监察机关的宪法地位同时发生变化，应逐条理解而非只以人物叙事概括。",
+    "significance": "编辑总结：国家领导职务任期规则与监察机关的宪法地位同时发生变化，应逐条理解而非只以人物叙事概括。",
     "note": "取消的是国家主席、副主席的连续任职届数限制，不是取消所有国家职务任期，也不是法条直接规定终身任职；每届任期仍与全国人大相同。",
     "sourceIds": [
       "modern-constitution-2018"
@@ -2922,7 +2970,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "新冠疫情扩散期间，武汉实施严格交通管制，随后更广泛的公共卫生应对改变生产、流动与日常生活。",
-    "significance": "重大公共卫生事件也属于社会史与治理史；需要同时看防疫制度、医疗压力和普通人的生活，而不是只列病例数字。",
+    "significance": "编辑总结：重大公共卫生事件也属于社会史与治理史；需要同时看防疫制度、医疗压力和普通人的生活，而不是只列病例数字。",
     "note": "日期标记武汉交通管制，不是疫情最早发生日，也不支持任何病毒起源判断。早期考察报告有时点局限，不能代替最终死亡、长期影响或政策效果研究。",
     "sourceIds": [
       "modern-covid-who"
@@ -2974,7 +3022,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "中华人民共和国民法典生效，将多部民事单行法整合为统一法典。",
-    "significance": "把财产、人格、家庭与侵权规则放入通史，可以让制度史与普通人的日常权利联系起来。",
+    "significance": "编辑总结：把财产、人格、家庭与侵权规则放入通史，可以让制度史与普通人的日常权利联系起来。",
     "note": "通过日为2020年5月28日，生效日为2021年1月1日；法律文本的确立与具体权利在实践中的实现不能等同。",
     "sourceIds": [
       "modern-civil-code"
@@ -3031,7 +3079,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "“新十条”调整检测和隔离措施，随后新冠病毒感染管理转为“乙类乙管”。",
-    "significance": "从严格限制向常态化医疗管理转变，是制度和社会运行的结构性变化；政策变化本身与健康后果应分别记录。",
+    "significance": "编辑总结：从严格限制向常态化医疗管理转变，是制度和社会运行的结构性变化；政策变化本身与健康后果应分别记录。",
     "note": "区间连接主要政策发布与施行节点，不表示各地同时、同速实施，也不等于病毒消失或疫情全部结束；死亡影响须另查可靠统计与估计。",
     "sourceIds": [
       "modern-covid-ten",
@@ -3084,7 +3132,7 @@ export const modernEvents: TimelineEvent[] = [
     ],
     "entityIds": [],
     "summary": "延迟法定退休年龄改革开始实施，以渐进方式调整男女职工退休年龄。",
-    "significance": "这类长期制度变化连接人口老龄化、劳动市场和养老安排，比零散年度新闻更适合作为当代社会经济骨架。",
+    "significance": "编辑总结：这类长期制度变化连接人口老龄化、劳动市场和养老安排，比零散年度新闻更适合作为当代社会经济骨架。",
     "note": "2025年是启动，不是所有人当年立即达到新年龄。决定规定十五年渐进调整并分类实施；具体个人规则需要按出生年月及配套办法判断。",
     "sourceIds": [
       "modern-retirement-reform"
@@ -3135,8 +3183,8 @@ export const modernEvents: TimelineEvent[] = [
       "contemporary"
     ],
     "entityIds": [],
-    "summary": "十四届全国人大四次会议批准“十五五”规划纲要，确定2026—2030年国家发展的规划框架。",
-    "significance": "与1953年首个五年计划相对照，可观察国家规划工具的延续与目标变化；当前节点只记录决策，不预写成效。",
+    "summary": "十四届全国人大四次会议批准“十五五”规划纲要，决议列示后续发展的工作方向。",
+    "significance": "编辑总结：与1953年首个五年计划相对照，可观察国家规划工具的延续与目标变化；当前节点只记录决策，不预写成效。",
     "note": "本条是已发生的批准事件，不把2026—2030年的目标当作已经完成的事实，也不预测政策未来结果。目录截至2026年10月24日。",
     "sourceIds": [
       "modern-fifteenth-plan"

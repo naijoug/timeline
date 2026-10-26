@@ -43,6 +43,7 @@ const baseSources: Source[] = [
   { ...source('api-changelog', 'OpenAI API changelog', 'OpenAI', 'https://developers.openai.com/api/docs/changelog', '官方公告'), checkedAt: releaseResearchDate },
   source('codex-changelog', 'ChatGPT & Codex changelog', 'OpenAI', 'https://learn.chatgpt.com/docs/changelog', '官方公告'),
   source('mcculloch', 'A logical calculus of the ideas immanent in nervous activity', 'Springer', 'https://doi.org/10.1007/BF02478259'),
+  { ...source('turing-original-scan', 'Computing Machinery and Intelligence — original journal scan', 'A. M. Turing · Mind（UMBC课程托管原刊扫描）', 'https://www.csee.umbc.edu/courses/471/papers/turing_computing_machinery_and_intelligence.pdf'), checkedAt: '2026-10-26', locator: '原刊 pp.433–434；卷期与 October 1950 刊头', format: '原刊扫描 PDF（大学课程托管）' },
   source('turing', 'Computing Machinery and Intelligence', 'Mind / Oxford', 'https://academic.oup.com/mind/article/LIX/236/433/986238'),
   source('dartmouth', 'A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence', 'John McCarthy et al.', 'https://www-formal.stanford.edu/jmc/history/dartmouth/dartmouth.html'),
   source('dartmouth-history', 'Our Story', 'Dartmouth', 'https://ai.dartmouth.edu/our-story', '机构回顾'),

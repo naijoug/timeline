@@ -29,7 +29,7 @@ export function toCoreEvent(e: AIEvent): TimelineEvent {
     details: aiEventDetails(e),
     recommendedResources: e.recommendedResources,
     facts: [
-      { label: '发布 / 发表方', text: e.company || entityList[0]?.name || '见原始资料', sourceIds: e.sourceIds },
+      ...(e.company ? [{ label: '相关机构 / 团队', text: e.company, sourceIds: e.sourceIds }] : []),
       { label: '事件类型', text: e.kind, sourceIds: e.sourceIds },
       { label: '时间口径', text: datePrecision, sourceIds: e.sourceIds },
       ...(entityList.length ? [{ label: '涉及对象', text: entityList.map(entity => entity!.name).join(' · '), sourceIds: entitySources }] : []),

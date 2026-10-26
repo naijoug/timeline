@@ -8,7 +8,7 @@ test('Shang era reading pairs a specific recommendation with author interpretati
   assert.deepEqual(event.time.start, { year: -1600, approximate: true });
   assert.deepEqual(event.sourceIds, ['anc-nmc-early', 'anc-yinxu']);
   assert.equal(chinaHistory.events.length, 145);
-  assert.equal(chinaHistory.sources.length, 191);
+  assert.equal(chinaHistory.sources.length, 198);
   const [video, interview] = event.recommendedResources!;
   assert.equal(event.recommendedResources!.length, 2);
   assert.equal(video.url, 'https://www.bilibili.com/en/video/BV1xh41177En');

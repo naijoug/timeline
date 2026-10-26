@@ -38,7 +38,7 @@ export const verificationTrainingSources: Source[] = [
     "url": "https://aws.amazon.com/blogs/machine-learning/announcing-new-ways-to-customize-models-with-sagemaker-ai-without-managing-gpus/",
     "type": "官方公告",
     "publishedAt": "2026-10-22",
-    "checkedAt": "2026-10-25",
+    "checkedAt": "2026-10-26",
     "locator": "Publication; general availability launch of training sessions; How it works"
   },
   {
@@ -173,7 +173,7 @@ export const verificationTrainingEvents: TimelineEvent[] = [
     ],
     "summary": "AWS 将可编排训练循环的 Training Sessions 推向正式可用，让开发者控制后训练步骤，由服务管理 GPU 与分布式执行。",
     "significance": "编辑解读：后训练平台在托管基础设施与保留算法控制之间提供更细粒度的接口。",
-    "limitation": "不是新基础模型，也不是无需编程的一键训练。支持模型、区域和配额有边界；公告与文档列出的模型清单并不完全一致，应在使用前核对。",
+    "limitation": "不是新基础模型，也不是无需编程的一键训练。本轮未能复核文档中的区域、配额及完整模型清单，使用前应以可访问的官方文档确认；公告不等于所有配置均可用。",
     "entityIds": [
       "aws-sagemaker-training-sessions"
     ],
@@ -200,11 +200,11 @@ export const verificationTrainingEvents: TimelineEvent[] = [
       },
       {
         "label": "可用性与费用边界",
-        "text": "文档按模型列出可用区域，并区分输入处理、采样和训练计费。正式可用不代表所有区域、所有模型都可用，也不代表免费训练。",
+        "text": "官方公告说明按 SageMaker AI 处理的 token 计费，开发者自己的奖励函数在其环境中评分时暂停计量；公告列出 gpt-oss-20b、gemma-4-31B-it、Qwen3.6-27B 和 Qwen3.8-27B。正式可用不等于免费训练。",
         "sourceIds": [
-          "aws-training-sessions-docs"
+          "aws-training-sessions-ga"
         ],
-        "locator": "Supported models, pricing, and Regions"
+        "locator": "How it works; Get started today"
       },
       {
         "label": "编辑解读：托管不替代评估",
@@ -226,8 +226,8 @@ export const verificationTrainingEvents: TimelineEvent[] = [
         "url": "https://docs.aws.amazon.com/sagemaker/latest/dg/customizing-models-training-sessions.html",
         "kind": "article",
         "match": "理解训练循环控制与托管GPU的分工，并核对模型、区域及计费维度。",
-        "scopeNote": "已核验文档；未创建云资源或进行付费测试。",
-        "checkedAt": "2026-10-25",
+        "scopeNote": "本轮该文档访问异常，未复核区域及细分计费；官方公告可核实正式可用与计费原则。未创建云资源或进行付费测试。",
+        "checkedAt": "2026-10-26",
         "locator": "Training session APIs; Supported models, pricing, and Regions"
       }
     ]
