@@ -13,7 +13,7 @@ const waitFor = async (check, message) => {
   while (Date.now() < deadline) { if (check()) return; await new Promise(resolve => setTimeout(resolve, 10)); }
   assert.ok(check(), message);
 };
-async function hydrate(path, search = '', headerOnly = false) {
+async function hydrate(path, search = '', headerOnly = false, beforeHydrate) {
   const errors = [];
   const console = new VirtualConsole();
   console.on('error', (...args) => errors.push(args.map(String).join(' ')));
@@ -61,6 +61,9 @@ async function hydrate(path, search = '', headerOnly = false) {
   const firstCard = w.document.querySelector('.chronicle-event-button');
   const component = await load(island.getAttribute('component-url'));
   const renderer = await load(island.getAttribute('renderer-url'));
+  // Execute the real parser-blocking guard, as a browser does before hydration.
+  for (const script of w.document.querySelectorAll('script[data-timeline-search-capture]')) w.eval(script.textContent);
+  beforeHydrate?.(w);
   renderer.default(island)(component.default, props, {}, { client:'load' });
   await waitFor(() => headerOnly ? w.document.documentElement.style.getPropertyValue('--navigation-header-height') : w.document.querySelector('[data-timeline-ready="true"]'), `${path}: hydration did not finish`);
   assert.equal(errors.length, 0, errors.join('\n'));
@@ -190,3 +193,58 @@ console.log('Production hydration smoke checks passed, including filtered AI leg
   assert.equal(errors.length, 0, errors.join('\n')); dom.window.close();
 }
 console.log('Filter chips, full clear, year presets, invalid input, focus restoration and period context passed.');
+
+// Native edits before the React chunk arrives must beat only the INITIAL URL.
+for (const [topic, initial, draft] of [['china-history', '张骞', '郑和'], ['ai', 'Kimi', 'Claude'], ['programming-languages', 'Python', 'Rust'], ['writers', '三体', '球状闪电'], ['china-history', '张骞', '']]) {
+  const { dom, w, errors } = await hydrate(topic, `?q=${initial}&order=desc`, false, w => {
+    const input = w.document.querySelector('#current-topic-search input[name=q]');
+    input.value = 'temporary'; input.dispatchEvent(new w.Event('input', { bubbles:true }));
+    input.value = draft; input.dispatchEvent(new w.Event('input', { bubbles:true }));
+  });
+  const input = w.document.querySelector('#current-topic-search input[name=q]');
+  assert.equal(input.value, draft, 'initial URL restoration must not overwrite newer typing or an explicit clear');
+  assert.equal(new URLSearchParams(w.location.search).get('q') || '', draft);
+  assert.equal(new URLSearchParams(w.location.search).get('order'), 'desc');
+  assert.equal(input.__timelineSearchDraft, undefined, 'consume initial draft');
+  w.history.pushState(null, '', `?q=${initial}&order=asc`);
+  w.dispatchEvent(new w.PopStateEvent('popstate'));
+  await waitFor(() => input.value === initial, 'later history navigation must use new URL, not old draft');
+  assert.equal(w.document.querySelector('[aria-label="排列顺序"]').value, 'asc');
+  const setValue = Object.getOwnPropertyDescriptor(w.HTMLInputElement.prototype, 'value').set;
+  setValue.call(input, draft); input.dispatchEvent(new w.Event('input', { bubbles:true }));
+  await waitFor(() => (new URLSearchParams(w.location.search).get('q') || '') === draft, 'later typing still works');
+  assert.equal(input.__timelineSearchDraft, undefined, 'temporary capture listener removed');
+  assert.equal(errors.length, 0, errors.join('\n')); dom.window.close();
+}
+{
+  const { dom, w, errors } = await hydrate('china-history', '?q=张骞&order=desc', false, w => {
+    const input = w.document.querySelector('#current-topic-search input[name=q]');
+    input.dispatchEvent(new w.CompositionEvent('compositionstart', { bubbles:true }));
+    input.value = '郑'; input.dispatchEvent(new w.InputEvent('input', { bubbles:true, isComposing:true }));
+  });
+  const input = w.document.querySelector('#current-topic-search input[name=q]');
+  assert.equal(input.value, '郑');
+  Object.getOwnPropertyDescriptor(w.HTMLInputElement.prototype, 'value').set.call(input, '郑和');
+  input.dispatchEvent(new w.CompositionEvent('compositionend', { bubbles:true, data:'郑和' }));
+  input.dispatchEvent(new w.InputEvent('input', { bubbles:true }));
+  await waitFor(() => new URLSearchParams(w.location.search).get('q') === '郑和', 'composition crossing hydration retains final input');
+  assert.equal(input.value, '郑和');
+  assert.ok(w.document.querySelector('[data-event-id="zheng-he-voyages"]'));
+  assert.equal(errors.length, 0, errors.join('\n')); dom.window.close();
+}
+console.log('Early search: four topics, clear-to-empty, IME handoff, later typing and URL history restoration passed.');
+
+{
+  // Selection/paste may start before the first input event; do not insert the
+  // old URL value between focusing an empty SSR field and the ensuing typing.
+  const { dom, w } = await hydrate('china-history', '?q=张骞&order=desc', false, w => {
+    w.document.querySelector('#current-topic-search input[name=q]').focus();
+  });
+  const input = w.document.querySelector('#current-topic-search input[name=q]');
+  assert.equal(input.value, '', 'a field already being edited must not change under the cursor');
+  Object.getOwnPropertyDescriptor(w.HTMLInputElement.prototype, 'value').set.call(input, '郑和');
+  input.dispatchEvent(new w.Event('input', { bubbles:true }));
+  await waitFor(() => new URLSearchParams(w.location.search).get('q') === '郑和', 'focus-to-input hydration gap');
+  dom.window.close();
+}
+console.log('Focus/selection before the first input event also survives hydration.');

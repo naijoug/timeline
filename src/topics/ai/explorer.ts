@@ -3,7 +3,6 @@ import { aiAtlasData } from './adapter';
 import { aiPresentation, eventTitle, chinaCompanies } from './config';
 import { atlasQuery, readAtlas, datePosition, type AtlasState } from '../../lib/atlas';
 import { displayDate } from '../../lib/timeline';
-import { releaseResearchDate } from './releases';
 
 /** Only AI data and legacy URL compatibility live here; layout is shared. */
 export function aiExplorerPresentation(data = aiAtlasData): ExplorerPresentation {
@@ -20,7 +19,7 @@ export function aiExplorerPresentation(data = aiAtlasData): ExplorerPresentation
       change: event.change, href: data.eventHref(event),
       related: event.entityIds.map(id => ({ title: data.entityMap[id].name, href: data.entityHref(id) })),
     }])),
-    footer: `本轮核查 ${releaseResearchDate} · 持续整理`,
+    footer: '来源与核查日期见各事件 · 持续整理',
     readState: (search, category) => {
       const state = readAtlas(search, (category || 'all') as AtlasState['lane']);
       return { from: state.from, to: state.to, period: '', category: state.lane === 'all' ? '' : state.lane, q: state.q, all: state.all, selected: state.selected, expanded: [], scope: state.scope === 'china' ? 'china' : '' };

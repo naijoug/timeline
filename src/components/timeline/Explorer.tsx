@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, ExternalLink, SlidersHorizontal, SearchX, Copy, X } from 'lucide-react';
 import Header from '../Header';
 import CategorySelect from './CategorySelect';
@@ -26,6 +26,8 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   const [state, setState] = useState(() => restoreReadingExplorer('', catalog, initialPeriod, initialCategory, presentation));
   const [ready, setReady] = useState(false);
   const restoredPosition = useRef(false);
+  const restoredInitialState = useRef(false);
+  const explorerRoot = useRef<HTMLDivElement>(null);
   const [rangeOpen, setRangeOpen] = useState(false);
   const [rangeError, setRangeError] = useState('');
   const filterTrigger = useRef<HTMLButtonElement>(null);
@@ -45,16 +47,27 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   const timelinePath = sitePath(viewPath || (initialPeriod ? `${topic.path}${topic.periodSegment || 'periods'}/${initialPeriod}/` : topic.path));
   const returnPath = (event?: ExplorerEvent, view = state) => timelinePath + query(event ? { ...view, selected: '' } : view) + (event ? `#event-${event.id}` : '');
   const eventHref = (event: ExplorerEvent, view = state) => eventRecordHref(info(event).href || sitePath(`${topic.path}events/${event.id}/`), returnPath(event, view));
-  useEffect(() => {
-    const restore = () => {
+  useLayoutEffect(() => {
+    const restore = (initial = false) => {
       const next = restoreReadingExplorer(location.search, catalog, initialPeriod, initialCategory, presentation);
+      if (initial) {
+        // A native edit made while JS loads is newer than the URL, including
+        // an explicit clear. Only the first restore consumes this draft.
+        const input = explorerRoot.current?.querySelector<HTMLInputElement & { __timelineSearchDraft?: { value: string } }>('#current-topic-search input[name="q"]');
+        if (input?.__timelineSearchDraft) {
+          next.q = input.value;
+          delete input.__timelineSearchDraft;
+        }
+        document.dispatchEvent(new Event('timeline:search-hydrated'));
+      }
       const explicitEvent = new URLSearchParams(location.search).get('event');
       const linkedEvent = explicitEvent && events.find(event => event.id === explicitEvent);
       if (linkedEvent) { location.replace(eventHref(linkedEvent, next)); return; }
       setState(next); setReady(true);
     };
     const pop = () => { restoredPosition.current = false; restore(); };
-    restore(); window.addEventListener('popstate', pop);
+    if (!restoredInitialState.current) { restoredInitialState.current = true; restore(true); }
+    window.addEventListener('popstate', pop);
     return () => window.removeEventListener('popstate', pop);
   }, [catalog, initialPeriod, initialCategory, presentation]);
   useEffect(() => { if (ready) history.replaceState(history.state, '', location.pathname + query(state) + location.hash); }, [state, ready, query]);
@@ -122,7 +135,7 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   };
   const togglePeriod = (id: string) => { const subtree = descendants(catalog, id); update({ expanded: state.expanded.includes(id) ? state.expanded.filter(p => !subtree.has(p)) : [...state.expanded, id] }); };
   const visiblePeriodOptions = periods.filter(p => !p.parentId || state.expanded.includes(p.parentId) || p.id === state.period || p.parentId === state.period);
-  return <div className="atlas-app chronicle-app" data-timeline-ready={ready || undefined}>
+  return <div ref={explorerRoot} className="atlas-app chronicle-app" data-timeline-ready={ready || undefined}>
     <Header screen="timeline" topicTitle={topic.title} topicPath={topic.path} query={state.q} onQuery={q => update({ q })} />
     <main id="main" className="atlas-main">
       <nav className="mobile-topic-back" aria-label="返回主题"><a href={sitePath('/')}><ArrowLeft size={16} />所有主题</a><span>沿时间向下探索</span></nav>
