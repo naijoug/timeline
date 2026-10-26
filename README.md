@@ -65,6 +65,8 @@ npm run dev
 
 ## 编程语言已实现
 
+- 2026-10-26 深化 Swift 5／6 两条既有详情，区分 ABI 与模块稳定、工具链与语言模式及 Embedded Swift 发布时的实验性，加入具体官方文章与 WWDC24 迁移讲座。[核查范围](docs/programming-languages/swift-depth-2026-10-26.md)。
+
 - 69 个关键节点、35 个语言对象、5 个时代分组、73 份来源与 6 条事件证据关系；覆盖 FORTRAN 到 2025 年发布的 Rust 2024 edition 等高级语言、范式、标准、实现与大版本演进路线。
 - 语言与发布、范式与思想、标准与规格、实现与运行四类筛选；时代、类别、语言对象和独立事件页共用通用时间线界面。
 - 可切换单个语言查看其发展时间线；Python、Java、C++、JavaScript/ECMAScript、TypeScript、Go、Rust、C#、Swift、Kotlin 等重大版本更新提供比较基线、主要变化、边界与官方来源。

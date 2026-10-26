@@ -12,6 +12,8 @@ import { goReviewedEvents, goReviewedSources, goReviewedRelations } from "./go-r
 import { pythonReviewedEvents, pythonReviewedSources } from "./python-reviewed-records";
 import { rustReviewedEvents, rustReviewedSources } from "./rust-reviewed-records";
 
+import { swiftReviewedPatches, swiftReviewedSources } from "./swift-reviewed-records";
+
 const checkedAt = "2026-10-12";
 
 const source = (
@@ -954,6 +956,13 @@ for (const entry of events) if (finalEarlyEditorial[entry.id]) entry.significanc
 deepEvent("lisp-paper").facts?.[0].sourceIds?.push("lisp-author-original");
 for (const [entityId, sourceId] of [["lisp", "lisp-author-original"], ["algol60", "algol60-original-report"], ["simula67", "simula-dahl-original"]]) entities.find(item => item.id === entityId)?.sourceIds.push(sourceId);
 periods.find(item => item.id === "structured-languages")?.sourceIds.push("algol60-original-report", "simula-dahl-original", "lisp-author-original");
+
+sources.push(...swiftReviewedSources);
+for (const entry of events) Object.assign(entry, swiftReviewedPatches[entry.id] ?? {});
+for (const id of ["swift5-exact-release", "swift6-release"]) {
+  const index = sources.findIndex(item => item.id === id);
+  sources[index] = { ...sources[index], checkedAt: "2026-10-26" };
+}
 
 export const programmingLanguages: Catalog = {
   topic: {
