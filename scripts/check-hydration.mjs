@@ -41,6 +41,8 @@ async function hydrate(path, search = '', headerOnly = false, beforeHydrate) {
   };
   w.HTMLElement.prototype.scrollTo = () => {};
   w.scrollTo = () => {};
+  w.HTMLDialogElement.prototype.showModal = function() { this.open = true; };
+  w.HTMLDialogElement.prototype.close = function() { this.open = false; };
   w.HTMLElement.prototype.scrollIntoView = () => {};
   const context = dom.getInternalVMContext();
   const modules = new Map();
@@ -81,9 +83,11 @@ for (const topic of ['ai','programming-languages','china-history','writers']) {
   await waitFor(() => cards()[0].dataset.eventId === original.at(-1), `${topic}: order control failed`);
   assert.deepEqual(cards().map(card => card.dataset.eventId), [...original].reverse());
   w.document.querySelector('[aria-label="时间与范围筛选"]').click();
-  await waitFor(() => !w.document.querySelector('#chronicle-filters').hidden, `${topic}: filter drawer did not open`);
-  const toggle = w.document.querySelector('.key-toggle input');
+  await waitFor(() => w.document.querySelector('#chronicle-filters')?.open, `${topic}: filter drawer did not open`);
+  const toggle = w.document.querySelector('.filter-sheet-key input');
   toggle.click();
+  await waitFor(() => !toggle.checked, 'draft changes key-only selection');
+  w.document.querySelector('.filter-sheet-apply').click();
   await waitFor(() => w.location.search.includes('all=1'), `${topic}: all-event control failed`);
   const payload = JSON.parse(w.document.querySelector(`#timeline-payload-${topic}`).textContent);
   assert.equal(cards().length, payload.catalog.events.length, `${topic}: hidden/lost events after hydration`);
@@ -93,7 +97,7 @@ for (const topic of ['ai','programming-languages','china-history','writers']) {
   link.click();
   const saved = JSON.parse(w.sessionStorage.getItem('timeline-mobile-position'));
   assert.equal(new URL(link.href).searchParams.get('return'), saved.url);
-  assert.equal(saved.filters, true);
+  assert.equal(saved.filters, false);
   assert.ok(saved.url.includes('all=1') && saved.url.includes('order=') && saved.url.includes('#event-'));
   assert.equal(w.location.hash, `#event-${link.dataset.eventId}`);
   // Repeated in-document restoration must retain query and not duplicate cards.
@@ -165,31 +169,42 @@ console.log('Production hydration smoke checks passed, including filtered AI leg
   assert.equal(new URLSearchParams(w.location.search).get('q'), null);
   const trigger = w.document.querySelector('[aria-label="时间与范围筛选"]');
   trigger.click();
-  await waitFor(() => !w.document.querySelector('#chronicle-filters').hidden, 'open filters');
-  const latestYear = Number(w.document.querySelector('.filter-years [name=to]').value);
-  [...w.document.querySelectorAll('.filter-presets button')].find(button => button.textContent === '最近 5 年').click();
-  await waitFor(() => new URLSearchParams(w.location.search).get('from') === String(latestYear - 4), 'recent five years applies');
-  const form = w.document.querySelector('.filter-years');
-  form.elements.namedItem('from').value = String(latestYear); form.elements.namedItem('to').value = String(latestYear - 4);
-  form.dispatchEvent(new w.Event('submit', { bubbles:true, cancelable:true }));
-  await waitFor(() => w.document.querySelector('#filter-range-error'), 'invalid range is explained');
+  await waitFor(() => w.document.querySelector('#chronicle-filters')?.open, 'open filters');
+  const latestYear = Number(w.document.querySelector('.filter-sheet-years [name=to]').value);
+  [...w.document.querySelectorAll('.filter-sheet-presets button')].find(button => button.textContent === '最近 5 年').click();
+  await waitFor(() => w.document.querySelector('[name=from]').value === String(latestYear - 4), 'recent five years updates draft');
+  assert.notEqual(new URLSearchParams(w.location.search).get('from'), String(latestYear - 4), 'draft must not edit URL');
+  w.document.querySelector('.filter-sheet-apply').click();
+  await waitFor(() => new URLSearchParams(w.location.search).get('from') === String(latestYear - 4), 'apply commits draft');
+  trigger.click();
+  await waitFor(() => w.document.querySelector('#chronicle-filters')?.open, 'reopen filters');
+  const input = w.document.querySelector('.filter-sheet-years [name=from]');
+  Object.getOwnPropertyDescriptor(w.HTMLInputElement.prototype, 'value').set.call(input, String(latestYear + 1));
+  input.dispatchEvent(new w.Event('input', { bubbles:true }));
+  await waitFor(() => w.document.querySelector('.filter-sheet-error'), 'invalid range is explained');
   assert.equal(new URLSearchParams(w.location.search).get('from'), String(latestYear - 4));
-  w.dispatchEvent(new w.KeyboardEvent('keydown', { key:'Escape', bubbles:true }));
-  await waitFor(() => w.document.querySelector('#chronicle-filters').hidden, 'Escape closes filter panel');
+  w.document.querySelector('#chronicle-filters').dispatchEvent(new w.Event('cancel', { cancelable:true }));
+  await waitFor(() => !w.document.querySelector('#chronicle-filters'), 'Escape cancels filter panel');
+  await waitFor(() => w.document.activeElement === trigger, 'focus restored after dialog unmount');
   assert.equal(w.document.activeElement, trigger);
   assert.equal(errors.length, 0, errors.join('\n')); dom.window.close();
 }
 {
   const { dom, w, errors } = await hydrate('china-history', '?q=制度&all=1&order=desc');
+  w.document.querySelector('[aria-label="时间与范围筛选"]').click();
+  await waitFor(() => w.document.querySelector('#chronicle-filters')?.open, 'open history filters');
   const select = w.document.querySelector('[aria-label="选择朝代或时期"]');
   select.value = 'tang'; select.dispatchEvent(new w.Event('change', { bubbles:true }));
+  await waitFor(() => select.value === 'tang', 'period draft selection');
+  w.document.querySelector('.filter-sheet-apply').click();
   await waitFor(() => new URLSearchParams(w.location.search).get('period') === 'tang', 'period filters in place');
   assert.equal(new URLSearchParams(w.location.search).get('q'), '制度');
   assert.equal(new URLSearchParams(w.location.search).get('all'), '1');
   assert.equal(new URLSearchParams(w.location.search).get('order'), 'desc');
   assert.equal(w.location.pathname, `${base}/china-history/`);
   w.dispatchEvent(new w.PopStateEvent('popstate'));
-  await waitFor(() => select.value === 'tang', 'period survives restore');
+  await waitFor(() => w.document.querySelector('.filter-chip')?.textContent.includes('制度'), 'query survives restore');
+  assert.equal(new URLSearchParams(w.location.search).get('period'), 'tang');
   assert.equal(errors.length, 0, errors.join('\n')); dom.window.close();
 }
 console.log('Filter chips, full clear, year presets, invalid input, focus restoration and period context passed.');

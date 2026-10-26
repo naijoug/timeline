@@ -1,0 +1,11 @@
+# Responsive filter sheet
+
+The old inline filter panel competed with the timeline and mobile browser chrome. Filtering is now a native modal dialog: bottom sheet below 761px, centered 540px dialog on larger screens. The timeline keeps one compact trigger and a horizontally scrollable row of active chips instead of duplicated category/key controls.
+
+Changes are a draft until “查看 N 个结果”. Close, backdrop and Escape discard them. Reset also remains a draft. The sheet combines category, period, region (where applicable), ordering and key-only controls. A dual native range selector adjusts the endpoints horizontally; exact civil-year fields remain available, including BCE and no year zero. Presets do not erase unrelated choices. Matching counts are previews, not writes to the URL.
+
+Native dialog supplies top-layer display and inert background; explicit first/last Tab wrapping keeps keyboard focus in the panel. Scroll position/body styles are restored on dismissal, then focus returns to the trigger. The header/footer stay outside the sheet's independently scrollable content. Dynamic/visual viewport height and safe-area padding prevent the action footer from being tied to a tall page or keyboard-covered layout. Reduced-motion preference is respected. URLs, topic search, event return anchors and latest-first defaults are retained. No dependencies or remote assets added.
+
+Regression tests exercise actual React DOM draft/apply/cancel/reset transitions, invalid civil years, BCE/CE, slider clamping and text synchronization, and scroll-lock cleanup. Production-chunk hydration checks exercise all four topics, existing search/IME capture, filtered deep links, and period/order preservation.
+
+Cloud Chromium QA uses ordinary window resizing and browser zoom, not a real iOS device. The 375px by 505px short viewport verifies a scrollable body with fixed visible actions; 390px by 311px, 400px and desktop views cover actual mouse drags, collapsed same-year handles, cancellation, focus restoration, light/dark appearance and details/back state. Chromium DevTools is policy-disabled and was not bypassed. Native mobile touch, iOS Safari chrome and on-screen keyboard remain untested on actual hardware.

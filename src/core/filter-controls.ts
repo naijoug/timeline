@@ -1,7 +1,7 @@
 import { catalogBounds } from './catalog';
 import type { ExplorerCatalog } from './types';
 import type { ExplorerState } from './explorer';
-import { timeBounds } from './time';
+import { timeBounds, yearCoordinate } from './time';
 
 /** Changing one facet preserves the other choices and the reading order. */
 export function selectFilterPeriod(catalog: ExplorerCatalog, state: ExplorerState, id: string): ExplorerState {
@@ -18,4 +18,14 @@ export function clearExplorerFilters(catalog: ExplorerCatalog, state: ExplorerSt
 export function applyFilterYears(catalog: ExplorerCatalog, state: ExplorerState, years?: number): ExplorerState {
   const [min, max] = catalogBounds(catalog);
   return { ...state, from: years ? Math.max(min, max - years + 1) : min, to: max, period: '', selected: '' };
+}
+
+/** Civil-year fields validate before converting to year-zero-free coordinates. */
+export function validateFilterYearRange(fromText: string, toText: string, min: number, max: number): { ok: true; from: number; to: number } | { ok: false; error: string } {
+  const fromYear = Number(fromText), toYear = Number(toText);
+  if (!fromText.trim() || !toText.trim() || !Number.isInteger(fromYear) || !Number.isInteger(toYear) || !fromYear || !toYear) return { ok: false, error: '请输入非零整数年份；公元前使用负数。' };
+  const from = yearCoordinate(fromYear), to = yearCoordinate(toYear);
+  if (from > to) return { ok: false, error: '起始年份不能晚于结束年份。' };
+  if (from < min || to > max) return { ok: false, error: '年份超出本主题范围，请拖动滑块选择。' };
+  return { ok: true, from, to };
 }

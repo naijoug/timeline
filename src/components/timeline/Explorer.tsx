@@ -1,11 +1,10 @@
-import SourceIcon from '../SourceIcon';
+import FilterSheet from './FilterSheet';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, ExternalLink, SlidersHorizontal, SearchX, Copy, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, SlidersHorizontal, SearchX, X } from 'lucide-react';
 import Header from '../Header';
-import CategorySelect from './CategorySelect';
 import type { ExplorerCatalog, ExplorerEvent } from '../../core/types';
-import { catalogBounds, descendants } from '../../core/catalog';
-import { civilYear, yearCoordinate, formatYear, formatTime } from '../../core/time';
+import { catalogBounds } from '../../core/catalog';
+import { civilYear, formatYear, formatTime } from '../../core/time';
 import { explorerEvents, explorerQuery, type ExplorerState, type ExplorerPresentation } from '../../core/explorer';
 import { aiViewQuery } from '../../core/ai-view-state';
 import { sitePath } from '../../lib/paths';
@@ -13,7 +12,7 @@ import '../../styles/chronicle.css';
 import '../../styles/collections.css';
 import '../../styles/mobile-timeline.css';
 import '../../styles/filter-controls.css';
-import { selectFilterPeriod, clearExplorerFilters, applyFilterYears } from '../../core/filter-controls';
+import { selectFilterPeriod, clearExplorerFilters } from '../../core/filter-controls';
 import { restoreReadingExplorer, readingExplorerQuery, readingExplorerEvents, eventRecordHref } from '../../core/mobile-navigation';
 
 const emptyPresentation: ExplorerPresentation = {};
@@ -30,21 +29,17 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   const restoredInitialState = useRef(false);
   const explorerRoot = useRef<HTMLDivElement>(null);
   const [rangeOpen, setRangeOpen] = useState(false);
-  const [rangeError, setRangeError] = useState('');
   const filterTrigger = useRef<HTMLButtonElement>(null);
-  const closeFilters = () => { setRangeOpen(false); filterTrigger.current?.focus({ preventScroll: true }); };
-  const [message, setMessage] = useState('');
+  const closeFilters = () => { setRangeOpen(false); requestAnimationFrame(() => filterTrigger.current?.focus({ preventScroll: true })); };
   const update = (patch: Partial<ExplorerState>) => setState(s => ({ ...s, ...patch }));
   const query = useMemo(() => (view: ExplorerState) => readingExplorerQuery(view, presentation.urlFormat === 'ai' ? aiViewQuery : presentation.serializeState || explorerQuery), [presentation]);
   const [min, max] = useMemo(() => catalogBounds(catalog), [catalog]);
-  const sourceMap = useMemo(() => new Map(catalog.sources.map(s => [s.id, s])), [catalog.sources]);
   const categoryTitle = (id: string) => topic.categories.find(c => c.id === id)?.title || id;
   const info = (event: ExplorerEvent) => presentation.events?.[event.id] || {};
   const title = (event: ExplorerEvent) => info(event).title || event.title;
   const metadata = (event: ExplorerEvent) => info(event).metadata || periods.filter(p => event.periodIds.includes(p.id)).map(p => p.title).join(' · ') || categoryTitle(event.category);
   const date = (event: ExplorerEvent) => info(event).dateLabel || formatTime(event.time);
   const currentPeriod = periods.find(p => p.id === state.period);
-  const periodHref = (id: string) => sitePath(`${topic.path}${topic.periodSegment || 'periods'}/${id}/`) + query(selectFilterPeriod(catalog, state, id));
   const timelinePath = sitePath(viewPath || (initialPeriod ? `${topic.path}${topic.periodSegment || 'periods'}/${initialPeriod}/` : topic.path));
   const returnPath = (event?: ExplorerEvent, view = state) => timelinePath + query(event ? { ...view, selected: '' } : view) + (event ? `#event-${event.id}` : '');
   const eventHref = (event: ExplorerEvent, view = state) => eventRecordHref(info(event).href || sitePath(`${topic.path}events/${event.id}/`), returnPath(event, view));
@@ -66,7 +61,7 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
       if (linkedEvent) { location.replace(eventHref(linkedEvent, next)); return; }
       setState(next); setReady(true);
     };
-    const pop = () => { restoredPosition.current = false; restore(); };
+    const pop = () => { setRangeOpen(false); restoredPosition.current = false; restore(); };
     if (!restoredInitialState.current) { restoredInitialState.current = true; restore(true); }
     window.addEventListener('popstate', pop);
     return () => window.removeEventListener('popstate', pop);
@@ -105,12 +100,6 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
     }
     return [...groups].map(([year, events]) => ({ year, events }));
   }, [results]);
-  useEffect(() => {
-    const escape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && rangeOpen && !document.querySelector('.topic-sidebar.mobile-open')) { e.preventDefault(); closeFilters(); }
-    };
-    window.addEventListener('keydown', escape); return () => window.removeEventListener('keydown', escape);
-  }, [rangeOpen]);
   const sourceCount = new Set(results.flatMap(e => e.sourceIds)).size;
   const filteredOutside = state.q ? explorerEvents(catalog, clearExplorerFilters(catalog, state, true), presentation).length : 0;
   const rangeLabel = state.from === state.to ? shortYear(state.from) : `${shortYear(state.from)} — ${shortYear(state.to)}`;
@@ -123,7 +112,6 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
     } catch { /* The return URL and anchor work without storage. */ }
   };
   const applyFilters = (next: ExplorerState) => {
-    setRangeError('');
     // Period landing pages imply a fixed period; leave that route when changing it.
     if (initialPeriod && next.period !== initialPeriod) location.href = sitePath(topic.path) + query(next);
     else setState(next);
@@ -134,8 +122,6 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   const searchAll = () => {
     applyFilters(clearExplorerFilters(catalog, state, true));
   };
-  const togglePeriod = (id: string) => { const subtree = descendants(catalog, id); update({ expanded: state.expanded.includes(id) ? state.expanded.filter(p => !subtree.has(p)) : [...state.expanded, id] }); };
-  const visiblePeriodOptions = periods.filter(p => !p.parentId || state.expanded.includes(p.parentId) || p.id === state.period || p.parentId === state.period);
   return <div ref={explorerRoot} className="atlas-app chronicle-app" data-timeline-ready={ready || undefined}>
     <Header screen="timeline" topicTitle={topic.title} topicPath={topic.path} query={state.q} onQuery={q => update({ q })} />
     <main id="main" className="atlas-main">
@@ -149,28 +135,11 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
       <div className="chronicle-workspace">
         <section className="chronicle-board" aria-label="关键事件时间线">
           <div className="chronicle-toolbar">
-            <div className="chronicle-range-row"><div className="range-title"><span className="mobile-range-label">事件时间线</span><span className="range-numbers">{rangeLabel}</span></div><div className="chronicle-range-actions"><button ref={filterTrigger} aria-label="时间与范围筛选" aria-expanded={rangeOpen} aria-controls="chronicle-filters" className={rangeOpen ? 'active' : ''} onClick={() => setRangeOpen(!rangeOpen)}><SlidersHorizontal size={17} /><span className="mobile-filter-label">筛选{activeFilters.length ? ` · ${activeFilters.length}` : ''}</span></button></div></div>
-            <div className="chronicle-filter-row"><CategorySelect value={state.category} options={[{ id: '', title: '全部类别' }, ...topic.categories]} onChange={category => update({ category })} /><label className="key-toggle"><input type="checkbox" checked={!state.all} onChange={e => update({ all: !e.target.checked })} /><span>仅关键节点</span></label></div>
+            <div className="chronicle-range-row"><div className="range-title"><span className="mobile-range-label">事件时间线</span><span className="range-numbers">{rangeLabel}</span></div><div className="chronicle-range-actions"><button ref={filterTrigger} aria-label="时间与范围筛选" aria-expanded={rangeOpen} aria-controls="chronicle-filters" className={rangeOpen ? 'active' : ''} aria-haspopup="dialog" onClick={() => setRangeOpen(true)}><SlidersHorizontal size={17} /><span className="mobile-filter-label">筛选{activeFilters.length ? ` · ${activeFilters.length}` : ''}</span></button></div></div>
+
           </div>
           {!!activeFilters.length && <div className="chronicle-filter-status" aria-label="已选筛选条件"><div className="filter-chips">{activeFilters.map(filter => <button key={filter.id} className="filter-chip" onClick={filter.clear} aria-label={`移除${filter.label}筛选`}><span>{filter.label}</span><X size={13} aria-hidden="true" /></button>)}</div><button className="filter-clear-all" onClick={resetFilters}>清除全部</button></div>}
-          <div id="chronicle-filters" className="chronicle-filters" hidden={!rangeOpen}>
-            <div className="filter-panel-heading"><strong>筛选事件</strong><button type="button" aria-label="关闭筛选" onClick={closeFilters}><X size={18} /></button></div>
-            {!!periods.length && <label className="filter-period-field">{topic.periodLabel || '时期'}<select aria-label="选择朝代或时期" value={state.period} onChange={e => changePeriod(e.target.value)}><option value="">全部时期</option>{periods.map(p => <option key={p.id} value={p.id}>{p.parentId ? '　' : ''}{p.title} · {formatTime(p.time)}</option>)}</select></label>}
-            <div className="filter-presets" aria-label="快捷时间范围"><span>时间范围</span><button type="button" onClick={() => applyFilters(applyFilterYears(catalog, state))} aria-pressed={state.from === min && state.to === max && !state.period}>全部年份</button>{topic.id !== 'china-history' && <><button type="button" onClick={() => applyFilters(applyFilterYears(catalog, state, 1))} aria-pressed={state.from === max && state.to === max && !state.period}>{shortYear(max)} 年</button><button type="button" onClick={() => applyFilters(applyFilterYears(catalog, state, 5))} aria-pressed={state.from === Math.max(min, max - 4) && state.to === max && !state.period}>最近 5 年</button></>}</div>
-            <form className="filter-years" key={`${state.from}:${state.to}`} onSubmit={e => { e.preventDefault(); const data = new FormData(e.currentTarget), fromYear = Number(data.get('from')), toYear = Number(data.get('to')); if (!Number.isInteger(fromYear) || !Number.isInteger(toYear) || !fromYear || !toYear) { setRangeError('请输入非零整数年份；公元前使用负数。'); return; } const from = yearCoordinate(fromYear), to = yearCoordinate(toYear); if (from > to || from < min || to > max) { setRangeError(`范围须在${formatYear(civilYear(min))}至${formatYear(civilYear(max))}之间，且起点不晚于终点。`); return; } applyFilters({ ...state, from, to, selected: '' }); }}>
-              <label>从<input name="from" type="number" required defaultValue={civilYear(state.from)} aria-label="起始年份，公元前为负数" aria-invalid={!!rangeError} aria-describedby={rangeError ? "filter-range-error" : undefined} /></label><label>至<input name="to" type="number" required defaultValue={civilYear(state.to)} aria-label="结束年份，公元前为负数" aria-invalid={!!rangeError} aria-describedby={rangeError ? "filter-range-error" : undefined} /></label><button type="submit">应用范围</button>
-            </form>
-            {min <= 0 && <p className="filter-help">公元前用负数表示，无公元 0 年。</p>}{rangeError && <p id="filter-range-error" className="filter-error" role="alert">{rangeError}</p>}
-            {!!presentation.scopes?.length && <label className="region-filter">{presentation.scopeLabel || '地区'}<select value={state.scope} onChange={e => update({ scope: e.target.value })}><option value="">{presentation.scopeAllLabel || '全球'}</option>{presentation.scopes.map(scope => <option key={scope.id} value={scope.id}>{scope.title}</option>)}</select></label>}
-
-            <p className="filter-help">{currentPeriod?.summary || topic.coverage}</p>{currentPeriod?.note && <p className="filter-help">{currentPeriod.note}</p>}
-            {!!periods.length && <details className="period-directory-control"><summary>{topic.periodLabel || '时期'}目录</summary><div>{visiblePeriodOptions.map(p => <div key={p.id} className={p.parentId ? 'period-child-row' : ''}><a href={periodHref(p.id)}>{p.title}<small>{formatTime(p.time)}</small></a>{periods.some(child => child.parentId === p.id) && <button onClick={() => togglePeriod(p.id)} aria-expanded={state.expanded.includes(p.id)} aria-label={`展开${p.title}分期`}>{state.expanded.includes(p.id) ? '收起' : '分期'}</button>}</div>)}</div></details>}
-            {!!currentPeriod?.sourceIds.length && <div className="period-evidence">{currentPeriod.sourceIds.map(id => { const source = sourceMap.get(id)!; return <a key={id} href={source.url} target="_blank" rel="noopener noreferrer"><SourceIcon url={source.url} size={16}/>{source.title}<ExternalLink size={12} /></a>; })}</div>}
-            {topic.shortcuts && <div className="period-shortcuts">{topic.shortcuts.map(shortcut => <a key={shortcut.path} href={sitePath(shortcut.path)}>{shortcut.title}<ArrowRight size={12} /></a>)}</div>}
-            <button className="copy-timeline" onClick={async () => { try { await navigator.clipboard.writeText(location.href); setMessage('时间线链接已复制'); } catch { setMessage('可复制浏览器地址栏中的链接'); } }}><Copy size={14} />复制当前时间线链接</button><span className="filter-help" role="status">{message}</span>
-            <p className="filter-help">类别与时期即时生效；自定年份请点击“应用范围”。</p>
-            <div className="filter-panel-footer"><span aria-live="polite">匹配 {results.length} 个事件</span><button type="button" onClick={closeFilters}>查看结果</button></div>
-          </div>
+          {rangeOpen && <FilterSheet catalog={catalog} state={state} presentation={presentation} onCancel={closeFilters} onApply={next => { applyFilters(next); closeFilters(); }} />}
 
           <div className="mobile-timeline-guide"><span aria-live="polite">{results.length} 个{state.all ? '事件' : '关键节点'}</span><label className="timeline-order"><span className="sr-only">排列顺序</span><select aria-label="排列顺序" value={state.order || 'asc'} onChange={e => update({ order: e.target.value as 'asc' | 'desc' })}><option value="desc">最新在前</option><option value="asc">从早到晚</option></select></label><label className="timeline-year-jump"><span className="sr-only">跳转年份</span><select aria-label="跳转年份" value="" onChange={e => jumpToYear(e.target.value)}><option value="">跳转年份</option>{years.map(group => <option key={group.year} value={group.year}>{formatYear(group.year)}</option>)}</select></label><button onClick={() => { const latest = state.order === 'desc' ? results[0] : results.at(-1); if (latest) document.getElementById(`event-${latest.id}`)?.scrollIntoView({ behavior: 'instant', block: 'start' }); }}>到最新<ArrowRight size={14} /></button></div>
           <div className="chronicle-event-scroll">
