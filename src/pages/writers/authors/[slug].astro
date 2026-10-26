@@ -1,4 +1,5 @@
 ---
+import SourceIcon from '../../../components/SourceIcon';
 import Layout from '../../../layouts/Layout.astro';
 import { writersCatalog } from '../../../topics/writers/catalog';
 import { sitePath } from '../../../lib/paths';
@@ -21,8 +22,8 @@ const sources = writersCatalog.sources.filter(s => sourceIds.has(s.id));
 <Layout title={`${entity.name} · 作家作品年谱`} description={`${entity.name}作品发布时间线、内容简介与代表作列表。`} topicTitle="作家作品" topicPath="/writers/">
   <a class="back-link" href={sitePath('/writers/')}>返回作家作品时间线</a>
   <header class="entity-hero"><div class="eyebrow">{entity.type}</div><h1>{entity.name}</h1><p>已收录 {events.length} 个作品与传播节点，按已知日期排序；同一作品可包含连载、成书、译介或获奖等不同阶段，不等于 {events.length} 部不同作品。</p></header>
-  {readingPaths.map(path => <section><h2>{path.title}</h2><p>{path.note}</p><ol>{path.eventIds.map(id => { const event = events.find(event => event.id === id)!; return <li><a href={sitePath(`/writers/events/${id}/`)}>{event.title}</a></li>; })}</ol><p>书系与作品依据：{path.sourceIds.map(id => { const source = sources.find(source => source.id === id)!; return <a href={source.url} target="_blank" rel="noopener noreferrer">{source.title} </a>; })}</p></section>)}
+  {readingPaths.map(path => <section><h2>{path.title}</h2><p>{path.note}</p><ol>{path.eventIds.map(id => { const event = events.find(event => event.id === id)!; return <li><a href={sitePath(`/writers/events/${id}/`)}>{event.title}</a></li>; })}</ol><p>书系与作品依据：{path.sourceIds.map(id => { const source = sources.find(source => source.id === id)!; return <a href={source.url} target="_blank" rel="noopener noreferrer"><SourceIcon url={source.url} size={16}/>{source.title} </a>; })}</p></section>)}
   <section><h2>作品与传播年表</h2><p>只知年份的记录不推定月日；同一年内的排列不代表未知日期的确切先后。</p><ol class="collection-nodes">{events.map(e => <li><time>{formatTime(e.time)}</time><div><a href={sitePath(`/writers/events/${e.id}/`)}>{e.title}</a><p>{e.summary}</p></div></li>)}</ol></section>
   <section><h2>创作分期</h2><p>{periods.map(p => p.title).join('、') || '当代'}</p></section>
-  <section id="sources"><h2>资料与出版依据</h2>{sources.map(s => <p><a href={s.url} target="_blank" rel="noopener noreferrer">{s.title}</a><small class="evidence-locator">{s.type} · 核查于 {s.checkedAt} · {s.locator}</small></p>)}</section>
+  <section id="sources"><h2>资料与出版依据</h2>{sources.map(s => <p><a href={s.url} target="_blank" rel="noopener noreferrer"><SourceIcon url={s.url} size={16}/>{s.title}</a><small class="evidence-locator">{s.type} · 核查于 {s.checkedAt} · {s.locator}</small></p>)}</section>
 </Layout>

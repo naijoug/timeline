@@ -28,3 +28,13 @@
 .entity-source-links{display:flex;gap:15px;flex-wrap:wrap;margin:-10px 0 25px}.entity-source-links a{font-size:12px;color:var(--paper-text);display:flex;align-items:center;gap:5px}.entity-source-links a:hover{text-decoration:underline}
 
 .event-card h3 a{display:block}
+
+/* Destination identity is not author attribution. Local icons inherit contrast. */
+.source-platform-icon{display:inline-flex;align-items:center;justify-content:center;flex:none;vertical-align:middle;line-height:1;margin-inline-end:.35em}
+.source-platform-icon img{display:block;object-fit:contain}
+.source-icon-link{position:relative;display:inline-flex!important;align-items:center;justify-content:center;min-width:36px;min-height:36px;border:1px solid var(--paper-line);border-radius:8px;text-decoration:none!important;vertical-align:middle;color:var(--paper-ink)}
+.source-icon-link .source-platform-icon{margin:0}
+.source-icon-link:hover,.source-icon-link:focus-visible{background:var(--paper-surface);border-color:var(--paper-muted)}
+.evidence-label,.entity-source-links,.source-links{flex-wrap:wrap}
+.source-item>.source-platform-icon{align-self:flex-start;margin-top:5px}
+.reader-evidence-links .source-platform-icon{margin-inline-end:2px}

@@ -1,6 +1,7 @@
+import SourceLink from './SourceLink';
 import { sitePath } from '../lib/paths';
 import { useEffect, useState, useMemo, useRef } from 'react';
-import { Search, SlidersHorizontal, X, ArrowDownUp, ExternalLink, ChevronDown, Bookmark, Sparkles, CalendarDays } from 'lucide-react';
+import { Search, SlidersHorizontal, X, ArrowDownUp, ChevronDown, Bookmark, Sparkles, CalendarDays } from 'lucide-react';
 import type { TimelineEvent, Track } from '../data/types';
 import { events } from '../data/events';
 import { entities, entityMap, entityHref, eventHref } from '../data/entities';
@@ -28,7 +29,7 @@ export function EventCard({ event, returnUrl }: { event: TimelineEvent; returnUr
     <div id={`details-${event.id}`} hidden={!open} className="inline-detail">
       <div className="detail-caption">为什么重要</div><p>{event.significance}</p>
       {event.change && <><div className="detail-caption">参考背景：{event.change.baseline}</div><ul>{event.change.improvements.map(x => <li key={x}>{x}</li>)}</ul><p className="caveat">{event.change.evidence} · {event.change.tradeoffs}</p></>}
-      <div className="source-links">{event.sourceIds.map(id => <a key={id} href={sourceMap[id].url} target="_blank" rel="noopener noreferrer">{sourceMap[id].publisher} · {sourceMap[id].type}<ExternalLink size={12} /></a>)}</div>
+      <div className="source-links">{event.sourceIds.map(id => <SourceLink key={id} url={sourceMap[id].url} title={sourceMap[id].title} publisher={sourceMap[id].publisher} />)}</div>
       <a className="text-link" href={href} onClick={() => { if (returnUrl) rememberReturn(`${returnUrl}#event-${event.id}`); }}>查看完整事件</a>
     </div>
   </article>;

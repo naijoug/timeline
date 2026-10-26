@@ -1,4 +1,5 @@
 ---
+import SourceIcon from '../../../components/SourceIcon';
 import Layout from '../../../layouts/Layout.astro';
 import Relations from '../../../components/timeline/Relations.astro';
 import { chinaHistory } from '../../../topics/china-history/catalog';
@@ -18,5 +19,5 @@ const entityHref = (id:string) => sitePath(`/china-history/objects/${id}/`);
   <header class="entity-hero"><div class="eyebrow">{entity.type} · 专题对象</div><h1>{entity.name}</h1><p>下列条目展示此对象在已收录事件中的参与记录。人物生平与机构沿革尚未完整展开。</p></header>
   <section><h2>相关事件</h2><ol class="collection-nodes">{events.map(e=><li><time>{formatTime(e.time)}</time><div><a href={sitePath(`/china-history/events/${e.id}/`)}>{e.title}</a><p>{e.summary}</p></div></li>)}</ol></section>
   <Relations catalog={subset} entityHref={entityHref}/>
-  <section id="sources"><h2>对象依据</h2>{sources.map(s=><p><a href={s.url} target="_blank" rel="noopener noreferrer">{s.title}</a><small class="evidence-locator">{s.format} · 核查于 {s.checkedAt} · {s.locator}</small></p>)}</section>
+  <section id="sources"><h2>对象依据</h2>{sources.map(s=><p><a href={s.url} target="_blank" rel="noopener noreferrer"><SourceIcon url={s.url} size={16}/>{s.title}</a><small class="evidence-locator">{s.format} · 核查于 {s.checkedAt} · {s.locator}</small></p>)}</section>
 </Layout>

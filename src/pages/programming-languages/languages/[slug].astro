@@ -1,4 +1,5 @@
 ---
+import SourceIcon from '../../../components/SourceIcon';
 import Layout from '../../../layouts/Layout.astro';
 import { programmingLanguages } from '../../../topics/programming-languages/catalog';
 import { sitePath } from '../../../lib/paths';
@@ -23,5 +24,5 @@ const versions = events.filter(e => e.change);
   {versions.length > 0 && <section><h2>大版本变化</h2><ol class="collection-nodes">{versions.map(e => <li><time>{formatTime(e.time)}</time><div><a href={sitePath(`/programming-languages/events/${e.id}/`)}>{e.title}</a><p>{e.change!.improvements.join(' · ')}</p></div></li>)}</ol></section>}
   <section><h2>相关事件</h2><ol class="collection-nodes">{events.map(e => <li><time>{formatTime(e.time)}</time><div><a href={sitePath(`/programming-languages/events/${e.id}/`)}>{e.title}</a><p>{e.summary}</p></div></li>)}</ol></section>
   <section><h2>相关时代</h2><p>{periods.map(p => p.title).join('、') || '待补充'}</p></section>
-  <section id="sources"><h2>对象依据</h2>{sources.map(s => <p><a href={s.url} target="_blank" rel="noopener noreferrer">{s.title}</a><small class="evidence-locator">{s.type} · 核查于 {s.checkedAt} · {s.locator}</small></p>)}</section>
+  <section id="sources"><h2>对象依据</h2>{sources.map(s => <p><a href={s.url} target="_blank" rel="noopener noreferrer"><SourceIcon url={s.url} size={16}/>{s.title}</a><small class="evidence-locator">{s.type} · 核查于 {s.checkedAt} · {s.locator}</small></p>)}</section>
 </Layout>

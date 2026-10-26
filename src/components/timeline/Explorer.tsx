@@ -1,3 +1,4 @@
+import SourceIcon from '../SourceIcon';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, ExternalLink, SlidersHorizontal, SearchX, Copy, X } from 'lucide-react';
 import Header from '../Header';
@@ -164,7 +165,7 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
 
             <p className="filter-help">{currentPeriod?.summary || topic.coverage}</p>{currentPeriod?.note && <p className="filter-help">{currentPeriod.note}</p>}
             {!!periods.length && <details className="period-directory-control"><summary>{topic.periodLabel || '时期'}目录</summary><div>{visiblePeriodOptions.map(p => <div key={p.id} className={p.parentId ? 'period-child-row' : ''}><a href={periodHref(p.id)}>{p.title}<small>{formatTime(p.time)}</small></a>{periods.some(child => child.parentId === p.id) && <button onClick={() => togglePeriod(p.id)} aria-expanded={state.expanded.includes(p.id)} aria-label={`展开${p.title}分期`}>{state.expanded.includes(p.id) ? '收起' : '分期'}</button>}</div>)}</div></details>}
-            {!!currentPeriod?.sourceIds.length && <div className="period-evidence">{currentPeriod.sourceIds.map(id => { const source = sourceMap.get(id)!; return <a key={id} href={source.url} target="_blank" rel="noopener noreferrer">{source.title}<ExternalLink size={12} /></a>; })}</div>}
+            {!!currentPeriod?.sourceIds.length && <div className="period-evidence">{currentPeriod.sourceIds.map(id => { const source = sourceMap.get(id)!; return <a key={id} href={source.url} target="_blank" rel="noopener noreferrer"><SourceIcon url={source.url} size={16}/>{source.title}<ExternalLink size={12} /></a>; })}</div>}
             {topic.shortcuts && <div className="period-shortcuts">{topic.shortcuts.map(shortcut => <a key={shortcut.path} href={sitePath(shortcut.path)}>{shortcut.title}<ArrowRight size={12} /></a>)}</div>}
             <button className="copy-timeline" onClick={async () => { try { await navigator.clipboard.writeText(location.href); setMessage('时间线链接已复制'); } catch { setMessage('可复制浏览器地址栏中的链接'); } }}><Copy size={14} />复制当前时间线链接</button><span className="filter-help" role="status">{message}</span>
             <p className="filter-help">类别与时期即时生效；自定年份请点击“应用范围”。</p>

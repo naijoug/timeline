@@ -1,7 +1,8 @@
+import TopicIcon from './TopicIcon';
 import { sitePath } from '../lib/paths';
 import { topics } from '../core/topics';
 import { canUseParentHistoryBack, canUseTimelineHistoryBack, safeTimelineReturn, timelineReadingReturn } from '../core/mobile-navigation';
-import { Search, X, BookOpen, ChartNoAxesColumn, Grid2X2, Info, ArrowLeft, PanelLeftClose, PanelLeftOpen, Menu } from 'lucide-react';
+import { Search, X, Grid2X2, Info, ArrowLeft, PanelLeftClose, PanelLeftOpen, Menu } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import '../styles/navigation.css';
 import AppearanceControl from './AppearanceControl';
@@ -113,7 +114,7 @@ export default function Header({ query, onQuery, active = 'timeline', topicTitle
       <span className="sidebar-caption" aria-hidden="true">主题</span>
       <nav id="topic-navigation" className="topic-navigation" aria-label="所有主题">
         <a href={sitePath('/')} aria-current={topicPath === '/' && active !== 'about' ? 'page' : undefined} title="所有主题" aria-label="所有主题"><Grid2X2 size={19} /><span>所有主题</span></a>
-        {topics.map(topic => <a key={topic.id} data-astro-prefetch="hover" href={sitePath(topic.path)} title={topic.title} aria-label={topic.title} aria-current={topicPath === topic.path && active !== 'about' ? 'page' : undefined}>{topic.icon === 'book' ? <BookOpen size={20} /> : <ChartNoAxesColumn size={20} />}<span>{topic.title}</span></a>)}
+        {topics.map(topic => <a key={topic.id} data-astro-prefetch="hover" href={sitePath(topic.path)} title={topic.title} aria-label={topic.title} aria-current={topicPath === topic.path && active !== 'about' ? 'page' : undefined}><TopicIcon icon={topic.icon} /><span>{topic.title}</span></a>)}
       </nav>
       <div className="sidebar-utilities"><AppearanceControl showLabel /><a href={sitePath('/about/')} aria-current={active === 'about' ? 'page' : undefined} title="关于 timeline" aria-label="关于 timeline"><Info size={18} /><span>关于 timeline</span></a></div>
     </aside>
