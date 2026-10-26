@@ -59,8 +59,8 @@ test('filter dialog drafts do not change live values or URL until Apply; Cancel 
   const fixture = await mount();
   try {
     assert.equal(select<HTMLDialogElement>('dialog').open, true);
-    await input('.filter-sheet-fields select', 'culture');
-    await input('select[aria-label="选择朝代或时期"]', 'early');
+    await click('[data-choice=category] .filter-choice-trigger'); await click('[data-choice=category] [data-value=culture]');
+    await click('[data-choice=period] .filter-choice-trigger'); await click('[data-choice=period] [data-value=early]');
     assert.equal(fixture.applied.length, 0);
     assert.equal(initial.category, ''); assert.equal(initial.period, '');
     assert.equal(window.location.href, beforeUrl);
@@ -68,18 +68,18 @@ test('filter dialog drafts do not change live values or URL until Apply; Cancel 
     assert.equal(fixture.cancelled, 1); assert.equal(fixture.applied.length, 0);
   } finally { await fixture.cleanup(); }
   const reopened = await mount();
-  try { assert.equal(select<HTMLSelectElement>('.filter-sheet-fields select').value, ''); assert.equal(select<HTMLInputElement>('[name="to"]').value, '2026'); }
+  try { assert.equal(select('[data-choice=category] .filter-choice-trigger').textContent, '全部类别'); assert.equal(select<HTMLInputElement>('[name="to"]').value, '2026'); }
   finally { await reopened.cleanup(); }
 });
 
 test('Apply commits period/category/scope/order/key state together and preserves independent search', async () => {
   const fixture = await mount({ ...initial, q: '事件' });
   try {
-    await input('.filter-sheet-fields select', 'culture');
-    await input('select[aria-label="选择朝代或时期"]', 'early');
-    const fields = [...doc.querySelectorAll<HTMLSelectElement>('.filter-sheet-fields select')];
-    await input(`.filter-sheet-fields label:nth-child(3) select`, 'subset');
-    await input(`.filter-sheet-fields label:nth-child(4) select`, 'asc');
+    await click('[data-choice=category] .filter-choice-trigger'); await click('[data-choice=category] [data-value=culture]');
+    await click('[data-choice=period] .filter-choice-trigger'); await click('[data-choice=period] [data-value=early]');
+    const fields = [...doc.querySelectorAll('.filter-sheet-fields > div, .filter-sheet-fields > fieldset')];
+    await click('[data-segments=scope] input[value=subset]');
+    await click('[data-segments=order] input[value=asc]');
     assert.equal(fields.length, 4);
     await click('input[role="switch"]');
     assert.equal(fixture.applied.length, 0);
@@ -180,4 +180,36 @@ test('Tab and Shift+Tab wrap between the enabled dialog endpoints, skipping a di
     assert.equal(event.defaultPrevented, true); assert.equal(doc.activeElement, apply);
     assert.equal(fixture.applied.length, 0); assert.equal(fixture.cancelled, 0);
   } finally { await fixture.cleanup(); }
+});
+
+test('choice keyboard navigation previews without committing, Escape closes only options and Enter selects', async () => {
+ const fixture = await mount();
+ const key = async (key: string) => { const element = select<HTMLElement>('[data-choice=category] [role=combobox]'); element.focus(); const event = new window.KeyboardEvent('keydown', { key, bubbles:true, cancelable:true }); await act(async () => { element.dispatchEvent(event); }); return event; };
+ try {
+  await click('[data-choice=category] .filter-choice-trigger');
+  assert.equal(select('[role=combobox]').getAttribute('aria-expanded'), 'true');
+  await key('End'); assert.equal(select('[role=combobox]').getAttribute('aria-activedescendant'), select('[data-choice=category] [data-value=culture]').id);
+  const escape = await key('Escape'); assert.equal(escape.defaultPrevented,true); assert.equal(fixture.cancelled,0); assert.equal(doc.querySelector('[role=listbox]'),null);
+  await click('[data-choice=category] .filter-choice-trigger'); await key('End'); await key('Enter');
+  assert.equal(select('[data-choice=category] .filter-choice-trigger').textContent,'文化'); assert.equal(fixture.applied.length,0);
+  await submit(); assert.equal(fixture.applied[0].category,'culture');
+ } finally { await fixture.cleanup(); }
+});
+
+test('choice typeahead, Tab and pointer outside dismiss correctly; segmented controls retain radio semantics', async () => {
+ const fixture = await mount();
+ try {
+  const trigger = select<HTMLElement>('[data-choice=category] [role=combobox]'); trigger.focus();
+  await act(async () => { trigger.dispatchEvent(new window.KeyboardEvent('keydown', {key:'文',bubbles:true,cancelable:true})); });
+  assert.equal(trigger.getAttribute('aria-activedescendant'), select('[data-value=culture]').id);
+  await act(async () => { trigger.dispatchEvent(new window.KeyboardEvent('keydown', {key:'Tab',bubbles:true})); });
+  assert.equal(trigger.getAttribute('aria-expanded'),'false');
+  await click('[data-choice=category] .filter-choice-trigger');
+  await act(async () => { select('.filter-sheet-reset').dispatchEvent(new window.Event('pointerdown',{bubbles:true})); });
+  assert.equal(trigger.getAttribute('aria-expanded'),'false');
+  assert.equal(select<HTMLInputElement>('[data-segments=order] input[value=desc]').checked,true);
+  await click('[data-segments=order] input[value=asc]');
+  assert.equal(select<HTMLInputElement>('[data-segments=order] input[value=asc]').checked,true);
+  assert.equal(fixture.applied.length,0);
+ } finally { await fixture.cleanup(); }
 });

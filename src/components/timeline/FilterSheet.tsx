@@ -7,6 +7,7 @@ import { catalogBounds } from '../../core/catalog';
 import { civilYear, formatYear } from '../../core/time';
 import { applyFilterYears, clearExplorerFilters, selectFilterPeriod, validateFilterYearRange } from '../../core/filter-controls';
 import YearRange from './YearRange';
+import FilterChoice, { FilterSegments } from './FilterChoice';
 
 /** A draft transaction: dismissal never edits the live timeline or its URL. */
 export default function FilterSheet({ catalog, state, presentation, onApply, onCancel }: {
@@ -51,7 +52,8 @@ export default function FilterSheet({ catalog, state, presentation, onApply, onC
   return <dialog ref={dialog} id="chronicle-filters" className="filter-sheet" aria-labelledby="filter-sheet-title" onKeyDown={event => {
     if (event.key !== 'Tab') return;
     const controls = [...event.currentTarget.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), select:not(:disabled), a[href]')];
-    const first = controls[0], last = controls.at(-1);
+    const tabbable = controls.filter(control => !(control instanceof HTMLInputElement && control.type === 'radio' && !control.checked));
+    const first = tabbable[0], last = tabbable.at(-1);
     if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
     else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
   }} onCancel={event => { event.preventDefault(); onCancel(); }} onClick={event => {
@@ -69,10 +71,11 @@ export default function FilterSheet({ catalog, state, presentation, onApply, onC
           <p id="filter-year-hint" className={!validation.ok ? 'filter-sheet-error' : 'filter-sheet-hint'} role={!validation.ok ? 'alert' : undefined}>{!validation.ok ? validation.error : min <= 0 ? '拖动两端，或输入年份。公元前用负数，没有公元 0 年。' : '拖动两端快速选择，也可以输入精确年份。'}</p>
         </section>
         <section className="filter-sheet-fields" aria-label="筛选条件">
-          <label>类别<select value={draft.category} onChange={event => change({ category: event.target.value })}><option value="">全部类别</option>{catalog.topic.categories.map(category => <option key={category.id} value={category.id}>{category.title}</option>)}</select></label>
-          {!!catalog.periods.length && <label>{catalog.topic.periodLabel || '时期'}<select aria-label="选择朝代或时期" value={draft.period} onChange={event => replace(selectFilterPeriod(catalog, draft, event.target.value))}><option value="">全部时期</option>{catalog.periods.map(period => <option key={period.id} value={period.id}>{period.parentId ? '　' : ''}{period.title}</option>)}</select></label>}
-          {!!presentation.scopes?.length && <label>{presentation.scopeLabel || '地区'}<select value={draft.scope} onChange={event => change({ scope: event.target.value })}><option value="">{presentation.scopeAllLabel || '全球'}</option>{presentation.scopes.map(scope => <option key={scope.id} value={scope.id}>{scope.title}</option>)}</select></label>}
-          <label>排列顺序<select value={draft.order || 'asc'} onChange={event => change({ order: event.target.value as 'asc' | 'desc' })}><option value="desc">最新在前</option><option value="asc">从早到晚</option></select></label>
+          <FilterChoice name="category" label="类别" value={draft.category} onChange={category => change({ category })} options={[{ value: '', label: '全部类别' }, ...catalog.topic.categories.map(category => ({ value: category.id, label: category.title }))]}/>
+          {!!catalog.periods.length && <FilterChoice name="period" label={catalog.topic.periodLabel || '时期'} value={draft.period} onChange={period => replace(selectFilterPeriod(catalog, draft, period))} options={[{ value: '', label: '全部时期' }, ...catalog.periods.map(period => ({ value: period.id, label: period.title, nested: !!period.parentId }))]}/>}
+          {!!presentation.scopes?.length && <FilterSegments name="scope" label={presentation.scopeLabel || '地区'} value={draft.scope} onChange={scope => change({ scope })} options={[{ value: '', label: presentation.scopeAllLabel || '全球' }, ...presentation.scopes.map(scope => ({ value: scope.id, label: scope.title }))]}/>}
+          <FilterSegments name="order" label="排列顺序" value={draft.order || 'asc'} onChange={order => change({ order: order as 'asc' | 'desc' })} options={[{ value: 'desc', label: '最新在前' }, { value: 'asc', label: '从早到晚' }]}/>
+
         </section>
         <label className="filter-sheet-key"><span>仅关键节点<small>集中浏览影响较大的转折</small></span><input type="checkbox" role="switch" checked={!draft.all} onChange={event => change({ all: !event.target.checked })}/></label>
         {draft.q && <div className="filter-sheet-search"><span>同时搜索“{draft.q}”</span><button type="button" onClick={() => change({ q: '' })}>清除搜索</button></div>}

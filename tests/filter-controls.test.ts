@@ -41,7 +41,7 @@ test('filters expose removable chips, clear semantics, panel status and focus re
   assert.match(source, /className="filter-clear-all" onClick={resetFilters}>清除全部/);
   assert.match(source, /filterTrigger.current\?\.focus\({ preventScroll: true }\)/);
   const sheet = readFileSync(new URL('../src/components/timeline/FilterSheet.tsx', import.meta.url), 'utf8');
-  assert.match(sheet, /selectFilterPeriod\(catalog, draft, event.target.value\)/);
+  assert.match(sheet, /selectFilterPeriod\(catalog, draft, period\)/);
   assert.match(sheet, /element.showModal\(\)/);
   assert.match(source, /initialPeriod && next.period !== initialPeriod/);
   assert.doesNotMatch(source, /className="filter-zoom"/);

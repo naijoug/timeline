@@ -193,9 +193,10 @@ console.log('Production hydration smoke checks passed, including filtered AI leg
   const { dom, w, errors } = await hydrate('china-history', '?q=制度&all=1&order=desc');
   w.document.querySelector('[aria-label="时间与范围筛选"]').click();
   await waitFor(() => w.document.querySelector('#chronicle-filters')?.open, 'open history filters');
-  const select = w.document.querySelector('[aria-label="选择朝代或时期"]');
-  select.value = 'tang'; select.dispatchEvent(new w.Event('change', { bubbles:true }));
-  await waitFor(() => select.value === 'tang', 'period draft selection');
+  w.document.querySelector('[data-choice=period] .filter-choice-trigger').click();
+  await waitFor(() => w.document.querySelector('[data-choice=period] [data-value=tang]'), 'period options');
+  w.document.querySelector('[data-choice=period] [data-value=tang]').click();
+  await waitFor(() => w.document.querySelector('[data-choice=period] .filter-choice-trigger').textContent.includes('唐'), 'period draft selection');
   w.document.querySelector('.filter-sheet-apply').click();
   await waitFor(() => new URLSearchParams(w.location.search).get('period') === 'tang', 'period filters in place');
   assert.equal(new URLSearchParams(w.location.search).get('q'), '制度');
