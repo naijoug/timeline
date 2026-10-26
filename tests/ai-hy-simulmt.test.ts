@@ -34,7 +34,7 @@ test('Hy-SimulMT bounds latency, evaluation and citation claims and keeps detail
   assert.ok(event.recommendedResources?.[0].creator && event.recommendedResources[0].scopeNote);
   const filtered = filterAtlas(events, { ...defaultAtlas(), all: true, scope: 'china', lane: 'models' });
   assert.ok(filtered.some(e => e.id === event.id));
-  assert.equal(aiPresentation.latestEvent, event.id);
+  assert.ok(events.some(e => e.id === aiPresentation.latestEvent && e.date >= event.date));
   const payload = JSON.stringify(createExplorerPayload(aiCatalog));
   assert.ok(payload.includes(event.id));
   assert.ok(!payload.includes('hy-simulmt-card-reading'));

@@ -1,3 +1,4 @@
+import { terraEvents, terraSources } from './terra-release';
 import { hySimulmtEvents, hySimulmtSources } from './hy-simulmt-release';
 import { nanbeigeEvents, nanbeigeSources, nanbeigeEntities } from './nanbeige-release';
 import { recyclerEvents, recyclerSources } from './recycler-research';
@@ -11,6 +12,7 @@ import type { Entity, Source, TimelineEvent } from './types';
 export const recentResearchDate = '2026-10-26';
 
 export const recentSources: Source[] = [
+  ...terraSources,
   ...hySimulmtSources,
   ...nanbeigeSources,
   ...recyclerSources,
@@ -102,6 +104,7 @@ export const recentEntities: Entity[] = [
 ];
 
 export const recentEvents: TimelineEvent[] = [
+  ...terraEvents,
   ...hySimulmtEvents,
   ...nanbeigeEvents,
   ...recyclerEvents,
