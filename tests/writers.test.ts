@@ -34,8 +34,8 @@ test('reviewed works cite concrete records without refreshing unrelated source d
     }
     assert.ok(eventSourceIds(entry).every(sourceId => ids.has(sourceId)), id);
   }
-  assert.equal(source('sfs-archive').checkedAt, '2026-10-12');
-  assert.equal(source('hunan-lit-press').checkedAt, '2026-10-12');
+  assert.equal(source('sfs-archive'), undefined);
+  assert.equal(source('hunan-lit-press'), undefined);
 });
 
 test('Three-Body serialization, book, translation and Hugo reception keep separate dates', () => {

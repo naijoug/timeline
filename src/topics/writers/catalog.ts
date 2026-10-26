@@ -1,3 +1,5 @@
+import { liuAuditSources, liuAuditPatches } from "./liu-reference-audit";
+import { auditedWriterSources, auditedWriterPatches } from "./reference-audit";
 import { liuReviewedEvents, liuReviewedSources } from "./liu-reviewed-works";
 import { writersReviewedSources, writersRelations } from "./reviewed-works";
 import { zijinReviewedEvents, zijinReviewedSources } from "./zijin-reviewed-works";
@@ -23,21 +25,23 @@ const source = (
 
 export const sources: Source[] = [
   ...writersReviewedSources,
+  ...auditedWriterSources,
+  ...liuAuditSources,
   ...liuReviewedSources,
   ...zijinReviewedSources,
-  source("sfs-archive", "《科幻世界》杂志社刊发档案", "科幻世界杂志社", "https://www.sfw.com.cn/", "期刊档案", "1999—2006 年期刊发表与中国科幻银河奖评奖档案"),
-  source("cq-press", "重庆出版社当代文学与科幻出版档案", "重庆出版社", "https://www.cqph.com/", "出版档案", "《三体》三部曲单行本出版记录与印次信息"),
-  source("scitech-press", "四川科学技术出版社出版书目", "四川科学技术出版社", "https://www.sckjpress.com/", "出版档案", "世界科幻大师丛书 · 《球状闪电》2004 年版出版档案"),
-  source("writers-press", "作家出版社当代文学出版档案", "作家出版社", "https://www.writerspress.com.cn/", "出版档案", "刘慈欣《超新星纪元》2003 年首版出版记录"),
-  source("new-star-press", "新星出版社午夜文库档案", "新星出版社", "https://www.newstarpress.com/", "出版档案", "午夜文库 · 紫金陈《无证之罪》2014 年版出版记录"),
-  source("jiangsu-lit-press", "江苏凤凰文艺出版社出版书目", "江苏凤凰文艺出版社", "https://www.jswy.com.cn/", "出版档案", "紫金陈《坏小孩》、马伯庸《古董局中局》《三国机密》出版档案"),
-  source("yunnan-peoples-press", "云南人民出版社出版档案", "云南人民出版社", "https://www.ynrmcbs.com/", "出版档案", "紫金陈《长夜难明》2017 年首版出版记录"),
-  source("beijing-joint-press", "北京联合出版公司图书档案", "北京联合出版公司", "https://www.bjjoint.com/", "出版档案", "联合读创 · 紫金陈《追踪师》再版与《黄金原野》中文选集出版记录"),
-  source("hainan-press", "海南出版社文学出版档案", "海南出版社", "https://www.hainanpress.com/", "出版档案", "马伯庸《风起陇西》2006 年首版出版记录"),
-  source("hunan-lit-press", "湖南文艺出版社当代原创档案", "湖南文艺出版社", "https://www.hnwyp.com/", "出版档案", "马伯庸《长安十二时辰》《显微镜下的大明》《长安的荔枝》《太白金星有点烦》《食南之徒》《两京十五日》《桃花源没事儿》出版档案"),
-  source("shanghai-lit-press", "上海文艺出版社原创文学档案", "上海文艺出版社", "https://www.rw-sh.com/", "出版档案", "马伯庸《大医》（破晓篇、日出篇）2022 年版出版记录"),
-  source("nlc-china", "中国国家图书馆全国总书目", "国家图书馆国家书目数据库", "https://www.nlc.cn/", "国家书目", "当代华语作家作品在版编目（CIP）与版本典藏登记"),
-  source("chinawriter", "中国作家网·书汇与作品档案", "中国作家协会", "https://www.chinawriter.com.cn/", "出版档案", "当代作家作品出版信息、书讯与内容简介"),
+  source("sfs-archive", "科幻世界网站（当前维护中）", "科幻世界杂志社", "https://www.sfw.com.cn/", "机构入口（非直接证据）", "2026-10-26 访问返回“网站维护中”，不能读取期刊档案，不能据此核实具体作品或情节。"),
+  source("cq-press", "重庆出版社网站入口（非具体书目）", "重庆出版社", "https://www.cqph.com/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("scitech-press", "四川科学技术出版社网站入口（非具体书目）", "四川科学技术出版社", "https://www.sckjpress.com/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("writers-press", "作家出版社网站入口（非具体书目）", "作家出版社", "https://www.writerspress.com.cn/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("new-star-press", "新星出版社网站入口（非具体书目）", "新星出版社", "https://www.newstarpress.com/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("jiangsu-lit-press", "江苏凤凰文艺出版社网站入口（非具体书目）", "江苏凤凰文艺出版社", "https://www.jswy.com.cn/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("yunnan-peoples-press", "云南人民出版社网站入口（非具体书目）", "云南人民出版社", "https://www.ynrmcbs.com/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("beijing-joint-press", "北京联合出版公司网站入口（非具体书目）", "北京联合出版公司", "https://www.bjjoint.com/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("hainan-press", "海南出版社网站入口（非具体书目）", "海南出版社", "https://www.hainanpress.com/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("hunan-lit-press", "湖南文艺出版社网站入口（非具体书目）", "湖南文艺出版社", "https://www.hnwyp.com/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("shanghai-lit-press", "上海文艺出版社网站入口（非具体书目）", "上海文艺出版社", "https://www.rw-sh.com/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("nlc-china", "国家图书馆国家书目数据库网站入口（非具体书目）", "国家图书馆国家书目数据库", "https://www.nlc.cn/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("chinawriter", "中国作家协会网站入口（非具体书目）", "中国作家协会", "https://www.chinawriter.com.cn/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
 ];
 
 export const entities: Entity[] = [
@@ -1997,6 +2001,29 @@ export const events: TimelineEvent[] = [
     },
   ),
 ];
+
+for (const event of events) Object.assign(event, auditedWriterPatches[event.id] || {}, liuAuditPatches[event.id] || {});
+
+
+// The eras are editorial navigation, not independently established literary periodization.
+const entityEvidence: Record<string, string[]> = {
+  "liu-cixin": ["writers-liu-chronology", "hugo-database"],
+  "zi-jin-chen": ["writers-audit-zi-jin-chen-burning-ice"],
+  "ma-bo-yong": ["writers-audit-ming-microscope"],
+};
+for (const entity of entities) entity.sourceIds = entityEvidence[entity.id] || entity.sourceIds;
+const eraEvidence: Record<string, { summary: string; sourceIds: string[] }> = {
+  "era-early-breakthrough": { summary: "编辑分期：以刘慈欣在世纪之交的期刊发表和几位作家的早期探索为阅读起点；分期名称不表示公认文学史结论。", sourceIds: ["writers-liu-chronology"] },
+  "era-epic-and-mystery": { summary: "编辑分期：并读《三体》的连载与成书，以及紫金陈的网络推理连载、马伯庸的历史小说。不同作品的发表阶段应分别确认。", sourceIds: ["writers-three-body-chronology", "writers-audit-zi-jin-chen-burning-ice", "writers-audit-ma-bo-yong-secret-of-three-kingdoms"] },
+  "era-screen-and-bestseller": { summary: "编辑分期：将作品出版与影视改编分开阅读，尤其留意《无证之罪》中地点、主角职业等改编差异，以及《显微镜下的大明》的非虚构定位。", sourceIds: ["writers-audit-zi-jin-chen-burning-ice", "writers-audit-ming-microscope"] },
+  "era-micro-history-mature": { summary: "编辑分期：以《大医》《食南之徒》和《长夜难明：双星》等作品观察题材变化；“成熟”只是导航用语，不作文学价值排名。", sourceIds: ["writers-audit-great-healer", "writers-audit-food-of-the-south", "writers-audit-zi-jin-chen-long-night-twin-stars"] },
+};
+for (const period of periods) Object.assign(period, eraEvidence[period.id] || {});
+
+
+// Retired institution entry pages are not evidence; keep their audit history in the audit ledger.
+const retiredSourceIds = new Set(["beijing-joint-press", "chinawriter", "cq-press", "hainan-press", "hunan-lit-press", "jiangsu-lit-press", "new-star-press", "nlc-china", "scitech-press", "sfs-archive", "shanghai-lit-press", "writers-press", "yunnan-peoples-press"]);
+for (let i = sources.length - 1; i >= 0; i--) if (retiredSourceIds.has(sources[i].id)) sources.splice(i, 1);
 
 export const writersCatalog: Catalog = {
   topic: {

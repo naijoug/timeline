@@ -14,7 +14,7 @@ export const liuReviewedSources: Source[] = [
 export const liuReviewedEvents: TimelineEvent[] = [
   {
     id: 'liu-cixin-supernova-era', title: '《超新星纪元》', time: { kind: 'point', start: { year: 2003, month: 1 } }, category: 'sci-fi', entityIds: ['liu-cixin'], periodIds: ['era-early-breakthrough'], milestone: false,
-    summary: '超新星辐射使十三岁以上的人生命进入倒计时，成年人试图把维持社会的知识传给孩子。孩子接手后，是否还会遵循原来的秩序？这是小说设定，不是天文学预测。',
+    summary: '按所引英译版简介，超新星辐射使超过十三岁的人生命进入倒计时，成年人试图把维持社会的知识传给孩子。孩子接手后，是否还会遵循原来的秩序？这是小说设定，不是天文学预测。',
     significance: '这部较早开始写作、历经修改才出版的长篇，提供了理解刘慈欣早期创作与后续译介的入口；写作时间、中文版和英文版不能混为一个节点。',
     sourceIds: ['writers-liu-chronology', 'writers-liu-chronology-issue', 'writers-liu-archive-books', 'writers-liu-wangyao-interview', 'writers-supernova-tor'], tags: ['科幻', '长篇小说', '儿童纪元', '刘慈欣', '超新星纪元'],
     facts: [

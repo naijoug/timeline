@@ -183,7 +183,7 @@ export const ancientSources: Source[] = [
   },
   {
     "id": "anc-oup-chronology",
-    "title": "Chronology",
+    "title": "Timeline of Chinese Dynasties",
     "publisher": "牛津大学出版社：The Oxford Handbook of Classical Chinese Literature",
     "url": "https://academic.oup.com/edited-volume/28107/chapter/212213471",
     "type": "学术参考年表",
@@ -217,8 +217,8 @@ export const ancientSources: Source[] = [
     "publisher": "臺灣師大歷史學報 第61期",
     "url": "https://www.his.ntnu.edu.tw/publish01/downloadfile.php?issue_id=8&locale=en&paper_id=17&periodicalsPage=2",
     "type": "学术论文",
-    "checkedAt": "2026-10-24",
-    "locator": "第3页：208年赤壁与229年孙权称帝",
+    "checkedAt": "2026-10-26",
+    "locator": "第3页：208年赤壁与229年孙权称帝；第20页：221年伐吴与222年夷陵战事",
     "version": "在线资料；仅使用下列定位段落，未对全文所有历史判断作背书"
   },
   {
@@ -285,9 +285,9 @@ export const ancientSources: Source[] = [
     "id": "anc-northernwei",
     "title": "门阀社会及其解体：魏晋南北朝（下）",
     "publisher": "叶炜 / 北京大学首都发展研究院",
-    "url": "https://news.pku.edu.cn/xwzh/129-300836.htm",
+    "url": "https://news.pku.edu.cn/info/12521/3283651.htm",
     "type": "学者讲座纪要",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-26",
     "locator": "讲座正文：439年北魏统一北方与南北朝对峙",
     "version": "在线资料；仅使用下列定位段落，未对全文所有历史判断作背书"
   },
@@ -343,21 +343,21 @@ export const ancientSources: Source[] = [
   },
   {
     "id": "anc-liao",
-    "title": "契丹の金属工芸：遼代の器物と文化",
+    "title": "科学观照 显微析理 ——辽代金属工艺品",
     "publisher": "九州国立博物馆",
     "url": "https://www.kyuhaku.jp/zh/exhibition/exhibition_pre200.html",
     "type": "博物馆展览说明",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-26",
     "locator": "展览介绍：契丹、辽916—1125年及多元文化",
     "version": "在线资料；仅使用下列定位段落，未对全文所有历史判断作背书"
   },
   {
     "id": "anc-liao-founded",
-    "title": "契丹与辽朝历史",
+    "title": "赤峰—市博物馆—辽中京遗址、大明塔—福峰山—打虎石水库—辽祖州祖陵",
     "publisher": "赤峰市人民政府",
     "url": "https://www.chifeng.gov.cn/zjcf/cycf/tjlx/200901/t20090109_416683.html",
-    "type": "地方历史资料",
-    "checkedAt": "2026-10-24",
+    "type": "地方文旅路线中的历史介绍",
+    "checkedAt": "2026-10-26",
     "locator": "916年耶律阿保机建国段",
     "version": "在线资料；仅使用下列定位段落，未对全文所有历史判断作背书"
   },
@@ -383,11 +383,11 @@ export const ancientSources: Source[] = [
   },
   {
     "id": "anc-jin-founded",
-    "title": "辽金时期的货币与经济交流",
+    "title": "我省发现大量金代窖藏铜钱，研究表明——宋钱成为金朝主要流通货币",
     "publisher": "辽宁省文化和旅游厅",
     "url": "https://whly.ln.gov.cn/whly/mtjj/FA934D6B73CD4693BC45F32237F96FE0/index.shtml",
     "type": "文博历史资料",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-26",
     "locator": "1115年完颜阿骨打建立金朝段",
     "version": "在线资料；仅使用下列定位段落，未对全文所有历史判断作背书"
   },
@@ -453,11 +453,11 @@ export const ancientSources: Source[] = [
   },
   {
     "id": "anc-xiangyang-dates",
-    "title": "襄阳1273：历史纪录片专家论述",
+    "title": "再登CCTV｜西电教师撰稿纪录片《襄阳 一二七三》播出",
     "publisher": "西安电子科技大学官方发布 / 新浪平台",
     "url": "https://news.sina.cn/gn/2020-09-24/detail-iivhvpwy8590844.d.html",
     "type": "大学发布的学术传播资料",
-    "checkedAt": "2026-10-24",
+    "checkedAt": "2026-10-26",
     "locator": "纪录片及专家说明：1268—1273年襄阳战役",
     "version": "在线资料；仅使用下列定位段落，未对全文所有历史判断作背书"
   },
@@ -503,12 +503,12 @@ export const ancientSources: Source[] = [
   },
   {
     "id": "anc-jingnan",
-    "title": "靖难起家——朱棣",
-    "publisher": "故宫博物院",
+    "title": "靖难起家——朱棣小传",
+    "publisher": "陈时龙 / 故宫博物院",
     "url": "https://www.dpm.org.cn/explode/others/208160.html",
     "type": "博物馆历史研究",
-    "checkedAt": "2026-10-24",
-    "locator": "1399年起兵、1402年夺位段；不采用页面其他疑似OCR纪年",
+    "checkedAt": "2026-10-26",
+    "locator": "文章印刷第24—25页；1399年起兵、1402年夺位段；不采用PDF其他疑似OCR纪年",
     "version": "在线资料；仅使用下列定位段落，未对全文所有历史判断作背书"
   },
   {
@@ -673,7 +673,7 @@ export const ancientSources: Source[] = [
   },
   {
     "id": "anc-white-lotus-caution",
-    "title": "“白莲教”名称与历史组织问题研究",
+    "title": "“白莲教”质疑：无时不在抑或子虚乌有",
     "publisher": "中国人民大学清史研究所",
     "url": "https://iqh.ruc.edu.cn/old/jsmmhsymjjpyj/mmzjymmhs/3b82e98c5a66414a88e51e3418148b42.htm",
     "type": "宗教社会史研究",
@@ -898,7 +898,8 @@ export const ancientEvents: TimelineEvent[] = [
     "note": "前1046年采用常见断代口径，早期绝对年代仍有研究讨论；铭文甲子日不在此擅自换算成公历月日。",
     "sourceIds": [
       "anc-nmc-early",
-      "anc-li-gui"
+      "anc-li-gui",
+      "anc-met-bronze"
     ],
     "tags": [
       "夏商周",
@@ -1909,7 +1910,7 @@ export const ancientEvents: TimelineEvent[] = [
     "significance": "展示三国联盟关系的变化与区域利益冲突。",
     "note": "吴的entity标签是阅读对象，并不表示孙权222年已经称帝。",
     "sourceIds": [
-      "anc-chibi-yiling"
+      "anc-sunwu"
     ],
     "tags": [
       "汉末三国",
@@ -1921,17 +1922,17 @@ export const ancientEvents: TimelineEvent[] = [
         "label": "背景与依据",
         "text": "赤壁后的孙刘关系逐渐改变，刘备发动对吴战争。",
         "sourceIds": [
-          "anc-chibi-yiling"
+          "anc-sunwu"
         ],
-        "locator": "222年陆逊、刘备夷陵战事段"
+        "locator": "吕春盛《族群关系与孙吴政权的成立》第20页：221年刘备伐吴、222年夷陵战败"
       },
       {
         "label": "事件与变化",
         "text": "222年夷陵之战，陆逊一方取胜，刘备军败退。",
         "sourceIds": [
-          "anc-chibi-yiling"
+          "anc-sunwu"
         ],
-        "locator": "222年陆逊、刘备夷陵战事段"
+        "locator": "吕春盛《族群关系与孙吴政权的成立》第20页：221年刘备伐吴、222年夷陵战败"
       },
       {
         "label": "阅读理解",

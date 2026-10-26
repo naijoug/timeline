@@ -6,7 +6,7 @@ const references: [string, string, string, string, Source['type']][] = [
   ['qwen3', 'Qwen3: Think Deeper, Act Faster', 'Qwen', 'https://qwenlm.github.io/blog/qwen3/', '官方公告'],
   ['kimi2', 'Kimi K2: Open Agentic Intelligence', 'Moonshot AI', 'https://www.kimi.com/blog/kimi-k2', '官方公告'],
   ['kimi-agent', 'Introducing Kimi Agent', 'Moonshot AI', 'https://www.kimi.com/en/help/agent/agent-overview', '官方文档'],
-  ['glm45', 'GLM-4.5: Reasoning, Coding, and Agentic Abilities', 'Z.ai', 'https://z.ai/blog/glm-4.5', '官方公告'],
+  ['glm45', 'Z.ai Releases GLM-4.5, Setting New Standards for AI Performance and Accessibility While Improving Affordability', 'Z.ai（PR Newswire 发布）', 'https://www.prnewswire.com/news-releases/zai-releases-glm-4-5--setting-new-standards-for-ai-performance-and-accessibility-while-improving-affordability-302514803.html', '官方公告'],
   ['glm45-repo', 'GLM-4.5 model and research repository', 'Z.ai', 'https://github.com/zai-org/GLM-4.5', '官方文档'],
   ['minimax-m1', 'MiniMax-M1', 'MiniMax', 'https://www.minimax.io/news/minimaxm1', '官方公告'],
   ['minimax-agent', 'Introducing MiniMax Agent', 'MiniMax', 'https://www.minimax.io/news/minimax-agent', '官方公告'],
@@ -16,8 +16,9 @@ const references: [string, string, string, string, Source['type']][] = [
   ['step3', 'Step3: Cost-Effective Multimodal Intelligence', '阶跃星辰', 'https://chat.stepfun.com/research/en/step3', '官方公告'],
   ['sensenova6', '商汤日日新 V6 发布', '商汤', 'https://www.sensetime.com/cn/news/51169469', '官方公告'],
   ['ui-tars', 'UI-TARS: Pioneering Automated GUI Interaction', 'ByteDance Seed', 'https://github.com/bytedance/UI-TARS', '官方文档'],
+  ['ui-tars-paper', 'UI-TARS: Pioneering Automated GUI Interaction with Native Agents', 'ByteDance Seed / arXiv', 'https://arxiv.org/abs/2501.12326', '原始论文'],
   ['gpt4-report', 'GPT-4 Technical Report', 'OpenAI / arXiv', 'https://arxiv.org/abs/2303.08774', '原始论文'],
-  ['gemini15', 'How Gemini 1.5 expands the context window', 'Google', 'https://blog.google/innovation-and-ai/products/long-context-window-ai-models/', '官方公告'],
+  ['gemini15', 'Our next-generation model: Gemini 1.5', 'Google', 'https://blog.google/innovation-and-ai/products/google-gemini-next-generation-model-february-2024/', '官方公告'],
   ['gemini20', 'Gemini 2.0, Jules and Colab updates', 'Google', 'https://blog.google/feed/gemini-jules-colab-updates/', '官方公告'],
   ['llama2', 'Meta and Microsoft introduce Llama 2', 'Meta', 'https://ai.meta.com/blog/llama-2/', '官方公告'],
   ['llama3', 'Introducing Meta Llama 3', 'Meta', 'https://ai.meta.com/blog/meta-llama-3', '官方公告'],
@@ -30,10 +31,10 @@ const references: [string, string, string, string, Source['type']][] = [
   ['copilot-agent', 'GitHub Copilot: Meet the new coding agent', 'GitHub', 'https://github.blog/news-insights/product-news/github-copilot-meet-the-new-coding-agent/', '官方公告'],
   ['replit-v2', 'Introducing Replit Agent v2 in Early Access', 'Replit', 'https://replit.com/blog/agent-v2', '官方公告'],
   ['devin', 'Introducing Devin', 'Cognition', 'https://cognition.com/blog/introducing-devin', '官方公告'],
-  ['cursor-agent', 'Composer UI, Agent and Commit Messages', 'Cursor', 'https://www.cursor.com/ja/changelog/new-composer-ui-agent-commit-messages', '官方公告'],
+  ['cursor-agent', 'Composer UI, Agent and Commit Messages', 'Cursor', 'https://cursor.com/changelog/0-43-x', '官方公告'],
 ];
 export const globalSources: Source[] = references.map(([id, title, publisher, url, type]) => ({
-  id, title, publisher, url, type, language: ['ernie45','hunyuan-t1','pangu-open','sensenova6'].includes(id) ? '简体中文' : id === 'cursor-agent' ? '日本語 / English' : 'English', checkedAt: '2026-09-29',
+  id, title, publisher, url, type, language: ['ernie45','hunyuan-t1','pangu-open','sensenova6'].includes(id) ? '简体中文' : 'English', checkedAt: '2026-09-29',
 }));
 
 const families = [
@@ -133,3 +134,7 @@ export const globalEvents: TimelineEvent[] = [
   application('devin-introduction','2024-03','Devin','devin','devin','Cognition 介绍具有终端、编辑器与浏览器环境的软件工程 Agent。','展示将开发任务委托给可以持续执行的系统这一产品方向。','产品介绍'),
   application('cursor-agent-introduction','2024-11-24','Cursor Agent','cursor','cursor-agent','Cursor 在 Composer 更新中引入 Agent 工作流。','让代码编辑器中的助手能够更主动地组织开发操作。','功能发布'),
 ];
+
+// The repository README follows newer versions; retain the original research date.
+const originalUiTars = globalEvents.find(event => event.id === 'ui-tars-research');
+if (originalUiTars) originalUiTars.sourceIds.push('ui-tars-paper');

@@ -41,7 +41,7 @@ test('Zijin facts and factual sections cite concrete reviewed records, with edit
     }
     assert.ok(event.facts!.every(fact => fact.sourceIds?.length));
   }
-  assert.equal(writersCatalog.sources.find(source => source.id === 'jiangsu-lit-press')!.checkedAt, '2026-10-12');
+  assert.equal(writersCatalog.sources.find(source => source.id === 'jiangsu-lit-press'), undefined);
 });
 
 test('Bad Kids does not leak adaptation-only characters, setting or rescue motive into the novel', () => {

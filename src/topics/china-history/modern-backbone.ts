@@ -80,7 +80,7 @@ export const modernSources: Source[] = [
   },
   {
     "id": "modern-late-qing-reform",
-    "title": "China and the West: Imperialism, Opium, and Self-Strengthening",
+    "title": "From Reform to Revolution, 1842 to 1911",
     "publisher": "哥伦比亚大学 Asia for Educators",
     "url": "https://afe.easia.columbia.edu/special/china_1750_reform.htm",
     "type": "大学教学研究",
@@ -246,13 +246,13 @@ export const modernSources: Source[] = [
   {
     "id": "modern-taierzhuang",
     "title": "血战台儿庄 激战禹王山：徐州会战回眸",
-    "publisher": "中华人民共和国国防部 · 解放军报",
-    "url": "https://www.mod.gov.cn/gfbw/gfjy_index/16398839.html",
+    "publisher": "西藏日报 · 新华社（赵久龙、丛佳鑫）",
+    "url": "https://e.xzxw.com/xzrbpad/202507/28/content_319068.html",
     "type": "机构历史回顾",
     "format": "机构历史回顾",
     "locator": "1938年3月开战、4月7日胜利；随后徐州撤退段",
     "version": "仅采用日期、指挥方与战役关系；不采用兵力、伤亡数字",
-    "checkedAt": "2026-10-24"
+    "checkedAt": "2026-10-26"
   },
   {
     "id": "modern-japan-surrender",
@@ -279,46 +279,46 @@ export const modernSources: Source[] = [
   {
     "id": "modern-liaoshen",
     "title": "辽沈战役：开启解放战争战略决战序幕",
-    "publisher": "中华人民共和国国防部 · 解放军报",
-    "url": "https://www.mod.gov.cn/gfbw/gfjy_index/js_214151/4911864.html?big=fan",
+    "publisher": "人民网 · 解放军报（冯斌、刘奎、姚池）",
+    "url": "https://cpc.people.com.cn/n1/2022/0531/c443712-32434528.html",
     "type": "机构军事史回顾",
     "format": "机构军事史回顾",
     "locator": "首段1948年9月12日至11月2日；锦州和沈阳作战段",
     "version": "采用日期、战区和结果；不沿用政治评价或参战伤亡统计",
-    "checkedAt": "2026-10-24"
+    "checkedAt": "2026-10-26"
   },
   {
     "id": "modern-huaihai",
     "title": "淮海战役：以60万战胜80万的战争奇迹",
-    "publisher": "中华人民共和国国防部 · 央广军事",
-    "url": "https://www.mod.gov.cn/gfbw/gfjy_index/js_214151/4834146.html",
+    "publisher": "央广军事 · 姜廷玉",
+    "url": "https://m.cnr.cn/mil/20190108/t20190108_524475138.html",
     "type": "机构军事史回顾",
     "format": "机构军事史回顾",
     "locator": "审时度势 科学运筹：1948年11月6日至1949年1月10日；参战部队与徐州战区",
     "version": "标题与正文兵力、伤亡数字不用于本节点；仅核对时间、部队、地区和结果",
-    "checkedAt": "2026-10-24"
+    "checkedAt": "2026-10-26"
   },
   {
     "id": "modern-pingjin",
     "title": "平津战役：铸就伟大胜利的关键一役",
-    "publisher": "中国军网 · 解放军报",
-    "url": "https://www.81.mil.cn/2022zt/2022-07/26/content_10174175.htm",
+    "publisher": "人民网 · 解放军报（冯斌、刘奎、郭书菊）",
+    "url": "https://cpc.people.com.cn/n1/2022/0726/c443712-32485491.html",
     "type": "机构军事史回顾",
     "format": "机构军事史回顾",
     "locator": "首段；天津作战和北平和平接收段",
     "version": "仅采用战役日期与不同城市的解决方式",
-    "checkedAt": "2026-10-24"
+    "checkedAt": "2026-10-26"
   },
   {
     "id": "modern-three-campaigns",
-    "title": "三大战役：伟大的战略决战",
-    "publisher": "中华人民共和国国防部 · 解放军报",
-    "url": "https://www.mod.gov.cn/gfbw/gfjy_index/js_214151/4879656.html",
+    "title": "伟大征程丨三大战役：伟大的战略决战",
+    "publisher": "新华网·新华社（朱高祥、宋瑞）",
+    "url": "https://www1.xinhuanet.com/politics/20260615/b48d60a31a304823b72b17f4aad54558/c.html",
     "type": "机构军事史回顾",
     "format": "机构军事史回顾",
-    "locator": "三战役起止顺序；1949年1月31日平津战役结束",
-    "version": "已核对在线文字；不是原件影印",
-    "checkedAt": "2026-10-24"
+    "locator": "1948年9月12日及1949年1月31日时间段；三大战役整体背景",
+    "version": "2026年新华社回顾，已核正文日期；只作整体背景和终点交叉佐证，不从概述推断三战役互不重叠",
+    "checkedAt": "2026-10-26"
   },
   {
     "id": "modern-land-reform",
@@ -366,7 +366,7 @@ export const modernSources: Source[] = [
   },
   {
     "id": "modern-socialist-transformation",
-    "title": "全国工商界代表在接受社会主义改造时报喜的信",
+    "title": "全国工商界代表为全国主要城市资本主义工商业实现全行业公私合营给中共中央的报喜信",
     "publisher": "中国国家博物馆",
     "url": "https://www.chnmuseum.cn/zp/zpml/gshww/202109/t20210927_251567.shtml",
     "type": "藏品说明",
@@ -378,13 +378,13 @@ export const modernSources: Source[] = [
   {
     "id": "modern-constitution-1954",
     "title": "中华人民共和国宪法（1954年）",
-    "publisher": "中国政协网",
-    "url": "https://www.cppcc.gov.cn/2011/09/06/ARTI1315304517625183.shtml",
+    "publisher": "共产党员网",
+    "url": "https://news.12371.cn/2015/03/18/ARTI1426665514681575.shtml",
     "type": "历史宪法原文",
     "format": "历史宪法原文",
     "locator": "1954年9月20日公告；总纲与国家机构章",
-    "version": "1954年历史文本，不是现行法；页面日期与标题已核对，网页读取间歇超时",
-    "checkedAt": "2026-10-24"
+    "version": "1954年历史文本，不是现行法；已核通过日期、序言、总纲和国家机构章",
+    "checkedAt": "2026-10-26"
   },
   {
     "id": "modern-hundred-flowers",
@@ -455,13 +455,13 @@ export const modernSources: Source[] = [
   {
     "id": "modern-constitution-1982",
     "title": "中华人民共和国宪法（历次修正沿革）",
-    "publisher": "中华人民共和国教育部",
-    "url": "https://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/moe_418/201805/t20180508_335334.html",
+    "publisher": "中央人民政府驻香港特别行政区联络办公室",
+    "url": "https://www.locpg.gov.cn/fzfz/zhrmghgxf/index.htm",
     "type": "宪法合并文本",
     "format": "宪法合并文本",
     "locator": "文首1982年12月4日通过公布及历次修正说明；目录",
     "version": "本页是2018年修正后的合并文本；本节点仅据文首核对1982年日期和篇章结构，不将后来的具体条文倒写为1982年内容",
-    "checkedAt": "2026-10-24"
+    "checkedAt": "2026-10-26"
   },
   {
     "id": "modern-tiananmen-archives",
@@ -476,14 +476,14 @@ export const modernSources: Source[] = [
   },
   {
     "id": "modern-southern-tour",
-    "title": "共和国的足迹：1992年邓小平视察南方",
-    "publisher": "中国政府网 · 新华社",
-    "url": "https://www.gov.cn/zhuanti/content_2754129.htm",
+    "title": "新中国峥嵘岁月丨邓小平视察南方",
+    "publisher": "人民网 · 新华社",
+    "url": "https://cpc.people.com.cn/n1/2019/1024/c429559-31418497.html",
     "type": "机构历史资料",
     "format": "机构历史资料",
     "locator": "1992年1月18日至2月21日行程与谈话段",
     "version": "仅采用行程与谈话议题，不沿用评价性结论",
-    "checkedAt": "2026-10-24"
+    "checkedAt": "2026-10-26"
   },
   {
     "id": "modern-market-reform",
@@ -536,7 +536,7 @@ export const modernSources: Source[] = [
     "url": "https://www.th.gov.tw/Epaper_Content/238/9126/",
     "type": "档案机构历史研究",
     "format": "档案机构历史研究",
-    "locator": "末段：首次全民直选总统1996年3月23日",
+    "locator": "第二段：首次全民直选总统1996年3月23日",
     "version": "已核对在线文字；不是原件影印",
     "checkedAt": "2026-10-24"
   },
@@ -718,14 +718,14 @@ export const modernSources: Source[] = [
   },
   {
     "id": "modern-prc-founding-record",
-    "title": "中华人民共和国大事记：1949年10月1日",
-    "publisher": "中央党史和文献研究院 · 国防部转载",
-    "url": "https://www.mod.gov.cn/gfbw/qwfb/4851535.html?big=fan",
+    "title": "中华人民共和国大事记（1949年10月－2019年9月）",
+    "publisher": "中央党史和文献研究院 · 共产党员网转载",
+    "url": "https://www.12371.cn/2019/09/27/ARTI1569582665702388.shtml",
     "type": "机构编年史",
     "format": "机构编年史",
     "locator": "1949年10月1日段：政协、共同纲领、政府会议和成立典礼",
     "version": "只取可核对的日期、会议和机构安排，不沿用“完全统一”等政治评价",
-    "checkedAt": "2026-10-24"
+    "checkedAt": "2026-10-26"
   }
 ];
 
@@ -1865,9 +1865,9 @@ export const modernEvents: TimelineEvent[] = [
         "label": "史实与依据",
         "text": "官方军事史回顾将平津战役结束日列为1949年1月31日。",
         "sourceIds": [
-          "modern-three-campaigns"
+          "modern-pingjin"
         ],
-        "locator": "开头时间序列"
+        "locator": "慑谈并举，和平解放北平：1949年1月31日接管防务、战役结束"
       },
       {
         "label": "理解与延伸",
@@ -2673,7 +2673,8 @@ export const modernEvents: TimelineEvent[] = [
         "label": "官方结果记录",
         "text": "政治大学保存的中选会数据表列出1996年3月23日投票结果；国史馆台湾文献馆也核对这一首次直选日期。",
         "sourceIds": [
-          "modern-taiwan-election-result"
+          "modern-taiwan-election-result",
+          "modern-taiwan-election-date"
         ],
         "locator": "表首日期与得票表"
       },

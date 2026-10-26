@@ -111,7 +111,7 @@ model('kimi-k2-6', '2026-04-20', 'Kimi K2.6', 'kimi', '月之暗面', kimi + 'ki
 model('kimi-k3', '2026-07-16', 'Kimi K3 公布', 'kimi', '月之暗面', kimi + 'kimi-k3', 'Kimi K2.6', ['更新原生视觉与百万 token 上下文能力'], '系列继续扩展跨模态长任务处理。', '此处为公告日期，不把随后权重开放日期合并为同一天。', { baselineId: 'kimi-k2-6', kind: '模型公告' });
 
 const glmNotes = 'https://docs.z.ai/release-notes/new-released';
-model('glm-4-5v', '2025-08-11', 'GLM-4.5V', 'glm', '智谱', glmNotes, 'GLM-4.5 文本路线', ['增加视觉推理、定位与 GUI 任务支持'], 'GLM 扩展视觉分支。', '不能将视觉任务成绩直接等同于 Agent 成功率。');
+model('glm-4-5v', '2025-08-11', 'GLM-4.5V', 'glm', '智谱', 'https://github.com/zai-org/GLM-V', 'GLM-4.5 文本路线', ['增加视觉推理、定位与 GUI 任务支持'], 'GLM 扩展视觉分支。', '不能将视觉任务成绩直接等同于 Agent 成功率。');
 model('glm-4-6', '2025-09-30', 'GLM-4.6', 'glm', '智谱', glmNotes, 'GLM-4.5', ['改进编程并扩展上下文'], '服务更大代码库。', '实际收益依任务而变。', { baselineId: 'glm-4-5' });
 model('glm-4-7', '2025-12-22', 'GLM-4.7', 'glm', '智谱', glmNotes, 'GLM-4.6', ['加强编码、推理与多步执行'], '面向端到端开发。', '评测环境影响结果。', { baselineId: 'glm-4-6' });
 model('glm-5', '2026-02-12', 'GLM-5', 'glm', '智谱', glmNotes, 'GLM-4.7', ['面向系统工程与长程 Agent 任务'], '关注项目级工程。', '采用官方更新日志日期。', { key: true, baselineId: 'glm-4-7' });
@@ -131,7 +131,7 @@ product('generative-agents-paper', '2023-04-07', 'Generative Agents：记忆、�
 product('swe-agent-paper', '2024-05-06', 'SWE-agent：为 Agent 设计电脑接口', 'swe-agent', 'Princeton / Stanford', 'https://arxiv.org/abs/2405.15793', '开源研究系统通过专门的编辑、导航和执行接口处理软件工程任务。', '说明工具接口设计本身会影响 Agent 的任务表现。', '论文日期不是仓库首次建立日期；评测修复率不能直接代表所有项目。', { key: true, kind: '论文首发', tags: ['开源', '编码'] });
 product('openhands-paper', '2024-07-23', 'OpenDevin / OpenHands 平台论文', 'openhands', 'OpenHands 社区', 'https://arxiv.org/abs/2407.16741', '平台将代码编辑、终端、浏览器和沙箱环境组织成软件开发 Agent 的执行空间。', '开源执行平台使 Agent 的环境与运行方式可以复用。', '采用论文首次提交日；论文后续版本使用 OpenHands 名称，不把更名日期倒推到首稿。', { key: true, kind: '论文首发', tags: ['开源', '编码', '执行环境'] });
 product('autoglm-paper', '2024-10-28', 'AutoGLM：浏览器与手机 GUI Agent', 'autoglm', '智谱', 'https://arxiv.org/abs/2411.00820', 'AutoGLM 研究通过界面观察、规划和操作来执行浏览器与手机任务。', '中国团队的 GUI Agent 路线形成公开技术材料。', '研究论文不是所有用户都可使用的商业产品公告。', { key: true, kind: '论文首发', tags: ['GUI', '手机', '研究原型'] });
-product('autoglm-phone-multilingual', '2025-12-11', 'AutoGLM-Phone 多语言版', 'autoglm', '智谱', glmNotes, '手机自动化框架增加中英文任务支持。', '扩展手机 Agent 使用范围。', '需要设备连接和相应授权。', { tags: ['手机', '多语言'] });
+product('autoglm-phone-multilingual', '2025-12-09', 'AutoGLM-Phone 多语言版权重上传', 'autoglm', '智谱', 'https://huggingface.co/zai-org/AutoGLM-Phone-9B-Multilingual/commit/118ebd2c2262b40fb64d8adfbb632ccf627af532', '官方模型仓库记录多语言版权重与配置文件上传；配套框架分别支持中文和英文手机应用场景。', '扩展手机 Agent 使用范围。', '日期采用 Hugging Face 权重上传提交时间，不等同于产品公告或 API 开放日；需要设备连接和相应授权。', { kind: '权重上传记录', tags: ['手机', '多语言'] });
 product('replit-agent-first', '2024-09', 'Replit Agent 首次推出', 'replit-agent', 'Replit', 'https://replit.com/blog/introducing-replit-agent', '用户用自然语言描述需求，Agent 在 Replit 中搭建应用并配置运行环境。', '应用开发从逐段生成代码走向任务式构建。', '官方回顾写于推出之后，本条仅确认首次发布月份。', { key: true, kind: '产品发布' });
 product('replit-agent-3', '2025-09-10', 'Replit Agent 3', 'replit-agent', 'Replit', 'https://replit.com/blog/introducing-agent-3-our-most-autonomous-agent-yet', 'Agent 增加通过浏览器测试应用、检查结果并修复的能力。', '构建、运行、验证和修复形成更完整的循环。', '自动测试不能代替业务验收；复杂任务仍可能失败。', { key: true, tags: ['编码', '验证循环'] });
 product('replit-agent-4', '2026-03-11', 'Replit Agent 4', 'replit-agent', 'Replit', 'https://replit.com/blog/introducing-agent-4-built-for-creativity', '将创意探索、设计迭代与并行开发工作结合。', 'Agent 产品从单任务执行扩展到协作创作流程。', '实际可用性受工作区和产品套餐影响。');
@@ -177,7 +177,7 @@ product('codex-cloud-preview', '2025-05-16', 'Codex 云端研究预览', 'codex'
 product('codex-cloud-ga', '2025-10-06', 'Codex 正式开放', 'codex', 'OpenAI', 'https://openai.com/index/codex-now-generally-available/', 'Codex 云端服务从研究预览进入正式开放，并扩展团队集成与管理能力。', '编码 Agent 进入可管理的团队工作流程。', '正式开放不代表每个实验功能都同时稳定。', { kind: '正式开放', tags: ['编码', '团队协作'] });
 product('codex-desktop', '2026-02-02', 'Codex macOS 应用', 'codex', 'OpenAI', 'https://openai.com/index/introducing-the-codex-app/', '桌面应用提供项目、多任务、并行 Agent、Skills 和自动化的统一入口。', '产品重心从一次对话转向持续管理多个工作任务。', '这是 macOS 首发；Windows 版随后在 3 月开放。', { key: true, kind: '产品发布', tags: ['工作空间', '多 Agent', 'Skills'] });
 product('chatgpt-deep-research', '2025-02-02', 'ChatGPT deep research', 'chatgpt-agent', 'OpenAI', 'https://openai.com/index/introducing-deep-research/', '自主拆解研究问题，浏览资料并生成带引用的报告。', '资料检索从单次搜索发展为多步研究任务。', '报告可能包含错误或不恰当引用，仍需核对关键证据。', { key: true, kind: '产品发布', tags: ['研究', '检索'] });
-product('cowork-announcement', '2026-01-12', 'Cowork：从编码走向日常工作', 'cowork', 'Anthropic', 'https://claude.com/blog-category/agents', 'Anthropic 公告将 Claude Code 式的任务委派方式扩展到代码以外的工作。', '通用知识工作成为 Agent 产品的明确方向。', '原始文章已重定向到当前产品页；日期由官方博客目录的历史条目核实，不把当前功能全部倒填到首发。', { key: true, kind: '产品公告', tags: ['通用任务', '办公'] });
+product('cowork-announcement', '2026-01-12', 'Cowork：从编码走向日常工作', 'cowork', 'Anthropic', 'https://support.claude.com/en/articles/12138966-release-notes', 'Anthropic 公告将 Claude Code 式的任务委派方式扩展到代码以外的工作。', '通用知识工作成为 Agent 产品的明确方向。', '官方 Release notes 的 January 12, 2026 条目记载：首发为 macOS 桌面端 Max 计划研究预览；不把当前功能或后续扩展倒填到首发。', { key: true, kind: '产品公告', tags: ['通用任务', '办公'] });
 
 const seed = 'https://seed.bytedance.com/';
 model('seed-1-5-vl', '2025-05-13', 'Seed1.5-VL 技术公告', 'seed', '字节跳动', seed + 'en/blog/first-release-of-seed-vlm-tech-report-comprehensive-solutions-for-image-video-gui-and-game', 'Seed 既有语言模型路线', ['扩展图像、视频与 GUI 视觉推理'], '豆包背后的基础模型研究与产品品牌分开追踪。', '本条采用技术公告日期；论文更早提交，API 快照日期也不是公告日。', { key: true, kind: '技术公告', tags: ['多模态', 'GUI'] });
@@ -199,7 +199,10 @@ for (const { event, source } of records) {
   event.sourceIds = [id];
   if (event.change) event.change.sourceIds = [id];
 }
+releaseSources.push({ id: 'autoglm-phone-framework', title: 'Open-AutoGLM: An Open Phone Agent Model & Framework', publisher: 'Z.ai', url: 'https://github.com/zai-org/Open-AutoGLM', type: '官方文档', checkedAt: '2026-10-26' });
 export const releaseEvents = records.map(record => record.event);
+const multilingualPhone = releaseEvents.find(event => event.id === 'autoglm-phone-multilingual');
+if (multilingualPhone) multilingualPhone.sourceIds.push('autoglm-phone-framework');
 // Availability dates for these model cards are backed by the dated API log as well.
 for (const event of releaseEvents) {
   if (event.kind === 'API 开放' && event.company === 'OpenAI') {
