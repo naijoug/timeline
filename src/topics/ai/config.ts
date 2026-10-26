@@ -27,6 +27,7 @@ export const chinaCompanies = new Set([
   "华为",
   "阶跃星辰",
   "商汤",
+  "南北阁",
 ]);
 const agents = new Set([
   "claude-code",

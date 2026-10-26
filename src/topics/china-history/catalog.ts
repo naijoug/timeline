@@ -10,6 +10,7 @@ import { ancientEvents, ancientSources, ancientEventPatches, ancientRelations } 
 import { modernEvents, modernSources, modernEventPatches, modernRelations } from './modern-backbone';
 import { historyBackboneCollections, modernReadingPeriods, reviewedPeriodCoverage, earlyQingReadingPeriod } from './backbone-structure';
 import { historyReviewedSources, historyReviewedEventPatches } from './reviewed-records';
+import { exchangeDepthSources, exchangeDepthEventPatches, exchangeSourceReviews } from './exchange-depth';
 import { historyRecommendedResources } from './recommended-resources';
 import { xinhaiCollection, xinhaiEntities, xinhaiEvents, xinhaiRelations, xinhaiSources } from './xinhai';
 
@@ -119,8 +120,9 @@ export const sources: Source[] = [
   ...ancientSources,
   ...modernSources,
   ...historyReviewedSources,
+  ...exchangeDepthSources,
 ].map(s => {
-  const reviewed = transitionSourceReviews[s.id] ? { ...s, ...transitionSourceReviews[s.id] } : s;
+  const reviewed = { ...s, ...(transitionSourceReviews[s.id] || {}), ...(exchangeSourceReviews[s.id] || {}) };
   return s.id === 'diamond' ? { ...reviewed, checkedAt: '2026-10-24', locator: 'Frontispiece；How and why was it made?；Colophon', version: '本轮核对题记、制作与宗教实践说明，保留年份精度，不将印本年代当作印刷术发明日期。' } : reviewed;
 });
 const duration = (
@@ -632,6 +634,7 @@ export const events: TimelineEvent[] = [
   ...(ancientEventPatches[event.id] || {}),
   ...(modernEventPatches[event.id] || {}),
   ...(historyReviewedEventPatches[event.id] || {}),
+  ...(exchangeDepthEventPatches[event.id] || {}),
   ...(historyRecommendedResources[event.id] ? { recommendedResources: historyRecommendedResources[event.id] } : {}),
 }));
 const backboneCollections = historyBackboneCollections(events);
