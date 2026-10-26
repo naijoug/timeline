@@ -1,3 +1,4 @@
+import { liuReviewedEvents, liuReviewedSources } from "./liu-reviewed-works";
 import { writersReviewedSources, writersRelations } from "./reviewed-works";
 import { zijinReviewedEvents, zijinReviewedSources } from "./zijin-reviewed-works";
 import type {
@@ -22,6 +23,7 @@ const source = (
 
 export const sources: Source[] = [
   ...writersReviewedSources,
+  ...liuReviewedSources,
   ...zijinReviewedSources,
   source("sfs-archive", "《科幻世界》杂志社刊发档案", "科幻世界杂志社", "https://www.sfw.com.cn/", "期刊档案", "1999—2006 年期刊发表与中国科幻银河奖评奖档案"),
   source("cq-press", "重庆出版社当代文学与科幻出版档案", "重庆出版社", "https://www.cqph.com/", "出版档案", "《三体》三部曲单行本出版记录与印次信息"),
@@ -366,72 +368,7 @@ export const events: TimelineEvent[] = [
     },
   ),
 
-  event(
-    "liu-cixin-supernova-era",
-    "《超新星纪元》",
-    2003,
-    1,
-    "sci-fi",
-    ["era-early-breakthrough"],
-    ["liu-cixin"],
-    "近地超新星爆发辐射导致所有成年人将在一年内死去，留下全球十三岁以下的孩子接管世界并经历残酷的儿童纪元。",
-    ["writers-press"],
-    {
-      milestone: false,
-      significance: "刘慈欣早期长篇代表作，借由极端社会学思想实验探讨文明演进、地缘政治与人性本质。",
-      tags: ["科幻", "长篇小说", "社会思想实验", "儿童纪元", "刘慈欣"],
-      facts: [
-        { label: "出版机构", text: "作家出版社（2003年1月首版）", sourceIds: ["writers-press"] },
-        { label: "体裁篇幅", text: "长篇小说", sourceIds: ["writers-press"] },
-        { label: "创作年代", text: "1991年构思，2003年正式出版", sourceIds: ["writers-press"] },
-      ],
-      details: [
-        {
-          label: "内容简介",
-          text: "一颗超新星爆发产生的致命辐射照射地球，基因修复机制受损使所有十三岁以上的成年人生命进入倒计时。成人们在生命的最后十个月里加紧培训孩子们学习维持电力、农业、国防与政府运转。大人全部离世后，一个完全由儿童统治的世界诞生了。起初孩子们沉浸在糖果与游戏的狂欢中，但随后社会秩序迅速崩塌，各国孩子甚至在大洋与南极洲展开了使用真枪实弹的‘超新星奥运会’和残酷战争，最终在废墟上重建新的文明形态。",
-          sourceIds: ["writers-press"],
-        },
-        {
-          label: "创作背景与反响",
-          text: "刘慈欣历时十余年数易其稿的长篇作品，以冷酷锋利的笔触撕破了对童年的浪漫化想象，是一部充满政治预言色彩的社会科幻经典。",
-          sourceIds: ["writers-press"],
-        },
-      ],
-    },
-  ),
-
-  event(
-    "liu-cixin-ball-lightning",
-    "《球状闪电》",
-    2004,
-    6,
-    "sci-fi",
-    ["era-early-breakthrough"],
-    ["liu-cixin"],
-    "陈博士为解开父母化为灰烬的球状闪电之谜穷尽一生，与武器狂人林云共同揭开宏电子与量子态观察者效应的惊世图景。",
-    ["scitech-press"],
-    {
-      significance: "《三体》系列的重要前传与宇宙观奠基之作，塑造了丁仪、林云等经典角色，将量子物理假说与武器伦理推向极致。",
-      tags: ["科幻", "长篇小说", "宏原子", "量子物理", "刘慈欣"],
-      facts: [
-        { label: "出版机构", text: "四川科学技术出版社（2004年6月）", sourceIds: ["scitech-press"] },
-        { label: "丛书系列", text: "世界科幻大师丛书", sourceIds: ["scitech-press"] },
-        { label: "关联作品", text: "《三体》系列前传世界观", sourceIds: ["scitech-press"] },
-      ],
-      details: [
-        {
-          label: "内容简介",
-          text: "在十四岁生日的暴风雨之夜，少年陈博士亲睹神秘的球状闪电穿墙而入，将父母瞬间化为飞灰而周围座椅完好无损。为此他倾注毕生精力研究这一自然谜团，并结识了对武器研发极度痴狂的少校女军官林云与理论物理天才丁仪。他们发现球状闪电本质上是空间中处于激发态的‘宏电子’，林云成功将其武器化并在战争中释放宏电子湮灭敌人。小说最后，林云自身也化为宏量子态，展现了观察者效应下既生又死的神秘世界。",
-          sourceIds: ["scitech-press"],
-        },
-        {
-          label: "创作背景与反响",
-          text: "小说不仅在硬科幻设定上惊艳绝伦，更深刻探讨了纯粹科学探索与毁灭性军事应用之间的永恒伦理矛盾，是刘慈欣文学水准最成熟的长篇之一。",
-          sourceIds: ["scitech-press"],
-        },
-      ],
-    },
-  ),
+  ...liuReviewedEvents,
 
   event(
     "liu-cixin-three-body-1",
