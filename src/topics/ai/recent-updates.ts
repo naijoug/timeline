@@ -1,3 +1,4 @@
+import { hySimulmtEvents, hySimulmtSources } from './hy-simulmt-release';
 import { nanbeigeEvents, nanbeigeSources, nanbeigeEntities } from './nanbeige-release';
 import { recyclerEvents, recyclerSources } from './recycler-research';
 import { verificationTrainingEvents, verificationTrainingSources, verificationTrainingEntities } from "./verification-training-updates";
@@ -10,6 +11,7 @@ import type { Entity, Source, TimelineEvent } from './types';
 export const recentResearchDate = '2026-10-26';
 
 export const recentSources: Source[] = [
+  ...hySimulmtSources,
   ...nanbeigeSources,
   ...recyclerSources,
   ...verificationTrainingSources,
@@ -100,6 +102,7 @@ export const recentEntities: Entity[] = [
 ];
 
 export const recentEvents: TimelineEvent[] = [
+  ...hySimulmtEvents,
   ...nanbeigeEvents,
   ...recyclerEvents,
   ...verificationTrainingEvents,
