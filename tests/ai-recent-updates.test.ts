@@ -10,7 +10,7 @@ import { defaultAtlas, eventLane, filterAtlas } from '../src/lib/atlas';
 test('recent updates are unique, discoverable and backed by dated primary sources', () => {
   const visible = filterAtlas(events, { ...defaultAtlas(), from: 2026, to: 2026, all: true });
   const sourceMap = new Map(sources.map(source => [source.id, source]));
-  assert.equal(recentEvents.length, 15);
+  assert.equal(recentEvents.length, 16);
   assert.equal(new Set(recentSources.map(source => source.url)).size, recentSources.length);
   for (const event of recentEvents) {
     assert.equal(events.filter(item => item.id === event.id).length, 1, event.id);
@@ -96,9 +96,9 @@ test('Kimi K3.1 Pro is a key China model event with a K3 baseline, not a complet
 });
 
 test('new research dates do not rewrite older sources as freshly checked', () => {
-  assert.equal(recentResearchDate, '2026-10-26');
+  assert.equal(recentResearchDate, '2026-10-27');
   for (const source of recentSources) {
-    assert.equal(source.checkedAt, (source.id.startsWith('terra-61') || source.id.startsWith('nanbeige') || source.id.startsWith('hy-simulmt') || source.id === 'aws-training-sessions-ga') ? '2026-10-26' : ['seed-recycler-publication', 'seed-recycler-paper', 'anthropic-formal-verification-report', 'theorem-oss-verify-proofs', 'theorem-linux-process-semantics', 'aws-training-sessions-ga', 'aws-training-sessions-docs'].includes(source.id) ? '2026-10-25' : (source.publisher === '月之暗面' || ['openai-frontier-containment-report', 'aa-kimi-k31-launch-evaluation', 'aa-intelligence-methodology-432', 'uk-aibl-announcement', 'uk-ai-budget-package', 'anthropic-aisi-alignment-assessment', 'aisi-alignment-failures', 'aisi-organisation-date-index'].includes(source.id)) ? '2026-10-24' : '2026-10-23', source.id);
+    assert.equal(source.checkedAt, (source.id.startsWith('openai-science-') || source.id.startsWith('openai-math-')) ? '2026-10-27' : (source.id.startsWith('terra-61') || source.id.startsWith('nanbeige') || source.id.startsWith('hy-simulmt') || source.id === 'aws-training-sessions-ga') ? '2026-10-26' : ['seed-recycler-publication', 'seed-recycler-paper', 'anthropic-formal-verification-report', 'theorem-oss-verify-proofs', 'theorem-linux-process-semantics', 'aws-training-sessions-ga', 'aws-training-sessions-docs'].includes(source.id) ? '2026-10-25' : (source.publisher === '月之暗面' || ['openai-frontier-containment-report', 'aa-kimi-k31-launch-evaluation', 'aa-intelligence-methodology-432', 'uk-aibl-announcement', 'uk-ai-budget-package', 'anthropic-aisi-alignment-assessment', 'aisi-alignment-failures', 'aisi-organisation-date-index'].includes(source.id)) ? '2026-10-24' : '2026-10-23', source.id);
   }
   assert.equal(recentSources.find(source => source.id === 'kimi-k3-1-pro-announcement')!.publishedAt, '2026-10-24');
   assert.equal(recentSources.find(source => source.id === 'kimi-code-k3-1-pro-rollout')!.publishedAt, '2026-10-23');

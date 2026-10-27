@@ -13,7 +13,7 @@ test('Terra is a single important hosted release with an actual predecessor and 
  assert.equal(e.change?.baselineEventId, 'gpt-5-6-api'); assert.equal(e.change?.evidence, '厂商报告');
  assert.ok(events.some(x => x.id === e.change?.baselineEventId));
  assert.ok(terraSources.every(s => s.checkedAt === '2026-10-26'));
- assert.equal(aiPresentation.latestEvent, e.id);
+ assert.ok(events.find(x => x.id === aiPresentation.latestEvent)!.date >= e.date);
  assert.match(e.limitation, /不是权重开放/);
 });
 test('Terra separates evaluation, cost, modalities and editorial inference, keeping detail server-side', () => {

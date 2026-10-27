@@ -1,3 +1,4 @@
+import { scientificEvents, scientificSources } from './scientific-materials';
 import { terraEvents, terraSources } from './terra-release';
 import { hySimulmtEvents, hySimulmtSources } from './hy-simulmt-release';
 import { nanbeigeEvents, nanbeigeSources, nanbeigeEntities } from './nanbeige-release';
@@ -9,9 +10,10 @@ import type { Entity, Source, TimelineEvent } from './types';
 
 // Source-reviewed updates. Each source keeps its own verification date; advancing
 // the latest research date does not imply older sources were checked again.
-export const recentResearchDate = '2026-10-26';
+export const recentResearchDate = '2026-10-27';
 
 export const recentSources: Source[] = [
+  ...scientificSources,
   ...terraSources,
   ...hySimulmtSources,
   ...nanbeigeSources,
@@ -104,6 +106,7 @@ export const recentEntities: Entity[] = [
 ];
 
 export const recentEvents: TimelineEvent[] = [
+  ...scientificEvents,
   ...terraEvents,
   ...hySimulmtEvents,
   ...nanbeigeEvents,
