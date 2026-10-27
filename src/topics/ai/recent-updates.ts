@@ -1,3 +1,4 @@
+import { genieEvents, genieSources, genieEntities } from './genie4-preview';
 import { ethEvents, ethSources } from './anthropic-eth-materials';
 import { unlimitedOcrEvents, unlimitedOcrSources, unlimitedOcrEntities } from './unlimited-ocr2-release';
 import { scientificEvents, scientificSources } from './scientific-materials';
@@ -15,6 +16,7 @@ import type { Entity, Source, TimelineEvent } from './types';
 export const recentResearchDate = '2026-10-27';
 
 export const recentSources: Source[] = [
+  ...genieSources,
   ...ethSources,
   ...unlimitedOcrSources,
   ...scientificSources,
@@ -94,6 +96,7 @@ export const recentSources: Source[] = [
 ];
 
 export const recentEntities: Entity[] = [
+  ...genieEntities,
   ...unlimitedOcrEntities,
   ...nanbeigeEntities,
   ...verificationTrainingEntities,
@@ -111,6 +114,7 @@ export const recentEntities: Entity[] = [
 ];
 
 export const recentEvents: TimelineEvent[] = [
+  ...genieEvents,
   ...ethEvents,
   ...unlimitedOcrEvents,
   ...scientificEvents,
