@@ -1,3 +1,4 @@
+import { ethEvents, ethSources } from './anthropic-eth-materials';
 import { unlimitedOcrEvents, unlimitedOcrSources, unlimitedOcrEntities } from './unlimited-ocr2-release';
 import { scientificEvents, scientificSources } from './scientific-materials';
 import { terraEvents, terraSources } from './terra-release';
@@ -14,6 +15,7 @@ import type { Entity, Source, TimelineEvent } from './types';
 export const recentResearchDate = '2026-10-27';
 
 export const recentSources: Source[] = [
+  ...ethSources,
   ...unlimitedOcrSources,
   ...scientificSources,
   ...terraSources,
@@ -109,6 +111,7 @@ export const recentEntities: Entity[] = [
 ];
 
 export const recentEvents: TimelineEvent[] = [
+  ...ethEvents,
   ...unlimitedOcrEvents,
   ...scientificEvents,
   ...terraEvents,
