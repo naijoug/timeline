@@ -427,7 +427,7 @@ export const events: TimelineEvent[] = [
     ["era-epic-and-mystery"],
     ["liu-cixin"],
     "面对外星文明对信息的监控，人类启动面壁计划；罗辑成为四位面壁者中最出人意料的一员。",
-    ["writers-three-body-chronology", "writers-dark-forest-tor"],
+    ["writers-three-body-chronology", "writers-dark-forest-tor", "writers-dark-forest-tor-2015", "writers-dark-forest-tor-2016", "writers-dark-forest-nbd-interview", "hugo-database"],
     {
       significance: "三部曲第二部将文明接触推进到战略与信任困境；阅读时应把小说的宇宙社会学设想与现实科学结论区分开。",
       tags: ["科幻", "三体", "面壁计划", "刘慈欣"],
@@ -456,9 +456,40 @@ export const events: TimelineEvent[] = [
           text: "智子的监视使公开部署难以保密，面壁者因此以未被读取的思想构思防御方案。天文学家、社会学家罗辑被选中后，必须理解自己为何受到特别关注。",
           sourceIds: ["writers-dark-forest-tor"],
           locator: "Book Details：Wallfacer Project 与 Luo Ji"
+        },
+        {
+          label: "译介：同一作品，不同ISBN的发行记录",
+          text: "Tor书目列Joel Martinsen为本书译者：ISBN 9780765377081的发行日为2015年8月11日，ISBN 9780765386694为2016年8月16日。后者不是作品首次英译日期，更不能替换本节点的2008年中文出版月份。这里按具体ISBN区分，不推断未显示的装帧信息。",
+          sourceIds: ["writers-dark-forest-tor-2015", "writers-dark-forest-tor-2016"],
+          locator: "两页Author、On Sale与ISBN"
+        },
+        {
+          label: "设定与现实：作者解释不是科学证明",
+          text: "2017年每经访谈直接追问黑暗森林。刘慈欣把它放在小说所构造的可能性中，而非对现实宇宙的定论。可据此理解作品怎样组织文明之间的信息与信任困境，但不能把设定称作已验证的宇宙法则，也不能用作者访谈替代科学论证。",
+          sourceIds: ["writers-dark-forest-nbd-interview"],
+          locator: "黑暗森林是否成立的问答"
+        },
+        {
+          label: "传播边界：不要移用第一部的奖项",
+          text: "2015年雨果奖最佳长篇小说记录列的是《三体》第一部及其译者Ken Liu（刘宇昆），不是《黑暗森林》。本书的Joel Martinsen译本应与第一部的译者、出版及获奖记录分别阅读。",
+          sourceIds: ["hugo-database", "writers-dark-forest-tor-2015"],
+          locator: "2015 Hugo Best Novel；Tor Author"
+        },
+        {
+          label: "编辑解读：先看信息条件，再判断人物策略",
+          text: "建议接着第一部阅读，先记录各方能观察什么、能隐藏什么，以及决策代价由谁承担，再比较面壁者的不同选择。读完后回到作者访谈，区分故事为形成冲突而设置的前提，与现实中需要证据支持的判断。这是编辑阅读路径，不是对小说价值或宇宙规律的权威结论。",
+          editorial: true
         }
       ],
-      note: "2008 年 5 月按中文出版年表记录；引用的英文作品页另有其有声版发行日期，二者不可混用。"
+      recommendedResources: [{
+        id: "dark-forest-nbd-conversation", title: "专访│科幻作家刘慈欣：我和你们一样看不懂前沿物理论文",
+        creator: "刘慈欣（受访）；丁舟洋、王礼迪（采访）", series: "每日经济新闻", kind: "article",
+        url: "https://www.nbd.com.cn/articles/2017-12-19/1173292.html",
+        match: "具体问答直接讨论黑暗森林是否成立，适合在读完小说后核对作者如何限定虚构设定与现实判断。",
+        scopeNote: "已核读文字，可能涉及设定与情节；2017年12月19日为采访文章刊发日，不是作品出版日。作者观点不是独立科学证据。",
+        locator: "黑暗森林问答", checkedAt: "2026-10-27"
+      }],
+      note: "本节点仍为2008年5月中文单行本出版，未补造日。中文出版、具体ISBN英译版发行和2015年第一部获奖分别记录；未查看中文初版版权页实物。本轮深化一个既有节点，不新增或重复计算作品。"
     },
   ),
 

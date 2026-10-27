@@ -21,7 +21,7 @@ test('writers remain limited to the three existing authors and pass catalog vali
 test('reviewed works cite concrete records without refreshing unrelated source dates', () => {
   const ids = new Set(writersReviewedSources.map(source => source.id));
   for (const source of writersReviewedSources) {
-    assert.equal(source.checkedAt, '2026-10-24');
+    assert.equal(source.checkedAt, ['writers-dark-forest-tor-2015', 'writers-dark-forest-tor-2016', 'writers-dark-forest-nbd-interview'].includes(source.id) ? '2026-10-27' : '2026-10-24');
     assert.notEqual(new URL(source.url).pathname, '/', source.id);
     assert.ok(source.locator, source.id);
   }
@@ -131,4 +131,20 @@ test('writer counts describe publication stages and detail sources include relat
   assert.match(about, /未逐条重新核查/);
   assert.match(detail, /relationsFor\(writersCatalog, event\.id\)/);
   assert.match(detail, /event\.time\.start\.day/);
+});
+
+
+test('Dark Forest separates Chinese publication, ISBN editions, translators and fictional premises', () => {
+  const record = event('liu-cixin-three-body-2');
+  assert.deepEqual(record.time.start, { year: 2008, month: 5 });
+  assert.equal(record.details?.length, 6);
+  assert.ok(record.details?.some(detail => detail.editorial && /编辑解读/.test(detail.label)));
+  assert.match(JSON.stringify(record), /2015年8月11日/);
+  assert.match(JSON.stringify(record), /2016年8月16日/);
+  assert.match(JSON.stringify(record), /Joel Martinsen/);
+  assert.match(JSON.stringify(record), /不是《黑暗森林》/);
+  assert.match(JSON.stringify(record), /不能把设定称作已验证/);
+  assert.equal(record.recommendedResources?.[0].url, 'https://www.nbd.com.cn/articles/2017-12-19/1173292.html');
+  assert.equal(source('writers-dark-forest-tor-2015').version, 'ISBN 9780765377081');
+  assert.equal(source('writers-dark-forest-tor').checkedAt, '2026-10-24');
 });

@@ -44,6 +44,24 @@ export const writersReviewedSources: Source[] = [
     version: "ISBN 9781427273321"
   },
   {
+    id: "writers-dark-forest-tor-2015", title: "The Dark Forest — ISBN 9780765377081",
+    publisher: "Tor Books / Macmillan", url: "https://us.macmillan.com/books/9780765377081/thedarkforest/",
+    type: "出版社版本书目", checkedAt: "2026-10-27", version: "ISBN 9780765377081",
+    locator: "Author：Cixin Liu、Joel Martinsen；On Sale：08/11/2015；Book Details：系列第二部与面壁计划。不由未显示的格式字段推断装帧。"
+  },
+  {
+    id: "writers-dark-forest-tor-2016", title: "The Dark Forest — ISBN 9780765386694",
+    publisher: "Tor Books / Macmillan", url: "https://us.macmillan.com/books/9780765386694/thedarkforest/",
+    type: "出版社版本书目", checkedAt: "2026-10-27", version: "ISBN 9780765386694",
+    locator: "Author：Cixin Liu、Joel Martinsen；On Sale：08/16/2016。该日期仅对应此ISBN，不覆盖2015年版本。"
+  },
+  {
+    id: "writers-dark-forest-nbd-interview", title: "专访│科幻作家刘慈欣：我和你们一样看不懂前沿物理论文",
+    publisher: "丁舟洋、王礼迪 / 每日经济新闻", url: "https://www.nbd.com.cn/articles/2017-12-19/1173292.html",
+    type: "作者访谈", checkedAt: "2026-10-27", publishedAt: "2017-12-19",
+    locator: "关于黑暗森林是否成立的问答：作者限定为小说中的一种可能性；不将创作解释当作现实宇宙的科学证据。"
+  },
+  {
     id: "writers-deaths-end-tor",
     title: "Death’s End",
     publisher: "Tor Books / Macmillan Audio",
