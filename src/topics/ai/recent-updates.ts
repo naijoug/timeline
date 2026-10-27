@@ -1,3 +1,4 @@
+import { unlimitedOcrEvents, unlimitedOcrSources, unlimitedOcrEntities } from './unlimited-ocr2-release';
 import { scientificEvents, scientificSources } from './scientific-materials';
 import { terraEvents, terraSources } from './terra-release';
 import { hySimulmtEvents, hySimulmtSources } from './hy-simulmt-release';
@@ -13,6 +14,7 @@ import type { Entity, Source, TimelineEvent } from './types';
 export const recentResearchDate = '2026-10-27';
 
 export const recentSources: Source[] = [
+  ...unlimitedOcrSources,
   ...scientificSources,
   ...terraSources,
   ...hySimulmtSources,
@@ -90,6 +92,7 @@ export const recentSources: Source[] = [
 ];
 
 export const recentEntities: Entity[] = [
+  ...unlimitedOcrEntities,
   ...nanbeigeEntities,
   ...verificationTrainingEntities,
   ...safetyEntities,
@@ -106,6 +109,7 @@ export const recentEntities: Entity[] = [
 ];
 
 export const recentEvents: TimelineEvent[] = [
+  ...unlimitedOcrEvents,
   ...scientificEvents,
   ...terraEvents,
   ...hySimulmtEvents,
