@@ -2,7 +2,7 @@
 
 一个可本地运行、可静态部署的通用时间线网站。使用 Astro、React、TypeScript；无数据库、账号或运行时模型 API。当前包含 AI 发展史、编程语言、中国历史与作家作品四个主题，共用时间计算、筛选、时间线界面和事件详情模板。
 
-最新内容维护：[CFSG公开材料与评测版本边界](docs/maintenance-2026-10-28-0400.md)；[LFM3 实际权重、端侧条件与许可边界](docs/maintenance-2026-10-28-0000.md)；[Genie 4 受限研究预览与模拟边界](docs/maintenance-2026-10-27-2000.md)；[《黑暗森林》版本、访谈与阅读边界](docs/maintenance-2026-10-27-1600.md)；[Anthropic ETH研究材料公开与核验边界](docs/maintenance-2026-10-27-1200.md)；[隋代大运河工程、仓储与社会成本](docs/maintenance-2026-10-27-0800.md)；[Unlimited-OCR 2 权重公开与跨页解析边界](docs/maintenance-2026-10-27-0400.md)；[上一轮 OpenAI 科学研究材料核验](docs/maintenance-2026-10-27-0000.md)。
+最新内容维护：[Robotics ER 2 云公开预览与渠道边界](docs/maintenance-2026-10-28-0800.md)；[CFSG公开材料与评测版本边界](docs/maintenance-2026-10-28-0400.md)；[LFM3 实际权重、端侧条件与许可边界](docs/maintenance-2026-10-28-0000.md)；[Genie 4 受限研究预览与模拟边界](docs/maintenance-2026-10-27-2000.md)；[《黑暗森林》版本、访谈与阅读边界](docs/maintenance-2026-10-27-1600.md)；[Anthropic ETH研究材料公开与核验边界](docs/maintenance-2026-10-27-1200.md)；[隋代大运河工程、仓储与社会成本](docs/maintenance-2026-10-27-0800.md)；[Unlimited-OCR 2 权重公开与跨页解析边界](docs/maintenance-2026-10-27-0400.md)；[上一轮 OpenAI 科学研究材料核验](docs/maintenance-2026-10-27-0000.md)。
 
 ## 启动
 
@@ -51,7 +51,7 @@ npm run dev
 - 2026-10-24 补充英国 AI Biosecurity Lab 设立公告、AISI 与 Anthropic 各自对既有事件的对齐分析；区分承诺/已交付、资金/服务额度，以及报告日期/原事件日期。
 
 - AI 技术突破、模型演进、Agent 应用三类事件，沿同一纵向时间线排列。
-- 289 个事件、95 个对象、308 份来源；6 条对象关系与 22 条事件证据关系分别统计。
+- 290 个事件、96 个对象、311 份来源；6 条对象关系与 22 条事件证据关系分别统计。
 - 2026-10-24 补齐 19 个重要缺口，覆盖 Gemma 4、Gemini 4 Argon、Claude、MiniMax、文心、混元、Muse 模型与图像视频路线；保留受限访问、API 预览、公开可用及实际权重开放的区别，不把后续计划写成已发布。
 - 2026-10-24 核查新增 Kimi K3.1 Pro 关键模型节点，连接 K3 比较基线；保留研究索引与 Kimi Code 渠道日期差异，并区分已经上线与计划开放的权重。
 - 2026-10-23 核查新增 5 个节点：Decisions API 正式开放、Agent Skills 基金会捐赠、DeepSeek-V4.1-Flash-1017 更新、AA-Robotics 研究预览与 AA FrontierCode 榜单上线；每条保留日期口径、来源定位和评测边界。

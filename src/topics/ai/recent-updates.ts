@@ -1,3 +1,4 @@
+import { roboticsErEvents, roboticsErSources, roboticsErEntities } from './robotics-er2-cloud';
 import { verificationOct28Events, verificationOct28Sources } from './research-verification-oct28';
 import { lfm3Events, lfm3Sources, lfm3Entities } from './lfm3-release';
 import { genieEvents, genieSources, genieEntities } from './genie4-preview';
@@ -18,6 +19,7 @@ import type { Entity, Source, TimelineEvent } from './types';
 export const recentResearchDate = '2026-10-28';
 
 export const recentSources: Source[] = [
+  ...roboticsErSources,
   ...verificationOct28Sources,
   ...lfm3Sources,
   ...genieSources,
@@ -100,6 +102,7 @@ export const recentSources: Source[] = [
 ];
 
 export const recentEntities: Entity[] = [
+  ...roboticsErEntities,
   ...lfm3Entities,
   ...genieEntities,
   ...unlimitedOcrEntities,
@@ -119,6 +122,7 @@ export const recentEntities: Entity[] = [
 ];
 
 export const recentEvents: TimelineEvent[] = [
+  ...roboticsErEvents,
   ...verificationOct28Events,
   ...lfm3Events,
   ...genieEvents,
