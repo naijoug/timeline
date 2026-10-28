@@ -7,7 +7,7 @@ import { validateCatalog } from '../src/core/validate';
 
 test('Rust depth preserves routes and inventory while pinning real release dates', () => {
   assert.deepEqual(validateCatalog(programmingLanguages), []);
-  assert.equal(programmingLanguages.events.length, 69);
+  assert.equal(programmingLanguages.events.length, 71);
   for (const [id, year, month, day] of [['rust-10', 2015, 5, 15], ['rust-2024', 2025, 2, 20]] as const) {
     const matching = programmingLanguages.events.filter(event => event.id === id);
     assert.equal(matching.length, 1);

@@ -1,3 +1,4 @@
+import { goIterationEvents, goIterationSources, goIterationRelations } from './go-iteration-history';
 import type {
   Catalog,
   Entity,
@@ -964,6 +965,9 @@ for (const id of ["swift5-exact-release", "swift6-release"]) {
   sources[index] = { ...sources[index], checkedAt: "2026-10-26" };
 }
 
+sources.push(...goIterationSources);
+events.push(...goIterationEvents);
+
 export const programmingLanguages: Catalog = {
   topic: {
     id: "programming-languages",
@@ -990,5 +994,5 @@ export const programmingLanguages: Catalog = {
   events,
   entities,
   sources,
-  relations: [...evolutionRelations, ...goReviewedRelations],
+  relations: [...evolutionRelations, ...goReviewedRelations, ...goIterationRelations],
 };

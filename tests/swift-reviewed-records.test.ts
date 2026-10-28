@@ -6,7 +6,7 @@ import { validateCatalog } from '../src/core/validate';
 
 test('Swift depth preserves existing release dates and resolved evidence', () => {
   assert.deepEqual(validateCatalog(programmingLanguages), []);
-  assert.equal(programmingLanguages.events.length, 69);
+  assert.equal(programmingLanguages.events.length, 71);
   for (const [id, year, month, day] of [['swift-5', 2019, 3, 25], ['swift-6', 2024, 9, 17]] as const) {
     const entries = programmingLanguages.events.filter(item => item.id === id);
     assert.equal(entries.length, 1);

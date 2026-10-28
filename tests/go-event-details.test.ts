@@ -8,7 +8,7 @@ import { validateCatalog } from '../src/core/validate';
 
 test('Go release detail review preserves IDs and source-backed exact dates', () => {
   assert.deepEqual(validateCatalog(programmingLanguages), []);
-  assert.equal(programmingLanguages.events.length, 69);
+  assert.equal(programmingLanguages.events.length, 71);
   for (const [id, year, month, day] of [['go-10', 2012, 3, 28], ['go-111', 2018, 8, 24], ['go-118', 2022, 3, 15]] as const) {
     const event = programmingLanguages.events.find(event => event.id === id)!;
     assert.deepEqual(event.time.start, { year, month, day });

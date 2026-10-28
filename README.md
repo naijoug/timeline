@@ -2,7 +2,7 @@
 
 一个可本地运行、可静态部署的通用时间线网站。使用 Astro、React、TypeScript；无数据库、账号或运行时模型 API。当前包含 AI 发展史、编程语言、中国历史与作家作品四个主题，共用时间计算、筛选、时间线界面和事件详情模板。
 
-最新内容维护：[Robotics ER 2 云公开预览与渠道边界](docs/maintenance-2026-10-28-0800.md)；[CFSG公开材料与评测版本边界](docs/maintenance-2026-10-28-0400.md)；[LFM3 实际权重、端侧条件与许可边界](docs/maintenance-2026-10-28-0000.md)；[Genie 4 受限研究预览与模拟边界](docs/maintenance-2026-10-27-2000.md)；[《黑暗森林》版本、访谈与阅读边界](docs/maintenance-2026-10-27-1600.md)；[Anthropic ETH研究材料公开与核验边界](docs/maintenance-2026-10-27-1200.md)；[隋代大运河工程、仓储与社会成本](docs/maintenance-2026-10-27-0800.md)；[Unlimited-OCR 2 权重公开与跨页解析边界](docs/maintenance-2026-10-27-0400.md)；[上一轮 OpenAI 科学研究材料核验](docs/maintenance-2026-10-27-0000.md)。
+最新内容维护：[Go 循环语义与迭代器](docs/maintenance-2026-10-28-1200.md)；[Robotics ER 2 云公开预览与渠道边界](docs/maintenance-2026-10-28-0800.md)；[CFSG公开材料与评测版本边界](docs/maintenance-2026-10-28-0400.md)；[LFM3 实际权重、端侧条件与许可边界](docs/maintenance-2026-10-28-0000.md)；[Genie 4 受限研究预览与模拟边界](docs/maintenance-2026-10-27-2000.md)；[《黑暗森林》版本、访谈与阅读边界](docs/maintenance-2026-10-27-1600.md)；[Anthropic ETH研究材料公开与核验边界](docs/maintenance-2026-10-27-1200.md)；[隋代大运河工程、仓储与社会成本](docs/maintenance-2026-10-27-0800.md)；[Unlimited-OCR 2 权重公开与跨页解析边界](docs/maintenance-2026-10-27-0400.md)；[上一轮 OpenAI 科学研究材料核验](docs/maintenance-2026-10-27-0000.md)。
 
 ## 启动
 
@@ -69,7 +69,7 @@ npm run dev
 
 - 2026-10-26 深化 Swift 5／6 两条既有详情，区分 ABI 与模块稳定、工具链与语言模式及 Embedded Swift 发布时的实验性，加入具体官方文章与 WWDC24 迁移讲座。[核查范围](docs/programming-languages/swift-depth-2026-10-26.md)。
 
-- 69 个关键节点、35 个语言对象、5 个时代分组、73 份来源与 6 条事件证据关系；覆盖 FORTRAN 到 2025 年发布的 Rust 2024 edition 等高级语言、范式、标准、实现与大版本演进路线。
+- 71 个事件、35 个语言对象、5 个时代分组、112 份来源与 7 条事件证据关系；覆盖 FORTRAN 到 2025 年发布的 Rust 2024 edition 等高级语言、范式、标准、实现与大版本演进路线。
 - 语言与发布、范式与思想、标准与规格、实现与运行四类筛选；时代、类别、语言对象和独立事件页共用通用时间线界面。
 - 可切换单个语言查看其发展时间线；Python、Java、C++、JavaScript/ECMAScript、TypeScript、Go、Rust、C#、Swift、Kotlin 等重大版本更新提供比较基线、主要变化、边界与官方来源。
 - 精确日期仅用于有明确资料支撑的 BASIC、JavaScript、Go 等节点；形成过程和研究项目保留年份精度并在阅读边界中说明。

@@ -7,7 +7,7 @@ import { validateCatalog } from '../src/core/validate';
 
 test('Python depth review preserves two stable routes, inventory and official release dates', () => {
   assert.deepEqual(validateCatalog(programmingLanguages), []);
-  assert.equal(programmingLanguages.events.length, 69);
+  assert.equal(programmingLanguages.events.length, 71);
   for (const [id, year, month, day] of [['python-3', 2008, 12, 3], ['python-311', 2022, 10, 24]] as const) {
     const matching = programmingLanguages.events.filter(event => event.id === id);
     assert.equal(matching.length, 1);
