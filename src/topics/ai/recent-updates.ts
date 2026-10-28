@@ -1,3 +1,4 @@
+import { lfm3Events, lfm3Sources, lfm3Entities } from './lfm3-release';
 import { genieEvents, genieSources, genieEntities } from './genie4-preview';
 import { ethEvents, ethSources } from './anthropic-eth-materials';
 import { unlimitedOcrEvents, unlimitedOcrSources, unlimitedOcrEntities } from './unlimited-ocr2-release';
@@ -13,9 +14,10 @@ import type { Entity, Source, TimelineEvent } from './types';
 
 // Source-reviewed updates. Each source keeps its own verification date; advancing
 // the latest research date does not imply older sources were checked again.
-export const recentResearchDate = '2026-10-27';
+export const recentResearchDate = '2026-10-28';
 
 export const recentSources: Source[] = [
+  ...lfm3Sources,
   ...genieSources,
   ...ethSources,
   ...unlimitedOcrSources,
@@ -96,6 +98,7 @@ export const recentSources: Source[] = [
 ];
 
 export const recentEntities: Entity[] = [
+  ...lfm3Entities,
   ...genieEntities,
   ...unlimitedOcrEntities,
   ...nanbeigeEntities,
@@ -114,6 +117,7 @@ export const recentEntities: Entity[] = [
 ];
 
 export const recentEvents: TimelineEvent[] = [
+  ...lfm3Events,
   ...genieEvents,
   ...ethEvents,
   ...unlimitedOcrEvents,
