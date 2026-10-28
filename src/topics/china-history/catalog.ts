@@ -1,3 +1,4 @@
+import { wangAnshiDepthSources, wangAnshiSourceReviews, wangAnshiDepthEventPatches } from './wang-anshi-depth';
 import type {
   Catalog,
   Period,
@@ -123,8 +124,9 @@ export const sources: Source[] = [
   ...historyReviewedSources,
   ...exchangeDepthSources,
   ...grandCanalDepthSources,
+  ...wangAnshiDepthSources,
 ].map(s => {
-  const reviewed = { ...s, ...(transitionSourceReviews[s.id] || {}), ...(exchangeSourceReviews[s.id] || {}), ...(grandCanalSourceReviews[s.id] || {}) };
+  const reviewed = { ...s, ...(transitionSourceReviews[s.id] || {}), ...(exchangeSourceReviews[s.id] || {}), ...(grandCanalSourceReviews[s.id] || {}), ...(wangAnshiSourceReviews[s.id] || {}) };
   return s.id === 'diamond' ? { ...reviewed, checkedAt: '2026-10-24', locator: 'Frontispiece；How and why was it made?；Colophon', version: '本轮核对题记、制作与宗教实践说明，保留年份精度，不将印本年代当作印刷术发明日期。' } : reviewed;
 });
 const duration = (
@@ -645,7 +647,8 @@ export const events: TimelineEvent[] = [
   ...(historyReviewedEventPatches[event.id] || {}),
   ...(exchangeDepthEventPatches[event.id] || {}),
   ...(grandCanalDepthEventPatches[event.id] || {}),
-  ...(historyRecommendedResources[event.id] ? { recommendedResources: historyRecommendedResources[event.id] } : {}),
+  ...(wangAnshiDepthEventPatches[event.id] || {}),
+  ...(historyRecommendedResources[event.id] ? { recommendedResources: [...historyRecommendedResources[event.id], ...(wangAnshiDepthEventPatches[event.id]?.recommendedResources || [])] } : {}),
 }));
 const backboneCollections = historyBackboneCollections(events);
 export const chinaHistory: Catalog = {

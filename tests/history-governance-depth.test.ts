@@ -19,7 +19,9 @@ test('Tang–Song detail patches survive catalog ordering without changing event
   for (const id of ['an-shi', 'wang-anshi-reforms']) {
     const event = entry(id);
     assert.equal(chinaHistory.events.filter(candidate => candidate.id === id).length, 1);
-    assert.deepEqual(event.details, historyReviewedEventPatches[id].details);
+    for (const previous of historyReviewedEventPatches[id].details!.filter(section => !section.editorial)) {
+      assert.ok(event.details!.some(section => JSON.stringify(section) === JSON.stringify(previous)), `${id}: preserved reviewed section`);
+    }
     assert.ok(event.details!.filter(section => !section.editorial).length >= 5);
     assert.equal(event.details!.filter(section => section.editorial).length, 1);
     for (const section of event.details!.filter(section => !section.editorial)) {
@@ -47,7 +49,7 @@ test('evidence distinguishes bibliography, public abstracts, objects and policy 
   // Only the explicitly reread review entry is redated; old bibliographic/base records stay honest.
   assert.equal(source('an-shi').checkedAt, '2026-09-30');
   assert.equal(source('tang-met').checkedAt, '2026-09-30');
-  assert.equal(source('anc-wanganshi').checkedAt, '2026-10-24');
+  assert.equal(source('anc-wanganshi').checkedAt, '2026-10-28');
 });
 
 test('specific primary-text and academic readings supplement rather than replace existing videos', () => {
