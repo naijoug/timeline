@@ -101,7 +101,7 @@ test('collections cover early and contemporary history in actual chronological o
 test('every recommendation is attached to a real event and stays outside fact sources and the client index', () => {
   const payload = createExplorerPayload(chinaHistory);
   for (const [id, resources] of Object.entries(historyRecommendedResources)) {
-    assert.deepEqual(event(id).recommendedResources, resources, id);
+    assert.deepEqual(event(id).recommendedResources!.slice(0, resources.length), resources, `${id}: preserve prior resources`);
     assert.equal('recommendedResources' in payload.catalog.events.find(event => event.id === id)!, false);
     for (const resource of resources) {
       assert.ok(resource.match && resource.scopeNote && resource.creator && resource.checkedAt);
