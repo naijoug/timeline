@@ -1,3 +1,4 @@
+import { agenticWorkflowSources } from './agentic-workflows-ga';
 import { carbonFusionSources } from './carbon-fusion-release';
 import { verified2026Sources } from './verified-2026';
 import type { Source } from './types';
@@ -71,5 +72,5 @@ const baseSources: Source[] = [
   source('muse', 'How We Designed Muse', 'Muse / Meta', 'https://introducing.muse.ai/', '工程文章'),
   source('cue', 'Your personal agents, on Cue', 'Cue / Manus', 'https://cue.im/', '官方文档'),
 ];
-export const sources: Source[] = [...baseSources.map(s => ({ ...s, ...instructionSourceReviews[s.id], ...historicalSourceReviews[s.id] })), ...instructionSources, ...historicalSources, ...recentSources, ...verified2026Sources, ...carbonFusionSources];
+export const sources: Source[] = [...baseSources.map(s => ({ ...s, ...instructionSourceReviews[s.id], ...historicalSourceReviews[s.id] })), ...instructionSources, ...historicalSources, ...recentSources, ...verified2026Sources, ...carbonFusionSources, ...agenticWorkflowSources];
 export const sourceMap = Object.fromEntries(sources.map(s => [s.id, s]));
