@@ -1,3 +1,4 @@
+import { rustAsyncSources, rustAsyncPatch } from './rust-async-depth';
 import { goIterationEvents, goIterationSources, goIterationRelations } from './go-iteration-history';
 import type {
   Catalog,
@@ -964,6 +965,9 @@ for (const id of ["swift5-exact-release", "swift6-release"]) {
   const index = sources.findIndex(item => item.id === id);
   sources[index] = { ...sources[index], checkedAt: "2026-10-26" };
 }
+
+sources.push(...rustAsyncSources);
+Object.assign(events.find(event => event.id === 'rust-139-async')!, rustAsyncPatch);
 
 sources.push(...goIterationSources);
 events.push(...goIterationEvents);
