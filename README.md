@@ -1,5 +1,7 @@
 # timeline
 
+最新维护：[《显微镜下的大明》书目与改编边界](docs/maintenance-2026-10-29-0400.md)。
+
 一个可本地运行、可静态部署的通用时间线网站。使用 Astro、React、TypeScript；无数据库、账号或运行时模型 API。当前包含 AI 发展史、编程语言、中国历史与作家作品四个主题，共用时间计算、筛选、时间线界面和事件详情模板。
 
 最新内容维护：[Agentic Workflows正式可用与权限边界](docs/maintenance-2026-10-29-0000.md)；[Carbon 受限投放与 Copilot Fusion 正式可用](docs/maintenance-2026-10-28-2000.md)；[王安石新法的纪年、地域与史源](docs/maintenance-2026-10-28-1600.md)；[Go 循环语义与迭代器](docs/maintenance-2026-10-28-1200.md)；[Robotics ER 2 云公开预览与渠道边界](docs/maintenance-2026-10-28-0800.md)；[CFSG公开材料与评测版本边界](docs/maintenance-2026-10-28-0400.md)；[LFM3 实际权重、端侧条件与许可边界](docs/maintenance-2026-10-28-0000.md)；[Genie 4 受限研究预览与模拟边界](docs/maintenance-2026-10-27-2000.md)；[《黑暗森林》版本、访谈与阅读边界](docs/maintenance-2026-10-27-1600.md)；[Anthropic ETH研究材料公开与核验边界](docs/maintenance-2026-10-27-1200.md)；[隋代大运河工程、仓储与社会成本](docs/maintenance-2026-10-27-0800.md)；[Unlimited-OCR 2 权重公开与跨页解析边界](docs/maintenance-2026-10-27-0400.md)；[上一轮 OpenAI 科学研究材料核验](docs/maintenance-2026-10-27-0000.md)。

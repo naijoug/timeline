@@ -1,3 +1,4 @@
+import { mingMicroscopeSources, mingMicroscopePatch } from './ming-microscope-depth';
 import { liuAuditSources, liuAuditPatches } from "./liu-reference-audit";
 import { auditedWriterSources, auditedWriterPatches } from "./reference-audit";
 import { liuReviewedEvents, liuReviewedSources } from "./liu-reviewed-works";
@@ -24,6 +25,7 @@ const source = (
 ): Source => ({ id, title, publisher, url, type, locator, checkedAt });
 
 export const sources: Source[] = [
+  ...mingMicroscopeSources,
   ...writersReviewedSources,
   ...auditedWriterSources,
   ...liuAuditSources,
@@ -2034,6 +2036,7 @@ export const events: TimelineEvent[] = [
 ];
 
 for (const event of events) Object.assign(event, auditedWriterPatches[event.id] || {}, liuAuditPatches[event.id] || {});
+Object.assign(events.find(event => event.id === 'ma-bo-yong-ming-microscope')!, mingMicroscopePatch);
 
 
 // The eras are editorial navigation, not independently established literary periodization.
