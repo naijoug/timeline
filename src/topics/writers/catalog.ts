@@ -1,3 +1,4 @@
+import { greatHealerSources, greatHealerPatch } from './great-healer-depth';
 import { mingMicroscopeSources, mingMicroscopePatch } from './ming-microscope-depth';
 import { liuAuditSources, liuAuditPatches } from "./liu-reference-audit";
 import { auditedWriterSources, auditedWriterPatches } from "./reference-audit";
@@ -25,6 +26,7 @@ const source = (
 ): Source => ({ id, title, publisher, url, type, locator, checkedAt });
 
 export const sources: Source[] = [
+  ...greatHealerSources,
   ...mingMicroscopeSources,
   ...writersReviewedSources,
   ...auditedWriterSources,
@@ -2037,6 +2039,7 @@ export const events: TimelineEvent[] = [
 
 for (const event of events) Object.assign(event, auditedWriterPatches[event.id] || {}, liuAuditPatches[event.id] || {});
 Object.assign(events.find(event => event.id === 'ma-bo-yong-ming-microscope')!, mingMicroscopePatch);
+Object.assign(events.find(event => event.id === 'ma-bo-yong-great-healer')!, greatHealerPatch);
 
 
 // The eras are editorial navigation, not independently established literary periodization.

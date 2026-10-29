@@ -1,6 +1,6 @@
 # timeline
 
-最新维护：[Mistral Large 4 实际权重与许可边界](docs/maintenance-2026-10-29-1600.md)；[官渡的战线、粮运与史源边界](docs/maintenance-2026-10-29-1200.md)；[Rust async/await 的稳定日期与运行时边界](docs/maintenance-2026-10-29-0800.md)；[《显微镜下的大明》书目与改编边界](docs/maintenance-2026-10-29-0400.md)。
+最新维护：[《大医》分篇出版、虚构边界与具体节目](docs/maintenance-2026-10-29-2000.md)；[Mistral Large 4 实际权重与许可边界](docs/maintenance-2026-10-29-1600.md)；[官渡的战线、粮运与史源边界](docs/maintenance-2026-10-29-1200.md)；[Rust async/await 的稳定日期与运行时边界](docs/maintenance-2026-10-29-0800.md)；[《显微镜下的大明》书目与改编边界](docs/maintenance-2026-10-29-0400.md)。
 
 一个可本地运行、可静态部署的通用时间线网站。使用 Astro、React、TypeScript；无数据库、账号或运行时模型 API。当前包含 AI 发展史、编程语言、中国历史与作家作品四个主题，共用时间计算、筛选、时间线界面和事件详情模板。
 
