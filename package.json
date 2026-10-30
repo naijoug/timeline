@@ -11,7 +11,10 @@
     "validate": "node --import tsx scripts/validate.ts",
     "report:ai": "node --import tsx scripts/ai-coverage.ts",
     "test": "node --import tsx --test tests/*.test.ts",
-    "check:links": "node scripts/check-links.mjs"
+    "check:links": "node scripts/check-links.mjs",
+    "check:performance": "node scripts/check-performance.mjs",
+    "test:hydration": "node --experimental-vm-modules scripts/check-hydration.mjs",
+    "check:reading": "node --import tsx scripts/check-reading-ui.ts"
   },
   "dependencies": {
     "@astrojs/react": "7.0.0",
@@ -25,6 +28,7 @@
     "@types/node": "^22.20.4",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "jsdom": "^26.1.0",
     "tsx": "^4.20.0",
     "typescript": "^5.9.0"
   }

@@ -1,6 +1,7 @@
+import SourceLink from './SourceLink';
 import { sitePath } from '../lib/paths';
 import { useEffect, useState, useMemo, useRef } from 'react';
-import { Search, SlidersHorizontal, X, ArrowDownUp, ExternalLink, ChevronDown, Bookmark, Sparkles, CalendarDays } from 'lucide-react';
+import { Search, SlidersHorizontal, X, ArrowDownUp, ChevronDown, Bookmark, Sparkles, CalendarDays } from 'lucide-react';
 import type { TimelineEvent, Track } from '../data/types';
 import { events } from '../data/events';
 import { entities, entityMap, entityHref, eventHref } from '../data/entities';
@@ -27,8 +28,8 @@ export function EventCard({ event, returnUrl }: { event: TimelineEvent; returnUr
     <div className="event-bottom"><div className="event-tags">{event.tags.slice(0, 2).map(t => <span key={t}>{t}</span>)}</div><button className="expand-button" aria-expanded={open} aria-controls={`details-${event.id}`} onClick={() => setOpen(!open)}>{open ? '收起' : '了解这次变化'}<ChevronDown size={15} /></button></div>
     <div id={`details-${event.id}`} hidden={!open} className="inline-detail">
       <div className="detail-caption">为什么重要</div><p>{event.significance}</p>
-      {event.change && <><div className="detail-caption">相比 {event.change.baseline}</div><ul>{event.change.improvements.map(x => <li key={x}>{x}</li>)}</ul><p className="caveat">{event.change.evidence} · {event.change.tradeoffs}</p></>}
-      <div className="source-links">{event.sourceIds.map(id => <a key={id} href={sourceMap[id].url} target="_blank" rel="noopener noreferrer">{sourceMap[id].publisher} · {sourceMap[id].type}<ExternalLink size={12} /></a>)}</div>
+      {event.change && <><div className="detail-caption">参考背景：{event.change.baseline}</div><ul>{event.change.improvements.map(x => <li key={x}>{x}</li>)}</ul><p className="caveat">{event.change.evidence} · {event.change.tradeoffs}</p></>}
+      <div className="source-links">{event.sourceIds.map(id => <SourceLink key={id} url={sourceMap[id].url} title={sourceMap[id].title} publisher={sourceMap[id].publisher} />)}</div>
       <a className="text-link" href={href} onClick={() => { if (returnUrl) rememberReturn(`${returnUrl}#event-${event.id}`); }}>查看完整事件</a>
     </div>
   </article>;
@@ -96,7 +97,7 @@ export default function Timeline({ track = 'history', entityId }: { track?: Trac
           return <section className="time-group" key={key} id={`year-${key}`} data-era={era?.short}><div className="time-label"><span className="year-number">{key.slice(0, 4)}</span>{key.includes('-') && <span className="month-label">{Number(key.slice(5))} 月</span>}<span className="time-dot" /></div><div className="year-events">{items.map(e => <div className="event-wrap" key={e.id}><div className="event-date">{displayDate(e)}</div><EventCard event={e} returnUrl={returnUrl} /></div>)}</div></section>;
         })}
         {!results.length && <div className="empty-state"><Search size={30} /><h2>这一段历史，还没有匹配的记录</h2><p>试试其他关键词，或扩大年份与对象范围。</p><button className="primary-button" onClick={reset}>清除筛选</button></div>}
-        {!!results.length && <div className="timeline-end"><span />历史仍在继续<p>已收录事件更新至 2026 年 9 月 · 持续整理中</p></div>}
+        {!!results.length && <div className="timeline-end"><span />历史仍在继续<p>持续整理中 · 日期与资料见各事件</p></div>}
       </div><aside className="era-rail"><div className="rail-inner"><div className="rail-heading">时光索引</div>{availableEras.map(era => { const target = groups.find(([key]) => +key.slice(0, 4) >= era.from && +key.slice(0, 4) <= era.to)?.[0]; return <a key={era.short} href={`#year-${target}`} className={activeEra === era.short ? 'active' : ''}><span>{era.short}</span><strong>{era.label}</strong></a>; })}<div className="rail-note"><Bookmark size={16} /><p>按时间排序，间距不代表实际时间长度。</p></div>{entityId && <a className="text-link" href={entityHref(entityId)}>关于 {entityMap[entityId]?.name}</a>}</div></aside></div>
     </section>
   </>;

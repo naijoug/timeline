@@ -6,7 +6,7 @@ const references: [string, string, string, string, Source['type']][] = [
   ['qwen3', 'Qwen3: Think Deeper, Act Faster', 'Qwen', 'https://qwenlm.github.io/blog/qwen3/', '官方公告'],
   ['kimi2', 'Kimi K2: Open Agentic Intelligence', 'Moonshot AI', 'https://www.kimi.com/blog/kimi-k2', '官方公告'],
   ['kimi-agent', 'Introducing Kimi Agent', 'Moonshot AI', 'https://www.kimi.com/en/help/agent/agent-overview', '官方文档'],
-  ['glm45', 'GLM-4.5: Reasoning, Coding, and Agentic Abilities', 'Z.ai', 'https://z.ai/blog/glm-4.5', '官方公告'],
+  ['glm45', 'Z.ai Releases GLM-4.5, Setting New Standards for AI Performance and Accessibility While Improving Affordability', 'Z.ai（PR Newswire 发布）', 'https://www.prnewswire.com/news-releases/zai-releases-glm-4-5--setting-new-standards-for-ai-performance-and-accessibility-while-improving-affordability-302514803.html', '官方公告'],
   ['glm45-repo', 'GLM-4.5 model and research repository', 'Z.ai', 'https://github.com/zai-org/GLM-4.5', '官方文档'],
   ['minimax-m1', 'MiniMax-M1', 'MiniMax', 'https://www.minimax.io/news/minimaxm1', '官方公告'],
   ['minimax-agent', 'Introducing MiniMax Agent', 'MiniMax', 'https://www.minimax.io/news/minimax-agent', '官方公告'],
@@ -16,8 +16,10 @@ const references: [string, string, string, string, Source['type']][] = [
   ['step3', 'Step3: Cost-Effective Multimodal Intelligence', '阶跃星辰', 'https://chat.stepfun.com/research/en/step3', '官方公告'],
   ['sensenova6', '商汤日日新 V6 发布', '商汤', 'https://www.sensetime.com/cn/news/51169469', '官方公告'],
   ['ui-tars', 'UI-TARS: Pioneering Automated GUI Interaction', 'ByteDance Seed', 'https://github.com/bytedance/UI-TARS', '官方文档'],
+  ['ui-tars-paper', 'UI-TARS: Pioneering Automated GUI Interaction with Native Agents', 'ByteDance Seed / arXiv', 'https://arxiv.org/abs/2501.12326', '原始论文'],
+  ['gpt4o-launch', 'Hello GPT-4o', 'OpenAI', 'https://openai.com/index/hello-gpt-4o/', '官方公告'],
   ['gpt4-report', 'GPT-4 Technical Report', 'OpenAI / arXiv', 'https://arxiv.org/abs/2303.08774', '原始论文'],
-  ['gemini15', 'How Gemini 1.5 expands the context window', 'Google', 'https://blog.google/innovation-and-ai/products/long-context-window-ai-models/', '官方公告'],
+  ['gemini15', 'Our next-generation model: Gemini 1.5', 'Google', 'https://blog.google/innovation-and-ai/products/google-gemini-next-generation-model-february-2024/', '官方公告'],
   ['gemini20', 'Gemini 2.0, Jules and Colab updates', 'Google', 'https://blog.google/feed/gemini-jules-colab-updates/', '官方公告'],
   ['llama2', 'Meta and Microsoft introduce Llama 2', 'Meta', 'https://ai.meta.com/blog/llama-2/', '官方公告'],
   ['llama3', 'Introducing Meta Llama 3', 'Meta', 'https://ai.meta.com/blog/meta-llama-3', '官方公告'],
@@ -30,26 +32,27 @@ const references: [string, string, string, string, Source['type']][] = [
   ['copilot-agent', 'GitHub Copilot: Meet the new coding agent', 'GitHub', 'https://github.blog/news-insights/product-news/github-copilot-meet-the-new-coding-agent/', '官方公告'],
   ['replit-v2', 'Introducing Replit Agent v2 in Early Access', 'Replit', 'https://replit.com/blog/agent-v2', '官方公告'],
   ['devin', 'Introducing Devin', 'Cognition', 'https://cognition.com/blog/introducing-devin', '官方公告'],
-  ['cursor-agent', 'Composer UI, Agent and Commit Messages', 'Cursor', 'https://www.cursor.com/ja/changelog/new-composer-ui-agent-commit-messages', '官方公告'],
+  ['cursor-agent', 'Composer UI, Agent and Commit Messages', 'Cursor', 'https://cursor.com/changelog/0-43-x', '官方公告'],
 ];
 export const globalSources: Source[] = references.map(([id, title, publisher, url, type]) => ({
-  id, title, publisher, url, type, language: ['ernie45','hunyuan-t1','pangu-open','sensenova6'].includes(id) ? '简体中文' : id === 'cursor-agent' ? '日本語 / English' : 'English', checkedAt: '2026-09-29',
+  id, title, publisher, url, type, language: ['ernie45','hunyuan-t1','pangu-open','sensenova6'].includes(id) ? '简体中文' : 'English', checkedAt: ['cursor-agent', 'gemini15', 'glm45', 'ui-tars-paper', 'pangu-open', 'gpt4o-launch', 'glm45-repo', 'sensenova6'].includes(id) ? '2026-10-26' : '2026-09-29',
 }));
+globalSources.find(item => item.id === 'glm45-repo')!.locator = 'Model Introduction → GLM-4.5（不使用后续4.6/4.7段落倒推）';
 
 const families = [
   ['gpt', 'GPT', 'OpenAI', '从通用语言能力到多模态交互，追踪代表模型的能力变化。', 'gpt4-report'],
-  ['gemini', 'Gemini', 'Google', '多模态、长上下文与面向工具的模型演进。', 'gemini15'],
+  ['gemini', 'Gemini', 'Google', '多模态与长上下文模型演进；具体工具能力以各版本说明为准。', 'gemini15'],
   ['llama', 'Llama', 'Meta', '可获得权重的模型家族，关注生态、语言与上下文能力。', 'llama2'],
   ['qwen', 'Qwen / 通义千问', '阿里巴巴', '多语言、编程与推理模型，以及不同规模的开放权重。', 'qwen3'],
   ['kimi', 'Kimi', '月之暗面', '关注代码、长上下文和 Agent 工具使用。', 'kimi2'],
   ['glm', 'GLM', '智谱', '结合推理、代码和 Agent 能力的模型家族。', 'glm45'],
   ['minimax', 'MiniMax', 'MiniMax', '混合注意力与长上下文推理模型。', 'minimax-m1'],
   ['ernie', 'ERNIE / 文心', '百度', '语言与多模态模型，追踪开放权重和能力变化。', 'ernie45'],
-  ['hunyuan', 'Hunyuan / 混元', '腾讯', '通用语言、推理与多模态模型体系。', 'hunyuan-t1'],
+  ['hunyuan', 'Hunyuan / 混元', '腾讯', '腾讯混元模型系列；本条来源介绍 Hunyuan-T1 的深度推理能力。', 'hunyuan-t1'],
   ['pangu', 'Pangu / 盘古', '华为', '模型开放、部署生态与行业能力的演进。', 'pangu-open'],
   ['step', 'Step', '阶跃星辰', '多模态推理模型与效率设计。', 'step3'],
   ['sensenova', 'SenseNova / 日日新', '商汤', '多模态理解、推理与实时交互。', 'sensenova6'],
-  ['mistral', 'Mistral', 'Mistral AI', '法国团队的开放模型与混合专家路线。', 'mixtral'],
+  ['mistral', 'Mistral', 'Mistral AI', '开放模型与混合专家路线。', 'mixtral'],
   ['command', 'Command', 'Cohere', '面向企业检索增强与工具使用的模型家族。', 'command-r'],
   ['falcon', 'Falcon', 'TII', '阿联酋 TII 的大规模开放模型研究。', 'falcon180'],
 ];
@@ -104,7 +107,7 @@ function application(id:string,date:string,title:string,entityId:string,source:s
 }
 export const globalEvents: TimelineEvent[] = [
   {...release('gpt-4-report','2023-03-15','GPT-4 技术报告','gpt','gpt4-report','GPT-3.5 系列',['报告更强的复杂任务表现','介绍文本和图像输入能力'],'这是论文首发时间，不能当作所有模态或渠道同时开放的日期。'),kind:'技术报告'},
-  release('gpt-4o-api','2024-05-13','GPT-4o','gpt','api-changelog','此前 GPT-4 系列',['新一代旗舰模型进入 API','改善速度与使用成本'],'这里记录 API 发布；不同模态与产品入口的开放日期应分别核查。','gpt-4-report'),
+  release('gpt-4o-api','2024-05-13','GPT-4o','gpt','api-changelog','GPT-4 Turbo',['新一代旗舰模型进入 API','改善速度与使用成本'],'这里记录文本与视觉进入 API；速度和价格比较对象是 GPT-4 Turbo，不表示所有模态同日开放。'),
   release('gemini-1-5','2024-02-15','Gemini 1.5','gemini','gemini15','Gemini 1.0',['扩展多模态长上下文处理','探索百万 token 级上下文窗口'],'百万 token 窗口在此阶段面向有限测试；大窗口不等于全程信息检索都可靠。'),
   release('gemini-2-0','2024-12-11','Gemini 2.0 Flash 实验版','gemini','gemini20','Gemini 1.5',['进一步结合多模态与工具调用','提供实时交互相关开发能力'],'此条为实验版发布，不等于所有能力正式可用。','gemini-1-5'),
   release('llama-2','2023-07-18','Llama 2','llama','llama2','Llama 初代',['扩大模型权重的研究与商业使用范围','提供不同规模的预训练与对话版本'],'使用需遵循模型许可；开放权重不等于没有使用条件。'),
@@ -117,9 +120,9 @@ export const globalEvents: TimelineEvent[] = [
   release('minimax-m1','2025-06-16','MiniMax-M1','minimax','minimax-m1','MiniMax-01 系列',['结合混合注意力与长上下文推理','面向长任务和工具使用优化'],'长上下文和推理输出上限是不同指标；厂商效率测试依赖具体设置。'),
   {...release('ernie-4-5-open','2025-06-30','文心 ERNIE 4.5 开放权重','ernie','ernie45','此前文心模型的可获得性',['开放多尺寸语言与多模态模型权重','提供训练与部署生态支持'],'这是权重开放日，不是 ERNIE 4.5 最初公布日。'),kind:'开放权重'},
   release('hunyuan-t1','2025-03-21','混元 Hunyuan-T1','hunyuan','hunyuan-t1','Hunyuan TurboS 基座',['扩展深度推理能力','进一步进行偏好对齐'],'此日期依腾讯云正式发布动态，预览和后续快照另行区分。'),
-  {...release('pangu-open','2025-06-30','盘古 7B / Pro MoE 开放','pangu','pangu-open','此前盘古模型的可获得性',['开放稠密与混合专家模型','开放基于昇腾的推理技术'],'模型开放及推理技术发布，不代表所有盘古行业模型均已开放。'),kind:'开放权重'},
+  {...release('pangu-open','2025-06-30','盘古 Pro MoE 72B 开放，7B 仍待上线','pangu','pangu-open','此前盘古模型的可获得性',['公告称 Pro MoE 72B 权重及基础推理代码已上线','基于昇腾的 MoE 推理代码已上线；7B 权重与代码仍计划近期上线'],'本条记录 6 月 30 日公告的开放状态，不将 7B 的上线计划视为当日可下载；未下载或运行模型。'),kind:'开放权重'},
   release('step-3','2025-07-31','Step3','step','step3','此前 Step 系列',['结合多模态推理与混合专家架构','关注推理计算效率'],'能力与成本需要结合具体任务和部署配置评估。'),
-  release('sensenova-6','2025-04-10','日日新 SenseNova V6','sensenova','sensenova6','SenseNova V5 系列',['增强多模态推理','更新实时交互相关能力'],'官方性能描述不等于所有场景的第三方验证。'),
+  release('sensenova-6','2025-04-10','日日新 SenseNova V6','sensenova','sensenova6','SenseNova V5.5',['增强多模态推理','更新实时交互相关能力'],'官方性能描述不等于所有场景的第三方验证。'),
   release('mixtral-8x7b','2023-12-11','Mixtral 8×7B','mistral','mixtral','Mistral 7B',['开放稀疏混合专家模型权重','支持多语言与 32K 上下文'],'激活参数量与总参数量不能混为一谈，实际部署仍需存储全部权重。'),
   release('command-r','2024-03','Command R','command','command-r','此前 Command 系列',['针对检索增强与工具使用优化','支持长上下文与多语言'],'博客与 changelog 日期口径不同，本条保留月份。'),
   release('falcon-180b','2023-09-06','Falcon 180B','falcon','falcon180','此前 Falcon 系列',['发布更大规模的语言模型权重','扩展可获得的大模型研究选择'],'规模不自动意味着每种任务更优；使用条件依发布方许可。'),
@@ -133,3 +136,13 @@ export const globalEvents: TimelineEvent[] = [
   application('devin-introduction','2024-03','Devin','devin','devin','Cognition 介绍具有终端、编辑器与浏览器环境的软件工程 Agent。','展示将开发任务委托给可以持续执行的系统这一产品方向。','产品介绍'),
   application('cursor-agent-introduction','2024-11-24','Cursor Agent','cursor','cursor-agent','Cursor 在 Composer 更新中引入 Agent 工作流。','让代码编辑器中的助手能够更主动地组织开发操作。','功能发布'),
 ];
+
+// The repository README follows newer versions; retain the original research date.
+const originalUiTars = globalEvents.find(event => event.id === 'ui-tars-research');
+if (originalUiTars) originalUiTars.sourceIds.push('ui-tars-paper');
+
+const gpt4oRelease = globalEvents.find(event => event.id === 'gpt-4o-api')!;
+gpt4oRelease.sourceIds.push('gpt4o-launch');
+gpt4oRelease.change!.sourceIds.push('gpt4o-launch');
+const glm45Release = globalEvents.find(event => event.id === 'glm-4-5')!;
+if (!glm45Release.change!.sourceIds.includes('glm45-repo')) glm45Release.change!.sourceIds.push('glm45-repo');

@@ -1,8 +1,14 @@
+import { monitoringSources } from './misalignment-monitoring';
+import { mistralLarge4Sources } from './mistral-large4-weights';
+import { agenticWorkflowSources } from './agentic-workflows-ga';
+import { carbonFusionSources } from './carbon-fusion-release';
+import { verified2026Sources } from './verified-2026';
 import type { Source } from './types';
 import { globalSources } from './global';
 import { releaseSources, releaseResearchDate } from './releases';
 import { instructionSources, instructionSourceReviews } from './instruction-following';
 import { historicalSources, historicalSourceReviews } from './historical-milestones';
+import { recentSources } from './recent-updates';
 const source = (id: string, title: string, publisher: string, url: string, type: Source['type'] = '原始论文'): Source => ({ id, title, publisher, url, type, language: 'English', checkedAt: '2026-09-29' });
 const baseSources: Source[] = [
   ...globalSources,
@@ -41,6 +47,7 @@ const baseSources: Source[] = [
   { ...source('api-changelog', 'OpenAI API changelog', 'OpenAI', 'https://developers.openai.com/api/docs/changelog', '官方公告'), checkedAt: releaseResearchDate },
   source('codex-changelog', 'ChatGPT & Codex changelog', 'OpenAI', 'https://learn.chatgpt.com/docs/changelog', '官方公告'),
   source('mcculloch', 'A logical calculus of the ideas immanent in nervous activity', 'Springer', 'https://doi.org/10.1007/BF02478259'),
+  { ...source('turing-original-scan', 'Computing Machinery and Intelligence — original journal scan', 'A. M. Turing · Mind（UMBC课程托管原刊扫描）', 'https://www.csee.umbc.edu/courses/471/papers/turing_computing_machinery_and_intelligence.pdf'), checkedAt: '2026-10-26', locator: '原刊 pp.433–434；卷期与 October 1950 刊头', format: '原刊扫描 PDF（大学课程托管）' },
   source('turing', 'Computing Machinery and Intelligence', 'Mind / Oxford', 'https://academic.oup.com/mind/article/LIX/236/433/986238'),
   source('dartmouth', 'A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence', 'John McCarthy et al.', 'https://www-formal.stanford.edu/jmc/history/dartmouth/dartmouth.html'),
   source('dartmouth-history', 'Our Story', 'Dartmouth', 'https://ai.dartmouth.edu/our-story', '机构回顾'),
@@ -67,5 +74,5 @@ const baseSources: Source[] = [
   source('muse', 'How We Designed Muse', 'Muse / Meta', 'https://introducing.muse.ai/', '工程文章'),
   source('cue', 'Your personal agents, on Cue', 'Cue / Manus', 'https://cue.im/', '官方文档'),
 ];
-export const sources: Source[] = [...baseSources.map(s => ({ ...s, ...instructionSourceReviews[s.id], ...historicalSourceReviews[s.id] })), ...instructionSources, ...historicalSources];
+export const sources: Source[] = [...baseSources.map(s => ({ ...s, ...instructionSourceReviews[s.id], ...historicalSourceReviews[s.id] })), ...instructionSources, ...historicalSources, ...recentSources, ...verified2026Sources, ...carbonFusionSources, ...agenticWorkflowSources, ...mistralLarge4Sources, ...monitoringSources];
 export const sourceMap = Object.fromEntries(sources.map(s => [s.id, s]));

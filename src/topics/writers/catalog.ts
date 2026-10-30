@@ -1,3 +1,10 @@
+import { greatHealerSources, greatHealerPatch } from './great-healer-depth';
+import { mingMicroscopeSources, mingMicroscopePatch } from './ming-microscope-depth';
+import { liuAuditSources, liuAuditPatches } from "./liu-reference-audit";
+import { auditedWriterSources, auditedWriterPatches } from "./reference-audit";
+import { liuReviewedEvents, liuReviewedSources } from "./liu-reviewed-works";
+import { writersReviewedSources, writersRelations } from "./reviewed-works";
+import { zijinReviewedEvents, zijinReviewedSources } from "./zijin-reviewed-works";
 import type {
   Catalog,
   Entity,
@@ -19,20 +26,26 @@ const source = (
 ): Source => ({ id, title, publisher, url, type, locator, checkedAt });
 
 export const sources: Source[] = [
-  source("sfs-archive", "《科幻世界》杂志社刊发档案", "科幻世界杂志社", "https://www.sfw.com.cn/", "期刊档案", "1999—2006 年期刊发表与中国科幻银河奖评奖档案"),
-  source("hugo-database", "The Hugo Awards Official Database", "World Science Fiction Society", "https://www.thehugoawards.org/hugo-history/2015-hugo-awards/", "奖项记录", "2015 Hugo Award Best Novel: The Three-Body Problem by Cixin Liu"),
-  source("cq-press", "重庆出版社当代文学与科幻出版档案", "重庆出版社", "https://www.cqph.com/", "出版档案", "《三体》三部曲单行本出版记录与印次信息"),
-  source("scitech-press", "四川科学技术出版社出版书目", "四川科学技术出版社", "https://www.sckjpress.com/", "出版档案", "世界科幻大师丛书 · 《球状闪电》2004 年版出版档案"),
-  source("writers-press", "作家出版社当代文学出版档案", "作家出版社", "https://www.writerspress.com.cn/", "出版档案", "刘慈欣《超新星纪元》2003 年首版出版记录"),
-  source("new-star-press", "新星出版社午夜文库档案", "新星出版社", "https://www.newstarpress.com/", "出版档案", "午夜文库 · 紫金陈《无证之罪》2014 年版出版记录"),
-  source("jiangsu-lit-press", "江苏凤凰文艺出版社出版书目", "江苏凤凰文艺出版社", "https://www.jswy.com.cn/", "出版档案", "紫金陈《坏小孩》、马伯庸《古董局中局》《三国机密》出版档案"),
-  source("yunnan-peoples-press", "云南人民出版社出版档案", "云南人民出版社", "https://www.ynrmcbs.com/", "出版档案", "紫金陈《长夜难明》2017 年首版出版记录"),
-  source("beijing-joint-press", "北京联合出版公司图书档案", "北京联合出版公司", "https://www.bjjoint.com/", "出版档案", "联合读创 · 紫金陈《追踪师》再版与《黄金原野》中文选集出版记录"),
-  source("hainan-press", "海南出版社文学出版档案", "海南出版社", "https://www.hainanpress.com/", "出版档案", "马伯庸《风起陇西》2006 年首版出版记录"),
-  source("hunan-lit-press", "湖南文艺出版社当代原创档案", "湖南文艺出版社", "https://www.hnwyp.com/", "出版档案", "马伯庸《长安十二时辰》《显微镜下的大明》《长安的荔枝》《太白金星有点烦》《食南之徒》《两京十五日》《桃花源没事儿》出版档案"),
-  source("shanghai-lit-press", "上海文艺出版社原创文学档案", "上海文艺出版社", "https://www.rw-sh.com/", "出版档案", "马伯庸《大医》（破晓篇、日出篇）2022 年版出版记录"),
-  source("nlc-china", "中国国家图书馆全国总书目", "国家图书馆国家书目数据库", "https://www.nlc.cn/", "国家书目", "当代华语作家作品在版编目（CIP）与版本典藏登记"),
-  source("chinawriter", "中国作家网·书汇与作品档案", "中国作家协会", "https://www.chinawriter.com.cn/", "出版档案", "当代作家作品出版信息、书讯与内容简介"),
+  ...greatHealerSources,
+  ...mingMicroscopeSources,
+  ...writersReviewedSources,
+  ...auditedWriterSources,
+  ...liuAuditSources,
+  ...liuReviewedSources,
+  ...zijinReviewedSources,
+  source("sfs-archive", "科幻世界网站（当前维护中）", "科幻世界杂志社", "https://www.sfw.com.cn/", "机构入口（非直接证据）", "2026-10-26 访问返回“网站维护中”，不能读取期刊档案，不能据此核实具体作品或情节。"),
+  source("cq-press", "重庆出版社网站入口（非具体书目）", "重庆出版社", "https://www.cqph.com/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("scitech-press", "四川科学技术出版社网站入口（非具体书目）", "四川科学技术出版社", "https://www.sckjpress.com/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("writers-press", "作家出版社网站入口（非具体书目）", "作家出版社", "https://www.writerspress.com.cn/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("new-star-press", "新星出版社网站入口（非具体书目）", "新星出版社", "https://www.newstarpress.com/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("jiangsu-lit-press", "江苏凤凰文艺出版社网站入口（非具体书目）", "江苏凤凰文艺出版社", "https://www.jswy.com.cn/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("yunnan-peoples-press", "云南人民出版社网站入口（非具体书目）", "云南人民出版社", "https://www.ynrmcbs.com/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("beijing-joint-press", "北京联合出版公司网站入口（非具体书目）", "北京联合出版公司", "https://www.bjjoint.com/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("hainan-press", "海南出版社网站入口（非具体书目）", "海南出版社", "https://www.hainanpress.com/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("hunan-lit-press", "湖南文艺出版社网站入口（非具体书目）", "湖南文艺出版社", "https://www.hnwyp.com/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("shanghai-lit-press", "上海文艺出版社网站入口（非具体书目）", "上海文艺出版社", "https://www.rw-sh.com/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("nlc-china", "国家图书馆国家书目数据库网站入口（非具体书目）", "国家图书馆国家书目数据库", "https://www.nlc.cn/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
+  source("chinawriter", "中国作家协会网站入口（非具体书目）", "中国作家协会", "https://www.chinawriter.com.cn/", "机构入口（非直接证据）", "机构首页不等于具体作品档案；此链接不能直接验证所引出版日期、奖项或情节，相关直接证据待补。"),
 ];
 
 export const entities: Entity[] = [
@@ -363,103 +376,49 @@ export const events: TimelineEvent[] = [
     },
   ),
 
-  event(
-    "liu-cixin-supernova-era",
-    "《超新星纪元》",
-    2003,
-    1,
-    "sci-fi",
-    ["era-early-breakthrough"],
-    ["liu-cixin"],
-    "近地超新星爆发辐射导致所有成年人将在一年内死去，留下全球十三岁以下的孩子接管世界并经历残酷的儿童纪元。",
-    ["writers-press"],
-    {
-      milestone: false,
-      significance: "刘慈欣早期长篇代表作，借由极端社会学思想实验探讨文明演进、地缘政治与人性本质。",
-      tags: ["科幻", "长篇小说", "社会思想实验", "儿童纪元", "刘慈欣"],
-      facts: [
-        { label: "出版机构", text: "作家出版社（2003年1月首版）", sourceIds: ["writers-press"] },
-        { label: "体裁篇幅", text: "长篇小说", sourceIds: ["writers-press"] },
-        { label: "创作年代", text: "1991年构思，2003年正式出版", sourceIds: ["writers-press"] },
-      ],
-      details: [
-        {
-          label: "内容简介",
-          text: "一颗超新星爆发产生的致命辐射照射地球，基因修复机制受损使所有十三岁以上的成年人生命进入倒计时。成人们在生命的最后十个月里加紧培训孩子们学习维持电力、农业、国防与政府运转。大人全部离世后，一个完全由儿童统治的世界诞生了。起初孩子们沉浸在糖果与游戏的狂欢中，但随后社会秩序迅速崩塌，各国孩子甚至在大洋与南极洲展开了使用真枪实弹的‘超新星奥运会’和残酷战争，最终在废墟上重建新的文明形态。",
-          sourceIds: ["writers-press"],
-        },
-        {
-          label: "创作背景与反响",
-          text: "刘慈欣历时十余年数易其稿的长篇作品，以冷酷锋利的笔触撕破了对童年的浪漫化想象，是一部充满政治预言色彩的社会科幻经典。",
-          sourceIds: ["writers-press"],
-        },
-      ],
-    },
-  ),
-
-  event(
-    "liu-cixin-ball-lightning",
-    "《球状闪电》",
-    2004,
-    6,
-    "sci-fi",
-    ["era-early-breakthrough"],
-    ["liu-cixin"],
-    "陈博士为解开父母化为灰烬的球状闪电之谜穷尽一生，与武器狂人林云共同揭开宏电子与量子态观察者效应的惊世图景。",
-    ["scitech-press"],
-    {
-      significance: "《三体》系列的重要前传与宇宙观奠基之作，塑造了丁仪、林云等经典角色，将量子物理假说与武器伦理推向极致。",
-      tags: ["科幻", "长篇小说", "宏原子", "量子物理", "刘慈欣"],
-      facts: [
-        { label: "出版机构", text: "四川科学技术出版社（2004年6月）", sourceIds: ["scitech-press"] },
-        { label: "丛书系列", text: "世界科幻大师丛书", sourceIds: ["scitech-press"] },
-        { label: "关联作品", text: "《三体》系列前传世界观", sourceIds: ["scitech-press"] },
-      ],
-      details: [
-        {
-          label: "内容简介",
-          text: "在十四岁生日的暴风雨之夜，少年陈博士亲睹神秘的球状闪电穿墙而入，将父母瞬间化为飞灰而周围座椅完好无损。为此他倾注毕生精力研究这一自然谜团，并结识了对武器研发极度痴狂的少校女军官林云与理论物理天才丁仪。他们发现球状闪电本质上是空间中处于激发态的‘宏电子’，林云成功将其武器化并在战争中释放宏电子湮灭敌人。小说最后，林云自身也化为宏量子态，展现了观察者效应下既生又死的神秘世界。",
-          sourceIds: ["scitech-press"],
-        },
-        {
-          label: "创作背景与反响",
-          text: "小说不仅在硬科幻设定上惊艳绝伦，更深刻探讨了纯粹科学探索与毁灭性军事应用之间的永恒伦理矛盾，是刘慈欣文学水准最成熟的长篇之一。",
-          sourceIds: ["scitech-press"],
-        },
-      ],
-    },
-  ),
+  ...liuReviewedEvents,
 
   event(
     "liu-cixin-three-body-1",
-    "《三体》",
+    "《三体》开始连载",
     2006,
     5,
     "sci-fi",
     ["era-epic-and-mystery"],
     ["liu-cixin"],
-    "叶文洁向宇宙发出暴露地球坐标的信号，引来半人马座恶劣三星环境下的三体文明，揭开人类文明与地外文明生死博弈的序幕。",
-    ["sfs-archive", "hugo-database", "cq-press"],
+    "一次向宇宙发出的信号把地球与濒临毁灭的外星文明联系起来，人类内部也开始分化为迎接者与抵抗者。",
+    ["writers-three-body-chronology", "writers-three-body-tor"],
     {
-      significance: "荣获第73届雨果奖最佳长篇故事奖，亚洲首次获此殊荣；中国科幻走向世界的划时代巨著。",
-      tags: ["科幻", "雨果奖", "红岸基地", "智子", "三体", "刘慈欣"],
+      significance: "三部曲的第一部先以期刊连载进入读者视野；连载、中文成书、英文译介与获奖是四个不同的时间节点。",
+      tags: ["科幻", "三体", "期刊首发", "刘慈欣"],
+      milestone: true,
       facts: [
-        { label: "首发连载", text: "《科幻世界》2006年5月开始连载", sourceIds: ["sfs-archive"] },
-        { label: "单行本出版", text: "重庆出版社（2008年1月）", sourceIds: ["cq-press"] },
-        { label: "所获荣誉", text: "第73届雨果奖最佳长篇小说奖（2015）", sourceIds: ["hugo-database"] },
+        {
+          label: "节点类型",
+          text: "期刊连载开始",
+          sourceIds: ["writers-three-body-chronology"]
+        },
+        {
+          label: "连载范围",
+          text: "2006 年 5—12 月，共八个月",
+          sourceIds: ["writers-three-body-chronology"]
+        }
       ],
       details: [
         {
-          label: "内容简介",
-          text: "文化大革命期间，天体物理学女学者叶文洁目睹父亲惨遭批斗致死，被发配至绝密的红岸基地。在对人类彻底绝望的痛苦中，她利用太阳对电磁波的能量放大镜效应向宇宙发出文明呼吁。四光年外半人马座三星系统中的三体文明收到了信号，派出由四百艘飞船组成的庞大舰队启航远征地球，并释放‘智子’封锁地球基础物理研究。纳米科学家汪淼与刑警史强介入调查科学家离奇自杀事件，揭开反人类组织地球三体协会（ETO）与外星入侵的惊天危机。",
-          sourceIds: ["cq-press"],
+          label: "首发与版本",
+          text: "《科幻世界》于 2006 年 5 月开始连载，12 月结束；中文单行本另记在 2008 年 1 月。",
+          sourceIds: ["writers-three-body-chronology"],
+          locator: "2006 年与 2008 年条目"
         },
         {
-          label: "创作背景与反响",
-          text: "作品开创性地将中国现代历史创伤与最宏大的地外文明接触融为一体，重塑了世界对中国当代科幻的认知，开启了长达二十年的全球现象级阅读狂潮。",
-          sourceIds: ["hugo-database"],
-        },
+          label: "作品入口",
+          text: "故事将中国的历史经验与第一次外星接触并置；可先把握两个文明的接触及人类的不同回应，再进入续作。",
+          sourceIds: ["writers-three-body-tor"],
+          locator: "Book Details：首部与故事背景"
+        }
       ],
+      note: "此处日期是首期连载月份，不是单行本、英译本或获奖日期；简介不预先揭示主要结局。"
     },
   ),
 
@@ -471,28 +430,70 @@ export const events: TimelineEvent[] = [
     "sci-fi",
     ["era-epic-and-mystery"],
     ["liu-cixin"],
-    "面对智子监控与水滴碾压，人类推行面壁计划；罗辑参透叶文洁留下的宇宙社会学公理，悟出冰冷的黑暗森林法则建立威慑。",
-    ["cq-press"],
+    "面对外星文明对信息的监控，人类启动面壁计划；罗辑成为四位面壁者中最出人意料的一员。",
+    ["writers-three-body-chronology", "writers-dark-forest-tor", "writers-dark-forest-tor-2015", "writers-dark-forest-tor-2016", "writers-dark-forest-nbd-interview", "hugo-database"],
     {
-      significance: "提出震撼思想界的‘黑暗森林法则’（猜疑链、技术爆炸），确立了当代太空社会学最著名的思想模型之一。",
-      tags: ["科幻", "黑暗森林", "面壁计划", "罗辑", "水滴", "刘慈欣"],
+      significance: "三部曲第二部将文明接触推进到战略与信任困境；阅读时应把小说的宇宙社会学设想与现实科学结论区分开。",
+      tags: ["科幻", "三体", "面壁计划", "刘慈欣"],
+      milestone: true,
       facts: [
-        { label: "出版机构", text: "重庆出版社（2008年5月）", sourceIds: ["cq-press"] },
-        { label: "体裁篇幅", text: "长篇小说", sourceIds: ["cq-press"] },
-        { label: "核心法则", text: "宇宙社会学黑暗森林公理", sourceIds: ["cq-press"] },
+        {
+          label: "节点类型",
+          text: "中文单行本出版",
+          sourceIds: ["writers-three-body-chronology"]
+        },
+        {
+          label: "系列位置",
+          text: "三部曲第二部",
+          sourceIds: ["writers-dark-forest-tor"]
+        }
       ],
       details: [
         {
-          label: "内容简介",
-          text: "由于人类的一切通讯均受到三体智子的完全监控，联合国挑选了四位不受智子思维监控的‘面壁者’秘密构思防御战略。然而前三位面壁者的宏大计划均被三体破壁人轻易识破。在三体仅用一颗强互作用力探测器‘水滴’就近乎全歼人类两千艘主力太空舰队的至暗时刻，原本玩世不恭的第四位面壁者罗辑悟出了宇宙文明间充满猜疑链与灭霸本能的‘黑暗森林法则’。罗辑在荒原墓地将枪口对准自己的心脏，以随时发射三体星坐标引来神级文明清理为筹码，迫使三体舰队停航转向，开创了两个文明相持半个世纪的威慑纪元。",
-          sourceIds: ["cq-press"],
+          label: "版本与承接",
+          text: "中文单行本出版于 2008 年 5 月，承接《三体》第一部。英文出版社将其列为系列第二卷。",
+          sourceIds: ["writers-three-body-chronology", "writers-dark-forest-tor"],
+          locator: "年表 2008 年；出版社 Volume 2"
         },
         {
-          label: "创作背景与反响",
-          text: "小说通过水滴摧毁太空舰队的毁灭性描摹与墓地终极对决，达到了硬科幻构思与文学戏剧冲突的巅峰，被广泛誉为《三体》三部曲中情节最精彩的一卷。",
-          sourceIds: ["cq-press"],
+          label: "内容简介",
+          text: "智子的监视使公开部署难以保密，面壁者因此以未被读取的思想构思防御方案。天文学家、社会学家罗辑被选中后，必须理解自己为何受到特别关注。",
+          sourceIds: ["writers-dark-forest-tor"],
+          locator: "Book Details：Wallfacer Project 与 Luo Ji"
         },
+        {
+          label: "译介：同一作品，不同ISBN的发行记录",
+          text: "Tor书目列Joel Martinsen为本书译者：ISBN 9780765377081的发行日为2015年8月11日，ISBN 9780765386694为2016年8月16日。后者不是作品首次英译日期，更不能替换本节点的2008年中文出版月份。这里按具体ISBN区分，不推断未显示的装帧信息。",
+          sourceIds: ["writers-dark-forest-tor-2015", "writers-dark-forest-tor-2016"],
+          locator: "两页Author、On Sale与ISBN"
+        },
+        {
+          label: "设定与现实：作者解释不是科学证明",
+          text: "2017年每经访谈直接追问黑暗森林。刘慈欣把它放在小说所构造的可能性中，而非对现实宇宙的定论。可据此理解作品怎样组织文明之间的信息与信任困境，但不能把设定称作已验证的宇宙法则，也不能用作者访谈替代科学论证。",
+          sourceIds: ["writers-dark-forest-nbd-interview"],
+          locator: "黑暗森林是否成立的问答"
+        },
+        {
+          label: "传播边界：不要移用第一部的奖项",
+          text: "2015年雨果奖最佳长篇小说记录列的是《三体》第一部及其译者Ken Liu（刘宇昆），不是《黑暗森林》。本书的Joel Martinsen译本应与第一部的译者、出版及获奖记录分别阅读。",
+          sourceIds: ["hugo-database", "writers-dark-forest-tor-2015"],
+          locator: "2015 Hugo Best Novel；Tor Author"
+        },
+        {
+          label: "编辑解读：先看信息条件，再判断人物策略",
+          text: "建议接着第一部阅读，先记录各方能观察什么、能隐藏什么，以及决策代价由谁承担，再比较面壁者的不同选择。读完后回到作者访谈，区分故事为形成冲突而设置的前提，与现实中需要证据支持的判断。这是编辑阅读路径，不是对小说价值或宇宙规律的权威结论。",
+          editorial: true
+        }
       ],
+      recommendedResources: [{
+        id: "dark-forest-nbd-conversation", title: "专访│科幻作家刘慈欣：我和你们一样看不懂前沿物理论文",
+        creator: "刘慈欣（受访）；丁舟洋、王礼迪（采访）", series: "每日经济新闻", kind: "article",
+        url: "https://www.nbd.com.cn/articles/2017-12-19/1173292.html",
+        match: "具体问答直接讨论黑暗森林是否成立，适合在读完小说后核对作者如何限定虚构设定与现实判断。",
+        scopeNote: "已核读文字，可能涉及设定与情节；2017年12月19日为采访文章刊发日，不是作品出版日。作者观点不是独立科学证据。",
+        locator: "黑暗森林问答", checkedAt: "2026-10-27"
+      }],
+      note: "本节点仍为2008年5月中文单行本出版，未补造日。中文出版、具体ISBN英译版发行和2015年第一部获奖分别记录；未查看中文初版版权页实物。本轮深化一个既有节点，不新增或重复计算作品。"
     },
   ),
 
@@ -504,28 +505,39 @@ export const events: TimelineEvent[] = [
     "sci-fi",
     ["era-epic-and-mystery"],
     ["liu-cixin"],
-    "程心接替执剑人导致威慑瓦解；故事跨越千万年尺度，呈现二向箔降维打击直至整个宇宙归零重生的浩瀚画卷。",
-    ["cq-press"],
+    "黑暗森林威慑维持着脆弱和平，从冬眠中苏醒的航天工程师程心进入一个新的时代，也改变了两种文明的平衡。",
+    ["writers-three-body-chronology", "writers-deaths-end-tor"],
     {
-      significance: "中国科幻史诗的壮丽绝唱；以二向箔降维打击、掩体世界与微型宇宙重构，将宏大叙事推向宇宙终局。",
-      tags: ["科幻", "死神永生", "二向箔", "降维打击", "程心", "刘慈欣"],
+      significance: "作为三部曲终卷，它把技术选择、伦理责任与文明存续放到更大的时间和空间尺度中。",
+      tags: ["科幻", "三体", "程心", "刘慈欣"],
+      milestone: true,
       facts: [
-        { label: "出版机构", text: "重庆出版社（2010年11月）", sourceIds: ["cq-press"] },
-        { label: "体裁篇幅", text: "长篇小说", sourceIds: ["cq-press"] },
-        { label: "时间跨度", text: "公元纪年跨越至宇宙终结", sourceIds: ["cq-press"] },
+        {
+          label: "节点类型",
+          text: "中文单行本出版",
+          sourceIds: ["writers-three-body-chronology"]
+        },
+        {
+          label: "系列位置",
+          text: "三部曲第三部",
+          sourceIds: ["writers-deaths-end-tor"]
+        }
       ],
       details: [
         {
-          label: "内容简介",
-          text: "航天工程师程心被选为威慑平衡的新一任执剑人，但在交接仅仅十五分钟后，三体便看透其母性博爱导致的软弱，水滴摧毁地球广播系统，人类威慑彻底瓦解。随后引力号飞船发射宇宙广播毁灭了三体星系，也招来了更高等文明‘歌者’的清理。歌者抛出一张仅有邮票大小的‘二向箔’，将整个太阳系从三维空间跌落压缩为二维平面。程心与关一帆凭借光速飞船逃离并在大宇宙坍缩的尽头进入微型宇宙，最终为促使宇宙归零重启而放弃私利，展现了关于爱、责任与宇宙归宿的终极寓言。",
-          sourceIds: ["cq-press"],
+          label: "版本与承接",
+          text: "中文单行本出版于 2010 年 11 月；出版社将英文版列为系列第三卷及三部曲的收束。",
+          sourceIds: ["writers-three-body-chronology", "writers-deaths-end-tor"],
+          locator: "年表 2010 年；出版社 Volume 3 与 Book Details"
         },
         {
-          label: "创作背景与反响",
-          text: "小说在空间维度、物理规律武器化以及千亿年宇宙命运上的惊世想象，突破了传统科幻的边界，确立了中国硬科幻在世界科幻殿堂的至高位置。",
-          sourceIds: ["cq-press"],
-        },
+          label: "内容简介",
+          text: "威慑之下，两种文明交换知识与文化，表面的繁荣却不能消除生存风险。程心带着危机初期的经历醒来，故事由此展开新的抉择。",
+          sourceIds: ["writers-deaths-end-tor"],
+          locator: "Book Details：Dark Forest Deterrence 与 Cheng Xin"
+        }
       ],
+      note: "这里记录出版史，不把小说内部纪元当作现实年份；不以简化的结局梗概代替原作。"
     },
   ),
 
@@ -596,103 +608,60 @@ export const events: TimelineEvent[] = [
     },
   ),
 
-  event(
-    "zi-jin-chen-bad-kids",
-    "《坏小孩》",
-    2014,
-    8,
-    "suspense",
-    ["era-screen-and-bestseller"],
-    ["zi-jin-chen"],
-    "三个孩子在景区无意录下张东升谋杀岳父母视频，因原生家庭创伤与金钱诱惑走向无法回头的人性深渊。",
-    ["jiangsu-lit-press"],
-    {
-      significance: "‘社会派推理三部曲’第二部；改编网剧《隐秘的角落》引发全民热议，深刻剖析青少年犯罪心理与家庭教育裂痕。",
-      tags: ["悬疑", "社会派", "朱朝阳", "隐秘的角落", "坏小孩", "紫金陈"],
-      facts: [
-        { label: "出版机构", text: "江苏文艺出版社（2014年8月）", sourceIds: ["jiangsu-lit-press"] },
-        { label: "系列归属", text: "社会派推理三部曲之二", sourceIds: ["jiangsu-lit-press"] },
-        { label: "影视改编", text: "网剧《隐秘的角落》（2020）", sourceIds: ["jiangsu-lit-press"] },
-      ],
-      details: [
-        {
-          label: "内容简介",
-          text: "性格孤僻内向但数学天赋极高的学霸初中生朱朝阳，遇到了从福利院逃跑出来投奔他的同乡严良与小女孩普普。三个孩子在六峰山顶拍照游玩时，无意中录下了入赘女婿张东升将岳父母故意推下悬崖的杀人过程。为了筹措为普普弟弟治病的三十万元巨款，三个孩子与凶残的张东升展开危险周旋并进行敲诈。在家庭离异的冷漠、父爱的偏颇以及嫉妒与猜忌的发酵下，看似最孱弱的孩子逐步学会了用缜密的日记与借刀杀人布局，最终让所有知情者命丧黄泉，自己独善其身。",
-          sourceIds: ["jiangsu-lit-press"],
-        },
-        {
-          label: "创作背景与反响",
-          text: "小说对未成年人纯真外表下潜伏的残酷心机进行了毫无保留的冷酷剖析，改编剧集《隐秘的角落》掀起现象级流行文化风暴，金句‘一起爬山吗’风靡全国。",
-          sourceIds: ["jiangsu-lit-press"],
-        },
-      ],
-    },
-  ),
-
-  event(
-    "zi-jin-chen-long-night",
-    "《长夜难明》",
-    2017,
-    1,
-    "suspense",
-    ["era-screen-and-bestseller"],
-    ["zi-jin-chen"],
-    "年轻检察官江阳为替支教受害青年翻案历经十年磨难，倾家荡产、家破人亡，最终以身做局用生命撕开漫漫长夜。",
-    ["yunnan-peoples-press"],
-    {
-      significance: "‘社会派推理三部曲’巅峰收官之作；改编剧集《沉默的真相》豆瓣评分9.0，被誉为中国当代现实主义社会派推理的丰碑。",
-      tags: ["悬疑", "社会派", "江阳", "沉默的真相", "长夜难明", "紫金陈"],
-      facts: [
-        { label: "出版机构", text: "云南人民出版社（2017年1月）", sourceIds: ["yunnan-peoples-press"] },
-        { label: "系列归属", text: "社会派推理三部曲之三（终结篇）", sourceIds: ["yunnan-peoples-press"] },
-        { label: "影视改编", text: "白宇、廖凡主演网剧《沉默的真相》（2020）", sourceIds: ["yunnan-peoples-press"] },
-      ],
-      details: [
-        {
-          label: "内容简介",
-          text: "某市繁华地铁站内，知名法学教授张超企图携带一只巨大行李箱登车，被安检人员发现有液体渗出，随后声称箱内有炸弹引发恐慌。防暴特警将其制服后打开箱子，赫然发现里面蜷缩着前任优秀检察官江阳的冰冷尸体。警方严加审讯下张超当场认罪，但在公开庭审中却突然全盘翻供。专案组刑警严良抽丝剥茧，终于揭开一段令人潸然泪下的惨烈往事：为了给十年前在偏远苗高乡因调查权贵性侵幼女案而惨遭灭口的支教大学生侯贵平平反昭雪，江阳、李静、朱伟、陈明章等人耗尽十年青春与社会前途，在强权与黑恶势力的层层绞杀下身败名裂、罹患绝症，最终以江阳的自杀抛尸大案迫使最高检介入，点亮了正义微光。",
-          sourceIds: ["yunnan-peoples-press"],
-        },
-        {
-          label: "创作背景与反响",
-          text: "作品以沉痛震撼的笔力展现了正义追寻过程中的惨痛牺牲与赤子之心，感动了千百万读者与观众，成为国产社会派悬疑小说的最高口碑代表作之一。",
-          sourceIds: ["yunnan-peoples-press"],
-        },
-      ],
-    },
-  ),
+  ...zijinReviewedEvents,
 
   event(
     "zi-jin-chen-low-iq-crime",
     "《低智商犯罪》",
     2020,
-    3,
+    1,
     "suspense",
     ["era-screen-and-bestseller"],
     ["zi-jin-chen"],
-    "运气爆棚的福将刑警张宝民下派偏僻小县办案，各路心怀鬼胎的笨贼贪官在一连串荒诞巧合中互相拆台自投罗网。",
-    ["nlc-china"],
+    "警察张一昂、笨贼与各怀心思的人物被一连串误会卷在一起，严肃的犯罪调查变成多线交错的荒诞喜剧。",
+    ["writers-zijin-2020-interview", "writers-low-iq-cite"],
     {
+      time: {
+        kind: "point",
+        start: {
+          year: 2020
+        }
+      },
+      significance: "这是理解紫金陈风格变化的一个入口：从沉重的社会派推理，转向依靠巧合、误判和多线结构制造喜剧。",
+      tags: ["推理", "黑色幽默", "张一昂", "紫金陈"],
       milestone: false,
-      significance: "紫金陈突破沉重社会派基调的黑色幽默推理力作，展现了出色的多线叙事结构与喜剧解构才能。",
-      tags: ["推理", "黑色幽默", "张宝民", "低智商犯罪", "紫金陈"],
       facts: [
-        { label: "出版机构", text: "天津人民出版社（2020年3月）", sourceIds: ["nlc-china"] },
-        { label: "体裁篇幅", text: "长篇幽默悬疑小说", sourceIds: ["nlc-china"] },
-        { label: "风格转型", text: "黑色幽默与多线交织推理", sourceIds: ["nlc-china"] },
+        {
+          label: "节点类型",
+          text: "作品出版，按年记录",
+          sourceIds: ["writers-zijin-2020-interview"]
+        },
+        {
+          label: "核心人物",
+          text: "张一昂",
+          sourceIds: ["writers-low-iq-cite"]
+        },
+        {
+          label: "写作方向",
+          text: "喜剧推理、多线叙事",
+          sourceIds: ["writers-low-iq-cite"]
+        }
       ],
       details: [
         {
-          label: "内容简介",
-          text: "省城刑侦总队‘福将’张宝民警官被临时借调到边缘贫困的三水县协助办案。此时的三水县暗流涌动：本省最大的文物盗窃集团、企图暗杀市长换取开发权的地产寡头、两个走投无路但智商严重欠缺的职业杀手，以及各自心怀鬼胎的基层混混全部汇聚于此。张宝民在完全摸不着头脑的办案过程中凭借匪夷所思的超级运气与天然呆性格，让各路智商欠费的犯罪分子在误会、巧合与自作聪明中频频撞车、互相火并，最后戏剧性地全军覆没。",
-          sourceIds: ["nlc-china"],
+          label: "人物与叙事",
+          text: "小说中的警察是张一昂。出版社介绍以笨贼、官商与警方相互牵动的多线喜剧为重点，突出误会和自作聪明怎样改变案件走向。",
+          sourceIds: ["writers-low-iq-cite"],
+          locator: "内容简介与奇幻基地编辑何宁推荐"
         },
         {
-          label: "创作背景与反响",
-          text: "作品摆脱了以往压抑沉郁的基调，借鉴了盖·里奇式的疯狂喜剧多线索推进手法，向读者证明了推理小说也可以充满欢笑与智慧的轻松碰撞。",
-          sourceIds: ["nlc-china"],
-        },
+          label: "创作与版本",
+          text: "作者在 2020 年 6 月的访谈中介绍已经出版的本书，表示此次希望写得轻松、好笑。城邦所列 2022 年 1 月 25 日是繁体版日期，不是作品首次问世时间。",
+          sourceIds: ["writers-zijin-2020-interview", "writers-low-iq-cite"],
+          locator: "访谈末尾谈轻松创作；城邦基本资料"
+        }
       ],
+      note: "现有证据能确认 2020 年已出版，但不足以统一简体首版月份，因此按年记录；繁体版只用于核对人物与内容。"
     },
   ),
 
@@ -704,30 +673,50 @@ export const events: TimelineEvent[] = [
     "suspense",
     ["era-screen-and-bestseller"],
     ["zi-jin-chen"],
-    "计算机视觉天才陈舟与高智商反侦查逃犯在天网监控密布的现代化都市中，展开毫秒级大数据猫鼠追逐。",
-    ["nlc-china"],
+    "围绕安防系统与黄金案件，警察林奇、张强和夏明逐步接近工程师沈研背后的秘密。",
+    ["writers-tracker-library"],
     {
-      time: { kind: "point", start: { year: 2018 } },
+      time: {
+        kind: "point",
+        start: {
+          year: 2018
+        }
+      },
+      significance: "把技术侦查与企业利益冲突结合，可与作者的社会派、喜剧推理路线对照阅读。",
+      tags: ["悬疑", "技术侦查", "安防系统", "紫金陈"],
       milestone: false,
-      significance: "将现代人脸识别、天网大数据与传统逻辑推理紧密融合，探讨高科技刑侦与数字时代隐私伦理。",
-      tags: ["悬疑", "高科技刑侦", "人脸识别", "天网大数据", "紫金陈"],
       facts: [
-        { label: "出版机构", text: "中国友谊出版公司（2018年首版）", sourceIds: ["nlc-china"] },
-        { label: "体裁篇幅", text: "长篇都市刑侦小说", sourceIds: ["nlc-china"] },
-        { label: "核心技术", text: "步态识别 / 监控盲区算法", sourceIds: ["nlc-china"] },
+        {
+          label: "出版机构",
+          text: "中国友谊出版公司，2018 年",
+          sourceIds: ["writers-tracker-library"]
+        },
+        {
+          label: "版本标识",
+          text: "ISBN 9787505742888",
+          sourceIds: ["writers-tracker-library"]
+        },
+        {
+          label: "人物线索",
+          text: "林奇、张强、夏明、沈研",
+          sourceIds: ["writers-tracker-library"]
+        }
       ],
       details: [
         {
           label: "内容简介",
-          text: "在数字化天网工程覆盖每一个街角小巷的现代都市里，曾经的计算机天才、因意外致残的陈舟隐居幕后，凭借自研的人脸步态识别算法与鹰隼般的空间直觉成为警方‘幽灵顾问’。与此同时，擅长利用监控光学死角、易容术与数据噪声抹去一切轨迹的高智商通缉犯在繁华市区犯下连环大案。在数以万计的摄像头数据洪流中，两位顶尖的大数据追踪者展开了一场毫秒级的猫鼠博弈。",
-          sourceIds: ["nlc-china"],
+          text: "馆藏提要将沈研的创业困境、黄金案与安防系统竞争连在一起，调查线则涉及林奇、张强和夏明。这里保留线索而不展开凶案结果。",
+          sourceIds: ["writers-tracker-library"],
+          locator: "提要文摘"
         },
         {
-          label: "创作背景与反响",
-          text: "紫金陈紧跟当代智慧安防与AI图像分析前沿，拓展了本土刑侦小说的技术边界，展现了现代技术对抗下的智谋较量。",
-          sourceIds: ["nlc-china"],
-        },
+          label: "版本核对",
+          text: "采用中国友谊出版公司 2018 年版，ISBN 9787505742888。馆藏出版项只给出年份，不把编目日期写成出版日。",
+          sourceIds: ["writers-tracker-library"],
+          locator: "出版发行项、ISBN、记录来源"
+        }
       ],
+      note: "馆藏著录只提供出版年，内容以该版提要为准；不把小说中的技术设定当作现实刑侦系统的能力说明。"
     },
   ),
 
@@ -901,34 +890,54 @@ export const events: TimelineEvent[] = [
 
   event(
     "ma-bo-yong-lychee-of-changan",
-    "《长安的荔枝》",
+    "《长安的荔枝》单行本出版",
     2022,
     10,
     "historical",
     ["era-micro-history-mature"],
     ["ma-bo-yong"],
-    "九品小吏李善德误领‘荔枝使’死差，算尽分枝植瓮与冰镇驿骑运荔枝入长安，借小人物视角道尽盛唐盛世疮痍与良心坚守。",
-    ["hunan-lit-press"],
+    "小吏李善德接下限时运送鲜荔枝的差事，在保鲜、路途与官僚体系之间寻找可行方案。",
+    ["writers-lychee-book", "writers-lychee-serial", "writers-ma-jianwei-interview"],
     {
-      significance: "现象级畅销历史小说，豆瓣超10万人评分8.5；以现代职场共情解构盛唐官僚体制，广受各界好评。",
-      tags: ["历史", "荔枝使", "职场寓言", "长安的荔枝", "李善德", "马伯庸"],
+      significance: "通过一项具体差事观察盛世的代价；将作品首发与成书分开，才能看清它从文学期刊到单行本的传播过程。",
+      tags: ["历史", "长安", "荔枝", "见微", "马伯庸"],
+      milestone: true,
       facts: [
-        { label: "出版机构", text: "湖南文艺出版社（2022年10月）", sourceIds: ["hunan-lit-press"] },
-        { label: "体裁篇幅", text: "中篇历史小说", sourceIds: ["hunan-lit-press"] },
-        { label: "经典名句", text: "就算失败，我也想知道自己倒在距离终点多远的地方", sourceIds: ["hunan-lit-press"] },
+        {
+          label: "节点类型",
+          text: "中文单行本出版",
+          sourceIds: ["writers-lychee-book"]
+        },
+        {
+          label: "版本标识",
+          text: "湖南文艺出版社；ISBN 9787572608582",
+          sourceIds: ["writers-lychee-book"]
+        }
       ],
       details: [
         {
-          label: "内容简介",
-          text: "长安城上林署九品监事李善德老实巴交、苦熬多年终于在京城按揭买了一间小宅，却被同僚哄骗接下了烫手的‘荔枝使’差事——圣人要在贵妃生辰时吃岭南新鲜荔枝。荔枝‘一日色变，两日香变，三日味变’，而岭南距长安五千四百余里，在冷链运输完全不可能的古代堪称必死任务。李善德不甘坐以待毙，奔赴岭南利用算学推演，精确设计分枝植瓮、双层冰镇与飞骑换驿接力路线，历尽千难万险终于将荔枝运抵京城。然而亲眼目睹沿途驿户破产、劳民伤财的盛世疮痍后，李善德在杨国忠面前毅然发出抗议，丢官流放岭南，反而在安史之乱的浩劫中保全了阖家性命。",
-          sourceIds: ["hunan-lit-press"],
+          label: "版本沿革",
+          text: "本节点采用湖南文艺出版社 2022 年 10 月版；作品此前已发表于《收获》长篇小说 2021 年春卷。",
+          sourceIds: ["writers-lychee-book", "writers-lychee-serial"],
+          locator: "书讯出版时间；访谈导语"
         },
         {
-          label: "创作背景与反响",
-          text: "小说以凝练紧凑的笔触将古代物流技术试验与当代普通打工人的职场困境深度互文，既有惊心动魄的算法推演，又有催人泪下的人性光辉，被誉为马伯庸文字张力最饱满的作品之一。",
-          sourceIds: ["hunan-lit-press"],
+          label: "内容与阅读",
+          text: "故事聚焦李善德的运输任务，而不是给唐代荔枝运输写一份确定的历史复原。作者在访谈中谈到借普通办事者观察大历史。",
+          sourceIds: ["writers-lychee-book", "writers-lychee-serial"],
+          locator: "内容简介；关于小人物与史料的问答"
         },
+        {
+          label: "书系位置",
+          text: "本书与《太白金星有点烦》《桃花源没事儿》同属“见微”书系。",
+          sourceIds: ["writers-ma-jianwei-interview"],
+          locator: "开篇书系介绍"
+        },
+        {"label": "创作方法与历史边界", "text": "作者在首发访谈中明确：小说运输路线是据文献与地形推想的可能方案，并非已证实的唐代路线；保鲜技术取自不同时代的资料，小说把它们集中到唐代。阅读时应把史料线索与虚构安排分开。", "sourceIds": ["writers-lychee-serial"], "locator": "关于路线推想、保鲜办法与历史真实的问答"},
+        {"label": "从任务看制度：阅读建议", "text": "不妨沿“谁提出目标、谁承担成本、谁有权更改规则”做三列阅读笔记。我们认为，运输难题既推动情节，也让抽象制度通过普通人的选择变得可见；这是编辑阅读角度，不是对唐代行政史的定论。", "editorial": true}
       ],
+      recommendedResources: [{"id": "lychee-author-method-interview", "title": "对话 | 马伯庸新作首发《收获》：但问荔枝“如何来”？", "creator": "罗昕采访；马伯庸受访", "series": "《收获》 / 中国作家网", "url": "https://www.chinawriter.com.cn/n1/2021/0406/c405057-32070554.html", "kind": "article", "match": "作者直接说明运输路线如何构想，以及历史材料如何转换为小说。适合读完后核对虚构边界。", "scopeNote": "这是2021年首发阶段的文字访谈，不是2022年单行本的发行公告；作者解释不能代替唐史考证。含情节讨论。", "checkedAt": "2026-10-24", "publishedAt": "2021-04-06", "locator": "关于路线与保鲜方法的两组问答"}],
+      note: "出版月份不是创作起点；2021 年春卷首发另列为节点。小说情节及人物不等于已证实的唐代史实。"
     },
   ),
 
@@ -969,32 +978,51 @@ export const events: TimelineEvent[] = [
     "ma-bo-yong-taibai-jinxing",
     "《太白金星有点烦》",
     2023,
-    4,
+    6,
     "historical",
     ["era-micro-history-mature"],
     ["ma-bo-yong"],
-    "体制职场视角戏说西游：太白金星李长庚奉命落地‘西天取经’项目，在人情编制与利益博弈中坚守本心、修仙修心。",
-    ["hunan-lit-press"],
+    "太白金星李长庚负责协调西天取经，面对神仙、妖怪与繁杂事务，在办事过程中重新理解自己的修行。",
+    ["writers-taibai-book", "writers-ma-jianwei-interview"],
     {
-      significance: "兼具西游神话解构与当代职场讽喻的爆款中篇，引发广大年轻读者强烈共鸣，探讨成仙与修心的终极意义。",
-      tags: ["历史", "神话解构", "职场讽喻", "西天取经", "李长庚", "马伯庸"],
+      significance: "以神话世界重写组织协作与人情难题，是“见微”书系中与《长安的荔枝》形成对照的一部。",
+      tags: ["神话改写", "职场", "见微", "马伯庸"],
+      milestone: true,
       facts: [
-        { label: "出版机构", text: "湖南文艺出版社（2023年4月）", sourceIds: ["hunan-lit-press"] },
-        { label: "体裁篇幅", text: "中篇小说", sourceIds: ["hunan-lit-press"] },
-        { label: "核心主题", text: "修仙不如修心 / 职场通透哲学", sourceIds: ["hunan-lit-press"] },
+        {
+          label: "节点类型",
+          text: "中文图书出版",
+          sourceIds: ["writers-taibai-book"]
+        },
+        {
+          label: "版本标识",
+          text: "ISBN 9787572610912",
+          sourceIds: ["writers-taibai-book"]
+        },
+        {
+          label: "核心人物",
+          text: "太白金星李长庚",
+          sourceIds: ["writers-taibai-book"]
+        }
       ],
       details: [
         {
-          label: "内容简介",
-          text: "天庭老神仙太白金星李长庚接到了玉帝与如来佛祖联合下发的一项政治任务：策划实施玄奘‘西天取经’并协助师徒四人成佛。看似简单的护送项目，实则处处是人情世故与雷区——九九八十一难的妖怪哪些是有后台的必须保命放行、哪些是没背景的必须斩草除根；取经队伍的人员编制平衡、黄风怪的因果纠缠以及六耳猕猴的舆情公关……李长庚在官僚系统的文山会海与派系妥协中焦头烂额，最终却在护送取经的过程中找回了自己当年初心，参透了‘修仙不如修心’的真谛。",
-          sourceIds: ["hunan-lit-press"],
+          label: "版本与内容",
+          text: "中国作家网书讯列湖南文艺出版社 2023 年 6 月版，ISBN 9787572610912。故事的中心是李长庚筹划取经及其遭遇的层层问题。",
+          sourceIds: ["writers-taibai-book"],
+          locator: "出版时间、ISBN 与内容简介"
         },
         {
-          label: "创作背景与反响",
-          text: "小说妙趣横生而又洞察世事，在荒诞滑稽的取经项目推演下藏着对体制内打工人甘苦的心疼，展现了马伯庸举重若轻的讽喻功力。",
-          sourceIds: ["hunan-lit-press"],
+          label: "创作与书系",
+          text: "作者前言谈到希望用一部短而轻松的作品调整写作状态；后续访谈将它与《长安的荔枝》《桃花源没事儿》归入“见微”书系。",
+          sourceIds: ["writers-taibai-book", "writers-ma-jianwei-interview"],
+          locator: "前言；2025 年访谈开篇"
         },
+        {"label": "作者自述：从休息到故事转向", "text": "书讯所附前言说，作者在2022年交出长稿后，想写一部较短、轻松的作品。写作过程中篇幅增长；他也说明，没有逐一重写全部八十一难，是因为故事重心会发生变化。这里记录创作自述，不把动笔年份当出版年份。", "sourceIds": ["writers-taibai-book"], "locator": "前言：2022年交稿后的写作缘起；关于宝象国后叙事重心的解释"},
+        {"label": "不只当成职场段子：阅读建议", "text": "编辑建议先观察“办成一件事”与“成为怎样的人”是否始终一致，再回看李长庚的选择。职场类比可以帮助进入故事，却不必成为唯一答案；本书是神话改写，并非《西游记》的续篇认证或职场操作手册。", "editorial": true}
       ],
+      recommendedResources: [{"id": "taibai-author-preface", "title": "《太白金星有点烦》书讯所附前言", "creator": "马伯庸", "series": "中国作家网·书汇", "url": "https://image.chinawriter.com.cn/n1/2023/0602/c405081-40005145.html", "kind": "article", "match": "前言直接解释创作动机、篇幅变化和叙事转向，适合与读者自己的阅读感受对照。", "scopeNote": "链接原页面标题为《太白金星有点烦》；阅读定位为“前言”。含情节结构讨论，建议读完小说后看；书讯日期不等于首售日。", "checkedAt": "2026-10-24", "publishedAt": "2023-06-02", "locator": "页面下半部“前言”"}],
+      note: "本节点按书讯标注的 2023 年 6 月版记录，不据书讯日期推定具体首售日；这是神话改写，不是历史人物传记。"
     },
   ),
 
@@ -1537,28 +1565,37 @@ export const events: TimelineEvent[] = [
 
   event(
     "ma-bo-yong-seven-marquises",
-    "《七侯笔录》",
-    2007,
-    10,
+    "《七侯笔录》更名成书",
+    2019,
+    4,
     "historical",
-    ["era-epic-and-mystery"],
+    ["era-screen-and-bestseller"],
     ["ma-bo-yong"],
-    "原名《笔冢随录》，落魄书生卷入与七支神笔、历代文豪灵魂相关的奇幻历史冒险，以文为剑搅动古今。",
-    ["nlc-china"],
+    "现代少年遇见寄寓李白才情的青莲笔，进入由文人笔灵构成的奇幻世界；旧作《笔冢随录》以新书名收束故事。",
+    ["writers-seven-marquises-book"],
     {
-      significance: "马伯庸奇幻历史长篇，展现其对传统文化瑰丽想象的驾驭能力。",
-      tags: ["历史", "奇幻", "笔冢随录", "七侯笔录", "马伯庸"],
+      significance: "让旧题名、早期写作与后来成书各归其位，也展现马伯庸在历史小说之外的文化奇幻路线。",
+      tags: ["奇幻", "笔冢随录", "七侯笔录", "马伯庸"],
       facts: [
-        { label: "首发版本", text: "上海锦绣文章出版社（2007年10月，原名《笔冢随录》）", sourceIds: ["nlc-china"] },
-        { label: "更名再版", text: "2019年湖南文艺出版社以《七侯笔录》再版", sourceIds: ["hunan-lit-press"] },
+        { label: "节点类型", text: "《七侯笔录》书名下的图书版本", sourceIds: ["writers-seven-marquises-book"] },
+        { label: "出版版本", text: "湖南文艺出版社，2019 年 4 月；ISBN 9787540490805", sourceIds: ["writers-seven-marquises-book"] },
+        { label: "原题名", text: "《笔冢随录》", sourceIds: ["writers-seven-marquises-book"] },
       ],
       details: [
         {
+          label: "版本与旧作关系",
+          text: "书讯注明原名《笔冢随录》，并说明此次版本首次带来大结局。本节点记录《七侯笔录》的 2019 年图书版本，不把早期旧题名的日期直接移用过来。",
+          sourceIds: ["writers-seven-marquises-book"],
+          locator: "出版时间、ISBN 与编辑推荐",
+        },
+        {
           label: "内容简介",
-          text: "一介书生意外卷入一场延续千年的秘密传承：七支承载历代文豪才气与灵魂的神笔散落人间，得笔者可驱使文思、笔落惊风雨。少年由此踏上追寻神笔、对抗宿命的奇幻旅程，在诗文典故与历史传说交织的世界里，以文为剑、以笔为刃，搅动古今文运。",
-          sourceIds: ["nlc-china"],
+          text: "小说让历代文人的精神化为笔灵，现代少年意外与李白之笔相遇，继而进入笔冢世界。它以传统文化为想象材料，主人公并不是生活在古代的落魄书生。",
+          sourceIds: ["writers-seven-marquises-book"],
+          locator: "内容简介：现代少年与青莲笔",
         },
       ],
+      note: "更名、结局补全与最初写作不是同一时点；本轮未核定《笔冢随录》各早期版本日期，不补造首发年月。",
     },
   ),
 
@@ -1777,28 +1814,253 @@ export const events: TimelineEvent[] = [
     "ma-bo-yong-peach-blossom-fine",
     "《桃花源没事儿》",
     2025,
-    5,
+    6,
     "historical",
     ["era-micro-history-mature"],
     ["ma-bo-yong"],
-    "小道士玄穹身具‘遇财呈劫’与‘明真破妄’的命格，在陶渊明笔下的桃花源世界里历经离奇修行与世俗纷扰。",
-    ["hunan-lit-press"],
+    "俗务道人玄穹在妖怪居住的桃花源处理日常纠纷，一场危机让维持安稳生活也变成艰难的任务。",
+    ["writers-peach-book", "writers-ma-jianwei-interview"],
     {
-      significance: "马伯庸最新长篇，以志怪笔法重写桃花源传说。",
-      tags: ["历史", "志怪", "桃花源", "小道士", "马伯庸"],
+      significance: "“见微”书系转向志怪生活与群像叙事；它也提示读者，书籍上市时间和作者断续构思的时间并不相同。",
+      tags: ["志怪", "桃花源", "玄穹", "见微", "马伯庸"],
+      milestone: true,
       facts: [
-        { label: "出版机构", text: "湖南文艺出版社（2025年5月）", sourceIds: ["hunan-lit-press"] },
+        {
+          label: "节点类型",
+          text: "中文图书出版",
+          sourceIds: ["writers-peach-book"]
+        },
+        {
+          label: "版本标识",
+          text: "湖南文艺出版社；ISBN 9787572624247",
+          sourceIds: ["writers-peach-book"]
+        },
+        {
+          label: "构思与出版",
+          text: "2013 年萌生灵感，2025 年出版",
+          sourceIds: ["writers-ma-jianwei-interview"]
+        }
       ],
       details: [
         {
-          label: "内容简介",
-          text: "小说以陶渊明《桃花源记》中的桃花源为背景展开。小道士玄穹身具‘遇财呈劫’与‘明真破妄’的双重命格，注定与财帛、真相纠缠不清。他误入桃花源中的奇异世界，在修行与俗世、仙缘与人情的夹缝中历经一连串离奇遭遇，也在啼笑皆非的冒险里渐渐看清人心与自己的命数。",
-          sourceIds: ["hunan-lit-press"],
+          label: "书讯与版本",
+          text: "中国作家网在 2025 年 5 月 28 日刊出书讯，书目中的出版时间为 2025 年 6 月。两种日期分属报道与图书版本，不宜互相替代。",
+          sourceIds: ["writers-peach-book"],
+          locator: "页面发布时间与出版时间栏"
         },
+        {
+          label: "内容与创作",
+          text: "玄穹因财运受限而在桃花源谋生，为妖怪居民调解纠纷。作者访谈说故事灵感萌生于 2013 年，经过十余年断续写作，属于“见微”书系。",
+          sourceIds: ["writers-peach-book", "writers-ma-jianwei-interview"],
+          locator: "内容简介；“打怪升级”段落"
+        },
+        {"label": "作者自述：志怪与日常经验", "text": "2025年访谈中，马伯庸把书中的群像与日常生活观察联系起来，并明确谈到《聊斋志异》的启发。他保留断续创作留下的不同表达风貌；这是作者对创作过程的回顾，不是连续写作十余年的证明。", "sourceIds": ["writers-ma-jianwei-interview"], "locator": "“打怪升级”中破解成长困局；历史宝库里开采灵感源泉"},
+        {"label": "从个人闯关到共同生活：阅读建议", "text": "编辑建议把注意力从主角能否升迁，移到居民各自的愿望如何相互牵制。与《长安的荔枝》的单项任务、与《太白金星有点烦》的组织协调对照，可以看见三种小人物叙事入口；这不是统一主题的唯一解释，也不是必须依序阅读的续作关系。", "editorial": true}
       ],
+      recommendedResources: [{"id": "peach-author-jianwei-interview", "title": "马伯庸：在小说里“任性一把”", "creator": "许旸采访；马伯庸受访", "series": "文汇报 / 中国作家网", "url": "https://www.chinawriter.com.cn/n1/2025/0606/c403994-40495089.html", "kind": "article", "match": "直接谈到本书的群像、断续创作和《聊斋志异》阅读经验，可比较作者自述与个人理解。", "scopeNote": "文字访谈含人物和主题讨论；书系关系不等于剧情连续，作者自述也不是第三方效果评价。", "checkedAt": "2026-10-24", "publishedAt": "2025-06-06", "locator": "“打怪升级”中破解成长困局；历史宝库里开采灵感源泉"}],
+      note: "此处用书目所列月份，不据提前书讯推定实际首售日；“2013 年萌生灵感”也不等于从那年连续写作至出版。"
+    },
+  ),
+  event(
+    "liu-cixin-three-body-book",
+    "《三体》单行本出版",
+    2008,
+    1,
+    "sci-fi",
+    ["era-epic-and-mystery"],
+    ["liu-cixin"],
+    "《三体》在期刊连载结束后以中文单行本出版，形成三部曲第一部的图书版本节点。",
+    ["writers-three-body-chronology"],
+    {
+      significance: "将 2006 年连载与 2008 年成书分开，避免不同资料使用不同“首次出版”口径时产生冲突。",
+      tags: ["科幻", "三体", "单行本", "刘慈欣"],
+      milestone: false,
+      facts: [
+        {
+          label: "节点类型",
+          text: "中文单行本出版",
+          sourceIds: ["writers-three-body-chronology"]
+        }
+      ],
+      details: [
+        {
+          label: "出版节点",
+          text: "《文艺报》年表把 2006 年 5—12 月连载与 2008 年 1 月单行本分别列项。",
+          sourceIds: ["writers-three-body-chronology"],
+          locator: "2006 年、2008 年条目"
+        }
+      ],
+      note: "是同一作品的版本阶段，不是又一部新作。"
+    },
+  ),
+
+  event(
+    "liu-cixin-three-body-english",
+    "《三体》英文版出版",
+    2014,
+    11,
+    "sci-fi",
+    ["era-screen-and-bestseller"],
+    ["liu-cixin"],
+    "刘宇昆英译的 The Three-Body Problem 由 Tor Books 出版，作品进入英语出版体系。",
+    ["writers-three-body-tor", "hugo-database"],
+    {
+      time: {
+        kind: "point",
+        start: {
+          year: 2014,
+          month: 11,
+          day: 11
+        }
+      },
+      significance: "译介是作品传播史中的独立阶段，不能把英文版发行日追溯为中文作品的诞生日。",
+      tags: ["科幻", "三体", "译介", "刘宇昆", "刘慈欣"],
+      milestone: false,
+      facts: [
+        {
+          label: "节点类型",
+          text: "英文译本出版",
+          sourceIds: ["writers-three-body-tor"]
+        },
+        {
+          label: "译者",
+          text: "刘宇昆（Ken Liu）",
+          sourceIds: ["writers-three-body-tor"]
+        }
+      ],
+      details: [
+        {
+          label: "译本档案",
+          text: "出版社列作者 Cixin Liu、译者 Ken Liu，精装本 ISBN 9780765377067；其 On Sale 日期为 2014 年 11 月 11 日。",
+          sourceIds: ["writers-three-body-tor"],
+          locator: "Author、On Sale 与 ISBN"
+        },
+        {
+          label: "与获奖的关系",
+          text: "雨果奖官方档案说明，2014 年首次英文出版使作品按其资格规则再次具备参评条件，获奖本身发生在次年。",
+          sourceIds: ["hugo-database"],
+          locator: "Best Novel 后的 eligibility note"
+        }
+      ],
+      note: "日期对应这里明确的 Tor 英文精装版，不推广到其他语种、装帧或地区版本。"
+    },
+  ),
+
+  event(
+    "liu-cixin-three-body-hugo",
+    "《三体》获雨果奖最佳长篇小说",
+    2015,
+    8,
+    "sci-fi",
+    ["era-screen-and-bestseller"],
+    ["liu-cixin"],
+    "《三体》第一部的刘宇昆英译本获得 2015 年雨果奖 Best Novel，作者、译者与出版者均载于官方名单。",
+    ["hugo-database"],
+    {
+      time: {
+        kind: "point",
+        start: {
+          year: 2015,
+          month: 8,
+          day: 22
+        }
+      },
+      significance: "获奖节点把作品的中文发表、英语译介和国际认可串联起来，但不把单部获奖扩大为三部曲全部获奖。",
+      tags: ["科幻", "三体", "雨果奖", "刘慈欣"],
+      milestone: true,
+      facts: [
+        {
+          label: "节点类型",
+          text: "文学奖项",
+          sourceIds: ["hugo-database"]
+        },
+        {
+          label: "奖项",
+          text: "2015 Hugo Award · Best Novel",
+          sourceIds: ["hugo-database"]
+        }
+      ],
+      details: [
+        {
+          label: "奖项记录",
+          text: "官方记录列 The Three Body Problem，作者 Cixin Liu、译者 Ken Liu、出版者 Tor Books，颁奖地点为美国斯波坎。",
+          sourceIds: ["hugo-database"],
+          locator: "Presented at 与 Best Novel"
+        }
+      ],
+      note: "采用颁奖地当地日期 2015 年 8 月 22 日；中国报道中常见的 8 月 23 日是跨时区报道日期。获奖对象是第一部，不是三部曲整体。"
+    },
+  ),
+
+  event(
+    "ma-bo-yong-lychee-serial",
+    "《长安的荔枝》期刊首发",
+    2021,
+    1,
+    "historical",
+    ["era-micro-history-mature"],
+    ["ma-bo-yong"],
+    "《长安的荔枝》首发于《收获》长篇小说 2021 年春卷，比 2022 年单行本更早进入读者视野。",
+    ["writers-lychee-serial"],
+    {
+      time: {
+        kind: "point",
+        start: {
+          year: 2021
+        }
+      },
+      significance: "补上期刊发表这一环，使创作与出版年谱不再仅由后来畅销的图书版本定义。",
+      tags: ["历史", "期刊首发", "见微", "马伯庸"],
+      milestone: false,
+      facts: [
+        {
+          label: "节点类型",
+          text: "期刊首发",
+          sourceIds: ["writers-lychee-serial"]
+        },
+        {
+          label: "期刊卷次",
+          text: "《收获》长篇小说 2021 年春卷",
+          sourceIds: ["writers-lychee-serial"]
+        }
+      ],
+      details: [
+        {
+          label: "首发记录",
+          text: "《收获》访谈导语明确标注 2021 年春卷，由《收获》杂志出品、上海文艺出版社出版。",
+          sourceIds: ["writers-lychee-serial"],
+          locator: "导语前两段"
+        }
+      ],
+      note: "资料给出季节卷次，未据此补造月份或日；2021 年 4 月 6 日是访谈刊发日，不作小说首发日。"
     },
   ),
 ];
+
+for (const event of events) Object.assign(event, auditedWriterPatches[event.id] || {}, liuAuditPatches[event.id] || {});
+Object.assign(events.find(event => event.id === 'ma-bo-yong-ming-microscope')!, mingMicroscopePatch);
+Object.assign(events.find(event => event.id === 'ma-bo-yong-great-healer')!, greatHealerPatch);
+
+
+// The eras are editorial navigation, not independently established literary periodization.
+const entityEvidence: Record<string, string[]> = {
+  "liu-cixin": ["writers-liu-chronology", "hugo-database"],
+  "zi-jin-chen": ["writers-audit-zi-jin-chen-burning-ice"],
+  "ma-bo-yong": ["writers-audit-ming-microscope"],
+};
+for (const entity of entities) entity.sourceIds = entityEvidence[entity.id] || entity.sourceIds;
+const eraEvidence: Record<string, { summary: string; sourceIds: string[] }> = {
+  "era-early-breakthrough": { summary: "编辑分期：以刘慈欣在世纪之交的期刊发表和几位作家的早期探索为阅读起点；分期名称不表示公认文学史结论。", sourceIds: ["writers-liu-chronology"] },
+  "era-epic-and-mystery": { summary: "编辑分期：并读《三体》的连载与成书，以及紫金陈的网络推理连载、马伯庸的历史小说。不同作品的发表阶段应分别确认。", sourceIds: ["writers-three-body-chronology", "writers-audit-zi-jin-chen-burning-ice", "writers-audit-ma-bo-yong-secret-of-three-kingdoms"] },
+  "era-screen-and-bestseller": { summary: "编辑分期：将作品出版与影视改编分开阅读，尤其留意《无证之罪》中地点、主角职业等改编差异，以及《显微镜下的大明》的非虚构定位。", sourceIds: ["writers-audit-zi-jin-chen-burning-ice", "writers-audit-ming-microscope"] },
+  "era-micro-history-mature": { summary: "编辑分期：以《大医》《食南之徒》和《长夜难明：双星》等作品观察题材变化；“成熟”只是导航用语，不作文学价值排名。", sourceIds: ["writers-audit-great-healer", "writers-audit-food-of-the-south", "writers-audit-zi-jin-chen-long-night-twin-stars"] },
+};
+for (const period of periods) Object.assign(period, eraEvidence[period.id] || {});
+
+
+// Retired institution entry pages are not evidence; keep their audit history in the audit ledger.
+const retiredSourceIds = new Set(["beijing-joint-press", "chinawriter", "cq-press", "hainan-press", "hunan-lit-press", "jiangsu-lit-press", "new-star-press", "nlc-china", "scitech-press", "sfs-archive", "shanghai-lit-press", "writers-press", "yunnan-peoples-press"]);
+for (let i = sources.length - 1; i >= 0; i--) if (retiredSourceIds.has(sources[i].id)) sources.splice(i, 1);
 
 export const writersCatalog: Catalog = {
   topic: {
@@ -1807,8 +2069,8 @@ export const writersCatalog: Catalog = {
     path: "/writers/",
     periodLabel: "创作时代",
     periodSegment: "eras",
-    description: "从刘慈欣的科幻宏构、紫金陈的社会派推理到马伯庸的历史微细叙事，记录当代作家的作品发布时间线与内容简介。",
-    coverage: "收录刘慈欣、紫金陈、马伯庸的长篇小说、重要中短篇与代表作出版记录，附内容简介、体裁分类与出版来源。",
+    description: "从刘慈欣的科幻宏构、紫金陈的社会派推理到马伯庸的历史微细叙事，区分期刊首发、单行本、译介与获奖节点，记录作品与出版脉络。",
+    coverage: "刘慈欣、紫金陈、马伯庸的精选作品年谱，不是完整书目。部分重点作品已细分发表阶段并核对具体书目；其余条目继续补证，不能把本轮核查日期视为全部重核。",
     categories: [
       { id: "sci-fi", title: "科幻文学" },
       { id: "suspense", title: "悬疑推理" },
@@ -1834,4 +2096,5 @@ export const writersCatalog: Catalog = {
   events,
   entities,
   sources,
+  relations: writersRelations,
 };

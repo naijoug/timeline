@@ -25,7 +25,7 @@ export const xinhaiSources:Source[] = [
 ];
 const s = (label:string,text:string,sourceId:string,locator:string):ReadingSection => ({label,text,sourceIds:[sourceId],locator});
 const e = (id:string,title:string,date:string,category:string,periodIds:string[],entityIds:string[],summary:string,significance:string,details:ReadingSection[],end?:string,note?:string):TimelineEvent => ({
-  id,title,time:{kind:end?'duration':'point',start:parseDate(date),...(end?{end:parseDate(end)}:{})},category,periodIds,entityIds,summary,significance,details,
+  id,title,time:{kind:end?'duration':'point',start:parseDate(date),...(end?{end:parseDate(end)}:{})},category,periodIds,entityIds,summary,significance:`编辑总结：${significance}`,details,
   sourceIds:[...new Set(details.flatMap(d=>d.sourceIds!))],tags:['辛亥革命','1911—1912'],milestone:true,
   note:note || '日期采用资料所列公历；机构回顾与史料转录分别标示，未声称核验馆藏原件。',
 });
@@ -78,7 +78,7 @@ export const xinhaiEvents:TimelineEvent[] = [
   ],undefined,'FRUS 第 67 号报告提到译件附件，但脚注明确附件未刊出；不能声称本页提供或本轮核验了退位诏书原件全文。'),
   e('yuan-presidential-transfer','袁世凯当选、就任与交接','1912-02-15','politics',r,['yuan-shikai','sun-yat-sen','provisional-senate'],'临时总统权力交接分阶段进行。','用持续过程显示选举、就任和南京解职之间的间隔。',[
     s('2 月 15 日选举','2 月 16 日电报报告袁世凯前一天当选，同时记载邀请其赴南京，表明就任地点仍需协调。','xinhai-frus-yuan-election','正文首段'),
-    s('3 月 10 日就任','3 月 9 日电报记录南京方面授权袁在北京于次日就任；文献集章首确认 3 月 10 日就任。','xinhai-frus-yuan-inauguration','正文；就任结果另见 FRUS 章首 Note'),
+    { ...s('3 月 10 日就任','3 月 9 日电报记录南京方面授权袁在北京于次日就任；文献集章首确认 3 月 10 日就任。','xinhai-frus-yuan-inauguration','正文；就任结果另见 FRUS 章首 Note'), sourceIds: ['xinhai-frus-yuan-inauguration', 'xinhai-frus-overview'] },
     s('交接的后续','大事记记载孙中山于 4 月 1 日正式宣告辞去临时总统职务。','xinhai-wuchang-chronology','1912 年 4 月 1 日条'),
     s('前后任关系','文献集章首说明将袁的选举表述为接替辞职的孙中山。','xinhai-frus-overview','章首 Note 第二、三段'),
   ],'1912-04-01','区间内有三个阶段，不能把 2 月 15 日当选说成当日就任，也不能将 3 月 10 日就任理解为南京各项交接全部完成。'),

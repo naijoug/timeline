@@ -13,7 +13,7 @@ test('untrusted ranges are bounded and reversed years normalized',()=>{
   assert.deepEqual(clampWindow(2026,3),[2024,2026]);
   assert.deepEqual(clampWindow(1800,200),[1943,2026]);
   assert.equal(readAtlas('?from=2026&to=2023').from,2023);
-  assert.equal(readAtlas('?from=oops').from,2023);
+  assert.equal(readAtlas('?from=oops').from,Math.min(...events.map(event => Number(event.date.slice(0,4)))));
 });
 test('model releases, methods, and early AI systems are not misclassified as agents',()=>{
   const lane=(id:string)=>eventLane(events.find(e=>e.id===id)!);

@@ -20,7 +20,7 @@ test('the actual pre-paint script restores saved dark mode and tolerates blocked
     const root = { dataset: {} as Record<string,string> }, meta = { content:'' };
     runInNewContext(bootstrap, { appearanceKey:APPEARANCE_KEY, document:{documentElement:root,querySelector:()=>meta,currentScript:{getAttribute:()=>APPEARANCE_KEY}},matchMedia:()=>({matches:scenario.system}),localStorage:{getItem:()=>{if(scenario.blocked)throw new Error('blocked');return scenario.stored;}} });
     assert.equal(root.dataset.theme, scenario.expected);
-    assert.equal(meta.content, scenario.expected==='dark'?'#202020':'#f3f3f3');
+    assert.equal(meta.content, scenario.expected==='dark'?'#181818':'#f7f7f7');
   }
 });
 

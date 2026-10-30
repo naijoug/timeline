@@ -1,3 +1,5 @@
+import { rustAsyncSources, rustAsyncPatch } from './rust-async-depth';
+import { goIterationEvents, goIterationSources, goIterationRelations } from './go-iteration-history';
 import type {
   Catalog,
   Entity,
@@ -6,6 +8,13 @@ import type {
   TimeSpan,
   TimelineEvent,
 } from "../../core/types";
+import { evolutionCheckedAt, evolutionEvents, evolutionRelations, evolutionSources } from "./evolution-milestones";
+
+import { goReviewedEvents, goReviewedSources, goReviewedRelations } from "./go-reviewed-records";
+import { pythonReviewedEvents, pythonReviewedSources } from "./python-reviewed-records";
+import { rustReviewedEvents, rustReviewedSources } from "./rust-reviewed-records";
+
+import { swiftReviewedPatches, swiftReviewedSources } from "./swift-reviewed-records";
 
 const checkedAt = "2026-10-12";
 
@@ -19,52 +28,59 @@ const source = (
 ): Source => ({ id, title, publisher, url, type, locator, checkedAt });
 
 export const sources: Source[] = [
-  source("ibm-fortran", "IBM 100: FORTRAN", "IBM", "https://www.ibm.com/ibm/history/ibm100/us/en/items/fortran/", "机构史料", "项目背景、1957 年交付与首个编译器"),
-  source("acm-lisp", "Recursive Functions of Symbolic Expressions and Their Computation by Machine, Part I", "ACM", "https://dl.acm.org/doi/10.1145/367199.367179", "原始论文", "Communications of the ACM, 1960 年 4 月"),
+  ...goReviewedSources,
+  ...pythonReviewedSources,
+  ...rustReviewedSources,
+  source("ibm-fortran", "Fortran — IBM History", "IBM", "https://www.ibm.com/history/fortran", "机构史料", "项目背景、1957 年交付与首个编译器"),
+  source("acm-lisp", "Recursive Functions of Symbolic Expressions and Their Computation by Machine, Part I", "ACM", "https://dl.acm.org/doi/10.1145/367177.367199", "原始论文", "Communications of the ACM, 1960 年 4 月"),
   source("codasyl-cobol", "COBOL: Initial Specifications for a Common Business Oriented Language", "CODASYL · Bitsavers 扫描档案", "https://bitsavers.trailing-edge.com/pdf/codasyl/COBOL_Report_Apr60.pdf", "历史规格", "1960 年 4 月报告；1959 年为发起年份"),
-  source("acm-algol60", "Report on the Algorithmic Language ALGOL 60", "ACM", "https://dl.acm.org/doi/10.1145/367233.367262", "原始报告", "1960 年 5 月报告"),
-  source("dartmouth-basic", "BASIC at 50", "达特茅斯学院", "https://www.dartmouth.edu/basicfiftyyears.html", "机构史料", "1964 年 5 月 1 日运行记录"),
+  source("acm-algol60", "Report on the Algorithmic Language ALGOL 60", "ACM", "https://dl.acm.org/doi/10.1145/367236.367262", "原始报告", "1960 年 5 月报告"),
+  source("dartmouth-basic", "BASIC at 50", "达特茅斯学院", "https://www.dartmouth.edu/basicfifty/basic.html", "机构史料", "1964 年 5 月 1 日运行记录"),
   source("acm-simula", "The Development of the SIMULA Languages", "ACM", "https://dl.acm.org/doi/10.1145/960118.808391", "历史论文", "Nygaard 与 Dahl 回顾 Simula 67"),
   source("eth-pascal", "The Programming Language Pascal", "苏黎世联邦理工学院", "https://www.research-collection.ethz.ch/items/514c7df1-8a1c-46c3-af34-2b7938131aeb", "技术报告", "1970 年 11 月报告"),
   source("bell-c", "The Development of the C Language", "Nokia Bell Labs", "https://www.nokia.com/bell-labs/about/dennis-m-ritchie/chist.html", "作者回顾", "Ritchie 说明 1969—1973 年形成过程"),
   source("prolog-history", "The Birth of Prolog", "Colmerauer 与 Roussel · Prolog Academy 镜像", "https://prolog.academy/DOCS/the%20birth%20of%20prolog%20-%20Colmerauer%20-%20nov%201992.pdf", "作者回顾", "1972 年秋第一个解释器"),
   source("smalltalk-manual", "Smalltalk-72 Instruction Manual", "Computer History Museum", "https://smalltalkzoo.computerhistory.org/papers/Smalltalk72_Manual.pdf", "历史手册", "1972 年夏设计与秋冬季使用"),
-  source("mit-scheme", "The Revised Report on Scheme", "Scheme 官方社区", "https://scheme.org/tspl4/", "语言报告", "Scheme 的 Lisp 方言定位与报告体系"),
+  source("mit-scheme", "SCHEME: An Interpreter for Extended Lambda Calculus", "MIT · Sussman 与 Steele", "https://dspace.mit.edu/entities/publication/83ae1e70-c572-430d-abc1-c52725abfefb", "原始报告", "AIM-349，1975 年 12 月；摘要说明 Lisp-like language 与 lambda calculus"),
   source("ada-standard", "Ada 83: ANSI/MIL-STD-1815A", "Ada Resource Association", "https://www.adaic.org/ada-resources/standards/", "标准档案", "Ada 83 标准入口"),
   source("cpp-history", "A History of C++: 1979—1991", "Bjarne Stroustrup", "https://www.stroustrup.com/hopl2.pdf", "作者回顾", "1983 年命名与 1985 年商业发布"),
+  source("objc-history", "The Origins of Objective-C at PPI/Stepstone and its Evolution at NeXT", "Brad Cox、Steve Naroff、Hansen Hsu · HOPL IV", "https://hopl4.sigplan.org/details/hopl-4-papers/18/The-Origins-of-Objective-C-at-PPI-Stepstone-and-its-Evolution-at-NeXT", "作者历史回顾", "摘要：1980 年代初起源；1986 年 Naroff 加入与 NeXT 成为重要客户"),
   source("apple-objc", "Programming with Objective-C", "Apple Developer", "https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html", "官方文档", "Objective-C 的面向对象模型"),
   source("erlang-history", "Concurrent Programming in ERLANG", "Erlang 官网", "https://erlang.org/download/erlang-book-part1.pdf", "技术资料", "并发模型与早期电信背景"),
-  source("perl-release", "Perl 语言官网", "Perl 官方社区", "https://www.perl.org/about.html", "官方网站", "Perl 1 发布年份"),
+  source("perl-release", "perlhist — the Perl history records", "Perl 官方社区", "https://perldoc.perl.org/perlhist", "官方版本史", "THE RECORDS：Larry，1.000，1987-Dec-18"),
   source("haskell-report", "Haskell 1.0 Report", "Haskell 官方社区", "https://www.haskell.org/definition/haskell-report-1.0.ps.gz", "语言报告", "1990 年 Haskell 1.0"),
-  source("python-history", "The History of Python", "Python 官方网站", "https://www.python.org/doc/essays/history/", "作者回顾", "1991 年首次公开发布"),
-  source("oracle-java", "Java 概述", "Oracle", "https://www.oracle.com/java/technologies/java-language-and-jvm-overview/", "官方文档", "Java 平台与语言关系"),
+  source("python-history", "25 Years of Python at CWI", "Centrum Wiskunde & Informatica", "https://www.cwi.nl/en/news/25-years-of-python-at-cwi/", "机构史料", "2015 年回顾：1989 年设计、1990 年原型与 1991-02-20 首次公开发布"),
+  source("oracle-java", "What is Java technology and why do I need it?", "Oracle", "https://www.java.com/en/download/help/whatis_java.html", "官方历史说明", "首段：Sun 于 1995 年首次发布 Java；下文 JRE 8 描述不能倒推到 1995 年"),
   source("netscape-javascript", "Netscape and Sun Announce JavaScript", "Netscape 新闻稿 · Web Archive", "https://web.archive.org/web/20080206040518/http://wp.netscape.com/newsref/pr/newsrelease67.html", "新闻稿", "1995 年 12 月 4 日发布"),
-  source("php-history", "PHP 手册：历史与发布", "PHP 官方社区", "https://www.php.net/manual/en/history.php", "官方文档", "PHP/FI 1995 年公开使用"),
-  source("ruby-history", "Ruby 语言的诞生", "Ruby 官方社区", "https://www.ruby-lang.org/en/documentation/ruby-from-other-languages-to-ruby/", "官方资料", "1995 年 Ruby 0.95"),
+  source("php-history", "PHP 手册：历史与发布", "PHP 官方社区", "https://www.php.net/manual/en/history.php.php", "官方文档", "PHP Tools 于 1995 年 6 月公开；PHP/FI 合名始于 1996 年 4 月"),
+  source("ruby-history", "Ruby 语言的诞生", "Ruby 官方社区", "https://www.ruby-lang.org/en/documentation/faq/1/", "官方资料", "1995 年 Ruby 0.95"),
   source("ecma-javascript", "ECMA-262: ECMAScript Language Specification", "Ecma International", "https://www.ecma-international.org/publications-and-standards/standards/ecma-262/", "标准", "ECMAScript 标准系列"),
-  source("microsoft-csharp", "C# 文档", "Microsoft Learn", "https://learn.microsoft.com/en-us/dotnet/csharp/", "官方文档", "C# 与 .NET 平台"),
-  source("scala-release", "Scala 语言官网", "Scala 官方社区", "https://www.scala-lang.org/", "官方网站", "2004 年发布与演进"),
-  source("clojure-release", "Clojure 语言官网", "Clojure 官方社区", "https://clojure.org/", "官方网站", "2007 年发布与 Lisp 传承"),
-  source("go-open-source", "Hey, Ho, Let's Go!", "Go 官方网站", "https://go.dev/blog/lets-go", "官方公告", "2009 年 11 月 10 日开源"),
-  source("rust-history", "Rust 官方博客", "Rust 官方社区", "https://blog.rust-lang.org/", "官方公告", "2010 年预览与 2015 年 1.0"),
-  source("typescript-release", "TypeScript: JavaScript at Scale", "Microsoft TypeScript 官网", "https://www.typescriptlang.org/", "官方网站", "2012 年 TypeScript 0.8"),
-  source("julia-paper", "Julia: A Fresh Approach to Numerical Computing", "SIAM Review", "https://epubs.siam.org/doi/10.1137/141000671", "原始论文", "2012 年论文与语言目标"),
-  source("apple-swift", "The Swift Programming Language", "Apple Developer", "https://developer.apple.com/swift/", "官方文档", "2014 年发布与演进"),
-  source("kotlin-release", "Kotlin 官方网站", "JetBrains", "https://kotlinlang.org/", "官方网站", "2011 年公布与 2016 年 1.0"),
-  source("elixir-release", "Elixir 语言官网", "Elixir 官方社区", "https://elixir-lang.org/", "官方网站", "Elixir 与 Erlang 虚拟机"),
+  source("microsoft-csharp", "Microsoft Introduces Highly Productive .NET Programming Language: C#", "Microsoft", "https://news.microsoft.com/source/2000/06/26/microsoft-introduces-highly-productive-net-programming-language-c/", "官方新闻稿", "2000-06-26 公布；技术预览计划在后续 PDC 提供"),
+  source("scala-release", "An Overview of the Scala Programming Language (Second Edition)", "Martin Odersky 等 · EPFL", "https://scala-lang.org/docu/files/ScalaOverview.pdf", "技术报告", "第 1 页：2004 年 1 月 JVM 公开发布；面向对象与函数式设计"),
+  source("clojure-release", "Clojure 15th Anniversary: A Retrospective", "Georgia Anunciação · Nubank", "https://building.nubank.com/clojure-15th-anniversary-a-retrospective/", "机构回顾", "2007: The Release；区分 2005 年设计与 2007 年公开发布"),
+  source("go-open-source", "Hey! Ho! Let's Go!", "Google Open Source Blog", "https://opensource.googleblog.com/2009/11/hey-ho-lets-go.html", "官方公告", "2009 年 11 月 10 日开源"),
+  source("rust-history", "Rust programming language — Mozilla Annual Summit, July 2010", "Graydon Hoare", "https://venge.net/graydon/talks/intro-talk.pdf", "原始演讲", "2010 年 7 月；早期安全/并发设计与实现状态，不代表现代借用检查器"),
+  source("typescript-release", "Announcing TypeScript 1.0", "Microsoft TypeScript", "https://devblogs.microsoft.com/typescript/announcing-typescript-1-0/", "官方公告", "2014 年公告回顾 2012 年 10 月 TypeScript 0.8 首次发布"),
+  { ...source("julia-paper", "Julia: A Fresh Approach to Numerical Computing", "SIAM Review", "https://epubs.siam.org/doi/10.1137/141000671", "原始论文", "Information & Authors → History：2017-02-07 在线发表；Abstract：设计目标"), publishedAt: "2017-02-07", checkedAt: evolutionCheckedAt },
+  source("apple-swift", "Apple Releases iOS 8 SDK With Over 4,000 New APIs", "Apple", "https://www.apple.com/ie/newsroom/2014/06/02Apple-Releases-iOS-8-SDK-With-Over-4-000-New-APIs/", "官方新闻稿", "2014-06-02；Swift 与 Objective-C 共存；SDK beta"),
+  source("kotlin-release", "Kotlin 1.0 Released", "JetBrains", "https://blog.jetbrains.com/kotlin/2016/02/kotlin-1-0-released-pragmatic-language-for-jvm-and-android/", "官方公告", "2016 年 1.0 发布及 Java 互操作性"),
+  source("elixir-release", "Elixir v0.5.0 released", "José Valim · Elixir", "https://elixir-lang.org/blog/2012/05/25/elixir-v0-5-0-released/", "官方公告", "2012-05-25；重写后的首次发布，不是语言最早原型"),
   source("carbon-release", "Carbon Language", "GitHub", "https://github.com/carbon-language/carbon-lang", "实验项目", "2022 年 7 月公开实验代码"),
-  source("modular-mojo", "Mojo 编程语言", "Modular", "https://www.modular.com/mojo", "官方文档", "面向 AI 工作负载的语言"),
+  source("modular-mojo", "A unified, extensible platform to superpower your AI", "Chris Lattner、Tim Davis、Eric Johnson · Modular", "https://www.modular.com/blog/a-unified-extensible-platform-to-superpower-your-ai", "官方公告", "2023-05-02；仍在开发，通过 JupyterHub Playground 预览"),
   source("python-313", "Python 3.13 Release Notes", "Python 官方社区", "https://docs.python.org/3.13/whatsnew/3.13.html", "发布说明", "实验性 free-threaded 构建与 2024 年发布"),
-  source("cpp-standard", "C++ Standards", "Standard C++ Foundation", "https://isocpp.org/std/the-standard", "标准档案", "C++ 11/20/23 等标准版本入口"),
   source("java-versions", "Java SE Versions", "Oracle", "https://www.oracle.com/java/technologies/java-se-support-roadmap.html", "官方路线图", "Java SE 5/8/11/17/21 版本窗口"),
   source("javascript-2015", "ECMAScript 2015 Language Specification", "Ecma International", "https://262.ecma-international.org/6.0/", "标准", "let/const、类、模块与 Promise"),
-  source("typescript-release-notes", "TypeScript Release Notes", "Microsoft TypeScript", "https://www.typescriptlang.org/docs/handbook/release-notes/", "发布说明", "TypeScript 1.0/2.0/5.0 变化"),
+  source("typescript20-exact-release", "TypeScript 2.0 is now available!", "Daniel Rosenwasser · Microsoft", "https://devblogs.microsoft.com/typescript/announcing-typescript-2-0/", "官方公告", "2016-09-22；strictNullChecks 与控制流分析"),
+  source("typescript50-exact-release", "Announcing TypeScript 5.0", "Daniel Rosenwasser · Microsoft", "https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/", "官方公告", "2023-03-16；装饰器、const 类型参数和模块解析"),
+  source("typescript-release-notes", "Announcing TypeScript 1.0", "Jonathan Turner · Microsoft", "https://devblogs.microsoft.com/typescript/announcing-typescript-1-0/", "官方公告", "2014-04-02；稳定平台与 Visual Studio 集成"),
   source("go-release-notes", "Go Release History", "Go 官方社区", "https://go.dev/doc/devel/release", "发布说明", "Go 1/1.11/1.18 版本记录"),
   source("rust-editions", "Rust Edition Guide", "Rust 官方社区", "https://doc.rust-lang.org/edition-guide/", "官方指南", "Rust 2015/2018/2021/2024 版本差异"),
-  source("csharp-release-notes", "C# What's New", "Microsoft Learn", "https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/", "官方文档", "C# 2/3/6/8 变化"),
-  source("swift-release-notes", "Swift Release Notes", "Apple Developer", "https://developer.apple.com/documentation/swift-release-notes", "发布说明", "Swift 3/5/6 兼容性与并发演进"),
+  source("csharp-release-notes", "The history of C#", "Microsoft Learn", "https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-version-history", "官方文档", "C# 2/3/6/8 变化"),
+  source("swift-release-notes", "Swift 3.0 Released!", "Swift.org", "https://www.swift.org/blog/swift-3.0-released/", "发布说明", "2016-09-13 Swift 3.0 发布与源码兼容性"),
   source("kotlin-release-notes", "Kotlin Releases", "JetBrains", "https://kotlinlang.org/docs/releases.html", "发布说明", "Kotlin 1.x 与 2.0 变化"),
-  source("python-versions", "Python Release Versions", "Python 官方社区", "https://www.python.org/downloads/release-list/", "版本列表", "Python 2.0/3.0/3.11 发布时间"),
+  source("python-versions", "Python Release Versions", "Python 官方社区", "https://www.python.org/doc/versions/", "版本列表", "Python 2.0/3.0/3.11 发布时间"),
+  source("swift5-exact-release", "Swift 5 Released!", "Swift.org", "https://www.swift.org/blog/swift-5-released/", "发布说明", "2019-03-25，Apple 平台 ABI 稳定"),
+  ...evolutionSources,
 ];
 
 const duration = (start: number, end: number): TimeSpan => ({
@@ -159,7 +175,7 @@ const change = (
   improvements: string[],
   tradeoffs: string,
   sourceIds: string[],
-): TimelineEvent["change"] => ({
+): NonNullable<TimelineEvent["change"]> => ({
   baseline,
   improvements,
   tradeoffs,
@@ -252,10 +268,10 @@ export const events: TimelineEvent[] = [
     tags: ["面向对象", "系统编程", "Cfront"],
     note: "C with Classes 始于 1979 年；本条采用 1985 年商业发布节点。",
   }),
-  event("objective-c", "Objective-C 面向 C 的对象层", 1986, "paradigm", ["desktop-scripting"], ["objective-c"], "Objective-C 把 Smalltalk 风格的消息传递加入 C，后来成为 Apple 平台的主要开发语言之一。", ["apple-objc"], {
+  event("objective-c", "Objective-C 进入 NeXT 平台路线", 1986, "paradigm", ["desktop-scripting"], ["objective-c"], "1986 年 Steve Naroff 加入 Stepstone，NeXT 成为 Objective-C 的重要客户；语言把 Smalltalk 风格消息传递与 C 兼容性结合。", ["objc-history", "apple-objc"], {
     significance: "它展示了动态面向对象层与 C 运行时结合的可行路线，也影响移动应用开发工具链。",
     tags: ["Objective-C", "消息传递", "Apple"],
-    note: "官方文档用于核对语言模型；早期发布年份需另查 Brad Cox 的原始资料。",
+    note: "1986 年标记 Naroff 加入与 NeXT 客户关系，不是 Objective-C 的诞生年。作者历史回顾把语言根源追溯到 1980 年代初；Apple 文档仅用于核对语言模型。",
   }),
   event("erlang-concurrency", "Erlang 面向并发系统", 1986, "paradigm", ["desktop-scripting"], ["erlang"], "Ericsson 实验室为电信系统开发 Erlang，以进程、消息传递和容错为核心。", ["erlang-history"], {
     significance: "Erlang 的 Actor 式并发和“让它崩溃”容错思想，后来影响分布式服务和多个并发语言。",
@@ -295,7 +311,7 @@ export const events: TimelineEvent[] = [
     significance: "标准化让不同浏览器和运行时能以同一语义基础实现 JavaScript，是 Web 兼容性的关键制度。",
     tags: ["标准化", "浏览器兼容", "ECMA-262"],
   }),
-  event("csharp-announced", "C# 与 .NET 发布", 2000, "release", ["web-platform"], ["csharp"], "Microsoft 公布 C#，语言与 .NET 运行时和类库一起面向企业应用与 Web 服务。", ["microsoft-csharp"], {
+  event("csharp-announced", "C# 公布", 2000, "release", ["web-platform"], ["csharp"], "Microsoft 公布 C#，语言与 .NET 运行时和类库一起面向企业应用与 Web 服务。", ["microsoft-csharp"], {
     significance: "C# 把托管运行时、强类型面向对象和平台工具链组合成主流企业开发方案。",
     tags: ["托管平台", "企业开发", ".NET"],
     note: "2000 年为公布节点；C# 1.0 随 Visual Studio .NET 在 2002 年正式发布。",
@@ -313,33 +329,39 @@ export const events: TimelineEvent[] = [
     significance: "Go 把轻量并发、静态链接和工程化工具链作为语言设计目标，服务云基础设施场景。",
     tags: ["并发", "网络服务", "工程工具"],
   }),
-  event("rust-prealpha", "Rust 预览", 2010, "release", ["modern-safety"], ["rust"], "Rust 项目公开预览，提出内存安全与并发安全由类型系统约束的设计方向。", ["rust-history"], {
-    significance: "Rust 把所有权与借用检查作为语言核心，为无垃圾回收的系统编程提供新的安全策略。",
-    tags: ["所有权", "内存安全", "系统编程"],
+  event("rust-prealpha", "Rust 早期设计公开介绍", 2010, "release", ["modern-safety"], ["rust"], "Graydon Hoare 在 Mozilla 年度峰会上介绍 Rust，提出面向安全、并发系统程序的设计与早期实现。", ["rust-history"], {
+    significance: "编辑分析：这一公开介绍呈现了 Rust 的安全与系统编程目标；其后语言机制经历多轮重构，不能把成熟版本的借用检查器倒推到 2010 年。",
+    time: { kind: "point", start: { year: 2010, month: 7 } },
+    note: "原始演讲仍描述 typestate、任务级垃圾回收和早期编译器；这是设计介绍，不是稳定版本发布。",
+    tags: ["早期设计", "内存安全", "系统编程"],
   }),
   event("typescript-08", "TypeScript 0.8 发布", 2012, "release", ["modern-safety"], ["typescript"], "Microsoft 发布 TypeScript 0.8，为 JavaScript 增加可选静态类型和工具化能力。", ["typescript-release"], {
     significance: "可选类型层让大型 JavaScript 工程获得编辑器支持与渐进迁移路径，改变了前端工程形态。",
     tags: ["渐进类型", "JavaScript", "工具链"],
   }),
-  event("julia-paper", "Julia 语言论文发表", 2012, "paradigm", ["modern-safety"], ["julia"], "Julia 团队发表论文，说明其兼顾数值计算生产力与接近编译语言性能的目标。", ["julia-paper"], {
+  // Keep the legacy event ID so previously shared links continue to resolve.
+  event("julia-paper", "Julia 首次公开发布", 2012, "release", ["modern-safety"], ["julia"], "Julia 创始团队公开介绍语言，提出把动态语言的易用性与数值计算性能结合的目标。", ["julia-initial-release", "julia-paper"], {
+    time: { kind: "point", start: { year: 2012, month: 2, day: 14 } },
     significance: "Julia 把多重派发、科学计算生态和即时编译结合，服务数值密集型研究工作流。",
     tags: ["数值计算", "多重派发", "即时编译"],
+    note: "2012 年是首次公开发布，不是 Julia 1.0，也不是所引 SIAM Review 论文的出版年；该论文于 2017-02-07 在线发表，仅作后续设计说明。",
+    details: [{ label: "先公开语言，再形成后续论文", text: "初次发布文章明确提出尚未完成的语言需要更多使用者参与；官方脚注也澄清这不是 1.0 发布。", sourceIds: ["julia-initial-release"], locator: "末段 initial release；脚注 1" }],
   }),
-  event("swift-announced", "Swift 发布", 2014, "release", ["modern-safety"], ["swift"], "Apple 在 WWDC 发布 Swift，作为 Objective-C 之外的新一代平台语言。", ["apple-swift"], {
+  event("swift-announced", "Swift 公布与开发者预览", 2014, "release", ["modern-safety"], ["swift"], "Apple 在 WWDC 公布 Swift，并随开发者 SDK 提供预览，支持与 Objective-C 代码共存。", ["apple-swift"], {
     significance: "Swift 展示了现代类型安全、值语义和开发者体验在移动与系统平台中的组合。",
     tags: ["Apple", "类型安全", "移动开发"],
-  }),
-  event("rust-10", "Rust 1.0 发布", 2015, "release", ["modern-safety"], ["rust"], "Rust 1.0 承诺语言与标准库核心的稳定性，生态可以建立在明确兼容性边界上。", ["rust-history"], {
-    significance: "所有权模型从实验项目进入长期生产阶段，推动内存安全成为系统语言设计议题。",
-    tags: ["稳定性", "所有权", "生产化"],
+    time: { kind: "point", start: { year: 2014, month: 6, day: 2 } },
+    note: "该节点是公布和开发者预览，不等同于 Swift 1.0 正式发布。",
   }),
   event("kotlin-10", "Kotlin 1.0 发布", 2016, "release", ["modern-safety"], ["kotlin"], "JetBrains 发布 Kotlin 1.0，提供 JVM 上更现代的语法、空安全与工具体验。", ["kotlin-release"], {
     significance: "Kotlin 后来成为 Android 官方支持语言，说明宿主平台能显著改变语言扩散路径。",
     tags: ["JVM", "空安全", "Android"],
   }),
-  event("elixir-release", "Elixir 发布", 2012, "release", ["modern-safety"], ["elixir"], "José Valim 发布 Elixir，在 Erlang 虚拟机上构建现代语法与生产力工具。", ["elixir-release"], {
+  event("elixir-release", "Elixir 0.5 发布", 2012, "release", ["modern-safety"], ["elixir"], "José Valim 发布重写后的 Elixir 0.5，在 Erlang 虚拟机上构建现代语法与生产力工具。", ["elixir-release"], {
     significance: "Elixir 把 Erlang 的并发与容错能力带入 Web 和实时系统开发，延续 Actor 模型路线。",
     tags: ["BEAM", "并发", "实时系统"],
+    time: { kind: "point", start: { year: 2012, month: 5, day: 25 } },
+    note: "这是重写后的 0.5 版本发布；作者回顾记载 2011 年已有 0.3 原型，不能把 2012 年视为全部开发工作的起点。",
   }),
   event("carbon-experiment", "Carbon 实验项目公开", 2022, "release", ["modern-safety"], ["carbon"], "Google 相关团队公开 Carbon 实验语言，探索 C++ 的渐进迁移与互操作路线。", ["carbon-release"], {
     significance: "Carbon 说明现代语言不仅要提出安全模型，还必须回应既有 C++ 资产迁移成本。",
@@ -349,6 +371,8 @@ export const events: TimelineEvent[] = [
   event("mojo-release", "Mojo 面向 AI 工作负载", 2023, "release", ["modern-safety"], ["mojo"], "Modular 公布 Mojo，尝试把 Python 生态与底层硬件性能控制连接起来。", ["modular-mojo"], {
     significance: "Mojo 代表 AI 编译栈对语言语法、硬件抽象和 Python 兼容性的重新组合。",
     tags: ["AI", "性能", "Python 生态"],
+    time: { kind: "point", start: { year: 2023, month: 5, day: 2 } },
+    note: "当日为仍在开发中的语言与网页 Playground 预览，不是完整本地 SDK 或稳定版发布；性能数字属于厂商特定测试，不能泛化。",
     milestone: false,
   }),
   event("python-313", "Python 3.13 发布", 2024, "release", ["modern-safety"], ["python"], "Python 3.13 引入实验性 free-threaded 构建和交互式解释器改进。", ["python-313"], {
@@ -356,12 +380,12 @@ export const events: TimelineEvent[] = [
     tags: ["free-threading", "解释器", "并行"],
     milestone: true,
   }),
-  event("cpp-11", "C++11 标准发布", 2011, "release", ["modern-safety"], ["cpp"], "C++11 以 auto、lambda、右值引用和智能指针等特性更新现代 C++ 的表达方式。", ["cpp-standard"], {
+  event("cpp-11", "C++11 标准发布", 2011, "standard", ["modern-safety"], ["cpp"], "C++11 以 auto、lambda、右值引用和智能指针等特性更新现代 C++ 的表达方式。", ["cpp-standard"], {
     significance: "C++11 是从经典 C++ 转向现代资源管理与泛型编程的分界线。",
     tags: ["C++11", "lambda", "移动语义"],
     change: change("C++03 语法与手工资源管理模式", ["auto 类型推断", "lambda 表达式", "右值引用与移动语义", "标准智能指针"], "新特性增加语言复杂度，旧代码迁移需要明确编译器支持范围", ["cpp-standard"]),
   }),
-  event("cpp-20", "C++20 标准发布", 2020, "release", ["modern-safety"], ["cpp"], "C++20 引入模块、协程、概念和 ranges 等大型语言与库特性。", ["cpp-standard"], {
+  event("cpp-20", "C++20 标准发布", 2020, "standard", ["modern-safety"], ["cpp"], "C++20 引入模块、协程、概念和 ranges 等大型语言与库特性。", ["cpp-standard"], {
     significance: "C++20 继续压缩依赖宏和手写模板约束的空间，让接口约束与组合式算法更直接。",
     tags: ["C++20", "模块", "协程", "ranges"],
     change: change("C++11/17 中的头文件、模板约束和手写迭代模式", ["模块化组织代码", "concepts 约束模板参数", "协程语法", "ranges 组合算法"], "模块与协程的工具链支持长期不均衡，迁移通常分阶段进行", ["cpp-standard"]),
@@ -391,40 +415,24 @@ export const events: TimelineEvent[] = [
     tags: ["TypeScript 1.0", "泛型"],
     change: change("TypeScript 0.8 的基础类型注解", ["正式类型系统", "泛型", "工具链集成"], "严格性选项与现代项目默认值仍随后续版本演进", ["typescript-release-notes"]),
   }),
-  event("typescript-20", "TypeScript 2.0 发布", 2016, "release", ["modern-safety"], ["typescript"], "TypeScript 2.0 引入 strictNullChecks 与控制流分析相关的空安全能力。", ["typescript-release-notes"], {
+  event("typescript-20", "TypeScript 2.0 发布", 2016, "release", ["modern-safety"], ["typescript"], "TypeScript 2.0 引入 strictNullChecks 与控制流分析相关的空安全能力。", ["typescript20-exact-release"], {
     significance: "空值检查把 TypeScript 从“可选注解”推进到可系统性消除 null/undefined 错误的工具。",
     tags: ["TypeScript 2.0", "strictNullChecks"],
-    change: change("TypeScript 1.x 默认允许 null 赋给多数类型", ["strictNullChecks", "never 类型", "只读属性", "标记联合改进"], "启用严格空安全后需要显式收窄和标注边界", ["typescript-release-notes"]),
+    change: change("TypeScript 1.x 默认允许 null 赋给多数类型", ["strictNullChecks", "never 类型", "只读属性", "标记联合改进"], "启用严格空安全后需要显式收窄和标注边界", ["typescript20-exact-release"]),
   }),
-  event("typescript-50", "TypeScript 5.0 发布", 2023, "release", ["modern-safety"], ["typescript"], "TypeScript 5.0 重构运行时与数据结构，引入 const 类型参数和装饰器新方案。", ["typescript-release-notes"], {
+  event("typescript-50", "TypeScript 5.0 发布", 2023, "release", ["modern-safety"], ["typescript"], "TypeScript 5.0 优化编译器实现和包体积，引入 const 类型参数和装饰器新方案。", ["typescript50-exact-release"], {
     significance: "在语言表达力继续增加的同时，工具链性能和代码规模被明确纳入版本目标。",
     tags: ["TypeScript 5.0", "性能", "装饰器"],
-    change: change("TypeScript 4.x 的代码库结构与实验性装饰器", ["更快的编译与安装体验", "const 类型参数", "标准化装饰器", "命名空间兼容改进"], "部分 API 被移除，复杂项目需要检查迁移清单", ["typescript-release-notes"]),
+    change: change("TypeScript 4.x 的代码库结构与实验性装饰器", ["更快的编译与安装体验", "const 类型参数", "标准化装饰器", "bundler 模块解析"], "部分 API 被移除，复杂项目需要检查迁移清单", ["typescript50-exact-release"]),
   }),
-  event("go-10", "Go 1 发布", 2012, "release", ["modern-safety"], ["go"], "Go 1 明确语言与标准库兼容性承诺，让 Go 程序可以随编译器升级持续构建。", ["go-release-notes"], {
-    significance: "兼容性承诺成为 Go 生态扩散的关键前提。",
-    tags: ["Go 1", "兼容性"],
-    change: change("Go 发布前的预发布语言与标准库", ["Go 1 兼容性承诺", "统一工具链与发布节奏"], "兼容性以受控方式演进，重大能力通常经由构建标签或新 API 引入", ["go-release-notes"]),
-  }),
-  event("go-111", "Go 1.11 发布", 2018, "release", ["modern-safety"], ["go"], "Go 1.11 引入 WebAssembly 支持和模块实验。", ["go-release-notes"], {
-    significance: "Go 开始同时进入浏览器执行环境和去 GOPATH 的依赖管理路径。",
-    tags: ["Go modules", "WebAssembly"],
-    change: change("GOPATH 依赖布局与仅原生平台目标", ["Go modules 实验", "GO111MODULE 开关", "WebAssembly 目标"], "模块模式最初仍需迁移开关，旧工作流保留一段时间", ["go-release-notes"]),
-  }),
-  event("go-118", "Go 1.18 发布", 2022, "release", ["modern-safety"], ["go"], "Go 1.18 引入泛型、模糊测试和工作区模式。", ["go-release-notes"], {
-    significance: "Go 在保持简洁语法和兼容承诺的同时，补上参数化类型这一长期缺口。",
-    tags: ["Go 泛型", "模糊测试"],
-    change: change("Go 1.17 的 interface{} 与代码生成式泛型替代品", ["类型参数", "泛型约束", "原生模糊测试", "go work 工作区"], "泛型不等于所有场景的继承或运行时多态，标准库采用仍保持克制", ["go-release-notes"]),
-  }),
-  event("rust-2018", "Rust 2018 edition 发布", 2018, "release", ["modern-safety"], ["rust"], "Rust 2018 edition 引入模块路径与异步生态的基础语法改进。", ["rust-editions"], {
+  ...goReviewedEvents,
+  event("rust-2018", "Rust 2018 edition 发布", 2018, "release", ["modern-safety"], ["rust"], "Rust 2018 随 Rust 1.31 发布，改善模块路径、非词法生命周期与迁移工具。", ["rust-editions", "rust131-release"], {
+    time: { kind: "point", start: { year: 2018, month: 12, day: 6 } },
     significance: "edition 机制让 Rust 能清理语法债务，同时保持跨版本库互操作。",
     tags: ["Rust 2018", "edition"],
-    change: change("Rust 2015 的模块声明与 await 生态碎片化", ["更直接的模块路径", "async/await 生态准备", "dyn Trait 语法", "edition 迁移工具"], "edition 改变源代码兼容性而非库 ABI，迁移仍需工具检查", ["rust-editions"]),
-  }),
-  event("rust-2024", "Rust 2024 edition 发布", 2024, "release", ["modern-safety"], ["rust"], "Rust 2024 edition 继续清理 unsafe 边界、宏与 async 语法细节。", ["rust-editions"], {
-    significance: "edition 成为 Rust 稳定演进制度的一部分，而不是破坏性重写。",
-    tags: ["Rust 2024", "edition"],
-    change: change("Rust 2021 edition 的既有宏、unsafe 与 async 行为", ["std::io::Error 简化", "gen 关键字预留", "async 闭包方向", "unsafe 属性边界澄清"], "edition 迁移可自动处理多数语法变化，但 unsafe 相关语义需人工审查", ["rust-editions"]),
+    note: "async / await 要到 2019 年 Rust 1.39 才稳定，不能与 Rust 2018 edition 的发布混同。",
+    change: { ...change("Rust 2015 edition 的模块路径与词法借用限制", ["更直接的模块路径", "非词法生命周期（NLL）借用检查", "cargo fix 辅助 edition 迁移"], "edition 按包选择，2015 与 2018 的依赖可互用；不构成稳定 ABI 的承诺", ["rust131-release"]), baselineEventId: "rust-10" },
+    details: [{ label: "兼容地改变规则", text: "官方说明不同 edition 的包可以相互依赖，新规则由各包主动选择；2018 并不意味着旧生态同时失效。", sourceIds: ["rust131-release"], locator: "Rust 2018：edition package setting and dependency interoperability" }],
   }),
   event("csharp-2", "C# 2.0 发布", 2005, "release", ["web-platform"], ["csharp"], "C# 2.0 引入泛型、可空类型与迭代器。", ["csharp-release-notes"], {
     significance: "类型安全集合和惰性枚举成为 C# 常用表达方式。",
@@ -446,15 +454,18 @@ export const events: TimelineEvent[] = [
     tags: ["Swift 3", "API 命名"],
     change: change("Swift 2 的旧 API 命名与跨平台核心库差异", ["Swift 3 API 命名指南", "核心库 API 清理", "移除 ++/-- 等遗留运算符"], "这是源代码不兼容版本，大量项目需要迁移", ["swift-release-notes"]),
   }),
-  event("swift-5", "Swift 5 发布", 2019, "release", ["modern-safety"], ["swift"], "Swift 5 稳定 ABI，并继续推进编码指南与字符串处理。", ["swift-release-notes"], {
+  event("swift-5", "Swift 5 发布", 2019, "release", ["modern-safety"], ["swift"], "Swift 5 稳定 ABI，并继续推进编码指南与字符串处理。", ["swift5-exact-release"], {
     significance: "稳定 ABI 使系统组件与用户程序可共享 Swift 运行时，是 Apple 平台集成的重要基础。",
     tags: ["Swift 5", "ABI 稳定"],
-    change: change("Swift 4 每个应用附带运行时与源码兼容模式", ["ABI 稳定", "标准库二进制兼容", "字符串重写与 SIMD 雏形"], "源代码兼容性与二进制兼容是不同层面的承诺", ["swift-release-notes"]),
+    change: change("Swift 4 每个应用附带运行时与源码兼容模式", ["ABI 稳定", "标准库二进制兼容", "字符串重写与 SIMD 雏形"], "源代码兼容性与二进制兼容是不同层面的承诺", ["swift5-exact-release"]),
   }),
-  event("swift-6", "Swift 6 发布", 2024, "release", ["modern-safety"], ["swift"], "Swift 6 默认开启严格数据隔离检查，把并发安全提升为可检查的语言约束。", ["swift-release-notes"], {
+  event("swift-6", "Swift 6 发布", 2024, "release", ["modern-safety"], ["swift"], "Swift 6 提供可选择启用的语言模式，把潜在数据竞争诊断提升为编译错误。", ["swift6-release"], {
+    time: { kind: "point", start: { year: 2024, month: 9, day: 17 } },
     significance: "并发模型从库和开发者约定进一步转向编译期隔离检查。",
     tags: ["Swift 6", "并发", "数据竞争安全"],
-    change: change("Swift 5 语言模式下的 Sendable 与并发检查警告", ["严格并发检查默认化", "数据竞争安全阶段", "typed throws", "非可复制类型继续演进"], "并发迁移可按语言模式分阶段开启，存量代码需要 actor 与 Sendable 边界整理", ["swift-release-notes"]),
+    note: "Swift 6 工具链与 Swift 6 语言模式不是一回事；升级编译器不等于所有旧项目自动开启新模式。",
+    change: change("Swift 5.10 可通过完整严格并发选项获得的警告", ["Swift 6 语言模式将潜在数据竞争作为错误", "typed throws 指定抛出错误类型", "非可复制类型扩展到泛型系统"], "新语言模式需要主动选择；存量代码仍需整理 actor、Sendable 和跨隔离域边界", ["swift6-release"]),
+    details: [{ label: "安全检查的启用边界", text: "官方将这一能力称为 opt-in language mode：原先在 Swift 5.10 可作为警告启用的检查，在新模式中成为编译错误。", sourceIds: ["swift6-release"], locator: "Language and Standard Library → Concurrency" }],
   }),
   event("kotlin-2", "Kotlin 2.0 发布", 2024, "release", ["modern-safety"], ["kotlin"], "Kotlin 2.0 引入 K2 编译器并保持语言源码兼容。", ["kotlin-release-notes"], {
     significance: "编译器基础设施重写为后续语言与工具性能演进提供基础。",
@@ -466,17 +477,500 @@ export const events: TimelineEvent[] = [
     tags: ["Python 2", "列表推导"],
     change: change("Python 1.x 的类型与内存模型", ["列表推导", "引用计数加垃圾回收", "增强赋值"], "Unicode 支持尚不完整，Python 2 与 3 的长期并存需要项目明确兼容策略", ["python-versions"]),
   }),
-  event("python-3", "Python 3.0 发布", 2008, "release", ["web-platform"], ["python"], "Python 3.0 以不兼容方式修正 Unicode、除法和 print 等基础语义。", ["python-versions"], {
-    significance: "这是 Python 历史上最重要的兼容性转折，生态花费十余年完成迁移。",
-    tags: ["Python 3", "Unicode", "不兼容迁移"],
-    change: change("Python 2 的 ASCII 字符串与旧 print 语句", ["str/bytes 分离", "默认 Unicode 字符串", "整数除法语义修正", "print 函数化"], "初期部分库不兼容，Python 2.6/2.7 提供过渡工具但无法消除全部差异", ["python-versions"]),
-  }),
-  event("python-311", "Python 3.11 发布", 2022, "release", ["modern-safety"], ["python"], "Python 3.11 带来异常组、改进追溯信息和大比例解释器性能提升。", ["python-versions"], {
-    significance: "CPython 把性能工程作为 3.11 后的重要主线。",
-    tags: ["Python 3.11", "性能"],
-    change: change("Python 3.10 的异常处理与解释器开销", ["异常组与 except*", "精确错误定位", "Faster CPython 优化"], "具体加速幅度取决于工作负载，官方基准不能直接代表所有程序", ["python-versions"]),
-  }),
+  ...pythonReviewedEvents,
+  ...rustReviewedEvents,
+  ...evolutionEvents,
 ];
+
+// 2026-10-26 逐句引用复核：日期、版本能力与兼容边界分别取证。
+const deepAuditSources: Source[] = [
+  {
+    "id": "java5-exact-features",
+    "title": "New Features and Enhancements — J2SE 5.0",
+    "url": "https://docs.oracle.com/javase/1.5.0/docs/relnotes/features.html",
+    "publisher": "Sun Microsystems / Oracle",
+    "locator": "Java Language Features：泛型、增强 for、枚举与注解；非发布日期证据",
+    "type": "官方文档",
+    "checkedAt": "2026-10-26"
+  },
+  {
+    "id": "java5-jsr-final",
+    "title": "JSR 176: J2SE 5.0 (Tiger) Release Contents",
+    "url": "https://jcp.org/en/jsr/detail?id=176",
+    "publisher": "Java Community Process",
+    "locator": "Stage timeline：Final Release 2004-09-30；区分规格定稿与预览",
+    "type": "官方文档",
+    "checkedAt": "2026-10-26"
+  },
+  {
+    "id": "java8-exact-features",
+    "title": "What's New in JDK 8",
+    "url": "https://www.oracle.com/java/technologies/javase/8-whats-new.html",
+    "publisher": "Oracle",
+    "locator": "Java Programming Language、Collections、Date-Time Package",
+    "type": "官方文档",
+    "checkedAt": "2026-10-26"
+  },
+  {
+    "id": "java21-exact-features",
+    "title": "JDK 21 Release Notes",
+    "url": "https://www.oracle.com/java/technologies/javase/21-relnote-issues.html",
+    "publisher": "Oracle",
+    "locator": "2023-09-19；Major New Functionality：record patterns、switch patterns、virtual threads、Sequenced Collections",
+    "type": "官方文档",
+    "checkedAt": "2026-10-26"
+  },
+  {
+    "id": "kotlin20-exact-features",
+    "title": "What's new in Kotlin 2.0.0",
+    "url": "https://kotlinlang.org/docs/whatsnew20.html",
+    "publisher": "JetBrains",
+    "locator": "2024-05-21；默认稳定 K2 与 Smart cast improvements",
+    "type": "官方文档",
+    "checkedAt": "2026-10-26"
+  },
+  {
+    "id": "kotlin20-compatibility",
+    "title": "Compatibility guide for Kotlin 2.0.x",
+    "url": "https://kotlinlang.org/docs/compatibility-guide-20.html",
+    "publisher": "JetBrains",
+    "locator": "Language：源码与行为不兼容变更；非无条件源码兼容承诺",
+    "type": "官方文档",
+    "checkedAt": "2026-10-26"
+  },
+  {
+    "id": "python20-exact-features",
+    "title": "What's New in Python 2.0",
+    "url": "https://docs.python.org/3/whatsnew/2.0.html",
+    "publisher": "Python 官方文档 · A. M. Kuchling、Moshe Zadka",
+    "locator": "Introduction：2000-10-16；List Comprehensions、Augmented Assignment、Garbage Collection of Cycles",
+    "type": "官方文档",
+    "checkedAt": "2026-10-26"
+  },
+  {
+    "id": "cpp11-designer-faq",
+    "title": "C++11 — the new ISO C++ standard",
+    "url": "https://www.stroustrup.com/C++11FAQ.html",
+    "publisher": "Bjarne Stroustrup",
+    "locator": "2011 标准；auto、lambda、rvalue references、smart pointers 专节",
+    "type": "设计者回顾",
+    "checkedAt": "2026-10-26"
+  },
+  {
+    "id": "cpp20-iso-record",
+    "title": "ISO/IEC 14882:2020 — Programming languages — C++",
+    "url": "https://www.iso.org/standard/79358.html",
+    "publisher": "ISO",
+    "locator": "2020-12 出版记录；不是浏览器或编译器实现完成日期",
+    "type": "官方文档",
+    "checkedAt": "2026-10-26"
+  },
+  {
+    "id": "cpp20-designer-history",
+    "title": "Thriving in a Crowded and Changing World: C++ 2006–2020",
+    "url": "https://www.stroustrup.com/hopl20main-p5-p-bfc9cd4--final.pdf",
+    "publisher": "Bjarne Stroustrup · HOPL 2020",
+    "locator": "§9.3 C++20 Features；2020 年 6 月发表，当时最终 ISO 出版仍是计划，实际出版另据 ISO 档案",
+    "type": "设计者回顾",
+    "checkedAt": "2026-10-26"
+  },
+  {
+    "id": "typescript09-generics",
+    "title": "Announcing TypeScript 0.9",
+    "url": "https://devblogs.microsoft.com/typescript/announcing-typescript-0-9/",
+    "publisher": "Microsoft · Jonathan Turner",
+    "locator": "2013-06-18；Generics，避免把泛型首次加入误记为 1.0",
+    "type": "官方文档",
+    "checkedAt": "2026-10-26"
+  }
+];
+sources.push(...deepAuditSources);
+const deepAuditPatches: Record<string, Partial<TimelineEvent>> = {
+  "php-fi": {
+    "title": "PHP Tools 源代码公开",
+    "time": {
+      "kind": "point",
+      "start": {
+        "year": 1995,
+        "month": 6
+      }
+    },
+    "summary": "Rasmus Lerdorf 于 1995 年 6 月公开 PHP Tools 源代码，允许外部开发者使用、修复和改进这组动态网页工具。",
+    "note": "1995 年 9 月为 FI，10 月为 Personal Home Page Construction Kit；PHP/FI 合名始于 1996 年 4 月，不能把这些阶段合并成一次发布。"
+  },
+  "java-5": {
+    "title": "J2SE 5.0 发布",
+    "sourceIds": [
+      "java5-jsr-final",
+      "java5-exact-features"
+    ]
+  },
+  "java-8": {
+    "sourceIds": [
+      "java-versions",
+      "java8-exact-features"
+    ]
+  },
+  "java-21": {
+    "sourceIds": [
+      "java-versions",
+      "java21-exact-features"
+    ]
+  },
+  "kotlin-2": {
+    "time": {
+      "kind": "point",
+      "start": {
+        "year": 2024,
+        "month": 5,
+        "day": 21
+      }
+    },
+    "summary": "Kotlin 2.0 默认启用稳定的 K2 编译器，扩展智能类型转换；迁移仍包含源码与行为不兼容变更。",
+    "sourceIds": [
+      "kotlin-release-notes",
+      "kotlin20-exact-features",
+      "kotlin20-compatibility"
+    ]
+  },
+  "python-2": {
+    "time": {
+      "kind": "point",
+      "start": {
+        "year": 2000,
+        "month": 10,
+        "day": 16
+      }
+    },
+    "summary": "Python 2.0 引入列表推导、增强赋值，并在 CPython 已有引用计数之外增加循环引用垃圾回收。",
+    "sourceIds": [
+      "python-versions",
+      "python20-exact-features"
+    ],
+    "note": "引用计数早已存在；本次新增的是不可达引用环的回收机制。Python 1.6 已有 Unicode 支持，不把 Unicode 起点或 Python 3 的迁移时间提前合并。"
+  },
+  "python-313": {
+    "time": {
+      "kind": "point",
+      "start": {
+        "year": 2024,
+        "month": 10,
+        "day": 7
+      }
+    },
+    "significance": "编辑解读：实验性无 GIL 构建提供了探索 CPython 多线程并行的新路径，但不意味着此前没有多进程或其他并行方案。"
+  },
+  "cpp-11": {
+    "sourceIds": [
+      "cpp11-designer-faq"
+    ]
+  },
+  "cpp-20": {
+    "time": {
+      "kind": "point",
+      "start": {
+        "year": 2020,
+        "month": 12
+      }
+    },
+    "sourceIds": [
+      "cpp20-iso-record",
+      "cpp20-designer-history"
+    ]
+  },
+  "swift-3": {
+    "time": {
+      "kind": "point",
+      "start": {
+        "year": 2016,
+        "month": 9,
+        "day": 13
+      }
+    },
+    "summary": "Swift 3 将 API 设计指南用于标准库并清理语言语法；它是与 Swift 2.2、2.3 源码不兼容的正式版本。"
+  },
+  "swift-5": {
+    "time": {
+      "kind": "point",
+      "start": {
+        "year": 2019,
+        "month": 3,
+        "day": 25
+      }
+    },
+    "summary": "Swift 5 在 Apple 平台声明 ABI 稳定，并以 UTF-8 重写 String、加入 Result 与 SIMD 向量类型。",
+    "note": "ABI 稳定的发布承诺明确限于 Apple 平台，不能无条件推广到所有平台；源码兼容与二进制兼容也不是同一件事。"
+  },
+  "typescript-10": {
+    "time": {
+      "kind": "point",
+      "start": {
+        "year": 2014,
+        "month": 4,
+        "day": 2
+      }
+    },
+    "sourceIds": [
+      "typescript-release-notes",
+      "typescript09-generics"
+    ],
+    "note": "泛型在 2013-06-18 的 TypeScript 0.9 已加入，不是 1.0 首次引入；此处与 0.8 比较的是阶段演进。"
+  },
+  "typescript-20": {
+    "time": {
+      "kind": "point",
+      "start": {
+        "year": 2016,
+        "month": 9,
+        "day": 22
+      }
+    },
+    "significance": "编辑解读：启用严格空值检查能提前发现许多 null／undefined 使用错误，但类型断言、any 与外部数据等边界仍需运行时验证。"
+  },
+  "typescript-50": {
+    "time": {
+      "kind": "point",
+      "start": {
+        "year": 2023,
+        "month": 3,
+        "day": 16
+      }
+    },
+    "note": "装饰器实现对齐当时新的 ECMAScript 提案，不等于 2023 年已写入正式 ECMAScript 标准。"
+  }
+};
+for (const entry of events) {
+  Object.assign(entry, deepAuditPatches[entry.id] ?? {});
+  if (deepAuditPatches[entry.id]?.sourceIds && entry.change) entry.change.sourceIds = [...entry.sourceIds];
+}
+const deepEvent = (id: string) => events.find(entry => entry.id === id)!;
+deepEvent("java-21").change!.improvements[3] = "有序集合接口（Sequenced Collections）";
+deepEvent("java-5").change!.tradeoffs = "泛型在编译期检查类型；存量原始类型集合仍需逐步迁移。";
+deepEvent("kotlin-2").change!.tradeoffs = "K2 迁移包含源码与行为不兼容项；编译器插件也需检查适配情况。";
+deepEvent("python-2").change!.improvements[1] = "在引用计数之外增加循环引用回收";
+deepEvent("python-2").change!.tradeoffs = "循环检测增加开销；Python 1.6 已有 Unicode，不能把这次发布说成首次文本国际化。";
+deepEvent("cpp-11").change!.baseline = "C++03 的语法与标准库（当时已有 RAII、模板和 auto_ptr）";
+deepEvent("swift-5").change!.improvements = ["Apple 平台 ABI 稳定", "Apple 平台 Swift 运行时进入系统", "UTF-8 String、Result 与 SIMD 向量类型"];
+deepEvent("swift-5").change!.baseline = "Swift 4 的 Apple 平台应用运行时随包分发与源码兼容模式";
+deepEvent("typescript-50").change!.improvements[2] = "对齐新装饰器提案的实现";
+for (const id of ["acm-lisp", "acm-algol60", "php-history", "java-versions", "kotlin-release-notes", "python-313", "swift-release-notes", "swift5-exact-release", "typescript-release-notes", "typescript20-exact-release", "typescript50-exact-release"]) {
+  const entry = sources.find(item => item.id === id);
+  if (entry) entry.checkedAt = "2026-10-26";
+}
+
+sources.push({ id: "erlang-compiler-history", title: "A Brief History of the BEAM Compiler", publisher: "Erlang/OTP · Björn Gustavsson", url: "https://beta.erlang.org/blog/beam-compiler-history/", type: "实现者回顾", checkedAt: "2026-10-26", publishedAt: "2018-06-18", locator: "The Prolog interpreter：1986 年实验实现；JAM 与 OTP 为后续阶段" });
+Object.assign(deepEvent("java-public"), { summary: "Sun Microsystems 于 1995 年首次公开发布 Java 编程语言与计算平台。", significance: "编辑解读：应把语言公开、JDK 1.0 正式可用与后来虚拟机生态的扩展分别观察，不能由一份现行产品说明倒推出早期版本的全部能力。" });
+Object.assign(deepEvent("javascript-netscape"), { title: "JavaScript 公布并提供浏览器测试版", note: "1995-12-04 的 Netscape／Sun 公告说明 JavaScript 已在 Navigator 2.0 测试版中提供；不是 Navigator 2.0 正式版发布日期。" });
+deepEvent("smalltalk72").summary = "Xerox PARC 的学习研究组于 1972 年夏设计 Smalltalk-72，同年晚秋首次与用户交互；手册并未确认首次用户是儿童。";
+deepEvent("scheme-report").note = "1975 年 AIM-349 是本条所引原始报告，不是现行 Scheme 规范；后来版本的细节不能倒填到这个初始报告。";
+Object.assign(deepEvent("erlang-concurrency"), { title: "Erlang 早期实验实现", summary: "Erlang 的首个实验版本于 1986 年用 Prolog 实现，用来快速检验和调整语言特性；后续 JAM 与 OTP 工程化是不同阶段。", sourceIds: ["erlang-compiler-history", "erlang-history"], note: "1986 年指早期 Prolog 实验实现，不是成熟 BEAM 虚拟机或 OTP 的正式发布；OTP 首版另在 1996 年。" });
+deepEvent("go-111").details![2].text = "模块支持让开发者可以在 GOPATH 之外工作；js/wasm 编译产物包含 Go 运行时，并通过实验性的 syscall/js 与 JavaScript 交互。新目标不是对现有服务端程序的浏览器兼容承诺。";
+deepEvent("go-111").change!.improvements[1] = "GOPATH 之外的模块工作流";
+deepEvent("c99-standard").details![0].text = "前言明确这版替代经修订与勘误的 ISO C90，并逐项列出新增能力和移除的旧式隐式规则。";
+for (const entry of periods) entry.summary = "编辑分期：" + entry.summary;
+for (const id of ["oracle-java", "netscape-javascript", "smalltalk-manual", "mit-scheme"]) sources.find(entry => entry.id === id)!.checkedAt = "2026-10-26";
+
+sources.push(...[
+  {
+    "id": "lisp-author-original",
+    "title": "Recursive Functions of Symbolic Expressions and Their Computation by Machine, Part I",
+    "publisher": "John McCarthy · Stanford University 作者存档",
+    "url": "https://www-formal.stanford.edu/jmc/recursive.pdf",
+    "type": "作者托管原文",
+    "checkedAt": "2026-10-26",
+    "locator": "1960-04；§e Representation of S-Functions by S-Expressions；脚注说明重排版存在少量记号修改，不冒称原刊排印"
+  },
+  {
+    "id": "pascal-author-projects",
+    "title": "Summary of projects by N. Wirth, 1962–1999",
+    "publisher": "Niklaus Wirth · ETH Zürich",
+    "url": "https://people.inf.ethz.ch/wirth/projects.html",
+    "type": "设计者回顾",
+    "checkedAt": "2026-10-26",
+    "locator": "Pascal, 1968–1972；Pascal-P, 1972–74；当时教育使用与实现路线，不作现今排名"
+  }
+] as Source[]);
+const boundedEarlyPatches: Record<string, Partial<TimelineEvent>> = {
+  "lisp-paper": {
+    "sourceIds": [
+      "acm-lisp",
+      "lisp-author-original"
+    ],
+    "significance": "编辑解读：程序与数据能用相近表示法处理，为阅读解释器和元编程提供了一个清晰入口；具体后继语言的影响关系仍须分别取证。"
+  },
+  "cobol-initial-spec": {
+    "summary": "CODASYL 发布面向商业数据处理的 COBOL 初始规格；报告记录了 1959 年底的短期委员会稿与随后审批。"
+  },
+  "pascal-report": {
+    "summary": "Wirth 发布 Pascal 报告；其作者回顾说明，语言设计同时考虑系统设计、清晰结构和大学教学。",
+    "sourceIds": [
+      "eth-pascal",
+      "pascal-author-projects"
+    ],
+    "significance": "编辑解读：可把 Pascal 放在系统实现与教学两种要求的交叉点阅读，而不是简单归为只供初学者使用的语言。"
+  },
+  "scheme-report": {
+    "title": "Scheme 原始报告",
+    "summary": "Sussman 与 Steele 发布 1975 年 Scheme 原始报告，以类似 Lisp 的语言解释扩展 lambda 演算。",
+    "significance": "编辑解读：阅读原始报告可以追问，少量核心规则如何表达复杂控制过程；不由这一份报告直接推定它对后继语言的全部影响。"
+  },
+  "ada83-standard": {
+    "summary": "Ada 在 1983 年成为 ANSI 标准与美国军用标准 MIL-STD-1815A。"
+  },
+  "perl-1": {
+    "summary": "Larry Wall 发布 Perl 1.000；官方 perlhist 版本记录将日期列为 1987 年 12 月 18 日。",
+    "significance": "编辑解读：先用明确版本记录建立起点，再另读语法和使用场景；发布史与早期 Web 普及史不是同一组证据。"
+  },
+  "python-public": {
+    "summary": "Guido van Rossum 于 1991 年 2 月公开发布 Python 0.9.0 解释器。"
+  },
+  "ruby-095": {
+    "summary": "Matz 于 1995 年 12 月把 Ruby 0.95 发布到日本新闻组，探索面向对象的脚本语言。",
+    "significance": "编辑解读：这里适合比较脚本语言的对象模型与使用体验；Rails 等后续生态应另按自己的发布与采纳证据讨论。"
+  },
+  "carbon-experiment": {
+    "summary": "Carbon 项目公开实验语言，探索 C++ 的渐进迁移与互操作路线。",
+    "significance": "编辑解读：实验项目的价值可以从迁移目标与实现边界观察；设计目标不能被当成已经交付的安全或兼容保证。"
+  },
+  "algol60-report": {
+    "significance": "编辑解读：可以从报告如何组织语法与语义规则入手阅读；它与各后继语言的具体关系，需要设计者记录逐条说明。"
+  },
+  "simula67": {
+    "significance": "编辑解读：仿真系统如何表达有状态的参与者，是理解对象组织方式的入口；后继语言是否、如何借鉴，应另据设计者记述。"
+  },
+  "basic-first-run": {
+    "significance": "编辑解读：把易学语言与分时交互一起观察，更容易理解这个节点的教学目标；不能仅由首次运行推出后来全部个人电脑文化。"
+  },
+  "smalltalk72": {
+    "significance": "编辑解读：应把语言设计、实际用户试用与后来图形环境的演化分开阅读，避免将整个 Smalltalk 家族的成果一次性归到 1972 年。"
+  },
+  "cpp-release": {
+    "significance": "编辑解读：C++ 的早期路线把程序组织与系统效率放在一起权衡；其后不同领域的采用程度，不能用首个商业版本直接证明。"
+  },
+  "objective-c": {
+    "significance": "编辑解读：这个节点适合观察语言设计与平台采用的关系；不能把 1986 年的采用直接等同于后来移动平台的全部发展。"
+  },
+  "erlang-concurrency": {
+    "significance": "编辑解读：用可快速修改的解释器检验语言特性，与构建可部署系统是不同任务；后来的并发和容错能力需要按各阶段阅读。"
+  },
+  "scala-release": {
+    "significance": "编辑解读：可以从静态类型约束下如何组合面向对象与函数式写法理解 Scala；大数据生态的采用与影响需要另一组具体证据。"
+  },
+  "clojure-release": {
+    "significance": "编辑解读：语言发布、宿主平台互操作和不可变数据的设计应分别看证据，不把一个周年回顾当成所有技术细节的来源。"
+  },
+  "go-open-source": {
+    "significance": "编辑解读：开源让外部使用者能够检验编译与并发设计；静态链接和云基础设施采用的具体历史，需要另找针对性记录。"
+  },
+  "kotlin-10": {
+    "summary": "JetBrains 发布 Kotlin 1.0，强调 JVM／Android 开发、类型安全、工具支持及 Java 互操作。",
+    "significance": "编辑解读：1.0 的发布承诺与后来 Android 平台的采纳是两个节点，不能把后来的平台支持倒推为首发时已完成。"
+  },
+  "csharp-announced": {
+    "significance": "编辑解读：语言公布反映了工具链与平台协同设计的方向，但公布、正式产品交付和大规模采用应分别记录。"
+  },
+  "elixir-release": {
+    "significance": "编辑解读：可以把 Elixir 与底层 Erlang 运行环境对照阅读，区分新语法、运行时能力及后来具体应用生态。"
+  }
+};
+for (const entry of events) Object.assign(entry, boundedEarlyPatches[entry.id] ?? {});
+
+sources.push(...[
+  {
+    "id": "simula-dahl-original",
+    "title": "The Birth of Object Orientation: the Simula Languages",
+    "url": "https://www.mn.uio.no/ifi/english/about/ole-johan-dahl/bibliography/the-birth-of-object-orientation-the-simula-languages.pdf",
+    "publisher": "Ole-Johan Dahl · University of Oslo 作者档案",
+    "type": "一手文档／作者说明",
+    "checkedAt": "2026-10-26",
+    "locator": "2001-06 回顾，§3：1967 年、class、object、subclass/prefixing；不是1967同期出版物"
+  },
+  {
+    "id": "clojure-design-rationale",
+    "title": "Rationale",
+    "url": "https://clojure.org/about/rationale",
+    "publisher": "Clojure · Rich Hickey",
+    "type": "一手文档／作者说明",
+    "checkedAt": "2026-10-26",
+    "locator": "首段与 Functional programming／Languages and Platforms；当前设计阐述，不把页面更新时间当2007发布日期"
+  },
+  {
+    "id": "typescript2012-conference",
+    "title": "Introducing TypeScript",
+    "url": "https://2012.jsconf.eu/speaker/2012/10/05/introducing-typescript.html",
+    "publisher": "JSConf EU 2012 · Anders Hejlsberg、Luke Hoban",
+    "type": "一手文档／作者说明",
+    "checkedAt": "2026-10-26",
+    "locator": "2012-10 会场文字摘要：optional static types/classes/modules/tooling；未验证嵌入视频播放，发布日期另据微软回顾"
+  },
+  {
+    "id": "java21-arrival",
+    "title": "The Arrival of Java 21!",
+    "url": "https://inside.java/2023/09/19/the-arrival-of-java-21/",
+    "publisher": "Oracle Java 团队 · Sharat Chander",
+    "type": "一手文档／作者说明",
+    "checkedAt": "2026-10-26",
+    "locator": "2023-09-19 正式可用；各 JEP 段区分正式、预览和孵化能力，含 Sequenced Collections"
+  },
+  {
+    "id": "java8-jsr-final",
+    "title": "JSR 337: Java SE 8 Release Contents",
+    "url": "https://jcp.org/en/jsr/detail?id=337",
+    "publisher": "Java Community Process",
+    "type": "一手文档／作者说明",
+    "checkedAt": "2026-10-26",
+    "locator": "规格 Final Release 为2014-03-04；不是JDK产品GA日期，产品月份另据路线图"
+  }
+] as Source[]);
+deepEvent("simula67").sourceIds.push("simula-dahl-original");
+deepEvent("clojure-release").sourceIds.push("clojure-design-rationale");
+Object.assign(deepEvent("typescript-08"), { title: "TypeScript 0.8 预览公开", sourceIds: ["typescript-release", "typescript2012-conference"], note: "微软回顾确认 0.8 于2012年10月首次公开；同月会场文字介绍可选静态类型与工具能力，不把2014年1.0功能整体倒填到预览版。" });
+deepEvent("java-21").sourceIds.push("java21-arrival");
+deepEvent("java-21").change!.sourceIds.push("java21-arrival");
+deepEvent("java-8").sourceIds.push("java8-jsr-final");
+for (const id of ["java5-exact-features", "java8-exact-features", "java21-exact-features"]) {
+  const entry = sources.find(item => item.id === id)!;
+  entry.locator += "；本轮搜索正文可核，但云浏览器直达显示 Site Unavailable，非404；可先参考并列的规范记录或官方发布文章。";
+}
+
+sources.push({ id: "algol60-original-report", title: "Report on the Algorithmic Language ALGOL 60", url: "https://softwarepreservation.computerhistory.org/ALGOL/report/Algol60_report_CACM_1960_June.pdf", publisher: "Peter Naur（编）等 · Communications of the ACM；Computer History Museum 档案", type: "一手文档／作者说明", checkedAt: "2026-10-26", locator: "1960年5月报告，含截至6月28日勘误；§4.1.3嵌套块、§5作用域、§5.4.4递归过程；不是1963修订版" });
+deepEvent("algol60-report").sourceIds.push("algol60-original-report");
+deepEvent("cobol-initial-spec").note = "事件按1960年4月报告出版记年；前言所记1959年12月委员会草稿不是该报告出版日期。";
+
+const finalEarlyEditorial: Record<string, string> = {
+  "fortran-i": "编辑解读：此节点适合比较数学公式与机器指令两种表达层级，并追问编译优化如何降低使用高级记法的成本。",
+  "cobol-initial-spec": "编辑解读：报告中的商业数据处理目标与多方委员会过程，可以帮助理解语言规格如何成为共同协作的对象；不能据此直接量化行业影响。",
+  "c-creative-year": "编辑解读：把语言的形成与 UNIX 的实现需求并读，可以观察抽象能力和机器控制之间的取舍；后续系统的采用需分别取证。",
+  "prolog-interpreter": "编辑解读：可把规则描述与解释器如何求解目标对照阅读，理解逻辑式写法与命令式步骤的差别。",
+  "ada83-standard": "编辑解读：将语言规范放入采购与软件工程要求的背景阅读，有助于区分设计目标、标准批准与实际项目效果。",
+  "haskell-1": "编辑解读：统一报告提供了可共同讨论的语法语义文本；其在研究和产业中的实际采用不能仅凭报告发布推断。",
+  "python-public": "编辑解读：这个节点先确定可公开获取的版本起点；教学、科学计算等后来的用途应另按各自形成过程讨论。",
+  "javascript-netscape": "编辑解读：浏览器测试版中的脚本能力与后来的服务器运行时不是同一次事件，阅读时应区分平台与阶段。",
+  "php-fi": "编辑解读：应先区分工具集公开、表单解释功能与 PHP/FI 合名，再讨论它们如何服务动态网页；不能把后来全部功能倒填到首发。",
+  "ecmascript-v1": "编辑解读：共同规格为比较不同实现提供依据，但标准文本的发布本身不保证浏览器已完成兼容实现。",
+  "typescript-08": "编辑解读：可选静态类型让使用者可以讨论增量引入类型的路线；实际迁移成本和工程效果仍取决于项目。",
+  "julia-paper": "编辑解读：把动态交互与数值计算性能并列为设计目标，提供了观察语言取舍的角度；目标不是对每项任务的性能保证。",
+  "swift-announced": "编辑解读：预览版让开发者开始比较新语言与既有平台接口的协作方式；后来的稳定性和生态不能倒算为首日成果。",
+  "mojo-release": "编辑解读：可把 Python 使用体验与硬件控制两个目标对照阅读，注意预览展示与可部署、兼容的能力之间仍有边界。"
+};
+for (const entry of events) if (finalEarlyEditorial[entry.id]) entry.significance = finalEarlyEditorial[entry.id];
+
+deepEvent("lisp-paper").facts?.[0].sourceIds?.push("lisp-author-original");
+for (const [entityId, sourceId] of [["lisp", "lisp-author-original"], ["algol60", "algol60-original-report"], ["simula67", "simula-dahl-original"]]) entities.find(item => item.id === entityId)?.sourceIds.push(sourceId);
+periods.find(item => item.id === "structured-languages")?.sourceIds.push("algol60-original-report", "simula-dahl-original", "lisp-author-original");
+
+sources.push(...swiftReviewedSources);
+for (const entry of events) Object.assign(entry, swiftReviewedPatches[entry.id] ?? {});
+for (const id of ["swift5-exact-release", "swift6-release"]) {
+  const index = sources.findIndex(item => item.id === id);
+  sources[index] = { ...sources[index], checkedAt: "2026-10-26" };
+}
+
+sources.push(...rustAsyncSources);
+Object.assign(events.find(event => event.id === 'rust-139-async')!, rustAsyncPatch);
+
+sources.push(...goIterationSources);
+events.push(...goIterationEvents);
 
 export const programmingLanguages: Catalog = {
   topic: {
@@ -504,4 +998,5 @@ export const programmingLanguages: Catalog = {
   events,
   entities,
   sources,
+  relations: [...evolutionRelations, ...goReviewedRelations, ...goIterationRelations],
 };

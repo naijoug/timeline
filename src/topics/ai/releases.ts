@@ -87,9 +87,9 @@ model('qwen-1-5', '2024-02-04', 'Qwen1.5', 'qwen', '阿里巴巴', qwen + 'qwen1
 model('qwen-2', '2024-06-07', 'Qwen2', 'qwen', '阿里巴巴', qwen + 'qwen2/', 'Qwen1.5', ['增强多语言、编程与数学能力', '部分版本扩展长上下文'], '形成较完整的多规模开放模型家族。', '最长上下文不适用于系列中的每个版本。', { key: true, baselineId: 'qwen-1-5' });
 model('qwen-2-vl', '2024-08-29', 'Qwen2-VL', 'qwen', '阿里巴巴', qwen + 'qwen2-vl/', 'Qwen-VL', ['处理不同分辨率图像与视频', '探索视觉 Agent 交互'], '视觉语言模型成为独立演进分支。', '视觉理解成绩不等同于真实设备操作成功率。', { key: true });
 model('qwen-2-5-coder', '2024-11-12', 'Qwen2.5-Coder 完整系列', 'qwen', '阿里巴巴', qwen + 'qwen2.5-coder-family/', 'Qwen2.5-Coder 已有档位', ['补齐多规模编程模型，增强代码生成、修复与推理'], '开发者可以按部署预算选择编程专用模型。', '这是完整系列公告，不能视为所有尺寸的首次出现。');
-model('qwen-2-5-vl', '2025-01', 'Qwen2.5-VL', 'qwen', '阿里巴巴', qwen + 'qwen2.5-vl/', 'Qwen2-VL', ['加强文档、视频与界面理解', '改善视觉定位和工具交互'], '多模态能力与 GUI 工作流联系更紧密。', '页面元数据与传播日期存在差异，本条保留月份精度。', { baselineId: 'qwen-2-vl' });
+model('qwen-2-5-vl', '2025-01', 'Qwen2.5-VL', 'qwen', '阿里巴巴', qwen + 'qwen2.5-vl/', 'Qwen2-VL', ['加强文档、视频与界面理解', '改善视觉定位和工具交互'], '多模态能力与 GUI 工作流联系更紧密。', '本条按月份精度记录此阶段；视觉能力需结合任务与部署条件评估。', { baselineId: 'qwen-2-vl' });
 model('qwq-32b', '2025-03-06', 'QwQ-32B', 'qwen', '阿里巴巴', qwen + 'qwq-32b/', 'QwQ 预览路线', ['通过强化学习增强推理能力'], '中等规模开放模型探索推理计算收益。', '较长思考可能增加等待和 token 消耗。', { key: true, tags: ['推理'] });
-model('qwen-3-coder', '2025-07', 'Qwen3-Coder', 'qwen', '阿里巴巴', qwen + 'qwen3-coder/', 'Qwen2.5-Coder', ['面向代码 Agent 与工具使用训练', '扩展仓库级上下文处理'], '编程模型开始与执行型开发工具共同发布。', '原文元数据与发布时区存在日差，本条保留月份；扩展上下文与原生窗口需区分。', { key: true, baselineId: 'qwen-2-5-coder' });
+model('qwen-3-coder', '2025-07', 'Qwen3-Coder', 'qwen', '阿里巴巴', qwen + 'qwen3-coder/', 'Qwen2.5-Coder', ['面向代码 Agent 与工具使用训练', '扩展仓库级上下文处理'], '编程模型开始与执行型开发工具共同发布。', '本条按月份精度记录此阶段；扩展上下文与原生窗口需区分。', { key: true, baselineId: 'qwen-2-5-coder' });
 
 const ds = 'https://api-docs.deepseek.com/news/';
 model('deepseek-coder-paper', '2024-01-25', 'DeepSeek-Coder 技术论文', 'deepseek', 'DeepSeek', 'https://arxiv.org/abs/2401.14196', '通用语言模型的代码能力', ['采用项目级代码预训练和填空式任务'], '为开放代码模型提供系统化训练与评估材料。', '这是论文日期，不是模型权重最早发布日期。', { kind: '论文首发' });
@@ -111,7 +111,7 @@ model('kimi-k2-6', '2026-04-20', 'Kimi K2.6', 'kimi', '月之暗面', kimi + 'ki
 model('kimi-k3', '2026-07-16', 'Kimi K3 公布', 'kimi', '月之暗面', kimi + 'kimi-k3', 'Kimi K2.6', ['更新原生视觉与百万 token 上下文能力'], '系列继续扩展跨模态长任务处理。', '此处为公告日期，不把随后权重开放日期合并为同一天。', { baselineId: 'kimi-k2-6', kind: '模型公告' });
 
 const glmNotes = 'https://docs.z.ai/release-notes/new-released';
-model('glm-4-5v', '2025-08-11', 'GLM-4.5V', 'glm', '智谱', glmNotes, 'GLM-4.5 文本路线', ['增加视觉推理、定位与 GUI 任务支持'], 'GLM 扩展视觉分支。', '不能将视觉任务成绩直接等同于 Agent 成功率。');
+model('glm-4-5v', '2025-08-11', 'GLM-4.5V', 'glm', '智谱', 'https://github.com/zai-org/GLM-V', 'GLM-4.5 文本路线', ['增加视觉推理、定位与 GUI 任务支持'], 'GLM 扩展视觉分支。', '不能将视觉任务成绩直接等同于 Agent 成功率。');
 model('glm-4-6', '2025-09-30', 'GLM-4.6', 'glm', '智谱', glmNotes, 'GLM-4.5', ['改进编程并扩展上下文'], '服务更大代码库。', '实际收益依任务而变。', { baselineId: 'glm-4-5' });
 model('glm-4-7', '2025-12-22', 'GLM-4.7', 'glm', '智谱', glmNotes, 'GLM-4.6', ['加强编码、推理与多步执行'], '面向端到端开发。', '评测环境影响结果。', { baselineId: 'glm-4-6' });
 model('glm-5', '2026-02-12', 'GLM-5', 'glm', '智谱', glmNotes, 'GLM-4.7', ['面向系统工程与长程 Agent 任务'], '关注项目级工程。', '采用官方更新日志日期。', { key: true, baselineId: 'glm-4-7' });
@@ -131,7 +131,7 @@ product('generative-agents-paper', '2023-04-07', 'Generative Agents：记忆、�
 product('swe-agent-paper', '2024-05-06', 'SWE-agent：为 Agent 设计电脑接口', 'swe-agent', 'Princeton / Stanford', 'https://arxiv.org/abs/2405.15793', '开源研究系统通过专门的编辑、导航和执行接口处理软件工程任务。', '说明工具接口设计本身会影响 Agent 的任务表现。', '论文日期不是仓库首次建立日期；评测修复率不能直接代表所有项目。', { key: true, kind: '论文首发', tags: ['开源', '编码'] });
 product('openhands-paper', '2024-07-23', 'OpenDevin / OpenHands 平台论文', 'openhands', 'OpenHands 社区', 'https://arxiv.org/abs/2407.16741', '平台将代码编辑、终端、浏览器和沙箱环境组织成软件开发 Agent 的执行空间。', '开源执行平台使 Agent 的环境与运行方式可以复用。', '采用论文首次提交日；论文后续版本使用 OpenHands 名称，不把更名日期倒推到首稿。', { key: true, kind: '论文首发', tags: ['开源', '编码', '执行环境'] });
 product('autoglm-paper', '2024-10-28', 'AutoGLM：浏览器与手机 GUI Agent', 'autoglm', '智谱', 'https://arxiv.org/abs/2411.00820', 'AutoGLM 研究通过界面观察、规划和操作来执行浏览器与手机任务。', '中国团队的 GUI Agent 路线形成公开技术材料。', '研究论文不是所有用户都可使用的商业产品公告。', { key: true, kind: '论文首发', tags: ['GUI', '手机', '研究原型'] });
-product('autoglm-phone-multilingual', '2025-12-11', 'AutoGLM-Phone 多语言版', 'autoglm', '智谱', glmNotes, '手机自动化框架增加中英文任务支持。', '扩展手机 Agent 使用范围。', '需要设备连接和相应授权。', { tags: ['手机', '多语言'] });
+product('autoglm-phone-multilingual', '2025-12-09', 'AutoGLM-Phone 多语言版权重上传', 'autoglm', '智谱', 'https://huggingface.co/zai-org/AutoGLM-Phone-9B-Multilingual/commit/118ebd2c2262b40fb64d8adfbb632ccf627af532', '官方模型仓库记录多语言版权重与配置文件上传；配套框架分别支持中文和英文手机应用场景。', '扩展手机 Agent 使用范围。', '日期采用 Hugging Face 权重上传提交时间，不等同于产品公告或 API 开放日；需要设备连接和相应授权。', { kind: '权重上传记录', tags: ['手机', '多语言'] });
 product('replit-agent-first', '2024-09', 'Replit Agent 首次推出', 'replit-agent', 'Replit', 'https://replit.com/blog/introducing-replit-agent', '用户用自然语言描述需求，Agent 在 Replit 中搭建应用并配置运行环境。', '应用开发从逐段生成代码走向任务式构建。', '官方回顾写于推出之后，本条仅确认首次发布月份。', { key: true, kind: '产品发布' });
 product('replit-agent-3', '2025-09-10', 'Replit Agent 3', 'replit-agent', 'Replit', 'https://replit.com/blog/introducing-agent-3-our-most-autonomous-agent-yet', 'Agent 增加通过浏览器测试应用、检查结果并修复的能力。', '构建、运行、验证和修复形成更完整的循环。', '自动测试不能代替业务验收；复杂任务仍可能失败。', { key: true, tags: ['编码', '验证循环'] });
 product('replit-agent-4', '2026-03-11', 'Replit Agent 4', 'replit-agent', 'Replit', 'https://replit.com/blog/introducing-agent-4-built-for-creativity', '将创意探索、设计迭代与并行开发工作结合。', 'Agent 产品从单任务执行扩展到协作创作流程。', '实际可用性受工作区和产品套餐影响。');
@@ -168,7 +168,7 @@ model('command-a', '2025-03-13', 'Command A', 'command', 'Cohere', 'https://docs
 model('sakana-evo-jp', '2024-03-21', 'EvoLLM-JP / EvoVLM-JP', 'sakana-evo', 'Sakana AI', 'https://sakana.ai/evolutionary-model-merge/', '人工选择的模型合并配方', ['用演化搜索组合已有模型', '发布日语语言与视觉语言模型'], '展示从头训练以外的模型构建路线。', '实验结果主要针对特定日语任务；同文中的图像模型并未同步全部开放。', { key: true, kind: '研究发布', tags: ['日本', '多模态', '模型合并'] });
 const qwenRepo = 'https://github.com/QwenLM/Qwen3.8';
 model('qwen-3-next', '2025-09-11', 'Qwen3-Next', 'qwen', '阿里巴巴', qwenRepo, 'Qwen3', ['采用混合注意力和高稀疏混合专家架构'], '探索高效率模型架构。', '日期依据官方仓库历史日志。', { baselineId: 'qwen-3' });
-model('qwen-3-5', '2026-02-16', 'Qwen3.5 首批权重', 'qwen', '阿里巴巴', qwenRepo, 'Qwen3 / Qwen3-Next', ['发布原生多模态混合专家模型'], '语言与视觉路线汇合。', '采用仓库权重发布日期；博客元数据早一天。', { key: true, kind: '权重开放', baselineId: 'qwen-3-next' });
+model('qwen-3-5', '2026-02-16', 'Qwen3.5 首批权重', 'qwen', '阿里巴巴', qwenRepo, 'Qwen3 / Qwen3-Next', ['发布原生多模态混合专家模型'], '语言与视觉路线汇合。', '采用官方仓库 News 记载的权重发布日期，不混用其他渠道的日期。', { key: true, kind: '权重开放', baselineId: 'qwen-3-next' });
 model('qwen-3-5-small', '2026-03-02', 'Qwen3.5 轻量系列', 'qwen', '阿里巴巴', qwenRepo, 'Qwen3.5 已有大型档位', ['增加 0.8B 至 9B 小型版本'], '扩大本地部署选择。', '尺寸不同，能力与部署条件不同。', { baselineId: 'qwen-3-5' });
 model('qwen-3-6', '2026-04-16', 'Qwen3.6-35B-A3B', 'qwen', '阿里巴巴', qwenRepo, 'Qwen3.5 系列', ['新增开放的稀疏专家版本'], '继续迭代可部署模型。', '仅确认发布与型号，不推断统一性能提升。', { baselineId: 'qwen-3-5' });
 model('qwen-3-8', '2026-08-12', 'Qwen3.8 首批权重', 'qwen', '阿里巴巴', qwenRepo, 'Qwen3.6 系列', ['开放更大档位，强化编程、研究和长任务'], '扩展开放模型的能力范围。', '27B 档位在 8 月 14 日另行开放。', { baselineId: 'qwen-3-6', kind: '权重开放' });
@@ -177,7 +177,7 @@ product('codex-cloud-preview', '2025-05-16', 'Codex 云端研究预览', 'codex'
 product('codex-cloud-ga', '2025-10-06', 'Codex 正式开放', 'codex', 'OpenAI', 'https://openai.com/index/codex-now-generally-available/', 'Codex 云端服务从研究预览进入正式开放，并扩展团队集成与管理能力。', '编码 Agent 进入可管理的团队工作流程。', '正式开放不代表每个实验功能都同时稳定。', { kind: '正式开放', tags: ['编码', '团队协作'] });
 product('codex-desktop', '2026-02-02', 'Codex macOS 应用', 'codex', 'OpenAI', 'https://openai.com/index/introducing-the-codex-app/', '桌面应用提供项目、多任务、并行 Agent、Skills 和自动化的统一入口。', '产品重心从一次对话转向持续管理多个工作任务。', '这是 macOS 首发；Windows 版随后在 3 月开放。', { key: true, kind: '产品发布', tags: ['工作空间', '多 Agent', 'Skills'] });
 product('chatgpt-deep-research', '2025-02-02', 'ChatGPT deep research', 'chatgpt-agent', 'OpenAI', 'https://openai.com/index/introducing-deep-research/', '自主拆解研究问题，浏览资料并生成带引用的报告。', '资料检索从单次搜索发展为多步研究任务。', '报告可能包含错误或不恰当引用，仍需核对关键证据。', { key: true, kind: '产品发布', tags: ['研究', '检索'] });
-product('cowork-announcement', '2026-01-12', 'Cowork：从编码走向日常工作', 'cowork', 'Anthropic', 'https://claude.com/blog-category/agents', 'Anthropic 公告将 Claude Code 式的任务委派方式扩展到代码以外的工作。', '通用知识工作成为 Agent 产品的明确方向。', '原始文章已重定向到当前产品页；日期由官方博客目录的历史条目核实，不把当前功能全部倒填到首发。', { key: true, kind: '产品公告', tags: ['通用任务', '办公'] });
+product('cowork-announcement', '2026-01-12', 'Cowork：从编码走向日常工作', 'cowork', 'Anthropic', 'https://support.claude.com/en/articles/12138966-release-notes', 'Anthropic 公告将 Claude Code 式的任务委派方式扩展到代码以外的工作。', '通用知识工作成为 Agent 产品的明确方向。', '官方 Release notes 的 January 12, 2026 条目记载：首发为 macOS 桌面端 Max 计划研究预览；不把当前功能或后续扩展倒填到首发。', { key: true, kind: '产品公告', tags: ['通用任务', '办公'] });
 
 const seed = 'https://seed.bytedance.com/';
 model('seed-1-5-vl', '2025-05-13', 'Seed1.5-VL 技术公告', 'seed', '字节跳动', seed + 'en/blog/first-release-of-seed-vlm-tech-report-comprehensive-solutions-for-image-video-gui-and-game', 'Seed 既有语言模型路线', ['扩展图像、视频与 GUI 视觉推理'], '豆包背后的基础模型研究与产品品牌分开追踪。', '本条采用技术公告日期；论文更早提交，API 快照日期也不是公告日。', { key: true, kind: '技术公告', tags: ['多模态', 'GUI'] });
@@ -194,12 +194,15 @@ for (const { event, source } of records) {
   if (!id) {
     id = source.id;
     sourceByUrl.set(source.url, id);
-    releaseSources.push({ ...source, title: source.url === glmNotes ? 'Z.ai 模型与产品更新日志' : source.url === qwenRepo ? 'Qwen 官方模型仓库与历史发布日志' : source.title });
+    releaseSources.push({ ...source, ...(['release-cowork-announcement', 'release-glm-4-5v', 'release-autoglm-phone-multilingual'].includes(source.id) ? { checkedAt: '2026-10-26' } : {}), title: source.url === glmNotes ? 'Z.ai 模型与产品更新日志' : source.url === qwenRepo ? 'Qwen 官方模型仓库与历史发布日志' : source.title });
   }
   event.sourceIds = [id];
   if (event.change) event.change.sourceIds = [id];
 }
+releaseSources.push({ id: 'autoglm-phone-framework', title: 'Open-AutoGLM: An Open Phone Agent Model & Framework', publisher: 'Z.ai', url: 'https://github.com/zai-org/Open-AutoGLM', type: '官方文档', checkedAt: '2026-10-26' });
 export const releaseEvents = records.map(record => record.event);
+const multilingualPhone = releaseEvents.find(event => event.id === 'autoglm-phone-multilingual');
+if (multilingualPhone) multilingualPhone.sourceIds.push('autoglm-phone-framework');
 // Availability dates for these model cards are backed by the dated API log as well.
 for (const event of releaseEvents) {
   if (event.kind === 'API 开放' && event.company === 'OpenAI') {
@@ -226,7 +229,7 @@ export const releaseEntities: Entity[] = [
   entity('flux', 'FLUX', 'family', 'Black Forest Labs', '欧洲团队开发的图像生成系列，不同档位使用不同开放方式。', 'flux-1', ['图像生成']),
   entity('wan', 'Wan / 通义万相', 'family', '阿里巴巴', '追踪视频生成模型与权重、推理代码的开放。', 'wan-2-1', ['视频生成']),
   entity('seed', 'Seed / 豆包基础模型', 'family', '字节跳动', '追踪支持豆包等产品的通用及视觉语言模型研究，不把产品更新等同于模型发布。', 'seed-1-5-vl', ['多模态', '推理']),
-  entity('seedance', 'Seedance', 'family', '字节跳动', '联合处理视频与声音的生成模型系列。', 'seedance-1-5-pro', ['视频生成', '音频']),
+  entity('seedance', 'Seedance', 'family', '字节跳动', '视频生成模型系列；从 Seedance 1.5 pro 起支持联合音视频生成。', 'seedance-1-5-pro', ['视频生成', '音频']),
   entity('generative-agents', 'Generative Agents', 'product', 'Stanford / Google Research', '在模拟环境中研究记忆、反思、规划与社会互动的 Agent 原型。', 'generative-agents-paper', ['研究原型', '多 Agent']),
   entity('swe-agent', 'SWE-agent', 'product', 'Princeton / Stanford', '通过专门电脑接口处理软件工程任务的开源 Agent 研究系统。', 'swe-agent-paper', ['开源', '编码']),
   entity('openhands', 'OpenHands / OpenDevin', 'product', 'OpenHands 社区', '提供代码、终端、浏览器与沙箱运行环境的软件开发 Agent 平台。', 'openhands-paper', ['开源', '编码']),
@@ -238,3 +241,37 @@ export const releaseEntities: Entity[] = [
   entity('chatgpt-agent', 'Operator / ChatGPT agent', 'product', 'OpenAI', '从浏览器操作研究预览发展到整合研究、电脑和终端的通用任务 Agent。', 'operator-preview', ['浏览器', '通用任务']),
   entity('cowork', 'Claude Cowork', 'product', 'Anthropic', '把任务委派扩展到代码以外的日常工作。', 'cowork-announcement', ['通用任务', '办公']),
 ];
+
+// Entity overviews can span more than their first release; cite each scope explicitly.
+releaseSources.push(
+  { id: 'exaone-family-background', title: 'Toward Expert AI: EXAONE 3.0 and ChatEXAONE', publisher: 'Kyunghoon Bae · LG AI Research', url: 'https://www.lgresearch.ai/news/view?seq=462', type: '官方公告', checkedAt: '2026-10-26', publishedAt: '2024-08-05', locator: 'Opening: EXAONE 1.0 bilingual/multimodal background; EXAONE 3.0 language model' },
+  { id: 'stable-diffusion-original-card', title: 'Stable Diffusion model card', publisher: 'CompVis', url: 'https://huggingface.co/CompVis/stable-diffusion', type: '官方文档', checkedAt: '2026-10-26', locator: 'Stable Diffusion: latent text-to-image diffusion; Model Access' },
+);
+for (const [id, sourceId] of [['exaone', 'exaone-family-background'], ['stable-diffusion', 'stable-diffusion-original-card'], ['chatgpt-agent', 'release-chatgpt-agent-launch']]) {
+  const entity = releaseEntities.find(item => item.id === id)!;
+  entity.sourceIds = [...new Set([...entity.sourceIds, sourceId])];
+}
+
+// Release-day announcements support capabilities; the changelog retains API date evidence.
+releaseSources.push(
+  { id: 'gpt4-turbo-devday-announcement', title: 'New models and developer products announced at DevDay', publisher: 'OpenAI', url: 'https://openai.com/index/new-models-and-developer-products-announced-at-devday/', type: '官方公告', checkedAt: '2026-10-26', publishedAt: '2023-11-06', locator: 'GPT-4 Turbo with 128K context: knowledge cutoff, preview and pricing；本轮网页检索可读正文，直接请求返回403（非404）' },
+  { id: 'o1-api-developer-announcement', title: 'OpenAI o1 and new tools for developers', publisher: 'OpenAI', url: 'https://openai.com/index/o1-and-new-tools-for-developers/', type: '官方公告', checkedAt: '2026-10-26', publishedAt: '2024-12-17', locator: 'OpenAI o1 in the API: function calling, Structured Outputs and vision；本轮网页检索可读正文，直接请求返回403（非404）' },
+);
+for (const [id, sourceId] of [['gpt-4-turbo-preview', 'gpt4-turbo-devday-announcement'], ['o1-api', 'o1-api-developer-announcement']]) {
+  const event = releaseEvents.find(item => item.id === id)!;
+  event.sourceIds = [...new Set([...event.sourceIds, sourceId])];
+  if (event.change) event.change.sourceIds = [...new Set([...event.change.sourceIds, sourceId])];
+}
+releaseSources.push({ id: 'gemma3-model-card', title: 'Gemma 3 model card', publisher: 'Google DeepMind', url: 'https://ai.google.dev/gemma/docs/core/model_card_3', type: '官方文档', checkedAt: '2026-10-26', locator: 'Inputs and outputs; Vision benchmark table（尺寸差异，不用于证明首发日期）' });
+const gemma3Release = releaseEvents.find(item => item.id === 'gemma-3')!;
+gemma3Release.sourceIds.push('gemma3-model-card');
+gemma3Release.change!.sourceIds.push('gemma3-model-card');
+releaseSources.push(
+  { id: 'seed15-vl-paper-date', title: 'Seed1.5-VL Technical Report', publisher: 'Dong Guo 等 · arXiv', url: 'https://arxiv.org/abs/2505.07062', type: '原始论文', checkedAt: '2026-10-26', publishedAt: '2025-05-11', locator: 'Submission history v1; abstract API model identifier doubao-1-5-thinking-vision-pro-250428' },
+  { id: 'seedance15-paper-date', title: 'Seedance 1.5 pro: A Native Audio-Visual Joint Generation Foundation Model', publisher: 'Team Seedance 等 · arXiv', url: 'https://arxiv.org/abs/2512.13507', type: '原始论文', checkedAt: '2026-10-26', publishedAt: '2025-12-15', locator: 'Submission history v1（不是后续修订日期）' },
+);
+for (const [id, sourceId] of [['seed-1-5-vl', 'seed15-vl-paper-date'], ['seedance-1-5-pro', 'seedance15-paper-date']]) {
+  const event = releaseEvents.find(item => item.id === id)!;
+  event.sourceIds.push(sourceId);
+  event.change!.sourceIds.push(sourceId);
+}

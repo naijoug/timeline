@@ -42,7 +42,10 @@ test('election, inauguration, negotiations and constitutional stages keep distin
   assert.deepEqual(event('provisional-constitution').time.end,parseDate('1912-03-11'));
   assert.match(xinhaiSources.find(s=>s.id==='xinhai-sun-declaration')!.version!,/英文原文未发现/);
   assert.match(event('qing-abdication').note!,/附件未刊出/);
-  assert.ok(chinaHistory.sources.filter(s=>!xinhaiSources.includes(s)).every(s=>s.checkedAt==='2026-09-30'));
+  // Later content packs may add sources or explicitly re-review existing ones.
+  assert.ok(xinhaiSources.every(s => s.checkedAt === '2026-10-09'));
+  const untouched = ['chronology', 'tang-met', 'hulao', 'xuanwu', 'turk', 'buniantu', 'wu-zhou', 'talas', 'an-shi', 'song-rivals', 'caishi'];
+  assert.ok(untouched.every(id => chinaHistory.sources.find(s => s.id === id)?.checkedAt === '2026-09-30'));
 });
 test('incoming event relationships retain the complete directed statement in both topics',()=>{
   for(const [catalog,from,to,label] of [

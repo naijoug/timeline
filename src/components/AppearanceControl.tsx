@@ -8,7 +8,7 @@ const options = [
   { value: 'system', label: '跟随系统', Icon: Monitor },
 ] as const;
 
-export default function AppearanceControl() {
+export default function AppearanceControl({ showLabel = false }: { showLabel?: boolean }) {
   const [mode, setMode] = useState<Appearance>('system');
   useEffect(() => observeAppearance(setMode), []);
   const index = options.findIndex(option => option.value === mode);
@@ -17,5 +17,6 @@ export default function AppearanceControl() {
   const description = `当前外观：${label}；点击切换为${next.label}`;
   return <button type="button" className="appearance-control" aria-label={description} title={description} onClick={() => chooseAppearance(next.value)}>
     <Icon size={18} aria-hidden="true" />
+    {showLabel && <span aria-hidden="true">外观<span className="appearance-mode">{label}</span></span>}
   </button>;
 }

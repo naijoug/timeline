@@ -1,16 +1,16 @@
 # AI 时间线覆盖报告
 
-来源最近核查日期：2026-10-09；版本发布批次核查日期：2026-09-30。各来源保留各自核查日期。运行 `npm run report:ai` 从实际数据重新生成本报告。
+来源最近核查日期：2026-10-26；版本发布批次核查日期：2026-09-30。各来源保留各自核查日期。运行 `npm run report:ai` 从实际数据重新生成本报告。
 
 ## 收录范围
 
-当前共 248 个事件、84 个对象、206 份来源；版本发布批次新增 133 条，指令专题新增 3 条，视觉学习到协作系统专题新增 3 条。两个专题分别复用并完善 11、7 个既有节点，保留原事件 ID。
+当前工作区共 282 个事件、92 个对象、282 份来源；版本发布批次新增 133 条，指令专题新增 3 条，视觉学习到协作系统专题新增 3 条，截至 2026-10-26 的近期核查更新共 15 条。2026-10-24 的重要缺口补齐批次另增 19 条。两个专题分别复用并完善 11、7 个既有节点，保留原事件 ID。
 
 | 主线 | 全部已收录 | 关键节点 | 中国团队筛选 |
 | --- | ---: | ---: | ---: |
-| AI 技术突破 | 53 | 29 | 0 |
-| 模型演进 | 144 | 76 | 58 |
-| Agent 应用 | 51 | 34 | 9 |
+| AI 技术突破 | 63 | 36 | 1 |
+| 模型演进 | 167 | 95 | 70 |
+| Agent 应用 | 52 | 35 | 9 |
 
 “当前显示”受时间窗口、关键词、地区、主线和关键节点筛选共同影响；页面同时显示全库和每轨总数。聚合不删除事件，打开组内目录可逐条阅读。
 
@@ -22,6 +22,9 @@
 - Opus 4.5 公告为 2025-11-24；DeepSeek-V3-0324 的更新公告为 2025-03-25；Kimi k1.5 论文首稿为 2025-01-22。
 - Manus Browser Operator 的 2025-11-18 公告与 11 月 22 日全量开放分开说明。Seedance 2.0 使用发布说明日期，不推断更早的灰度上线日。
 - Cowork 原文已重定向到当前产品页面。2026-01-12 来自官方博客历史目录的搜索索引；仅收录当时公告的工作方向，后续功能不倒填。
+- Kimi K3.1 Pro 按官方研究索引的 2026-10-24 记载，Kimi Code 渠道日志标为 10 月 23 日；完整权重计划于 11 月 4 日前发布，不记录为已经开放。
+- Gemini 4 Argon 的 9 月 30 日受限发布与 10 月 13 日公开可用扩展分开记录；MiniMax M3.1 Flash 的 10 月 19 日产品/API 发布与 10 月 23 日权重开放分开记录。
+- Mistral Large 4 截至 10 月 24 日仍为 API 公开预览，完整权重是后续计划；Muse 模型家族与 Muse 个人 Agent 产品、Seedream 图像模型与 Seedance 音视频模型分别建档。
 - 模型记录包含比较基线、变化和限制；只对已有且相同家族的前代建立链接。首个已收录版本不自动宣称为公司最早模型。
 - “为什么重要”是编辑解读。模型提升引用论文或厂商报告，未进行独立性能实测，也不拼接不同评测设置的排名。
 - 同页发布模型与产品时保留两条事件、关联同次公告，共用一个来源；多个模型尺寸通常作为系列事件，不靠拆尺寸凑数量。
@@ -40,44 +43,46 @@
 
 | 对象 | 团队 | 主轨事件数 | 最早已收录 | 最近已收录 |
 | --- | --- | ---: | --- | --- |
-| AutoGLM | 智谱 | 2 | 2024-10-28 | 2025-12-11 |
+| AutoGLM | 智谱 | 2 | 2024-10-28 | 2025-12-09 |
 | BERT | Google | 1 | 2018-10-11 | 2018-10-11 |
-| Claude | Anthropic | 20 | 2023-03-14 | 2026-09-28 |
+| Claude | Anthropic | 24 | 2023-03-14 | 2026-10-07 |
 | Claude Code | Anthropic | 4 | 2025-02-24 | 2026-02-05 |
 | Claude Cowork | Anthropic | 1 | 2026-01-12 | 2026-01-12 |
 | CLIP | OpenAI | 1 | 2021-01-05 | 2021-01-05 |
-| Codex | OpenAI | 5 | 2025-04-16 | 2026-02-02 |
+| Codex | OpenAI | 6 | 2025-04-16 | 2026-09-29 |
 | Command | Cohere | 2 | 2024-03 | 2025-03-13 |
 | Cue | Manus | 1 | 2026-09 | 2026-09 |
 | Cursor Agent | Cursor | 4 | 2024-11-24 | 2025-10-29 |
 | DALL·E | OpenAI | 1 | 2021-01-05 | 2021-01-05 |
-| DeepSeek | DeepSeek | 14 | 2024-01-25 | 2026-09-10 |
+| DeepSeek | DeepSeek | 15 | 2024-01-25 | 2026-10-17 |
 | Devin | Cognition | 2 | 2024-03 | 2025-04-03 |
-| ERNIE / 文心 | 百度 | 1 | 2025-06-30 | 2025-06-30 |
+| ERNIE / 文心 | 百度 | 2 | 2025-06-30 | 2026-05-09 |
 | EXAONE | LG AI Research | 1 | 2024-08-07 | 2024-08-07 |
 | Falcon | TII | 1 | 2023-09-06 | 2023-09-06 |
 | FLUX | Black Forest Labs | 1 | 2024-08-01 | 2024-08-01 |
-| Gemini | Google | 6 | 2023-12-06 | 2026-02-19 |
+| Gemini | Google | 8 | 2023-12-06 | 2026-10-13 |
 | Gemini CLI | Google | 1 | 2025-06-25 | 2025-06-25 |
-| Gemma | Google | 3 | 2024-02-21 | 2025-03-12 |
+| Gemma | Google | 4 | 2024-02-21 | 2026-04-02 |
 | Generative Agents | Stanford / Google Research | 1 | 2023-04-07 | 2023-04-07 |
 | GitHub Copilot | GitHub | 1 | 2025-05-19 | 2025-05-19 |
 | GLM | 智谱 | 9 | 2025-07-28 | 2026-08-26 |
-| GPT | OpenAI | 25 | 2018-06-11 | 2026-09-29 |
+| GPT | OpenAI | 26 | 2018-06-11 | 2026-10-26 |
 | Grok | xAI | 5 | 2024-08-13 | 2026-09-21 |
 | Grok Bot | xAI | 1 | 2026-08-11 | 2026-08-11 |
-| Hunyuan / 混元 | 腾讯 | 1 | 2025-03-21 | 2025-03-21 |
+| Hunyuan / 混元 | 腾讯 | 4 | 2025-03-21 | 2026-10-26 |
 | Jules | Google | 2 | 2025-05-20 | 2025-08-06 |
-| Kimi | 月之暗面 | 6 | 2025-01-22 | 2026-07-16 |
+| Kimi | 月之暗面 | 7 | 2025-01-22 | 2026-10-24 |
 | Kimi Agent | 月之暗面 | 2 | 2025-09-26 | 2026-01-27 |
 | Llama | Meta | 7 | 2023-02-24 | 2025-04-05 |
 | Manus | Manus | 8 | 2025-07-31 | 2026-09 |
 | Manus Studio | Manus | 1 | 2026-09 | 2026-09 |
-| MiniMax | MiniMax | 4 | 2025-06-16 | 2026-02-12 |
+| MiniMax | MiniMax | 7 | 2025-06-16 | 2026-10-23 |
 | MiniMax Agent | MiniMax | 2 | 2025-06-19 | 2025-10-27 |
-| Mistral | Mistral AI | 7 | 2023-09-27 | 2025-12-09 |
+| Mistral | Mistral AI | 8 | 2023-09-27 | 2026-10-06 |
 | Mistral Vibe | Mistral AI | 1 | 2025-12-09 | 2025-12-09 |
 | Muse | Meta | 1 | 2026-09 | 2026-09 |
+| Muse 模型 | Meta | 2 | 2026-10-12 | 2026-10-15 |
+| Nanbeige / 南北阁 | 南北阁 | 1 | 2026-10-24 | 2026-10-24 |
 | OpenHands / OpenDevin | OpenHands 社区 | 1 | 2024-07-23 | 2024-07-23 |
 | Operator / ChatGPT agent | OpenAI | 3 | 2025-01-23 | 2025-07-17 |
 | Pangu / 盘古 | 华为 | 1 | 2025-06-30 | 2025-06-30 |
@@ -87,7 +92,8 @@
 | Replit Agent | Replit | 4 | 2024-09 | 2026-03-11 |
 | Sakana Evo 系列 | Sakana AI | 1 | 2024-03-21 | 2024-03-21 |
 | Seed / 豆包基础模型 | 字节跳动 | 3 | 2025-05-13 | 2026-06-23 |
-| Seedance | 字节跳动 | 2 | 2025-12-16 | 2026-02-12 |
+| Seedance | 字节跳动 | 3 | 2025-12-16 | 2026-07-31 |
+| Seedream | 字节跳动 | 1 | 2026-07-08 | 2026-07-08 |
 | SenseNova / 日日新 | 商汤 | 1 | 2025-04-10 | 2025-04-10 |
 | Stable Diffusion | Stability AI | 1 | 2022-08-22 | 2022-08-22 |
 | Step | 阶跃星辰 | 1 | 2025-07-31 | 2025-07-31 |
@@ -98,7 +104,55 @@
 | Wan / 通义万相 | 阿里巴巴 | 1 | 2025-02-25 | 2025-02-25 |
 | Whisper | OpenAI | 1 | 2022-09-21 | 2022-09-21 |
 
-## 本轮新增事件与原始依据
+## 近期更新与原始依据（最近核查 2026-10-26）
+
+近期更新查阅厂商公告、官方模型卡及独立评测机构的原始发布。榜单上线、评测研究预览、模型更新、API 正式开放与标准治理变化分别记录；不把厂商成绩当独立实测，不混淆榜单得分与通过率，也不把后续计划写成已发布。
+
+| 日期 | 事件 | 事件口径 | 原始来源 |
+| --- | --- | --- | --- |
+| 2026-10-26 | Hy-SimulMT 开放权重：中英实时同传与配套工具 | 权重开放 | [腾讯混元](https://huggingface.co/tencent/Hy-SimulMT-30B-A3B-Interleave/blob/2f3d831b8fe28e2597091598ed60a376a3db5bc0/README.md)、[腾讯混元](https://huggingface.co/tencent/Hy-SimulMT-30B-A3B-Interleave/tree/2f3d831b8fe28e2597091598ed60a376a3db5bc0)、[腾讯混元](https://huggingface.co/tencent/Hy-SimulMT-30B-A3B-Interleave/commit/da7f540744bee4c3003935dbb770cae9cf12ab81)、[腾讯混元](https://github.com/Tencent-Hunyuan/Hy-SimulMT)、[腾讯混元](https://huggingface.co/tencent/Hy-SimulMT-30B-A3B-Interleave/blob/2f3d831b8fe28e2597091598ed60a376a3db5bc0/LICENSE.txt) |
+| 2026-10-26 | GPT-6.1 Terra 发布：视觉推理、计算机使用与低成本档位 | API 开放 | [OpenAI](https://openai.com/index/introducing-gpt-6-1-terra/)、[OpenAI](https://developers.openai.com/api/docs/models/gpt-6.1-terra)、[OpenAI](https://deploymentsafety.openai.com/gpt-6-1-terra) |
+| 2026-10-25 | ByteDance Seed 提出 Recycler：跨 token 回收隐藏状态 | 架构研究公开 | [ByteDance Seed](https://seed.bytedance.com/en/public_papers/recycler-cost-free-latent-reasoning-via-hidden-state-recycling)、[ByteDance Seed](https://lf3-static.bytednsdoc.com/obj/eden-cn/hyvsmeh7uhobf/recycler_arxiv%20(2).pdf) |
+| 2026-10-24 | Kimi K3.1 Pro 发布：强化长程编程与 Agent | 模型发布 | [月之暗面](https://www.kimi.com/en/blog/kimi-k3-1-pro)、[月之暗面](https://www.kimi.com/en/blog/)、[月之暗面](https://www.kimi.com/code/docs/en/kimi-code/whats-new.html)、[Artificial Analysis](https://artificialanalysis.ai/articles/kimi-k3-1-pro-launch-benchmarks)、[Artificial Analysis](https://artificialanalysis.ai/methodology/intelligence-benchmarking) |
+| 2026-10-24 | Nanbeige4.3-33B：面向 Agent 的开放权重教师模型 | 权重开放 | [Nanbeige LLM Lab](https://huggingface.co/Nanbeige/Nanbeige4.3-33B)、[Nanbeige LLM Lab](https://huggingface.co/Nanbeige/Nanbeige4.3-33B/commit/0dacc64718ab6a5a7cbfc74cacc663d6c5c3de05)、[Nanbeige LLM Lab](https://huggingface.co/Nanbeige/Nanbeige4.3-33B/commits/main)、[Nanbeige LLM Lab](https://huggingface.co/Nanbeige/Nanbeige4.3-33B/tree/main)、[Nanbeige LLM Lab](https://huggingface.co/Nanbeige)、[Nanbeige LLM Lab](https://huggingface.co/Nanbeige/Nanbeige4.3-33B/discussions/6) |
+| 2026-10-24 | 英国宣布设立 AI Biosecurity Lab | 机构与治理公告 | [英国 Cabinet Office](https://www.gov.uk/government/news/introducing-the-ai-biosecurity-lab)、[英国 HM Treasury](https://www.gov.uk/government/news/chancellor-unveils-britains-ambitious-plan-for-ai) |
+| 2026-10-23 | AISI 与 Anthropic 分别发布 Agent 越界事件对齐分析 | 安全评估报告 | [Anthropic](https://www.anthropic.com/research/alignment-assessment-ukaisi)、[英国 AI Security Institute](https://www.aisi.gov.uk/blog/investigating-alignment-failures-in-aisis-incident)、[英国 AI Security Institute](https://www.aisi.gov.uk/category/organisation) |
+| 2026-10-23 | OpenAI 公布前沿训练环境隔离与红队报告 | 安全工程报告 | [OpenAI](https://openai.com/index/securing-our-frontier-model-training-environment/) |
+| 2026-10-22 | Anthropic 与 Theorem 展示大规模软件形式化验证 | 研究与证明公开 | [Anthropic](https://www.anthropic.com/research/formal-verification)、[Theorem](https://github.com/theorem-labs/oss-verify-proofs)、[Theorem](https://github.com/theorem-labs/rocq-linux-process-semantics) |
+| 2026-10-22 | SageMaker AI Training Sessions 正式可用 | 平台正式可用 | [AWS](https://aws.amazon.com/blogs/machine-learning/announcing-new-ways-to-customize-models-with-sagemaker-ai-without-managing-gpus/)、[AWS](https://docs.aws.amazon.com/sagemaker/latest/dg/customizing-models-training-sessions.html) |
+| 2026-10-22 | Decisions API 正式开放：把小决策接入应用 | 正式开放 | [OpenAI](https://openai.com/index/decisions-api/) |
+| 2026-10-22 | Agent Skills 捐赠给 Agentic AI Foundation | 标准治理更新 | [Anthropic](https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation) |
+| 2026-10-17 | DeepSeek-V4.1-Flash-1017 更新 | 模型更新 | [DeepSeek](https://api-docs.deepseek.com/updates/)、[DeepSeek](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017) |
+| 2026-10-14 | AA-Robotics v0.1：让语言模型操作真实机械臂 | 评测研究预览 | [Artificial Analysis](https://artificialanalysis.ai/articles/aa-robotics) |
+| 2026-10-12 | Artificial Analysis 上线 FrontierCode 1.1 榜单 | 独立评测榜单上线 | [Artificial Analysis](https://artificialanalysis.ai/articles/frontiercode) |
+
+## 2026 年重要缺口补齐（核查 2026-10-24）
+
+本批次限定为有一手材料、明确日期与重要能力或可获得性变化的节点，不把零散产品新闻全部加入时间线。多尺寸同次发布合并成一个节点，受限开放、API 预览与权重可下载按实际阶段区分。本批次不扩展为零散新闻或套餐更新列表，也不代表 2026 年已全部覆盖。
+
+| 日期 | 事件 | 事件口径 | 原始来源 |
+| --- | --- | --- | --- |
+| 2026-10-23 | MiniMax M3.1 Flash 权重开放 | 权重开放 | [MiniMax](https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash/commits/main)、[MiniMax](https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash)、[MiniMax](https://www.minimax.io/blog/minimax-m31f) |
+| 2026-10-23 | Hy-Nomas：可交互的视频世界模型 | 模型与权重开放 | [腾讯](https://huggingface.co/tencent/Hy-Nomas)、[腾讯](https://huggingface.co/tencent/Hy-Nomas/commits/main)、[腾讯](https://github.com/Tencent-Hunyuan/Hy-Nomas) |
+| 2026-10-19 | MiniMax M3.1 Flash：低成本多模态 Agent 模型 | 模型发布 | [MiniMax](https://www.minimax.io/blog/minimax-m31f)、[MiniMax](https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash)、[MiniMax](https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash/commits/main) |
+| 2026-10-15 | Muse Spark Open 正式开放权重 | 权重开放 | [Meta](https://research.meta.ai/blog/muse-spark-open)、[Meta · Hugging Face](https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B)、[Meta · Hugging Face](https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B/tree/main) |
+| 2026-10-13 | Gemini 4 Argon 扩展公开可用 | 公开可用范围扩展 | [Google](https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/)、[Google](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/) |
+| 2026-10-12 | Muse Wonder 与 Wonder Full 发布 | 模型发布 | [Meta](https://research.meta.ai/blog/muse-wonder) |
+| 2026-10-07 | Claude Haiku 5.5：更低成本的 Agent 子任务 | 模型发布 | [Anthropic](https://www.anthropic.com/claude-haiku-5-5) |
+| 2026-10-06 | Mistral Large 4 进入公开预览 | 公开预览 | [Mistral AI](https://mistral.ai/news/mistral-large-4/) |
+| 2026-09-30 | Gemini 4 Argon 首次公布 | 公布与受限开放 | [Google](https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-argon/)、[Google](https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/) |
+| 2026-09-29 | Codex Cloud：在可复用云环境中持续开发 | 产品更新 | [OpenAI](https://help.openai.com/en/articles/6825453-chatgpt-release-notes) |
+| 2026-09-22 | Claude Opus 5.5：旗舰能力与效率升级 | 模型发布 | [Anthropic](https://www.anthropic.com/claude-opus-5-5) |
+| 2026-09-01 | Claude Fable 5.1 与 Mythos 5.1 发布 | 模型发布 | [Anthropic](https://www.anthropic.com/claude-fable-and-mythos-5-1)、[Anthropic](https://www.anthropic.com/claude/fable) |
+| 2026-08-28 | 腾讯 Hy4 预览版开放权重 | 预览与权重开放 | [腾讯](https://www.tencent.com/tencent-releases-and-open-sources-tencent-hy4-preview/) |
+| 2026-07-31 | Seedance 2.5：长镜头与多模态参考 | 模型发布 | [字节跳动](https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5?view_from=content_recommend) |
+| 2026-07-08 | Seedream 5.0 Pro：从图像生成走向设计编辑 | 模型发布 | [字节跳动](https://seed.bytedance.com/en/blog/beyond-generation-it-understands-design-introducing-seedream-5-0-pro?view_from=content_recommend) |
+| 2026-06-09 | Claude Fable 5 与 Mythos 5 公布 | 模型发布 | [Anthropic](https://www.anthropic.com/news/claude-fable-5-mythos-5) |
+| 2026-06-01 | MiniMax M3：原生多模态与长程任务 | 模型发布 | [MiniMax](https://www.minimax.io/blog/minimax-m3) |
+| 2026-05-09 | 文心 ERNIE 5.1 发布 | 模型发布 | [百度](https://ernie.baidu.com/blog/posts/ernie-5.1-0508-release/) |
+| 2026-04-02 | Gemma 4：面向推理与 Agent 的开放模型 | 模型发布 | [Google](https://blog.google/innovation-and-ai/technology/developers-tools/gemma-4/) |
+
+## 2026-09-30 版本发布批次与原始依据
 
 | 日期 | 事件 | 事件口径 | 原始来源 |
 | --- | --- | --- | --- |
@@ -114,7 +168,7 @@
 | 2023-03-14 | Claude / Claude Instant | 模型发布 | [Anthropic](https://www.anthropic.com/news/introducing-claude) |
 | 2023-04-07 | Generative Agents：记忆、反思与规划 | 论文首发 | [Stanford / Google Research](https://arxiv.org/abs/2304.03442) |
 | 2023-09-27 | Mistral 7B | 模型发布 | [Mistral AI](https://mistral.ai/news/announcing-mistral-7b/) |
-| 2023-11-06 | GPT-4 Turbo 预览 | API 预览 | [OpenAI](https://developers.openai.com/api/docs/changelog) |
+| 2023-11-06 | GPT-4 Turbo 预览 | API 预览 | [OpenAI](https://developers.openai.com/api/docs/changelog)、[OpenAI](https://openai.com/index/new-models-and-developer-products-announced-at-devday/) |
 | 2023-12-06 | Gemini 1.0 | 模型发布 | [Google](https://blog.google/technology/ai/google-gemini-ai/) |
 | 2024-01-25 | DeepSeek-Coder 技术论文 | 论文首发 | [DeepSeek](https://arxiv.org/abs/2401.14196) |
 | 2024-02-04 | Qwen1.5 | 模型发布 | [阿里巴巴](https://qwenlm.github.io/blog/qwen1.5/) |
@@ -140,7 +194,7 @@
 | 2024-10-28 | AutoGLM：浏览器与手机 GUI Agent | 论文首发 | [智谱](https://arxiv.org/abs/2411.00820) |
 | 2024-11-12 | Qwen2.5-Coder 完整系列 | 模型发布 | [阿里巴巴](https://qwenlm.github.io/blog/qwen2.5-coder-family/) |
 | 2024-12 | Llama 3.3 70B | 模型发布 | [Meta](https://ai.meta.com/blog/future-of-ai-built-with-llama/) |
-| 2024-12-17 | o1 开放 API | API 开放 | [OpenAI](https://developers.openai.com/api/docs/changelog) |
+| 2024-12-17 | o1 开放 API | API 开放 | [OpenAI](https://developers.openai.com/api/docs/changelog)、[OpenAI](https://openai.com/index/o1-and-new-tools-for-developers/) |
 | 2025-01 | Qwen2.5-VL | 模型发布 | [阿里巴巴](https://qwenlm.github.io/blog/qwen2.5-vl/) |
 | 2025-01-22 | Kimi k1.5 技术论文 | 论文首发 | [月之暗面](https://arxiv.org/abs/2501.12599) |
 | 2025-01-23 | Operator 研究预览 | 研究预览 | [OpenAI](https://openai.com/index/introducing-operator/) |
@@ -150,7 +204,7 @@
 | 2025-02-25 | Wan2.1 开放视频模型 | 权重开放 | [阿里巴巴](https://github.com/Wan-Video/Wan2.1) |
 | 2025-02-27 | GPT-4.5 研究预览 | 研究预览 | [OpenAI](https://openai.com/index/introducing-gpt-4-5/) |
 | 2025-03-06 | QwQ-32B | 模型发布 | [阿里巴巴](https://qwenlm.github.io/blog/qwq-32b/) |
-| 2025-03-12 | Gemma 3 | 模型发布 | [Google](https://blog.google/technology/developers/gemma-3/) |
+| 2025-03-12 | Gemma 3 | 模型发布 | [Google](https://blog.google/technology/developers/gemma-3/)、[Google DeepMind](https://ai.google.dev/gemma/docs/core/model_card_3) |
 | 2025-03-13 | Command A | 模型发布 | [Cohere](https://docs.cohere.com/changelog/command-a) |
 | 2025-03-25 | DeepSeek-V3-0324 更新公告 | 模型发布 | [DeepSeek](https://api-docs.deepseek.com/news/news250325/) |
 | 2025-03-25 | Gemini 2.5 Pro 实验版 | 实验版 | [Google](https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-model-thinking-updates-march-2025/) |
@@ -158,7 +212,7 @@
 | 2025-04-05 | Llama 4 Scout / Maverick | 模型发布 | [Meta](https://ai.meta.com/blog/llama-4-multimodal-intelligence/) |
 | 2025-04-14 | GPT-4.1 系列 | API 开放 | [OpenAI](https://openai.com/index/gpt-4-1/)、[OpenAI](https://developers.openai.com/api/docs/changelog) |
 | 2025-04-16 | o3 / o4-mini | 模型发布 | [OpenAI](https://openai.com/index/introducing-o3-and-o4-mini/) |
-| 2025-05-13 | Seed1.5-VL 技术公告 | 技术公告 | [字节跳动](https://seed.bytedance.com/en/blog/first-release-of-seed-vlm-tech-report-comprehensive-solutions-for-image-video-gui-and-game) |
+| 2025-05-13 | Seed1.5-VL 技术公告 | 技术公告 | [字节跳动](https://seed.bytedance.com/en/blog/first-release-of-seed-vlm-tech-report-comprehensive-solutions-for-image-video-gui-and-game)、[Dong Guo 等 · arXiv](https://arxiv.org/abs/2505.07062) |
 | 2025-05-15 | Cursor Background Agents 预览 | 早期预览 | [Cursor](https://cursor.com/changelog/0-50) |
 | 2025-05-16 | Codex 云端研究预览 | 研究预览 | [OpenAI](https://openai.com/index/introducing-codex/) |
 | 2025-05-21 | Devstral：软件工程模型 | 模型发布 | [Mistral AI](https://mistral.ai/news/devstral/) |
@@ -173,7 +227,7 @@
 | 2025-07-31 | Manus Wide Research | 产品更新 | [Manus](https://manus.im/blog/introducing-wide-research) |
 | 2025-08-05 | Claude Opus 4.1 | 模型发布 | [Anthropic](https://www.anthropic.com/news/claude-opus-4-1) |
 | 2025-08-07 | GPT-5 系列 API | API 开放 | [OpenAI](https://developers.openai.com/api/docs/models/gpt-5)、[OpenAI](https://developers.openai.com/api/docs/changelog) |
-| 2025-08-11 | GLM-4.5V | 模型发布 | [智谱](https://docs.z.ai/release-notes/new-released) |
+| 2025-08-11 | GLM-4.5V | 模型发布 | [智谱](https://github.com/zai-org/GLM-V) |
 | 2025-08-21 | DeepSeek-V3.1 | 模型发布 | [DeepSeek](https://api-docs.deepseek.com/news/news250821/) |
 | 2025-09-10 | Replit Agent 3 | 产品更新 | [Replit](https://replit.com/blog/introducing-agent-3-our-most-autonomous-agent-yet) |
 | 2025-09-11 | Qwen3-Next | 模型发布 | [阿里巴巴](https://github.com/QwenLM/Qwen3.8) |
@@ -193,14 +247,14 @@
 | 2025-11-24 | Claude Opus 4.5 | 模型发布 | [Anthropic](https://www.anthropic.com/news/claude-opus-4-5) |
 | 2025-12-01 | DeepSeek-V3.2 | 模型发布 | [DeepSeek](https://api-docs.deepseek.com/news/news251201/) |
 | 2025-12-01 | Manus Projects | 产品更新 | [Manus](https://manus.im/blog/manus-projects) |
+| 2025-12-09 | AutoGLM-Phone 多语言版权重上传 | 权重上传记录 | [智谱](https://huggingface.co/zai-org/AutoGLM-Phone-9B-Multilingual/commit/118ebd2c2262b40fb64d8adfbb632ccf627af532)、[Z.ai](https://github.com/zai-org/Open-AutoGLM) |
 | 2025-12-09 | Devstral 2 | 模型发布 | [Mistral AI](https://mistral.ai/news/devstral-2-vibe-cli/) |
 | 2025-12-09 | Mistral Vibe CLI | 开源发布 | [Mistral AI](https://mistral.ai/news/devstral-2-vibe-cli/) |
-| 2025-12-11 | AutoGLM-Phone 多语言版 | 产品更新 | [智谱](https://docs.z.ai/release-notes/new-released) |
 | 2025-12-11 | GPT-5.2 API | API 开放 | [OpenAI](https://developers.openai.com/api/docs/models/gpt-5.2)、[OpenAI](https://developers.openai.com/api/docs/changelog) |
-| 2025-12-16 | Seedance 1.5 pro | 模型发布 | [字节跳动](https://seed.bytedance.com/en/blog/sound-and-vision-all-in-one-take-the-official-release-of-seedance-1-5-pro) |
+| 2025-12-16 | Seedance 1.5 pro | 模型发布 | [字节跳动](https://seed.bytedance.com/en/blog/sound-and-vision-all-in-one-take-the-official-release-of-seedance-1-5-pro)、[Team Seedance 等 · arXiv](https://arxiv.org/abs/2512.13507) |
 | 2025-12-22 | GLM-4.7 | 模型发布 | [智谱](https://docs.z.ai/release-notes/new-released) |
 | 2025-12-23 | MiniMax-M2.1 | 模型发布 | [MiniMax](https://www.minimax.io/news/minimax-m21) |
-| 2026-01-12 | Cowork：从编码走向日常工作 | 产品公告 | [Anthropic](https://claude.com/blog-category/agents) |
+| 2026-01-12 | Cowork：从编码走向日常工作 | 产品公告 | [Anthropic](https://support.claude.com/en/articles/12138966-release-notes) |
 | 2026-01-27 | Kimi Agent Swarm 预览 | 预览发布 | [月之暗面](https://www.kimi.com/blog/kimi-k2-5) |
 | 2026-01-27 | Kimi K2.5 | 模型发布 | [月之暗面](https://www.kimi.com/blog/kimi-k2-5) |
 | 2026-02-02 | Codex macOS 应用 | 产品发布 | [OpenAI](https://openai.com/index/introducing-the-codex-app/) |

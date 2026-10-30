@@ -1,4 +1,4 @@
-import type { TimelineEvent } from "./types";
+import type { Entity, TimelineEvent } from "./types";
 import { events } from "./events";
 export type Lane = "methods" | "models" | "products";
 export const laneInfo: Record<Lane, { title: string; description: string }> = {
@@ -27,6 +27,7 @@ export const chinaCompanies = new Set([
   "华为",
   "阶跃星辰",
   "商汤",
+  "南北阁",
 ]);
 const agents = new Set([
   "claude-code",
@@ -55,6 +56,11 @@ const agents = new Set([
   "chatgpt-agent",
   "cowork",
 ]);
+// A product can be developer infrastructure rather than a user-facing Agent.
+export function entityLane(entity: Pick<Entity, "id" | "type">): Lane {
+  if (entity.type === "family") return "models";
+  return entity.type === "product" && agents.has(entity.id) ? "products" : "methods";
+}
 const technicalOverrides = new Set(["skills-introduction", "manus-cascade"]);
 export function eventLane(e: TimelineEvent): Lane {
   if (e.tracks.includes("models")) return "models";
@@ -126,14 +132,15 @@ export const MAX_YEAR = Math.max(
   ...events.map((e) => Number(e.date.slice(0, 4))),
 );
 export const YEAR_COUNT = MAX_YEAR - MIN_YEAR + 1;
+const newestRecordedEvent = [...events].sort((a, b) => a.date.localeCompare(b.date) || a.id.localeCompare(b.id)).at(-1)!;
 export const aiPresentation = {
   title: "全球 AI 时间线",
   subtitle: "从图灵到生成式 AI",
   lanes: ["methods", "models", "products"] as Lane[],
   preferredEvents: ["claude-code-preview", "skills-introduction"],
-  defaultRange: [2023, 2025] as const,
-  defaultEvent: "llama-2",
-  latestEvent: "manus-2",
+  defaultRange: [MIN_YEAR, MAX_YEAR] as const,
+  defaultEvent: newestRecordedEvent.id,
+  latestEvent: newestRecordedEvent.id,
   landmark: {
     year: 2017,
     date: "2017-06-12",

@@ -1,3 +1,5 @@
+import { guanduDepthSources, guanduDepthEventPatches } from './guandu-depth';
+import { wangAnshiDepthSources, wangAnshiSourceReviews, wangAnshiDepthEventPatches } from './wang-anshi-depth';
 import type {
   Catalog,
   Period,
@@ -5,6 +7,14 @@ import type {
   TimeSpan,
   TimelineEvent,
 } from "../../core/types";
+import { transitionCollection, transitionEvents, transitionRelations, transitionSources, transitionSourceReviews } from './state-transitions';
+import { ancientEvents, ancientSources, ancientEventPatches, ancientRelations } from './ancient-backbone';
+import { modernEvents, modernSources, modernEventPatches, modernRelations } from './modern-backbone';
+import { historyBackboneCollections, modernReadingPeriods, reviewedPeriodCoverage, earlyQingReadingPeriod } from './backbone-structure';
+import { historyReviewedSources, historyReviewedEventPatches } from './reviewed-records';
+import { exchangeDepthSources, exchangeDepthEventPatches, exchangeSourceReviews } from './exchange-depth';
+import { grandCanalDepthSources, grandCanalSourceReviews, grandCanalDepthEventPatches } from './grand-canal-depth';
+import { historyRecommendedResources } from './recommended-resources';
 import { xinhaiCollection, xinhaiEntities, xinhaiEvents, xinhaiRelations, xinhaiSources } from './xinhai';
 
 const source = (
@@ -83,7 +93,7 @@ export const sources: Source[] = [
   ),
   source(
     "tax",
-    "两税法",
+    "隋、唐",
     "国家税务总局天津市税务局",
     "https://tianjin.chinatax.gov.cn/11248000000/8000/800001/80000105/20191025153613963.shtml",
   ),
@@ -109,7 +119,18 @@ export const sources: Source[] = [
     "历史回顾",
   ),
   ...xinhaiSources,
-];
+  ...transitionSources,
+  ...ancientSources,
+  ...modernSources,
+  ...historyReviewedSources,
+  ...exchangeDepthSources,
+  ...grandCanalDepthSources,
+  ...wangAnshiDepthSources,
+  ...guanduDepthSources,
+].map(s => {
+  const reviewed = { ...s, ...(transitionSourceReviews[s.id] || {}), ...(exchangeSourceReviews[s.id] || {}), ...(grandCanalSourceReviews[s.id] || {}), ...(wangAnshiSourceReviews[s.id] || {}) };
+  return s.id === 'diamond' ? { ...reviewed, checkedAt: '2026-10-24', locator: 'Frontispiece；How and why was it made?；Colophon', version: '本轮核对题记、制作与宗教实践说明，保留年份精度，不将印本年代当作印刷术发明日期。' } : reviewed;
+});
 const duration = (
   start: number,
   end: number,
@@ -136,7 +157,7 @@ const period = (
   coverage: "outline",
   ...extra,
 });
-export const periods: Period[] = [
+const legacyPeriods: Period[] = [
   period("xia", "夏", -2070, -1600, "早期王朝的传统纪年。", {
     time: {
       kind: "duration",
@@ -144,6 +165,7 @@ export const periods: Period[] = [
       end: { year: -1600, approximate: true },
     },
     note: "年代采用参考简表的近似纪年；起源与考古对应关系仍有讨论。",
+    sourceIds: ["chronology", "anc-met-bronze"],
   }),
   period(
     "shang",
@@ -151,7 +173,7 @@ export const periods: Period[] = [
     -1600,
     -1046,
     "从早期王朝进入有文字材料可参照的历史。",
-    { time: duration(-1600, -1046, true) },
+    { time: duration(-1600, -1046, true), sourceIds: ["chronology", "anc-yinxu"] },
   ),
   period(
     "zhou",
@@ -165,6 +187,7 @@ export const periods: Period[] = [
   ),
   period("western-zhou", "西周", -1046, -771, "周的早期阶段。", {
     parentId: "zhou",
+    time: { kind: "duration", start: { year: -1046, approximate: true }, end: { year: -771 } },
   }),
   period("eastern-zhou", "东周", -770, -256, "东周王室存续时期。", {
     parentId: "zhou",
@@ -172,12 +195,13 @@ export const periods: Period[] = [
   period("spring-autumn", "春秋", -770, -476, "列国历史的一个分期。", {
     parentId: "zhou",
     note: "春秋与战国的分界存在不同口径；此处采用前476／前475年的分期。",
+    sourceIds: ["chronology", "columbia"],
   }),
   period("warring-states", "战国", -475, -221, "列国竞争延续至秦统一。", {
-    parentId: "zhou",
+    parentId: "zhou", sourceIds: ["chronology", "nmc-qin-han"],
   }),
   period("qin", "秦", -221, -206, "以秦王朝为线索的历史。", {
-    sourceIds: ["columbia"],
+    sourceIds: ["columbia", "chronology"],
     note: "终年采用前206年；不同纪年表亦有前207年的记法。",
   }),
   period(
@@ -186,10 +210,10 @@ export const periods: Period[] = [
     -202,
     220,
     "展开西汉与东汉；其间的政权变化不等于汉连续统治。",
-    { note: "起点按前202年称帝口径，部分资料以汉王建国的前206年为起点。" },
+    { coverage: "selected", sourceIds: ["chronology", "nmc-qin-han", "columbia"], note: "起点按前202年称帝口径；所引哥伦比亚大学年表另将汉的起点列为前206年。" },
   ),
   period("western-han", "西汉", -202, 8, "汉的前期。", {
-    parentId: "han",
+    parentId: "han", coverage: "selected", sourceIds: ["chronology", "nmc-qin-han", "columbia", "anc-nmh-huoquan"],
     note: "这里按参考简表记至公元8年；有资料按新朝建立记至9年。",
   }),
   period("eastern-han", "东汉", 25, 220, "汉的后期。", { parentId: "han" }),
@@ -199,20 +223,21 @@ export const periods: Period[] = [
     220,
     589,
     "多政权并存的阅读分组，展开后使用同一时间刻度。",
-    { entityIds: [], sourceIds: ["chronology", "columbia"] },
+    { entityIds: [], coverage: "selected", sourceIds: ["chronology", "columbia", "nmc-division"] },
   ),
   period("wei", "曹魏", 220, 265, "三国中的一个政权。", {
-    parentId: "division",
+    parentId: "division", sourceIds: ["chronology", "nmc-qin-han"],
   }),
   period("shu", "蜀汉", 221, 263, "三国中的一个政权。", {
     parentId: "division",
   }),
   period("wu", "孙吴", 222, 280, "三国中的一个政权。", {
     parentId: "division",
-    note: "起点采用称吴王的222年口径。",
+    sourceIds: ["chronology", "anc-sunwu"],
+    note: "起点采用222年改元黄武的分期；受封吴王、改元与229年称帝是不同节点。",
   }),
-  period("western-jin", "西晋", 265, 316, "两晋的前期。", {
-    parentId: "division",
+  period("western-jin", "西晋", 265, 316, "两晋的前期；280年出现短暂统一。", {
+    parentId: "division", coverage: "selected", sourceIds: ["chronology", "aja-western-jin"],
   }),
   period("eastern-jin", "东晋", 317, 420, "两晋的后期。", {
     parentId: "division",
@@ -224,14 +249,16 @@ export const periods: Period[] = [
   period("northern-dynasties", "北朝", 386, 581, "北方诸朝的时期分组。", {
     parentId: "division",
     entityIds: [],
+    note: "采用所引纪年简表386年起的分组范围，不将它与439年北魏统一北方的事件日期混为一谈。",
+    sourceIds: ["chronology", "anc-northernwei"],
   }),
   period("southern-dynasties", "南朝", 420, 589, "南方诸朝的时期分组。", {
     parentId: "division",
     entityIds: [],
   }),
-  period("sui", "隋", 581, 618, "隋朝与南北朝末期在时间上交叠。"),
+  period("sui", "隋", 581, 618, "581年建国、589年灭陈，随后扩建南北运输网络。", { coverage: "selected", sourceIds: ["chronology", "nmc-sui-tang", "unesco-grand-canal"] }),
   period("tang", "唐", 618, 907, "从王朝建立、对外往来到战争与制度变化。", {
-    sourceIds: ["tang-met"],
+    sourceIds: ["tang-met", "wu-zhou", "anc-wuzhou-gold-tablet"],
     coverage: "selected",
     note: "总览使用618—907年的唐代分期，内含武周；不表示李唐统治从未中断。",
   }),
@@ -241,7 +268,7 @@ export const periods: Period[] = [
     690,
     705,
     "武则天称帝时期，作为唐代阅读分期内的独立政权列出。",
-    { parentId: "tang", sourceIds: ["wu-zhou"], coverage: "selected" },
+    { parentId: "tang", sourceIds: ["wu-zhou", "anc-wuzhou-gold-tablet"], coverage: "selected" },
   ),
   period(
     "five-dynasties",
@@ -265,9 +292,9 @@ export const periods: Period[] = [
   ),
   period("song", "宋", 960, 1279, "北宋与南宋的整体阅读入口。", {
     parentId: "song-era",
-    sourceIds: ["columbia"],
+    sourceIds: ["columbia", "chronology"],
     coverage: "selected",
-    note: "终年采用1279年；1276年临安陷落是另一常见分期节点。",
+    note: "终年采用哥伦比亚大学年表的1279年；所引纪年简表另将宋的终年列为1276年。",
   }),
   period(
     "northern-song",
@@ -275,7 +302,7 @@ export const periods: Period[] = [
     960,
     1127,
     "宋的前期，与辽、金等政权处于同一时间背景。",
-    { parentId: "song", sourceIds: ["columbia"], coverage: "selected" },
+    { parentId: "song", sourceIds: ["columbia", "song-rivals"], coverage: "selected" },
   ),
   period("southern-song", "南宋", 1127, 1279, "宋的后期。", {
     parentId: "song",
@@ -285,6 +312,7 @@ export const periods: Period[] = [
   period("liao", "辽", 916, 1125, "与宋等政权并存。", {
     parentId: "song-era",
     note: "采用916年建国口径；部分教学资料将起点前推至907年。",
+    sourceIds: ["chronology", "song-rivals"],
     coverage: "selected",
   }),
   period("western-xia", "西夏", 1038, 1227, "宋辽夏金时期的一个政权。", {
@@ -300,14 +328,15 @@ export const periods: Period[] = [
     1271,
     1368,
     "按1271年定国号口径起算，保留与南宋的交叠。",
-    { note: "1279年是南宋结束的节点，不等同于元朝定国号之年。" },
+    { note: "1279年是南宋结束的节点，不等同于元朝定国号之年。", sourceIds: ["chronology", "anc-mongols", "columbia"] },
   ),
-  period("ming", "明", 1368, 1644, "以明王朝为线索的历史。", {
+  period("ming", "明", 1368, 1644, "从南京建政进入明清制度变迁的阅读线索。", {
+    coverage: "selected", sourceIds: ["chronology", "nmc-ming-qing"],
     note: "总览采用明朝通常分期；南明等后续政权尚未展开。",
   }),
-  period("qing", "清", 1644, 1912, "此处按入关至清帝退位的阅读分期展示。", {
-    sourceIds: ["columbia"],
-    note: "1644年是入关口径；1636年改国号等更早阶段待补充。",
+  period("qing", "清", 1644, 1912, "按入关至退位分期，追踪通商条约、选官改革与共和转折。", {
+    coverage: "selected", sourceIds: ["columbia", "nmc-ming-qing", "xinhai-frus-abdication", "anc-laterjin", "anc-qing-name"],
+    note: "1644年是入关口径；1616年后金建立与1636年改国号，另见“后金与入关前的清”分组。",
   }),
   period('late-qing-republic', '清末民初：辛亥革命与共和建政', 1911, 1912,
     '跨政权的专题阅读分期，包含清廷存续、地方起义、南京建政与总统交接。', {
@@ -317,10 +346,12 @@ export const periods: Period[] = [
   period('early-republic', '民国初年：1912 建政与交接', 1912, 1912,
     '本版仅展开 1912 年共和建政、总统交接和约法，不代表民国整体存续范围。', {
       time: { kind: 'duration', start: { year: 1912, month: 1, day: 1 }, end: { year: 1912, month: 12, day: 31 } },
-      entityIds: [], coverage: 'selected', sourceIds: ['xinhai-exhibition', 'xinhai-frus-overview'],
+      entityIds: [], parentId: 'republican-early', coverage: 'selected', sourceIds: ['xinhai-exhibition', 'xinhai-frus-overview'],
       note: '与清的末期在 1912 年并行；全年阅读范围不表示南京政府一直存续到年底。',
     }),
 ];
+
+export const periods: Period[] = reviewedPeriodCoverage([...legacyPeriods.flatMap(period => period.id === 'qing' ? [earlyQingReadingPeriod(ancientEvents), period] : [period]), ...modernReadingPeriods(modernEvents)], [...ancientEvents, ...modernEvents]);
 
 const event = (
   id: string,
@@ -354,11 +385,15 @@ export const events: TimelineEvent[] = [
     -221,
     "politics",
     ["qin", "warring-states"],
-    "秦建立统一王朝，成为总览中先秦与帝国时期之间的节点。",
-    ["talas"],
+    "秦完成对六国的兼并，以皇帝为中心组织统一国家，推行郡县与文字、货币、度量衡标准。",
+    ["nmc-qin-han", "columbia"],
     {
-      significance:
-        "政治组织进入新的阶段；后续制度的形成仍需结合具体史料理解。",
+      significance: "从列国竞争转向统一的中央行政体系；秦虽很快灭亡，其制度框架仍是理解汉代调整与继承的起点。",
+      details: [
+        { label: "统一与制度", text: "前230至前221年间，秦先后兼并六国；其后以皇帝、中央官署与郡县组织统治，并推动多项标准化措施。", sourceIds: ["nmc-qin-han"], locator: "第一单元总述及第一组「秦统一中国」" },
+        { label: "阅读重点", text: "哥伦比亚大学年表同时强调中央行政和标准化，而不只把秦统一当作王朝名单上的起点。", sourceIds: ["columbia"], locator: "Annotated Timeline / Qin" },
+      ],
+      note: "前221年标记兼并六国完成，不代表所有制度从该年才开始或在该年全部完成；保留年份精度。",
     },
   ),
   event(
@@ -483,11 +518,16 @@ export const events: TimelineEvent[] = [
     780,
     "institution",
     ["tang"],
-    "唐德宗时期，杨炎主持制定两税法。",
+    "780年，杨炎主持推行两税法，赋税计征由以人丁为主转向土地、财产等依据。",
     ["tax"],
     {
-      significance:
-        "征税方式向土地、财产等依据调整，是唐代财政制度的变化节点。",
+      significance: "土地与户口条件变化后，原有租庸调制度难以维持财政。两税法展示国家如何调整征收办法，而不只是一次皇帝更替。",
+      details: [
+        { label: "为什么调整", text: "税务机构所引研究说明，均田制受损、农民授田不足等变化，使原有赋役义务难以承担，朝廷财政收入下降。", sourceIds: ["tax"], locator: "正文均田制变化与财政危机段" },
+        { label: "调整了什么", text: "780年由杨炎主持改革，以户为单位按土地和财产计征，区别于此前以人丁为基本依据的租庸调。", sourceIds: ["tax"], locator: "正文唐德宗建中元年及地税、户税段" },
+        { label: "编辑解读：从谁来负担看制度", text: "比起只记税制名称，更值得追问国家按什么识别纳税人、土地和财产怎样进入征收依据，以及不同家庭承受什么后果。财政收入增加与个体负担改善不是同一判断；讲座可帮助理解背景，不能代替各地实施证据。", editorial: true },
+      ],
+      note: "税务机构网页转引研究，不是780年法令原件；只说明计征依据的变化，不据此断言税负普遍减轻或把改革归结为安史之乱的单一结果。",
     },
   ),
   event(
@@ -499,7 +539,12 @@ export const events: TimelineEvent[] = [
     "现存这一完整雕版印刷卷子具有868年的题记。",
     ["diamond"],
     {
-      significance: "为研究印刷与佛教文本传播提供实物证据。",
+      significance: "把印刷技术、宗教实践与私人资助放在同一件实物中，理解文本如何制作和传播。",
+      details: [
+        { label: "题记证明什么", text: "国际敦煌项目据卷末题记说明，此本由王玠出资为父母印造，纪年为868年。题记支持这件印本的年代，不能据此认定印刷术就在该年发明。", sourceIds: ["diamond"], locator: "Colophon from the Diamond Sutra；末段earlier examples of printing" },
+        { label: "不只是抽象的技术发明", text: "该卷以雕版分别印制后接成横卷，卷首有说法图。机构解说将复制、传播佛经与佛教积累功德的实践相联系，展现出资者、制作技术与信仰需求的结合。", sourceIds: ["diamond"], locator: "The Diamond Sutra frontispiece；How and why was it made?；Colophon" },
+        { label: "编辑解读：沿着一件实物提问", text: "读这件印本，可以依次看图像、接纸与题记，再问谁出钱、给谁看、为什么值得复制。这样能把技术史放回人的活动中，而不是只争一个“世界第一”的标签。", editorial: true },
+      ],
       note: "这是存世有纪年印本的证据，不是印刷术发明年份。",
     },
   ),
@@ -594,13 +639,30 @@ export const events: TimelineEvent[] = [
     { significance: "王朝建立与完成征服不是同一个日期。" },
   ),
   ...xinhaiEvents,
-];
+  ...transitionEvents,
+  ...ancientEvents,
+  ...modernEvents,
+].map(event => ({
+  ...event,
+  ...(ancientEventPatches[event.id] || {}),
+  ...(modernEventPatches[event.id] || {}),
+  ...(historyReviewedEventPatches[event.id] || {}),
+  ...(exchangeDepthEventPatches[event.id] || {}),
+  ...(grandCanalDepthEventPatches[event.id] || {}),
+  ...(wangAnshiDepthEventPatches[event.id] || {}),
+  ...(guanduDepthEventPatches[event.id] || {}),
+  ...(historyRecommendedResources[event.id] ? { recommendedResources: [...historyRecommendedResources[event.id], ...(wangAnshiDepthEventPatches[event.id]?.recommendedResources || [])] } : {}),
+}));
+const backboneCollections = historyBackboneCollections(events);
 export const chinaHistory: Catalog = {
   topic: {
     periodLabel: "朝代与时期",
     periodSegment: "dynasties",
     shortcuts: [
-      { title: "朝代总览", path: "/china-history/" },
+      { title: "通史总览", path: "/china-history/" },
+      { title: "从夏商周到当代", path: "/china-history/collections/china-through-the-ages/" },
+      { title: "战役与战争转折", path: "/china-history/collections/wars-and-turning-points/" },
+      { title: "统一、分裂与制度转型", path: transitionCollection.path },
       { title: "从唐朝开始", path: "/china-history/dynasties/tang/" },
       { title: "看宋辽夏金并存", path: "/china-history/dynasties/song-era/" },
       { title: "跨朝代战役", path: "/china-history/themes/battles/" },
@@ -609,9 +671,9 @@ export const chinaHistory: Catalog = {
     id: "china-history",
     title: "中国历史",
     path: "/china-history/",
-    description: "沿着朝代读历史，也沿着一场战役走进一个时代。",
+    description: "从夏商周到当代，沿重要战役、政权更替、制度和社会转型读中国历史。",
     coverage:
-      "夏至民初的时期骨架；唐代、宋辽夏金与辛亥革命 1911—1912 精选事件。其余时期以骨架为主，事件仍在补充。",
+      "贯穿夏商周至当代的通史主干，收录重要战役、长期战争、制度与社会转折；史实、编辑解读和相关节目分开呈现。各时期深度不一，仍非无遗漏的历史数据库。",
     categories: [
       { id: "politics", title: "政治与更替" },
       { id: "battle", title: "重大战役" },
@@ -624,8 +686,8 @@ export const chinaHistory: Catalog = {
   periods,
   events,
   sources,
-  collections: [xinhaiCollection],
-  relations: xinhaiRelations,
+  collections: [...backboneCollections, transitionCollection, xinhaiCollection],
+  relations: [...transitionRelations, ...xinhaiRelations, ...ancientRelations, ...modernRelations],
   entities: [...periods
     .filter((p) => p.entityIds.length)
     .map((p) => ({

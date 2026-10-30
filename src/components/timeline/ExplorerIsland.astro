@@ -1,0 +1,28 @@
+---
+import TopicExplorer from './TopicExplorer';
+import type { ExplorerTopic } from '../../core/topic-payloads.server';
+interface Props {
+  topicId: ExplorerTopic; initialPeriod?: string; initialCategory?: string; viewPath?: string;
+}
+---
+<!-- Install before the visible SSR form, while the React chunk is still loading. -->
+<script is:inline data-timeline-search-capture>
+  (() => {
+    const remember = event => {
+      const input = event.target;
+      if (input instanceof HTMLInputElement && input.matches('#current-topic-search input[name="q"]')) {
+        input.__timelineSearchDraft = { value: input.value };
+      }
+    };
+    // Focus can precede the first input event (selection, paste, or IME).
+    document.addEventListener('focusin', remember, true);
+    document.addEventListener('input', remember, true);
+    document.addEventListener('compositionstart', remember, true);
+    document.addEventListener('timeline:search-hydrated', () => {
+      document.removeEventListener('focusin', remember, true);
+      document.removeEventListener('input', remember, true);
+      document.removeEventListener('compositionstart', remember, true);
+    }, { once: true });
+  })();
+</script>
+<TopicExplorer {...Astro.props} client:load />

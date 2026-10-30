@@ -1,0 +1,22 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { scientificEvents, scientificSources } from '../src/topics/ai/scientific-materials';
+import { events } from '../src/topics/ai/events';
+import { aiCatalog } from '../src/topics/ai/adapter';
+import { createExplorerPayload } from '../src/core/explorer-payload';
+test('scientific disclosure separates artifacts, attribution and independent verification', () => {
+ const e = scientificEvents[0];
+ assert.equal(events.filter(x => x.id === e.id).length, 1);
+ assert.equal(e.date, '2026-10-26'); assert.equal(e.kind, '研究材料公开'); assert.equal(e.milestone, true);
+ assert.deepEqual(e.entityIds, []); assert.deepEqual(e.tracks, ['methods']);
+ assert.match(e.limitation, /未运行 Lean/);
+ assert.match(JSON.stringify(e), /未命名、未发布/);
+ assert.ok(e.details?.every(d => d.sourceIds?.length && d.locator));
+ assert.equal(e.details?.filter(d => d.editorial).length, 1);
+ assert.ok(scientificSources.every(s => s.checkedAt === '2026-10-27'));
+ assert.ok(scientificSources.slice(1).every(s => s.url.includes('7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a')));
+ assert.ok(e.recommendedResources?.every(r => r.creator && r.match && r.scopeNote));
+ const payload = JSON.stringify(createExplorerPayload(aiCatalog));
+ assert.ok(payload.includes(e.id)); assert.ok(!payload.includes('openai-science-eth-scope-reading'));
+ assert.ok(!payload.includes('阅读方法：先看形式化究竟覆盖什么'));
+});

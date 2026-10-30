@@ -1,8 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import Explorer from '../../../components/timeline/Explorer';
+import Explorer from '../../../components/timeline/ExplorerIsland.astro';
 import { programmingLanguages } from '../../../topics/programming-languages/catalog';
-import { languagePresentation } from '../../../topics/programming-languages/presentation';
 
 export function getStaticPaths() {
   return programmingLanguages.periods.map(period => ({ params: { slug: period.id }, props: { period } }));
@@ -10,4 +9,4 @@ export function getStaticPaths() {
 
 const { period } = Astro.props;
 ---
-<Layout explorer title={`${period.title} · 编程语言时间线`} description={period.summary}><Explorer catalog={programmingLanguages} initialPeriod={period.id} presentation={languagePresentation} client:load /></Layout>
+<Layout explorer title={`${period.title} · 编程语言时间线`} description={period.summary}><Explorer topicId="programming-languages" initialPeriod={period.id} /></Layout>

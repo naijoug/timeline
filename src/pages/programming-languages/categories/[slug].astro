@@ -1,8 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import Explorer from '../../../components/timeline/Explorer';
+import Explorer from '../../../components/timeline/ExplorerIsland.astro';
 import { programmingLanguages } from '../../../topics/programming-languages/catalog';
-import { languagePresentation } from '../../../topics/programming-languages/presentation';
 
 export function getStaticPaths() {
   return programmingLanguages.topic.categories.map(category => ({ params: { slug: category.id }, props: { category } }));
@@ -10,4 +9,4 @@ export function getStaticPaths() {
 
 const { category } = Astro.props;
 ---
-<Layout explorer title={`${category.title} · 编程语言时间线`} description={`按“${category.title}”筛选编程语言时间线。`}><Explorer catalog={programmingLanguages} initialCategory={category.id} presentation={languagePresentation} client:load /></Layout>
+<Layout explorer title={`${category.title} · 编程语言时间线`} description={`按“${category.title}”筛选编程语言时间线。`}><Explorer topicId="programming-languages" initialCategory={category.id} /></Layout>

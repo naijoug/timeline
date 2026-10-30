@@ -1,4 +1,5 @@
 ---
+import SourceIcon from '../../../components/SourceIcon';
 import Layout from '../../../layouts/Layout.astro';
 import { programmingLanguages } from '../../../topics/programming-languages/catalog';
 import { sitePath } from '../../../lib/paths';
@@ -19,9 +20,9 @@ const versions = events.filter(e => e.change);
 <Layout title={`${entity.name} · 编程语言`} description={`${entity.name}在编程语言时间线中的相关事件与来源。`} topicTitle="编程语言" topicPath="/programming-languages/">
   <a class="back-link" href={sitePath('/programming-languages/')}>返回编程语言时间线</a>
   <header class="entity-hero"><div class="eyebrow">{entity.type}</div><h1>{entity.name}</h1><p>下列条目展示这一语言对象在已收录事件中的出现记录；可在时间线中切换语言，聚焦单语言的发展节点。</p></header>
-  <a class="collection-cta" href={sitePath(`/programming-languages/?scope=${entity.id}&all=1&event=${events.at(-1)?.id || ''}`)}>查看{entity.name}单语言时间线</a>
+  <a class="collection-cta" href={sitePath(`/programming-languages/?scope=${entity.id}&all=1&event=#event-${events.at(-1)?.id || ''}`)}>查看{entity.name}单语言时间线</a>
   {versions.length > 0 && <section><h2>大版本变化</h2><ol class="collection-nodes">{versions.map(e => <li><time>{formatTime(e.time)}</time><div><a href={sitePath(`/programming-languages/events/${e.id}/`)}>{e.title}</a><p>{e.change!.improvements.join(' · ')}</p></div></li>)}</ol></section>}
   <section><h2>相关事件</h2><ol class="collection-nodes">{events.map(e => <li><time>{formatTime(e.time)}</time><div><a href={sitePath(`/programming-languages/events/${e.id}/`)}>{e.title}</a><p>{e.summary}</p></div></li>)}</ol></section>
   <section><h2>相关时代</h2><p>{periods.map(p => p.title).join('、') || '待补充'}</p></section>
-  <section id="sources"><h2>对象依据</h2>{sources.map(s => <p><a href={s.url} target="_blank" rel="noopener noreferrer">{s.title}</a><small class="evidence-locator">{s.type} · 核查于 {s.checkedAt} · {s.locator}</small></p>)}</section>
+  <section id="sources"><h2>对象依据</h2>{sources.map(s => <p><a href={s.url} target="_blank" rel="noopener noreferrer"><SourceIcon url={s.url} size={16}/>{s.title}</a><small class="evidence-locator">{s.type} · 核查于 {s.checkedAt} · {s.locator}</small></p>)}</section>
 </Layout>
