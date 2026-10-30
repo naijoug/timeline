@@ -2,14 +2,15 @@
 
 所有主题共用一套电子墨水屏灰阶视觉与交互，不通过主题 ID 分支渲染不同页面。
 
-- `src/components/timeline/Explorer.tsx`：横向时间总览、范围/类别筛选、纵向节点、详情与前后节点切换。朝代/时期、地区等控件由提供的数据启用。
+- `src/components/timeline/Explorer.tsx`：纵向时间线、搜索、排序、筛选状态与独立事件页入口；`FilterSheet.tsx` 提供范围和类别等筛选，`YearRange.tsx` 提供年份范围滑块。朝代/时期、地区等控件由提供的数据启用。
 - `src/components/timeline/EventRecord.astro`：所有独立事件页的标题、摘要、意义、补充段落、来源、相关对象、复制与返回入口。
 - `src/styles/chronicle.css`、`record.css`、`navigation.css`：共用布局；颜色统一引用 `paper.css` 的灰阶语义变量，分类用文字而非彩色区分。
-- `src/core/explorer.ts`：共用默认选择、范围/分类/关键词/地区筛选与视图 URL。空 `event=` 表示关闭详情，刷新保持关闭。
+- `src/core/explorer.ts`：共用默认选择、范围/分类/关键词/地区筛选与视图 URL。阅读模式由 `src/core/mobile-navigation.ts` 适配：时间线不打开内嵌详情，旧 `event=` 链接由 Explorer 转到独立事件页，返回时保留原有筛选与阅读位置。
 - `src/topics/ai/explorer.ts`：AI 专用数据适配，包括公司、模型版本比较、完整事件路径、地区条目集合，以及 `lane` 等旧 URL 参数。这里不写 JSX 或主题样式。
 - `src/components/Atlas.tsx`：兼容现有 AI 路由，提供适配后的 Catalog 与展示数据，界面仍由 Explorer 渲染。
+- `src/components/timeline/ExplorerIsland.astro`、`TopicExplorer.tsx`：主题页面的静态首屏与客户端入口，通过 `src/core/topic-payloads.server.ts` 将服务端完整目录转换成轻量时间线索引；正文、来源档案和关系留在静态详情页。
 
-新增主题先创建 `Catalog`，再通过主题、时期、类别路由向同一个 Explorer 传入数据；独立事件路由把内容映射给 EventRecord。将主题注册到 `src/core/topics.ts` 和首页，再注册内容校验。不要复制 Explorer 或创建单独的主题样式表。
+新增主题先创建 `Catalog`，在 `src/core/topic-payloads.server.ts` 注册服务端目录；主题、时期、类别页面通过 ExplorerIsland 向同一个 Explorer 传入轻量索引，不把完整目录导入客户端。独立事件路由把内容映射给 EventRecord。将主题注册到 `src/core/topics.ts` 和首页，再注册内容校验。不要复制 Explorer 或创建单独的主题样式表。
 
 `ExplorerPresentation` 仅提供可选的默认范围、默认/最近事件、里程碑、地区范围、节点显示信息及兼容 URL 的读写函数。新主题通常无需提供自定义 URL 编解码。标题、类别、来源和补充事实始终来自该主题的内容数据。
 
@@ -17,6 +18,6 @@
 
 ## 浅色、深色与系统模式
 
-侧栏底部只显示一个图标按钮，点击按浅色 → 深色 → 跟随系统循环；太阳、月亮、显示器图标表示当前模式。展开、收拢和手机抽屉使用同一控件，支持 Enter 和空格操作。`src/lib/appearance.ts` 管理偏好、系统变更及跨标签同步；`Layout.astro` 在正文绘制前恢复选择。偏好键为 `timeline-appearance`，新访客默认跟随系统。
+顶部工具区与侧栏底部共用 AppearanceControl；侧栏版本带文字标签。点击按浅色 → 深色 → 跟随系统循环，太阳、月亮、显示器图标表示当前模式，支持 Enter 和空格操作。`src/lib/appearance.ts` 管理偏好、系统变更及跨标签同步；`Layout.astro` 在正文绘制前恢复选择。偏好键为 `timeline-appearance`，新访客默认跟随系统。
 
 新增样式只使用 `src/styles/paper.css` 中的 `--paper-*` 变量。不要按主题写颜色，也不要用页面整体滤镜模拟深色模式。正文与辅助文字在页面、侧栏和选中背景上均有对比度测试。
