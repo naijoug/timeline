@@ -1,3 +1,4 @@
+import { monitoringSources } from './misalignment-monitoring';
 import { mistralLarge4Sources } from './mistral-large4-weights';
 import { agenticWorkflowSources } from './agentic-workflows-ga';
 import { carbonFusionSources } from './carbon-fusion-release';
@@ -73,5 +74,5 @@ const baseSources: Source[] = [
   source('muse', 'How We Designed Muse', 'Muse / Meta', 'https://introducing.muse.ai/', '工程文章'),
   source('cue', 'Your personal agents, on Cue', 'Cue / Manus', 'https://cue.im/', '官方文档'),
 ];
-export const sources: Source[] = [...baseSources.map(s => ({ ...s, ...instructionSourceReviews[s.id], ...historicalSourceReviews[s.id] })), ...instructionSources, ...historicalSources, ...recentSources, ...verified2026Sources, ...carbonFusionSources, ...agenticWorkflowSources, ...mistralLarge4Sources];
+export const sources: Source[] = [...baseSources.map(s => ({ ...s, ...instructionSourceReviews[s.id], ...historicalSourceReviews[s.id] })), ...instructionSources, ...historicalSources, ...recentSources, ...verified2026Sources, ...carbonFusionSources, ...agenticWorkflowSources, ...mistralLarge4Sources, ...monitoringSources];
 export const sourceMap = Object.fromEntries(sources.map(s => [s.id, s]));
