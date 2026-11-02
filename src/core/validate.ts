@@ -50,6 +50,18 @@ export function validateCatalog(catalog: Catalog): string[] {
       refs(section.sourceIds || [], sources, e.id);
       if (!section.label.trim() || !section.text.trim()) errors.push(`${e.id}: empty reading section`);
     }
+    ids(e.maps || [], `${e.id}: map`);
+    for (const map of e.maps || []) {
+      refs(map.sourceIds, sources, `${e.id}/${map.id}`);
+      if (!map.sourceIds.length || ![map.title, map.depictedTime, map.alt, map.description, map.scopeNote, map.creator, map.createdAt, map.license?.label, map.modificationNote].every(value => value?.trim()))
+        errors.push(`${e.id}/${map.id}: incomplete map provenance`);
+      if (!['reconstruction', 'schematic'].includes(map.kind) || !/^\/maps\/[a-z0-9-]+\.(svg|png|webp)$/.test(map.assetPath) || !Number.isInteger(map.width) || !Number.isInteger(map.height) || map.width <= 0 || map.height <= 0)
+        errors.push(`${e.id}/${map.id}: invalid map asset`);
+      for (const url of [map.originalUrl, map.license?.url].filter(Boolean)) {
+        try { if (new URL(url!).protocol !== 'https:') throw new Error(); }
+        catch { errors.push(`${e.id}/${map.id}: invalid map provenance URL`); }
+      }
+    }
     if (e.change) refs(e.change.sourceIds, sources, e.id);
     ids(e.recommendedResources || [], `${e.id}: recommended resource`);
     for (const resource of e.recommendedResources || []) {

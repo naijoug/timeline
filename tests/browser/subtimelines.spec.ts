@@ -7,6 +7,18 @@ const prefix=(process.env.TIMELINE_BASE_PATH || '').replace(/\/$/,'');
 const path=(value:string)=>`${prefix}/${value}`;
 async function ready(page:Page){await page.locator('[data-timeline-ready="true"]').waitFor();await page.evaluate(()=>document.fonts.ready);}
 async function capture(page:Page,info:TestInfo,name:string){const file=info.outputPath(`${name}.png`);await page.screenshot({path:file});await info.attach(name,{path:file,contentType:'image/png'});}
+async function readableMapSources(page:Page) {
+  await expect(page.locator('.map-evidence a')).toHaveCount(2);
+  // Theme links have a 160ms color transition; assert settled real contrast, not its first frame.
+  await expect.poll(async()=>{const contrasts=await page.locator('.map-evidence a').evaluateAll(links=>links.map(link=>{
+    const rgb=(value:string)=>value.match(/[\d.]+/g)!.map(Number);
+    const luminance=(color:number[])=>color.slice(0,3).map(v=>{const s=v/255;return s<=0.04045?s/12.92:((s+0.055)/1.055)**2.4;}).reduce((sum,v,i)=>sum+v*[0.2126,0.7152,0.0722][i],0);
+    const fg=rgb(getComputedStyle(link).color); let el:Element|null=link; let bg=[255,255,255];
+    while(el){const candidate=rgb(getComputedStyle(el).backgroundColor); if(candidate.length<4||candidate[3]>0){bg=candidate;break;} el=el.parentElement;}
+    const a=luminance(fg),b=luminance(bg);return (Math.max(a,b)+0.05)/(Math.min(a,b)+0.05);
+  }));
+  return Math.min(...contrasts);}).toBeGreaterThanOrEqual(4.5);
+}
 async function noOverflow(page:Page){expect(await page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth+1)).toBe(true);}
 
 test('curated main, union selection and native Back/Forward',async({page},info)=>{
@@ -218,4 +230,54 @@ test('new LongCat API stage leads the curated main and preserves release caveats
   await noOverflow(page); await capture(page, info, 'longcat-api-detail');
   await page.getByRole('link', { name: '返回时间线', exact: true }).click(); await ready(page);
   await expect(page.locator('[data-event-id="longcat-2-5-api"]')).toBeFocused();
+});
+
+test('Li Bubai publication line keeps edition precision, reading notes and exact return', async ({page}, info) => {
+  await page.goto(path('writers/authors/li-bu-bai/')); await ready(page);
+  await expect(page.locator('h1')).toHaveText('李不白作品年谱');
+  const cards=page.locator('.chronicle-event-button'); await expect(cards).toHaveCount(5);
+  await noOverflow(page); await capture(page,info,'li-bubai-author-line');
+  const ocean=page.locator('[data-event-id="li-bu-bai-ocean-2022"]');
+  await ocean.scrollIntoViewIfNeeded();
+  const destination=new URL((await ocean.getAttribute('href'))!,'http://127.0.0.1:4179').searchParams.get('return')!;
+  await ocean.click(); await expect(page.locator('.event-record')).toContainText('6月与7月差异');
+  await expect(page.locator('.event-record')).toContainText('2021年已有');
+  await expect(page.locator('.full-event-meta time')).toHaveText('2022 年');
+  await noOverflow(page); await capture(page,info,'li-bubai-edition-detail');
+  await page.getByRole('link',{name:'返回时间线',exact:true}).click(); await ready(page);
+  await expect(page).toHaveURL(`http://127.0.0.1:4179${destination}`); await expect(ocean).toBeFocused();
+  await page.locator('#timeline-notes').scrollIntoViewIfNeeded();
+  await expect(page.locator('#timeline-notes')).toContainText('不是出版顺序');
+  const liu=page.getByRole('checkbox',{name:'合并刘慈欣作品年谱',exact:true}); await liu.click(); await ready(page);
+  await expect(liu).toBeChecked(); await expect(cards).toHaveCount(30);
+  expect(new Set(await cards.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.eventId))).size).toBe(30);
+});
+
+test('Feishui sourced diagram loads in light and dark without disturbing reading return', async ({page}, info) => {
+  await page.emulateMedia({colorScheme:'light'});
+  await page.goto(path('china-history/collections/idiom-backgrounds/')); await ready(page);
+  const card=page.locator('[data-event-id="feishui"]'); await card.scrollIntoViewIfNeeded();
+  const destination=new URL((await card.getAttribute('href'))!,'http://127.0.0.1:4179').searchParams.get('return')!;
+  await card.click(); const figure=page.locator('#map-feishui-spatial-383'); await figure.scrollIntoViewIfNeeded();
+  const img=figure.locator('img'); await expect(img).toBeVisible();
+  await expect.poll(()=>img.evaluate(el=>(el as HTMLImageElement).naturalWidth)).toBe(640);
+  await expect(img).toHaveAttribute('alt',/两窗示意/);
+  await expect(figure).toContainText('不是383年绘制');
+  await expect(figure).toContainText('2026-11-02');
+  await noOverflow(page); await capture(page,info,'feishui-map-light');
+  const figureShot=info.outputPath('feishui-map-full-figure.png'); await figure.screenshot({path:figureShot}); await info.attach('feishui-map-full-figure',{path:figureShot,contentType:'image/png'});
+  const imageLink=figure.getByRole('link',{name:/打开原尺寸地图/});
+  await expect(imageLink).toHaveAttribute('href',path('maps/feishui-spatial-383.svg'));
+  await expect(imageLink).toHaveAttribute('target','_blank');
+  await imageLink.focus(); await expect(imageLink).toBeFocused();
+  const popupPromise=page.waitForEvent('popup'); await imageLink.click(); const popup=await popupPromise; await popup.waitForLoadState();
+  await expect(popup).toHaveURL(new URL(path('maps/feishui-spatial-383.svg'),page.url()).href);
+  await expect(popup.locator('svg')).toBeVisible(); await popup.close(); await expect(imageLink).toBeFocused();
+  await figure.locator('summary').click();
+  await expect(figure.getByRole('link',{name:'《淝水之战：胡人骑兵大败》教学材料',exact:true})).toBeVisible();
+  await readableMapSources(page);
+  await page.emulateMedia({colorScheme:'dark'}); await expect(page.locator('html')).toHaveAttribute('data-theme','dark'); await readableMapSources(page); await noOverflow(page); await capture(page,info,'feishui-map-dark');
+  const darkFigure=info.outputPath('feishui-map-full-figure-dark.png'); await figure.screenshot({path:darkFigure}); await info.attach('feishui-map-full-figure-dark',{path:darkFigure,contentType:'image/png'});
+  await page.getByRole('link',{name:'返回时间线',exact:true}).click(); await ready(page);
+  await expect(page).toHaveURL(`http://127.0.0.1:4179${destination}`); await expect(card).toBeFocused();
 });

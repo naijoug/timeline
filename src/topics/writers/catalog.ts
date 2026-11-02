@@ -1,3 +1,4 @@
+import { liBubaiEntity, liBubaiEvents, liBubaiSources } from './li-bubai';
 import { writerTimelines } from './timelines';
 import { greatHealerSources, greatHealerPatch } from './great-healer-depth';
 import { mingMicroscopeSources, mingMicroscopePatch } from './ming-microscope-depth';
@@ -27,6 +28,7 @@ const source = (
 ): Source => ({ id, title, publisher, url, type, locator, checkedAt });
 
 export const sources: Source[] = [
+  ...liBubaiSources,
   ...greatHealerSources,
   ...mingMicroscopeSources,
   ...writersReviewedSources,
@@ -50,6 +52,7 @@ export const sources: Source[] = [
 ];
 
 export const entities: Entity[] = [
+  liBubaiEntity,
   {
     id: "liu-cixin",
     name: "刘慈欣",
@@ -77,6 +80,7 @@ const duration = (start: number, end: number): TimeSpan => ({
 });
 
 export const periods: Period[] = [
+  { id: 'era-history-geography-reading', title: '历史地理通俗阅读（精选）', time: duration(2019, 2024), entityIds: ['li-bu-bai'], sourceIds: ['writers-li-bubai-profile', 'writers-li-spring-autumn'], summary: '编辑分组：李不白已收录的五个版本出版节点；这是阅读导航，不是对其完整创作生涯或文学史阶段的判断。', coverage: 'selected' },
   {
     id: "era-early-breakthrough",
     title: "世纪初探索与类型破局",
@@ -142,6 +146,7 @@ const event = (
 });
 
 export const events: TimelineEvent[] = [
+  ...liBubaiEvents,
   // ==================== 刘慈欣 (12 部) ====================
   event(
     "liu-cixin-whale-song",
@@ -2070,9 +2075,10 @@ export const writersCatalog: Catalog = {
     path: "/writers/",
     periodLabel: "创作时代",
     periodSegment: "eras",
-    description: "从刘慈欣的科幻宏构、紫金陈的社会派推理到马伯庸的历史微细叙事，区分期刊首发、单行本、译介与获奖节点，记录作品与出版脉络。",
-    coverage: "刘慈欣、紫金陈、马伯庸的精选作品年谱，不是完整书目。部分重点作品已细分发表阶段并核对具体书目；其余条目继续补证，不能把本轮核查日期视为全部重核。",
+    description: "从刘慈欣的科幻、紫金陈的推理、马伯庸的历史叙事到李不白的历史地理阅读，区分期刊首发、单行本、译介与获奖节点，记录作品与出版脉络。",
+    coverage: "刘慈欣、紫金陈、马伯庸、李不白的精选作品年谱，不是完整书目。部分重点作品已细分发表阶段并核对具体书目；其余条目继续补证，不能把本轮核查日期视为全部重核。",
     categories: [
+      { id: "history-geography", title: "历史地理读物" },
       { id: "sci-fi", title: "科幻文学" },
       { id: "suspense", title: "悬疑推理" },
       { id: "historical", title: "历史小说" },
@@ -2082,6 +2088,7 @@ export const writersCatalog: Catalog = {
       { id: "horror", title: "恐怖悬疑" },
     ],
     shortcuts: [
+      { title: "李不白作品年谱", path: "/writers/authors/li-bu-bai/" },
       { title: "刘慈欣作品年谱", path: "/writers/authors/liu-cixin/" },
       { title: "紫金陈作品年谱", path: "/writers/authors/zi-jin-chen/" },
       { title: "马伯庸作品年谱", path: "/writers/authors/ma-bo-yong/" },

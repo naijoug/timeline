@@ -12,8 +12,8 @@ const longNight = zijinReviewedEvents.find(event => event.id === 'zi-jin-chen-lo
 
 test('Zijin review replaces two existing novels without changing dates, authors or node count', () => {
   assert.deepEqual(validateCatalog(writersCatalog), []);
-  assert.equal(writersCatalog.events.length, 59);
-  assert.equal(writersCatalog.entities.length, 3);
+  assert.equal(writersCatalog.events.filter(event => !event.entityIds.includes('li-bu-bai')).length, 59);
+  assert.equal(writersCatalog.entities.filter(entity => entity.id !== 'li-bu-bai').length, 3);
   assert.deepEqual(badKids.time.start, { year: 2014, month: 8 });
   assert.deepEqual(longNight.time.start, { year: 2017, month: 1 });
   for (const event of zijinReviewedEvents) {

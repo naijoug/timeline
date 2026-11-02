@@ -8,7 +8,7 @@ import { createExplorerPayload } from '../src/core/explorer-payload';
 
 test('Liu review replaces two nodes and distinguishes July 2004 version from June 2005', () => {
   assert.deepEqual(validateCatalog(writersCatalog), []);
-  assert.equal(writersCatalog.events.length, 59);
+  assert.equal(writersCatalog.events.filter(event => !event.entityIds.includes('li-bu-bai')).length, 59);
   assert.equal(liuReviewedEvents[0].milestone, false);
   assert.equal(liuReviewedEvents[1].milestone, true);
   for (const event of liuReviewedEvents) assert.deepEqual(writersCatalog.events.filter(e => e.id === event.id), [event]);
