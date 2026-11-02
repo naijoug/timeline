@@ -193,7 +193,11 @@ test('idiom backgrounds distinguish story dates, preserve details and merge with
   await page.getByRole('heading', { name: '后世用语：词义与书证', exact: true }).scrollIntoViewIfNeeded();
   await noOverflow(page); await capture(page, info, 'idiom-feishui-reading');
   await page.getByRole('link', { name: '返回时间线', exact: true }).click(); await ready(page);
-  await page.getByRole('checkbox', { name: '合并战役与战争转折', exact: true }).check();
+  const wars = page.getByRole('checkbox', { name: '合并战役与战争转折', exact: true });
+  await expect(wars).not.toBeChecked();
+  // Selecting from an independent route performs a native navigation; check() may
+  // retry on the replacement checkbox and toggle it back. Click once, then assert.
+  await wars.click(); await ready(page); await expect(wars).toBeChecked();
   await expect(cards).toHaveCount(53);
   expect(new Set(await cards.evaluateAll(els => els.map(el => (el as HTMLElement).dataset.eventId))).size).toBe(53);
   await page.getByRole('checkbox', { name: '合并战役与战争转折', exact: true }).uncheck();
