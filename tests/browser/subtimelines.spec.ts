@@ -202,7 +202,7 @@ test('idiom backgrounds distinguish story dates, preserve details and merge with
   expect(new Set(await cards.evaluateAll(els => els.map(el => (el as HTMLElement).dataset.eventId))).size).toBe(53);
   await page.getByRole('checkbox', { name: '合并战役与战争转折', exact: true }).uncheck();
   await expect(cards).toHaveCount(2);
-  await page.getByRole('button', { name: '搜索当前主题', exact: true }).click();
+  if (info.project.name === 'mobile') await page.getByRole('button', { name: '搜索当前主题', exact: true }).click();
   await page.getByRole('textbox', { name: '搜索事件、对象或关键词', exact: true }).fill('破釜沉舟');
   await expect(cards).toHaveCount(1); await expect(page.locator('[data-event-id="julu"]')).toBeVisible();
 });
