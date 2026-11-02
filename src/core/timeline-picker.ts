@@ -8,7 +8,8 @@ export function selectedTimelineScrollLeft(
   // With several selected lines, a visible one is sufficient. Never cycle through them.
   if (selected.some(card => card.left >= viewport.left - 1 && card.right <= right + 1)) return;
   const candidates = selected.map(card => {
-    const delta = card.left < viewport.left ? card.left - viewport.left : card.right - right;
+    // Match the rail's scroll-snap-align:start; edge-only reveal can snap back to the previous card.
+    const delta = card.left - viewport.left;
     return Math.max(0, Math.min(viewport.scrollWidth - viewport.width, viewport.scrollLeft + delta));
   });
   return candidates.reduce((nearest, candidate) => Math.abs(candidate - viewport.scrollLeft) < Math.abs(nearest - viewport.scrollLeft) ? candidate : nearest);

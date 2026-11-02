@@ -126,6 +126,7 @@ test('selected reading paths stay discoverable without stealing rail scroll or f
   // A reader can inspect other paths; unrelated filtering must not drag the rail back.
   await rail.evaluate(el => el.scrollTo({ left: 0, behavior: 'instant' }));
   await expect.poll(() => rail.evaluate(el => el.scrollLeft)).toBe(0);
+  await page.getByRole('button', { name: '搜索当前主题', exact: true }).click();
   await page.getByRole('textbox', { name: '搜索事件、对象或关键词', exact: true }).fill('Agent');
   await expect(page).toHaveURL(/q=Agent/);
   expect(await rail.evaluate(el => el.scrollLeft)).toBe(0);
