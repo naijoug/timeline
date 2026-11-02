@@ -3,9 +3,9 @@ import { X } from 'lucide-react';
 import type { ExplorerCatalog } from '../../core/types';
 import type { ExplorerPresentation, ExplorerState } from '../../core/explorer';
 import { readingExplorerEvents } from '../../core/mobile-navigation';
-import { catalogBounds } from '../../core/catalog';
+import { readingBounds } from '../../core/timelines';
 import { civilYear, formatYear } from '../../core/time';
-import { applyFilterYears, clearExplorerFilters, selectFilterPeriod, validateFilterYearRange } from '../../core/filter-controls';
+import { applyFilterYears, clearExplorerFilters, selectFilterPeriod, validateFilterYearRange, filterControlBounds } from '../../core/filter-controls';
 import YearRange from './YearRange';
 import FilterChoice, { FilterSegments } from './FilterChoice';
 
@@ -18,15 +18,19 @@ export default function FilterSheet({ catalog, state, presentation, onApply, onC
   const [fromText, setFromText] = useState(String(civilYear(state.from)));
   const [toText, setToText] = useState(String(civilYear(state.to)));
   const dialog = useRef<HTMLDialogElement>(null);
-  const [min, max] = useMemo(() => catalogBounds(catalog), [catalog]);
-  const validation = validateFilterYearRange(fromText, toText, min, max);
+  const [min, max] = useMemo(() => readingBounds(catalog, state.timelineIds), [catalog, state.timelineIds]);
+  const [[controlMin, controlMax], setControlBounds] = useState(() => filterControlBounds(catalog, state));
+  const validation = validateFilterYearRange(fromText, toText, controlMin, controlMax);
   const count = useMemo(() => readingExplorerEvents(catalog, draft, presentation).length, [catalog, draft, presentation]);
   const change = (patch: Partial<ExplorerState>) => setDraft(value => ({ ...value, ...patch, selected: '' }));
-  const replace = (next: ExplorerState) => { setDraft(next); setFromText(String(civilYear(next.from))); setToText(String(civilYear(next.to))); };
+  const replace = (next: ExplorerState) => {
+    // Keep the scale stable while dragging; an explicit period can expand it, never shrink it.
+    setControlBounds(([low, high]) => [Math.min(low, next.from), Math.max(high, next.to)]);
+    setDraft(next); setFromText(String(civilYear(next.from))); setToText(String(civilYear(next.to))); };
   const changeYears = (from: number, to: number) => replace({ ...draft, from, to, period: '', selected: '' });
   const editYear = (side: 'from' | 'to', text: string) => {
     if (side === 'from') setFromText(text); else setToText(text);
-    const next = validateFilterYearRange(side === 'from' ? text : fromText, side === 'to' ? text : toText, min, max);
+    const next = validateFilterYearRange(side === 'from' ? text : fromText, side === 'to' ? text : toText, controlMin, controlMax);
     if (next.ok) change({ from: next.from, to: next.to, period: '' });
   };
   useEffect(() => {
@@ -65,7 +69,7 @@ export default function FilterSheet({ catalog, state, presentation, onApply, onC
       <header className="filter-sheet-heading"><div className="filter-sheet-handle" aria-hidden="true" /><div><h2 id="filter-sheet-title">筛选时间线</h2><button type="button" aria-label="关闭筛选，不保存更改" autoFocus onClick={onCancel}><X size={20}/></button></div></header>
       <div className="filter-sheet-body">
         <section className="filter-sheet-section" aria-labelledby="filter-time-title"><div className="filter-section-heading"><h3 id="filter-time-title">时间范围</h3><span>{formatYear(civilYear(draft.from))} — {formatYear(civilYear(draft.to))}</span></div>
-          <YearRange min={min} max={max} from={draft.from} to={draft.to} onChange={changeYears}/>
+          <YearRange min={controlMin} max={controlMax} from={draft.from} to={draft.to} onChange={changeYears}/>
           <div className="filter-sheet-presets"><button type="button" aria-pressed={draft.from === min && draft.to === max && !draft.period} onClick={() => replace(applyFilterYears(catalog, draft))}>全部时间</button>{catalog.topic.id !== 'china-history' && <><button type="button" aria-pressed={draft.from === max && draft.to === max && !draft.period} onClick={() => replace(applyFilterYears(catalog, draft, 1))}>{formatYear(civilYear(max))}</button><button type="button" aria-pressed={draft.from === Math.max(min, max - 4) && draft.to === max && !draft.period} onClick={() => replace(applyFilterYears(catalog, draft, 5))}>最近 5 年</button></>}</div>
           <div className="filter-sheet-years"><label>起始年份<input name="from" type="number" step="1" value={fromText} onChange={event => editYear('from', event.target.value)} aria-invalid={!validation.ok} aria-describedby="filter-year-hint"/></label><span aria-hidden="true">—</span><label>结束年份<input name="to" type="number" step="1" value={toText} onChange={event => editYear('to', event.target.value)} aria-invalid={!validation.ok} aria-describedby="filter-year-hint"/></label></div>
           <p id="filter-year-hint" className={!validation.ok ? 'filter-sheet-error' : 'filter-sheet-hint'} role={!validation.ok ? 'alert' : undefined}>{!validation.ok ? validation.error : min <= 0 ? '拖动两端，或输入年份。公元前用负数，没有公元 0 年。' : '拖动两端快速选择，也可以输入精确年份。'}</p>

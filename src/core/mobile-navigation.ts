@@ -1,5 +1,7 @@
 import { normalizedTimelineIds } from './timelines';
+import { selectFilterPeriod } from './filter-controls';
 import { catalogBounds } from './catalog';
+import { yearCoordinate } from './time';
 import { restoreExplorer, explorerQuery, explorerEvents, type ExplorerPresentation, type ExplorerState } from './explorer';
 import type { ExplorerCatalog, ExplorerEvent } from './types';
 
@@ -7,15 +9,26 @@ import type { ExplorerCatalog, ExplorerEvent } from './types';
 export function restoreReadingExplorer(search: string, catalog: ExplorerCatalog, period = '', category = '', presentation: ExplorerPresentation = {}, initialTimelineId = ''): ExplorerState {
   const state = restoreExplorer(search, catalog, period, category, presentation);
   const params = new URLSearchParams(search);
-  if (!params.has('from') && !params.has('to') && !state.period) {
-    [state.from, state.to] = catalogBounds(catalog);
-  }
   const fixedLine = catalog.timelines?.find(line => line.id === initialTimelineId);
   const requested = params.has('lines') ? (params.get('lines') || '').split(',') : [];
   const selected = normalizedTimelineIds(catalog, requested);
   // Old filtered links retain their original scope; only a fresh theme opens its curated mainline.
   const defaultId = !search && !period && !category ? catalog.topic.defaultTimelineId : undefined;
   const timelineIds = fixedLine ? [fixedLine.id] : selected.length ? selected : params.has('lines') && params.get('lines') !== 'all' ? (catalog.topic.defaultTimelineId ? [catalog.topic.defaultTimelineId] : []) : defaultId ? [defaultId] : [];
+  const defaults = selectFilterPeriod(catalog, { ...state, timelineIds }, state.period);
+  const [topicMin, topicMax] = catalogBounds(catalog);
+  const explicitYear = (name: string) => /^-?\d{1,6}$/.test(params.get(name) || '') && Number(params.get(name)) !== 0;
+  const hasFrom = explicitYear('from'), hasTo = explicitYear('to');
+  const endpoint = (name: string) => Math.max(topicMin, Math.min(topicMax, yearCoordinate(Number(params.get(name)))));
+  // Explicit URL endpoints retain their meaning, even when the line has no events there.
+  // Missing endpoints use the reading domain without turning a disjoint interval around.
+  state.from = hasFrom ? endpoint('from') : defaults.from;
+  state.to = hasTo ? endpoint('to') : defaults.to;
+  if (state.from > state.to) {
+    if (!hasTo) state.to = state.from;
+    else if (!hasFrom) state.from = state.to;
+    else [state.from, state.to] = [state.to, state.from];
+  }
   const all = timelineIds.length ? params.get('all') !== '0' : state.all;
   return { ...state, timelineIds, all, selected: '', order: params.get('order') === 'asc' ? 'asc' : params.get('order') === 'desc' ? 'desc' : catalog.topic.id === 'ai' ? 'desc' : 'asc' };
 }
