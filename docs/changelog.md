@@ -10,7 +10,7 @@
 
 ## 日常维护
 
-- [2026-11-02 UTC：子时间线与融合阅读](subtimelines/verification-2026-11-02.md) · [数据模型](subtimelines/design.md)；云端阶段性提交，未发布。
+- [2026-11-02 UTC：子时间线与融合阅读](subtimelines/verification-2026-11-02.md) · [数据模型](subtimelines/design.md) · [真实上游与浏览器验收](subtimelines/publication-2026-11-02.md)；独立/融合阅读、分阶段提交与桌面/窄屏回归。
 
 - [2026-10-30 00:00 UTC：失配监控的证据与接口边界](maintenance-2026-10-30-0000.md) · [AI 雷达](ai-radar-2026-10-30-0000.md)
 - [2026-10-29 20:00 UTC：《大医》出版与阅读边界](maintenance-2026-10-29-2000.md) · [AI 雷达](ai-radar-2026-10-29-2000.md)
