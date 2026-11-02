@@ -1,4 +1,4 @@
-import { selectedTimelines, normalizedTimelineIds, timelineMembership } from '../../core/timelines';
+import { selectedTimelines, normalizedTimelineIds, timelineMembership, readingBounds } from '../../core/timelines';
 import FilterSheet from './FilterSheet';
 import { selectedTimelineScrollLeft } from '../../core/timeline-picker';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
@@ -39,7 +39,8 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   const closeFilters = () => { setRangeOpen(false); requestAnimationFrame(() => filterTrigger.current?.focus({ preventScroll: true })); };
   const update = (patch: Partial<ExplorerState>) => setState(s => ({ ...s, ...patch }));
   const query = useMemo(() => (view: ExplorerState) => readingExplorerQuery(view, presentation.urlFormat === 'ai' ? aiViewQuery : presentation.serializeState || explorerQuery), [presentation]);
-  const [min, max] = useMemo(() => catalogBounds(catalog), [catalog]);
+  const [min, max] = useMemo(() => readingBounds(catalog, state.timelineIds), [catalog, state.timelineIds]);
+  const [topicMin, topicMax] = useMemo(() => catalogBounds(catalog), [catalog]);
   const categoryTitle = (id: string) => topic.categories.find(c => c.id === id)?.title || id;
   const info = (event: ExplorerEvent) => presentation.events?.[event.id] || {};
   const title = (event: ExplorerEvent) => info(event).title || event.title;
@@ -124,7 +125,7 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   }, [ready, rangeOpen]);
   const results = useMemo(() => readingExplorerEvents(catalog, state, presentation), [catalog, state, presentation]);
   const branchSides = useMemo(() => new Map(results.map((event, index) => [event.id, index % 2 ? 'right' : 'left'])), [results]);
-  const newestEvent = useMemo(() => explorerEvents(catalog, { ...restoreReadingExplorer('', catalog, '', '', presentation), from: min, to: max, all: true, period: '', category: '', q: '', scope: '', timelineIds: [] }, presentation).at(-1), [catalog, min, max, presentation]);
+  const newestEvent = useMemo(() => explorerEvents(catalog, { ...restoreReadingExplorer('', catalog, '', '', presentation), from: topicMin, to: topicMax, all: true, period: '', category: '', q: '', scope: '', timelineIds: [] }, presentation).at(-1), [catalog, topicMin, topicMax, presentation]);
   const activeFilters: { id: string; label: string; clear: () => void }[] = [];
   if (state.q) activeFilters.push({ id: 'search', label: `搜索：${state.q}`, clear: () => update({ q: '' }) });
   if (state.scope) activeFilters.push({ id: 'scope', label: presentation.scopes?.find(scope => scope.id === state.scope)?.title || state.scope, clear: () => update({ scope: '' }) });
@@ -160,7 +161,7 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   };
   const chooseTimelines = (ids: string[]) => {
     const timelineIds = normalizedTimelineIds(catalog, ids);
-    const next = { ...clearExplorerFilters(catalog, state), timelineIds };
+    const next = clearExplorerFilters(catalog, { ...state, timelineIds });
     if (initialTimelineId || initialPeriod) { location.href = sitePath(topic.path) + query(next); return; }
     // A reading-path change is navigable; filter edits still replace their current history entry.
     const previousUrl = location.pathname + query(state) + location.hash;
