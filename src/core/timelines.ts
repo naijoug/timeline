@@ -1,3 +1,4 @@
+import { catalogBounds } from './catalog';
 import type { ExplorerCatalog, ExplorerEvent, TimelineDefinition, TimelineEntry } from './types';
 
 /** Explicit ID lists are the authoring format; no inferred category/tag rules. */
@@ -27,4 +28,11 @@ export function timelineEvents<Event extends ExplorerEvent>(catalog: ExplorerCat
     const entries = membership.get(event.id);
     return entries && (!keyOnly || entries.some(entry => entry.importance === 'key'));
   });
+}
+
+/** The reading domain uses every explicit member, never the currently filtered results. */
+export function readingBounds(catalog: ExplorerCatalog, ids: string[] = []): [number, number] {
+  const events = timelineEvents(catalog, ids);
+  // No selected/usable members: keep a safe topic domain while the line stays empty.
+  return events.length ? catalogBounds({ ...catalog, periods: [], events }) : catalogBounds(catalog);
 }
