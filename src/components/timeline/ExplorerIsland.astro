@@ -2,7 +2,7 @@
 import TopicExplorer from './TopicExplorer';
 import type { ExplorerTopic } from '../../core/topic-payloads.server';
 interface Props {
-  topicId: ExplorerTopic; initialPeriod?: string; initialCategory?: string; viewPath?: string;
+  topicId: ExplorerTopic; initialPeriod?: string; initialCategory?: string; viewPath?: string; initialTimelineId?: string; notesHref?: string;
 }
 ---
 <!-- Install before the visible SSR form, while the React chunk is still loading. -->

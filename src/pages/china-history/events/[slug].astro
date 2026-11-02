@@ -19,7 +19,7 @@ const entityHref = (id:string) => sitePath(`/china-history/objects/${id}/`);
 <Layout title={`${event.title} · 中国历史`} description={event.summary} topicTitle="中国历史" topicPath="/china-history/">
   <EventRecord topicPath="/china-history/" topicTitle="中国历史" title={event.title} category={category.title} date={formatTime(event.time)} summary={event.summary} significance={event.significance} milestone={event.milestone} details={event.details}
     note={event.note || (event.time.start.day ? '按资料所列公历日期展示。' : event.time.start.month ? '按月份精度展示，不补造具体日期。' : '按年份精度展示；年份节点不表示事件发生于某个确定月日。')} sources={sources}
-    related={[...periods.map(period=>({title:period.title,label:formatTime(period.time),href:sitePath(`/china-history/dynasties/${period.id}/`)})), ...objects.map(o=>({title:o.name,label:o.type,href:entityHref(o.id)}))]}
+    related={[...periods.map(period=>({title:period.title,label:formatTime(period.time),href:sitePath(`/china-history/dynasties/${period.id}/`)})), ...objects.map(o=>({title:o.name,label:o.type,href:entityHref(o.id)})), ...(chinaHistory.timelines || []).filter(line => line.entries.some(entry => entry.eventId === event.id)).map(line => ({ title: line.title, label: '所属时间线', href: sitePath(line.path) }))]}
     facts={[{label:'时间精度',value:event.time.start.day?'日期':event.time.start.month?'月份':'年份'},{label:'类别',value:category.title},{label:'时间类型',value:event.time.kind==='duration'?'持续过程':event.time.kind==='uncertain'?'日期范围待考':'时间节点'}]}>
     <div slot="related"><Relations catalog={chinaHistory} eventId={event.id} entityHref={entityHref} /></div>
     <RecommendedReading slot="further-reading" resources={event.recommendedResources} />

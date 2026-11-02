@@ -1,8 +1,9 @@
+import { timelineEvents } from './timelines';
 import type { ExplorerCatalog, ExplorerEvent, TimelineView } from './types';
 import { readAiView } from './ai-view-state';
 import { defaultView, readView, selectEvents, viewQuery } from './catalog';
 
-export interface ExplorerState extends TimelineView { scope: string; order?: 'asc' | 'desc' }
+export interface ExplorerState extends TimelineView { scope: string; order?: 'asc' | 'desc'; timelineIds?: string[] }
 export interface EventPresentation {
   title?: string;
   metadata?: string;
@@ -30,7 +31,9 @@ export interface ExplorerPresentation {
 export function explorerEvents<Event extends ExplorerEvent>(catalog: ExplorerCatalog<Event>, state: ExplorerState, presentation: ExplorerPresentation = {}): Event[] {
   const scope = presentation.scopes?.find(scope => scope.id === state.scope);
   const allowed = scope ? new Set(scope.eventIds) : undefined;
-  return selectEvents(catalog, state).filter(event => !allowed || allowed.has(event.id));
+  const selected = state.timelineIds?.length ? { ...catalog, events: timelineEvents(catalog, state.timelineIds, !state.all) } : catalog;
+  // Per-line importance overrides the event's legacy/global milestone flag.
+  return selectEvents(selected, state.timelineIds?.length ? { ...state, all: true } : state).filter(event => !allowed || allowed.has(event.id));
 }
 export function defaultExplorer(catalog: ExplorerCatalog, period = '', category = '', presentation: ExplorerPresentation = {}): ExplorerState {
   const base = defaultView(catalog, period, category);

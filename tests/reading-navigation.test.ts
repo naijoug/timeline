@@ -12,14 +12,16 @@ import { writersCatalog } from '../src/topics/writers/catalog';
 
 const source = (path: string) => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
 
-test('AI initially exposes the newest current data, with no fixed-year range or hydration-only correction', () => {
+test('AI opens its curated mainline while the latest-data link remains independent, with no fixed-year range', () => {
   const presentation = aiExplorerPresentation();
   const state = restoreReadingExplorer('', aiCatalog, '', '', presentation);
   const [min, max] = catalogBounds(aiCatalog);
   assert.deepEqual([state.from, state.to], [min, max]);
   assert.deepEqual(aiPresentation.defaultRange, [min, max]);
   assert.equal(state.order, 'desc');
-  const all = readingExplorerEvents(aiCatalog, { ...state, all:true }, presentation);
+  const all = readingExplorerEvents(aiCatalog, { ...state, all:true, timelineIds:[] }, presentation);
+  assert.deepEqual(state.timelineIds, ['ai-milestones']);
+  assert.equal(readingExplorerEvents(aiCatalog, state, presentation).length, 49);
   assert.equal(readingExplorerEvents(aiCatalog, state, presentation)[0].time.start.year, all[0].time.start.year);
   assert.equal(aiPresentation.latestEvent, all[0].id);
   assert.equal(aiPresentation.defaultEvent, all[0].id);

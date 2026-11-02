@@ -1,0 +1,10 @@
+---
+import TimelinePage from '../../../components/timeline/TimelinePage.astro';
+import { aiCatalog } from '../../../topics/ai/adapter';
+import { aiTimelines } from '../../../topics/ai/timelines';
+export function getStaticPaths() {
+  return aiTimelines.map(timeline => ({ params: { slug: timeline.id }, props: { timeline } }));
+}
+const { timeline } = Astro.props;
+---
+<TimelinePage catalog={aiCatalog} timeline={timeline} />

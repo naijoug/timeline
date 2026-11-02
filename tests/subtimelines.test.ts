@@ -56,3 +56,54 @@ test('validation rejects invalid references, duplicates, paths, themes, importan
   const errors = validateCatalog(broken).join('\n');
   for (const fragment of ['unknown-event','invalid timeline membership','timeline parent cycle','timeline theme','duplicate timeline path','invalid timeline entry','unknown timeline parent','unknown default timeline']) assert.ok(errors.includes(fragment), fragment);
 });
+
+import { restoreReadingExplorer, readingExplorerEvents, readingExplorerQuery, eventRecordHref, safeTimelineReturn } from '../src/core/mobile-navigation';
+import { aiExplorerPresentation } from '../src/topics/ai/explorer';
+import { aiViewQuery } from '../src/core/ai-view-state';
+import { clearExplorerFilters } from '../src/core/filter-controls';
+
+test('independent and merged line state survives URL serialization, filters and safe record returns', () => {
+  const presentation = aiExplorerPresentation();
+  const payload = createExplorerPayload(aiCatalog, presentation);
+  for (const ids of [[main],[models],[agents],[main,models],[models,agents],[]]) {
+    const state = { ...restoreReadingExplorer('?lines=all&all=1', payload.catalog, '', '', payload.presentation), timelineIds:ids, all:false, q:'GPT', scope:'china', order:'asc' as const };
+    const query = readingExplorerQuery(state, aiViewQuery);
+    const restored = restoreReadingExplorer(query, payload.catalog, '', '', payload.presentation);
+    assert.deepEqual(restored, state);
+    assert.deepEqual(readingExplorerEvents(payload.catalog, state, payload.presentation), readingExplorerEvents(payload.catalog, restored, payload.presentation));
+    const back = `/timeline/ai/${query}#event-gpt-4-report`;
+    const record = eventRecordHref('/timeline/ai/models/gpt/gpt-4/', back);
+    assert.equal(new URL(record,'https://example.com').searchParams.get('return'), back);
+    assert.equal(safeTimelineReturn(back,'https://example.com','/timeline/ai/'),back);
+  }
+  const standalone = restoreReadingExplorer('?lines=all', payload.catalog,'','',payload.presentation,agents);
+  assert.deepEqual(standalone.timelineIds,[agents]);
+  assert.equal(readingExplorerEvents(payload.catalog, standalone, payload.presentation).length,46);
+  assert.deepEqual(clearExplorerFilters(payload.catalog,standalone).timelineIds,[agents], 'reset filters does not silently leave a reading path');
+  assert.deepEqual(restoreReadingExplorer('?lines=unknown',payload.catalog,'','',payload.presentation).timelineIds,[main]);
+  assert.deepEqual(restoreReadingExplorer('?all=1&lane=models',payload.catalog,'','',payload.presentation).timelineIds,[], 'legacy filtered URLs do not become curated mainline URLs');
+});
+test('merged filtering deduplicates before counting, using any selected line importance', () => {
+  const state = {...restoreReadingExplorer('',aiCatalog), timelineIds:[main,models], all:true};
+  const events = readingExplorerEvents(aiCatalog,state);
+  assert.equal(new Set(events.map(event => event.id)).size, events.length);
+  const expected = new Set([...timelineEvents(aiCatalog,[main]),...timelineEvents(aiCatalog,[models])].map(event => event.id));
+  assert.equal(events.length,expected.size);
+  const key = readingExplorerEvents(aiCatalog,{...state,all:false});
+  assert.ok(key.some(event => event.id==='transformer'));
+  assert.ok(!key.some(event => event.id==='gpt-4o-mini'));
+});
+
+import { readFileSync } from 'node:fs';
+test('freshness and notes preserve the originating view, and restoration responds to popstate state changes', () => {
+  const explorer = readFileSync('src/components/timeline/Explorer.tsx','utf8');
+  assert.match(explorer, /returnPath\(\) \+ '#timeline-freshness'/);
+  assert.match(explorer, /rememberReturn\(undefined, state, '#timeline-freshness'\)/);
+  assert.match(explorer, /\[ready, state, query\]/);
+  assert.match(explorer, /history\.state\?\.timelinePosition/);
+  const notes = readFileSync('src/components/timeline/TimelinePage.astro','utf8');
+  assert.match(notes, /\['pointerover', 'focusin', 'contextmenu', 'auxclick'\]/);
+  assert.match(notes, /location\.pathname \+ location\.search \+ '#timeline-notes'/);
+  assert.match(notes, /class="timeline-page-shell"/);
+  assert.match(readFileSync('src/styles/collections.css','utf8'), /\.timeline-page-shell \.chronicle-app \{ display:contents;/);
+});

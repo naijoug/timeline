@@ -1,20 +1,18 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import TimelinePage from './TimelinePage.astro';
 import Relations from './Relations.astro';
 import type { Catalog, Collection } from '../../core/types';
+import { timelineEvents } from '../../core/timelines';
 import { formatTime } from '../../core/time';
 import { sitePath } from '../../lib/paths';
-import '../../styles/collections.css';
 interface Props { catalog: Catalog; collection: Collection; entityHref?: (id:string)=>string }
 const { catalog, collection, entityHref } = Astro.props;
-const selected = catalog.events.filter(e => collection.entries.map(entry => entry.eventId).includes(e.id));
-const subset = { ...catalog, events: selected, relations: catalog.relations?.filter(r => collection.entries.map(entry => entry.eventId).includes(r.fromEventId) && (!r.toEventId || collection.entries.map(entry => entry.eventId).includes(r.toEventId))) };
+const selected = timelineEvents(catalog, [collection.id]);
+const ids = new Set(selected.map(event => event.id));
+const subset = { ...catalog, events: selected, relations: catalog.relations?.filter(relation => ids.has(relation.fromEventId) && (!relation.toEventId || ids.has(relation.toEventId))) };
 ---
-<Layout title={collection.title} description={collection.description} topicTitle={catalog.topic.title} topicPath={catalog.topic.path}>
-  <a class="back-link" href={sitePath(catalog.topic.path)}>返回{catalog.topic.title}</a>
-  <header class="entity-hero"><div class="eyebrow">精选专题 · {selected.length} 个节点</div><h1>{collection.title}</h1><p>{collection.description}</p></header>
-  <p class="coverage-note">{collection.note}</p>
-  {catalog.periods.some(p => selected.some(e => e.periodIds.includes(p.id))) && <section class="collection-context"><h2>时期与归属</h2>{catalog.periods.filter(p => selected.some(e => e.periodIds.includes(p.id))).map(p => <p><a href={sitePath(`${catalog.topic.path}${catalog.topic.periodSegment || 'periods'}/${p.id}/`)}>{p.title} · {formatTime(p.time)}</a> — {p.summary}</p>)}</section>}
-  <section aria-label="专题节点"><h2>沿着节点阅读</h2><ol class="collection-nodes">{collection.entries.map(entry => entry.eventId).map(id => { const e = selected.find(e => e.id === id)!; return <li><time>{formatTime(e.time)}</time><div><a href={sitePath(`${catalog.topic.path}events/${e.id}/`)}>{e.title}</a><p>{e.summary}</p><small>{catalog.topic.categories.find(c => c.id === e.category)?.title}</small></div></li>; })}</ol></section>
-  <Relations catalog={subset} entityHref={entityHref} />
-</Layout>
+<!-- Legacy collection paths keep their content, now using the shared reading UI. -->
+<TimelinePage catalog={catalog} timeline={collection}>
+  {catalog.periods.some(period => selected.some(event => event.periodIds.includes(period.id))) && <section class="collection-context"><h2>时期与归属</h2>{catalog.periods.filter(period => selected.some(event => event.periodIds.includes(period.id))).map(period => <p><a href={sitePath(`${catalog.topic.path}${catalog.topic.periodSegment || 'periods'}/${period.id}/`)}>{period.title} · {formatTime(period.time)}</a> — {period.summary}</p>)}</section>}
+  <Relations catalog={subset} entityHref={entityHref} returnPath={`${sitePath(collection.path)}#timeline-notes`} />
+</TimelinePage>

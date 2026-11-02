@@ -2066,7 +2066,7 @@ for (let i = sources.length - 1; i >= 0; i--) if (retiredSourceIds.has(sources[i
 export const writersCatalog: Catalog = {
   topic: {
     id: "writers",
-    title: "作家作品",
+    title: "喜爱作家",
     path: "/writers/",
     periodLabel: "创作时代",
     periodSegment: "eras",

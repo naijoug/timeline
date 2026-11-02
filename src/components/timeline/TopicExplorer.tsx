@@ -10,7 +10,7 @@ import type { ExplorerTopic } from '../../core/topic-payloads.server';
 const server = import.meta.env.SSR ? await import('../../core/topic-payloads.server') : undefined;
 type Payload = ReturnType<typeof createExplorerPayload>;
 export default function TopicExplorer({ topicId, ...view }: {
-  topicId: ExplorerTopic; initialPeriod?: string; initialCategory?: string; viewPath?: string;
+  topicId: ExplorerTopic; initialPeriod?: string; initialCategory?: string; viewPath?: string; initialTimelineId?: string; notesHref?: string;
 }) {
   const [payload] = useState<Payload>(() => {
     if (server) return server.topicPayload(topicId);

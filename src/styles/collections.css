@@ -16,3 +16,38 @@
 .collection-cta { display:inline-flex; align-items:center; border:1px solid var(--paper-line); border-radius:3px; padding:9px 13px; color:var(--paper-ink); font-size:13px; text-decoration:none; }
 .collection-cta:hover { background:var(--paper-surface); }
 @media(max-width:760px) { .collection-nodes li { grid-template-columns:1fr; gap:8px; } }
+
+/* Reading paths are independent membership, not another exclusive category. */
+.timeline-breadcrumb { display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:0 0 18px; color:var(--paper-muted); font-size:12px; line-height:1.8; }
+.timeline-breadcrumb a { color:var(--paper-ink); text-underline-offset:4px; }
+html .chronicle-app .overview-heading.has-line-title h1 { white-space:normal; overflow-wrap:anywhere; }
+.timeline-navigation { margin-top:22px; }
+.timeline-navigation-heading { display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+.timeline-navigation-heading h2 { font-size:13px; margin:0; font-weight:600; }
+.timeline-navigation-heading>a { font-size:12px; color:var(--paper-muted); text-underline-offset:4px; padding-block:8px; }
+.timeline-navigation-heading>a.is-active { color:var(--paper-ink); font-weight:600; }
+.timeline-navigation-hint,.timeline-scope-note { color:var(--paper-muted); font-size:12px; line-height:1.85; margin:4px 0 13px; }
+.timeline-scope-note { margin:12px 0 0; max-width:78ch; }
+.subtimeline-options { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; }
+.timeline-option { border:1px solid var(--paper-line); border-radius:5px; padding:10px 12px; min-width:0; background:var(--paper-bg); }
+.timeline-option.is-selected { border-color:var(--paper-muted); background:var(--paper-surface); }
+.timeline-option label { display:flex; gap:9px; align-items:flex-start; cursor:pointer; font-size:13px; line-height:1.7; min-height:44px; }
+.timeline-option input { accent-color:var(--paper-ink); width:16px; height:16px; flex:none; margin-top:4px; }
+.timeline-option small { display:block; color:var(--paper-muted); font-size:11px; font-weight:400; }
+.timeline-option>a,.timeline-notes-link { display:inline-flex; align-items:center; gap:5px; color:var(--paper-muted); font-size:11px; text-underline-offset:4px; padding-block:7px; }
+.timeline-option>a { margin-left:25px; }
+.timeline-option input:focus-visible,.timeline-option>a:focus-visible,.timeline-navigation-heading>a:focus-visible { outline:2px solid var(--paper-ink); outline-offset:4px; }
+html .chronicle-event-copy .timeline-event-lines,html .chronicle-event-copy .timeline-entry-context { font-size:11px; line-height:1.8; color:var(--paper-muted); margin-top:8px; padding-top:8px; border-top:1px solid var(--paper-line); }
+.timeline-reading-notes { max-width:900px; margin:40px auto; padding:24px 40px; color:var(--paper-text); line-height:1.9; font-size:14px; scroll-margin-top:calc(var(--navigation-header-height,64px) + 16px); }
+.timeline-reading-notes h2 { color:var(--paper-ink); font-size:20px; margin-top:28px; }
+.timeline-reading-notes a { color:var(--paper-ink); text-underline-offset:4px; }
+@media(max-width:760px) {
+  .subtimeline-options { grid-template-columns:none; grid-auto-flow:column; grid-auto-columns:minmax(220px,76%); overflow-x:auto; padding:3px 3px 10px; scroll-snap-type:x proximity; }
+  .timeline-option { scroll-snap-align:start; }
+  .timeline-navigation { margin-top:16px; }
+  .timeline-navigation-hint { font-size:11px; }
+  .timeline-reading-notes { padding:20px; margin:20px auto; }
+}
+
+/* Let the shared sticky header cover the static, source-rich notes too. */
+html .timeline-page-shell .chronicle-app { display:contents; }
