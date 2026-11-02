@@ -11,9 +11,9 @@ import { validateCatalog } from '../src/core/validate';
 const event = (id: string) => writersCatalog.events.find(event => event.id === id)!;
 const source = (id: string) => writersCatalog.sources.find(source => source.id === id)!;
 
-test('writers remain limited to the three existing authors and pass catalog validation', () => {
+test('writers include the requested history-geography author and pass catalog validation', () => {
   assert.deepEqual(validateCatalog(writersCatalog), []);
-  assert.deepEqual(writersCatalog.entities.map(entity => entity.id), ['liu-cixin', 'zi-jin-chen', 'ma-bo-yong']);
+  assert.deepEqual(writersCatalog.entities.map(entity => entity.id), ['li-bu-bai', 'liu-cixin', 'zi-jin-chen', 'ma-bo-yong']);
   assert.equal(writersReviewedEventIds.length, 13);
   for (const id of writersReviewedEventIds) assert.equal(writersCatalog.events.filter(event => event.id === id).length, 1, id);
 });

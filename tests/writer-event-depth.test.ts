@@ -8,7 +8,7 @@ import { validateCatalog } from '../src/core/validate';
 const ids = ['ma-bo-yong-lychee-of-changan', 'ma-bo-yong-taibai-jinxing', 'ma-bo-yong-peach-blossom-fine'];
 test('writer depth review keeps publication precision and distinguishes editorial interpretation', () => {
   assert.deepEqual(validateCatalog(writersCatalog), []);
-  assert.equal(writersCatalog.events.length, 59);
+  assert.equal(writersCatalog.events.filter(event => !event.entityIds.includes('li-bu-bai')).length, 59);
   for (const [index, id] of ids.entries()) {
     const event = writersCatalog.events.find(event => event.id === id)!;
     assert.deepEqual(event.time.start, [{ year: 2022, month: 10 }, { year: 2023, month: 6 }, { year: 2025, month: 6 }][index]);

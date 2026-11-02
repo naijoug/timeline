@@ -1,7 +1,9 @@
+import { liBubaiTimeline } from './li-bubai';
 import type { TimelineDefinition } from '../../core/types';
 import { timelineEntries } from '../../core/timelines';
 
 export const writerTimelines: TimelineDefinition[] = [
+  liBubaiTimeline,
   { id: 'liu-cixin', themeId: 'writers', kind: 'entity', title: '刘慈欣作品年谱', path: '/writers/authors/liu-cixin/',
     description: '刘慈欣的已收录作品、发表阶段与传播节点。',
     note: '精选作品年谱，不是完整生平或完整书目；连载、成书、译介与获奖分别记录，不将不同阶段当作不同作品。',
