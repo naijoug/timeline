@@ -15,7 +15,8 @@
     "check:performance": "node scripts/check-performance.mjs",
     "test:hydration": "node --experimental-vm-modules scripts/check-hydration.mjs",
     "check:reading": "node --import tsx scripts/check-reading-ui.ts",
-    "check:subtimelines": "node --import tsx scripts/check-subtimelines.ts"
+    "check:subtimelines": "node --import tsx scripts/check-subtimelines.ts",
+    "test:browser": "playwright test"
   },
   "dependencies": {
     "@astrojs/react": "7.0.0",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
+    "@playwright/test": "1.57.0",
     "@types/node": "^22.20.4",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",

@@ -158,3 +158,9 @@ Fira Code Latin variable WOFF2 来自 `@fontsource-variable/fira-code@5.3.0` 的
 AI 的全新主题入口默认 49 节点主线；有明确旧式筛选的 URL 保持旧语义，“全部事件”可以打开完整 295 事件索引。这里的数目是 2026-11-02 本次迁移快照，不是自动承诺的维护指标。
 
 完整模型、来源与长文仍由静态详情页负责。补充阅读说明保留在静态页，移动导航打开时同样隔离背景焦点。实现与边界见 [子时间线数据模型](subtimelines/design.md) 和 [本轮验证](subtimelines/verification-2026-11-02.md)。
+
+### 真浏览器子时间线验收
+
+`npm run build` 后，运行 `npx playwright install --with-deps chromium`、`npm run test:browser`。测试使用仅 localhost 的静态服务，不会发布站点。`TIMELINE_BASE_PATH` / `TIMELINE_OUT_DIR` 必须与构建一致。结果在 `test-results/browser-root` 或 `test-results/browser-pages`；截图用于实际视觉复核，不自动生成或批准 golden。
+
+PR 验收工作流只读、无 secrets、无部署；不要改为 `pull_request_target`。Pages 发布触发条件和权限不因验收工作流改变。CI 安装 Noto CJK 回退字体，使中文布局可检查。
