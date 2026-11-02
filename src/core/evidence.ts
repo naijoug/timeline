@@ -1,6 +1,6 @@
 import type { Catalog, EventRelation, TimelineEvent } from './types';
 export function eventSourceIds(event: TimelineEvent): string[] {
-  return [...new Set([...event.sourceIds, ...(event.change?.sourceIds || []), ...(event.details?.flatMap(s => s.sourceIds || []) || []), ...(event.facts?.flatMap(s => s.sourceIds || []) || [])])];
+  return [...new Set([...event.sourceIds, ...(event.change?.sourceIds || []), ...(event.details?.flatMap(s => s.sourceIds || []) || []), ...(event.facts?.flatMap(s => s.sourceIds || []) || []), ...(event.maps?.flatMap(map => map.sourceIds) || [])])];
 }
 export function relationsFor(catalog: Catalog, eventId: string) {
   return (catalog.relations || []).filter(r => r.fromEventId === eventId || r.toEventId === eventId);

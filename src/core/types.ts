@@ -45,6 +45,25 @@ export interface RecommendedResource {
   publishedAt?: string;
   locator?: string;
 }
+/** Detail-only geography, with the depicted period distinct from the image's creation. */
+export interface HistoricalMap {
+  id: string;
+  title: string;
+  depictedTime: string;
+  kind: 'reconstruction' | 'schematic';
+  assetPath: string;
+  width: number;
+  height: number;
+  alt: string;
+  description: string;
+  scopeNote: string;
+  creator: string;
+  createdAt: string;
+  license: { label: string; url?: string };
+  originalUrl?: string;
+  modificationNote: string;
+  sourceIds: string[];
+}
 /** A sourced statement, never an edge inferred merely from chronological order. */
 export interface EventRelation {
   id: string;
@@ -110,6 +129,7 @@ export interface TimelineEvent {
   facts?: { label: string; text: string; sourceIds?: string[] }[];
   details?: ReadingSection[];
   recommendedResources?: RecommendedResource[];
+  maps?: HistoricalMap[];
   change?: {
     baseline: string;
     baselineEventId?: string;

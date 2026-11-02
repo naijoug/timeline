@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="730" viewBox="0 0 640 730" role="img" aria-labelledby="title desc">
+  <title id="title">淝水之战：两组史料空间关系</title>
+  <desc id="desc">383年背景，2026年原创示意，不按比例。上窗表现史书所述从寿阳城向北望八公山。下窗表现教育局教学材料所述前秦在淝水西岸、东晋在东岸。两窗不作坐标对位；不复原古河道、城墙、营地或行军路线。</desc>
+  <rect width="640" height="730" fill="#fff"/>
+  <g font-family="'Fira Code','PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-serif" fill="#171717">
+    <text x="30" y="45" font-size="26" font-weight="700">淝水之战 · 383年背景</text>
+    <text x="30" y="78" font-size="19" fill="#555">史料空间示意｜非比例｜两窗不作坐标对位</text>
+    <rect x="24" y="103" width="592" height="282" rx="12" fill="#f6f6f6" stroke="#999"/>
+    <text x="44" y="140" font-size="23" font-weight="700">A 城上所望</text>
+    <path d="M440 183v-41m-8 10 8-12 8 12" fill="none" stroke="#333" stroke-width="3"/>
+    <text x="466" y="161" font-size="24">北</text>
+    <path d="M190 224l37-40 23 22 25-36 38 54z" fill="#d4d4d4" stroke="#555" stroke-width="2"/>
+    <text x="328" y="215" font-size="27" font-weight="600">八公山</text>
+    <path d="M250 296v-54" stroke="#555" stroke-width="3" stroke-dasharray="5 5"/>
+    <path d="m243 254 7-13 7 13" fill="none" stroke="#555" stroke-width="2"/>
+    <rect x="211" y="309" width="79" height="34" fill="#fff" stroke="#333" stroke-width="3"/>
+    <text x="328" y="335" font-size="27" font-weight="600">寿阳城</text>
+    <text x="44" y="368" font-size="18" fill="#555">“北望”的叙述关系；城形、山形均为符号</text>
+    <rect x="24" y="405" width="592" height="251" rx="12" fill="#f6f6f6" stroke="#999"/>
+    <text x="44" y="442" font-size="23" font-weight="700">B 隔岸对峙</text>
+    <rect x="290" y="466" width="60" height="165" fill="#ddd"/>
+    <path d="M290 466v165M350 466v165" stroke="#777" stroke-width="2"/>
+    <text x="320" y="507" text-anchor="middle" font-size="25">淝</text>
+    <text x="320" y="542" text-anchor="middle" font-size="25">水</text>
+    <text x="145" y="510" text-anchor="middle" font-size="24" fill="#555">西岸</text>
+    <text x="145" y="558" text-anchor="middle" font-size="31" font-weight="700">前秦军</text>
+    <text x="495" y="510" text-anchor="middle" font-size="24" fill="#555">东岸</text>
+    <text x="495" y="558" text-anchor="middle" font-size="31" font-weight="700">东晋军</text>
+    <text x="320" y="688" text-anchor="middle" font-size="20">直水带不表示古河道走向或宽度</text>
+    <text x="320" y="718" text-anchor="middle" font-size="17" fill="#555">timeline 编辑绘制 · 2026-11-02 · 未复制书中地图</text>
+  </g>
+</svg>

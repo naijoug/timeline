@@ -1,0 +1,22 @@
+---
+import type { HistoricalMap, Source } from '../../core/types';
+import { sitePath } from '../../lib/paths';
+import EvidenceLinks from './EvidenceLinks.astro';
+interface Props { maps?: HistoricalMap[]; sources: Source[] }
+const { maps = [], sources } = Astro.props;
+---
+{maps.length > 0 && <section class="historical-maps" aria-labelledby="historical-maps-heading">
+  <h2 id="historical-maps-heading">地图与历史空间</h2>
+  {maps.map(map => <figure class="historical-map" id={`map-${map.id}`}>
+    <div class="historical-map-heading"><h3>{map.title}</h3><p>{map.depictedTime} · {map.kind === 'reconstruction' ? '现代历史复原图' : '史料关系示意图'}</p></div>
+    <a class="historical-map-image" href={sitePath(map.assetPath)} target="_blank" rel="noopener noreferrer" aria-label={`打开原尺寸地图：${map.title}（新窗口）`}>
+      <img src={sitePath(map.assetPath)} width={map.width} height={map.height} alt={map.alt} loading="lazy" decoding="async" />
+    </a>
+    <figcaption>
+      <p>{map.description}<EvidenceLinks sources={sources} ids={map.sourceIds} /></p>
+      <p class="map-boundary"><strong>读图边界：</strong>{map.scopeNote}</p>
+      <p class="map-credit">制图：{map.creator} · 制作／版本：{map.createdAt} · {map.license.url ? <a href={map.license.url} target="_blank" rel="noopener noreferrer">{map.license.label}</a> : map.license.label}。{map.modificationNote}{map.originalUrl && <> <a href={map.originalUrl} target="_blank" rel="noopener noreferrer">原图与授权记录</a></>}</p>
+      <details class="map-evidence"><summary>查看图示依据与战区教学资料</summary><ul>{map.sourceIds.map(id => { const source = sources.find(item => item.id === id); return source && <li><a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}</a><small>{source.locator}</small></li>; })}</ul><p>外链教学材料包含更大范围的战区图；本页只采用上文说明的空间关系，不替其中每项断言背书。</p></details>
+    </figcaption>
+  </figure>)}
+</section>}
