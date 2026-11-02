@@ -128,7 +128,7 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
       <nav className="mobile-topic-back" aria-label="返回主题"><a href={sitePath('/')}><ArrowLeft size={16} />所有主题</a><span>沿时间向下探索</span></nav>
       <section className="history-overview" aria-label="历史总览">
         <div className="overview-heading"><h1 title={`${formatYear(civilYear(min))} — ${formatYear(civilYear(max))}`}>{shortYear(min)} — {shortYear(max)}</h1><p>{presentation.subtitle || topic.description}</p></div>
-        {!!catalog.collections?.length && <nav className="chronicle-collections" aria-label="精选专题">专题：{catalog.collections.map(c => <a key={c.id} href={sitePath(c.path)}>{c.title}</a>)}</nav>}
+        {!!catalog.timelines?.length && <nav className="chronicle-collections" aria-label="精选专题">专题：{catalog.timelines.map(c => <a key={c.id} href={sitePath(c.path)}>{c.title}</a>)}</nav>}
 
       </section>
       {topic.id === 'ai' && newestEvent && <div className="timeline-freshness"><span>最新已收录 · {date(newestEvent)}</span><a href={eventHref(newestEvent)} onClick={e => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey) rememberReturn(newestEvent); }}>{title(newestEvent)}<ArrowRight size={15} /></a><small>精选事件持续补充，并非全部发布清单。</small></div>}

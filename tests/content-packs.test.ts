@@ -12,8 +12,8 @@ import { eventLane } from '../src/topics/ai/config';
 import { relationEndpoints } from '../src/core/evidence';
 
 test('instruction collection reuses unique records and preserves publication stages', () => {
-  assert.equal(instructionCollection.eventIds.length, 14);
-  for (const id of instructionCollection.eventIds) {
+  assert.equal(instructionCollection.entries.map(entry => entry.eventId).length, 14);
+  for (const id of instructionCollection.entries.map(entry => entry.eventId)) {
     const matches = events.filter(e=>e.id===id);
     assert.equal(matches.length,1,id);
     const e=matches[0];
@@ -43,15 +43,15 @@ test('nested citations, source review dates and relationship endpoints are guard
   broken.events[0].details=[{label:'断言',text:'断言',sourceIds:['missing']}];
   broken.sources[0].checkedAt='2026-02-30';
   broken.relations![0].toEventId='missing-event';
-  broken.collections![0].eventIds.push(broken.collections![0].eventIds[0]);
+  broken.timelines![0].entries.push(broken.timelines![0].entries[0]);
   const errors=validateCatalog(broken);
-  for(const fragment of ['unknown reference missing','checkedAt','missing-event','invalid collection']) assert.ok(errors.some(e=>e.includes(fragment)),fragment);
+  for(const fragment of ['unknown reference missing','checkedAt','missing-event','invalid timeline']) assert.ok(errors.some(e=>e.includes(fragment)),fragment);
 });
 
 test('historical pack keeps publication phases and cited details discoverable', () => {
-  assert.equal(historicalCollection.eventIds.length, 10);
-  assert.ok(aiCatalog.collections?.some(c=>c.id===historicalCollection.id));
-  for(const id of historicalCollection.eventIds) {
+  assert.equal(historicalCollection.entries.map(entry => entry.eventId).length, 10);
+  assert.ok(aiCatalog.timelines?.some(c=>c.id===historicalCollection.id));
+  for(const id of historicalCollection.entries.map(entry => entry.eventId)) {
     const matches=events.filter(e=>e.id===id);
     assert.equal(matches.length,1,id);
     assert.ok(matches[0].details?.every(s=>s.sourceIds?.length && s.locator),id);

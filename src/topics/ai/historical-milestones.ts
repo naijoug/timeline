@@ -1,3 +1,4 @@
+import { timelineEntries } from '../../core/timelines';
 import type { Entity, Source, TimelineEvent } from './types';
 import type { Collection, EventRelation, ReadingSection } from '../../core/types';
 
@@ -111,6 +112,7 @@ export const historicalRelations: EventRelation[] = [
 export const historicalCollection: Collection = {
   id: 'learning-to-systems', title: '从视觉学习到协作系统', path: '/ai/collections/learning-to-systems/',
   description: '2012—2023：视觉学习、生成方法、检索、跨模态表示和协作框架的 10 个代表节点。',
-  eventIds: ['alexnet', 'vae', 'gan', 'resnet', 'rag-paper', 'ddpm', 'clip-release', 'whisper-release', 'phi-1-paper', 'autogen-paper'],
+  themeId: 'ai', kind: 'curated',
+  entries: timelineEntries(['alexnet', 'vae', 'gan', 'resnet', 'rag-paper', 'ddpm', 'clip-release', 'whisper-release', 'phi-1-paper', 'autogen-paper']),
   note: '7 个既有节点补充正文，3 个新增代表节点。并行方法放在同一浏览专题中；年代顺序不是技术继承或因果关系。模型发布、论文首版与框架研究分别注明。',
 };

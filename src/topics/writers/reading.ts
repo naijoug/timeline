@@ -32,7 +32,8 @@ export const writersReadingPaths: Record<string, WriterReadingPath[]> = {
 
 /** Stable chronological order, without mutating shared catalog data. */
 export function authorTimeline(catalog: Catalog, authorId: string): TimelineEvent[] {
+  const ids = new Set(catalog.timelines?.find(line => line.id === authorId)?.entries.map(entry => entry.eventId) || []);
   return catalog.events
-    .filter(event => event.entityIds.includes(authorId))
+    .filter(event => ids.has(event.id))
     .sort((a, b) => dateBounds(a.time.start)[0] - dateBounds(b.time.start)[0] || a.id.localeCompare(b.id));
 }

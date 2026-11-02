@@ -56,14 +56,27 @@ export interface EventRelation {
   locator: string;
   note?: string;
 }
-export interface Collection {
+/** Membership is stored only here, never again on TimelineEvent. */
+export interface TimelineEntry {
+  eventId: string;
+  importance: 'key' | 'supporting';
+  /** Editorial reading context, not a second copy of the event's facts. */
+  context?: string;
+}
+export interface TimelineDefinition {
   id: string;
+  themeId: string;
   title: string;
   description: string;
   path: string;
-  eventIds: string[];
+  /** Navigation only: parents do not inherit child memberships. */
+  parentId?: string;
+  kind: 'main' | 'curated' | 'entity';
+  entries: TimelineEntry[];
   note: string;
 }
+/** Existing collection routes are now first-class timelines. */
+export type Collection = TimelineDefinition;
 export interface Entity {
   id: string;
   name: string;
@@ -114,6 +127,7 @@ export interface Topic {
   coverage: string;
   categories: { id: string; title: string }[];
   shortcuts?: { title: string; path: string }[];
+  defaultTimelineId?: string;
   periodLabel?: string;
   periodSegment?: string;
 }
@@ -124,7 +138,7 @@ export interface Catalog {
   entities: Entity[];
   sources: Source[];
   relations?: EventRelation[];
-  collections?: Collection[];
+  timelines?: TimelineDefinition[];
 }
 /** from/to use the internal continuous year coordinate, including coordinate 0 (1 BCE). */
 export interface TimelineView {
@@ -146,5 +160,5 @@ export interface ExplorerCatalog<Event extends ExplorerEvent = ExplorerEvent> {
   events: Event[];
   entities: Pick<Entity, 'id' | 'name'>[];
   sources: Pick<Source, 'id' | 'title' | 'url'>[];
-  collections?: Pick<Collection, 'id' | 'title' | 'path'>[];
+  timelines?: TimelineDefinition[];
 }

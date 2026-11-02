@@ -19,11 +19,11 @@ test('state transitions add eight unique sourced records and a reachable reading
     assert.ok(e.details!.filter(s => !s.editorial).every(s => s.sourceIds?.length && s.locator), e.id);
     assert.ok(e.significance.length > 20 && e.note, e.id);
   }
-  assert.ok(chinaHistory.collections?.includes(transitionCollection));
+  assert.ok(chinaHistory.timelines?.includes(transitionCollection));
   assert.ok(chinaHistory.topic.shortcuts?.some(s => s.path === transitionCollection.path));
   assert.ok(existsSync('src/pages/china-history/collections/state-transitions.astro'));
-  assert.equal(transitionCollection.eventIds.length, 21);
-  const years = transitionCollection.eventIds.map(id => yearCoordinate(event(id).time.start.year));
+  assert.equal(transitionCollection.entries.map(entry => entry.eventId).length, 21);
+  const years = transitionCollection.entries.map(entry => entry.eventId).map(id => yearCoordinate(event(id).time.start.year));
   assert.deepEqual(years, [...years].sort((a, b) => a - b));
   assert.match(transitionCollection.note, /不自动表示因果/);
 });

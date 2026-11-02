@@ -86,16 +86,16 @@ test('modern political scopes and decisions do not become false terminal dates o
 
 test('collections cover early and contemporary history in actual chronological order', () => {
   for (const id of ['china-through-the-ages','wars-and-turning-points']) {
-    const collection = chinaHistory.collections!.find(collection => collection.id === id)!;
+    const collection = chinaHistory.timelines!.find(collection => collection.id === id)!;
     assert.ok(collection && existsSync(`src/pages/china-history/collections/${id}.astro`));
-    const dates = collection.eventIds.map(id => dateBounds(event(id).time.start)[0]);
+    const dates = collection.entries.map(entry => entry.eventId).map(id => dateBounds(event(id).time.start)[0]);
     assert.deepEqual(dates, [...dates].sort((a,b) => a-b));
-    assert.equal(new Set(collection.eventIds).size, collection.eventIds.length);
+    assert.equal(new Set(collection.entries.map(entry => entry.eventId)).size, collection.entries.map(entry => entry.eventId).length);
   }
-  const backbone = chinaHistory.collections!.find(collection => collection.id === 'china-through-the-ages')!;
-  assert.equal(backbone.eventIds[0], 'xia-erlitou');
-  assert.equal(backbone.eventIds.at(-1), 'fifteenth-five-year-plan');
-  assert.ok(backbone.eventIds.includes('qin-unification') && backbone.eventIds.includes('prc-founding'));
+  const backbone = chinaHistory.timelines!.find(collection => collection.id === 'china-through-the-ages')!;
+  assert.equal(backbone.entries.map(entry => entry.eventId)[0], 'xia-erlitou');
+  assert.equal(backbone.entries.map(entry => entry.eventId).at(-1), 'fifteenth-five-year-plan');
+  assert.ok(backbone.entries.map(entry => entry.eventId).includes('qin-unification') && backbone.entries.map(entry => entry.eventId).includes('prc-founding'));
 });
 
 test('every recommendation is attached to a real event and stays outside fact sources and the client index', () => {

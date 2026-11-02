@@ -107,10 +107,28 @@ export function validateCatalog(catalog: Catalog): string[] {
     if (Number(!!r.toEventId) + Number(!!r.entityId) !== 1 || !r.sourceIds.length || !r.label.trim() || !r.locator.trim()) errors.push(`${r.id}: incomplete sourced relation`);
     if (r.fromEventId === r.toEventId) errors.push(`${r.id}: self-referencing relation`);
   }
-  ids(catalog.collections || [], 'collection');
-  for (const c of catalog.collections || []) {
-    refs(c.eventIds, eventIds, c.id);
-    if (!c.eventIds.length || new Set(c.eventIds).size !== c.eventIds.length || !c.path.startsWith(catalog.topic.path) || !c.path.endsWith('/') || !c.title.trim() || !c.description.trim()) errors.push(`${c.id}: invalid collection`);
+  const lines = catalog.timelines || [];
+  const timelineIds = ids(lines, 'timeline');
+  const paths = new Set<string>();
+  for (const line of lines) {
+    const members = line.entries.map(entry => entry.eventId);
+    refs(members, eventIds, line.id);
+    if (!members.length || new Set(members).size !== members.length || !line.title.trim() || !line.description.trim()) errors.push(`${line.id}: invalid timeline membership or content`);
+    if (line.themeId !== catalog.topic.id || !['main', 'curated', 'entity'].includes(line.kind)) errors.push(`${line.id}: invalid timeline theme or kind`);
+    if (!line.path.startsWith(catalog.topic.path) || !/^\/[a-z0-9/-]+\/$/.test(line.path) || line.path.includes('//') || paths.has(line.path)) errors.push(`${line.id}: invalid or duplicate timeline path`);
+    paths.add(line.path);
+    for (const entry of line.entries) {
+      if (!['key', 'supporting'].includes(entry.importance) || (entry.context !== undefined && !entry.context.trim())) errors.push(`${line.id}/${entry.eventId}: invalid timeline entry`);
+    }
+    const visited = new Set([line.id]);
+    let parent = line.parentId;
+    while (parent) {
+      if (!timelineIds.has(parent)) { errors.push(`${line.id}: unknown timeline parent ${parent}`); break; }
+      if (visited.has(parent)) { errors.push(`${line.id}: timeline parent cycle`); break; }
+      visited.add(parent);
+      parent = lines.find(value => value.id === parent)?.parentId;
+    }
   }
+  if (catalog.topic.defaultTimelineId && !timelineIds.has(catalog.topic.defaultTimelineId)) errors.push(`${catalog.topic.id}: unknown default timeline`);
   return errors;
 }

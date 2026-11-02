@@ -1,5 +1,5 @@
+import { timelineEntries } from '../../core/timelines';
 import type { Collection, Period, TimelineEvent } from '../../core/types';
-import { dateBounds } from '../../core/time';
 
 export const historyCoverageCheckedAt = '2026-10-24';
 // These are editorial reading groups, not claims about the end of a state or policy.
@@ -122,34 +122,21 @@ export function reviewedPeriodCoverage(periods: Period[], events: TimelineEvent[
   }));
 }
 
-const backboneAnchors = [
-  'xia-erlitou', 'shang-rise', 'yinxu-oracle-bones', 'muye', 'eastern-zhou-move',
-  'three-jin', 'shang-yang-reforms', 'qin-unification', 'western-han-founded',
-  'zhang-qian', 'han-state-monopolies', 'eastern-han-founded', 'yellow-turbans',
-  'chibi', 'western-jin-reunification', 'yongjia-crisis', 'feishui', 'xiaowen-luoyang',
-  'sui-reunification', 'sui-grand-canal', 'tang-founded', 'an-shi', 'two-tax',
-  'song-founded', 'chanyuan', 'wang-anshi-reforms', 'southern-song-start',
-  'yuan-named', 'song-ended', 'ming-founded', 'zheng-he-voyages', 'single-whip-reform',
-  'qing-enters-beijing', 'nerchinsk-treaty', 'treaty-nanjing', 'treaty-shimonoseki',
-  'abolish-examinations', 'wuchang-uprising', 'sun-inauguration', 'qing-abdication',
-];
-
-export function historyBackboneCollections(events: TimelineEvent[]): Collection[] {
-  const ordered = [...events].sort((a,b) => dateBounds(a.time.start)[0] - dateBounds(b.time.start)[0] || a.id.localeCompare(b.id));
-  const anchors = new Set(backboneAnchors);
-  // Modern nodes are already a bounded, sourced backbone rather than a daily news feed.
-  const backbone = ordered.filter(event => anchors.has(event.id) || event.time.start.year >= 1913 && event.milestone);
+export function historyBackboneCollections(): Collection[] {
+  // Explicit editorial membership: new events do not silently enter this reading path.
   return [
     {
       id: 'china-through-the-ages', title: '从夏商周到当代', path: '/china-history/collections/china-through-the-ages/',
       description: '把早期国家、帝国建立与分裂、制度和社会转型、近现代战争及改革放在一条连续阅读线上；再从每个节点进入有来源的事件详情。',
-      eventIds: backbone.map(event => event.id),
+      themeId: 'china-history', kind: 'main',
+      entries: timelineEntries(["xia-erlitou", "shang-rise", "yinxu-oracle-bones", "muye", "eastern-zhou-move", "three-jin", "shang-yang-reforms", "qin-unification", "western-han-founded", "zhang-qian", "han-state-monopolies", "eastern-han-founded", "yellow-turbans", "chibi", "western-jin-reunification", "yongjia-crisis", "feishui", "xiaowen-luoyang", "sui-reunification", "sui-grand-canal", "tang-founded", "an-shi", "two-tax", "song-founded", "chanyuan", "wang-anshi-reforms", "southern-song-start", "yuan-named", "song-ended", "ming-founded", "zheng-he-voyages", "single-whip-reform", "qing-enters-beijing", "nerchinsk-treaty", "treaty-nanjing", "treaty-shimonoseki", "abolish-examinations", "wuchang-uprising", "sun-inauguration", "qing-abdication", "may-fourth-movement", "ccp-first-congress", "northern-expedition", "shanghai-purge-1927", "mukden-incident", "long-march", "full-scale-war-resistance", "battle-shanghai-1937", "nanjing-massacre", "battle-taierzhuang", "japan-surrender-china", "liaoshen-campaign", "huaihai-campaign", "pingjin-campaign", "prc-founding", "land-reform-law", "china-korean-war", "first-five-year-plan", "constitution-1954", "anti-rightist-campaign", "great-leap-famine", "cultural-revolution", "un-china-representation", "reform-opening-plenum", "constitution-1982", "protests-crackdown-1989", "southern-tour-market-reform", "taiwan-direct-election", "hong-kong-handover", "macao-handover", "china-wto-accession", "constitution-amendment-2018", "covid-wuhan-restrictions", "civil-code-effective", "covid-policy-transition", "gradual-retirement-reform", "fifteenth-five-year-plan"]),
       note: '这是一条跨时代主线，不是无遗漏的通史。夏的传统纪年与考古材料分开说明；现代分期是阅读工具，不将1949年写成所有战事结束。顺序不自动证明因果，解释与推荐节目单独标记。',
     },
     {
-      id: 'wars-and-turning-points', title: '战役与战争转折', path: '/china-history/collections/wars-and-turning-points/',
+      id: 'wars-and-turning-points', parentId: 'china-through-the-ages', title: '战役与战争转折', path: '/china-history/collections/wars-and-turning-points/',
       description: '从先秦争霸、秦汉统一、三国与南北对峙，读到王朝战争、抗日战争和近现代冲突。把战场节点与长期战争过程分开看。',
-      eventIds: ordered.filter(event => event.category === 'battle' || event.category === 'war').map(event => event.id),
+      themeId: 'china-history', kind: 'curated',
+      entries: timelineEntries(["muye", "chengpu", "changping", "qin-rebellions", "julu", "gaixia", "seven-states-rebellion", "hexi-campaign", "yellow-turbans", "guandu", "chibi", "yiling", "eight-princes-war", "yongjia-crisis", "feishui", "sui-goguryeo", "hulao", "eastern-turks", "talas", "an-shi", "huang-chao", "caishi", "jin-conquered", "xiangyang-siege", "song-ended", "red-turban-rebellions", "poyang", "jingnan", "tumu-crisis", "sarhu", "zheng-taiwan", "three-feudatories-war", "qing-taiwan", "qing-central-asia", "white-lotus-rebellion", "first-opium-war", "taiping-civil-war", "second-opium-war", "first-sino-japanese-war", "boxer-war-protocol", "yangxia-war", "nanjing-captured", "northern-expedition", "mukden-incident", "long-march", "full-scale-war-resistance", "battle-shanghai-1937", "nanjing-massacre", "battle-taierzhuang", "liaoshen-campaign", "huaihai-campaign", "pingjin-campaign", "china-korean-war"]),
       note: '单场战役与持续战争分别分类；时间先后不等于单一因果，不把不可靠的兵力、伤亡数字或小说情节当作定论。战役胜负也不代表所有制度和社会变化同时完成。',
     },
   ];

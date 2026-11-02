@@ -1,3 +1,4 @@
+import { writerTimelines } from './timelines';
 import { greatHealerSources, greatHealerPatch } from './great-healer-depth';
 import { mingMicroscopeSources, mingMicroscopePatch } from './ming-microscope-depth';
 import { liuAuditSources, liuAuditPatches } from "./liu-reference-audit";
@@ -2097,4 +2098,5 @@ export const writersCatalog: Catalog = {
   entities,
   sources,
   relations: writersRelations,
+  timelines: writerTimelines,
 };

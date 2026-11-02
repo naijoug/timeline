@@ -1,3 +1,4 @@
+import { timelineEntries } from '../../core/timelines';
 import type { Collection, EventRelation, ReadingSection, Source, TimelineEvent } from '../../core/types';
 import { parseDate } from '../../core/time';
 
@@ -100,6 +101,7 @@ export const transitionRelations: EventRelation[] = [
 export const transitionCollection: Collection = {
   id: 'state-transitions', title: '统一、分裂与制度转型', path: '/china-history/collections/state-transitions/',
   description: '从秦汉国家、魏晋分裂与隋唐再统一，读到并存政权、明清更替及帝制向共和的转折；同时观察运河、财政、通商与选官制度。',
-  eventIds: ['qin-unification', 'western-han-founded', 'western-jin-reunification', 'sui-reunification', 'sui-grand-canal', 'tang-founded', 'an-shi', 'two-tax', 'song-founded', 'chanyuan', 'southern-song-start', 'yuan-named', 'song-ended', 'ming-founded', 'qing-enters-beijing', 'treaty-nanjing', 'abolish-examinations', 'wuchang-uprising', 'sun-inauguration', 'qing-abdication', 'provisional-constitution'],
+  themeId: 'china-history', kind: 'curated',
+  entries: timelineEntries(['qin-unification', 'western-han-founded', 'western-jin-reunification', 'sui-reunification', 'sui-grand-canal', 'tang-founded', 'an-shi', 'two-tax', 'song-founded', 'chanyuan', 'southern-song-start', 'yuan-named', 'song-ended', 'ming-founded', 'qing-enters-beijing', 'treaty-nanjing', 'abolish-examinations', 'wuchang-uprising', 'sun-inauguration', 'qing-abdication', 'provisional-constitution']),
   note: '这是一条精选阅读路线，不是完整通史。政治统一不等于制度一次完成，分裂也不等于交流中断；朝代、疆域、人口与财政各有不同的变化节奏。先后排列仅供阅读，不自动表示因果，关系另附来源。',
 };
