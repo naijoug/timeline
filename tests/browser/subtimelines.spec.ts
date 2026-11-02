@@ -101,3 +101,55 @@ test('filter cancel, apply and repeated dismissals retain subline context',async
   for(let i=0;i<2;i++){await trigger.click();await page.getByRole('button',{name:'关闭筛选，不保存更改',exact:true}).click();await expect(trigger).toBeFocused();}
   await noOverflow(page);await capture(page,info,'filtered-agent-line');
 });
+
+test('selected reading paths stay discoverable without stealing rail scroll or focus', async ({ page }, info) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto(path('ai/timelines/ai-agent-products/')); await ready(page);
+  const rail = page.locator('.subtimeline-options');
+  const agent = page.getByRole('checkbox', { name: '合并AI Agent 产品', exact: true });
+  const visibleSelection = () => rail.evaluate(el => {
+    const bounds = el.getBoundingClientRect();
+    return [...el.querySelectorAll('.is-selected')].some(card => {
+      const rect = card.getBoundingClientRect();
+      return rect.left >= bounds.left - 1 && rect.right <= bounds.right + 1;
+    });
+  });
+  await expect.poll(visibleSelection).toBe(true);
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
+  await expect(agent).not.toBeFocused();
+  await noOverflow(page); await capture(page, info, 'selected-agent-reading-path');
+  if (info.project.name === 'desktop') {
+    expect(await rail.evaluate(el => el.scrollLeft)).toBe(0);
+    return;
+  }
+  expect(await rail.evaluate(el => el.scrollLeft)).toBeGreaterThan(0);
+  // A reader can inspect other paths; unrelated filtering must not drag the rail back.
+  await rail.evaluate(el => el.scrollTo({ left: 0, behavior: 'instant' }));
+  await expect.poll(() => rail.evaluate(el => el.scrollLeft)).toBe(0);
+  await page.getByRole('textbox', { name: '搜索事件、对象或关键词', exact: true }).fill('Agent');
+  await expect(page).toHaveURL(/q=Agent/);
+  expect(await rail.evaluate(el => el.scrollLeft)).toBe(0);
+
+  // On the theme route, checkbox edits are in-place and create native history entries.
+  await page.goto(path('ai/?lines=ai-agent-products&all=1')); await ready(page);
+  await expect.poll(visibleSelection).toBe(true);
+  const original = page.url();
+  const main = page.getByRole('checkbox', { name: '合并AI 发展里程碑', exact: true });
+  await main.check(); // Playwright's normal click reveals the checkbox, as keyboard traversal does.
+  await expect(main).toBeFocused();
+  const merged = page.url(), scroll = await rail.evaluate(el => el.scrollLeft);
+  await expect(main).toBeChecked(); await expect(agent).toBeChecked();
+  await page.getByRole('combobox', { name: '排列顺序', exact: true }).selectOption('asc');
+  expect(await rail.evaluate(el => el.scrollLeft)).toBe(scroll);
+  await page.goBack(); await ready(page); await expect(page).toHaveURL(original);
+  await expect.poll(visibleSelection).toBe(true);
+  await page.goForward(); await ready(page);
+  expect(new URL(page.url()).searchParams.get('lines')).toBe(new URL(merged).searchParams.get('lines'));
+  await expect.poll(visibleSelection).toBe(true);
+  await main.focus(); await page.keyboard.press('Space');
+  await expect(main).not.toBeChecked(); await expect(main).toBeFocused();
+  const focusedScroll = await rail.evaluate(el => el.scrollLeft);
+  await page.keyboard.press('Space'); await expect(main).toBeChecked(); await expect(main).toBeFocused();
+  expect(await rail.evaluate(el => el.scrollLeft)).toBe(focusedScroll);
+  await noOverflow(page); await capture(page, info, 'merged-reading-path-focus');
+});
