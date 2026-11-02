@@ -125,11 +125,13 @@ test('selected reading paths stay discoverable without stealing rail scroll or f
   expect(await rail.evaluate(el => el.scrollLeft)).toBeGreaterThan(0);
   // A reader can inspect other paths; unrelated filtering must not drag the rail back.
   await rail.evaluate(el => el.scrollTo({ left: 0, behavior: 'instant' }));
-  await expect.poll(() => rail.evaluate(el => el.scrollLeft)).toBe(0);
+  // CSS snapping consumes the rail's 3px padding; record its settled position.
+  await expect.poll(() => rail.evaluate(el => Math.abs(el.firstElementChild!.getBoundingClientRect().left - el.getBoundingClientRect().left))).toBeLessThan(1);
+  const manualScroll = await rail.evaluate(el => el.scrollLeft);
   await page.getByRole('button', { name: '搜索当前主题', exact: true }).click();
   await page.getByRole('textbox', { name: '搜索事件、对象或关键词', exact: true }).fill('Agent');
   await expect(page).toHaveURL(/q=Agent/);
-  expect(await rail.evaluate(el => el.scrollLeft)).toBe(0);
+  expect(await rail.evaluate(el => el.scrollLeft)).toBe(manualScroll);
 
   // On the theme route, checkbox edits are in-place and create native history entries.
   await page.goto(path('ai/?lines=ai-agent-products&all=1')); await ready(page);
