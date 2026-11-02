@@ -1,3 +1,4 @@
+import { javaReviewedSources, java21Patch } from './java-reviewed-records';
 import { rustAsyncSources, rustAsyncPatch } from './rust-async-depth';
 import { goIterationEvents, goIterationSources, goIterationRelations } from './go-iteration-history';
 import type {
@@ -971,6 +972,9 @@ Object.assign(events.find(event => event.id === 'rust-139-async')!, rustAsyncPat
 
 sources.push(...goIterationSources);
 events.push(...goIterationEvents);
+
+sources.push(...javaReviewedSources);
+Object.assign(events.find(event => event.id === 'java-21')!, java21Patch);
 
 export const programmingLanguages: Catalog = {
   topic: {
