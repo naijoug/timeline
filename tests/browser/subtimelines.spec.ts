@@ -11,7 +11,7 @@ async function noOverflow(page:Page){expect(await page.evaluate(()=>document.doc
 
 test('curated main, union selection and native Back/Forward',async({page},info)=>{
   await page.goto(path('ai/'));await ready(page);
-  const cards=page.locator('.chronicle-event-button');await expect(cards).toHaveCount(49);
+  const cards=page.locator('.chronicle-event-button');await expect(cards).toHaveCount(50);
   await noOverflow(page);await capture(page,info,'ai-main');
   const mainUrl=page.url();
   await page.getByRole('checkbox',{name:'合并AI 模型发现与迭代',exact:true}).check();
@@ -21,9 +21,9 @@ test('curated main, union selection and native Back/Forward',async({page},info)=
     return new Set(catalog.timelines.filter((line:{id:string})=>['ai-milestones','ai-model-iterations'].includes(line.id)).flatMap((line:{entries:{eventId:string}[]})=>line.entries.map(entry=>entry.eventId))).size;
   });
   await expect(cards).toHaveCount(expected);expect(new Set(await cards.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.eventId))).size).toBe(expected);
-  const mergedUrl=page.url();await page.goBack();await ready(page);await expect(page).toHaveURL(mainUrl);await expect(cards).toHaveCount(49);
+  const mergedUrl=page.url();await page.goBack();await ready(page);await expect(page).toHaveURL(mainUrl);await expect(cards).toHaveCount(50);
   await page.goForward();await ready(page);await expect(page).toHaveURL(mergedUrl);await expect(cards).toHaveCount(expected);
-  await page.getByRole('checkbox',{name:'合并AI 模型发现与迭代',exact:true}).uncheck();await expect(cards).toHaveCount(49);
+  await page.getByRole('checkbox',{name:'合并AI 模型发现与迭代',exact:true}).uncheck();await expect(cards).toHaveCount(50);
   await page.getByRole('checkbox',{name:'合并AI 模型发现与迭代',exact:true}).check();await expect(cards).toHaveCount(expected);
   const freshness=page.locator('.timeline-freshness a');
   const back=new URL((await freshness.getAttribute('href'))!,'http://127.0.0.1').searchParams.get('return')!;
@@ -164,4 +164,58 @@ test('selected reading paths stay discoverable without stealing rail scroll or f
   await page.keyboard.press('Space'); await expect(main).toBeChecked(); await expect(main).toBeFocused();
   expect(await rail.evaluate(el => el.scrollLeft)).toBe(focusedScroll);
   await noOverflow(page); await capture(page, info, 'merged-reading-path-focus');
+});
+
+test('idiom backgrounds distinguish story dates, preserve details and merge without duplicates', async ({ page }, info) => {
+  await page.goto(path('china-history/collections/idiom-backgrounds/')); await ready(page);
+  await expect(page.locator('h1')).toHaveText('成语故事的历史背景');
+  const cards = page.locator('.chronicle-event-button');
+  await expect(cards).toHaveCount(2);
+  await expect(page.locator('#timeline-notes')).toContainText('不表示成语在该年首次出现');
+  await noOverflow(page); await capture(page, info, 'idiom-background-line');
+  const julu = page.locator('[data-event-id="julu"]');
+  await julu.scrollIntoViewIfNeeded();
+  const destination = new URL((await julu.getAttribute('href'))!, 'http://127.0.0.1').searchParams.get('return')!;
+  await julu.click();
+  await expect(page.locator('h1')).toContainText('巨鹿之战');
+  await expect(page.locator('.article-body')).toContainText('不是“破釜沉舟”的首见年');
+  await expect(page.getByRole('heading', { name: '后世用语：词义与书证', exact: true })).toBeVisible();
+  await expect(page.locator('#sources')).toContainText('破釜沉舟：典源、释义与书证');
+  await expect(page.locator('.article-body')).toContainText('陈佳荣');
+  await noOverflow(page); await capture(page, info, 'idiom-julu-detail');
+  await page.getByRole('link', { name: '返回时间线', exact: true }).click(); await ready(page);
+  await expect(page).toHaveURL(`http://127.0.0.1:4179${destination}`);
+  await expect(page.locator('[data-event-id="julu"]')).toBeFocused();
+  await expect(cards).toHaveCount(2);
+  await page.locator('[data-event-id="feishui"]').click();
+  await expect(page.locator('.article-body')).toContainText('不是“草木皆兵”的首见年');
+  await expect(page.locator('.article-body')).toContainText('不是两份独立战场证据');
+  await page.getByRole('heading', { name: '后世用语：词义与书证', exact: true }).scrollIntoViewIfNeeded();
+  await noOverflow(page); await capture(page, info, 'idiom-feishui-reading');
+  await page.getByRole('link', { name: '返回时间线', exact: true }).click(); await ready(page);
+  const wars = page.getByRole('checkbox', { name: '合并战役与战争转折', exact: true });
+  await expect(wars).not.toBeChecked();
+  // Selecting from an independent route performs a native navigation; check() may
+  // retry on the replacement checkbox and toggle it back. Click once, then assert.
+  await wars.click(); await ready(page); await expect(wars).toBeChecked();
+  await expect(cards).toHaveCount(53);
+  expect(new Set(await cards.evaluateAll(els => els.map(el => (el as HTMLElement).dataset.eventId))).size).toBe(53);
+  await page.getByRole('checkbox', { name: '合并战役与战争转折', exact: true }).uncheck();
+  await expect(cards).toHaveCount(2);
+  if (info.project.name === 'mobile') await page.getByRole('button', { name: '搜索当前主题', exact: true }).click();
+  await page.getByRole('textbox', { name: '搜索事件、对象或关键词', exact: true }).fill('破釜沉舟');
+  await expect(cards).toHaveCount(1); await expect(page.locator('[data-event-id="julu"]')).toBeVisible();
+});
+
+test('new LongCat API stage leads the curated main and preserves release caveats', async ({ page }, info) => {
+  await page.goto(path('ai/')); await ready(page);
+  await expect(page.locator('.chronicle-event-button').first()).toHaveAttribute('data-event-id', 'longcat-2-5-api');
+  await page.locator('[data-event-id="longcat-2-5-api"]').click();
+  await expect(page.locator('h1')).toHaveText('LongCat-2.5 API 上线');
+  await expect(page.locator('.article-body')).toContainText('2026年9月25日的LongCat-2.5-Preview');
+  await expect(page.locator('.article-body')).toContainText('未实际调用');
+  await expect(page.locator('.article-body')).toContainText('未核实2.5权重开放');
+  await noOverflow(page); await capture(page, info, 'longcat-api-detail');
+  await page.getByRole('link', { name: '返回时间线', exact: true }).click(); await ready(page);
+  await expect(page.locator('[data-event-id="longcat-2-5-api"]')).toBeFocused();
 });

@@ -1,3 +1,4 @@
+import { idiomBackgroundSources, idiomBackgroundTimeline, idiomBackgroundEventPatches } from './idiom-backgrounds';
 import { guanduDepthSources, guanduDepthEventPatches } from './guandu-depth';
 import { wangAnshiDepthSources, wangAnshiSourceReviews, wangAnshiDepthEventPatches } from './wang-anshi-depth';
 import type {
@@ -127,6 +128,7 @@ export const sources: Source[] = [
   ...grandCanalDepthSources,
   ...wangAnshiDepthSources,
   ...guanduDepthSources,
+  ...idiomBackgroundSources,
 ].map(s => {
   const reviewed = { ...s, ...(transitionSourceReviews[s.id] || {}), ...(exchangeSourceReviews[s.id] || {}), ...(grandCanalSourceReviews[s.id] || {}), ...(wangAnshiSourceReviews[s.id] || {}) };
   return s.id === 'diamond' ? { ...reviewed, checkedAt: '2026-10-24', locator: 'Frontispiece；How and why was it made?；Colophon', version: '本轮核对题记、制作与宗教实践说明，保留年份精度，不将印本年代当作印刷术发明日期。' } : reviewed;
@@ -651,6 +653,7 @@ export const events: TimelineEvent[] = [
   ...(grandCanalDepthEventPatches[event.id] || {}),
   ...(wangAnshiDepthEventPatches[event.id] || {}),
   ...(guanduDepthEventPatches[event.id] || {}),
+  ...(idiomBackgroundEventPatches[event.id] || {}),
   ...(historyRecommendedResources[event.id] ? { recommendedResources: [...historyRecommendedResources[event.id], ...(wangAnshiDepthEventPatches[event.id]?.recommendedResources || [])] } : {}),
 }));
 const backboneCollections = historyBackboneCollections();
@@ -662,6 +665,7 @@ export const chinaHistory: Catalog = {
       { title: "通史总览", path: "/china-history/" },
       { title: "从夏商周到当代", path: "/china-history/collections/china-through-the-ages/" },
       { title: "战役与战争转折", path: "/china-history/collections/wars-and-turning-points/" },
+      { title: "成语故事的历史背景", path: idiomBackgroundTimeline.path },
       { title: "统一、分裂与制度转型", path: transitionCollection.path },
       { title: "从唐朝开始", path: "/china-history/dynasties/tang/" },
       { title: "看宋辽夏金并存", path: "/china-history/dynasties/song-era/" },
@@ -686,7 +690,7 @@ export const chinaHistory: Catalog = {
   periods,
   events,
   sources,
-  timelines: [...backboneCollections, transitionCollection, xinhaiCollection],
+  timelines: [...backboneCollections, idiomBackgroundTimeline, transitionCollection, xinhaiCollection],
   relations: [...transitionRelations, ...xinhaiRelations, ...ancientRelations, ...modernRelations],
   entities: [...periods
     .filter((p) => p.entityIds.length)
