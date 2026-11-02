@@ -294,3 +294,6 @@ html .record-content .event-record .copy-link { border-radius:10px; background:v
 .map-evidence { margin-top:16px; font-size:13px; }
 .map-evidence summary { cursor:pointer; min-height:44px; display:list-item; line-height:1.8; }
 .map-evidence small { display:block; margin:5px 0 14px; line-height:1.8; }
+/* Plain source/credit links need explicit theme ink; legacy global anchors use fixed ink. */
+.record-content .event-record .historical-map :is(.map-evidence,.map-credit) a { color:var(--paper-ink); text-decoration:underline; text-underline-offset:3px; }
+.record-content .event-record .historical-map :is(.map-evidence,.map-credit) a:focus-visible { outline:2px solid var(--paper-ink); outline-offset:3px; border-radius:2px; }
