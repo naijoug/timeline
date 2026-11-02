@@ -281,3 +281,78 @@ test('Feishui sourced diagram loads in light and dark without disturbing reading
   await page.getByRole('link',{name:'返回时间线',exact:true}).click(); await ready(page);
   await expect(page).toHaveURL(`http://127.0.0.1:4179${destination}`); await expect(card).toBeFocused();
 });
+
+test('subline year domains follow membership through defaults, filtering, merging and history', async({page},info)=>{
+  await page.goto(path('writers/authors/li-bu-bai/'));await ready(page);
+  const cards=page.locator('.chronicle-event-button');
+  await expect(cards).toHaveCount(5);
+  await expect(page.locator('.range-numbers')).toHaveText('2019 — 2024');
+  await expect(page.locator('h1')).toHaveAttribute('title','2019 年 — 2024 年');
+  await capture(page,info,'author-scoped-years');
+  const original=page.url();
+  await page.getByRole('button',{name:'时间与范围筛选',exact:true}).click();
+  const dialog=page.getByRole('dialog',{name:'筛选时间线'});
+  await expect(dialog.locator('input[name="from"]')).toHaveValue('2019');
+  await expect(dialog.locator('input[name="to"]')).toHaveValue('2024');
+  await expect(dialog.getByRole('slider',{name:'拖动起始年份'})).toHaveAttribute('min','2019');
+  await expect(dialog.getByRole('slider',{name:'拖动结束年份'})).toHaveAttribute('max','2024');
+  await dialog.getByRole('button',{name:'最近 5 年',exact:true}).click();
+  await expect(dialog.locator('input[name="from"]')).toHaveValue('2020');
+  await capture(page,info,'author-scoped-year-controls');
+  await dialog.getByRole('button',{name:'关闭筛选，不保存更改',exact:true}).click();
+  await expect(page).toHaveURL(original);
+  await expect(page.getByRole('button',{name:'时间与范围筛选',exact:true})).toBeFocused();
+  // Native navigation to a merged line resets to the new member union, not the old line.
+  await page.getByRole('checkbox',{name:'合并刘慈欣作品年谱',exact:true}).click();await ready(page);
+  await expect(cards).toHaveCount(30);
+  await expect(page.locator('.range-numbers')).toHaveText('1999 — 2024');
+  const merged=page.url();
+  await page.goBack();await ready(page);await expect(page).toHaveURL(original);
+  await expect(page.locator('.range-numbers')).toHaveText('2019 — 2024');
+  await page.goForward();await ready(page);await expect(page).toHaveURL(merged);
+  await expect(page.locator('.range-numbers')).toHaveText('1999 — 2024');
+  const selected=cards.first();
+  const id=await selected.getAttribute('data-event-id');
+  const back=new URL((await selected.getAttribute('href'))!,'http://127.0.0.1').searchParams.get('return')!;
+  await selected.click();await page.getByRole('link',{name:'返回时间线',exact:true}).click();await ready(page);
+  await expect(page).toHaveURL(`http://127.0.0.1:4179${back}`);
+  await expect(page.locator(`[data-event-id="${id}"]`)).toBeFocused();
+  await expect(page.locator('.range-numbers')).toHaveText('1999 — 2024');
+  await page.locator('.timeline-navigation-heading a').click();await ready(page);
+  await expect(page.locator('.range-numbers')).toHaveText('1999 — 2026');
+  await noOverflow(page);
+});
+
+test('saved out-of-line ranges remain empty and editable, while resets and BCE use line bounds',async({page},info)=>{
+  await page.goto(path('writers/authors/li-bu-bai/?from=2000&to=2001&q=大航海&order=desc'));await ready(page);
+  await expect(page.locator('.chronicle-event-button')).toHaveCount(0);
+  await expect(page.locator('.range-numbers')).toHaveText('2000 — 2001');
+  await expect(page.locator('h1')).toHaveAttribute('title','2019 年 — 2024 年');
+  await page.getByRole('button',{name:'时间与范围筛选',exact:true}).click();
+  const dialog=page.getByRole('dialog',{name:'筛选时间线'});
+  const start=dialog.getByRole('slider',{name:'拖动起始年份'});
+  await expect(start).toHaveAttribute('min','2000');await expect(start).toHaveAttribute('max','2024');
+  await start.focus();await page.keyboard.press('ArrowRight');
+  await expect(dialog.locator('input[name="from"]')).toHaveValue('2001');
+  await expect(start).toHaveAttribute('min','2000');await expect(start).toHaveAttribute('max','2024');
+  await capture(page,info,'saved-empty-range-controls');
+  await dialog.getByRole('button',{name:'重置',exact:true}).click();
+  await expect(dialog.locator('input[name="from"]')).toHaveValue('2019');
+  await expect(dialog.locator('input[name="to"]')).toHaveValue('2024');
+  await dialog.getByRole('button',{name:'查看 5 个结果',exact:true}).click();
+  await expect(page.locator('.chronicle-event-button')).toHaveCount(5);
+  await expect(page.locator('.range-numbers')).toHaveText('2019 — 2024');
+  // Search does not shrink the domain or turn the header into a result-only span.
+  const search=page.locator('#current-topic-search input[name="q"]');
+  if(info.project.name==='mobile')await page.getByRole('button',{name:'搜索当前时间线',exact:true}).click();
+  await search.fill('大航海');await expect(page.locator('.chronicle-event-button')).toHaveCount(1);
+  await expect(page.locator('.range-numbers')).toHaveText('2019 — 2024');
+  await page.goto(path('china-history/collections/idiom-backgrounds/'));await ready(page);
+  await expect(page.locator('.range-numbers')).toHaveText('前207 — 383');
+  await page.getByRole('button',{name:'时间与范围筛选',exact:true}).click();
+  await expect(dialog.locator('input[name="from"]')).toHaveValue('-207');
+  await expect(dialog.locator('input[name="to"]')).toHaveValue('383');
+  await expect(dialog.getByRole('slider',{name:'拖动起始年份'})).toHaveAttribute('min','-206');
+  await capture(page,info,'bce-line-year-controls');
+  await noOverflow(page);
+});
