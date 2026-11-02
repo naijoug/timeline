@@ -6,7 +6,7 @@ const test=base.extend<{ pageErrors: string[] }>({
 const prefix=(process.env.TIMELINE_BASE_PATH || '').replace(/\/$/,'');
 const path=(value:string)=>`${prefix}/${value}`;
 async function ready(page:Page){await page.locator('[data-timeline-ready="true"]').waitFor();await page.evaluate(()=>document.fonts.ready);}
-async function capture(page:Page,info:TestInfo,name:string){const file=info.outputPath(`${name}.png`);await page.screenshot({path:file});await info.attach(name,{path:file,contentType:'image/png'});}
+async function capture(page:Page,info:TestInfo,name:string){const file=info.outputPath(`${name}.png`);await page.screenshot({path:file,animations:'disabled'});await info.attach(name,{path:file,contentType:'image/png'});}
 async function readableMapSources(page:Page) {
   await expect(page.locator('.map-evidence a')).toHaveCount(2);
   // Theme links have a 160ms color transition; assert settled real contrast, not its first frame.
