@@ -262,7 +262,7 @@ test('Feishui sourced diagram loads in light and dark without disturbing reading
   await expect(popup).toHaveURL(new URL(path('maps/feishui-spatial-383.svg'),page.url()).href);
   await expect(popup.locator('svg')).toBeVisible(); await popup.close(); await expect(imageLink).toBeFocused();
   await figure.locator('summary').click();
-  await expect(figure.getByRole('link',{name:'《淝水之战：胡人骑兵大败》教学材料'})).toBeVisible();
+  await expect(figure.getByRole('link',{name:'《淝水之战：胡人骑兵大败》教学材料',exact:true})).toBeVisible();
   await page.emulateMedia({colorScheme:'dark'}); await noOverflow(page); await capture(page,info,'feishui-map-dark');
   await page.getByRole('link',{name:'返回时间线',exact:true}).click(); await ready(page);
   await expect(page).toHaveURL(`http://127.0.0.1:4179${destination}`); await expect(card).toBeFocused();
