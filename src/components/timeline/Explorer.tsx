@@ -33,6 +33,8 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   const [rangeOpen, setRangeOpen] = useState(false);
   const timelineOptions = useRef<HTMLDivElement>(null);
   const timelineSelectionKey = (state.timelineIds || []).join(',');
+  const [selectionRestoreVersion, setSelectionRestoreVersion] = useState(0);
+  const seenSelectionRestore = useRef(0);
   const filterTrigger = useRef<HTMLButtonElement>(null);
   const closeFilters = () => { setRangeOpen(false); requestAnimationFrame(() => filterTrigger.current?.focus({ preventScroll: true })); };
   const update = (patch: Partial<ExplorerState>) => setState(s => ({ ...s, ...patch }));
@@ -68,6 +70,7 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
       const explicitEvent = new URLSearchParams(location.search).get('event');
       const linkedEvent = explicitEvent && events.find(event => event.id === explicitEvent && (!next.timelineIds?.length || timelineMembership(catalog, next.timelineIds).has(event.id)));
       if (linkedEvent) { location.replace(eventHref(linkedEvent, next)); return; }
+      setSelectionRestoreVersion(version => version + 1);
       setState(next); setReady(true);
     };
     const pop = () => { setRangeOpen(false); restoredPosition.current = false; restore(); };
@@ -78,7 +81,12 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   useEffect(() => { if (ready) history.replaceState(history.state, '', location.pathname + query(state) + location.hash); }, [state, ready, query]);
   useLayoutEffect(() => {
     const options = timelineOptions.current;
-    if (!ready || !options || options.contains(document.activeElement)) return;
+    if (!ready || !options) return;
+    const restoring = seenSelectionRestore.current !== selectionRestoreVersion;
+    seenSelectionRestore.current = selectionRestoreVersion;
+    // Back/Forward restores a reading path even if focus remains on an old checkbox.
+    // Keep focus itself untouched; suppress movement only during direct rail edits.
+    if (!restoring && options.contains(document.activeElement)) return;
     const bounds = options.getBoundingClientRect();
     const left = selectedTimelineScrollLeft({
       left: bounds.left + options.clientLeft, width: options.clientWidth,
@@ -87,7 +95,7 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
     // Only the horizontal rail moves, instantly (including reduced-motion mode).
     // Filter edits and manual rail scrolling do not retrigger this selection effect.
     if (left !== undefined) options.scrollTo({ left, behavior: 'instant' });
-  }, [ready, timelineSelectionKey]);
+  }, [ready, timelineSelectionKey, selectionRestoreVersion]);
   useEffect(() => {
     if (!ready || restoredPosition.current) return;
     restoredPosition.current = true;

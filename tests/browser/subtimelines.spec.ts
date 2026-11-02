@@ -137,10 +137,19 @@ test('selected reading paths stay discoverable without stealing rail scroll or f
   const main = page.getByRole('checkbox', { name: '合并AI 发展里程碑', exact: true });
   await main.check(); // Playwright's normal click reveals the checkbox, as keyboard traversal does.
   await expect(main).toBeFocused();
-  const merged = page.url(), scroll = await rail.evaluate(el => el.scrollLeft);
+  const merged = page.url();
   await expect(main).toBeChecked(); await expect(agent).toBeChecked();
+  // Native history does not necessarily blur the checkbox that created the entry.
+  const historyTop = await page.evaluate(() => window.scrollY);
+  await page.goBack(); await ready(page); await expect(page).toHaveURL(original);
+  await expect(main).toBeFocused(); await expect(main).not.toBeChecked();
+  await expect.poll(visibleSelection).toBe(true);
+  expect(await page.evaluate(() => window.scrollY)).toBe(historyTop);
+  await page.goForward(); await ready(page); await expect(main).toBeChecked();
+  await expect(main).toBeFocused();
+  const forwardScroll = await rail.evaluate(el => el.scrollLeft);
   await page.getByRole('combobox', { name: '排列顺序', exact: true }).selectOption('asc');
-  expect(await rail.evaluate(el => el.scrollLeft)).toBe(scroll);
+  expect(await rail.evaluate(el => el.scrollLeft)).toBe(forwardScroll);
   await page.goBack(); await ready(page); await expect(page).toHaveURL(original);
   await expect.poll(visibleSelection).toBe(true);
   await page.goForward(); await ready(page);
