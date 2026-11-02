@@ -6,6 +6,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '从思想与方法，到模型和任务型产品的精选阅读主线。',
     note: '编辑精选的阅读主线，串联思想、方法、模型与产品转折；不等于全部重大事件，也不自动汇总所有子时间线。',
     entries: [
+      {"eventId": "longcat-2-5-api", "importance": "key", "context": "API上线与此前Preview分开；不由API可用推断权重开放。"},
       {"eventId": "formal-neuron", "importance": "key"},
       {"eventId": "turing-test", "importance": "key"},
       {"eventId": "dartmouth-workshop", "importance": "key"},
@@ -62,6 +63,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '按论文、预览、API 和权重开放阶段阅读模型演进。',
     note: '已收录模型与关键训练、架构方法的精选年表，非完整发布清单。论文、预览、API 开放和权重开放分别记录，不把它们视为同一种发布。',
     entries: [
+      {"eventId": "longcat-2-5-api", "importance": "key", "context": "API上线与此前Preview分开；不由API可用推断权重开放。"},
       {"eventId": "formal-neuron", "importance": "key"},
       {"eventId": "backprop", "importance": "key"},
       {"eventId": "alexnet", "importance": "key"},
