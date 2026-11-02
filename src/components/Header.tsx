@@ -7,8 +7,8 @@ import { useEffect, useRef, useState } from 'react';
 import '../styles/navigation.css';
 import AppearanceControl from './AppearanceControl';
 
-export default function Header({ query, onQuery, active = 'timeline', topicTitle = '全球 AI 时间线', topicPath = '/ai/', screen = 'timeline' }: {
-  topicTitle?: string; topicPath?: string; query?: string;
+export default function Header({ query, onQuery, active = 'timeline', topicTitle = '全球 AI 时间线', topicPath = '/ai/', searchPath, searchTimelineIds, parentPath, screen = 'timeline' }: {
+  topicTitle?: string; topicPath?: string; searchPath?: string; searchTimelineIds?: string[]; parentPath?: string; query?: string;
   screen?: 'home' | 'timeline' | 'record';
   onQuery?: (query: string) => void; active?: 'timeline' | 'themes' | 'about';
 }) {
@@ -21,18 +21,18 @@ export default function Header({ query, onQuery, active = 'timeline', topicTitle
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [backHref, setBackHref] = useState(screen === 'record' && active !== 'about' ? sitePath(topicPath) : sitePath('/'));
+  const [backHref, setBackHref] = useState(screen === 'record' && active !== 'about' ? sitePath(topicPath) : sitePath(parentPath || '/'));
   const currentTopic = topics.find(t => t.path === topicPath);
   const mobileTitle = active === 'about' ? '关于 timeline' : screen === 'home' ? '探索时间线' : screen === 'record' ? '事件详情' : currentTopic?.title || topicTitle;
   const resolveBackHref = () => {
-    if (screen !== 'record' || active === 'about') return sitePath('/');
+    if (screen !== 'record' || active === 'about') return sitePath(parentPath || '/');
     const prefix = sitePath(topicPath);
     let value = new URLSearchParams(location.search).get('return');
     if (!value && safeTimelineReturn(document.referrer, location.origin, prefix)) { try { value = sessionStorage.getItem('timeline-return'); } catch { /* The topic link still works. */ } }
     const destination = safeTimelineReturn(value, location.origin, prefix);
     return destination ? timelineReadingReturn(destination) : prefix;
   };
-  useEffect(() => { setBackHref(resolveBackHref()); }, [screen, topicPath, active]);
+  useEffect(() => { setBackHref(resolveBackHref()); }, [screen, topicPath, active, parentPath]);
   const openSearch = () => {
     setSearchOpen(true);
     requestAnimationFrame(() => input.current?.focus({ preventScroll: true }));
@@ -81,7 +81,7 @@ export default function Header({ query, onQuery, active = 'timeline', topicTitle
     sidebar.current?.querySelector<HTMLButtonElement>('.mobile-nav-close')?.focus({ preventScroll: true });
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    const background = [...document.querySelectorAll<HTMLElement>('main, .library-header, footer, .skip-link')];
+    const background = [...document.querySelectorAll<HTMLElement>('main, .library-header, footer, .skip-link, .timeline-reading-notes')];
     const previousInert = background.map(el => el.inert);
     background.forEach(el => { el.inert = true; });
     const keyboard = (e: KeyboardEvent) => {
@@ -120,7 +120,7 @@ export default function Header({ query, onQuery, active = 'timeline', topicTitle
     </aside>
     <header ref={header} className="atlas-header library-header" data-search-open={searchOpen || undefined}>
       <button ref={desktopMenu} type="button" className="header-sidebar-toggle" onClick={toggle} aria-label={collapsed ? '展开侧栏' : '收拢侧栏'} aria-expanded={!collapsed} aria-controls="topic-sidebar" title={collapsed ? '展开侧栏' : '收拢侧栏'}>{collapsed ? <PanelLeftOpen size={20} /> : <PanelLeftClose size={20} />}</button>
-      {screen !== 'home' && <a className="mobile-app-back" href={backHref} aria-label={screen === 'record' && active !== 'about' ? '返回时间线' : '返回首页'} onClick={event => {
+      {screen !== 'home' && <a className="mobile-app-back" href={backHref} aria-label={screen === 'record' && active !== 'about' ? '返回时间线' : parentPath ? '返回上级时间线' : '返回首页'} onClick={event => {
         // Recheck at activation as well as hydration, without guessing browser history.
         const destination = resolveBackHref();
         event.currentTarget.href = destination;
@@ -144,13 +144,13 @@ export default function Header({ query, onQuery, active = 'timeline', topicTitle
         <AppearanceControl />
         <button ref={menu} type="button" className="mobile-nav-open" onClick={() => { setSearchOpen(false); setMobileOpen(true); }} aria-label="打开主题导航" aria-expanded={mobileOpen} aria-controls="topic-sidebar" aria-haspopup="dialog"><Menu size={23} /></button>
       </div>
-      {topicPath !== '/' && <form id="current-topic-search" className="atlas-search" action={sitePath(topicPath)} role="search" onSubmit={onQuery ? event => {
+      {topicPath !== '/' && <form id="current-topic-search" className="atlas-search" action={sitePath(searchPath || topicPath)} role="search" onSubmit={onQuery ? event => {
         event.preventDefault();
         if (window.matchMedia('(max-width: 760px)').matches) closeSearch();
       } : undefined} onKeyDown={event => {
         if (event.key === 'Escape' && searchOpen && window.matchMedia('(max-width: 760px)').matches) { event.preventDefault(); event.stopPropagation(); closeSearch(); }
       }}>
-        <Search size={17} /><input ref={input} name="q" aria-label="搜索事件、对象或关键词" placeholder="搜索当前主题…" value={query} onChange={onQuery ? e => onQuery(e.target.value) : undefined} />
+        <Search size={17} />{searchTimelineIds && <input type="hidden" name="lines" value={searchTimelineIds.length ? searchTimelineIds.join(',') : 'all'} />}<input ref={input} name="q" aria-label="搜索事件、对象或关键词" placeholder="搜索当前主题…" value={query} onChange={onQuery ? e => onQuery(e.target.value) : undefined} />
         {!onQuery && topicPath === '/ai/' && <input type="hidden" name="all" value="1" />}
         {query && onQuery ? <button type="button" aria-label="清除搜索" onClick={() => onQuery('')}><X size={15} /></button> : <kbd>⌘ K</kbd>}
       </form>}

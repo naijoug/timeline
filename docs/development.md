@@ -33,6 +33,7 @@ npm run preview     # 预览 dist
 ```sh
 npm run check:links        # 静态站点内部链接
 npm run check:reading      # 首屏顺序、层级导航与事件链接
+npm run check:subtimelines # 子线静态成员、独立路由、精确返回与原生检索
 npm run check:performance  # 客户端依赖与体积预算
 npm run test:hydration     # 生产脚本的 DOM 模拟回归
 ```
@@ -147,3 +148,19 @@ Fira Code Latin variable WOFF2 来自 `@fontsource-variable/fira-code@5.3.0` 的
 - 每次有实际变更时，在 [更新记录](changelog.md) 增加简短条目并链接详细文档；没有变化无需写日报。
 - 日常核验沿用 `docs/maintenance-YYYY-MM-DD-HHMM.md`，AI 资料巡查沿用 `docs/ai-radar-YYYY-MM-DD-HHMM.md`；记录中明确时区、核查范围与验证结果。
 - 主题研究、设计和验收材料继续放在 `docs/` 对应目录。只有需要用户执行迁移步骤时，才新增升级指南。
+
+## 子时间线
+
+在主题的 `timelines` 中声明 `TimelineDefinition`，只维护 `entries`（`eventId`、本线 `importance` 与可选编辑 `context`）。事件只保留一份事实，不添加反向 `timelineIds`。主线独立策展，`parentId` 仅用于导航。新增事件不会自动加入已有线路；请有意识地维护成员。
+
+独立页面使用 `TimelinePage.astro` 和原有 `ExplorerIsland`；不新建一套阅读器。既有 `/collections/` 和 `/writers/authors/` 路径继续有效。`lines` 查询参数保存单线或合并成员，`lines=all` 表示全库；多个 ID 归一为目录顺序。分类、关键词、地区、时期和排序可以叠加；清除筛选不会偷偷退出当前线路。
+
+AI 的全新主题入口默认 49 节点主线；有明确旧式筛选的 URL 保持旧语义，“全部事件”可以打开完整 295 事件索引。这里的数目是 2026-11-02 本次迁移快照，不是自动承诺的维护指标。
+
+完整模型、来源与长文仍由静态详情页负责。补充阅读说明保留在静态页，移动导航打开时同样隔离背景焦点。实现与边界见 [子时间线数据模型](subtimelines/design.md) 和 [本轮验证](subtimelines/verification-2026-11-02.md)。
+
+### 真浏览器子时间线验收
+
+`npm run build` 后，运行 `npx playwright install --with-deps chromium`、`npm run test:browser`。测试使用仅 localhost 的静态服务，不会发布站点。`TIMELINE_BASE_PATH` / `TIMELINE_OUT_DIR` 必须与构建一致。结果在 `test-results/browser-root` 或 `test-results/browser-pages`；截图用于实际视觉复核，不自动生成或批准 golden。
+
+PR 验收工作流只读、无 secrets、无部署；不要改为 `pull_request_target`。Pages 发布触发条件和权限不因验收工作流改变。CI 安装 Noto CJK 回退字体，使中文布局可检查。

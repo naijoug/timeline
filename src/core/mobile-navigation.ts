@@ -1,15 +1,23 @@
+import { normalizedTimelineIds } from './timelines';
 import { catalogBounds } from './catalog';
 import { restoreExplorer, explorerQuery, explorerEvents, type ExplorerPresentation, type ExplorerState } from './explorer';
 import type { ExplorerCatalog, ExplorerEvent } from './types';
 
 /** The document timeline opens the whole chronology at every viewport width. */
-export function restoreReadingExplorer(search: string, catalog: ExplorerCatalog, period = '', category = '', presentation: ExplorerPresentation = {}): ExplorerState {
+export function restoreReadingExplorer(search: string, catalog: ExplorerCatalog, period = '', category = '', presentation: ExplorerPresentation = {}, initialTimelineId = ''): ExplorerState {
   const state = restoreExplorer(search, catalog, period, category, presentation);
   const params = new URLSearchParams(search);
   if (!params.has('from') && !params.has('to') && !state.period) {
     [state.from, state.to] = catalogBounds(catalog);
   }
-  return { ...state, selected: '', order: params.get('order') === 'asc' ? 'asc' : params.get('order') === 'desc' ? 'desc' : catalog.topic.id === 'ai' ? 'desc' : 'asc' };
+  const fixedLine = catalog.timelines?.find(line => line.id === initialTimelineId);
+  const requested = params.has('lines') ? (params.get('lines') || '').split(',') : [];
+  const selected = normalizedTimelineIds(catalog, requested);
+  // Old filtered links retain their original scope; only a fresh theme opens its curated mainline.
+  const defaultId = !search && !period && !category ? catalog.topic.defaultTimelineId : undefined;
+  const timelineIds = fixedLine ? [fixedLine.id] : selected.length ? selected : params.has('lines') && params.get('lines') !== 'all' ? (catalog.topic.defaultTimelineId ? [catalog.topic.defaultTimelineId] : []) : defaultId ? [defaultId] : [];
+  const all = timelineIds.length ? params.get('all') !== '0' : state.all;
+  return { ...state, timelineIds, all, selected: '', order: params.get('order') === 'asc' ? 'asc' : params.get('order') === 'desc' ? 'desc' : catalog.topic.id === 'ai' ? 'desc' : 'asc' };
 }
 
 /** Preserve existing event routes, including AI model aliases and project base paths. */
@@ -75,6 +83,11 @@ export function canUseTimelineHistoryBack(destination: string, origin: string, r
 export function readingExplorerQuery(state: ExplorerState, serialize: (state: ExplorerState) => string = explorerQuery): string {
   const params = new URLSearchParams(serialize(state));
   params.set('order', state.order || 'asc');
+  if (state.timelineIds) {
+    params.set('lines', state.timelineIds.length ? state.timelineIds.join(',') : 'all');
+    // An explicit false is needed because independent lines open with every entry.
+    if (state.timelineIds.length) params.set('all', state.all ? '1' : '0');
+  }
   return `?${params}`;
 }
 export function readingExplorerEvents<Event extends ExplorerEvent>(catalog: ExplorerCatalog<Event>, state: ExplorerState, presentation: ExplorerPresentation = {}) {

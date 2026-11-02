@@ -1,3 +1,4 @@
+import { aiTimelines } from './timelines';
 import type { TimelineEvent as AIEvent } from "./types";
 import type { Catalog, TimelineEvent } from "../../core/types";
 import { parseDate } from "../../core/time";
@@ -45,6 +46,7 @@ export const aiCatalog: Catalog = {
     description: "技术、模型与 Agent 的演进。",
     path: "/ai/",
     coverage: "全球精选事件。",
+    defaultTimelineId: "ai-milestones",
     categories: [
       { id: "methods", title: "AI 技术突破" },
       { id: "models", title: "模型演进" },
@@ -55,7 +57,7 @@ export const aiCatalog: Catalog = {
   entities,
   sources,
   periods: [],
-  collections: [instructionCollection, historicalCollection],
+  timelines: [...aiTimelines, instructionCollection, historicalCollection],
   relations: [...instructionRelations, ...historicalRelations],
 };
 /** The AI reading presentation retains its model comparison and entity links. */

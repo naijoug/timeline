@@ -11,9 +11,9 @@ import { validateCatalog } from '../src/core/validate';
 const event = (id:string) => xinhaiEvents.find(e=>e.id===id)!;
 test('Xinhai records are unique, cited and discoverable across the transition',()=>{
   assert.deepEqual(validateCatalog(chinaHistory),[]);
-  assert.equal(xinhaiCollection.eventIds.length,14);
+  assert.equal(xinhaiCollection.entries.map(entry => entry.eventId).length,14);
   assert.ok(chinaHistory.topic.shortcuts?.some(s=>s.path===xinhaiCollection.path));
-  assert.ok(chinaHistory.collections?.includes(xinhaiCollection));
+  assert.ok(chinaHistory.timelines?.includes(xinhaiCollection));
   for (const e of xinhaiEvents) {
     assert.equal(chinaHistory.events.filter(other=>other.id===e.id).length,1,e.id);
     assert.ok(e.details?.every(s=>s.sourceIds?.length && s.locator),e.id);

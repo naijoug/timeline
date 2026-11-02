@@ -70,11 +70,13 @@ async function hydrate(path, search = '', headerOnly = false, beforeHydrate) {
   await waitFor(() => headerOnly ? w.document.documentElement.style.getPropertyValue('--navigation-header-height') : w.document.querySelector('[data-timeline-ready="true"]'), `${path}: hydration did not finish`);
   assert.equal(errors.length, 0, errors.join('\n'));
   if (!search) assert.equal(w.document.querySelector('.chronicle-event-button'), firstCard, `${path}: hydration replaced SSR instead of reusing it`);
-  return { dom, w, errors, setMobile };
+  return { dom, w, errors, setMobile, load };
 }
 for (const topic of ['ai','programming-languages','china-history','writers']) {
   const { dom, w, errors } = await hydrate(topic);
   const cards = () => [...w.document.querySelectorAll('.chronicle-event-button')];
+  const allEvents = w.document.querySelector('.timeline-navigation-heading>a');
+  if (allEvents) { allEvents.click(); await waitFor(() => w.location.search.includes('lines=all') && w.location.search.includes('all=1'), 'explicit all-events view'); }
   assert.ok(cards().length);
   const original = cards().map(card => card.dataset.eventId);
   const order = w.document.querySelector('[aria-label="排列顺序"]');
@@ -85,6 +87,7 @@ for (const topic of ['ai','programming-languages','china-history','writers']) {
   w.document.querySelector('[aria-label="时间与范围筛选"]').click();
   await waitFor(() => w.document.querySelector('#chronicle-filters')?.open, `${topic}: filter drawer did not open`);
   const toggle = w.document.querySelector('.filter-sheet-key input');
+  if (!toggle.checked) { toggle.click(); await waitFor(() => toggle.checked, 'draft restricts to key entries'); }
   toggle.click();
   await waitFor(() => !toggle.checked, 'draft changes key-only selection');
   w.document.querySelector('.filter-sheet-apply').click();
@@ -264,3 +267,95 @@ console.log('Early search: four topics, clear-to-empty, IME handoff, later typin
   dom.window.close();
 }
 console.log('Focus/selection before the first input event also survives hydration.');
+
+// First-class sublines use the exact same production island, not a separate reader.
+for (const [path, topic, id, count] of [
+  ['ai/timelines/ai-milestones', 'ai', 'ai-milestones', 49],
+  ['ai/timelines/ai-model-iterations', 'ai', 'ai-model-iterations', 190],
+  ['ai/timelines/ai-agent-products', 'ai', 'ai-agent-products', 46],
+  ['writers/authors/liu-cixin', 'writers', 'liu-cixin', null],
+  ['china-history/collections/wars-and-turning-points', 'china-history', 'wars-and-turning-points', null],
+  ['ai/collections/transformer-to-instructions', 'ai', 'transformer-to-instructions', 14],
+]) {
+  const {dom,w,errors} = await hydrate(path);
+  const payload = JSON.parse(w.document.querySelector(`#timeline-payload-${topic}`).textContent);
+  const line = payload.catalog.timelines.find(line => line.id === id);
+  if (count !== null) assert.equal(line.entries.length,count);
+  const cards = [...w.document.querySelectorAll('.chronicle-event-button')];
+  assert.equal(cards.length,line.entries.length,`${id}: full independent membership`);
+  assert.equal(new Set(cards.map(card=>card.dataset.eventId)).size,cards.length);
+  const link = cards[Math.floor(cards.length / 2)];
+  w.document.addEventListener('click',event=>event.preventDefault(),{once:true});
+  link.click();
+  const back = new URL(link.href).searchParams.get('return');
+  assert.ok(back.startsWith(`${base}/${path}/?`),`${id}: record returns to original subline route`);
+  assert.equal(new URL(back,'https://timeline.example').searchParams.get('lines'),id);
+  assert.equal(JSON.parse(w.sessionStorage.getItem('timeline-mobile-position')).url,back);
+  assert.equal(errors.length,0,errors.join('\n'));
+  dom.window.close();
+}
+{
+  const {dom,w,errors} = await hydrate('ai');
+  const cards = () => [...w.document.querySelectorAll('.chronicle-event-button')];
+  assert.equal(cards().length,49);
+  const mainUrl = w.location.href;
+  w.document.querySelector('[aria-label="合并AI 模型发现与迭代"]').click();
+  await waitFor(()=>w.location.search.includes('ai-model-iterations'),'merge selection serialized');
+  const mergedUrl = w.location.href;
+  const mergedIds = cards().map(card=>card.dataset.eventId);
+  const payload = JSON.parse(w.document.querySelector('#timeline-payload-ai').textContent);
+  const expected = new Set(payload.catalog.timelines.filter(line=>['ai-milestones','ai-model-iterations'].includes(line.id)).flatMap(line=>line.entries.map(entry=>entry.eventId)));
+  assert.equal(cards().length,expected.size);
+  assert.equal(new Set(mergedIds).size,mergedIds.length);
+  assert.ok(w.document.querySelector('.timeline-event-lines'));
+  const freshness = w.document.querySelector('.timeline-freshness a');
+  const latestReturn = new URL(freshness.href).searchParams.get('return');
+  assert.equal(new URL(latestReturn,'https://timeline.example').searchParams.get('lines'),'ai-milestones,ai-model-iterations');
+  assert.ok(latestReturn.endsWith('#timeline-freshness'));
+  // Real same-document history traversal restores the line set and URL exactly.
+  w.history.back();
+  await waitFor(()=>w.location.href===mainUrl && cards().length===49,'Back restores curated mainline');
+  w.history.forward();
+  await waitFor(()=>w.location.href===mergedUrl && cards().length===expected.size,'Forward restores merged selection');
+  assert.deepEqual(cards().map(card=>card.dataset.eventId),mergedIds);
+  const model = w.document.querySelector('[aria-label="合并AI 模型发现与迭代"]');
+  model.click(); await waitFor(()=>cards().length===49,'repeated unmerge');
+  model.click(); await waitFor(()=>cards().length===expected.size,'repeated merge');
+  assert.equal(errors.length,0,errors.join('\n'));
+  dom.window.close();
+}
+console.log('Sublines: shared SSR hydration, exact independent membership, record returns, merged union dedup, repeated selection and actual Back/Forward passed (DOM simulation, not browser layout).');
+{
+  const {dom,w,errors,setMobile,load} = await hydrate('writers/authors/liu-cixin');
+  assert.equal(w.document.querySelector('.mobile-app-back').getAttribute('aria-label'),'返回上级时间线');
+  assert.equal(new URL(w.document.querySelector('.mobile-app-back').href).pathname,`${base}/writers/`);
+  setMobile(true);
+  const menu=w.document.querySelector('.mobile-nav-open'); menu.click();
+  await waitFor(()=>w.document.querySelector('[role="dialog"]'),'subline mobile navigation opens');
+  assert.equal(w.document.querySelector('.timeline-reading-notes').inert,true,'source appendix is inert behind modal navigation');
+  w.dispatchEvent(new w.KeyboardEvent('keydown',{key:'Escape',bubbles:true}));
+  await waitFor(()=>!w.document.querySelector('[role="dialog"]'),'subline mobile navigation closes');
+  assert.notEqual(w.document.querySelector('.timeline-reading-notes').inert,true);
+  await waitFor(()=>w.document.activeElement===menu,'subline navigation restores opener focus');
+  // Native departures refresh an older return position, including notes scroll.
+  Object.defineProperty(w,'scrollY',{value:1234,configurable:true});
+  w.dispatchEvent(new w.PageTransitionEvent('pagehide'));
+  assert.equal(w.history.state.timelinePosition.top,1234);
+  Object.defineProperty(w,'scrollY',{value:3456,configurable:true});
+  w.dispatchEvent(new w.PageTransitionEvent('pagehide'));
+  assert.equal(w.history.state.timelinePosition.top,3456);
+  assert.equal(JSON.parse(w.sessionStorage.getItem('timeline-mobile-position')).top,3456);
+  // Execute actual page-note module so auxiliary links retain the latest query.
+  for (const script of w.document.querySelectorAll('script[type="module"][src]')) await load(script.src);
+  const noteLink=w.document.querySelector('.timeline-reading-notes a[href*="/events/"]');
+  assert.ok(noteLink);
+  w.history.replaceState(null,'',w.location.pathname+'?lines=liu-cixin&q=三体&order=desc');
+  for(const type of ['focusin','contextmenu','auxclick']) {
+    noteLink.dispatchEvent(new w.Event(type,{bubbles:true}));
+    const destination=new URL(noteLink.href).searchParams.get('return');
+    assert.equal(new URL(destination,'https://timeline.example').searchParams.get('q'),'三体');
+    assert.ok(destination.endsWith('#timeline-notes'));
+  }
+  assert.equal(errors.length,0,errors.join('\n')); dom.window.close();
+}
+console.log('Sublines: parent navigation, mobile source-note inertness, focus restoration, refreshed pagehide scroll and modified notes links passed.');

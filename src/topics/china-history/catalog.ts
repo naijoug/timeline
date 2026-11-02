@@ -653,7 +653,7 @@ export const events: TimelineEvent[] = [
   ...(guanduDepthEventPatches[event.id] || {}),
   ...(historyRecommendedResources[event.id] ? { recommendedResources: [...historyRecommendedResources[event.id], ...(wangAnshiDepthEventPatches[event.id]?.recommendedResources || [])] } : {}),
 }));
-const backboneCollections = historyBackboneCollections(events);
+const backboneCollections = historyBackboneCollections();
 export const chinaHistory: Catalog = {
   topic: {
     periodLabel: "朝代与时期",
@@ -686,7 +686,7 @@ export const chinaHistory: Catalog = {
   periods,
   events,
   sources,
-  collections: [...backboneCollections, transitionCollection, xinhaiCollection],
+  timelines: [...backboneCollections, transitionCollection, xinhaiCollection],
   relations: [...transitionRelations, ...xinhaiRelations, ...ancientRelations, ...modernRelations],
   entities: [...periods
     .filter((p) => p.entityIds.length)

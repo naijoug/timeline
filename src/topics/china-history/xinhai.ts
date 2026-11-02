@@ -1,3 +1,4 @@
+import { timelineEntries } from '../../core/timelines';
 import type { Collection, Entity, EventRelation, ReadingSection, Source, TimelineEvent } from '../../core/types';
 import { parseDate } from '../../core/time';
 
@@ -119,6 +120,7 @@ export const xinhaiRelations:EventRelation[] = [
 export const xinhaiCollection:Collection = {
   id:'xinhai-1911-1912',title:'辛亥革命 1911—1912',path:'/china-history/collections/xinhai-1911-1912/',
   description:'从保路风潮、地方起义与战争，读到议和、共和建政及临时约法。',
-  eventIds:xinhaiEvents.map(e=>e.id),
+  themeId: 'china-history', kind: 'curated',
+  entries: timelineEntries(xinhaiEvents.map(e=>e.id)),
   note:'14 个精选节点、10 条有据关系。1912 年南京共和政权与清廷一度并存，事件明确归属，跨时期记录仅存一份。机构年表、同时代外交文书转录和中文译文按各自性质标示；日期先后本身不构成因果。',
 };

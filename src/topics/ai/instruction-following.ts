@@ -1,3 +1,4 @@
+import { timelineEntries } from '../../core/timelines';
 import type { Entity, Source, TimelineEvent } from './types';
 import type { Collection, EventRelation, ReadingSection } from '../../core/types';
 
@@ -122,6 +123,7 @@ export const instructionRelations: EventRelation[] = [
 export const instructionCollection: Collection = {
   id: 'transformer-to-instructions', title: 'Transformer 到指令遵循', path: '/ai/collections/transformer-to-instructions/',
   description: '2017—2023：区分架构、预训练与算力、任务适配、提示，以及反馈与偏好优化。',
-  eventIds: ['transformer', 'gpt-1', 'bert', 'gpt-2', 't5-paper', 'scaling-laws', 'gpt3-paper', 'lora', 'chain-of-thought', 'instructgpt', 'chinchilla', 'chatgpt', 'constitutional-ai', 'dpo'],
+  themeId: 'ai', kind: 'curated',
+  entries: timelineEntries(['transformer', 'gpt-1', 'bert', 'gpt-2', 't5-paper', 'scaling-laws', 'gpt3-paper', 'lora', 'chain-of-thought', 'instructgpt', 'chinchilla', 'chatgpt', 'constitutional-ai', 'dpo']),
   note: '14 个精选节点；11 个复用并补充，3 个新增。年代顺序只用于浏览，关系均另外提供原文依据。BERT、LoRA、提示与偏好优化是不同维度，不能串成一条模型继承链。',
 };

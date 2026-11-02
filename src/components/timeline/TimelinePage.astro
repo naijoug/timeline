@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Explorer from './ExplorerIsland.astro';
+import type { Catalog, TimelineDefinition } from '../../core/types';
+import type { ExplorerTopic } from '../../core/topic-payloads.server';
+import { sitePath } from '../../lib/paths';
+import '../../styles/collections.css';
+interface Props { catalog: Catalog; timeline: TimelineDefinition }
+const { catalog, timeline } = Astro.props;
+---
+<Layout explorer title={timeline.title} description={timeline.description}>
+<div class="timeline-page-shell">
+  <Explorer topicId={catalog.topic.id as ExplorerTopic} initialTimelineId={timeline.id} viewPath={timeline.path} notesHref="#timeline-notes" />
+  <aside class="timeline-reading-notes" id="timeline-notes" data-timeline-notes data-topic-prefix={sitePath(catalog.topic.path)} aria-label="阅读说明与资料">
+    <h2>阅读说明与资料</h2><p>{timeline.note}</p>
+    <slot />
+    <a class="collection-cta" href="#main">回到这条时间线</a>
+  </aside>
+  <footer class="chronicle-footer"><span>理解过去 · 看见可能的未来</span><a href={sitePath('/about/')}>资料来源随节点保留 · 持续整理</a></footer>
+</div>
+</Layout>
+<script>
+  import { recordContinuationHref } from '../../core/mobile-navigation';
+  const notes = document.querySelector<HTMLElement>('[data-timeline-notes]');
+  if (notes) {
+    const prepare = (link: HTMLAnchorElement) => {
+      const destination = location.pathname + location.search + '#timeline-notes';
+      const href = recordContinuationHref(link.href, destination, location.origin, notes.dataset.topicPrefix!);
+      if (href) link.href = href;
+      return href ? destination : undefined;
+    };
+    // Native/modified clicks work without storage; keep the latest filter query on click.
+    notes.querySelectorAll<HTMLAnchorElement>('a[href]').forEach(prepare);
+    const refreshLink = (event: Event) => {
+      const link = (event.target as Element).closest<HTMLAnchorElement>('a[href]');
+      if (link) prepare(link);
+    };
+    for (const type of ['pointerover', 'focusin', 'contextmenu', 'auxclick']) notes.addEventListener(type, refreshLink);
+    notes.addEventListener('click', event => {
+      const link = (event.target as Element).closest<HTMLAnchorElement>('a[href]');
+      if (!link) return;
+      const destination = prepare(link);
+      if (!destination || (event as MouseEvent).metaKey || (event as MouseEvent).ctrlKey || (event as MouseEvent).shiftKey || (event as MouseEvent).altKey) return;
+      history.replaceState({ ...history.state, timelinePosition: { url: destination, top: window.scrollY } }, '', destination);
+      try {
+        sessionStorage.setItem('timeline-return', destination);
+        sessionStorage.setItem('timeline-mobile-position', JSON.stringify({url: destination, top: window.scrollY}));
+      } catch { /* The URL still preserves the reading context. */ }
+    });
+  }
+</script>

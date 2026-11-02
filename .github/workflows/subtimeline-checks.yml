@@ -1,0 +1,49 @@
+name: Subtimeline checks
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: subtimeline-checks-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      ASTRO_TELEMETRY_DISABLED: 1
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Install Chromium and CJK fallback fonts
+        run: |
+          npx playwright install --with-deps chromium
+          sudo apt-get install -y fonts-noto-cjk
+      - name: Validate source and root build
+        run: npm run check && npm test && npm run build && npm run check:links && npm run check:reading && npm run check:subtimelines && npm run check:performance && npm run test:hydration
+      - name: Root browser acceptance
+        run: npm run test:browser
+      - name: Validate Pages build
+        env:
+          TIMELINE_BASE_PATH: /timeline
+          TIMELINE_OUT_DIR: dist-pages
+        run: npm run build && npm run check:links && npm run check:reading && npm run check:subtimelines && npm run check:performance && npm run test:hydration
+      - name: Pages browser acceptance
+        env:
+          TIMELINE_BASE_PATH: /timeline
+          TIMELINE_OUT_DIR: dist-pages
+        run: npm run test:browser
+      - name: Keep browser evidence
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: subtimeline-browser-${{ github.sha }}
+          path: test-results/browser-*/
+          retention-days: 7
+          if-no-files-found: warn

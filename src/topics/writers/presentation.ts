@@ -2,7 +2,7 @@ import type { ExplorerPresentation } from "../../core/explorer";
 import { writersCatalog } from "./catalog";
 
 const scopeEventIds = (entityId: string) =>
-  writersCatalog.events.filter(e => e.entityIds.includes(entityId)).map(e => e.id);
+  writersCatalog.timelines?.find(line => line.id === entityId)?.entries.map(entry => entry.eventId) || [];
 
 export const writersPresentation: ExplorerPresentation = {
   subtitle: "刘慈欣、紫金陈、马伯庸精选作品、发表阶段与阅读脉络",

@@ -15,7 +15,7 @@ export function createExplorerPayload(catalog: Catalog, presentation: ExplorerPr
         ({ id, title, time, summary, category, entityIds, periodIds, sourceIds, tags, milestone })),
       entities: catalog.entities.map(({ id, name }) => ({ id, name })),
       sources: catalog.sources.filter(source => periodSources.has(source.id)).map(({ id, title, url }) => ({ id, title, url })),
-      collections: catalog.collections?.map(({ id, title, path }) => ({ id, title, path })),
+      timelines: catalog.timelines,
     },
     presentation: {
       subtitle: presentation.subtitle,
