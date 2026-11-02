@@ -44,17 +44,17 @@ test('independent model line preserves query, order, scroll and focus through de
   const id=await card.getAttribute('data-event-id');
   const destination=new URL((await card.getAttribute('href'))!,'http://127.0.0.1:4179').searchParams.get('return')!;
   const scroll=await page.evaluate(()=>window.scrollY);await capture(page,info,'filtered-model-line');
-  await card.click();await page.locator('#back-to-timeline').waitFor();
-  await expect(page.locator('#back-to-timeline')).toHaveAttribute('href',destination);
+  await card.click();await page.getByRole('link',{name:'返回时间线',exact:true}).waitFor();
+  await expect(page.getByRole('link',{name:'返回时间线',exact:true})).toHaveAttribute('href',destination);
   await capture(page,info,'event-detail');
-  await page.locator('#back-to-timeline').click();await ready(page);
+  await page.getByRole('link',{name:'返回时间线',exact:true}).click();await ready(page);
   await expect(page).toHaveURL(`http://127.0.0.1:4179${destination}`);
   await expect(page.locator(`[data-event-id="${id}"]`)).toBeFocused();
   await expect.poll(()=>page.evaluate(()=>window.scrollY)).toBeGreaterThan(100);
   await expect.poll(async()=>Math.abs((await page.evaluate(()=>window.scrollY))-scroll)).toBeLessThan(8);
   expect(new URL(page.url()).searchParams.get('q')).toBe('GPT');
   expect(new URL(page.url()).searchParams.get('order')).toBe('asc');
-  await page.goForward();await page.locator('#back-to-timeline').waitFor();
+  await page.goForward();await page.getByRole('link',{name:'返回时间线',exact:true}).waitFor();
   await page.goBack();await ready(page);await expect(page).toHaveURL(`http://127.0.0.1:4179${destination}`);
   await noOverflow(page);
 });
@@ -83,10 +83,10 @@ test('Agent, writer and historical-war routes retain membership and source-note 
     expect(await page.locator('#timeline-notes').evaluate(el=>(el as HTMLElement).inert)).toBe(false);
   }
   const noteLink=page.locator('#timeline-notes a[href*="/events/"]').first();
-  await noteLink.scrollIntoViewIfNeeded();await noteLink.click();await page.locator('#back-to-timeline').waitFor();
-  expect((await page.locator('#back-to-timeline').getAttribute('href'))).toContain('/writers/authors/liu-cixin/');
-  expect((await page.locator('#back-to-timeline').getAttribute('href'))).toContain('#timeline-notes');
-  await page.locator('#back-to-timeline').click();await ready(page);await expect(page).toHaveURL(/#timeline-notes$/);
+  await noteLink.scrollIntoViewIfNeeded();await noteLink.click();await page.getByRole('link',{name:'返回时间线',exact:true}).waitFor();
+  expect((await page.getByRole('link',{name:'返回时间线',exact:true}).getAttribute('href'))).toContain('/writers/authors/liu-cixin/');
+  expect((await page.getByRole('link',{name:'返回时间线',exact:true}).getAttribute('href'))).toContain('#timeline-notes');
+  await page.getByRole('link',{name:'返回时间线',exact:true}).click();await ready(page);await expect(page).toHaveURL(/#timeline-notes$/);
 });
 
 test('filter cancel, apply and repeated dismissals retain subline context',async({page},info)=>{

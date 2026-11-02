@@ -7,3 +7,9 @@
 为解决原云端浏览器不可运行的环境门槛，新增仅 `pull_request` 触发、`contents: read`、无 secrets、无部署的验收工作流。锁定 Playwright 1.57.0，使用 Chromium 验证桌面 1440×1000 与窄屏 375×812，并保留 7 天截图与失败 trace。根路径和 /timeline 两种产物分别运行；原 Pages 仍只允许显式手动发布。
 
 本提交只建立验收流程，不把尚未运行的浏览器检查记为通过。后续记录以具体提交和实际 CI 结果为准。
+
+## First browser run
+
+- GitHub Actions run `41387785235` executed real Chromium: all four desktop cases and two mobile cases passed.
+- Two mobile cases targeted the intentionally hidden desktop-only return link. The rendered mobile header already had the correct visible return link and exact subline URL. The test now selects the accessible visible “返回时间线” link on either viewport; query, scroll, focus and browser Back/Forward assertions are unchanged.
+- This failed run is retained as evidence, not represented as acceptance. A new exact-head run is required before integration.
