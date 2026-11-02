@@ -8,14 +8,16 @@ const path=(value:string)=>`${prefix}/${value}`;
 async function ready(page:Page){await page.locator('[data-timeline-ready="true"]').waitFor();await page.evaluate(()=>document.fonts.ready);}
 async function capture(page:Page,info:TestInfo,name:string){const file=info.outputPath(`${name}.png`);await page.screenshot({path:file});await info.attach(name,{path:file,contentType:'image/png'});}
 async function readableMapSources(page:Page) {
-  const contrasts=await page.locator('.map-evidence a').evaluateAll(links=>links.map(link=>{
+  await expect(page.locator('.map-evidence a')).toHaveCount(2);
+  // Theme links have a 160ms color transition; assert settled real contrast, not its first frame.
+  await expect.poll(async()=>{const contrasts=await page.locator('.map-evidence a').evaluateAll(links=>links.map(link=>{
     const rgb=(value:string)=>value.match(/[\d.]+/g)!.map(Number);
     const luminance=(color:number[])=>color.slice(0,3).map(v=>{const s=v/255;return s<=0.04045?s/12.92:((s+0.055)/1.055)**2.4;}).reduce((sum,v,i)=>sum+v*[0.2126,0.7152,0.0722][i],0);
     const fg=rgb(getComputedStyle(link).color); let el:Element|null=link; let bg=[255,255,255];
     while(el){const candidate=rgb(getComputedStyle(el).backgroundColor); if(candidate.length<4||candidate[3]>0){bg=candidate;break;} el=el.parentElement;}
     const a=luminance(fg),b=luminance(bg);return (Math.max(a,b)+0.05)/(Math.min(a,b)+0.05);
   }));
-  expect(contrasts).toHaveLength(2); for(const contrast of contrasts)expect(contrast).toBeGreaterThanOrEqual(4.5);
+  return Math.min(...contrasts);}).toBeGreaterThanOrEqual(4.5);
 }
 async function noOverflow(page:Page){expect(await page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth+1)).toBe(true);}
 
@@ -274,7 +276,7 @@ test('Feishui sourced diagram loads in light and dark without disturbing reading
   await figure.locator('summary').click();
   await expect(figure.getByRole('link',{name:'《淝水之战：胡人骑兵大败》教学材料',exact:true})).toBeVisible();
   await readableMapSources(page);
-  await page.emulateMedia({colorScheme:'dark'}); await readableMapSources(page); await noOverflow(page); await capture(page,info,'feishui-map-dark');
+  await page.emulateMedia({colorScheme:'dark'}); await expect(page.locator('html')).toHaveAttribute('data-theme','dark'); await readableMapSources(page); await noOverflow(page); await capture(page,info,'feishui-map-dark');
   const darkFigure=info.outputPath('feishui-map-full-figure-dark.png'); await figure.screenshot({path:darkFigure}); await info.attach('feishui-map-full-figure-dark',{path:darkFigure,contentType:'image/png'});
   await page.getByRole('link',{name:'返回时间线',exact:true}).click(); await ready(page);
   await expect(page).toHaveURL(`http://127.0.0.1:4179${destination}`); await expect(card).toBeFocused();
