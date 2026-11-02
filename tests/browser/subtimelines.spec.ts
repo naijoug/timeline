@@ -344,7 +344,7 @@ test('saved out-of-line ranges remain empty and editable, while resets and BCE u
   await expect(page.locator('.range-numbers')).toHaveText('2019 — 2024');
   // Search does not shrink the domain or turn the header into a result-only span.
   const search=page.locator('#current-topic-search input[name="q"]');
-  if(info.project.name==='mobile')await page.getByRole('button',{name:'搜索当前时间线',exact:true}).click();
+  if(info.project.name==='mobile')await page.getByRole('button',{name:'搜索当前主题',exact:true}).click();
   await search.fill('大航海');await expect(page.locator('.chronicle-event-button')).toHaveCount(1);
   await expect(page.locator('.range-numbers')).toHaveText('2019 — 2024');
   await page.goto(path('china-history/collections/idiom-backgrounds/'));await ready(page);
