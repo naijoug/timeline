@@ -1,5 +1,6 @@
 import { selectedTimelines, normalizedTimelineIds, timelineMembership } from '../../core/timelines';
 import FilterSheet from './FilterSheet';
+import { selectedTimelineScrollLeft } from '../../core/timeline-picker';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, SlidersHorizontal, SearchX, X } from 'lucide-react';
 import Header from '../Header';
@@ -30,6 +31,8 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
   const restoredInitialState = useRef(false);
   const explorerRoot = useRef<HTMLDivElement>(null);
   const [rangeOpen, setRangeOpen] = useState(false);
+  const timelineOptions = useRef<HTMLDivElement>(null);
+  const timelineSelectionKey = (state.timelineIds || []).join(',');
   const filterTrigger = useRef<HTMLButtonElement>(null);
   const closeFilters = () => { setRangeOpen(false); requestAnimationFrame(() => filterTrigger.current?.focus({ preventScroll: true })); };
   const update = (patch: Partial<ExplorerState>) => setState(s => ({ ...s, ...patch }));
@@ -73,6 +76,18 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
     return () => window.removeEventListener('popstate', pop);
   }, [catalog, initialPeriod, initialCategory, presentation, initialTimelineId]);
   useEffect(() => { if (ready) history.replaceState(history.state, '', location.pathname + query(state) + location.hash); }, [state, ready, query]);
+  useLayoutEffect(() => {
+    const options = timelineOptions.current;
+    if (!ready || !options || options.contains(document.activeElement)) return;
+    const bounds = options.getBoundingClientRect();
+    const left = selectedTimelineScrollLeft({
+      left: bounds.left + options.clientLeft, width: options.clientWidth,
+      scrollLeft: options.scrollLeft, scrollWidth: options.scrollWidth,
+    }, [...options.querySelectorAll<HTMLElement>('.timeline-option.is-selected')].map(card => card.getBoundingClientRect()));
+    // Only the horizontal rail moves, instantly (including reduced-motion mode).
+    // Filter edits and manual rail scrolling do not retrigger this selection effect.
+    if (left !== undefined) options.scrollTo({ left, behavior: 'instant' });
+  }, [ready, timelineSelectionKey]);
   useEffect(() => {
     if (!ready || restoredPosition.current) return;
     restoredPosition.current = true;
@@ -161,7 +176,7 @@ export default function Explorer({ catalog, initialPeriod = '', initialCategory 
         {!!catalog.timelines?.length && <section className="timeline-navigation" aria-label="子时间线">
           <div className="timeline-navigation-heading"><h2>阅读路径</h2><a className={!lines.length ? 'is-active' : ''} aria-current={!lines.length ? 'true' : undefined} href={sitePath(topic.path) + '?lines=all&all=1'} onClick={event => { if (!ready || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return; event.preventDefault(); chooseTimelines([]); }}>全部事件 · {events.length}</a></div>
           <p className="timeline-navigation-hint">单独打开一条，或勾选多条融合阅读；分类与关键词仍可叠加筛选。</p>
-          <div className="subtimeline-options">{catalog.timelines.map(line => <div className={`timeline-option ${state.timelineIds?.includes(line.id) ? 'is-selected' : ''}`} key={line.id}>
+          <div ref={timelineOptions} className="subtimeline-options">{catalog.timelines.map(line => <div className={`timeline-option ${state.timelineIds?.includes(line.id) ? 'is-selected' : ''}`} key={line.id}>
             <label><input type="checkbox" aria-label={`合并${line.title}`} checked={!!state.timelineIds?.includes(line.id)} disabled={!ready} onChange={event => chooseTimelines(event.target.checked ? [...(state.timelineIds || []), line.id] : (state.timelineIds || []).filter(id => id !== line.id))}/><span>{line.title}<small>{line.kind === 'main' ? '精选主线' : '子时间线'} · {line.entries.length} 个节点</small></span></label>
             <a href={sitePath(line.path)} aria-label={`独立阅读${line.title}`}>独立阅读<ArrowRight size={13}/></a>
           </div>)}</div>
