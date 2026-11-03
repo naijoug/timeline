@@ -22,8 +22,6 @@ async function capture(page: Page, info: TestInfo, name: string) {
     const heading = await figure.locator('h3').boundingBox(), navigation = await page.locator('.library-header').boundingBox();
     return heading!.y - navigation!.y - navigation!.height;
   };
-  // Let focus restoration and layout settle before checking the captured view.
-  await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
   await expect.poll(headingClearance).toBeGreaterThanOrEqual(0);
   const viewport = info.outputPath(`${name}-viewport.png`);
   await page.screenshot({ path: viewport, animations: 'disabled' });
@@ -51,6 +49,8 @@ test('Han regional map retains uncertainty, image access, themes and filtered re
   const popup = await popupPromise; await popup.waitForLoadState();
   await expect(popup).toHaveURL(new URL(path('maps/qin-han-frontier-li-bevan.png'), page.url()).href);
   await expect(popup.locator('img')).toBeVisible(); await popup.close(); await expect(imageLink).toBeFocused();
+  // Focus callbacks need to settle here, not in the shared no-JavaScript capture.
+  await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
   await capture(page, info, 'han-map-light');
   await page.emulateMedia({ colorScheme: 'dark' }); await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await capture(page, info, 'han-map-dark');
