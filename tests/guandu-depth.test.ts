@@ -27,7 +27,7 @@ test('Guandu reading identifies its author and limits while keeping long text ou
   assert.equal(reading.publishedAt, undefined);
   assert.match(reading.scopeNote!, /未通读全书/);
   assert.match(reading.scopeNote!, /有误/);
-  assert.equal(chinaHistory.sources.find(source => source.id === 'guandu-wudi-chronicle')!.checkedAt, '2026-10-29');
+  assert.equal(chinaHistory.sources.find(source => source.id === 'guandu-wudi-chronicle')!.checkedAt, '2026-11-03');
   const payload = JSON.stringify(createExplorerPayload(chinaHistory));
   assert.ok(!payload.includes(reading.id));
   assert.ok(!payload.includes('曹瞒传'));

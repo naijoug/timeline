@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="1230" viewBox="0 0 640 1230" role="img" aria-labelledby="title desc">
+  <title id="title">官渡战役：四阶段与行军方向</title>
+  <desc id="desc">依据三国志武帝纪及裴松之注的原创示意。四窗独立、不按比例，不复原道路、古河道或营地坐标。未标方向的箭头为行动次序，粮屯与袁营间的无箭头线为静态方位关系。</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#333"/></marker></defs>
+  <style>text{font-family:"Noto Sans CJK SC","Microsoft YaHei",sans-serif;fill:#222} .title{font-size:31px;font-weight:700}.stage{font-size:28px;font-weight:700}.label{font-size:27px}.note{font-size:23px;fill:#505050}.small{font-size:21px;fill:#505050}.panel{fill:#fafafa;stroke:#bbb;stroke-width:2}.node{fill:#fff;stroke:#777;stroke-width:2}.line{fill:none;stroke:#333;stroke-width:3;marker-end:url(#arrow)}</style>
+  <rect width="640" height="1230" fill="white"/>
+  <text x="32" y="50" class="title">官渡战役 · 四阶段示意</text>
+  <text x="32" y="87" class="note">200年 · 各窗独立，非按比例地图</text>
+  <rect x="24" y="114" width="592" height="238" rx="10" class="panel"/>
+  <text x="44" y="153" class="stage">① 白马解围</text><text x="44" y="185" class="note">二月至夏四月（史书历法）</text>
+  <rect x="44" y="207" width="190" height="58" rx="5" class="node"/><text x="139" y="246" text-anchor="middle" class="label">延津佯动</text>
+  <path d="M244 236H344" class="line"/><text x="294" y="222" text-anchor="middle" class="small">先后</text>
+  <rect x="357" y="207" width="215" height="58" rx="5" class="node"/><text x="464" y="246" text-anchor="middle" class="label">白马解围</text>
+  <text x="44" y="304" class="note">北上救援；佯动不等于实际渡河</text><text x="44" y="333" class="small">延津至白马的箭头不表示地理方向</text>
+  <rect x="24" y="372" width="592" height="238" rx="10" class="panel"/>
+  <text x="44" y="412" class="stage">② 沿河西行 · 延津交战</text>
+  <rect x="44" y="438" width="174" height="58" rx="5" class="node"/><text x="131" y="477" text-anchor="middle" class="label">延津南</text>
+  <path d="M410 466H234" class="line"/><text x="322" y="450" text-anchor="middle" class="note">西</text>
+  <rect x="426" y="438" width="146" height="58" rx="5" class="node"/><text x="499" y="477" text-anchor="middle" class="label">白马</text>
+  <text x="44" y="537" class="label">曹军循河西行、迁移居民</text><text x="44" y="577" class="note">袁军渡河追击，至延津南</text>
+  <rect x="24" y="630" width="592" height="238" rx="10" class="panel"/>
+  <text x="44" y="670" class="stage">③ 阳武推进 · 官渡相持</text>
+  <text x="44" y="714" class="label">曹军：回官渡</text>
+  <text x="44" y="760" class="label">袁军：</text><rect x="146" y="728" width="133" height="54" rx="5" class="node"/><text x="212" y="765" text-anchor="middle" class="label">阳武</text><path d="M292 755H391" class="line"/><rect x="405" y="728" width="167" height="54" rx="5" class="node"/><text x="488" y="765" text-anchor="middle" class="label">官渡</text>
+  <text x="44" y="823" class="note">八月连营前进；箭头仅表示次序</text>
+  <rect x="24" y="888" width="592" height="260" rx="10" class="panel"/>
+  <text x="44" y="928" class="stage">④ 冬十月 · 夜袭粮屯</text>
+  <rect x="255" y="951" width="317" height="55" rx="5" class="node"/><text x="413" y="988" text-anchor="middle" class="label">淳于琼粮屯</text>
+  <path d="M445 1064V1016" fill="none" stroke="#777" stroke-width="2"/><text x="477" y="1048" class="note">以北</text>
+  <text x="413" y="1096" text-anchor="middle" class="label">袁绍营</text>
+  <text x="44" y="989" class="label">曹军夜袭</text><path d="M178 981H242" class="line"/>
+  <text x="44" y="1043" class="small">乌巢地名见裴注</text><text x="44" y="1127" class="note">粮屯失利后，袁绍渡河败退</text>
+  <text x="32" y="1184" class="small">据《三国志·武帝纪》及裴注原创绘制</text>
+  <text x="32" y="1213" class="small">未标方向的箭头仅表示行动次序 · 原创2026</text>
+</svg>

@@ -3,9 +3,9 @@ import type { Source, TimelineEvent } from '../../core/types';
 export const guanduDepthSources: Source[] = [{
   id: 'guandu-wudi-chronicle', title: '《三国志》卷一·魏书·武帝纪（裴松之注）',
   publisher: '陈寿撰、裴松之注 · 维基文库电子转录',
-  url: 'https://zh.wikisource.org/wiki/三國志/卷01', type: '古代史书及注释', checkedAt: '2026-10-29',
+  url: 'https://zh.wikisource.org/wiki/三國志/卷01', type: '古代史书及注释', checkedAt: '2026-11-03',
   locator: '建安五年白马、延津、阳武及冬十月；兵力裴注；建安七、九、十、十二年',
-  version: '定向核读电子转录，并与古文岛同篇对读；不是古籍影印校勘或考古报告。本纪、裴注所引《曹瞒传》及注者意见分别归属，不将不同记载混为同一层证据。',
+  version: '定向核读电子转录；官渡行军与袭粮段另与百万书库同篇对读（https://www.millionbook.net/lszl/c/chenshou/sgz/001.htm）；不是古籍影印校勘或考古报告。本纪、裴注所引《曹瞒传》及注者意见分别归属，不将不同记载混为同一层证据。',
 }];
 
 export const guanduDepthEventPatches: Record<string, Partial<TimelineEvent>> = {

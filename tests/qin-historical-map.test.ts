@@ -44,7 +44,7 @@ test('dynasty map associations are explicit, reuse events and stay out of the cl
   }
   const payload = JSON.stringify(createExplorerPayload(chinaHistory));
   for (const detail of [qinEmpireMap.assetPath, qinEmpireMap.scopeNote, 'map-qin-lander', 'readingPoints']) assert.ok(!payload.includes(detail), detail);
-  assert.equal(chinaHistory.events.find(event => event.id === 'guandu')?.maps, undefined);
+  assert.ok(!chinaHistory.events.find(event => event.id === 'guandu')?.maps?.some(map => map.id === qinEmpireMap.id));
 });
 
 test('Qin reading guide distinguishes symbols, chronology and uncertain southern locations', () => {

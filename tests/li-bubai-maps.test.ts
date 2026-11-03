@@ -46,7 +46,7 @@ test('original Feishui map is source-scoped, local and separate from event date 
   assert.match(svg, /<title/); assert.match(svg, /<desc/);
   assert.doesNotMatch(svg, /<script|<foreignObject|<image|href=|onload=/i);
   assert.match(svg, /西岸/); assert.match(svg, /东岸/);
-  assert.equal(chinaHistory.events.find(item => item.id === 'guandu')?.maps, undefined);
+  assert.ok(!chinaHistory.events.find(event => event.id === 'guandu')?.maps?.some(other => other.id === map.id));
   const payload = JSON.stringify(createExplorerPayload(chinaHistory));
   assert.ok(!payload.includes('"maps"')); assert.ok(!payload.includes(map.assetPath));
   assert.ok(!payload.includes(map.scopeNote));

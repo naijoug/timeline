@@ -44,5 +44,5 @@ test('Han frontier archive remains static and does not invent other period maps'
   const payload = JSON.stringify(createExplorerPayload(chinaHistory));
   for (const detail of [hanFrontierMap.assetPath, hanFrontierMap.scopeNote, hanFrontierMap.sourceIds[0]]) assert.ok(!payload.includes(detail), detail);
   assert.equal(historicalMapPeriodEvents['eastern-han'], undefined);
-  assert.equal(chinaHistory.events.find(event => event.id === 'guandu')?.maps, undefined);
+  assert.ok(!chinaHistory.events.find(event => event.id === 'guandu')?.maps?.some(map => map.id === hanFrontierMap.id));
 });

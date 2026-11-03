@@ -1,6 +1,7 @@
 import type { HistoricalMap, Source } from '../../core/types';
 import { qinEmpireMap, qinEmpireMapSource } from './qin-empire-map';
 import { hanFrontierMap, hanFrontierMapSource } from './han-frontier-map';
+import { guanduCampaignMap } from './guandu-campaign-map';
 
 export const historicalMapSources: Source[] = [qinEmpireMapSource, hanFrontierMapSource, {
   id: 'map-feishui-edb', title: '《淝水之战：胡人骑兵大败》教学材料',
@@ -12,6 +13,7 @@ export const historicalMapSources: Source[] = [qinEmpireMapSource, hanFrontierMa
 }];
 
 export const historicalMaps: Record<string, HistoricalMap[]> = {
+  guandu: [guanduCampaignMap],
   'qin-unification': [qinEmpireMap],
   'western-han-founded': [hanFrontierMap],
   feishui: [{
