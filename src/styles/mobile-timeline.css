@@ -1,6 +1,8 @@
 /* One document timeline at every width: mobile leaves right, desktop leaves alternate. */
 .mobile-topic-back,.mobile-timeline-guide,.mobile-event-meta,.mobile-event-summary,.mobile-event-footer,.mobile-year-count,.mobile-filter-label { display:none; }
-  html { scroll-behavior:auto; }
+  /* Match the global :root specificity so keyboard focus cannot keep a smooth
+     scroll running after an explicit timeline/map jump. */
+  html:root { scroll-behavior:auto; }
   html .chronicle-app { height:auto; min-height:100dvh; overflow:visible; }
   .chronicle-app .atlas-main { flex:none; overflow:visible; }
   .chronicle-workspace,.chronicle-workspace.reader-expanded { display:block; flex:none; }

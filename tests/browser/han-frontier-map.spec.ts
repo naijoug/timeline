@@ -18,12 +18,16 @@ async function visibleMap(page: Page) {
 async function capture(page: Page, info: TestInfo, name: string) {
   const figure = page.locator(figureId);
   await figure.evaluate(el => el.scrollIntoView({ block: 'start', behavior: 'instant' }));
-  await expect.poll(async () => {
+  const headingClearance = async () => {
     const heading = await figure.locator('h3').boundingBox(), navigation = await page.locator('.library-header').boundingBox();
     return heading!.y - navigation!.y - navigation!.height;
-  }).toBeGreaterThanOrEqual(0);
+  };
+  // Let focus restoration and layout settle before checking the captured view.
+  await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
+  await expect.poll(headingClearance).toBeGreaterThanOrEqual(0);
   const viewport = info.outputPath(`${name}-viewport.png`);
   await page.screenshot({ path: viewport, animations: 'disabled' });
+  expect(await headingClearance()).toBeGreaterThanOrEqual(0);
   await info.attach(`${name}-viewport`, { path: viewport, contentType: 'image/png' });
   const file = info.outputPath(`${name}.png`);
   await figure.screenshot({ path: file, animations: 'disabled' });
@@ -34,6 +38,7 @@ test('Han regional map retains uncertainty, image access, themes and filtered re
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
   await page.emulateMedia({ colorScheme: 'light' });
   await page.goto(path('china-history/dynasties/han/?q=刘邦')); await ready(page);
+  await expect.poll(() => page.evaluate(() => getComputedStyle(document.documentElement).scrollBehavior)).toBe('auto');
   await page.getByRole('link', { name: '阅读说明与资料', exact: true }).click();
   const figure = await visibleMap(page), toggle = figure.getByText('查看图示来源', { exact: true });
   await toggle.focus(); await toggle.press('Enter');

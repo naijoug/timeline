@@ -19,6 +19,7 @@ test('mobile event summaries remain complete and the document remains the scroll
   assert.doesNotMatch(css, /line-clamp|text-overflow:\s*ellipsis/);
   assert.match(css, /\.chronicle-app\s*\{[^}]*height:auto;[^}]*overflow:visible;/);
   assert.match(css, /\.chronicle-event-scroll\s*\{[^}]*overflow:visible;/);
+  assert.match(css, /html:root\s*\{\s*scroll-behavior:auto;\s*\}/, 'timeline auto scrolling must override the global :root smooth rule');
   assert.match(css, /border-radius:7px 24px 7px 24px/);
   assert.match(source('src/components/timeline/Explorer.tsx'), /<span className="mobile-event-summary">\{event\.summary\}<\/span>/);
 });
