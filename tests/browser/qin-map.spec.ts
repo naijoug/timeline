@@ -5,8 +5,16 @@ const path = (value: string) => `${prefix}/${value}`;
 const figureId = '#map-qin-commandery-lander';
 async function ready(page: Page) { await page.locator('[data-timeline-ready="true"]').waitFor(); await page.evaluate(() => document.fonts.ready); }
 async function capture(page: Page, info: TestInfo, name: string) {
+  const figure = page.locator(figureId);
+  await figure.evaluate(el => el.scrollIntoView({ block: 'start' }));
+  const viewport = info.outputPath(`${name}-viewport.png`);
+  await page.screenshot({ path: viewport, animations: 'disabled' });
+  await info.attach(`${name}-viewport`, { path: viewport, contentType: 'image/png' });
+  const heading = await figure.locator('h3').boundingBox();
+  const navigation = await page.locator('.library-header').boundingBox();
+  expect(heading!.y).toBeGreaterThanOrEqual(navigation!.y + navigation!.height);
   const file = info.outputPath(`${name}.png`);
-  await page.locator(figureId).screenshot({ path: file, animations: 'disabled' });
+  await figure.screenshot({ path: file, animations: 'disabled' });
   await info.attach(name, { path: file, contentType: 'image/png' });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
 }

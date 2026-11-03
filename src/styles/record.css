@@ -279,4 +279,3 @@ html .record-content .event-record .copy-link { border-radius:10px; background:v
   body:has(.navigation-root[data-screen='record']) .record-content:has(.event-record) { padding-top:26px; }
   html .record-content .event-record .article-body section { scroll-margin-top:8px; }
 }
-

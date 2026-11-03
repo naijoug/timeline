@@ -1,5 +1,5 @@
 /* Static historical maps shared by event records and dynasty reading notes. */
-.historical-map { margin:24px 0 36px; padding:20px; border:1px solid var(--paper-line); border-radius:12px; }
+.historical-map { margin:24px 0 36px; padding:20px; border:1px solid var(--paper-line); border-radius:12px; scroll-margin-top:calc(var(--navigation-header-height,64px) + 16px); }
 .historical-map :is(p,h3,h4,small,a) { overflow-wrap:anywhere; }
 .historical-map-heading h3 { margin:0 0 8px; font-size:20px; }
 .historical-map-heading p { margin:0 0 18px; font-size:13px; }
