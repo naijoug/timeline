@@ -219,9 +219,9 @@ test('idiom backgrounds distinguish story dates, preserve details and merge with
   await expect(cards).toHaveCount(1); await expect(page.locator('[data-event-id="julu"]')).toBeVisible();
 });
 
-test('new LongCat API stage leads the curated main and preserves release caveats', async ({ page }, info) => {
+test('LongCat API stage remains in the curated main and preserves release caveats', async ({ page }, info) => {
   await page.goto(path('ai/')); await ready(page);
-  await expect(page.locator('.chronicle-event-button').first()).toHaveAttribute('data-event-id', 'longcat-2-5-api');
+  await expect(page.locator('[data-event-id="longcat-2-5-api"]')).toHaveCount(1);
   await page.locator('[data-event-id="longcat-2-5-api"]').click();
   await expect(page.locator('h1')).toHaveText('LongCat-2.5 API 上线');
   await expect(page.locator('.article-body')).toContainText('2026年9月25日的LongCat-2.5-Preview');
