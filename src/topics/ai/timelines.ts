@@ -6,6 +6,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '从思想与方法，到模型和任务型产品的精选阅读主线。',
     note: '编辑精选的阅读主线，串联思想、方法、模型与产品转折；不等于全部重大事件，也不自动汇总所有子时间线。',
     entries: [
+      {"eventId": "antigravity-cheminformatics-skills", "importance": "key", "context": "Science 插件扩展科学工作流，不是新模型；候选设计仍须实验验证。"},
       {"eventId": "sensenova-6-8-flash", "importance": "key", "context": "正式模型与Design实验入口分开；主动交互仅内部研发版演示，不视为公众可用。"},
       {"eventId": "hydrogen-1-release", "importance": "key", "context": "科学后训练模型发布；MIT 权重标签不等于匿名可下载，评测保留厂商报告边界。"},
       {"eventId": "longcat-2-5-api", "importance": "key", "context": "API上线与此前Preview分开；不由API可用推断权重开放。"},
@@ -265,6 +266,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '面向任务执行的 Agent 产品、开源工具与功能演进。',
     note: '研究预览、公开测试、正式开放保留各自阶段；不是所有对话产品或 Agent 研究论文的合集。ChatGPT 2022 首发不视为 Agent 产品发布。',
     entries: [
+      {"eventId": "antigravity-cheminformatics-skills", "importance": "key", "context": "Science 插件扩展科学工作流，不是新模型；候选设计仍须实验验证。"},
       {"eventId": "devin-introduction", "importance": "key"},
       {"eventId": "replit-agent-first", "importance": "supporting"},
       {"eventId": "cursor-agent-introduction", "importance": "supporting"},

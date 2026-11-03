@@ -1,3 +1,4 @@
+import { antigravityScienceEntities } from './antigravity-science';
 import { hydrogenEntities } from './hydrogen-release';
 import { longcat25Entities } from './longcat-25-api';
 import { verified2026Entities } from './verified-2026';
@@ -9,6 +10,7 @@ import { instructionEntities } from './instruction-following';
 import { historicalEntities } from './historical-milestones';
 import { recentEntities } from './recent-updates';
 export const entities: Entity[] = [
+  ...antigravityScienceEntities,
   ...globalEntities,
   ...releaseEntities,
   ...instructionEntities,

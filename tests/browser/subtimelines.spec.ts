@@ -23,7 +23,7 @@ async function noOverflow(page:Page){expect(await page.evaluate(()=>document.doc
 
 test('curated main, union selection and native Back/Forward',async({page},info)=>{
   await page.goto(path('ai/'));await ready(page);
-  const cards=page.locator('.chronicle-event-button');await expect(cards).toHaveCount(52);
+  const cards=page.locator('.chronicle-event-button');await expect(cards).toHaveCount(53);
   await noOverflow(page);await capture(page,info,'ai-main');
   const mainUrl=page.url();
   await page.getByRole('checkbox',{name:'合并AI 模型发现与迭代',exact:true}).check();
@@ -33,9 +33,9 @@ test('curated main, union selection and native Back/Forward',async({page},info)=
     return new Set(catalog.timelines.filter((line:{id:string})=>['ai-milestones','ai-model-iterations'].includes(line.id)).flatMap((line:{entries:{eventId:string}[]})=>line.entries.map(entry=>entry.eventId))).size;
   });
   await expect(cards).toHaveCount(expected);expect(new Set(await cards.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.eventId))).size).toBe(expected);
-  const mergedUrl=page.url();await page.goBack();await ready(page);await expect(page).toHaveURL(mainUrl);await expect(cards).toHaveCount(52);
+  const mergedUrl=page.url();await page.goBack();await ready(page);await expect(page).toHaveURL(mainUrl);await expect(cards).toHaveCount(53);
   await page.goForward();await ready(page);await expect(page).toHaveURL(mergedUrl);await expect(cards).toHaveCount(expected);
-  await page.getByRole('checkbox',{name:'合并AI 模型发现与迭代',exact:true}).uncheck();await expect(cards).toHaveCount(52);
+  await page.getByRole('checkbox',{name:'合并AI 模型发现与迭代',exact:true}).uncheck();await expect(cards).toHaveCount(53);
   await page.getByRole('checkbox',{name:'合并AI 模型发现与迭代',exact:true}).check();await expect(cards).toHaveCount(expected);
   const freshness=page.locator('.timeline-freshness a');
   const back=new URL((await freshness.getAttribute('href'))!,'http://127.0.0.1').searchParams.get('return')!;
@@ -73,7 +73,7 @@ test('independent model line preserves query, order, scroll and focus through de
 
 test('Agent, writer and historical-war routes retain membership and source-note navigation',async({page},info)=>{
   for(const [route,title,count] of [
-    ['ai/timelines/ai-agent-products/','AI Agent 产品',46],
+    ['ai/timelines/ai-agent-products/','AI Agent 产品',47],
     ['writers/authors/liu-cixin/','刘慈欣作品年谱',25],
     ['china-history/collections/wars-and-turning-points/','战役与战争转折',53],
   ] as const){
@@ -109,7 +109,7 @@ test('filter cancel, apply and repeated dismissals retain subline context',async
   await expect(page.locator('#chronicle-filters')).toHaveCount(0);await expect(page).toHaveURL(before);await expect(trigger).toBeFocused();
   await trigger.click();await page.locator('.filter-sheet-key input').check();await page.locator('.filter-sheet-apply').click();
   await expect(page).toHaveURL(/all=0/);expect(new URL(page.url()).searchParams.get('lines')).toBe('ai-agent-products');
-  expect(await page.locator('.chronicle-event-button').count()).toBeLessThan(46);
+  expect(await page.locator('.chronicle-event-button').count()).toBeLessThan(47);
   for(let i=0;i<2;i++){await trigger.click();await page.getByRole('button',{name:'关闭筛选，不保存更改',exact:true}).click();await expect(trigger).toBeFocused();}
   await noOverflow(page);await capture(page,info,'filtered-agent-line');
 });

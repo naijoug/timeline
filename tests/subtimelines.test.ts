@@ -22,9 +22,9 @@ test('timelines have one authoritative membership, shared facts and contextual i
   assert.equal(selected.filter(event => event.id === 'transformer').length, 1);
   assert.equal(selected.find(event => event.id === 'transformer'), aiCatalog.events.find(event => event.id === 'transformer'));
   assert.equal(timelineMembership(aiCatalog, [main, models]).get('transformer')?.length, 2);
-  assert.equal(timelineEvents(aiCatalog, [main]).length, 52);
+  assert.equal(timelineEvents(aiCatalog, [main]).length, 53);
   assert.equal(timelineEvents(aiCatalog, [models]).length, 193);
-  assert.equal(timelineEvents(aiCatalog, [agents]).length, 46);
+  assert.equal(timelineEvents(aiCatalog, [agents]).length, 47);
   assert.ok(!timelineEvents(aiCatalog, [main]).some(event => event.id === 'gpt-4o-mini'), 'a parent does not inherit its child');
   assert.ok(timelineEvents(aiCatalog, [models]).some(event => event.id === 'gpt-4o-mini'));
   assert.ok(!timelineEvents(aiCatalog, [models], true).some(event => event.id === 'gpt-4o-mini'), 'importance is local to the line');
@@ -78,7 +78,7 @@ test('independent and merged line state survives URL serialization, filters and 
   }
   const standalone = restoreReadingExplorer('?lines=all', payload.catalog,'','',payload.presentation,agents);
   assert.deepEqual(standalone.timelineIds,[agents]);
-  assert.equal(readingExplorerEvents(payload.catalog, standalone, payload.presentation).length,46);
+  assert.equal(readingExplorerEvents(payload.catalog, standalone, payload.presentation).length,47);
   assert.deepEqual(clearExplorerFilters(payload.catalog,standalone).timelineIds,[agents], 'reset filters does not silently leave a reading path');
   assert.deepEqual(restoreReadingExplorer('?lines=unknown',payload.catalog,'','',payload.presentation).timelineIds,[main]);
   assert.deepEqual(restoreReadingExplorer('?all=1&lane=models',payload.catalog,'','',payload.presentation).timelineIds,[], 'legacy filtered URLs do not become curated mainline URLs');
