@@ -1,8 +1,38 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import Explorer from '../../../components/timeline/ExplorerIsland.astro';
+import HistoricalMaps from '../../../components/timeline/HistoricalMaps.astro';
 import { chinaHistory } from '../../../topics/china-history/catalog';
+import { historicalMapPeriodEvents } from '../../../topics/china-history/historical-maps';
+import { sitePath } from '../../../lib/paths';
+import '../../../styles/collections.css';
 export function getStaticPaths() { return chinaHistory.periods.map(period=>({params:{slug:period.id},props:{period}})); }
 const { period } = Astro.props;
+const mapEvents = (historicalMapPeriodEvents[period.id] || []).map(id => chinaHistory.events.find(event => event.id === id)!);
+const maps = mapEvents.flatMap(event => event.maps || []);
+const mapSources = chinaHistory.sources.filter(source => maps.some(map => map.sourceIds.includes(source.id)));
 ---
-<Layout explorer title={`${period.title} · 中国历史时间线`} description={period.summary}><Explorer topicId="china-history" initialPeriod={period.id} /></Layout>
+<Layout explorer title={`${period.title} · 中国历史时间线`} description={period.summary}>
+  {maps.length > 0 ? <div class="timeline-page-shell">
+    <Explorer topicId="china-history" initialPeriod={period.id} notesHref="#dynasty-maps" />
+    <aside class="timeline-reading-notes" id="dynasty-maps" aria-label={`${period.title}地图与资料`}>
+      <p>地图描绘的时期与事件年份分别说明；这不是本朝所有阶段的疆域总图。</p>
+      <HistoricalMaps maps={maps} sources={mapSources} />
+      <nav aria-label="地图相关事件">{mapEvents.map(event => <a class="collection-cta" data-map-event-link href={`${sitePath(`/china-history/events/${event.id}/`)}?return=${encodeURIComponent(sitePath(`/china-history/dynasties/${period.id}/`) + '#dynasty-maps')}`}>{event.title}：阅读事件与来源</a>)}</nav>
+      <p><a href="#main">回到本朝时间线</a></p>
+    </aside>
+    <footer class="chronicle-footer"><span>理解过去 · 看见可能的未来</span><a href={sitePath('/about/')}>资料来源随节点保留 · 持续整理</a></footer>
+  </div> : <Explorer topicId="china-history" initialPeriod={period.id} />}
+</Layout>
+<script>
+  // Keep the current dynasty filters when following its static map into the event.
+  for (const link of document.querySelectorAll<HTMLAnchorElement>('[data-map-event-link]')) {
+    const refresh = () => {
+      const url = new URL(link.href);
+      url.searchParams.set('return', location.pathname + location.search + '#dynasty-maps');
+      link.href = url.href;
+    };
+    refresh();
+    for (const type of ['pointerover', 'focusin', 'click', 'contextmenu', 'auxclick']) link.addEventListener(type, refresh);
+  }
+</script>

@@ -1,6 +1,7 @@
 import type { HistoricalMap, Source } from '../../core/types';
+import { qinEmpireMap, qinEmpireMapSource } from './qin-empire-map';
 
-export const historicalMapSources: Source[] = [{
+export const historicalMapSources: Source[] = [qinEmpireMapSource, {
   id: 'map-feishui-edb', title: '《淝水之战：胡人骑兵大败》教学材料',
   publisher: '香港教育局 · 中国历史课程资源',
   url: 'https://www.edb.gov.hk/attachment/sc/curriculum-development/kla/pshe/references-and-resources/chinese-history/war3_sc.pdf',
@@ -10,6 +11,7 @@ export const historicalMapSources: Source[] = [{
 }];
 
 export const historicalMaps: Record<string, HistoricalMap[]> = {
+  'qin-unification': [qinEmpireMap],
   feishui: [{
     id: 'feishui-spatial-383', title: '淝水战事的空间关系', depictedTime: '383年战事背景', kind: 'schematic',
     assetPath: '/maps/feishui-spatial-383.svg', width: 640, height: 730,
@@ -37,4 +39,9 @@ export const historicalMaps: Record<string, HistoricalMap[]> = {
       },
     ],
   }],
+};
+
+/** Explicit static-page association, not a date-based inference or client payload. */
+export const historicalMapPeriodEvents: Record<string, string[]> = {
+  qin: ['qin-unification'],
 };

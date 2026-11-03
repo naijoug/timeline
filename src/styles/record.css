@@ -280,26 +280,3 @@ html .record-content .event-record .copy-link { border-radius:10px; background:v
   html .record-content .event-record .article-body section { scroll-margin-top:8px; }
 }
 
-/* Historical maps are static, detail-only images: no map SDK, tiles or client catalog payload. */
-.historical-map { margin:24px 0 36px; padding:20px; border:1px solid var(--paper-line); border-radius:12px; }
-.historical-map-heading h3 { margin:0 0 8px; font-size:20px; }
-.historical-map-heading p { margin:0 0 18px; font-size:13px; }
-.historical-map-image { display:block; max-width:100%; padding:8px; background:#fff; border:1px solid var(--paper-line); border-radius:6px; }
-.historical-map-image img { display:block; width:100%; height:auto; max-height:760px; object-fit:contain; }
-.historical-map-image:focus-visible { outline:3px solid var(--paper-ink); outline-offset:4px; }
-.historical-map figcaption p { font-size:14px; line-height:1.85; margin:16px 0 0; }
-.historical-map .map-boundary { padding:12px; background:var(--paper-surface); border-radius:6px; }
-.historical-map .map-credit { font-size:12px; color:var(--paper-muted); }
-.map-reading-points { list-style:none; margin:20px 0; padding:0; }
-.map-reading-points > li { margin:0; padding:16px 0; border-top:1px solid var(--paper-line); }
-.map-reading-points h4 { margin:0; font-size:16px; line-height:1.6; }
-.historical-map .map-reading-points p { margin-top:8px; }
-.historical-map .map-reading-points .map-point-scope { font-size:13px; }
-@media(max-width:600px) { .historical-map { padding:12px; } .historical-map-image { padding:4px; } }
-.map-evidence { margin-top:16px; font-size:13px; }
-.map-evidence summary { cursor:pointer; min-height:44px; display:list-item; line-height:1.8; }
-.map-evidence summary:focus-visible { outline:2px solid var(--paper-ink); outline-offset:3px; border-radius:2px; }
-.map-evidence small { display:block; margin:5px 0 14px; line-height:1.8; }
-/* Plain source/credit links need explicit theme ink; legacy global anchors use fixed ink. */
-.record-content .event-record .historical-map :is(.map-evidence,.map-credit) a { color:var(--paper-ink); text-decoration:underline; text-underline-offset:3px; }
-.record-content .event-record .historical-map :is(.map-evidence,.map-credit) a:focus-visible { outline:2px solid var(--paper-ink); outline-offset:3px; border-radius:2px; }
