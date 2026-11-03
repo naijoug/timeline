@@ -14,9 +14,19 @@ const { maps = [], sources } = Astro.props;
     </a>
     <figcaption>
       <p>{map.description}<EvidenceLinks sources={sources} ids={map.sourceIds} /></p>
+      {map.readingPoints && map.readingPoints.length > 0 && <ul class="map-reading-points" aria-label="分窗读图">
+        {map.readingPoints.map(point => <li>
+          <h4>{point.label}</h4>
+          <p>{point.text}<EvidenceLinks sources={sources} ids={point.sourceIds} locator={point.locator} /></p>
+          <p class="map-point-scope"><strong>本窗边界：</strong>{point.scopeNote}</p>
+        </li>)}
+      </ul>}
       <p class="map-boundary"><strong>读图边界：</strong>{map.scopeNote}</p>
       <p class="map-credit">制图：{map.creator} · 制作／版本：{map.createdAt} · {map.license.url ? <a href={map.license.url} target="_blank" rel="noopener noreferrer">{map.license.label}</a> : map.license.label}。{map.modificationNote}{map.originalUrl && <> <a href={map.originalUrl} target="_blank" rel="noopener noreferrer">原图与授权记录</a></>}</p>
-      <details class="map-evidence"><summary>查看图示依据与战区教学资料</summary><ul>{map.sourceIds.map(id => { const source = sources.find(item => item.id === id); return source && <li><a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}</a><small>{source.locator}</small></li>; })}</ul><p>外链教学材料包含更大范围的战区图；本页只采用上文说明的空间关系，不替其中每项断言背书。</p></details>
+      <details class="map-evidence"><summary>查看图示来源</summary><ul>{map.sourceIds.map(id => { const source = sources.find(item => item.id === id); return source && <li>
+        <a href={source.url} target="_blank" rel="noopener noreferrer">{source.title}</a>
+        <small><strong>资料类型：</strong>{source.type}{source.locator && <><br />原文定位：{source.locator}</>}{source.version && <><br />使用范围：{source.version}</>}</small>
+      </li>; })}</ul></details>
     </figcaption>
   </figure>)}
 </section>}

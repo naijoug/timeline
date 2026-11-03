@@ -57,6 +57,16 @@ export function validateCatalog(catalog: Catalog): string[] {
         errors.push(`${e.id}/${map.id}: incomplete map provenance`);
       if (!['reconstruction', 'schematic'].includes(map.kind) || !/^\/maps\/[a-z0-9-]+\.(svg|png|webp)$/.test(map.assetPath) || !Number.isInteger(map.width) || !Number.isInteger(map.height) || map.width <= 0 || map.height <= 0)
         errors.push(`${e.id}/${map.id}: invalid map asset`);
+      const pointLabels = new Set<string>();
+      for (const point of map.readingPoints || []) {
+        const context = `${e.id}/${map.id}: map reading point`;
+        if (![point.label, point.text, point.locator, point.scopeNote].every(value => value?.trim()) || !point.sourceIds.length)
+          errors.push(`${context}: incomplete content or evidence`);
+        const label = point.label.trim();
+        if (pointLabels.has(label)) errors.push(`${context}: duplicate label ${label}`);
+        pointLabels.add(label);
+        refs(point.sourceIds, new Set(map.sourceIds), context);
+      }
       for (const url of [map.originalUrl, map.license?.url].filter(Boolean)) {
         try { if (new URL(url!).protocol !== 'https:') throw new Error(); }
         catch { errors.push(`${e.id}/${map.id}: invalid map provenance URL`); }
