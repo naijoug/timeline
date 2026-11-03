@@ -1,3 +1,4 @@
+import { hanMonopolyDepthSources, hanMonopolyDepthEventPatches } from './han-monopoly-depth';
 import { historicalMaps, historicalMapSources } from './historical-maps';
 import { idiomBackgroundSources, idiomBackgroundTimeline, idiomBackgroundEventPatches } from './idiom-backgrounds';
 import { guanduDepthSources, guanduDepthEventPatches } from './guandu-depth';
@@ -28,6 +29,7 @@ const source = (
 ): Source => ({ id, title, publisher, url, type, checkedAt: "2026-09-30" });
 export const sources: Source[] = [
   ...historicalMapSources,
+  ...hanMonopolyDepthSources,
   source(
     "chronology",
     "中国历史纪年简表",
@@ -656,6 +658,7 @@ export const events: TimelineEvent[] = [
   ...(wangAnshiDepthEventPatches[event.id] || {}),
   ...(guanduDepthEventPatches[event.id] || {}),
   ...(idiomBackgroundEventPatches[event.id] || {}),
+  ...(hanMonopolyDepthEventPatches[event.id] || {}),
   ...(historicalMaps[event.id] ? { maps: historicalMaps[event.id] } : {}),
   ...(historyRecommendedResources[event.id] ? { recommendedResources: [...historyRecommendedResources[event.id], ...(wangAnshiDepthEventPatches[event.id]?.recommendedResources || [])] } : {}),
 }));
