@@ -33,7 +33,7 @@ test('Qin map preserves licensed source pixels and distinguishes depiction from 
 });
 
 test('dynasty map associations are explicit, reuse events and stay out of the client index', () => {
-  assert.deepEqual(historicalMapPeriodEvents, { qin: ['qin-unification'] });
+  assert.deepEqual(historicalMapPeriodEvents.qin, ['qin-unification']);
   for (const [periodId, eventIds] of Object.entries(historicalMapPeriodEvents)) {
     assert.ok(chinaHistory.periods.some(period => period.id === periodId));
     for (const id of eventIds) {

@@ -18,3 +18,11 @@
 - 上窗仅表示史书所述“北望”关系，下窗仅表示对峙两岸。两窗不作坐标对位，符号与宽度不按比例；不复原古河道、疆界、城墙、营地或行军路径。
 - 未将教学材料或史书叙事冒充两份独立现场证据。完整史实仍以事件页分栏的来源及说明为准。
 - 未来引入第三方地图须另核作者、原图来源、具体许可、变更说明和制图依据；不能仅凭文件可下载或许可可复用判定史实准确。
+
+## qin-han-frontier-li-bevan.png
+- 出处：Zehao Li、Andrew Bevan，*A spatial interaction model of Qin-Han Dynasty organisation on the northern frontier and the location of the Zhidao highway (China)*，Journal of Archaeological Science: Reports 53 (2024), 104407，第2页 Figure 1。https://doi.org/10.1016/j.jasrep.2024.104407 。
+- 许可依据：[UCL出版版本记录](https://discovery.ucl.ac.uk/id/eprint/10186270/)与PDF第1页均注明© 2024 The Author(s)、[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)。逐件检查图1图注，没有第三方版权或许可排除；图注明“Based on (Xu and Yu, 2018)”，署名保留这一基础来源。未声称另取得Xu与Yu原著图像许可，也没有另复制其原书地图。
+- 2026-11-03使用`pdfimages -f 2 -l 2 -png qinhan.pdf qinhan-figure`提取出版PDF原嵌入图像，保存为1019×719 PNG；没有裁切、改色、重绘或修改图内文字。中文读图说明由本站另写，来源不代表作者背书。
+- PDF SHA-256：`20fd92a69a89219eb10b0293ac2c228bfe316bc900bb1d375b3aa21cae00ade0`；PNG SHA-256：`79cb7a295ae4b7146ff8c8b2fc421461ab73d126b965a5e20156619afbe11a46`。
+- 地理边界：秦汉北部边防的区域背景，不是全朝疆域或某年驻防图；赵、秦、汉墙线跨时期叠绘，堡址年代不足以证明同时使用。左下为现代地理定位。原图红实线不能全当已确证路线：图注明红庆河至城梁仅部分路段有考古证据，城梁至麻池依赖推定和少量遗存。
+- 只展示背景图1，不导入研究数据层、模型代码或模拟路线，不把推演当成实测/战役行军记录。未对底层考古报告或模型结果完成独立复核。原论文年代范围与版本日期在网页另列。
