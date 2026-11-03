@@ -264,7 +264,7 @@ test('Feishui sourced diagram loads in light and dark without disturbing reading
   await expect(img).toHaveAttribute('alt',/两窗示意/);
   await expect(figure).toContainText('不是383年绘制');
   await expect(figure).toContainText('2026-11-02');
-  const guide = figure.getByRole('list', { name: '分窗读图', exact: true });
+  const guide = figure.getByRole('list', { name: '读图要点', exact: true });
   await expect(guide.locator('h4')).toHaveText(['A 城上所望', 'B 隔岸对峙']);
   await expect(guide).toContainText('唐修《晋书》记述');
   await expect(guide).toContainText('现代教学材料');
