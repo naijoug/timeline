@@ -1,3 +1,4 @@
+import { hydrogenEntities } from './hydrogen-release';
 import { longcat25Entities } from './longcat-25-api';
 import { verified2026Entities } from './verified-2026';
 import { sitePath } from '../../lib/paths';
@@ -15,6 +16,7 @@ export const entities: Entity[] = [
   ...recentEntities,
   ...verified2026Entities,
   ...longcat25Entities,
+  ...hydrogenEntities,
   { id: 'mcp', name: 'MCP', type: 'concept', description: '连接 AI 应用与外部数据、工具的开放协议。编辑区分：它与 Skills 的任务知识和 Agent 的运行循环各有分工。', tags: ['协议', '工具连接'], sourceIds: ['mcp', 'skills', 'agents'] },
   { id: 'neural-networks', name: '神经网络', type: 'concept', description: '通过连接和参数学习，把输入转化为预测。编辑概览：本专题从早期形式神经元追踪到现代深度学习。', tags: ['深度学习', '学习方法'], sourceIds: ['mcculloch', 'backprop', 'alexnet'] },
   { id: 'symbolic-ai', name: '符号主义与专家系统', type: 'concept', description: '用符号、知识和规则完成推理。编辑概览：博物馆年表可见这一路线与学习方法在多个年代并行出现。', tags: ['知识表示', '推理'], sourceIds: ['chm'] },

@@ -1,16 +1,16 @@
 # AI 时间线覆盖报告
 
-来源最近核查日期：2026-10-26；版本发布批次核查日期：2026-09-30。各来源保留各自核查日期。运行 `npm run report:ai` 从实际数据重新生成本报告。
+来源最近核查日期：2026-11-03；版本发布批次核查日期：2026-09-30。各来源保留各自核查日期。运行 `npm run report:ai` 从实际数据重新生成本报告。
 
 ## 收录范围
 
-当前工作区共 282 个事件、92 个对象、282 份来源；版本发布批次新增 133 条，指令专题新增 3 条，视觉学习到协作系统专题新增 3 条，截至 2026-10-26 的近期核查更新共 15 条。2026-10-24 的重要缺口补齐批次另增 19 条。两个专题分别复用并完善 11、7 个既有节点，保留原事件 ID。
+当前工作区共 297 个事件、98 个对象、335 份来源；版本发布批次新增 133 条，指令专题新增 3 条，视觉学习到协作系统专题新增 3 条，截至 2026-10-28 的近期核查更新共 23 条。2026-10-24 的重要缺口补齐批次另增 19 条。两个专题分别复用并完善 11、7 个既有节点，保留原事件 ID。
 
 | 主线 | 全部已收录 | 关键节点 | 中国团队筛选 |
 | --- | ---: | ---: | ---: |
-| AI 技术突破 | 63 | 36 | 1 |
-| 模型演进 | 167 | 95 | 70 |
-| Agent 应用 | 52 | 35 | 9 |
+| AI 技术突破 | 68 | 40 | 1 |
+| 模型演进 | 175 | 100 | 72 |
+| Agent 应用 | 54 | 37 | 9 |
 
 “当前显示”受时间窗口、关键词、地区、主线和关键节点筛选共同影响；页面同时显示全库和每轨总数。聚合不删除事件，打开组内目录可逐条阅读。
 
@@ -60,25 +60,30 @@
 | EXAONE | LG AI Research | 1 | 2024-08-07 | 2024-08-07 |
 | Falcon | TII | 1 | 2023-09-06 | 2023-09-06 |
 | FLUX | Black Forest Labs | 1 | 2024-08-01 | 2024-08-01 |
-| Gemini | Google | 8 | 2023-12-06 | 2026-10-13 |
+| Gemini | Google | 9 | 2023-12-06 | 2026-10-28 |
 | Gemini CLI | Google | 1 | 2025-06-25 | 2025-06-25 |
+| Gemini Robotics ER | Google DeepMind | 1 | 2026-10-27 | 2026-10-27 |
 | Gemma | Google | 4 | 2024-02-21 | 2026-04-02 |
 | Generative Agents | Stanford / Google Research | 1 | 2023-04-07 | 2023-04-07 |
-| GitHub Copilot | GitHub | 1 | 2025-05-19 | 2025-05-19 |
+| Genie | Google DeepMind | 1 | 2026-10-27 | 2026-10-27 |
+| GitHub Copilot | GitHub | 3 | 2025-05-19 | 2026-10-28 |
 | GLM | 智谱 | 9 | 2025-07-28 | 2026-08-26 |
 | GPT | OpenAI | 26 | 2018-06-11 | 2026-10-26 |
 | Grok | xAI | 5 | 2024-08-13 | 2026-09-21 |
 | Grok Bot | xAI | 1 | 2026-08-11 | 2026-08-11 |
 | Hunyuan / 混元 | 腾讯 | 4 | 2025-03-21 | 2026-10-26 |
+| Hydrogen | Deep Principle | 1 | 2026-11-02 | 2026-11-02 |
 | Jules | Google | 2 | 2025-05-20 | 2025-08-06 |
 | Kimi | 月之暗面 | 7 | 2025-01-22 | 2026-10-24 |
 | Kimi Agent | 月之暗面 | 2 | 2025-09-26 | 2026-01-27 |
+| Liquid Foundation Models | Liquid AI | 1 | 2026-10-27 | 2026-10-27 |
 | Llama | Meta | 7 | 2023-02-24 | 2025-04-05 |
+| LongCat | 美团 | 1 | 2026-11-02 | 2026-11-02 |
 | Manus | Manus | 8 | 2025-07-31 | 2026-09 |
 | Manus Studio | Manus | 1 | 2026-09 | 2026-09 |
 | MiniMax | MiniMax | 7 | 2025-06-16 | 2026-10-23 |
 | MiniMax Agent | MiniMax | 2 | 2025-06-19 | 2025-10-27 |
-| Mistral | Mistral AI | 8 | 2023-09-27 | 2026-10-06 |
+| Mistral | Mistral AI | 9 | 2023-09-27 | 2026-10-29 |
 | Mistral Vibe | Mistral AI | 1 | 2025-12-09 | 2025-12-09 |
 | Muse | Meta | 1 | 2026-09 | 2026-09 |
 | Muse 模型 | Meta | 2 | 2026-10-12 | 2026-10-15 |
@@ -101,17 +106,26 @@
 | T5 | Google | 1 | 2019-10-23 | 2019-10-23 |
 | TRAE | 字节跳动 | 1 | 2025-07-17 | 2025-07-17 |
 | UI-TARS | 字节跳动 | 1 | 2025-01 | 2025-01 |
+| Unlimited-OCR | 百度 | 1 | 2026-10-27 | 2026-10-27 |
 | Wan / 通义万相 | 阿里巴巴 | 1 | 2025-02-25 | 2025-02-25 |
 | Whisper | OpenAI | 1 | 2022-09-21 | 2022-09-21 |
 
-## 近期更新与原始依据（最近核查 2026-10-26）
+## 近期更新与原始依据（最近核查 2026-10-28）
 
 近期更新查阅厂商公告、官方模型卡及独立评测机构的原始发布。榜单上线、评测研究预览、模型更新、API 正式开放与标准治理变化分别记录；不把厂商成绩当独立实测，不混淆榜单得分与通过率，也不把后续计划写成已发布。
 
 | 日期 | 事件 | 事件口径 | 原始来源 |
 | --- | --- | --- | --- |
+| 2026-10-27 | Intelligence Index v5：评测量尺更新 | 评测方法更新 | [Artificial Analysis](https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v5)、[Artificial Analysis](https://artificialanalysis.ai/methodology/intelligence-benchmarking)、[Artificial Analysis](https://artificialanalysis.ai/methodology/progress-index) |
+| 2026-10-27 | Anthropic 公开 ETH 研究材料，供进一步审查 | 研究材料公开 | [Anthropic / anthropics/formal-math](https://github.com/anthropics/formal-math/pull/31)、[Anthropic](https://raw.githubusercontent.com/anthropics/formal-math/16a5ce41304fcdaea4e0be7c132e1c361dc26da5/eth/README.md)、[Anthropic](https://raw.githubusercontent.com/anthropics/formal-math/16a5ce41304fcdaea4e0be7c132e1c361dc26da5/eth/MainResults.lean) |
+| 2026-10-27 | Gemini Robotics ER 2 进入云端公开预览 | 云平台公开预览 | [Google DeepMind](https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-robotics-er-2/)、[Google Cloud](https://cloud.google.com/blog/products/ai-machine-learning/gemini-robotics-embodied-reasoning-2-is-now-available-on-google-cloud)、[Google Cloud](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/robotics-er-2) |
+| 2026-10-27 | Genie 4 研究预览：原生声音与实时世界模拟 | 研究预览 | [Google DeepMind · Raia Hadsell、Diego Rivas、Hang Qi](https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/)、[Google DeepMind](https://deepmind.google/models/genie/) |
+| 2026-10-27 | LFM3 发布：端侧混合架构与专门任务模型 | 模型发布与权重公开 | [Liquid AI](https://www.liquid.ai/blog/lfm3)、[Liquid AI](https://huggingface.co/LiquidAI/LFM3-1.7B/blob/40ebe0aa6662c9d40389c2f5d565b6a2c6aebacd/README.md)、[Liquid AI · Hugging Face](https://huggingface.co/api/models/LiquidAI/LFM3-1.7B/tree/40ebe0aa6662c9d40389c2f5d565b6a2c6aebacd)、[Liquid AI](https://huggingface.co/LiquidAI/LFM3-1.7B/blob/40ebe0aa6662c9d40389c2f5d565b6a2c6aebacd/LICENSE) |
+| 2026-10-27 | Unlimited-OCR 2 开放权重：面向超长文档的跨页解析 | 权重开放 | [百度](https://huggingface.co/baidu/Unlimited-OCR-2/blob/04647c7a6098d8d58915f003536a741c82eafb40/README.md)、[百度](https://huggingface.co/baidu/Unlimited-OCR-2/blob/04647c7a6098d8d58915f003536a741c82eafb40/model.safetensors.index.json)、[百度](https://github.com/baidu/Unlimited-OCR)、[百度](https://github.com/baidu/Unlimited-OCR/blob/main/LICENSE) |
+| 2026-10-26 | Axiom 发布 CFSG 形式化证明材料 | 研究材料公开 | [Axiom Math](https://axiommath.ai/research/the-enormous-theorem-formalized/)、[Axiom Math](https://github.com/AxiomMath/CFSG/blob/69cb972f587a3ecc035e092253167ff2e303c962/formalization.yaml)、[Axiom Math](https://github.com/AxiomMath/CFSG/blob/69cb972f587a3ecc035e092253167ff2e303c962/Comparator/Solution.lean)、[Axiom Math](https://github.com/AxiomMath/CFSG/blob/69cb972f587a3ecc035e092253167ff2e303c962/CFSG/Statement.lean#L4923-L4936)、[Axiom Math](https://github.com/AxiomMath/CFSG/blob/69cb972f587a3ecc035e092253167ff2e303c962/CFSG/Milestones/CFSG_classification.lean#L4633-L4648)、[Axiom Math](https://github.com/AxiomMath/CFSG/blob/69cb972f587a3ecc035e092253167ff2e303c962/lake-manifest.json) |
 | 2026-10-26 | Hy-SimulMT 开放权重：中英实时同传与配套工具 | 权重开放 | [腾讯混元](https://huggingface.co/tencent/Hy-SimulMT-30B-A3B-Interleave/blob/2f3d831b8fe28e2597091598ed60a376a3db5bc0/README.md)、[腾讯混元](https://huggingface.co/tencent/Hy-SimulMT-30B-A3B-Interleave/tree/2f3d831b8fe28e2597091598ed60a376a3db5bc0)、[腾讯混元](https://huggingface.co/tencent/Hy-SimulMT-30B-A3B-Interleave/commit/da7f540744bee4c3003935dbb770cae9cf12ab81)、[腾讯混元](https://github.com/Tencent-Hunyuan/Hy-SimulMT)、[腾讯混元](https://huggingface.co/tencent/Hy-SimulMT-30B-A3B-Interleave/blob/2f3d831b8fe28e2597091598ed60a376a3db5bc0/LICENSE.txt) |
 | 2026-10-26 | GPT-6.1 Terra 发布：视觉推理、计算机使用与低成本档位 | API 开放 | [OpenAI](https://openai.com/index/introducing-gpt-6-1-terra/)、[OpenAI](https://developers.openai.com/api/docs/models/gpt-6.1-terra)、[OpenAI](https://deploymentsafety.openai.com/gpt-6-1-terra) |
+| 2026-10-26 | OpenAI 公开科学研究材料，交由学界检验 | 研究材料公开 | [OpenAI](https://openai.com/index/building-scientific-understanding-with-academic-communities/)、[OpenAI](https://raw.githubusercontent.com/openai/math/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/README.md)、[OpenAI](https://raw.githubusercontent.com/openai/math/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/lean/docs/079.md)、[OpenAI](https://raw.githubusercontent.com/openai/math/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/lean/docs/378.md) |
 | 2026-10-25 | ByteDance Seed 提出 Recycler：跨 token 回收隐藏状态 | 架构研究公开 | [ByteDance Seed](https://seed.bytedance.com/en/public_papers/recycler-cost-free-latent-reasoning-via-hidden-state-recycling)、[ByteDance Seed](https://lf3-static.bytednsdoc.com/obj/eden-cn/hyvsmeh7uhobf/recycler_arxiv%20(2).pdf) |
 | 2026-10-24 | Kimi K3.1 Pro 发布：强化长程编程与 Agent | 模型发布 | [月之暗面](https://www.kimi.com/en/blog/kimi-k3-1-pro)、[月之暗面](https://www.kimi.com/en/blog/)、[月之暗面](https://www.kimi.com/code/docs/en/kimi-code/whats-new.html)、[Artificial Analysis](https://artificialanalysis.ai/articles/kimi-k3-1-pro-launch-benchmarks)、[Artificial Analysis](https://artificialanalysis.ai/methodology/intelligence-benchmarking) |
 | 2026-10-24 | Nanbeige4.3-33B：面向 Agent 的开放权重教师模型 | 权重开放 | [Nanbeige LLM Lab](https://huggingface.co/Nanbeige/Nanbeige4.3-33B)、[Nanbeige LLM Lab](https://huggingface.co/Nanbeige/Nanbeige4.3-33B/commit/0dacc64718ab6a5a7cbfc74cacc663d6c5c3de05)、[Nanbeige LLM Lab](https://huggingface.co/Nanbeige/Nanbeige4.3-33B/commits/main)、[Nanbeige LLM Lab](https://huggingface.co/Nanbeige/Nanbeige4.3-33B/tree/main)、[Nanbeige LLM Lab](https://huggingface.co/Nanbeige)、[Nanbeige LLM Lab](https://huggingface.co/Nanbeige/Nanbeige4.3-33B/discussions/6) |
