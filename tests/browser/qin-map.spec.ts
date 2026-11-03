@@ -68,7 +68,7 @@ test('Qin dynasty map preserves attribution, native image access and filtered ev
   await expect(page).toHaveURL(destination);
   await expect(page.locator('#current-topic-search input[name="q"]')).toHaveValue('秦');
   await expect(page.locator('#dynasty-maps')).toBeInViewport();
-  await page.goto(path('china-history/dynasties/han/'));
+  await page.goto(path('china-history/dynasties/eastern-han/'));
   // A period with no reviewed map must not fabricate a placeholder map or attribution.
   await expect(page.locator('.historical-map')).toHaveCount(0);
   expect(errors).toEqual([]);
