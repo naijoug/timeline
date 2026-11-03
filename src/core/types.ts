@@ -63,6 +63,14 @@ export interface HistoricalMap {
   originalUrl?: string;
   modificationNote: string;
   sourceIds: string[];
+  /** Optional static reading guide. References must belong to this map's sources. */
+  readingPoints?: {
+    label: string;
+    text: string;
+    sourceIds: string[];
+    locator: string;
+    scopeNote: string;
+  }[];
 }
 /** A sourced statement, never an edge inferred merely from chronological order. */
 export interface EventRelation {
