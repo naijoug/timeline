@@ -10,7 +10,7 @@ async function capture(page:Page,info:TestInfo,name:string){const file=info.outp
 async function readableMapSources(page:Page) {
   await expect(page.locator('.map-evidence a')).toHaveCount(2);
   // Theme links have a 160ms color transition; assert settled real contrast, not its first frame.
-  await expect.poll(async()=>{const contrasts=await page.locator('.map-evidence a').evaluateAll(links=>links.map(link=>{
+  await expect.poll(async()=>{const contrasts=await page.locator('.map-evidence a, .map-reading-points a').evaluateAll(links=>links.map(link=>{
     const rgb=(value:string)=>value.match(/[\d.]+/g)!.map(Number);
     const luminance=(color:number[])=>color.slice(0,3).map(v=>{const s=v/255;return s<=0.04045?s/12.92:((s+0.055)/1.055)**2.4;}).reduce((sum,v,i)=>sum+v*[0.2126,0.7152,0.0722][i],0);
     const fg=rgb(getComputedStyle(link).color); let el:Element|null=link; let bg=[255,255,255];
@@ -264,6 +264,22 @@ test('Feishui sourced diagram loads in light and dark without disturbing reading
   await expect(img).toHaveAttribute('alt',/两窗示意/);
   await expect(figure).toContainText('不是383年绘制');
   await expect(figure).toContainText('2026-11-02');
+  const guide = figure.getByRole('list', { name: '分窗读图', exact: true });
+  await expect(guide.locator('h4')).toHaveText(['A 城上所望', 'B 隔岸对峙']);
+  await expect(guide).toContainText('唐修《晋书》记述');
+  await expect(guide).toContainText('现代教学材料');
+  await expect(guide).toContainText('不代表全战役的固定阵位');
+  await expect(guide.locator('.evidence-locator').first()).toContainText('卷一一四');
+  await expect(guide.locator('.evidence-locator').last()).toContainText('第11页');
+  await expect(guide.locator('a').first()).toHaveAttribute('href', 'https://www.shidianguji.com/book/HY2499/chapter/1mb9kwmhn6p86');
+  await expect(guide.locator('a').last()).toHaveAttribute('href', 'https://www.edb.gov.hk/attachment/sc/curriculum-development/kla/pshe/references-and-resources/chinese-history/war3_sc.pdf');
+  // Both reading points are visible HTML without opening a disclosure or loading a map SDK.
+  await expect(figure.locator('.map-evidence')).not.toHaveAttribute('open', '');
+  await expect(guide).toBeVisible();
+  for (const link of await guide.locator('a').all()) {
+    await link.focus(); await expect(link).toBeFocused();
+    await expect(link).toHaveAccessibleName(/来源.*；/);
+  }
   await noOverflow(page); await capture(page,info,'feishui-map-light');
   const figureShot=info.outputPath('feishui-map-full-figure.png'); await figure.screenshot({path:figureShot}); await info.attach('feishui-map-full-figure',{path:figureShot,contentType:'image/png'});
   const imageLink=figure.getByRole('link',{name:/打开原尺寸地图/});
@@ -273,7 +289,16 @@ test('Feishui sourced diagram loads in light and dark without disturbing reading
   const popupPromise=page.waitForEvent('popup'); await imageLink.click(); const popup=await popupPromise; await popup.waitForLoadState();
   await expect(popup).toHaveURL(new URL(path('maps/feishui-spatial-383.svg'),page.url()).href);
   await expect(popup.locator('svg')).toBeVisible(); await popup.close(); await expect(imageLink).toBeFocused();
-  await figure.locator('summary').click();
+  const sourceToggle = figure.getByText('查看图示来源', { exact: true });
+  await sourceToggle.focus(); await sourceToggle.press('Enter');
+  await expect(figure.locator('.map-evidence')).toHaveAttribute('open', '');
+  await expect(figure.locator('.map-evidence')).toContainText('资料类型：古代史书电子文本');
+  await expect(figure.locator('.map-evidence')).toContainText('不是两份独立战场证据');
+  await sourceToggle.press('Enter');
+  await expect(figure.locator('.map-evidence')).not.toHaveAttribute('open', '');
+  await expect(sourceToggle).toBeFocused();
+  await expect(guide).toBeVisible();
+  await sourceToggle.press('Enter');
   await expect(figure.getByRole('link',{name:'《淝水之战：胡人骑兵大败》教学材料',exact:true})).toBeVisible();
   await readableMapSources(page);
   await page.emulateMedia({colorScheme:'dark'}); await expect(page.locator('html')).toHaveAttribute('data-theme','dark'); await readableMapSources(page); await noOverflow(page); await capture(page,info,'feishui-map-dark');
