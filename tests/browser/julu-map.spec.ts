@@ -38,6 +38,18 @@ test('Julu diagram preserves evidence, image access and filtered return across t
   await toggle.focus(); await toggle.press('Enter');
   await expect(figure.locator('.map-evidence')).toHaveAttribute('open', '');
   await expect(figure.locator('.map-evidence')).toContainText('《史记》卷八十九');
+  await expect(figure.locator('.map-evidence')).toContainText('作者／发布整理方：西汉司马迁 · 维基文库古籍电子文本');
+  await expect(figure.locator('.map-evidence')).toContainText('不代表全库已复核');
+  await expect(figure.locator('.map-evidence time')).toHaveText(['2026-11-04', '2026-11-04']);
+  await expect(figure.locator('.map-evidence time').first()).toHaveAttribute('datetime', '2026-11-04');
+  for (const theme of ['light', 'dark'] as const) {
+    await page.emulateMedia({ colorScheme: theme });
+    await figure.locator('.map-evidence').scrollIntoViewIfNeeded();
+    const evidenceFile = info.outputPath(`julu-evidence-${theme}.png`);
+    await figure.locator('.map-evidence').screenshot({ path: evidenceFile });
+    await info.attach(`julu-evidence-${theme}`, { path: evidenceFile, contentType: 'image/png' });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+  }
   await toggle.press('Enter'); await expect(toggle).toBeFocused();
   const link = figure.getByRole('link', { name: /打开原尺寸地图/ });
   await link.focus(); const opened = page.waitForEvent('popup'); await link.press('Enter');
@@ -61,6 +73,10 @@ test('Julu diagram and reading points remain available without JavaScript', asyn
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: info.project.use.viewport });
   const page = await context.newPage();
   await page.goto(`http://127.0.0.1:4179${prefix}/china-history/events/julu/`);
-  await verifyMap(page); await capture(page, info, 'julu-no-js');
+  const figure = await verifyMap(page);
+  await figure.getByText('查看图示来源', { exact: true }).click();
+  await expect(figure.locator('.map-evidence time')).toHaveText(['2026-11-04', '2026-11-04']);
+  await expect(figure.locator('.map-evidence')).toContainText('不代表全库已复核');
+  await capture(page, info, 'julu-no-js');
   await context.close();
 });
