@@ -7,7 +7,8 @@ test('Hy4 formal release preserves preview baseline and search return', async ({
   await expect(page.locator('[data-event-id="tencent-hy4-preview"]')).toBeVisible();
   await page.locator('[data-event-id="tencent-hy4-release"]').click();
   await expect(page.locator('h1')).toContainText('Hy4 正式版');
-  for (const text of ['2026年11月4日', '权重与系统卡计划近日开放', '厂商报告', '未调用 API']) await expect(page.locator('main')).toContainText(text);
+  await expect(page.locator('main')).toContainText(/2026\s*年\s*11\s*月\s*4\s*日/);
+  for (const text of [ '权重与系统卡计划近日开放', '厂商报告', '未调用 API']) await expect(page.locator('main')).toContainText(text);
   for (const colorScheme of ['light', 'dark'] as const) {
     await page.emulateMedia({ colorScheme });
     await page.evaluate(() => document.fonts.ready);
