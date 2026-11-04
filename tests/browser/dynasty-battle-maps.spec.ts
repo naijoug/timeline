@@ -16,11 +16,21 @@ for (const item of cases) test(`${item.period} battle map is discoverable and pr
   await toggle.focus(); await toggle.press('Enter');
   await expect(figure.locator('.map-evidence')).toContainText(item.evidence);
   await toggle.press('Enter'); await expect(toggle).toBeFocused();
+  // Let native focus restoration finish before scrolling for visual evidence.
+  await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
   for (const theme of ['light', 'dark'] as const) {
     await page.emulateMedia({ colorScheme: theme });
     await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
     await page.evaluate(() => document.fonts.ready);
     await figure.evaluate(el => el.scrollIntoView({ block: 'start', behavior: 'instant' }));
+    await expect.poll(async () => {
+      const heading = await figure.locator('h3').boundingBox();
+      const header = await page.locator('.library-header').boundingBox();
+      return heading!.y - header!.y - header!.height;
+    }).toBeGreaterThanOrEqual(0);
+    const viewport = info.outputPath(`${item.period}-${theme}-viewport.png`);
+    await page.screenshot({ path: viewport, animations: 'disabled' });
+    await info.attach(`${item.period}-${theme}-viewport`, { path: viewport, contentType: 'image/png' });
     const file = info.outputPath(`${item.period}-${theme}.png`);
     await figure.screenshot({ path: file, animations: 'disabled' });
     await info.attach(`${item.period}-${theme}`, { path: file, contentType: 'image/png' });
