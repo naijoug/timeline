@@ -9,7 +9,7 @@ async function verifyMap(page: Page) {
   await expect(figure).toContainText('非按比例');
   await expect(figure).toContainText('不补造公历月日');
   await expect(figure).toContainText('不将原文的“河”直接指定');
-  await expect(figure).toContainText('相对袁绍营，不是曹营或巨鹿城');
+  await expect(figure).toContainText('先后记述不同');
   await expect(figure).toContainText('未复制第三方地图');
   return figure;
 }
