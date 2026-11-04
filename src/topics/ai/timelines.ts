@@ -250,6 +250,7 @@ export const aiTimelines: TimelineDefinition[] = [
       {"eventId": "minimax-m3-1-flash-weights", "importance": "supporting"},
       {"eventId": "tencent-hy-nomas", "importance": "supporting"},
       {"eventId": "kimi-k3-1-pro", "importance": "supporting"},
+      {"eventId": "kimi-k3-1-pro-weights-confirmed", "importance": "supporting", "context": "官方分片与许可可见；日期为检索确认日，不推断首次公开日。"},
       {"eventId": "nanbeige43-33b-weights", "importance": "supporting"},
       {"eventId": "seed-recycler-research", "importance": "supporting"},
       {"eventId": "hy-simulmt-open-weights", "importance": "supporting"},

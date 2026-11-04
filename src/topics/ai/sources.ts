@@ -1,3 +1,4 @@
+import { kimiK31WeightSources } from './kimi-k31-weights';
 import { hyplmSources } from './hyplm-flash-release';
 import { antigravityScienceSources } from './antigravity-science';
 import { sensenova68Sources } from './sensenova-68-flash';
@@ -80,5 +81,5 @@ const baseSources: Source[] = [
   source('muse', 'How We Designed Muse', 'Muse / Meta', 'https://introducing.muse.ai/', '工程文章'),
   source('cue', 'Your personal agents, on Cue', 'Cue / Manus', 'https://cue.im/', '官方文档'),
 ];
-export const sources: Source[] = [...baseSources.map(s => ({ ...s, ...instructionSourceReviews[s.id], ...historicalSourceReviews[s.id] })), ...instructionSources, ...historicalSources, ...recentSources, ...verified2026Sources, ...carbonFusionSources, ...agenticWorkflowSources, ...mistralLarge4Sources, ...monitoringSources, ...longcat25Sources, ...gemini25LifecycleSources, ...hydrogenSources, ...sensenova68Sources, ...hyplmSources, ...antigravityScienceSources];
+export const sources: Source[] = [...baseSources.map(s => ({ ...s, ...instructionSourceReviews[s.id], ...historicalSourceReviews[s.id] })), ...instructionSources, ...historicalSources, ...recentSources, ...verified2026Sources, ...carbonFusionSources, ...agenticWorkflowSources, ...mistralLarge4Sources, ...monitoringSources, ...longcat25Sources, ...gemini25LifecycleSources, ...hydrogenSources, ...sensenova68Sources, ...hyplmSources, ...antigravityScienceSources, ...kimiK31WeightSources];
 export const sourceMap = Object.fromEntries(sources.map(s => [s.id, s]));

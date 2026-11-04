@@ -141,7 +141,7 @@ export const recentEvents: TimelineEvent[] = [
     company: '月之暗面', kind: '模型发布', tracks: ['models'],
     summary: '月之暗面发布 K3.1 系列首款模型 Kimi K3.1 Pro，支持 100 万 token 上下文，面向编程、3D 创作与长程 Agent 任务。',
     significance: '基础模型的升级继续围绕完整任务的执行质量展开，长上下文与后训练共同服务于更长的工作流程。',
-    limitation: '本条按官方研究索引的 10 月 24 日记录；Kimi Code 更新日志标为 10 月 23 日，两者保留各自日期，不推断具体发布时刻。完整模型权重仍为后续计划。',
+    limitation: '本条按官方研究索引的 10 月 24 日记录；Kimi Code 更新日志标为 10 月 23 日，两者保留各自日期，不推断具体发布时刻。在本条10月发布快照中，完整模型权重仍为后续计划；后续可用性另见权重核验节点。',
     entityIds: ['kimi'], sourceIds: ['kimi-k3-1-pro-announcement', 'kimi-k3-1-pro-release-date', 'kimi-code-k3-1-pro-rollout', 'aa-kimi-k31-launch-evaluation', 'aa-intelligence-methodology-432'],
     tags: ['编程', '长上下文', '3D 创作', 'Agent', '模型发布'], milestone: true,
     change: {
@@ -152,7 +152,7 @@ export const recentEvents: TimelineEvent[] = [
     },
     details: [
       { label: '发布日期口径', text: '官方研究索引把 K3.1 Pro 列在 2026 年 10 月 24 日；Kimi Code 的上线条目标为 10 月 23 日。本条采用研究发布日，同时保留产品渠道日期。', sourceIds: ['kimi-k3-1-pro-release-date', 'kimi-code-k3-1-pro-rollout'], locator: 'Research → Kimi K3.1 Pro; K3.1 Pro Series is live → October 23, 2026' },
-      { label: '已上线与待发布', text: 'Kimi、Kimi Work、Kimi Code 与 API 已上线。完整模型权重计划于 2026 年 11 月 4 日前发布，本条不记录为权重开放。', sourceIds: ['kimi-k3-1-pro-announcement'], locator: 'Availability' },
+      { label: '当时已上线与待发布', text: '以下保留10月发布快照：Kimi、Kimi Work、Kimi Code 与 API 已上线。完整模型权重计划于 2026 年 11 月 4 日前发布，本条不记录为权重开放。', sourceIds: ['kimi-k3-1-pro-announcement'], locator: 'Availability' },
       { label: '上下文与使用范围', text: 'Kimi Code 更新日志说明：Pro 模型从 Plus / Moderato 档可用，100 万 token 上下文和 Highspeed 从 Pro / Allegretto 档开放；这不是所有套餐统一提供的额度。', sourceIds: ['kimi-code-k3-1-pro-rollout'], locator: 'Membership access' },
       { label: '第三方评测快照', text: 'Artificial Analysis 的 2026-10-23 评测文章报告 K3.1 Pro 的 Intelligence Index 得分为 55，并明确当时权重尚未公开。这是评测方在其测试设置下的报告，不是本项目复测，也不把文章时间替代模型官方研究日期。', sourceIds: ['aa-kimi-k31-launch-evaluation'], locator: '标题；Additional model details → Weights and license' },
       { label: '测量范围与版本', text: '2026年10月24日核查时方法页标为 Intelligence Index v4.3.2，由 10 项评测组合，主要面向文本和英语任务；图像、语音与多语言能力另行评测。综合分数不能直接代替中文任务、特定代码库或实际产品效果的验证。', sourceIds: ['aa-intelligence-methodology-432'], locator: 'Artificial Analysis Intelligence Index：版本、评测组成与语言范围' },
