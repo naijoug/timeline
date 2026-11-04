@@ -2,8 +2,9 @@ import type { HistoricalMap, Source } from '../../core/types';
 import { qinEmpireMap, qinEmpireMapSource } from './qin-empire-map';
 import { hanFrontierMap, hanFrontierMapSource } from './han-frontier-map';
 import { guanduCampaignMap } from './guandu-campaign-map';
+import { juluCampaignMap, juluMapSources } from './julu-campaign-map';
 
-export const historicalMapSources: Source[] = [qinEmpireMapSource, hanFrontierMapSource, {
+export const historicalMapSources: Source[] = [...juluMapSources, qinEmpireMapSource, hanFrontierMapSource, {
   id: 'map-feishui-edb', title: '《淝水之战：胡人骑兵大败》教学材料',
   publisher: '香港教育局 · 中国历史课程资源',
   url: 'https://www.edb.gov.hk/attachment/sc/curriculum-development/kla/pshe/references-and-resources/chinese-history/war3_sc.pdf',
@@ -14,6 +15,7 @@ export const historicalMapSources: Source[] = [qinEmpireMapSource, hanFrontierMa
 
 export const historicalMaps: Record<string, HistoricalMap[]> = {
   guandu: [guanduCampaignMap],
+  julu: [juluCampaignMap],
   'qin-unification': [qinEmpireMap],
   'western-han-founded': [hanFrontierMap],
   feishui: [{
@@ -47,7 +49,7 @@ export const historicalMaps: Record<string, HistoricalMap[]> = {
 
 /** Explicit static-page association, not a date-based inference or client payload. */
 export const historicalMapPeriodEvents: Record<string, string[]> = {
-  qin: ['qin-unification'],
+  qin: ['qin-unification', 'julu'],
   han: ['western-han-founded'],
   'western-han': ['western-han-founded'],
   // Battle evidence is associated explicitly, never inferred as a dynasty territory map.

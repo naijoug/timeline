@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="1270" viewBox="0 0 640 1270" role="img" aria-labelledby="title desc">
+  <title id="title">巨鹿之战：渡河救赵与断粮</title>
+  <desc id="desc">四窗独立、不按比例。围城窗仅保留史书记述的城南城北关系，其余箭头为项羽本纪叙事次序，不是实测路线。张耳陈馀列传的断粮、悉渡和诸侯参战次序不同。</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#333"/></marker></defs>
+  <style>text{font-family:"Noto Sans CJK SC","Microsoft YaHei",sans-serif;fill:#222}.title{font-size:31px;font-weight:700}.stage{font-size:28px;font-weight:700}.label{font-size:27px}.note{font-size:23px;fill:#505050}.small{font-size:21px;fill:#505050}.panel{fill:#fafafa;stroke:#bbb;stroke-width:2}.node{fill:#fff;stroke:#777;stroke-width:2}.line{fill:none;stroke:#333;stroke-width:3;marker-end:url(#arrow)}</style>
+  <rect width="640" height="1270" fill="white"/>
+  <text x="32" y="50" class="title">巨鹿之战 · 渡河救赵与断粮</text>
+  <text x="32" y="87" class="note">前207年背景 · 依《项羽本纪》排列</text>
+  <rect x="24" y="114" width="592" height="330" rx="10" class="panel"/>
+  <text x="44" y="154" class="stage">① 秦军围城 · 南北相对巨鹿</text>
+  <text x="44" y="204" class="label">城北：陈余军</text>
+  <rect x="44" y="229" width="210" height="58" rx="5" class="node"/><text x="149" y="269" text-anchor="middle" class="label">巨鹿城</text>
+  <text x="290" y="268" class="label">王离围城军</text>
+  <path d="M245 358H405V285" fill="none" stroke="#777" stroke-width="2" stroke-dasharray="7 6"/>
+  <text x="440" y="320" class="small">供粮</text>
+  <text x="44" y="368" class="label">城南：章邯军</text>
+  <text x="44" y="416" class="small">虚线表示供粮关系，不是粮道走向</text>
+  <rect x="24" y="464" width="592" height="214" rx="10" class="panel"/>
+  <text x="44" y="504" class="stage">② 先遣渡河救赵</text>
+  <rect x="44" y="529" width="254" height="58" rx="5" class="node"/><text x="171" y="568" text-anchor="middle" class="label">当阳君、蒲将军</text>
+  <path d="M310 557H390" class="line"/><text x="350" y="542" text-anchor="middle" class="small">先遣</text>
+  <rect x="405" y="529" width="167" height="58" rx="5" class="node"/><text x="488" y="568" text-anchor="middle" class="label">渡河救援</text>
+  <text x="44" y="637" class="note">战事稍利；陈余再次请求增援</text>
+  <rect x="24" y="698" width="592" height="222" rx="10" class="panel"/>
+  <text x="44" y="738" class="stage">③ 项羽悉渡 · 毁船破釜</text>
+  <rect x="44" y="764" width="200" height="58" rx="5" class="node"/><text x="144" y="803" text-anchor="middle" class="label">主力渡河</text>
+  <path d="M257 792H355" class="line"/><text x="307" y="777" text-anchor="middle" class="small">次序</text>
+  <rect x="370" y="764" width="202" height="58" rx="5" class="node"/><text x="471" y="803" text-anchor="middle" class="label">断粮、交战</text>
+  <text x="44" y="872" class="note">不指定河名、渡口或具体行军路</text>
+  <rect x="24" y="940" width="592" height="214" rx="10" class="panel"/>
+  <text x="44" y="980" class="stage">④ 王离被俘 · 巨鹿解围</text>
+  <text x="44" y="1030" class="label">本图止于解围，不并入后续投降</text>
+  <text x="44" y="1075" class="note">另一篇《张耳陈馀列传》</text>
+  <text x="44" y="1111" class="note">对断粮、悉渡、诸侯参战次序不同</text>
+  <text x="32" y="1194" class="small">据公版《史记》文字原创 · 未复制第三方地图</text>
+  <text x="32" y="1225" class="small">四窗独立、非按比例 · 箭头不表示地理方向</text>
+  <text x="32" y="1256" class="small">不复原古河道、道路、营地坐标或疆界 · 2026</text>
+</svg>
