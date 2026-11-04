@@ -43,6 +43,6 @@ test('Han map makes uncertain solid line and cross-period coverage explicit outs
 test('Han frontier archive remains static and does not invent other period maps', () => {
   const payload = JSON.stringify(createExplorerPayload(chinaHistory));
   for (const detail of [hanFrontierMap.assetPath, hanFrontierMap.scopeNote, hanFrontierMap.sourceIds[0]]) assert.ok(!payload.includes(detail), detail);
-  assert.equal(historicalMapPeriodEvents['eastern-han'], undefined);
+  assert.ok(!historicalMapPeriodEvents['eastern-han']?.includes('western-han-founded'));
   assert.ok(!chinaHistory.events.find(event => event.id === 'guandu')?.maps?.some(map => map.id === hanFrontierMap.id));
 });

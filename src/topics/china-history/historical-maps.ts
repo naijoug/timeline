@@ -50,4 +50,8 @@ export const historicalMapPeriodEvents: Record<string, string[]> = {
   qin: ['qin-unification'],
   han: ['western-han-founded'],
   'western-han': ['western-han-founded'],
+  // Battle evidence is associated explicitly, never inferred as a dynasty territory map.
+  'eastern-han': ['guandu'],
+  'eastern-jin': ['feishui'],
+  'sixteen-kingdoms': ['feishui'],
 };
