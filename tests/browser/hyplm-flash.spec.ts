@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 const prefix = (process.env.TIMELINE_BASE_PATH || '').replace(/\/$/, '');
 test('HyPLM keeps scientific release boundaries and filtered return', async ({ page }, info) => {
   const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
-  await page.goto(`${prefix}/ai/?lines=all&q=HyPLM`);
+  await page.goto(`${prefix}/ai/?lines=all&all=1&q=HyPLM`);
   await page.locator('[data-timeline-ready="true"]').waitFor();
   await page.locator('[data-event-id="hyplm-flash-release"]').click();
   await expect(page.locator('h1')).toContainText('HyPLM-Flash 650M');

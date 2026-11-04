@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 const prefix = (process.env.TIMELINE_BASE_PATH || '').replace(/\/$/, '');
 const cases = [
   { period: 'eastern-han', query: '官渡', map: 'guandu-campaign-200', event: 'guandu', evidence: '本纪、裴注' },
-  { period: 'eastern-jin', query: '淝水', map: 'feishui-spatial-383', event: 'feishui', evidence: '香港教育局' },
+  { period: 'eastern-jin', query: '淝水', map: 'feishui-spatial-383', event: 'feishui', evidence: '《淝水之战：胡人骑兵大败》教学材料' },
 ];
 for (const item of cases) test(`${item.period} battle map is discoverable and preserves dynasty return`, async ({ page }, info) => {
   const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));

@@ -69,8 +69,9 @@ test('Qin dynasty map preserves attribution, native image access and filtered ev
   await expect(page.locator('#current-topic-search input[name="q"]')).toHaveValue('秦');
   await expect(page.locator('#dynasty-maps')).toBeInViewport();
   await page.goto(path('china-history/dynasties/eastern-han/'));
-  // A period with no reviewed map must not fabricate a placeholder map or attribution.
-  await expect(page.locator('.historical-map')).toHaveCount(0);
+  // Eastern Han now has reviewed Guandu evidence, but must not inherit Qin's map.
+  await expect(page.locator('#map-qin-commandery-lander')).toHaveCount(0);
+  await expect(page.locator('#map-guandu-campaign-200')).toHaveCount(1);
   expect(errors).toEqual([]);
 });
 
