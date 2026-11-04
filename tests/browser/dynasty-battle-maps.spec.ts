@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 const prefix = (process.env.TIMELINE_BASE_PATH || '').replace(/\/$/, '');
 const cases = [
+  { period: 'qin', query: '巨鹿', map: 'julu-relief-207-bce', event: 'julu', evidence: '《史记》卷八十九' },
   { period: 'eastern-han', query: '官渡', map: 'guandu-campaign-200', event: 'guandu', evidence: '本纪、裴注' },
   { period: 'eastern-jin', query: '淝水', map: 'feishui-spatial-383', event: 'feishui', evidence: '《淝水之战：胡人骑兵大败》教学材料' },
 ];
@@ -10,6 +11,7 @@ for (const item of cases) test(`${item.period} battle map is discoverable and pr
   await page.locator('[data-timeline-ready="true"]').waitFor();
   await page.getByRole('link', { name: '阅读说明与资料', exact: true }).click();
   const figure = page.locator(`#map-${item.map}`);
+  await figure.scrollIntoViewIfNeeded();
   await expect(figure).toBeInViewport();
   await expect.poll(() => figure.locator('img').evaluate(el => (el as HTMLImageElement).naturalWidth)).toBe(640);
   const toggle = figure.getByText('查看图示来源', { exact: true });
