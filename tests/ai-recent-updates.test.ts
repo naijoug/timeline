@@ -95,7 +95,8 @@ test('Kimi K3.1 Pro is a key China model event with a K3 baseline, not a complet
   assert.notEqual(event.kind, '权重开放');
   const keyChinaModels = filterAtlas(events, { ...defaultAtlas(), from: 2026, to: 2026, all: false, scope: 'china', lane: 'models' });
   assert.ok(keyChinaModels.some(item => item.id === event.id));
-  assert.equal(events.filter(item => /K3\.1/.test(item.title)).length, 1);
+  assert.equal(events.filter(item => item.id === 'kimi-k3-1-pro').length, 1);
+  assert.equal(events.filter(item => item.id === 'kimi-k3-1-pro-weights-confirmed').length, 1);
 });
 
 test('new research dates do not rewrite older sources as freshly checked', () => {

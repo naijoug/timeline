@@ -1,8 +1,14 @@
 import type { Source, TimelineEvent } from './types';
 
-const sourceIds = ['tencent-hy4-release'];
+const sourceIds = ['tencent-hy4-release-zh', 'tencent-hy4-release'];
 export const hy4Sources: Source[] = [{
-  id: sourceIds[0], title: 'Tencent Launches Hy4', publisher: 'Tencent（PR Newswire 发布）',
+  id: 'tencent-hy4-release-zh', title: '腾讯混元发布Hy4，跻身最强开源模型之列', publisher: '腾讯',
+  url: 'https://www.tencent.com/zh-cn/tencent-launches-hy4-joining-the-ranks-of-the-worlds-leading-open-source-ai-models/',
+  type: '官方公告', publishedAt: '2026-11-04', checkedAt: '2026-11-06',
+  locator: '发布导语；视觉理解与电脑操作；产品与API入口；权重和系统卡片近期开放说明',
+  version: '腾讯中文公司公告；标题中的开源措辞不等于正式版权重当日已公开。仅核对公告内容，未调用API或复现评测；Hy4 Flash仍为后续计划，产品免费使用有额度边界。',
+}, {
+  id: 'tencent-hy4-release', title: 'Tencent Launches Hy4', publisher: 'Tencent（PR Newswire 发布）',
   url: 'https://en.prnasia.com/releases/apac/tencent-launches-hy4-joining-the-ranks-of-the-world-s-leading-open-source-ai-models-554689.shtml',
   type: '官方公告', publishedAt: '2026-11-04', checkedAt: '2026-11-04',
   locator: '发布导语；模型能力；Delivering Greater Cost Performance',

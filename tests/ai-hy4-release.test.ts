@@ -18,3 +18,15 @@ test('Hy4 formal release stays distinct from preview and planned weights', () =>
   assert.equal(sources.filter(s => s.id === 'tencent-hy4-release').length, 1);
   assert.ok(aiTimelines.find(t => t.id === 'ai-model-iterations')?.entries.some(e => e.eventId === event.id));
 });
+
+test('Hy4 release includes Tencent Chinese primary evidence without claiming weights or Flash shipped', () => {
+  const event = events.find(e => e.id === 'tencent-hy4-release')!;
+  const chinese = sources.find(source => source.id === 'tencent-hy4-release-zh')!;
+  assert.equal(chinese.publisher, '腾讯');
+  assert.equal(chinese.publishedAt, '2026-11-04');
+  assert.equal(new URL(chinese.url).hostname, 'www.tencent.com');
+  assert.ok(event.sourceIds.includes(chinese.id));
+  assert.ok(event.change?.sourceIds.includes(chinese.id));
+  assert.match(chinese.version || '', /不等于正式版权重当日已公开/);
+  assert.match(chinese.version || '', /Flash仍为后续计划/);
+});
