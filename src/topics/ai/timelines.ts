@@ -6,6 +6,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '从思想与方法，到模型和任务型产品的精选阅读主线。',
     note: '编辑精选的阅读主线，串联思想、方法、模型与产品转折；不等于全部重大事件，也不自动汇总所有子时间线。',
     entries: [
+      {"eventId": "perplexity-teammates-web-launch", "importance": "key", "context": "个人Max网页研究预览，持续任务与人类监督结合；官方发布帖UTC日期与博客索引分开记录。"},
       {"eventId": "openai-images-2-6-release", "importance": "key", "context": "图像生成连接局部编辑、GIF与API矢量输出；质量、规划及渠道边界分开核对。"},
       {"eventId": "gemini-omni-1-2-flash-ga", "importance": "key", "context": "视频生成进入正式API与Cloud阶段；应用分批上线、特殊时长模式和放大分辨率仍有边界。"},
       {"eventId": "antigravity-cheminformatics-skills", "importance": "key", "context": "Science 插件扩展科学工作流，不是新模型；候选设计仍须实验验证。"},
@@ -68,6 +69,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '按论文、预览、API 和权重开放阶段阅读模型演进。',
     note: '已收录模型与关键训练、架构方法的精选年表，非完整发布清单。论文、预览、API 开放和权重开放分别记录，不把它们视为同一种发布。',
     entries: [
+      {"eventId": "inkling-2-small-release", "importance": "supporting", "context": "Tinker推理和微调已开放，首发闭权重；Apache 2.0开放仍取决于后续外部测试。"},
       {"eventId": "openai-images-2-6-release", "importance": "key", "context": "图像生成连接局部编辑、GIF与API矢量输出；质量、规划及渠道边界分开核对。"},
       {"eventId": "gemini-omni-1-2-flash-ga", "importance": "key", "context": "视频生成进入正式API与Cloud阶段；应用分批上线、特殊时长模式和放大分辨率仍有边界。"},
       {"eventId": "ernie-5-5-flash-base", "importance": "supporting", "context": "预训练基座的 FP8/BF16 权重；自定义许可与后训练版本计划分别说明。"},
@@ -275,6 +277,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '面向任务执行的 Agent 产品、开源工具与功能演进。',
     note: '研究预览、公开测试、正式开放保留各自阶段；不是所有对话产品或 Agent 研究论文的合集。ChatGPT 2022 首发不视为 Agent 产品发布。',
     entries: [
+      {"eventId": "perplexity-teammates-web-launch", "importance": "key", "context": "个人Max网页研究预览，持续任务与人类监督结合；官方发布帖UTC日期与博客索引分开记录。"},
       {"eventId": "antigravity-cheminformatics-skills", "importance": "key", "context": "Science 插件扩展科学工作流，不是新模型；候选设计仍须实验验证。"},
       {"eventId": "devin-introduction", "importance": "key"},
       {"eventId": "replit-agent-first", "importance": "supporting"},

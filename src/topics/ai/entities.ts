@@ -1,3 +1,5 @@
+import { inkling2SmallEntities } from './inkling2-small-release';
+import { teammatesEntities } from './perplexity-teammates';
 import { hyplmEntities } from './hyplm-flash-release';
 import { antigravityScienceEntities } from './antigravity-science';
 import { hydrogenEntities } from './hydrogen-release';
@@ -11,6 +13,7 @@ import { instructionEntities } from './instruction-following';
 import { historicalEntities } from './historical-milestones';
 import { recentEntities } from './recent-updates';
 export const entities: Entity[] = [
+  ...teammatesEntities, ...inkling2SmallEntities,
   ...hyplmEntities, ...antigravityScienceEntities,
   ...globalEntities,
   ...releaseEntities,

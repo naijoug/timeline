@@ -31,6 +31,7 @@ export const chinaCompanies = new Set([
   "美团",
 ]);
 const agents = new Set([
+  "perplexity-teammates",
   "claude-code",
   "codex",
   "grok-bot",

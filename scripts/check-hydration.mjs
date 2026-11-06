@@ -270,9 +270,9 @@ console.log('Focus/selection before the first input event also survives hydratio
 
 // First-class sublines use the exact same production island, not a separate reader.
 for (const [path, topic, id, count] of [
-  ['ai/timelines/ai-milestones', 'ai', 'ai-milestones', 55],
-  ['ai/timelines/ai-model-iterations', 'ai', 'ai-model-iterations', 200],
-  ['ai/timelines/ai-agent-products', 'ai', 'ai-agent-products', 47],
+  ['ai/timelines/ai-milestones', 'ai', 'ai-milestones', 56],
+  ['ai/timelines/ai-model-iterations', 'ai', 'ai-model-iterations', 201],
+  ['ai/timelines/ai-agent-products', 'ai', 'ai-agent-products', 48],
   ['writers/authors/liu-cixin', 'writers', 'liu-cixin', null],
   ['china-history/collections/wars-and-turning-points', 'china-history', 'wars-and-turning-points', null],
   ['ai/collections/transformer-to-instructions', 'ai', 'transformer-to-instructions', 14],
@@ -297,7 +297,7 @@ for (const [path, topic, id, count] of [
 {
   const {dom,w,errors} = await hydrate('ai');
   const cards = () => [...w.document.querySelectorAll('.chronicle-event-button')];
-  assert.equal(cards().length,55);
+  assert.equal(cards().length,56);
   const mainUrl = w.location.href;
   w.document.querySelector('[aria-label="合并AI 模型发现与迭代"]').click();
   await waitFor(()=>w.location.search.includes('ai-model-iterations'),'merge selection serialized');
@@ -314,12 +314,12 @@ for (const [path, topic, id, count] of [
   assert.ok(latestReturn.endsWith('#timeline-freshness'));
   // Real same-document history traversal restores the line set and URL exactly.
   w.history.back();
-  await waitFor(()=>w.location.href===mainUrl && cards().length===55,'Back restores curated mainline');
+  await waitFor(()=>w.location.href===mainUrl && cards().length===56,'Back restores curated mainline');
   w.history.forward();
   await waitFor(()=>w.location.href===mergedUrl && cards().length===expected.size,'Forward restores merged selection');
   assert.deepEqual(cards().map(card=>card.dataset.eventId),mergedIds);
   const model = w.document.querySelector('[aria-label="合并AI 模型发现与迭代"]');
-  model.click(); await waitFor(()=>cards().length===55,'repeated unmerge');
+  model.click(); await waitFor(()=>cards().length===56,'repeated unmerge');
   model.click(); await waitFor(()=>cards().length===expected.size,'repeated merge');
   assert.equal(errors.length,0,errors.join('\n'));
   dom.window.close();
