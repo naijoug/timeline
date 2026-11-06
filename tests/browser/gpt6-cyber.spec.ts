@@ -23,9 +23,10 @@ test('GPT-6 Cyber restricted release keeps evidence and exact search return', as
   await page.locator('[data-timeline-ready="true"]').waitFor();
   await expect(page.locator('#current-topic-search input[name="q"]')).toHaveValue('GPT-6 Cyber');
   await expect(page.locator('[data-event-id="gpt-6-cyber-restricted-release"]')).toBeFocused();
-  await page.goBack();
-  await expect(page.locator('h1')).toContainText('受限开放');
+  // The return link consumes history.back(), so Forward revisits the detail.
   await page.goForward();
+  await expect(page.locator('h1')).toContainText('受限开放');
+  await page.goBack();
   await page.locator('[data-timeline-ready="true"]').waitFor();
   await expect(page.locator('#current-topic-search input[name="q"]')).toHaveValue('GPT-6 Cyber');
   expect(errors).toEqual([]);
