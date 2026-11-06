@@ -10,17 +10,17 @@ import { timelineEvents } from '../src/core/timelines';
 import { validateCatalog } from '../src/core/validate';
 import { eventLane, isKeyEvent, chinaCompanies } from '../src/topics/ai/config';
 
-test('combined Hy4 and Kimi release data preserves both nodes and cumulative counts', () => {
-  assert.equal(events.length, 302);
-  assert.equal(sources.length, 349);
+test('cumulative release data preserves Hy4, Kimi and GPT-6 Cyber nodes', () => {
+  assert.equal(events.length, 303);
+  assert.equal(sources.length, 352);
   assert.equal(new Set(events.map(event => event.id)).size, events.length);
   assert.equal(new Set(sources.map(source => source.id)).size, sources.length);
   const models = timelineEvents(aiCatalog, ['ai-model-iterations']);
-  assert.equal(models.length, 196);
-  for (const id of ['tencent-hy4-release', 'kimi-k3-1-pro-weights-confirmed']) {
+  assert.equal(models.length, 197);
+  for (const id of ['tencent-hy4-release', 'kimi-k3-1-pro-weights-confirmed', 'gpt-6-cyber-restricted-release']) {
     assert.equal(models.filter(event => event.id === id).length, 1);
   }
-  assert.equal(events.filter(event => eventLane(event) === 'models').length, 179);
+  assert.equal(events.filter(event => eventLane(event) === 'models').length, 180);
   assert.equal(events.filter(event => eventLane(event) === 'models' && chinaCompanies.has(event.company || '')).length, 76);
   assert.deepEqual(validateCatalog(aiCatalog), []);
   assert.deepEqual(validateAI(events, entities, sources, relations), []);

@@ -66,6 +66,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '按论文、预览、API 和权重开放阶段阅读模型演进。',
     note: '已收录模型与关键训练、架构方法的精选年表，非完整发布清单。论文、预览、API 开放和权重开放分别记录，不把它们视为同一种发布。',
     entries: [
+      {"eventId": "gpt-6-cyber-restricted-release", "importance": "supporting", "context": "仅部分 Daybreak Red 客户获批访问；不把计划扩展写成全面开放。"},
       {"eventId": "tencent-hy4-release", "importance": "key", "context": "正式产品与API阶段；与预览版及待开放的正式版权重分开记录。"},
       {"eventId": "hyplm-flash-release", "importance": "supporting", "context": "蛋白质模型权重与推理实现；FP32发布文件、INT8运行与目录MIT声明与权重许可边界分别核对。"},
       {"eventId": "sensenova-6-8-flash", "importance": "key", "context": "正式模型与Design实验入口分开；主动交互仅内部研发版演示，不视为公众可用。"},
