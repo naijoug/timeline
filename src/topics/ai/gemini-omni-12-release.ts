@@ -7,7 +7,7 @@ const modelDoc = 'https://docs.cloud.google.com/gemini-enterprise-agent-platform
 
 export const geminiOmni12Sources: Source[] = [
   { id: 'gemini-omni-12-announcement', title: 'Gemini Omni 1.2 Flash: Fast and cost-effective with longer clips', publisher: 'Google · Anish Nangia', url: announcement, type: '官方公告', publishedAt: '2026-11-05', checkedAt, locator: '视频生成与编辑时长；720p 价格及相对 1.1 的比较；Gemini API 与应用开放范围' },
-  { id: 'gemini-omni-12-cloud-announcement', title: 'Gemini Omni 1.2 Flash: Fast, cost-effective, and reliable video generation and editing now generally available', publisher: 'Google Cloud · John Nack', url: cloudAnnouncement, type: '官方公告', publishedAt: '2026-11-05', checkedAt, locator: 'Google Cloud 正式可用；生成与编辑能力；Gemini for business coming soon' },
+  { id: 'gemini-omni-12-cloud-announcement', title: 'Gemini Omni 1.2 Flash: Fast, cost-effective, and reliable video generation and editing now generally available', publisher: 'Google Cloud · John Nack', url: cloudAnnouncement, type: '官方公告', publishedAt: '2026-11-05', checkedAt, locator: 'Google Cloud 正式可用；生成与编辑能力；Gemini for business 页首与 Get started 口径差异' },
   { id: 'gemini-omni-12-model-doc', title: 'Gemini Omni 1.2 Flash', publisher: 'Google Cloud Documentation', url: modelDoc, type: '官方文档', checkedAt, version: '2026-11-06 模型文档快照', locator: '模型 ID gemini-omni-1.2-flash；视频时长；首尾帧与延展限制；升分辨率；音频参考访问条件' },
   { id: 'gemini-omni-12-model-card', title: 'Gemini Omni 1.2 Flash Model Card', publisher: 'Google DeepMind', url: 'https://deepmind.google/models/model-cards/gemini-omni-1-2-flash/', type: '官方文档', publishedAt: '2026-11-05', checkedAt, locator: '模型卡版本与模型说明；能力和局限的厂商披露' },
 ];
@@ -31,7 +31,7 @@ export const geminiOmni12Events: TimelineEvent[] = [{
     evidence: '厂商报告', sourceIds: ['gemini-omni-12-announcement', 'gemini-omni-12-cloud-announcement', 'gemini-omni-12-model-doc'],
   },
   details: [
-    { label: '经过：公告日与可用渠道', text: '11月5日，Google 与 Google Cloud 分别发布公告，模型文档列出的正式模型 ID 为 gemini-omni-1.2-flash。本事件记录 Gemini API 与 Google Cloud 的正式可用，不把消费者应用的分批上线合并为全渠道同日开放；Cloud 公告仍将 Gemini for business 标为 coming soon。', sourceIds: ['gemini-omni-12-announcement', 'gemini-omni-12-cloud-announcement', 'gemini-omni-12-model-doc'], locator: '两份公告的发布日期与可用渠道；模型文档 Model ID' },
+    { label: '经过：公告日与可用渠道', text: '11月5日，Google 与 Google Cloud 分别发布公告，模型文档列出的正式模型 ID 为 gemini-omni-1.2-flash。本事件记录 Gemini API 与 Google Cloud 的正式可用。两份官方公告对 Gemini for business 的文字不完全一致：The Keyword 将其写为 generally available，Cloud 公告页首也称可用，但 Get started 仍写 coming soon。本站保留这一来源差异，不据此断言该应用对所有用户同时开放；Gemini app 另标为向 Google AI Ultra 订阅者分批推出。', sourceIds: ['gemini-omni-12-announcement', 'gemini-omni-12-cloud-announcement', 'gemini-omni-12-model-doc'], locator: '两份公告的发布日期与可用渠道；模型文档 Model ID' },
     { label: '背景：视频生成与编辑的同一轮迭代', text: '这次更新同时覆盖生成和编辑工作流。官方以 Gemini Omni 1.1 作为价格比较对象，重点介绍更长片段与较低标价；这不等于公布模型权重，也不能据此推断所有视频任务的质量均有提升。', sourceIds: ['gemini-omni-12-announcement', 'gemini-omni-12-cloud-announcement'], locator: '生成与编辑能力；价格比较；正式可用说明' },
     { label: '时长：原生片段与分步操作不同', text: '一般视频生成与编辑支持 3–15 秒原生片段；指定首尾帧及视频延展仍受每步最多 10 秒限制。不能把 15 秒上限套用到所有调用模式，也不能把多步拼接或延展的总时长称为一次原生生成。', sourceIds: ['gemini-omni-12-announcement', 'gemini-omni-12-model-doc'], locator: '视频时长；first and last frame；video extension' },
     { label: '分辨率与价格：保留计费口径', text: '官方列出 720p 每秒 0.07 美元，并称相较 1.1 降低 30%；这是厂商标价比较，不是本站实测账单。模型提供升分辨率（upscale）能力，不能将其描述为原生 4K；较高分辨率与具体操作的费用应按各自计费条件核对。', sourceIds: ['gemini-omni-12-announcement', 'gemini-omni-12-model-doc'], locator: '720p pricing；upscale 与输出分辨率' },

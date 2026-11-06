@@ -17,7 +17,7 @@ test('Gemini Omni GA preserves evidence, filtered return focus and Back/Forward'
   await expect(page.locator('h1')).toContainText('Gemini Omni 1.2 Flash 在 API 与 Google Cloud 正式可用');
   const main = page.locator('main');
   await expect(main).toContainText(/2026\s*年\s*11\s*月\s*5\s*日/);
-  for (const text of ['gemini-omni-1.2-flash', '3–15 秒', '每步最多 10 秒', '720p 每秒 0.07 美元', '厂商标价比较', 'Gemini for business', 'coming soon', '白名单授权', '不是权重发布', '不能将其描述为原生 4K', '未调用 API']) {
+  for (const text of ['gemini-omni-1.2-flash', '3–15 秒', '每步最多 10 秒', '720p 每秒 0.07 美元', '厂商标价比较', 'Gemini for business', 'coming soon', '两份官方公告', 'generally available', '来源差异', 'Google AI Ultra', '白名单授权', '不是权重发布', '不能将其描述为原生 4K', '未调用 API']) {
     await expect(main).toContainText(text);
   }
   await expect(page.getByRole('heading', { name: /编辑分析：按可交付片段验收迭代.*编辑解读/ })).toBeVisible();

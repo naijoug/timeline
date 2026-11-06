@@ -6,6 +6,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '从思想与方法，到模型和任务型产品的精选阅读主线。',
     note: '编辑精选的阅读主线，串联思想、方法、模型与产品转折；不等于全部重大事件，也不自动汇总所有子时间线。',
     entries: [
+      {"eventId": "openai-images-2-6-release", "importance": "key", "context": "图像生成连接局部编辑、GIF与API矢量输出；质量、规划及渠道边界分开核对。"},
       {"eventId": "gemini-omni-1-2-flash-ga", "importance": "key", "context": "视频生成进入正式API与Cloud阶段；应用分批上线、特殊时长模式和放大分辨率仍有边界。"},
       {"eventId": "antigravity-cheminformatics-skills", "importance": "key", "context": "Science 插件扩展科学工作流，不是新模型；候选设计仍须实验验证。"},
       {"eventId": "sensenova-6-8-flash", "importance": "key", "context": "正式模型与Design实验入口分开；主动交互仅内部研发版演示，不视为公众可用。"},
@@ -67,6 +68,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '按论文、预览、API 和权重开放阶段阅读模型演进。',
     note: '已收录模型与关键训练、架构方法的精选年表，非完整发布清单。论文、预览、API 开放和权重开放分别记录，不把它们视为同一种发布。',
     entries: [
+      {"eventId": "openai-images-2-6-release", "importance": "key", "context": "图像生成连接局部编辑、GIF与API矢量输出；质量、规划及渠道边界分开核对。"},
       {"eventId": "gemini-omni-1-2-flash-ga", "importance": "key", "context": "视频生成进入正式API与Cloud阶段；应用分批上线、特殊时长模式和放大分辨率仍有边界。"},
       {"eventId": "ernie-5-5-flash-base", "importance": "supporting", "context": "预训练基座的 FP8/BF16 权重；自定义许可与后训练版本计划分别说明。"},
       {"eventId": "gpt-6-cyber-restricted-release", "importance": "supporting", "context": "仅部分 Daybreak Red 客户获批访问；不把计划扩展写成全面开放。"},

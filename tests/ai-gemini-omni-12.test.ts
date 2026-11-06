@@ -23,7 +23,10 @@ test('Gemini Omni 1.2 content records dated API and Cloud GA without blanket app
   assert.ok(!event.tags.includes('开放权重'));
   const details = event.details!.map(section => section.text).join('\n');
   assert.match(details, /模型 ID 为 gemini-omni-1\.2-flash/);
-  assert.match(details, /Gemini for business 标为 coming soon/);
+  assert.match(details, /The Keyword 将其写为 generally available/);
+  assert.match(details, /Get started 仍写 coming soon/);
+  assert.match(details, /保留这一来源差异/);
+  assert.match(details, /Google AI Ultra 订阅者分批推出/);
   assert.match(details, /不能移植为 gemini-omni-1\.2-flash 的退役日期/);
 });
 
