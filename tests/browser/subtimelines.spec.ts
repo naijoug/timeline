@@ -23,7 +23,7 @@ async function noOverflow(page:Page){expect(await page.evaluate(()=>document.doc
 
 test('curated main, union selection and native Back/Forward',async({page},info)=>{
   await page.goto(path('ai/'));await ready(page);
-  const cards=page.locator('.chronicle-event-button');await expect(cards).toHaveCount(53);
+  const cards=page.locator('.chronicle-event-button');await expect(cards).toHaveCount(54);
   await noOverflow(page);await capture(page,info,'ai-main');
   const mainUrl=page.url();
   await page.getByRole('checkbox',{name:'合并AI 模型发现与迭代',exact:true}).check();
@@ -33,9 +33,9 @@ test('curated main, union selection and native Back/Forward',async({page},info)=
     return new Set(catalog.timelines.filter((line:{id:string})=>['ai-milestones','ai-model-iterations'].includes(line.id)).flatMap((line:{entries:{eventId:string}[]})=>line.entries.map(entry=>entry.eventId))).size;
   });
   await expect(cards).toHaveCount(expected);expect(new Set(await cards.evaluateAll(els=>els.map(el=>(el as HTMLElement).dataset.eventId))).size).toBe(expected);
-  const mergedUrl=page.url();await page.goBack();await ready(page);await expect(page).toHaveURL(mainUrl);await expect(cards).toHaveCount(53);
+  const mergedUrl=page.url();await page.goBack();await ready(page);await expect(page).toHaveURL(mainUrl);await expect(cards).toHaveCount(54);
   await page.goForward();await ready(page);await expect(page).toHaveURL(mergedUrl);await expect(cards).toHaveCount(expected);
-  await page.getByRole('checkbox',{name:'合并AI 模型发现与迭代',exact:true}).uncheck();await expect(cards).toHaveCount(53);
+  await page.getByRole('checkbox',{name:'合并AI 模型发现与迭代',exact:true}).uncheck();await expect(cards).toHaveCount(54);
   await page.getByRole('checkbox',{name:'合并AI 模型发现与迭代',exact:true}).check();await expect(cards).toHaveCount(expected);
   const freshness=page.locator('.timeline-freshness a');
   const back=new URL((await freshness.getAttribute('href'))!,'http://127.0.0.1').searchParams.get('return')!;

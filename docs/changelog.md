@@ -1,5 +1,9 @@
 # 更新记录
 
+## 2026-11-06 17:00 UTC
+
+- 补入 Gemini Omni 1.2 Flash 正式 API／Cloud 阶段与 ERNIE 5.5 Flash Base 预训练权重，分别保留应用开放节奏、自定义许可和未实测边界；增加相关阅读及桌面／手机回归。[来源与验收](ai-radar-2026-11-06-1700.md)
+
 ## 2026-11-06 04:47 UTC
 
 - 定向更新五项传递依赖的兼容安全补丁，不升级 Astro／React；修正 Node.js 最低版本说明，并记录 magicast 内嵌旧版 source-map-js 的剩余边界。[维护与验收](maintenance-2026-11-06-0447.md)
