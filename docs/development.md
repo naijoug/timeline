@@ -4,7 +4,7 @@
 
 ## 启动
 
-需要 Node.js 22.12+，推荐 Node.js 22 LTS。
+需要 Node.js 22.19+，推荐使用最新的 Node.js 22 LTS 补丁版。当前锁定依赖中的 Undici 要求 Node.js ≥22.19.0；仅满足 Astro 的 22.12 下限不足以覆盖完整依赖树。
 
 ```sh
 npm ci
