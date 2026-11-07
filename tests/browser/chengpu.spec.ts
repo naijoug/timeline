@@ -13,7 +13,7 @@ test('Chengpu detail preserves search, source boundaries and return focus', asyn
   await card.click();
   await page.evaluate(() => document.fonts.ready);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('城濮之战：晋楚争霸');
-  await expect(page.locator('.full-event-meta time')).toHaveText('前 632 年');
+  await expect(page.locator('.full-event-meta time')).toHaveText('公元前 632 年');
   await expect(page.getByRole('heading', { name: '史源对读：铭文与后世解说' })).toBeVisible();
   await expect(page.getByRole('heading', { name: /编辑总结：从成语走回历史/ })).toHaveCount(1);
   await expect(page.locator('main')).toContainText('战役对应是馆方解释');
