@@ -84,6 +84,18 @@ export const historyRecommendedResources: Record<string, RecommendedResource[]> 
     }
   ],
   "chengpu": [
+{
+    "id": "chengpu-npm-reading",
+    "title": "子犯龢钟",
+    "creator": "国立故宫博物院",
+    "series": "精选赏析 · 藏品简介",
+    "url": "https://theme.npm.edu.tw/selection/Article.aspx?sNo=04001142",
+    "kind": "article",
+    "match": "以子犯这一参与者及伐楚、会盟相关铭文，对照城濮叙事与礼乐器物。",
+    "scopeNote": "馆方文物解说，不替代战史原文；已核对简介正文，未观看页面所附志工导览视频，不把视频内容列为事实依据。",
+    "checkedAt": "2026-11-07",
+    "locator": "简介第二、三项：城濮、践土及铭文摘句"
+},
     {
       "id": "laoshen-chengpu-1",
       "title": "【老沈一说】一个人的世界大战（上）",

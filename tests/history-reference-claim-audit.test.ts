@@ -25,7 +25,8 @@ test('new first-party materials replace inaccessible sole supports and metadata 
 });
 
 test('partial-source access and unplayed recommendations remain explicit, not silently verified', () => {
-  assert.match(event('chengpu').note!, /503.*索引/);
+  assert.match(source('anc-chengpu').version!, /仅能复核公开索引或摘要/);
+  assert.match(event('chengpu').note!, /战斗细节按《左传》记载/);
   assert.match(event('yongjia-crisis').note!, /摘要.*非论文全文/);
   assert.match(event('white-lotus-rebellion').note!, /访问异常.*索引/);
   assert.match(event('xuanwu').summary, /被杀；李世民随后/);

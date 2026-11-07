@@ -45,7 +45,7 @@ test('new details distinguish sourced facts from independent editorial interpret
     assert.ok(editorial.some(section => section.text !== entry.significance), `${entry.id}: repeated interpretation`);
   }
   for (const source of [...ancientSources, ...modernSources]) {
-    assert.ok(['2026-10-24', '2026-10-26'].includes(source.checkedAt), source.id);
+    assert.ok(['2026-10-24', '2026-10-26', '2026-11-07'].includes(source.checkedAt), source.id);
     assert.ok(source.locator, source.id);
   }
   assert.equal(chinaHistory.sources.find(source => source.id === 'chronology')!.checkedAt, '2026-09-30');
