@@ -1,3 +1,4 @@
+import { chibiDepthSources, chibiDepthEventPatches } from './chibi-depth';
 import { hanMonopolyDepthSources, hanMonopolyDepthEventPatches } from './han-monopoly-depth';
 import { historicalMaps, historicalMapSources } from './historical-maps';
 import { idiomBackgroundSources, idiomBackgroundTimeline, idiomBackgroundEventPatches } from './idiom-backgrounds';
@@ -132,6 +133,7 @@ export const sources: Source[] = [
   ...grandCanalDepthSources,
   ...wangAnshiDepthSources,
   ...guanduDepthSources,
+  ...chibiDepthSources,
   ...idiomBackgroundSources,
 ].map(s => {
   const reviewed = { ...s, ...(transitionSourceReviews[s.id] || {}), ...(exchangeSourceReviews[s.id] || {}), ...(grandCanalSourceReviews[s.id] || {}), ...(wangAnshiSourceReviews[s.id] || {}) };
@@ -657,6 +659,7 @@ export const events: TimelineEvent[] = [
   ...(grandCanalDepthEventPatches[event.id] || {}),
   ...(wangAnshiDepthEventPatches[event.id] || {}),
   ...(guanduDepthEventPatches[event.id] || {}),
+  ...(chibiDepthEventPatches[event.id] || {}),
   ...(idiomBackgroundEventPatches[event.id] || {}),
   ...(hanMonopolyDepthEventPatches[event.id] || {}),
   ...(historicalMaps[event.id] ? { maps: historicalMaps[event.id] } : {}),

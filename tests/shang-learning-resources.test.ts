@@ -8,7 +8,7 @@ test('Shang era reading pairs a specific recommendation with author interpretati
   assert.deepEqual(event.time.start, { year: -1600, approximate: true });
   assert.deepEqual(event.sourceIds, ['anc-nmc-early', 'anc-yinxu']);
   assert.equal(chinaHistory.events.length, 145);
-  assert.equal(chinaHistory.sources.filter(source => !source.id.startsWith('map-')).length, 208);
+  assert.equal(chinaHistory.sources.filter(source => !source.id.startsWith('map-')).length, 211);
   const [video, interview] = event.recommendedResources!;
   assert.equal(event.recommendedResources!.length, 2);
   assert.equal(video.url, 'https://www.bilibili.com/en/video/BV1xh41177En');
@@ -31,8 +31,8 @@ test('era-level learning resources are not duplicated across Shang events or cli
     assert.equal(all.filter(resource => resource.id === id).length, 1);
     assert.ok(!payload.includes(id));
   }
-  assert.equal(all.length, 29);
-  assert.equal(chinaHistory.events.filter(event => event.recommendedResources?.length).length, 21);
+  assert.equal(all.length, 30);
+  assert.equal(chinaHistory.events.filter(event => event.recommendedResources?.length).length, 22);
   const muye = chinaHistory.events.find(event => event.id === 'muye')!;
   assert.equal(muye.recommendedResources![0].id, 'nmc-li-gui');
 });
