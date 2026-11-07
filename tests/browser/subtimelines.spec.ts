@@ -73,7 +73,7 @@ test('independent model line preserves query, order, scroll and focus through de
 
 test('Agent, writer and historical-war routes retain membership and source-note navigation',async({page},info)=>{
   for(const [route,title,count] of [
-    ['ai/timelines/ai-agent-products/','AI Agent 产品',48],
+    ['ai/timelines/ai-agent-products/','AI Agent 产品',49],
     ['writers/authors/liu-cixin/','刘慈欣作品年谱',25],
     ['china-history/collections/wars-and-turning-points/','战役与战争转折',53],
   ] as const){
