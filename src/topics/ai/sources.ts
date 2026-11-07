@@ -1,3 +1,4 @@
+import { agentMemorySources } from './agent-memory-components';
 import { museSpecializedSources } from './muse-specialized';
 import { cryptanalysisSources } from './deepmind-cryptanalysis';
 import { inkling2SmallSources } from './inkling2-small-release';
@@ -90,5 +91,5 @@ const baseSources: Source[] = [
   source('muse', 'How We Designed Muse', 'Muse / Meta', 'https://introducing.muse.ai/', '工程文章'),
   source('cue', 'Your personal agents, on Cue', 'Cue / Manus', 'https://cue.im/', '官方文档'),
 ];
-export const sources: Source[] = [...baseSources.map(s => ({ ...s, ...instructionSourceReviews[s.id], ...historicalSourceReviews[s.id] })), ...instructionSources, ...historicalSources, ...recentSources, ...verified2026Sources, ...carbonFusionSources, ...agenticWorkflowSources, ...mistralLarge4Sources, ...monitoringSources, ...longcat25Sources, ...gemini25LifecycleSources, ...hydrogenSources, ...sensenova68Sources, ...hyplmSources, ...antigravityScienceSources, ...hy4Sources, ...kimiK31WeightSources, ...gpt6CyberSources, ...ernie55BaseSources, ...geminiOmni12Sources, ...images26Sources, ...teammatesSources, ...inkling2SmallSources, ...cryptanalysisSources, ...museSpecializedSources];
+export const sources: Source[] = [...baseSources.map(s => ({ ...s, ...instructionSourceReviews[s.id], ...historicalSourceReviews[s.id] })), ...instructionSources, ...historicalSources, ...recentSources, ...verified2026Sources, ...carbonFusionSources, ...agenticWorkflowSources, ...mistralLarge4Sources, ...monitoringSources, ...longcat25Sources, ...gemini25LifecycleSources, ...hydrogenSources, ...sensenova68Sources, ...hyplmSources, ...antigravityScienceSources, ...hy4Sources, ...kimiK31WeightSources, ...gpt6CyberSources, ...ernie55BaseSources, ...geminiOmni12Sources, ...images26Sources, ...teammatesSources, ...inkling2SmallSources, ...cryptanalysisSources, ...museSpecializedSources, ...agentMemorySources];
 export const sourceMap = Object.fromEntries(sources.map(s => [s.id, s]));
