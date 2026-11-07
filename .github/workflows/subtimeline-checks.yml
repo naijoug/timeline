@@ -39,11 +39,20 @@ jobs:
           TIMELINE_BASE_PATH: /timeline
           TIMELINE_OUT_DIR: dist-pages
         run: npm run test:browser
-      - name: Keep browser evidence
+      # Keep each base-path archive below connector download limits as the suite grows.
+      - name: Keep root browser evidence
         if: always()
         uses: actions/upload-artifact@v5
         with:
-          name: subtimeline-browser-${{ github.sha }}
-          path: test-results/browser-*/
+          name: subtimeline-browser-root-${{ github.sha }}
+          path: test-results/browser-root/
+          retention-days: 7
+          if-no-files-found: warn
+      - name: Keep Pages browser evidence
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: subtimeline-browser-pages-${{ github.sha }}
+          path: test-results/browser-pages/
           retention-days: 7
           if-no-files-found: warn
