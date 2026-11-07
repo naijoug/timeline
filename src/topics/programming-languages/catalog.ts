@@ -1,3 +1,4 @@
+import { typescript21Event, typescript21Sources } from './typescript21-type-transformations';
 import { javaReviewedSources, java21Patch } from './java-reviewed-records';
 import { typescript20AnnouncementReview, typescript20Patch, typescriptNullCheckingSources } from './typescript-null-checking-depth';
 import { rustAsyncSources, rustAsyncPatch } from './rust-async-depth';
@@ -980,6 +981,9 @@ Object.assign(events.find(event => event.id === 'java-21')!, java21Patch);
 sources.push(...typescriptNullCheckingSources);
 Object.assign(sources.find(source => source.id === 'typescript20-exact-release')!, typescript20AnnouncementReview);
 Object.assign(events.find(event => event.id === 'typescript-20')!, typescript20Patch);
+
+sources.push(...typescript21Sources);
+events.push(typescript21Event);
 
 export const programmingLanguages: Catalog = {
   topic: {
