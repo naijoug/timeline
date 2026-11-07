@@ -1,3 +1,4 @@
+import { deathsEndSources } from '../src/topics/writers/deaths-end-depth';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
@@ -19,7 +20,7 @@ test('writers include the requested history-geography author and pass catalog va
 });
 
 test('reviewed works cite concrete records without refreshing unrelated source dates', () => {
-  const ids = new Set(writersReviewedSources.map(source => source.id));
+  const ids = new Set([...writersReviewedSources, ...deathsEndSources].map(source => source.id));
   for (const source of writersReviewedSources) {
     assert.equal(source.checkedAt, ['writers-dark-forest-tor-2015', 'writers-dark-forest-tor-2016', 'writers-dark-forest-nbd-interview'].includes(source.id) ? '2026-10-27' : '2026-10-24');
     assert.notEqual(new URL(source.url).pathname, '/', source.id);

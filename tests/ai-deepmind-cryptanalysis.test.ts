@@ -1,0 +1,40 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { cryptanalysisEvents, cryptanalysisSources } from '../src/topics/ai/deepmind-cryptanalysis';
+import { events } from '../src/topics/ai/events';
+import { sourceMap } from '../src/topics/ai/sources';
+import { aiTimelines } from '../src/topics/ai/timelines';
+import { aiCatalog } from '../src/topics/ai/adapter';
+import { createExplorerPayload } from '../src/core/explorer-payload';
+const e = cryptanalysisEvents[0];
+test('cryptanalysis is a dated research key milestone, never a model launch', () => {
+  assert.equal(events.filter(x => x.id === e.id).length, 1);
+  assert.equal(e.date, '2026-11-06'); assert.equal(e.kind, '工作论文公开');
+  assert.deepEqual(e.tracks, ['methods']); assert.equal(e.milestone, true);
+  assert.equal(aiTimelines.find(t => t.id === 'ai-milestones')?.entries.find(x => x.eventId === e.id)?.importance, 'key');
+  assert.ok(aiTimelines.filter(t => /model/.test(t.id)).every(t => !t.entries.some(x => x.eventId === e.id)));
+  assert.match(e.summary, /人类主导/); assert.match(e.limitation, /不等于同行评审定论/);
+});
+test('research distinguishes assumptions, measured implementation gain and unimplemented theory', () => {
+  const detail = JSON.stringify(e.details);
+  for (const pattern of [/前期.*oracle/, /3.5倍.*实现与执行优化/, /约30倍.*渐近主项/, /尚未实现 fan factory/, /尚未在密码学规模实跑/, /2048-bit.*不是.*安全担保/]) assert.match(detail, pattern);
+  assert.match(e.limitation, /只核读摘要及相关章节，未独立复现/);
+  assert.ok(e.details?.every(d => d.sourceIds?.every(id => sourceMap[id]) && d.locator));
+  assert.equal(e.details?.filter(d => d.editorial).length, 1);
+  assert.ok(cryptanalysisSources.every(s => sourceMap[s.id] && s.checkedAt === '2026-11-07' && s.locator));
+  assert.equal(sourceMap['deepmind-fan-factories-paper'].publishedAt, undefined);
+  assert.match(sourceMap['deepmind-fan-factories-paper'].version!, /文内日期 2026-11-05/);
+  assert.match(sourceMap['deepmind-fan-factories-paper'].locator!, /November 5, 2026/);
+  assert.equal(e.recommendedResources?.[1].publishedAt, undefined);
+  assert.match(e.recommendedResources![1].locator!, /文内日期 2026-11-05/);
+  assert.ok(e.recommendedResources?.every(r => /Dvijotham.*Heninger.*Jones/.test(r.creator)));
+  assert.match(sourceMap['deepmind-cryptanalysis-announcement'].locator!, /2026-11-06T17:20:31Z/);
+});
+test('specific paper reading guides stay outside compact explorer payload', () => {
+  assert.equal(e.recommendedResources?.length, 2);
+  assert.ok(e.recommendedResources?.every(r => r.creator && r.locator && /未独立复现/.test(r.scopeNote)));
+  const payload = JSON.stringify(createExplorerPayload(aiCatalog));
+  assert.ok(payload.includes(e.id));
+  assert.ok(!payload.includes('deepmind-affine-roots-reading'));
+  assert.ok(!payload.includes('条件：先前的 oracle 访问不可省略'));
+});

@@ -6,6 +6,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '从思想与方法，到模型和任务型产品的精选阅读主线。',
     note: '编辑精选的阅读主线，串联思想、方法、模型与产品转折；不等于全部重大事件，也不自动汇总所有子时间线。',
     entries: [
+      { eventId: 'deepmind-ai-cryptanalysis-research', importance: 'key', context: '人类主导的 AI 辅助密码分析工作论文；oracle 条件、工程实测与批量分解理论估计分开，不代表通用 RSA 破解。' },
       {"eventId": "perplexity-teammates-web-launch", "importance": "key", "context": "个人Max网页研究预览，持续任务与人类监督结合；官方发布帖UTC日期与博客索引分开记录。"},
       {"eventId": "openai-images-2-6-release", "importance": "key", "context": "图像生成连接局部编辑、GIF与API矢量输出；质量、规划及渠道边界分开核对。"},
       {"eventId": "gemini-omni-1-2-flash-ga", "importance": "key", "context": "视频生成进入正式API与Cloud阶段；应用分批上线、特殊时长模式和放大分辨率仍有边界。"},
