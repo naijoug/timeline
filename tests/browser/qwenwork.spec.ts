@@ -25,7 +25,8 @@ test('QwenWork detail preserves product scope, permissions, search and return fo
     await page.emulateMedia({ colorScheme });
     await expect(page.locator('html')).toHaveAttribute('data-theme', colorScheme);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
-    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
     await page.screenshot({ path: info.outputPath(`qwenwork-${colorScheme}.png`), fullPage: true, animations: 'disabled' });
     await reading.scrollIntoViewIfNeeded();
     await expect(reading).toBeVisible();
