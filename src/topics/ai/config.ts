@@ -16,6 +16,7 @@ export const laneInfo: Record<Lane, { title: string; description: string }> = {
   },
 };
 export const chinaCompanies = new Set([
+  "钉钉",
   "阿里巴巴",
   "DeepSeek",
   "月之暗面",
@@ -31,6 +32,7 @@ export const chinaCompanies = new Set([
   "美团",
 ]);
 const agents = new Set([
+  "qwenwork",
   "perplexity-teammates",
   "claude-code",
   "codex",

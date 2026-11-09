@@ -6,6 +6,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '从思想与方法，到模型和任务型产品的精选阅读主线。',
     note: '编辑精选的阅读主线，串联思想、方法、模型与产品转折；不等于全部重大事件，也不自动汇总所有子时间线。',
     entries: [
+      { eventId: 'qwenwork-2-release', importance: 'key', context: '2.0.0版本汇总，协作与事件触发连接跨端任务；保留此前功能日期与远控权限边界。' },
       { eventId: 'deepmind-ai-cryptanalysis-research', importance: 'key', context: '人类主导的 AI 辅助密码分析工作论文；oracle 条件、工程实测与批量分解理论估计分开，不代表通用 RSA 破解。' },
       {"eventId": "perplexity-teammates-web-launch", "importance": "key", "context": "个人Max网页研究预览，持续任务与人类监督结合；官方发布帖UTC日期与博客索引分开记录。"},
       {"eventId": "openai-images-2-6-release", "importance": "key", "context": "图像生成连接局部编辑、GIF与API矢量输出；质量、规划及渠道边界分开核对。"},
@@ -278,6 +279,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '面向任务执行的 Agent 产品、开源工具与功能演进。',
     note: '研究预览、公开测试、正式开放保留各自阶段；不是所有对话产品或 Agent 研究论文的合集。ChatGPT 2022 首发不视为 Agent 产品发布。',
     entries: [
+      { eventId: 'qwenwork-2-release', importance: 'key', context: '2.0.0版本汇总，协作与事件触发连接跨端任务；保留此前功能日期与远控权限边界。' },
       {"eventId": "muse-specialized-rollout", "importance": "supporting", "context": "产品逐步推出；未公布独立模型ID、API或权重，不重复Wonder首发。"},
       {"eventId": "perplexity-teammates-web-launch", "importance": "key", "context": "个人Max网页研究预览，持续任务与人类监督结合；官方发布帖UTC日期与博客索引分开记录。"},
       {"eventId": "antigravity-cheminformatics-skills", "importance": "key", "context": "Science 插件扩展科学工作流，不是新模型；候选设计仍须实验验证。"},
