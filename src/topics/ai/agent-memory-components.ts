@@ -1,6 +1,6 @@
 import type { Source, TimelineEvent } from './types';
 
-const checkedAt = '2026-11-07';
+const checkedAt = '2026-11-09';
 const articleUrl = 'https://www.anthropic.com/research/components-of-agent-memory';
 const cookbookUrl = 'https://platform.claude.com/cookbook/managed-agents-cma-dreaming-with-a-dynamic-workflow';
 

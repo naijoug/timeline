@@ -26,12 +26,12 @@ test('memory evaluation keeps definition, score units and preview boundaries', (
   assert.match(event.limitation, /未运行示例或独立复现/);
   assert.ok(event.details!.every(d => d.locator && d.sourceIds?.length && d.sourceIds.every(id => sourceMap[id])));
   assert.equal(event.details!.filter(d => d.editorial).length, 1);
-  assert.ok(agentMemorySources.every(s => s.checkedAt === '2026-11-07' && s.locator));
+  assert.ok(agentMemorySources.every(s => s.checkedAt === '2026-11-09' && s.locator));
 });
 
 test('specific memory readings remain static and outside the compact explorer payload', () => {
   assert.equal(event.recommendedResources!.length, 2);
-  assert.ok(event.recommendedResources!.every(r => r.creator && r.locator && r.checkedAt === '2026-11-07'));
+  assert.ok(event.recommendedResources!.every(r => r.creator && r.locator && r.checkedAt === '2026-11-09'));
   const payload = JSON.stringify(createExplorerPayload(aiCatalog));
   assert.ok(payload.includes(event.id));
   assert.ok(!payload.includes('agent-memory-workflow-reading'));

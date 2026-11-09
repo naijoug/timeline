@@ -164,3 +164,5 @@ AI 的全新主题入口默认 49 节点主线；有明确旧式筛选的 URL �
 `npm run build` 后，运行 `npx playwright install --with-deps chromium`、`npm run test:browser`。测试使用仅 localhost 的静态服务，不会发布站点。`TIMELINE_BASE_PATH` / `TIMELINE_OUT_DIR` 必须与构建一致。结果在 `test-results/browser-root` 或 `test-results/browser-pages`；截图用于实际视觉复核，不自动生成或批准 golden。
 
 PR 验收工作流只读、无 secrets、无部署；不要改为 `pull_request_target`。Pages 发布触发条件和权限不因验收工作流改变。CI 安装 Noto CJK 回退字体，使中文布局可检查。
+
+用户选择不建 PR 时，先将候选提交推送至 `maintenance/**` 分支，同一只读工作流也会执行完整验收。核对确切候选提交的检查与截图后，才非强推快进 `main`，再手动运行既有 Pages 发布并核对线上；不以提交成功替代验收。维护分支 push 不会部署，工作流权限仍为 `contents: read`。

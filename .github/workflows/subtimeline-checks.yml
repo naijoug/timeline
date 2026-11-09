@@ -2,10 +2,13 @@ name: Subtimeline checks
 on:
   pull_request:
     branches: [main]
+  # Candidate pushes support the owner's no-PR workflow; this never deploys.
+  push:
+    branches: ['maintenance/**']
 permissions:
   contents: read
 concurrency:
-  group: subtimeline-checks-${{ github.event.pull_request.number }}
+  group: subtimeline-checks-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
   browser:
