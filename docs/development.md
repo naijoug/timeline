@@ -166,3 +166,5 @@ AI 的全新主题入口默认 49 节点主线；有明确旧式筛选的 URL �
 PR 验收工作流只读、无 secrets、无部署；不要改为 `pull_request_target`。Pages 发布触发条件和权限不因验收工作流改变。CI 安装 Noto CJK 回退字体，使中文布局可检查。
 
 用户选择不建 PR 时，先将候选提交推送至 `maintenance/**` 分支，同一只读工作流也会执行完整验收。核对确切候选提交的检查与截图后，才非强推快进 `main`，再手动运行既有 Pages 发布并核对线上；不以提交成功替代验收。维护分支 push 不会部署，工作流权限仍为 `contents: read`。
+
+浏览器验收固定使用GitHub托管的`ubuntu-24.04`，与当前锁定Playwright1.57兼容。避免`ubuntu-latest`滚动到未受支持系统使安装先于测试失败；升级runner时应同时核查Playwright支持范围，不能跳过浏览器依赖或测试。Pages工作流与权限不因此改变。
