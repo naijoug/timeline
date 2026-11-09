@@ -1,3 +1,4 @@
+import { chanyuanRecommendedResources } from './chanyuan-depth';
 import type { RecommendedResource } from '../../core/types';
 
 // Teaching and interpretation links only. Evidence for dates and historical facts remains in sources.
@@ -205,6 +206,7 @@ export const historyRecommendedResources: Record<string, RecommendedResource[]> 
     }
   ],
   "chanyuan": [
+    ...chanyuanRecommendedResources,
     {
       "id": "civilization-1004",
       "title": "澶渊之战大宋是怎么扛住的｜罗振宇《文明之旅》之1004",

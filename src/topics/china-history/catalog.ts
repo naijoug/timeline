@@ -1,3 +1,4 @@
+import { chanyuanDepthSources, chanyuanSourceReviews, chanyuanDepthEventPatches } from './chanyuan-depth';
 import { chibiDepthSources, chibiDepthEventPatches } from './chibi-depth';
 import { hanMonopolyDepthSources, hanMonopolyDepthEventPatches } from './han-monopoly-depth';
 import { historicalMaps, historicalMapSources } from './historical-maps';
@@ -31,6 +32,7 @@ const source = (
 export const sources: Source[] = [
   ...historicalMapSources,
   ...hanMonopolyDepthSources,
+  ...chanyuanDepthSources,
   source(
     "chronology",
     "中国历史纪年简表",
@@ -136,7 +138,7 @@ export const sources: Source[] = [
   ...chibiDepthSources,
   ...idiomBackgroundSources,
 ].map(s => {
-  const reviewed = { ...s, ...(transitionSourceReviews[s.id] || {}), ...(exchangeSourceReviews[s.id] || {}), ...(grandCanalSourceReviews[s.id] || {}), ...(wangAnshiSourceReviews[s.id] || {}) };
+  const reviewed = { ...s, ...(transitionSourceReviews[s.id] || {}), ...(exchangeSourceReviews[s.id] || {}), ...(grandCanalSourceReviews[s.id] || {}), ...(wangAnshiSourceReviews[s.id] || {}), ...(chanyuanSourceReviews[s.id] || {}) };
   return s.id === 'diamond' ? { ...reviewed, checkedAt: '2026-10-24', locator: 'Frontispiece；How and why was it made?；Colophon', version: '本轮核对题记、制作与宗教实践说明，保留年份精度，不将印本年代当作印刷术发明日期。' } : reviewed;
 });
 const duration = (
@@ -662,6 +664,7 @@ export const events: TimelineEvent[] = [
   ...(chibiDepthEventPatches[event.id] || {}),
   ...(idiomBackgroundEventPatches[event.id] || {}),
   ...(hanMonopolyDepthEventPatches[event.id] || {}),
+  ...(chanyuanDepthEventPatches[event.id] || {}),
   ...(historicalMaps[event.id] ? { maps: historicalMaps[event.id] } : {}),
   ...(historyRecommendedResources[event.id] ? { recommendedResources: [...historyRecommendedResources[event.id], ...(wangAnshiDepthEventPatches[event.id]?.recommendedResources || [])] } : {}),
 }));
