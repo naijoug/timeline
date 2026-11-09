@@ -1,3 +1,4 @@
+import { burningIceSources, burningIcePatch } from './burning-ice-depth';
 import { deathsEndSources, deathsEndPatch } from './deaths-end-depth';
 import { liBubaiEntity, liBubaiEvents, liBubaiSources } from './li-bubai';
 import { writerTimelines } from './timelines';
@@ -30,6 +31,7 @@ const source = (
 
 export const sources: Source[] = [
   ...liBubaiSources,
+  ...burningIceSources,
   ...deathsEndSources,
   ...greatHealerSources,
   ...mingMicroscopeSources,
@@ -2049,6 +2051,7 @@ for (const event of events) Object.assign(event, auditedWriterPatches[event.id] 
 Object.assign(events.find(event => event.id === 'ma-bo-yong-ming-microscope')!, mingMicroscopePatch);
 Object.assign(events.find(event => event.id === 'ma-bo-yong-great-healer')!, greatHealerPatch);
 Object.assign(events.find(event => event.id === 'liu-cixin-three-body-3')!, deathsEndPatch);
+Object.assign(events.find(event => event.id === 'zi-jin-chen-burning-ice')!, burningIcePatch);
 
 
 // The eras are editorial navigation, not independently established literary periodization.

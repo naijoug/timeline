@@ -92,13 +92,13 @@ export const auditedWriterSources: Source[] = [
   },
   {
     "id": "writers-audit-zi-jin-chen-long-night-twin-stars",
-    "title": "紫金陈：写作和人生是一个正反馈的过程",
-    "url": "https://www.chinawriter.com.cn/n1/2024/0202/c404024-40171683.html",
-    "publisher": "文艺报 · 紫金陈、张小童",
-    "type": "具体书讯或作者访谈",
-    "checkedAt": "2026-10-26",
+    "title": "写作和人生是一个正反馈的过程：专访网络文学作家紫金陈",
+    "url": "https://wyb.chinawriter.com.cn/content/202402/02/content73422.html",
+    "publisher": "文艺报 · 张小童（采访）、紫金陈（受访）",
+    "type": "作者访谈（第7版）",
+    "checkedAt": "2026-11-09",
     "publishedAt": "2024-02-02",
-    "locator": "具体作品、版本或作者自述；核验范围见节点正文"
+    "locator": "三部曲灵感与主题问答；独立叙事为采访者概括，悲剧层次为作者自述；文中《无证之罪》2012年口径与2017年报道冲突。"
   },
   {
     "id": "writers-audit-ma-bo-yong-three-kingdoms-supporting",
@@ -215,13 +215,13 @@ export const auditedWriterSources: Source[] = [
   },
   {
     "id": "writers-audit-zi-jin-chen-burning-ice",
-    "title": "悬疑神作《无证之罪》原作者竟是宁波人 纯理科宅男一枚",
-    "url": "https://news.cnnb.com.cn/system/2017/09/20/008681476.shtml",
-    "publisher": "中国宁波网 / 都市快报",
-    "type": "作者专访（小说与电视剧差别）",
-    "checkedAt": "2026-10-26",
+    "title": "“中国版东野圭吾”是浙大毕业的理工宅男 专访《无证之罪》原著作者紫金陈",
+    "url": "https://hznews.hangzhou.com.cn/wenti/content/2017-09/20/content_6663063.htm",
+    "publisher": "都市快报 · 潘卓盈 / 杭州网",
+    "type": "作者专访（原著与改编区别）",
+    "checkedAt": "2026-11-09",
     "publishedAt": "2017-09-20",
-    "locator": "具体作品、版本或作者自述；核验范围见节点正文"
+    "locator": "第1页“关于《无证之罪》”：2014年出版、杭州与数学教师设定；本次核读报社所属杭州网版本，旧宁波网转载超时。"
   },
   {
     "id": "writers-audit-zi-jin-chen-love-confused",
