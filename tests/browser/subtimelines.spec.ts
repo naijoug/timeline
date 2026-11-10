@@ -95,9 +95,12 @@ test('Agent, writer and historical-war routes retain membership and source-note 
     expect(await page.locator('#timeline-notes').evaluate(el=>(el as HTMLElement).inert)).toBe(false);
   }
   const noteLink=page.locator('#timeline-notes a[href*="/events/"]').first();
-  await noteLink.scrollIntoViewIfNeeded();await noteLink.click();await page.getByRole('link',{name:'返回时间线',exact:true}).waitFor();
-  expect((await page.getByRole('link',{name:'返回时间线',exact:true}).getAttribute('href'))).toContain('/writers/authors/liu-cixin/');
-  expect((await page.getByRole('link',{name:'返回时间线',exact:true}).getAttribute('href'))).toContain('#timeline-notes');
+  const destination=path('writers/authors/liu-cixin/')+'#timeline-notes';
+  expect(new URL((await noteLink.getAttribute('href'))!,page.url()).searchParams.get('return')).toBe(destination);
+  await noteLink.scrollIntoViewIfNeeded();await noteLink.click();
+  // The static record initially renders the topic fallback. Wait for its deferred
+  // navigation script to resolve the return query, not merely for link visibility.
+  await expect(page.getByRole('link',{name:'返回时间线',exact:true})).toHaveAttribute('href',destination);
   await page.getByRole('link',{name:'返回时间线',exact:true}).click();await ready(page);await expect(page).toHaveURL(/#timeline-notes$/);
 });
 
