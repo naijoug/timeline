@@ -1,3 +1,4 @@
+import { googleNov10Entities } from './google-nov10';
 import { ernieEvolveEntities } from './ernie-evolve-research';
 import { groot2Entities } from './groot2-research';
 import { tpu8Entities } from './tpu8-system-configurations';
@@ -17,6 +18,7 @@ import { instructionEntities } from './instruction-following';
 import { historicalEntities } from './historical-milestones';
 import { recentEntities } from './recent-updates';
 export const entities: Entity[] = [
+  ...googleNov10Entities,
   ...ernieEvolveEntities, ...groot2Entities,
   ...tpu8Entities,
   ...qwenworkEntities,
