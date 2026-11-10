@@ -2,14 +2,18 @@ import { test, expect, type Page } from '@playwright/test';
 import { groot2Events, groot2Sources } from '../../src/topics/ai/groot2-research';
 import { ernieEvolveEvents, ernieEvolveSources } from '../../src/topics/ai/ernie-evolve-research';
 
-// Event routes are generated from event.id in src/pages/ai/events/[slug].astro.
+// Canonical routing follows src/topics/ai/entities.ts: models with a family use
+// /ai/models/{family}/{id}/; other records use /ai/events/{id}/.
+const prefix = (process.env.TIMELINE_BASE_PATH || '').replace(/\/$/, '');
 const records = [
   {
+    path: `${prefix}/ai/models/nvidia-groot/${groot2Events[0].id}/`,
     event: groot2Events[0], sources: groot2Sources, query: 'GR00T 2',
     boundary: /Code Available in December/,
     detailBoundary: /不是 GR00T 2 模型权重/,
   },
   {
+    path: `${prefix}/ai/events/${ernieEvolveEvents[0].id}/`,
     event: ernieEvolveEvents[0], sources: ernieEvolveSources, query: 'ERNIE Evolve',
     boundary: /ERNIE-5\.5-Flash 仍在开发中/,
     detailBoundary: /作者系统内部的独立评估程序，不是第三方复现/,
@@ -39,10 +43,10 @@ async function inspectRecord(page: Page, record: typeof records[number]) {
 }
 
 for (const record of records) {
-  test(`${record.event.id}: evidence, availability boundaries, light/dark and no-JS reading`, async ({ page, browser, baseURL }, testInfo) => {
+  test(`${record.event.id}: evidence, availability boundaries and light/dark reading`, async ({ page }, testInfo) => {
     const errors: string[] = [];
     page.on('pageerror', error => errors.push(error.message));
-    const path = `ai/events/${record.event.id}/`;
+    const path = record.path;
     await page.emulateMedia({ colorScheme: 'light' });
     await page.goto(path);
     await inspectRecord(page, record);
@@ -61,29 +65,37 @@ for (const record of records) {
     await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
     await page.screenshot({ path: testInfo.outputPath(`${record.event.id}-dark.png`), fullPage: true, animations: 'disabled' });
 
-    const noJS = await browser.newContext({
-      baseURL, javaScriptEnabled: false, viewport: page.viewportSize(), colorScheme: 'light',
-    });
-    try {
-      const staticPage = await noJS.newPage();
-      await staticPage.goto(path);
-      await inspectRecord(staticPage, record);
-      await staticPage.evaluate(() => document.fonts.ready);
-      await expect(staticPage.locator('#back-to-timeline')).toHaveAttribute('href', /\/ai\/$/);
-      await staticPage.screenshot({ path: testInfo.outputPath(`${record.event.id}-no-js.png`), fullPage: true });
-      await staticPage.locator('#back-to-timeline').click();
-      await expect(staticPage).toHaveURL(/\/ai\/$/);
-      await noOverflow(staticPage);
-    } finally {
-      await noJS.close();
-    }
     expect(errors).toEqual([]);
+  });
+
+  test.describe(`${record.event.id}: JavaScript disabled`, () => {
+    // Let Playwright own context teardown: a failed operation remains the primary
+    // error, rather than a finally/close rejection replacing its call log.
+    test.use({ javaScriptEnabled: false });
+    test('sources, boundaries, layout and native return stay usable', async ({ page }, testInfo) => {
+      await test.step('read the canonical record without JavaScript', async () => {
+        await page.goto(record.path);
+        await inspectRecord(page, record);
+        await page.evaluate(() => document.fonts.ready);
+        const back = page.getByRole('link', { name: '返回时间线', exact: true });
+        await expect(back).toBeVisible();
+        await expect(back).toHaveAttribute('href', `${prefix}/ai/`);
+        await page.screenshot({ path: testInfo.outputPath(`${record.event.id}-no-js.png`), fullPage: true, animations: 'disabled' });
+      });
+      await test.step('follow the native return link without JavaScript', async () => {
+        // Mobile CSS hides the desktop #back-to-timeline; the visible header
+        // anchor has the same native href and works without JavaScript.
+        await page.getByRole('link', { name: '返回时间线', exact: true }).click();
+        await expect(page).toHaveURL(url => url.pathname === `${prefix}/ai/` && !url.search);
+        await noOverflow(page);
+      });
+    });
   });
 
   test(`${record.event.id}: full-library search, return focus and two Back/Forward cycles`, async ({ page }, testInfo) => {
     const errors: string[] = [];
     page.on('pageerror', error => errors.push(error.message));
-    await page.goto('ai/?lines=all&all=1&lane=all');
+    await page.goto(`${prefix}/ai/?lines=all&all=1&lane=all`);
     await expect(page.locator('[data-timeline-ready="true"]')).toBeVisible();
     if (testInfo.project.name === 'mobile') {
       expect(page.viewportSize()).toEqual({ width: 375, height: 812 });
@@ -96,8 +108,10 @@ for (const record of records) {
     const card = page.locator(`a[data-event-id="${record.event.id}"]`);
     await expect(card).toBeVisible();
     await noOverflow(page);
+    const destination = new URL((await card.getAttribute('href'))!, page.url());
+    expect(destination.pathname).toBe(record.path);
     await card.click();
-    await expect(page).toHaveURL(url => url.pathname.endsWith(`/ai/events/${record.event.id}/`));
+    await expect(page).toHaveURL(destination.href);
     await inspectRecord(page, record);
     const returnURL = new URL(page.url()).searchParams.get('return');
     expect(returnURL).toBeTruthy();
@@ -113,7 +127,10 @@ for (const record of records) {
       await expect(card).toBeFocused();
       await noOverflow(page);
     };
-    await page.locator('#back-to-timeline').click();
+    const back = page.getByRole('link', { name: '返回时间线', exact: true });
+    await expect(back).toBeVisible();
+    await expect(back).toHaveAttribute('href', saved.pathname + saved.search + saved.hash);
+    await back.click();
     await checkRestored();
     await page.screenshot({ path: testInfo.outputPath(`${record.event.id}-search-return.png`), fullPage: true });
     // Re-enter through the result, then exercise native history twice.
@@ -123,7 +140,7 @@ for (const record of records) {
       await page.goBack();
       await checkRestored();
       await page.goForward();
-      await expect(page).toHaveURL(url => url.pathname.endsWith(`/ai/events/${record.event.id}/`));
+      await expect(page).toHaveURL(destination.href);
       await expect(page.getByRole('heading', { level: 1 })).toHaveText(record.event.title);
       await noOverflow(page);
     }
