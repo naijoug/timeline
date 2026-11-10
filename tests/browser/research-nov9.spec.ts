@@ -123,7 +123,9 @@ for (const record of records) {
       await expect(page).toHaveURL(saved.href);
       await expect(page).toHaveURL(url => url.pathname.endsWith('/ai/') && url.searchParams.get('q') === record.query && url.searchParams.get('lines') === 'all' && url.hash === `#event-${record.event.id}`);
       await expect(page.locator('[data-timeline-ready="true"]')).toBeVisible();
-      await expect(search).toHaveValue(record.query);
+      // Returning intentionally closes the mobile search panel so focus can
+      // return to the card. Inspect its persisted input without reopening it.
+      await expect(page.locator('#current-topic-search input[name="q"]')).toHaveValue(record.query);
       await expect(card).toBeFocused();
       await noOverflow(page);
     };
