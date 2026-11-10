@@ -6,6 +6,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '从思想与方法，到模型和任务型产品的精选阅读主线。',
     note: '编辑精选的阅读主线，串联思想、方法、模型与产品转折；不等于全部重大事件，也不自动汇总所有子时间线。',
     entries: [
+      { eventId: 'claude-fable-mythos-5-2', importance: 'key', context: '同一底层模型的能力与成本升级；Fable广泛上线，Mythos验证项目准入，厂商评测不等于独立实测。' },
       { eventId: 'qwenwork-2-release', importance: 'key', context: '2.0.0版本汇总，协作与事件触发连接跨端任务；保留此前功能日期与远控权限边界。' },
       { eventId: 'deepmind-ai-cryptanalysis-research', importance: 'key', context: '人类主导的 AI 辅助密码分析工作论文；oracle 条件、工程实测与批量分解理论估计分开，不代表通用 RSA 破解。' },
       {"eventId": "perplexity-teammates-web-launch", "importance": "key", "context": "个人Max网页研究预览，持续任务与人类监督结合；官方发布帖UTC日期与博客索引分开记录。"},
@@ -71,6 +72,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '按论文、预览、API 和权重开放阶段阅读模型演进。',
     note: '已收录模型与关键训练、架构方法的精选年表，非完整发布清单。论文、预览、API 开放和权重开放分别记录，不把它们视为同一种发布。',
     entries: [
+      { eventId: 'claude-fable-mythos-5-2', importance: 'key', context: '同一底层模型的能力与成本升级；Fable广泛上线，Mythos验证项目准入，厂商评测不等于独立实测。' },
       {"eventId": "inkling-2-small-release", "importance": "supporting", "context": "Tinker推理和微调已开放，首发闭权重；Apache 2.0开放仍取决于后续外部测试。"},
       {"eventId": "openai-images-2-6-release", "importance": "key", "context": "图像生成连接局部编辑、GIF与API矢量输出；质量、规划及渠道边界分开核对。"},
       {"eventId": "gemini-omni-1-2-flash-ga", "importance": "key", "context": "视频生成进入正式API与Cloud阶段；应用分批上线、特殊时长模式和放大分辨率仍有边界。"},
