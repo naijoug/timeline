@@ -6,7 +6,9 @@ export default defineConfig({
   testDir: './tests/browser',
   outputDir: `test-results/browser-${label}`,
   timeout: 45_000,
-  globalTimeout: 300_000,
+  // The full dual-viewport suite now has 154 cases. Keep each case at 45s,
+  // but leave enough suite time for every test and teardown on hosted runners.
+  globalTimeout: 420_000,
   expect: { timeout: 10_000 },
   workers: 1,
   retries: 0,
