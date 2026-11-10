@@ -1,3 +1,4 @@
+import { claudeWorkspaceNov10Sources } from './claude-workspace-nov10';
 import { googleNov10Sources } from './google-nov10';
 import { ernieEvolveSources } from './ernie-evolve-research';
 import { groot2Sources } from './groot2-research';
@@ -99,5 +100,5 @@ const baseSources: Source[] = [
   source('muse', 'How We Designed Muse', 'Muse / Meta', 'https://introducing.muse.ai/', '工程文章'),
   source('cue', 'Your personal agents, on Cue', 'Cue / Manus', 'https://cue.im/', '官方文档'),
 ];
-export const sources: Source[] = [...baseSources.map(s => ({ ...s, ...instructionSourceReviews[s.id], ...historicalSourceReviews[s.id] })), ...instructionSources, ...historicalSources, ...recentSources, ...verified2026Sources, ...carbonFusionSources, ...agenticWorkflowSources, ...mistralLarge4Sources, ...monitoringSources, ...longcat25Sources, ...gemini25LifecycleSources, ...hydrogenSources, ...sensenova68Sources, ...hyplmSources, ...antigravityScienceSources, ...hy4Sources, ...kimiK31WeightSources, ...gpt6CyberSources, ...ernie55BaseSources, ...geminiOmni12Sources, ...images26Sources, ...teammatesSources, ...inkling2SmallSources, ...cryptanalysisSources, ...museSpecializedSources, ...agentMemorySources, ...qwenworkSources, ...claude52Sources, ...museEmberSources, ...seedream55Sources, ...tpu8Sources, ...ernieEvolveSources, ...groot2Sources, ...googleNov10Sources];
+export const sources: Source[] = [...baseSources.map(s => ({ ...s, ...instructionSourceReviews[s.id], ...historicalSourceReviews[s.id] })), ...instructionSources, ...historicalSources, ...recentSources, ...verified2026Sources, ...carbonFusionSources, ...agenticWorkflowSources, ...mistralLarge4Sources, ...monitoringSources, ...longcat25Sources, ...gemini25LifecycleSources, ...hydrogenSources, ...sensenova68Sources, ...hyplmSources, ...antigravityScienceSources, ...hy4Sources, ...kimiK31WeightSources, ...gpt6CyberSources, ...ernie55BaseSources, ...geminiOmni12Sources, ...images26Sources, ...teammatesSources, ...inkling2SmallSources, ...cryptanalysisSources, ...museSpecializedSources, ...agentMemorySources, ...qwenworkSources, ...claude52Sources, ...museEmberSources, ...seedream55Sources, ...tpu8Sources, ...ernieEvolveSources, ...groot2Sources, ...googleNov10Sources, ...claudeWorkspaceNov10Sources];
 export const sourceMap = Object.fromEntries(sources.map(s => [s.id, s]));

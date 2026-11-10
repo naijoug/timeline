@@ -1,5 +1,9 @@
 # 更新记录
 
+## 2026-11-10 20:00 UTC
+
+- 新增 Claude Whiteboards/Sheets beta 与 Claude Data GA，区分移动只读、数据共享与 Meetings 官方口径冲突。[维护与验收](maintenance-2026-11-10-2000.md) · [AI 巡查](ai-radar-2026-11-10-2000.md)
+
 - 2026-11-10 16:00 UTC：[Carbon 访问扩大、Robotics 2.5 与 AlphaProof Code](maintenance-2026-11-10-1600.md)，分开付费渠道、伙伴投放与限定实现的形式化验证；[AI巡查与盲区](ai-radar-2026-11-10-1600.md)。
 
 - 2026-11-10 12:00 UTC：[GR00T 2 与 ERNIE Evolve 研究披露](maintenance-2026-11-10-1200.md)，区分模型机制、代码计划、隔离评估与结果工件开放；[AI巡查与盲区](ai-radar-2026-11-10-1200.md)。

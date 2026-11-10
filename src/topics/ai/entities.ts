@@ -1,3 +1,4 @@
+import { claudeWorkspaceNov10Entities } from './claude-workspace-nov10';
 import { googleNov10Entities } from './google-nov10';
 import { ernieEvolveEntities } from './ernie-evolve-research';
 import { groot2Entities } from './groot2-research';
@@ -18,6 +19,7 @@ import { instructionEntities } from './instruction-following';
 import { historicalEntities } from './historical-milestones';
 import { recentEntities } from './recent-updates';
 export const entities: Entity[] = [
+  ...claudeWorkspaceNov10Entities,
   ...googleNov10Entities,
   ...ernieEvolveEntities, ...groot2Entities,
   ...tpu8Entities,
