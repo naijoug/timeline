@@ -242,14 +242,15 @@ export const verified2026Entities: Entity[] = [
     "name": "Muse 模型",
     "type": "family",
     "company": "Meta",
-    "description": "Meta 的 Muse Spark 与 Muse Wonder 基础模型路线，和 Muse 个人 Agent 产品分开追踪。",
+    "description": "Meta 的 Muse Spark、Muse Wonder 与 Muse Ember 模型路线，和 Muse 个人 Agent 产品分开追踪。",
     "tags": [
       "多模态",
       "Agent"
     ],
     "sourceIds": [
       "gap-muse-wonder",
-      "gap-muse-spark-open"
+      "gap-muse-spark-open",
+      "muse-ember-announcement"
     ]
   },
   {

@@ -21,7 +21,7 @@ test('AI opens its curated mainline while the latest-data link remains independe
   assert.equal(state.order, 'desc');
   const all = readingExplorerEvents(aiCatalog, { ...state, all:true, timelineIds:[] }, presentation);
   assert.deepEqual(state.timelineIds, ['ai-milestones']);
-  assert.equal(readingExplorerEvents(aiCatalog, state, presentation).length, 59);
+  assert.equal(readingExplorerEvents(aiCatalog, state, presentation).length, 61);
   assert.equal(readingExplorerEvents(aiCatalog, state, presentation)[0].time.start.year, all[0].time.start.year);
   assert.equal(aiPresentation.latestEvent, all[0].id);
   assert.equal(aiPresentation.defaultEvent, all[0].id);
