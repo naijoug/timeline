@@ -11,6 +11,11 @@ const queries: Record<string, string> = {
   'gemini-robotics-25-partner-rollout': 'Gemini Robotics 2.5',
   'alphaproof-code-verification': 'AlphaProof',
 };
+const expectedEvidenceCounts: Record<string, number> = {
+  'gemini-4-carbon-wider-access': 5,
+  'gemini-robotics-25-partner-rollout': 4,
+  'alphaproof-code-verification': 6,
+};
 const records = googleNov10Events.map(event => {
   // EventDetail includes evidence from the adapted record (including linked
   // entities and facts) and event relations, deduplicated in page order.
@@ -37,7 +42,9 @@ async function inspectRecord(page: Page, record: typeof records[number]) {
     await expect(page.getByRole('heading', { name: `${section.label}${section.editorial ? ' · 编辑解读' : ''}`, exact: true })).toBeVisible();
     await expect(page.locator('.article-body')).toContainText(section.text);
   }
-  await expect(page.locator('#sources .source-item')).toHaveCount(record.sources.length);
+  expect(record.sources).toHaveLength(expectedEvidenceCounts[record.event.id]);
+  for (const id of record.event.sourceIds) expect(record.sources.some(source => source.id === id)).toBe(true);
+  await expect(page.locator('#sources .source-item')).toHaveCount(expectedEvidenceCounts[record.event.id]);
   for (const source of record.sources) {
     const link = page.locator('#sources .source-item').filter({ hasText: source.title });
     await expect(link).toBeVisible();
