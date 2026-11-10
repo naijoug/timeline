@@ -95,12 +95,23 @@ test('Agent, writer and historical-war routes retain membership and source-note 
     expect(await page.locator('#timeline-notes').evaluate(el=>(el as HTMLElement).inert)).toBe(false);
   }
   const noteLink=page.locator('#timeline-notes a[href*="/events/"]').first();
-  const destination=path('writers/authors/liu-cixin/')+'#timeline-notes';
-  expect(new URL((await noteLink.getAttribute('href'))!,page.url()).searchParams.get('return')).toBe(destination);
+  const expectedFilters={from:'1999',to:'2018',category:'all',all:'1',event:'',order:'asc',lines:'liu-cixin'};
+  await expect.poll(()=>Object.fromEntries(new URL(page.url()).searchParams)).toEqual(expectedFilters);
+  const readingSearch=new URL(page.url()).search;
   await noteLink.scrollIntoViewIfNeeded();await noteLink.click();
+  await expect(page).toHaveURL(url=>url.pathname.startsWith(path('writers/events/')));
+  // Notes refresh their return query at activation, after Explorer serializes
+  // the hydrated filters. Inspect the URL actually followed, not the SSR href.
+  const destination=new URL(page.url()).searchParams.get('return');
+  expect(destination).not.toBeNull();
+  const returnUrl=new URL(destination!,page.url());
+  expect(returnUrl.pathname).toBe(path('writers/authors/liu-cixin/'));
+  expect(returnUrl.hash).toBe('#timeline-notes');
+  expect(Object.fromEntries(returnUrl.searchParams)).toEqual(expectedFilters);
+  expect(returnUrl.search).toBe(readingSearch);
   // The static record initially renders the topic fallback. Wait for its deferred
   // navigation script to resolve the return query, not merely for link visibility.
-  await expect(page.getByRole('link',{name:'返回时间线',exact:true})).toHaveAttribute('href',destination);
+  await expect(page.getByRole('link',{name:'返回时间线',exact:true})).toHaveAttribute('href',destination!);
   await page.getByRole('link',{name:'返回时间线',exact:true}).click();await ready(page);await expect(page).toHaveURL(/#timeline-notes$/);
 });
 
