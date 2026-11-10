@@ -2,6 +2,8 @@ import { test, expect, type Page } from '@playwright/test';
 import { googleNov10Events } from '../../src/topics/ai/google-nov10';
 import { sources } from '../../src/topics/ai/sources';
 import { eventHref } from '../../src/topics/ai/entities';
+import { aiCatalog } from '../../src/topics/ai/adapter';
+import { eventSourceIds, relationsFor } from '../../src/core/evidence';
 
 const prefix = (process.env.TIMELINE_BASE_PATH || '').replace(/\/$/, '');
 const queries: Record<string, string> = {
@@ -9,10 +11,16 @@ const queries: Record<string, string> = {
   'gemini-robotics-25-partner-rollout': 'Gemini Robotics 2.5',
   'alphaproof-code-verification': 'AlphaProof',
 };
-const records = googleNov10Events.map(event => ({
-  event, query: queries[event.id], path: `${prefix}${eventHref(event)}`,
-  sources: sources.filter(source => event.sourceIds.includes(source.id)),
-}));
+const records = googleNov10Events.map(event => {
+  // EventDetail includes evidence from the adapted record (including linked
+  // entities and facts) and event relations, deduplicated in page order.
+  const coreEvent = aiCatalog.events.find(item => item.id === event.id)!;
+  const evidenceIds = [...new Set([...eventSourceIds(coreEvent), ...relationsFor(aiCatalog, event.id).flatMap(relation => relation.sourceIds)])];
+  return {
+    event, query: queries[event.id], path: `${prefix}${eventHref(event)}`,
+    sources: evidenceIds.map(id => sources.find(source => source.id === id)!),
+  };
+});
 
 async function noOverflow(page: Page) {
   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
