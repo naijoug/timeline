@@ -23,12 +23,22 @@ test('timelines have one authoritative membership, shared facts and contextual i
   assert.equal(selected.find(event => event.id === 'transformer'), aiCatalog.events.find(event => event.id === 'transformer'));
   assert.equal(timelineMembership(aiCatalog, [main, models]).get('transformer')?.length, 2);
   assert.equal(timelineEvents(aiCatalog, [main]).length, 61);
-  assert.equal(timelineEvents(aiCatalog, [models]).length, 204);
+  assert.equal(timelineEvents(aiCatalog, [models]).length, 205);
   assert.equal(timelineEvents(aiCatalog, [agents]).length, 50);
   assert.ok(!timelineEvents(aiCatalog, [main]).some(event => event.id === 'gpt-4o-mini'), 'a parent does not inherit its child');
   assert.ok(timelineEvents(aiCatalog, [models]).some(event => event.id === 'gpt-4o-mini'));
   assert.ok(!timelineEvents(aiCatalog, [models], true).some(event => event.id === 'gpt-4o-mini'), 'importance is local to the line');
   assert.deepEqual(normalizedTimelineIds(aiCatalog, [models,main,models,'missing']), [main,models]);
+});
+test('November research additions retain explicit curated membership boundaries', () => {
+  const groot = 'nvidia-groot2-research', evolve = 'baidu-ernie-evolve-research';
+  for (const id of [groot, evolve]) {
+    assert.equal(aiCatalog.events.filter(event => event.id === id).length, 1);
+    assert.ok(!timelineEvents(aiCatalog, [main]).some(event => event.id === id));
+  }
+  assert.equal(timelineEvents(aiCatalog, [models]).filter(event => event.id === groot).length, 1);
+  assert.ok(!timelineEvents(aiCatalog, [models], true).some(event => event.id === groot));
+  assert.ok(aiCatalog.timelines!.every(line => !line.entries.some(entry => entry.eventId === evolve)));
 });
 test('Agent products do not conflate conversation, mechanisms or research with a product launch', () => {
   const ids = new Set(timelineEvents(aiCatalog, [agents]).map(event => event.id));

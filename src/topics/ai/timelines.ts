@@ -77,6 +77,7 @@ export const aiTimelines: TimelineDefinition[] = [
       { eventId: 'muse-ember-release', importance: 'key', context: '高效模型与Wonder定位分开；长上下文价格阈值、API模式与权重状态逐项核对。' },
       { eventId: 'seedream-5-5-release', importance: 'key', context: '透明素材与连续编辑属于厂商演示；产品逐步上线，5.5 Pro仍为后续计划。' },
       { eventId: 'claude-fable-mythos-5-2', importance: 'key', context: '同一底层模型的能力与成本升级；Fable广泛上线，Mythos验证项目准入，厂商评测不等于独立实测。' },
+      { eventId: 'nvidia-groot2-research', importance: 'supporting', context: '世界动作模型研究公告，联合预测视频与动作；代码计划12月提供，权重与许可未核验。' },
       {"eventId": "inkling-2-small-release", "importance": "supporting", "context": "Tinker推理和微调已开放，首发闭权重；Apache 2.0开放仍取决于后续外部测试。"},
       {"eventId": "openai-images-2-6-release", "importance": "key", "context": "图像生成连接局部编辑、GIF与API矢量输出；质量、规划及渠道边界分开核对。"},
       {"eventId": "gemini-omni-1-2-flash-ga", "importance": "key", "context": "视频生成进入正式API与Cloud阶段；应用分批上线、特殊时长模式和放大分辨率仍有边界。"},

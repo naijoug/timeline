@@ -1,3 +1,5 @@
+import { ernieEvolveEntities } from './ernie-evolve-research';
+import { groot2Entities } from './groot2-research';
 import { tpu8Entities } from './tpu8-system-configurations';
 import { qwenworkEntities } from './qwenwork-2-release';
 import { inkling2SmallEntities } from './inkling2-small-release';
@@ -15,6 +17,7 @@ import { instructionEntities } from './instruction-following';
 import { historicalEntities } from './historical-milestones';
 import { recentEntities } from './recent-updates';
 export const entities: Entity[] = [
+  ...ernieEvolveEntities, ...groot2Entities,
   ...tpu8Entities,
   ...qwenworkEntities,
   ...teammatesEntities, ...inkling2SmallEntities,
