@@ -11,8 +11,8 @@ import { validateCatalog } from '../src/core/validate';
 import { eventLane, isKeyEvent, chinaCompanies } from '../src/topics/ai/config';
 
 test('cumulative release data preserves Hy4, Kimi and GPT-6 Cyber nodes', () => {
-  assert.equal(events.length, 315);
-  assert.equal(sources.length, 398);
+  assert.equal(events.length, 316);
+  assert.equal(sources.length, 400);
   assert.equal(new Set(events.map(event => event.id)).size, events.length);
   assert.equal(new Set(sources.map(source => source.id)).size, sources.length);
   const models = timelineEvents(aiCatalog, ['ai-model-iterations']);

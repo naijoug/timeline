@@ -1,3 +1,4 @@
+import { tpu8Entities } from './tpu8-system-configurations';
 import { qwenworkEntities } from './qwenwork-2-release';
 import { inkling2SmallEntities } from './inkling2-small-release';
 import { teammatesEntities } from './perplexity-teammates';
@@ -14,6 +15,7 @@ import { instructionEntities } from './instruction-following';
 import { historicalEntities } from './historical-milestones';
 import { recentEntities } from './recent-updates';
 export const entities: Entity[] = [
+  ...tpu8Entities,
   ...qwenworkEntities,
   ...teammatesEntities, ...inkling2SmallEntities,
   ...hyplmEntities, ...antigravityScienceEntities,
