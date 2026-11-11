@@ -52,7 +52,7 @@ test('November 10 evidence and reading links resolve, retain review dates and di
   const payload = JSON.stringify(createExplorerPayload(aiCatalog));
   assert.equal(new Set(googleNov10Sources.map(source => source.id)).size, googleNov10Sources.length);
   for (const source of googleNov10Sources) {
-    assert.equal(source.checkedAt, '2026-11-10', source.id);
+    assert.equal(source.checkedAt, source.id === 'gemini4-carbon-wider-access' ? '2026-11-11' : '2026-11-10', source.id);
     assert.ok(source.locator, source.id);
     assert.match(source.url, /^https:\/\//, source.id);
     assert.deepEqual(sourceMap.get(source.id), source);
@@ -68,7 +68,7 @@ test('November 10 evidence and reading links resolve, retain review dates and di
     assert.ok(event.recommendedResources!.length, event.id);
     for (const resource of event.recommendedResources!) {
       assert.ok(resource.creator && resource.match && resource.scopeNote && resource.locator, resource.id);
-      assert.equal(resource.checkedAt, '2026-11-10', resource.id);
+      assert.equal(resource.checkedAt, resource.id === 'carbon-wider-access-reading' ? '2026-11-11' : '2026-11-10', resource.id);
       assert.match(resource.url, /^https:\/\//, resource.id);
       assert.ok(!payload.includes(resource.id), resource.id);
     }
@@ -117,4 +117,11 @@ test('AlphaProof code verification remains a scoped research result, not a gener
   assert.match(prose(ids[2]), /不能宣称完整后量子安全/);
   assert.ok(event.recommendedResources!.some(resource => resource.url === 'https://google-deepmind.github.io/code-verification/'));
   assert.ok(event.recommendedResources!.some(resource => resource.url === 'https://github.com/google-deepmind/code-verification'));
+});
+
+test('Carbon pricing enrichment preserves promotional units, expiry ambiguity and the existing event', () => {
+  const text = prose(ids[0]);
+  for (const pattern of [/每百万 token 输入／输出/, /2／10美元/, /2026年11月30日到期后.*4／20美元/, /未给出截止时刻或时区/, /不是批处理或 Flex SKU/]) assert.match(text, pattern);
+  assert.equal(record(ids[0]).date, '2026-11-10');
+  assert.equal(events.filter(event => event.id === ids[0]).length, 1);
 });

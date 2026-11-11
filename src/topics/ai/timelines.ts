@@ -6,6 +6,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '从思想与方法，到模型和任务型产品的精选阅读主线。',
     note: '编辑精选的阅读主线，串联思想、方法、模型与产品转折；不等于全部重大事件，也不自动汇总所有子时间线。',
     entries: [
+      { eventId: 'minimax-h3-image-weights', importance: 'key', context: '图像生成与编辑权重已公开；原帖UTC日期、博客日期、社区许可与厂商速度报告分开。' },
       { eventId: 'muse-ember-release', importance: 'key', context: '高效模型与Wonder定位分开；长上下文价格阈值、API模式与权重状态逐项核对。' },
       { eventId: 'seedream-5-5-release', importance: 'key', context: '透明素材与连续编辑属于厂商演示；产品逐步上线，5.5 Pro仍为后续计划。' },
       { eventId: 'claude-fable-mythos-5-2', importance: 'key', context: '同一底层模型的能力与成本升级；Fable广泛上线，Mythos验证项目准入，厂商评测不等于独立实测。' },
@@ -74,6 +75,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '按论文、预览、API 和权重开放阶段阅读模型演进。',
     note: '已收录模型与关键训练、架构方法的精选年表，非完整发布清单。论文、预览、API 开放和权重开放分别记录，不把它们视为同一种发布。',
     entries: [
+      { eventId: 'minimax-h3-image-weights', importance: 'key', context: '图像生成与编辑权重已公开；原帖UTC日期、博客日期、社区许可与厂商速度报告分开。' },
       { eventId: 'gemini-4-carbon-wider-access', importance: 'supporting', context: '10月28日受限公告之后的访问阶段：付费API与Ultra逐步上线，研究与网络防御仍有资格限制。' },
       { eventId: 'gemini-robotics-25-partner-rollout', importance: 'supporting', context: 'VLA动作模型向机器人伙伴投放；与ER高层推理及云公开预览分开，不代表公开API或权重。' },
       { eventId: 'muse-ember-release', importance: 'key', context: '高效模型与Wonder定位分开；长上下文价格阈值、API模式与权重状态逐项核对。' },

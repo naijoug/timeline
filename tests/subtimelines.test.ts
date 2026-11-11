@@ -22,8 +22,8 @@ test('timelines have one authoritative membership, shared facts and contextual i
   assert.equal(selected.filter(event => event.id === 'transformer').length, 1);
   assert.equal(selected.find(event => event.id === 'transformer'), aiCatalog.events.find(event => event.id === 'transformer'));
   assert.equal(timelineMembership(aiCatalog, [main, models]).get('transformer')?.length, 2);
-  assert.equal(timelineEvents(aiCatalog, [main]).length, 61);
-  assert.equal(timelineEvents(aiCatalog, [models]).length, 207);
+  assert.equal(timelineEvents(aiCatalog, [main]).length, 62);
+  assert.equal(timelineEvents(aiCatalog, [models]).length, 208);
   assert.equal(timelineEvents(aiCatalog, [agents]).length, 50);
   assert.ok(!timelineEvents(aiCatalog, [main]).some(event => event.id === 'gpt-4o-mini'), 'a parent does not inherit its child');
   assert.ok(timelineEvents(aiCatalog, [models]).some(event => event.id === 'gpt-4o-mini'));

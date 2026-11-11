@@ -1,5 +1,9 @@
 # 更新记录
 
+## 2026-11-11 00:00 UTC
+
+- 新增MiniMax H3-Image权重节点，保留UTC公告、博客日期与社区许可边界；既有Carbon补优惠期限和后续费率。[维护与验收](maintenance-2026-11-11-0000.md) · [AI巡查](ai-radar-2026-11-11-0000.md)
+
 ## 2026-11-10 20:00 UTC
 
 - 新增 Claude Whiteboards/Sheets beta 与 Claude Data GA，区分移动只读、数据共享与 Meetings 官方口径冲突。[维护与验收](maintenance-2026-11-10-2000.md) · [AI 巡查](ai-radar-2026-11-10-2000.md)

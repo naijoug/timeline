@@ -11,17 +11,17 @@ import { validateCatalog } from '../src/core/validate';
 import { eventLane, isKeyEvent, chinaCompanies } from '../src/topics/ai/config';
 
 test('cumulative release data preserves Hy4, Kimi and GPT-6 Cyber nodes', () => {
-  assert.equal(events.length, 324);
-  assert.equal(sources.length, 418);
+  assert.equal(events.length, 325);
+  assert.equal(sources.length, 424);
   assert.equal(new Set(events.map(event => event.id)).size, events.length);
   assert.equal(new Set(sources.map(source => source.id)).size, sources.length);
   const models = timelineEvents(aiCatalog, ['ai-model-iterations']);
-  assert.equal(models.length, 207);
+  assert.equal(models.length, 208);
   for (const id of ['tencent-hy4-release', 'kimi-k3-1-pro-weights-confirmed', 'gpt-6-cyber-restricted-release', 'ernie-5-5-flash-base', 'gemini-omni-1-2-flash-ga', 'openai-images-2-6-release', 'muse-ember-release', 'seedream-5-5-release']) {
     assert.equal(models.filter(event => event.id === id).length, 1);
   }
-  assert.equal(events.filter(event => eventLane(event) === 'models').length, 190);
-  assert.equal(events.filter(event => eventLane(event) === 'models' && chinaCompanies.has(event.company || '')).length, 78);
+  assert.equal(events.filter(event => eventLane(event) === 'models').length, 191);
+  assert.equal(events.filter(event => eventLane(event) === 'models' && chinaCompanies.has(event.company || '')).length, 79);
   for (const id of ['baidu-ernie-evolve-research', 'nvidia-groot2-research']) {
     assert.equal(events.filter(event => event.id === id).length, 1);
   }
