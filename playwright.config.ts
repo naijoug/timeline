@@ -6,11 +6,14 @@ export default defineConfig({
   testDir: './tests/browser',
   outputDir: `test-results/browser-${label}`,
   timeout: 45_000,
-  // The full dual-viewport suite now has 154 cases. Keep each case at 45s,
-  // but leave enough suite time for every test and teardown on hosted runners.
+  // Preserve the suite budget as coverage grows; bound CI concurrency instead
+  // of weakening individual checks or extending timeouts.
   globalTimeout: 420_000,
   expect: { timeout: 10_000 },
-  workers: 1,
+  // Files may run in parallel, but cases within a file remain ordered. Each
+  // test still gets its own context and output path; the fixture server is read-only.
+  fullyParallel: false,
+  workers: process.env.CI ? 2 : 1,
   retries: 0,
   reporter: [['list'], ['json', { outputFile: `test-results/browser-${label}/results.json` }]],
   use: {
