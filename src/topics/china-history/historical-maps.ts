@@ -1,4 +1,5 @@
 import type { HistoricalMap, Source } from '../../core/types';
+import { chibiRelationsMap } from './chibi-relations-map';
 import { qinEmpireMap, qinEmpireMapSource } from './qin-empire-map';
 import { hanFrontierMap, hanFrontierMapSource } from './han-frontier-map';
 import { guanduCampaignMap } from './guandu-campaign-map';
@@ -14,6 +15,7 @@ export const historicalMapSources: Source[] = [...juluMapSources, qinEmpireMapSo
 }];
 
 export const historicalMaps: Record<string, HistoricalMap[]> = {
+  chibi: [chibiRelationsMap],
   guandu: [guanduCampaignMap],
   julu: [juluCampaignMap],
   'qin-unification': [qinEmpireMap],
@@ -53,7 +55,7 @@ export const historicalMapPeriodEvents: Record<string, string[]> = {
   han: ['western-han-founded'],
   'western-han': ['western-han-founded'],
   // Battle evidence is associated explicitly, never inferred as a dynasty territory map.
-  'eastern-han': ['guandu'],
+  'eastern-han': ['guandu', 'chibi'],
   'eastern-jin': ['feishui'],
   'sixteen-kingdoms': ['feishui'],
 };

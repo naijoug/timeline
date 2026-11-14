@@ -4,7 +4,7 @@ import { chinaHistory } from '../src/topics/china-history/catalog';
 import { historicalMapPeriodEvents } from '../src/topics/china-history/historical-maps';
 import { createExplorerPayload } from '../src/core/explorer-payload';
 test('Battle maps enter the appropriate dynasty reading notes without implying territory', () => {
-  assert.deepEqual(historicalMapPeriodEvents['eastern-han'], ['guandu']);
+  assert.deepEqual(historicalMapPeriodEvents['eastern-han'], ['guandu', 'chibi']);
   assert.deepEqual(historicalMapPeriodEvents['eastern-jin'], ['feishui']);
   assert.deepEqual(historicalMapPeriodEvents['sixteen-kingdoms'], ['feishui']);
   assert.equal(historicalMapPeriodEvents.wei, undefined);

@@ -5,14 +5,14 @@ export const chibiDepthSources: Source[] = [
   {
     id: 'chibi-zhouyu-chronicle', title: '《三国志》卷五十四·周瑜传（裴松之注）',
     publisher: '陈寿撰、裴松之注 · 维基文库电子转录', url: 'https://zh.wikisource.org/wiki/三國志/卷54',
-    type: '古代史书及注释', checkedAt,
+    type: '古代史书及注释', checkedAt: '2026-11-14',
     locator: '周瑜传：建安十三年刘琮降曹、孙刘联合、黄盖火攻及南郡后续；裴注引《江表传》曹操致孙权信',
     version: '定向核读电子转录，非古籍影印校勘。分别标明陈寿正文、裴注所引《江表传》与其中转述的书信，不将史书所载人物言论当成现场逐字记录。',
   },
   {
     id: 'chibi-wudi-chronicle', title: '《三国志》卷一·武帝纪：赤壁与撤军',
     publisher: '陈寿撰、裴松之注 · 维基文库电子转录', url: 'https://zh.wikisource.org/wiki/三國志/卷01',
-    type: '古代史书及注释', checkedAt,
+    type: '古代史书及注释', checkedAt: '2026-11-14',
     locator: '建安十三年南征至赤壁段；裴注孙盛对赤壁、合肥先后次序的评论',
     version: '本次核读建安十三年相关正文及注释，不据本纪条目编排自行换算现代公历月日；与周瑜传比较叙事重点，不裁定全部兵力、伤亡或疫病种类。',
   },

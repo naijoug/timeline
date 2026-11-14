@@ -15,7 +15,9 @@ test('Red Cliffs keeps one Eastern Han event and year-level date without dispute
   assert.match(event.note!, /不裁定现代赤壁遗址坐标/);
   assert.match(event.note!, /先后次序的异议/);
   assert.match(event.note!, /疫病种类、兵力和伤亡总数不作定数/);
-  assert.equal(event.maps, undefined);
+  assert.equal(event.maps?.length, 1);
+  assert.equal(event.maps?.[0].id, 'chibi-relations-208');
+  assert.equal(event.maps?.[0].kind, 'schematic');
 });
 test('Red Cliffs separates chronicle, commentary and editorial interpretation', () => {
   assert.equal(event.details!.length, 5);
@@ -27,7 +29,11 @@ test('Red Cliffs separates chronicle, commentary and editorial interpretation', 
   assert.equal(event.details!.filter(d => d.editorial).length, 1);
   assert.equal(event.details!.at(-1)!.sourceIds, undefined);
   assert.ok(event.details!.filter(d => !d.editorial).every(d => d.locator && d.sourceIds?.every(id => event.sourceIds.includes(id))));
-  assert.ok(chibiDepthSources.every(s => s.checkedAt === '2026-11-07'));
+  assert.deepEqual(chibiDepthSources.map(s => [s.id, s.checkedAt]), [
+    ['chibi-zhouyu-chronicle', '2026-11-14'],
+    ['chibi-wudi-chronicle', '2026-11-14'],
+    ['chibi-crespigny-three-kingdoms', '2026-11-07'],
+  ]);
   assert.equal(chinaHistory.sources.find(s => s.id === 'anc-chibi-yiling')!.checkedAt, '2026-10-24');
   const payload = JSON.stringify(createExplorerPayload(chinaHistory));
   assert.ok(payload.includes('chibi'));
