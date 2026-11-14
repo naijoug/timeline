@@ -9,20 +9,28 @@ async function verify(page: Page) {
   for (const text of ['不作坐标对齐', '南郡地区与江陵城不是同一层级', '《山阳公载记》', '合肥', '未复制第三方地图']) await expect(figure).toContainText(text);
   return figure;
 }
+async function settleFrames(page: Page) {
+  await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))));
+}
 async function capture(page: Page, info: TestInfo, name: string) {
   const figure = page.locator(figureId);
+  // A locator screenshot may scroll. Finish it before positioning the viewport.
+  const figurePath = info.outputPath(`${name}-figure.png`);
+  await figure.screenshot({ path: figurePath, animations: 'disabled' });
+  await info.attach(`${name}-figure`, { path: figurePath, contentType: 'image/png' });
   await figure.evaluate(el => el.scrollIntoView({ block: 'start', behavior: 'instant' }));
-  await expect.poll(async () => {
+  await settleFrames(page);
+  const headingGap = async () => {
     const heading = await figure.locator('h3').boundingBox();
     const header = await page.locator('.library-header').boundingBox();
     return heading!.y - header!.y - header!.height;
-  }).toBeGreaterThanOrEqual(0);
-  for (const area of ['viewport', 'figure'] as const) {
-    const path = info.outputPath(`${name}-${area}.png`);
-    if (area === 'viewport') await page.screenshot({ path, animations: 'disabled' });
-    else await figure.screenshot({ path, animations: 'disabled' });
-    await info.attach(`${name}-${area}`, { path, contentType: 'image/png' });
-  }
+  };
+  await expect.poll(headingGap).toBeGreaterThanOrEqual(0);
+  const viewportPath = info.outputPath(`${name}-viewport.png`);
+  await page.screenshot({ path: viewportPath, animations: 'disabled' });
+  await settleFrames(page);
+  await expect.poll(headingGap).toBeGreaterThanOrEqual(0);
+  await info.attach(`${name}-viewport`, { path: viewportPath, contentType: 'image/png' });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
 }
 test('Chibi map preserves Eastern Han scope, keyboard evidence and repeated return history', async ({ page }, info) => {
@@ -44,6 +52,7 @@ test('Chibi map preserves Eastern Han scope, keyboard evidence and repeated retu
   const popup = await opened; await popup.waitForLoadState();
   await expect(popup).toHaveURL(new URL(`${prefix}/maps/chibi-relations-208.svg`, page.url()).href);
   await expect(popup.locator('svg')).toBeVisible(); await popup.close(); await expect(link).toBeFocused();
+  await settleFrames(page);
   for (const colorScheme of ['light', 'dark'] as const) {
     await page.emulateMedia({ colorScheme });
     await expect(page.locator('html')).toHaveAttribute('data-theme', colorScheme);
