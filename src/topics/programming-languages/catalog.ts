@@ -1,3 +1,4 @@
+import { rust1100Event, rust1100Sources } from './rust-1100-release';
 import { typescript21Event, typescript21Sources } from './typescript21-type-transformations';
 import { javaReviewedSources, java21Patch } from './java-reviewed-records';
 import { typescript20AnnouncementReview, typescript20Patch, typescriptNullCheckingSources } from './typescript-null-checking-depth';
@@ -984,6 +985,9 @@ Object.assign(events.find(event => event.id === 'typescript-20')!, typescript20P
 
 sources.push(...typescript21Sources);
 events.push(typescript21Event);
+
+sources.push(...rust1100Sources);
+events.push(rust1100Event);
 
 export const programmingLanguages: Catalog = {
   topic: {

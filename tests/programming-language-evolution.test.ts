@@ -76,7 +76,7 @@ test("C gains a readable language scope and latest jumps to the actual newest re
   assert.deepEqual(explorerEvents(programmingLanguages, cState, languagePresentation).map(event => event.id), ["c-creative-year", "c89-standard", "c99-standard"]);
   const state = defaultExplorer(programmingLanguages, "", "", languagePresentation);
   const latest = byId.get(languagePresentation.latestEvent!)!;
-  assert.equal(latest.id, "rust-2024");
+  assert.equal(latest.id, "rust-1100");
   assert.ok(explorerEvents(programmingLanguages, state, languagePresentation).some(event => event.id === latest.id));
   assert.ok(programmingLanguages.events.every(event => dateBounds(event.time.start)[0] <= dateBounds(latest.time.start)[0]));
 });
