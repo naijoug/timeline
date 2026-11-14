@@ -14,23 +14,32 @@ async function settleFrames(page: Page) {
 }
 async function capture(page: Page, info: TestInfo, name: string) {
   const figure = page.locator(figureId);
-  // A locator screenshot may scroll. Finish it before positioning the viewport.
+  // Poll from Node: no page timer/rAF dependency in the no-JavaScript context.
+  const expectStableClearance = async () => {
+    let previous: string | undefined;
+    await expect.poll(async () => {
+      const heading = await figure.locator('h3').boundingBox();
+      const header = await page.locator('.library-header').boundingBox();
+      if (!heading || !header) { previous = undefined; return false; }
+      const geometry = JSON.stringify({ heading, header });
+      const stable = geometry === previous;
+      previous = geometry;
+      return stable && heading.y - header.y - header.height >= 0;
+    }).toBe(true);
+    const heading = await figure.locator('h3').boundingBox();
+    const header = await page.locator('.library-header').boundingBox();
+    expect(heading!.y - header!.y - header!.height).toBeGreaterThanOrEqual(0);
+  };
+  await figure.evaluate(el => el.scrollIntoView({ block: 'start', behavior: 'instant' }));
+  await expectStableClearance();
+  const viewportPath = info.outputPath(`${name}-viewport.png`);
+  await page.screenshot({ path: viewportPath, animations: 'disabled' });
+  await expectStableClearance();
+  await info.attach(`${name}-viewport`, { path: viewportPath, contentType: 'image/png' });
+  // The locator screenshot can scroll, so do it only after viewport checks.
   const figurePath = info.outputPath(`${name}-figure.png`);
   await figure.screenshot({ path: figurePath, animations: 'disabled' });
   await info.attach(`${name}-figure`, { path: figurePath, contentType: 'image/png' });
-  await figure.evaluate(el => el.scrollIntoView({ block: 'start', behavior: 'instant' }));
-  await settleFrames(page);
-  const headingGap = async () => {
-    const heading = await figure.locator('h3').boundingBox();
-    const header = await page.locator('.library-header').boundingBox();
-    return heading!.y - header!.y - header!.height;
-  };
-  await expect.poll(headingGap).toBeGreaterThanOrEqual(0);
-  const viewportPath = info.outputPath(`${name}-viewport.png`);
-  await page.screenshot({ path: viewportPath, animations: 'disabled' });
-  await settleFrames(page);
-  await expect.poll(headingGap).toBeGreaterThanOrEqual(0);
-  await info.attach(`${name}-viewport`, { path: viewportPath, contentType: 'image/png' });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
 }
 test('Chibi map preserves Eastern Han scope, keyboard evidence and repeated return history', async ({ page }, info) => {
