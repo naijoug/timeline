@@ -75,6 +75,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '按论文、预览、API 和权重开放阶段阅读模型演进。',
     note: '已收录模型与关键训练、架构方法的精选年表，非完整发布清单。论文、预览、API 开放和权重开放分别记录，不把它们视为同一种发布。',
     entries: [
+      { eventId: 'gemini-4-hydrogen-release', importance: 'supporting', context: 'Carbon适配的日常执行分支；企业GA与消费端分层推广分开，输入输出共享预算，非开放权重。' },
       { eventId: 'minimax-h3-image-weights', importance: 'key', context: '图像生成与编辑权重已公开；原帖UTC日期、博客日期、社区许可与厂商速度报告分开。' },
       { eventId: 'gemini-4-carbon-wider-access', importance: 'supporting', context: '10月28日受限公告之后的访问阶段：付费API与Ultra逐步上线，研究与网络防御仍有资格限制。' },
       { eventId: 'gemini-robotics-25-partner-rollout', importance: 'supporting', context: 'VLA动作模型向机器人伙伴投放；与ER高层推理及云公开预览分开，不代表公开API或权重。' },
