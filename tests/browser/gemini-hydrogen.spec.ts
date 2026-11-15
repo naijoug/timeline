@@ -4,6 +4,7 @@ import { geminiHydrogenEvents } from '../../src/topics/ai/gemini-hydrogen-releas
 const prefix = (process.env.TIMELINE_BASE_PATH || '').replace(/\/$/, '');
 const event = geminiHydrogenEvents[0];
 const path = `${prefix}/ai/events/${event.id}/`;
+const canonicalPath = `${prefix}/ai/models/gemini/gemini-4-hydrogen-release/`;
 const query = 'Gemini 4 Hydrogen';
 const modelDoc = 'https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/gemini/4-hydrogen';
 const noOverflow = async (page: Page) => expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
@@ -43,7 +44,7 @@ test('Gemini Hydrogen search preserves exact return, focus and repeated history;
   const saved = new URL(destination.searchParams.get('return')!, page.url());
   const expected = new URL(page.url()); expected.hash = `event-${event.id}`;
   expect(saved.href).toBe(expected.href);
-  expect(destination.pathname).toBe(path);
+  expect(destination.pathname).toBe(canonicalPath);
   await card.click(); await inspect(page);
   // Stub only the external destination: this checks native keyboard activation,
   // not external-site availability or the independently reviewed source content.

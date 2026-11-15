@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { geminiHydrogenEvents, geminiHydrogenSources } from '../src/topics/ai/gemini-hydrogen-release';
 import { events } from '../src/topics/ai/events';
+import { eventHref } from '../src/topics/ai/entities';
 import { sources } from '../src/topics/ai/sources';
 import { aiTimelines } from '../src/topics/ai/timelines';
 import { aiCatalog } from '../src/topics/ai/adapter';
@@ -13,6 +14,7 @@ test('Gemini Hydrogen keeps release date, Carbon baseline and enterprise versus 
   assert.equal(geminiHydrogenEvents.length, 1);
   assert.equal(event.date, '2026-11-12');
   assert.deepEqual(event.entityIds, ['gemini']);
+  assert.equal(eventHref(event), '/ai/models/gemini/gemini-4-hydrogen-release/');
   assert.deepEqual(event.tracks, ['models']);
   assert.equal(event.change!.baselineEventId, 'gemini-4-carbon-announced');
   assert.equal(event.change!.evidence, '厂商报告');
