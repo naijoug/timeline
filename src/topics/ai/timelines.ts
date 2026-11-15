@@ -291,6 +291,7 @@ export const aiTimelines: TimelineDefinition[] = [
     description: '面向任务执行的 Agent 产品、开源工具与功能演进。',
     note: '研究预览、公开测试、正式开放保留各自阶段；不是所有对话产品或 Agent 研究论文的合集。ChatGPT 2022 首发不视为 Agent 产品发布。',
     entries: [
+      { eventId: 'deepseek-app-api-release', importance: 'supporting', context: '开发者会话编排基础设施，保留技术分类；不是新模型或终端 App 首发。' },
       {"eventId": "claude-meetings-beta", "importance": "supporting", "context": "Google Meet 的逐步 beta，不是 GA 或全量开放。"},
       { eventId: 'qwenwork-2-release', importance: 'key', context: '2.0.0版本汇总，协作与事件触发连接跨端任务；保留此前功能日期与远控权限边界。' },
       {"eventId": "muse-specialized-rollout", "importance": "supporting", "context": "产品逐步推出；未公布独立模型ID、API或权重，不重复Wonder首发。"},
