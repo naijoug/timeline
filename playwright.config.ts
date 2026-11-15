@@ -6,13 +6,16 @@ export default defineConfig({
   testDir: './tests/browser',
   outputDir: `test-results/browser-${label}`,
   timeout: 45_000,
-  // The full dual-viewport suite now has 154 cases. Keep each case at 45s,
-  // but leave enough suite time for every test and teardown on hosted runners.
+  // Keep the existing acceptance deadlines and complete dual-viewport coverage.
   globalTimeout: 420_000,
   expect: { timeout: 10_000 },
   workers: 1,
   retries: 0,
-  reporter: [['list'], ['json', { outputFile: `test-results/browser-${label}/results.json` }]],
+  reporter: [
+    ['list'],
+    ['json', { outputFile: `test-results/browser-${label}/results.json` }],
+    ['./scripts/browser-runtime-reporter.mjs', { label, outputFile: `test-results/browser-${label}/runtime-diagnostics.ndjson` }],
+  ],
   use: {
     baseURL: `http://127.0.0.1:4179${base}/`,
     trace: 'retain-on-failure',
