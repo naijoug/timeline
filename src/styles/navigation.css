@@ -1,5 +1,7 @@
 :root { --topic-nav-width:216px; --navigation-safe-top:env(safe-area-inset-top,0px); --navigation-header-height:calc(76px + var(--navigation-safe-top)); --navigation-scroll-offset:calc(var(--navigation-header-height) + 16px); }
-html:has(.navigation-root) { scroll-padding-top:var(--navigation-scroll-offset); }
+/* Detail pages do not load Explorer's instant-scroll rule. Keep keyboard focus
+   scrolling from continuing after an explicit map or reading-position jump. */
+html:has(.navigation-root) { scroll-padding-top:var(--navigation-scroll-offset); scroll-behavior:auto; }
 html[data-sidebar='collapsed'] { --topic-nav-width:72px; }
 body:has(.topic-sidebar) { padding-left:var(--topic-nav-width); }
 /* One sticky layer keeps navigation reachable without a second scroll surface. */

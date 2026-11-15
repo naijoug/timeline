@@ -6,6 +6,15 @@ const source = (path: string) => readFileSync(new URL(`../${path}`, import.meta.
 const header = source('src/components/Header.tsx');
 const css = source('src/styles/navigation.css');
 
+test('shared navigation prevents residual focus scrolling on detail pages without Explorer styles', () => {
+  assert.match(header, /import '\.\.\/styles\/navigation\.css'/);
+  assert.match(source('src/layouts/Layout.astro'), /<Header\b/);
+  const sharedRootRule = css.match(/html:has\(\.navigation-root\)\s*\{([^}]*)\}/)?.[1];
+  assert.ok(sharedRootRule, 'shared navigation root rule must exist');
+  assert.match(sharedRootRule, /scroll-behavior:\s*auto\s*;/);
+  assert.match(sharedRootRule, /scroll-padding-top:var\(--navigation-scroll-offset\)/);
+});
+
 test('the shared navigation root is one opaque sticky layer in document flow', () => {
   assert.match(header, /return <div className="navigation-root" data-screen=\{screen\}>/);
   assert.match(css, /\.navigation-root\s*\{[^}]*position:sticky;[^}]*top:0;[^}]*z-index:50;[^}]*background:var\(--paper-bg\);/);

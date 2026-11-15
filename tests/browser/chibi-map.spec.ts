@@ -2,6 +2,7 @@ import { test, expect, type Page, type TestInfo } from '@playwright/test';
 const prefix = (process.env.TIMELINE_BASE_PATH || '').replace(/\/$/, '');
 const figureId = '#map-chibi-relations-208';
 async function verify(page: Page) {
+  await expect(page.locator('html')).toHaveCSS('scroll-behavior', 'auto');
   const figure = page.locator(figureId);
   await figure.scrollIntoViewIfNeeded();
   await expect.poll(() => figure.locator('img').evaluate(el => (el as HTMLImageElement).naturalWidth)).toBe(640);
