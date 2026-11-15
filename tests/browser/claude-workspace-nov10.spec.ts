@@ -11,7 +11,7 @@ const queries: Record<string, string> = {
   'claude-sheets-beta': 'Claude Sheets',
   'claude-data-ga': 'Claude Data',
 };
-const expectedEvidenceCounts: Record<string, number> = { 'claude-whiteboards-beta': 5, 'claude-sheets-beta': 4, 'claude-data-ga': 4 };
+const expectedEvidenceCounts: Record<string, number> = { 'claude-whiteboards-beta': 7, 'claude-sheets-beta': 4, 'claude-data-ga': 4 };
 const records = claudeWorkspaceNov10Events.map(event => {
   // EventDetail includes evidence from the adapted record (including linked
   // entities and facts) and event relations, deduplicated in page order.

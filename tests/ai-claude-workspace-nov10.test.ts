@@ -49,7 +49,7 @@ test('Claude workspace sources preserve publication precision, canonical evidenc
   assert.equal(new Set(claudeWorkspaceNov10Sources.map(source => source.id)).size, 5);
   for (const source of claudeWorkspaceNov10Sources) {
     assert.deepEqual(sourceMap.get(source.id), source);
-    assert.equal(source.checkedAt, '2026-11-10');
+    assert.equal(source.checkedAt, ['claude-workspace-nov10-overview', 'claude-whiteboards-guide'].includes(source.id) ? '2026-11-15' : '2026-11-10');
     assert.ok(source.locator && source.version, source.id);
     assert.match(source.url, /^https:\/\/(?:support\.)?claude\.com\//);
     if (source.type === '官方公告') assert.equal(source.publishedAt, '2026-11-10');
@@ -74,7 +74,7 @@ test('Claude workspace recommended reading retains scope notes without bloating 
     assert.ok(event.recommendedResources!.length);
     for (const resource of event.recommendedResources!) {
       assert.ok(resource.creator && resource.match && resource.scopeNote && resource.locator);
-      assert.equal(resource.checkedAt, '2026-11-10');
+      assert.equal(resource.checkedAt, event.id === 'claude-whiteboards-beta' ? '2026-11-15' : '2026-11-10');
       assert.match(resource.scopeNote, /未/);
       assert.ok(claudeWorkspaceNov10Sources.some(source => event.sourceIds.includes(source.id) && source.url === resource.url));
       assert.ok(!payload.includes(resource.id));
@@ -82,15 +82,15 @@ test('Claude workspace recommended reading retains scope notes without bloating 
   }
 });
 
-test('Whiteboards beta does not resolve conflicting official Meetings availability into a rollout claim', () => {
+test('Whiteboards beta preserves the historical conflict without backdating the later gradual beta', () => {
   const event = record(ids[0]);
   assert.equal(event.kind, '产品 beta');
   assert.match(prose(ids[0]), /Enterprise.*管理员启用/);
   assert.match(prose(ids[0]), /HIPAA-ready.*不可用/);
   const conflict = event.details!.find(section => section.label.includes('Meetings'))!;
   assert.ok(conflict);
-  assert.deepEqual([...conflict.sourceIds!].sort(), ['claude-workspace-nov10-overview', 'claude-whiteboards-guide'].sort());
-  for (const expression of [/即将推出/, /Meetings beta/, /Google Meet/, /不足以确定统一开放范围/, /不把会议功能计作已全面上线/, /不推断 Zoom 或 Teams 支持/]) assert.match(conflict.text, expression);
+  assert.deepEqual([...conflict.sourceIds!].sort(), ['claude-workspace-nov10-overview', 'claude-whiteboards-guide', 'claude-meetings-nov12-announcement', 'claude-meetings-nov12-release-notes'].sort());
+  for (const expression of [/即将推出/, /Meetings beta/, /Google Meet/, /不足以确定统一开放范围/, /不把会议功能计作已全面上线/, /不推断 Zoom 或 Teams 支持/, /11月12日.*逐步 beta/, /不倒填11月10日/, /已不见旧会议小节/]) assert.match(conflict.text, expression);
   assert.ok(!claudeWorkspaceNov10Events.some(item => /meetings/.test(item.id)));
 });
 

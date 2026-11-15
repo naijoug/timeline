@@ -32,6 +32,7 @@ export const chinaCompanies = new Set([
   "美团",
 ]);
 const agents = new Set([
+  "claude-meetings",
   "qwenwork",
   "perplexity-teammates",
   "claude-code",
