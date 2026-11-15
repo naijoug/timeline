@@ -10,7 +10,7 @@ import { validateCatalog } from '../src/core/validate';
 test('Rust 1.100 is one dated release with resolved evidence and no invented predecessor link', () => {
   assert.deepEqual(validateCatalog(programmingLanguages), []);
   assert.equal(programmingLanguages.events.filter(item => item.id === event.id).length, 1);
-  assert.equal(programmingLanguages.events.length, 73);
+  assert.equal(programmingLanguages.events.length, 74);
   assert.deepEqual(event.time.start, { year: 2026, month: 11, day: 12 });
   assert.deepEqual(event.entityIds, ['rust']);
   assert.deepEqual(event.periodIds, ['modern-safety']);
