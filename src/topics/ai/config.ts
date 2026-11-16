@@ -32,6 +32,7 @@ export const chinaCompanies = new Set([
   "美团",
 ]);
 const agents = new Set([
+  "chatgpt-wallet", // dots 的逐笔授权执行功能，不将普通 ChatGPT 对话泛化为 Agent。
   "claude-meetings",
   "qwenwork",
   "perplexity-teammates",

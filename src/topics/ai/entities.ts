@@ -1,3 +1,4 @@
+import { chatgptWalletEntities } from './chatgpt-wallet';
 import { claudeMeetingsNov12Entities } from './claude-meetings-nov12';
 import { h3ImageEntities } from './minimax-h3-image';
 import { claudeWorkspaceNov10Entities } from './claude-workspace-nov10';
@@ -20,7 +21,7 @@ import { releaseEntities } from './releases';
 import { instructionEntities } from './instruction-following';
 import { historicalEntities } from './historical-milestones';
 import { recentEntities } from './recent-updates';
-export const entities: Entity[] = [
+export const entities: Entity[] = [...chatgptWalletEntities, 
   ...h3ImageEntities, ...claudeMeetingsNov12Entities, ...claudeWorkspaceNov10Entities,
   ...googleNov10Entities,
   ...ernieEvolveEntities, ...groot2Entities,
