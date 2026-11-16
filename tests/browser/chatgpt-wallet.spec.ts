@@ -40,8 +40,12 @@ async function inspectRecord(page: Page, record: typeof records[number]) {
   for (const id of record.event.sourceIds) expect(record.sources.some(source => source.id === id)).toBe(true);
   await expect(page.locator('#sources .source-item')).toHaveCount(expectedEvidenceCounts[record.event.id]);
   for (const source of record.sources) {
-    const link = page.locator('#sources .source-item').filter({ hasText: source.title });
+    // A release-note locator may repeat the announcement title. Match the exact
+    // destination, then independently verify title and metadata on that one link.
+    const link = page.locator(`#sources .source-item[href=${JSON.stringify(source.url)}]`);
+    await expect(link).toHaveCount(1);
     await expect(link).toBeVisible();
+    await expect(link).toContainText(source.title);
     await expect(link).toHaveAttribute('href', source.url);
     await expect(link).toContainText(`核查于 ${source.checkedAt}`);
     await expect(link).toHaveAttribute('rel', /noopener/);
