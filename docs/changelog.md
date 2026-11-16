@@ -1,5 +1,9 @@
 # 更新记录
 
+## 2026-11-16 20:00 UTC
+
+- 仅诊断分支：新增精确 main/Wallet 的四用例配对计时与单独 trace 入口，不改变既有验收、页面或发布门槛。[设计与限制](paired-browser-diagnostic-2026-11-16-2000.md)
+
 ## 2026-11-15 20:00 UTC
 
 - 增补 DeepSeek App API 会话编排，区分此前 Search API、模型版本、默认检查与多步用量边界。[范围与候选验证](maintenance-2026-11-15-2000.md)

@@ -1,0 +1,17 @@
+# Bounded paired browser diagnostic: not release acceptance
+
+Local proposal only until separately reviewed and authorized for the existing repository. Adds a new, explicitly diagnostic push workflow on one diagnostics branch. It does not edit the original acceptance workflow, browser tests/configuration, Pages workflow or any candidate application source. Never merge this diagnostic branch as though its result accepts a release.
+
+Exact A: main aa79d2115c73067e34b51527585a2b321da11cd1. Exact B: Wallet 012ce7acb7b438653acf679323d7fc8e1f824c49. Three checkouts keep harness and both sources separate. Both exact sources install their own lock and build on the same Ubuntu 24.04 runner with Node 22, the same pinned Chromium installation and Noto CJK fonts. Before browser execution, SHA and tracked cleanliness are checked, and lock/config/common-test/server hashes must match across A/B.
+
+The four common cases are GR00T 2 light/dark reading and search/return/two-history-cycle cases, each on desktop and mobile. Each cohort must list exactly those four unique cases before running. Original test code, screenshots, assertions, viewport/DPR, browser flags, one worker, zero retries and original timeouts are preserved. No warmup: run order is recorded and first-run cold effects must be considered.
+
+Six serial runs: A/B/B/A with trace off, then separate A/B with trace on. This is 16 timing observations and 8 explanatory observations, not a statistically universal benchmark. Never pool the traced and untraced cohorts or compare untraced timing directly with historical retain-on-failure acceptance. Original retain-on-failure recording is unchanged outside this diagnostic config. Both sources use identical built-in list/JSON observers, deliberately excluding their differing resource reporters. This isolates observer version but does not measure the existing reporter's contribution.
+
+Outputs are outside both source trees, unique per run. Stop at any inventory, process, assertion, source-integrity or global error; do not selectively retry. Always upload available evidence, including failed observations and the incomplete plan. A passing diagnostic is not an application fix. It does not separate internal screenshot encoding from rendering or provide public screenshot Promise filesystem timings. Trace analysis may describe network/action phases only if the artifact actually includes those records.
+
+The workflow only has contents:read, no secrets, no persisted checkout credentials, no deployment permission, no PR/main writes and no publication path. Its setup uses existing repository action versions. Execution is bounded by the 20-minute job and original per-run global/test timeouts. Do not execute on the local cloud where Chromium/socket permission was denied. This proposal does not authorize retrying that denied operation or relaxing any release gate.
+
+After evidence supports a particular repair, complete the unchanged full root and /timeline desktop/mobile suite and actual-pixel review on the exact candidate, then the authorized non-force main and existing Pages/live verification. Diagnostic output alone never authorizes publication.
+
+The selected cases run in fresh, short processes rather than at their original late-suite positions. Similar paired results would not rule out long-lived browser/worker effects, cumulative resource changes, another unselected case, or total-suite growth. A failed or slower observation stays in the record; a clean subset does not justify claiming the earlier full-suite regression fixed.
