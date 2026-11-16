@@ -2,6 +2,7 @@ import { appendFileSync, mkdirSync, readFileSync } from 'node:fs';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import { createHash } from 'node:crypto';
 import { performance } from 'node:perf_hooks';
+import { RuntimeResourceSampler } from './runtime-resource-sampler.mjs';
 
 // Additive diagnostics only: never returns a status, changes tests or installs
 // browser hooks. The original reporters and acceptance settings remain authoritative.
@@ -134,6 +135,9 @@ export default class BrowserRuntimeReporter {
       warn: text => process.stderr.write(`${text}\n`),
       ...dependencies,
     };
+    this.resourceSampler = dependencies.resourceSampler ?? new RuntimeResourceSampler({
+      readFile: this.deps.readFile, readdir: dependencies.readdir, readlink: dependencies.readlink, now: this.deps.now, pid: dependencies.pid,
+    });
     this.active = new Map();
     this.results = new WeakMap();
     this.steps = new WeakMap();
@@ -176,6 +180,7 @@ export default class BrowserRuntimeReporter {
       hostMemory: this.read('/proc/meminfo', parseMeminfo),
       hostPressure: Object.fromEntries(['cpu', 'memory', 'io'].map(key => [key, this.read(`/proc/pressure/${key}`, parsePressure)])),
       reporterProcess: null,
+      attribution: null,
     };
     this.cpuPrevious = cpu;
     try {
@@ -185,6 +190,7 @@ export default class BrowserRuntimeReporter {
         'voluntaryContextSwitches', 'involuntaryContextSwitches',
       ].map(key => [key, numberOrNull(usage[key])]));
     } catch { /* unavailable is null, never an error object */ }
+    try { sample.attribution = this.resourceSampler.sample(); } catch { /* diagnostics never alter acceptance */ }
     return sample;
   }
 
