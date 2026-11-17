@@ -1,0 +1,81 @@
+name: Long mobile diagnostic (not acceptance)
+on:
+  push:
+    branches: ['diagnostics/long-mobile-20261117-0400']
+permissions:
+  contents: read
+concurrency:
+  group: long-mobile-diagnostic-20261117-0400
+  cancel-in-progress: false
+jobs:
+  diagnostic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      ASTRO_TELEMETRY_DISABLED: 1
+      TIMELINE_BASE_PATH: ''
+      TIMELINE_OUT_DIR: dist
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          path: harness
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          ref: 012ce7acb7b438653acf679323d7fc8e1f824c49
+          path: candidate
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - name: Check diagnostic contracts
+        run: node --test harness/tests/long-mobile-diagnostic.test.mjs
+      - name: Install locked source and supported browser
+        run: |
+          npm ci --prefix candidate
+          cd candidate
+          npx playwright install --with-deps chromium
+          sudo apt-get install -y fonts-noto-cjk
+      - name: Record provenance
+        run: |
+          mkdir -p long-mobile-diagnostic-evidence
+          {
+            node --version
+            npm --version
+            uname -a
+            lscpu
+            cat /proc/self/cgroup
+            dpkg-query -W fonts-noto-cjk
+            cd candidate
+            git rev-parse HEAD 'HEAD^{tree}'
+            npm ls @playwright/test playwright playwright-core
+            npx playwright install --list
+          } > long-mobile-diagnostic-evidence/provenance.txt 2>&1
+      - name: Build exact Wallet once, not full acceptance
+        run: npm run build --prefix candidate
+      - name: Fresh-long-fresh original mobile sequence
+        run: node harness/scripts/long-mobile-diagnostic.mjs "$GITHUB_WORKSPACE"
+      - name: Preserve numerical observations separately
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: long-mobile-numerical-${{ github.sha }}
+          path: |
+            long-mobile-diagnostic-evidence/manifest.json
+            long-mobile-diagnostic-evidence/provenance.txt
+            long-mobile-diagnostic-evidence/*/results.json
+            long-mobile-diagnostic-evidence/*/inventory.json
+            long-mobile-diagnostic-evidence/*/runtime-diagnostics.ndjson
+            long-mobile-diagnostic-evidence/*/diagnostic.config.mts
+            long-mobile-diagnostic-evidence/*/listing.*.txt
+            long-mobile-diagnostic-evidence/*/exposure.json
+          retention-days: 7
+          if-no-files-found: warn
+      - name: Preserve all observations including every original screenshot
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: long-mobile-diagnostic-${{ github.sha }}
+          path: long-mobile-diagnostic-evidence/
+          retention-days: 7
+          if-no-files-found: warn
