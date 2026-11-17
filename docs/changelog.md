@@ -1,5 +1,7 @@
 # 更新记录
 
+- 2026-11-17 16:00 UTC: Add an isolated, reversible screenshot-await boundary diagnostic with N/I/I/N controls and offline pixel comparison. Not acceptance or a release. [Diagnostic scope](screenshot-boundary-diagnostic-2026-11-17-1600.md).
+
 ## 2026-11-16 04:00 UTC
 
 - 接续 Wallet 候选，补充 CPU 限额、节流及进程归因诊断，保留全部验收标准。[诊断范围与验证状态](maintenance-2026-11-16-0400.md)

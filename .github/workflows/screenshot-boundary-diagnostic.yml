@@ -1,0 +1,86 @@
+name: Screenshot boundary diagnostic (not acceptance)
+on:
+  push:
+    branches: ['diagnostics/screenshot-boundary-20261117-1600']
+permissions:
+  contents: read
+concurrency:
+  group: screenshot-boundary-diagnostic-20261117-1600
+  cancel-in-progress: false
+jobs:
+  diagnostic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      ASTRO_TELEMETRY_DISABLED: 1
+      TIMELINE_BASE_PATH: ''
+      TIMELINE_OUT_DIR: dist
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          path: harness
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          ref: 012ce7acb7b438653acf679323d7fc8e1f824c49
+          path: candidate
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - name: Check pure diagnostic contracts
+        run: node --test harness/tests/screenshot-boundary-diagnostic.test.mjs
+      - name: Install locked source, supported browser and offline image decoder
+        run: |
+          npm ci --prefix candidate
+          cd candidate
+          npx playwright install --with-deps chromium
+          sudo apt-get install -y fonts-noto-cjk python3-pil
+      - name: Check offline pixel decoder contracts
+        run: /usr/bin/python3 -B harness/tests/screenshot-boundary-pixels.test.py
+      - name: Record provenance
+        run: |
+          mkdir -p screenshot-boundary-evidence
+          {
+            node --version
+            npm --version
+            uname -a
+            lscpu
+            cat /proc/self/cgroup
+            dpkg-query -W fonts-noto-cjk python3-pil
+            /usr/bin/python3 -c "import sys,PIL; print(sys.executable, PIL.__version__)"
+            cd candidate
+            git rev-parse HEAD 'HEAD^{tree}'
+            npm ls @playwright/test playwright playwright-core
+            npx playwright install --list
+          } > screenshot-boundary-evidence/provenance.txt 2>&1
+      - name: Build exact Wallet once, not full acceptance
+        run: npm run build --prefix candidate
+      - name: Original and surrounding-timer N I I N diagnostic
+        run: node harness/scripts/screenshot-boundary-diagnostic.mjs "$GITHUB_WORKSPACE"
+      - name: Preserve numerical observations separately
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: screenshot-boundary-numerical-${{ github.sha }}
+          path: |
+            screenshot-boundary-evidence/manifest.json
+            screenshot-boundary-evidence/provenance.txt
+            screenshot-boundary-evidence/pixel-comparison.json
+            screenshot-boundary-evidence/*/results.json
+            screenshot-boundary-evidence/*/inventory.json
+            screenshot-boundary-evidence/*/runtime-diagnostics.ndjson
+            screenshot-boundary-evidence/*/diagnostic.config.mts
+            screenshot-boundary-evidence/*/listing.*.txt
+            screenshot-boundary-evidence/*/observations.json
+            screenshot-boundary-evidence/*/artifacts/**/screenshot-await.json
+          retention-days: 7
+          if-no-files-found: warn
+      - name: Preserve all observations and all original screenshots
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: screenshot-boundary-full-${{ github.sha }}
+          path: screenshot-boundary-evidence/
+          retention-days: 7
+          if-no-files-found: warn
